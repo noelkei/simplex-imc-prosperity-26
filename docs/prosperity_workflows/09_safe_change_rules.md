@@ -6,7 +6,8 @@ These rules apply across docs, research, implementation, and validation.
 
 - Wiki facts define official constraints.
 - Playbook guidance defines heuristics and best practices.
-- Repo-local `bots/` code and `performances/` outputs are local artifacts, not authority.
+- Repo-local bot code and performance outputs are local artifacts, not authority. New work belongs under member-owned `rounds/round_X/bots/<member>/` and `rounds/round_X/performances/<member>/`; removed top-level `bots/` and `performances/` must not be recreated.
+- `non-canonical/` is personal scratch space. Do not use it as evidence, examples, or implementation source unless the user explicitly points to a draft, and then summarize useful parts into formal artifacts before relying on them.
 - Strategy assumptions must be labeled as assumptions.
 - Unknown or inconsistent source material must become a caveat, not an invented rule.
 

@@ -36,7 +36,7 @@ Do not turn playbook advice into official rules. If a strategy uses playbook gui
 
 ## Non-sources
 
-Do not use `bots/`, `performances/`, external material, or remembered Prosperity behavior as authority for official rules. Repo-local code and run outputs can show local artifacts, but they cannot define what Prosperity requires.
+Do not use round-local artifacts, `non-canonical/` drafts, removed top-level execution artifacts, external material, or remembered Prosperity behavior as authority for official rules. Repo-local code and run outputs can show local artifacts, but they cannot define what Prosperity requires.
 
 ## Caveat rule
 

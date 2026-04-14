@@ -10,6 +10,10 @@ Use this structure when handing work to another workstream:
 ## Summary
 What changed or what was learned.
 
+## Phase status
+Status:
+Index updated:
+
 ## Sources
 Wiki facts:
 Playbook heuristics:
@@ -31,7 +35,7 @@ The next useful step and who can pick it up.
 ## Common handoff paths
 
 - EDA to strategy: provide observed patterns, reproduction steps, and evidence limits.
-- Strategy to implementation: provide hypothesis, parameters, risk behavior, and tests.
+- Strategy spec to implementation: provide reviewed spec, parameters, risk behavior, and tests.
 - Implementation to validation: provide changed behavior, expected outputs, and known risk areas.
 - Validation to strategy: provide failures, logs, and whether the issue is factual, implementation-level, or heuristic.
 - Round preparation to all workstreams: provide products, limits, manual/algorithmic separation, caveats, and data availability.
@@ -49,7 +53,7 @@ The next useful step and who can pick it up.
 A good next action is concrete and bounded:
 
 - "Run EDA on spread distribution for the active product data."
-- "Implement the documented inventory cap in the strategy note."
+- "Implement the documented inventory cap in the reviewed strategy spec."
 - "Validate aggregate order capacity against the active round limits."
 - "Extract missing manual-only mechanics into the round doc."
 

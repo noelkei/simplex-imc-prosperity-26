@@ -1,6 +1,6 @@
 # Prosperity Agent Wiki
 
-This wiki is a compact source of truth for coding agents implementing Prosperity trading algorithms.
+This wiki is the operational factual source for coding agents implementing Prosperity trading algorithms in this repository.
 
 It reorganizes the raw Prosperity wiki into small, task-oriented files:
 
@@ -12,12 +12,17 @@ It reorganizes the raw Prosperity wiki into small, task-oriented files:
 
 ## Source of truth
 
-Use only `docs/prosperity_wiki_raw/` as the authority for facts.
+Use `docs/prosperity_wiki/` as the operational source for facts during normal work.
+
+Use `docs/prosperity_wiki_raw/` as the underlying factual base when curating, checking, or updating wiki pages.
+
+Do not add official facts to the curated wiki unless they are supported by `docs/prosperity_wiki_raw/` or by another accepted factual source explicitly added to the repo workflow.
 
 Do not use:
 
-- `bots/`
-- `performances/`
+- round-local `rounds/round_X/bots/`
+- round-local `rounds/round_X/performances/`
+- `non-canonical/`
 - `docs/prosperity_playbook/`
 - external sources
 

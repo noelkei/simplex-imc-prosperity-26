@@ -6,7 +6,9 @@ This repository supports multiple valid workstreams. Not every contributor is ex
 
 - The factual source of truth is [`../prosperity_wiki/`](../prosperity_wiki/).
 - The strategy and process heuristic source is [`../prosperity_playbook/`](../prosperity_playbook/).
-- `bots/` and `performances/` are local implementation and run-output artifacts, not sources of truth for rules, product facts, API contracts, or position limits.
+- Round-local bot and performance folders are implementation and run-output artifacts, not sources of truth for rules, product facts, API contracts, or position limits.
+- [`../../non-canonical/`](../../non-canonical/) is informal personal scratch space outside the formal workflow.
+- Removed top-level `bots/` and `performances/` must not be recreated; active execution artifacts belong under `rounds/round_X/`.
 - The Prosperity API contract should be treated as stable unless active round documentation explicitly says otherwise.
 - Official rules, limits, product names, field names, and runtime constraints must not be inferred from examples, repo-local bot implementations, or performance outputs.
 - Round-specific facts belong in round documentation or clearly labeled notes, not in reusable workflow rules.
@@ -21,6 +23,8 @@ Useful contributions include:
 - Debugging and validation: logs, failure analysis, order-limit checks, runtime checks, and regression notes.
 - Round preparation: extracted facts, caveats, product/limit tables, and algorithmic/manual separation for new rounds.
 - Documentation and handoffs: concise notes that make work reproducible by someone else.
+
+Personal drafts in `non-canonical/` can be useful for thinking, but they become part of the project only after the useful parts are moved or summarized into the relevant formal artifact.
 
 ## Contribution shape
 

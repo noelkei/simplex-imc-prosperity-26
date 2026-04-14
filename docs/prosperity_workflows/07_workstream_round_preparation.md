@@ -23,6 +23,22 @@ Round preparation extracts new official facts and prepares the repo for EDA, str
 - Keep new round facts out of reusable workflow docs unless they are examples of process.
 - If a round appears to change the API contract, document the exact source language and caveat before implementation depends on it.
 
+## Ingestion quality checklist
+
+Before ingestion is marked complete:
+
+- Official round wiki link is present.
+- Accepted factual sources were reviewed.
+- Algorithmic products, symbols, and position limits are explicit or marked unknown.
+- Manual-only mechanics are separated from bot implementation requirements.
+- Round-specific mechanics are separated from shared API and trading facts.
+- Source caveats and conflicts are recorded.
+- Available and missing data artifacts are noted.
+- Unknowns that may affect EDA, strategy, or implementation are separated from facts and have a next action.
+- No facts were inferred from bots, performances, memory, or playbook heuristics.
+
+Ingestion cannot be `COMPLETED` unless each material unknown has a clarification path, targeted EDA action, or explicit deadline-risk deferral. These unknowns should seed the first EDA questions and the understanding summary.
+
 ## Handoff checklist
 
 - Factual source files reviewed.
@@ -30,4 +46,5 @@ Round preparation extracts new official facts and prepares the repo for EDA, str
 - Product and position-limit table status.
 - Algorithmic/manual separation status.
 - Source caveats.
+- Downstream-impacting unknowns and next actions.
 - Downstream actions for EDA, strategy, implementation, and validation.
