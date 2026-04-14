@@ -8,10 +8,17 @@ It is not a strategy manual and it does not define one correct path to a winning
 
 - Use [`../prosperity_wiki/`](../prosperity_wiki/) for factual rules: API contracts, datamodel fields, exchange mechanics, position limits, runtime constraints, platform flow, round facts, and source caveats.
 - Use [`../prosperity_playbook/`](../prosperity_playbook/) for heuristics: strategy patterns, risk habits, debugging practices, and iteration advice.
-- Do not use `bots/` or `performances/` as a source of truth.
+- Do not use round-local bot or performance artifacts as a source of truth.
+- Do not use [`../../non-canonical/`](../../non-canonical/) as evidence or examples unless the user explicitly points to a draft.
 - Treat the Prosperity API contract as stable unless round documentation explicitly says otherwise.
 
 When a fact is missing, ambiguous, or inconsistent, record a caveat. Do not invent official rules.
+
+## How To Use These Workflows
+
+For active round work, start from `rounds/round_X/workspace/_index.md`, then read the relevant phase context and the task-specific workflow below.
+
+When starting a phase, confirm required inputs and update the phase context. When continuing, update the existing artifact instead of creating duplicates. When closing, check the exit criteria, update `_index.md`, update the phase context, and leave a concrete next action.
 
 ## Workstream map
 
@@ -24,6 +31,10 @@ When a fact is missing, ambiguous, or inconsistent, record a caveat. Do not inve
 - [`07_workstream_round_preparation.md`](07_workstream_round_preparation.md): new-round documentation and preparation workflow.
 - [`08_handoffs_and_documentation.md`](08_handoffs_and_documentation.md): safe handoff patterns between workstreams.
 - [`09_safe_change_rules.md`](09_safe_change_rules.md): durable rules for safe repo changes.
+- [`10_time_aware_team_pipeline.md`](10_time_aware_team_pipeline.md): 2-day deadline workflow, phase state tracking, round indexes, and fast mode.
+- [`11_dataset_eda_framework.md`](11_dataset_eda_framework.md): column classification, adaptive EDA, and EDA-as-knowledge-transfer guidance.
+- [`12_top_level_artifact_audit.md`](12_top_level_artifact_audit.md): historical cleanup audit for removed top-level `bots/` and `performances/`.
+- [`../templates/`](../templates/): reusable Markdown templates for understanding summaries, strategy candidates, strategy specs, run summaries, and debugging issues.
 
 ## Operating rule
 
