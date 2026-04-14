@@ -1,6 +1,8 @@
 # Prosperity Agent Playbook
 
-Este documento complementa la documentación oficial de Prosperity (docs/prosperity_wiki_raw/) y está diseñado para ayudar a agentes de código (Codex, Claude) a desarrollar estrategias efectivas de trading.
+Este documento complementa la documentación oficial de Prosperity (`docs/prosperity_wiki_raw/`) y está diseñado para ayudar a agentes de código (Codex, Claude) a desarrollar estrategias efectivas de trading.
+
+Nota de autoridad: usa `docs/prosperity_wiki_raw/` y la wiki curada en `docs/prosperity_wiki/` para hechos del juego. No uses `bots/` ni `performances/` como fuente de verdad.
 
 ---
 
@@ -183,10 +185,10 @@ Al desarrollar código:
 
 # 🔗 Relación con otros documentos
 
-- API → `09_algorithm_api.md`
-- datamodel → `10_datamodel_reference.md`
-- reglas → `04_rules_and_eligibility.md`
-- rondas → `11_tutorial_round.md`, `12_round_1.md`
+- API → [../prosperity_wiki/api/01_trader_contract.md](../prosperity_wiki/api/01_trader_contract.md)
+- datamodel → [../prosperity_wiki/api/02_datamodel_reference.md](../prosperity_wiki/api/02_datamodel_reference.md)
+- reglas → [../prosperity_wiki/trading/02_orders_and_position_limits.md](../prosperity_wiki/trading/02_orders_and_position_limits.md), [../prosperity_wiki/appendix/competition_context.md](../prosperity_wiki/appendix/competition_context.md)
+- rondas → [../prosperity_wiki/rounds/tutorial.md](../prosperity_wiki/rounds/tutorial.md), [../prosperity_wiki/rounds/round_1.md](../prosperity_wiki/rounds/round_1.md)
 
 ---
 
