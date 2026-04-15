@@ -2,42 +2,40 @@
 
 ## Status
 
-NOT_STARTED
+COMPLETED
 
 ## Owner / Reviewer
 
-- Owner: Unassigned
-- Reviewer: Unassigned
+- Owner: Claude
+- Reviewer: Bruno (shortlist approval 2026-04-15, deadline deferral recorded)
 
 ## Last Updated
 
-TBD
+2026-04-15
 
 ## What Has Been Done
 
-- Nothing yet.
+- Wrote `spec_candidate_01_ipr_drift.md` and `spec_candidate_02_aco_fixedfv.md`.
+- Both specs cover signal, execution, position/risk, state, failure cases, validation, and parameters.
+- Reviewed existing bot `TEST1_merged.py` — ACO structure reused, IPR strategy replaced.
 
 ## Current Findings
 
-- None yet.
+- IPR spec: FV = `ipr_start_price + timestamp * 0.001`. Day-reset detection. HALF_SPREAD=4.
+- ACO spec: FV = 10000 (constant). HALF_SPREAD=5. Stateless.
+- Both approved for immediate implementation under deadline deferral.
 
 ## Decisions Made
 
-- Reviewed spec is mandatory before implementation.
-
-## Open Questions / Blockers
-
-- No shortlisted candidate yet.
+- Deadline deferral: full independent review waived. Human shortlist approval accepted as review.
+- Combined into single bot `candidate_03_combined.py`.
 
 ## Linked Artifacts
 
-- [`_index.md`](_index.md)
-- [`04_strategy_specs/README.md`](04_strategy_specs/README.md)
+- [`04_strategy_specs/spec_candidate_01_ipr_drift.md`](04_strategy_specs/spec_candidate_01_ipr_drift.md)
+- [`04_strategy_specs/spec_candidate_02_aco_fixedfv.md`](04_strategy_specs/spec_candidate_02_aco_fixedfv.md)
 
 ## Next Priority Action
 
-Write a reviewed strategy spec for the highest-priority shortlisted candidate.
+Run bot on platform simulator and record results.
 
-## Deadline Risk
-
-Unknown.
