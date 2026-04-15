@@ -4,21 +4,14 @@ Official round facts: [`../../docs/prosperity_wiki/rounds/round_1.md`](../../doc
 
 Do NOT duplicate or modify official round facts here. This folder contains derived artifacts only.
 
-This round workspace is pre-created; no round work has begun yet.
-
-## How To Start
-
-1. Open [`workspace/_index.md`](workspace/_index.md).
-2. Confirm all phases are `NOT_STARTED`.
-3. Start phase 00 ingestion in [`workspace/00_ingestion.md`](workspace/00_ingestion.md).
-4. Update the relevant phase context whenever status, decisions, blockers, or next actions change.
+This round workspace is active. Use [`workspace/_index.md`](workspace/_index.md) as the source of current state, blockers, product scope, active strategies, and next action.
 
 ## How To Continue
 
-- Read [`workspace/_index.md`](workspace/_index.md) first.
-- Use `Current Next Priority Action` to decide what to do next.
-- Use the phase context files in `workspace/` as short resumption notes.
-- Keep bots, data, and performance outputs inside this round folder.
+1. Open [`workspace/_index.md`](workspace/_index.md).
+2. Use `Current Next Priority Action` to decide what to do next.
+3. Use the phase context files in `workspace/` as short resumption notes.
+4. Keep bots, data, and performance outputs inside this round folder.
 
 ## How To Close Work
 

@@ -7,11 +7,12 @@ READY_FOR_REVIEW
 ## Owner / Reviewer
 
 - Owner: Claude
-- Reviewer: Unassigned (human shortlist approval needed)
+- Reviewer: Unassigned
+- Review outcome: not reviewed
 
 ## Last Updated
 
-2026-04-15
+2026-04-16
 
 ## What Has Been Done
 
@@ -33,7 +34,8 @@ READY_FOR_REVIEW
 
 ## Open Questions / Blockers
 
-- **Human decision needed:** Approve shortlist before agent writes specs.
+- **Human decision needed:** Approve shortlist, approve with caveats, or request changes before marking Strategy `COMPLETED`.
+- Specs were written under deadline deferral; if shortlist review changes, update specs and implementation intent before final submission readiness.
 
 ## Linked Artifacts
 
@@ -43,6 +45,5 @@ READY_FOR_REVIEW
 
 ## Next Priority Action
 
-1. **Human:** Approve shortlist in `03_strategy_candidates.md`.
-2. **Agent:** Write `04_strategy_specs/spec_candidate_01_ipr_drift.md` and `04_strategy_specs/spec_candidate_02_aco_fixedfv.md`.
-
+1. **Human:** Review shortlist in `03_strategy_candidates.md`.
+2. **Agent:** If review changes candidate priority or assumptions, update linked specs and implementation tracking.

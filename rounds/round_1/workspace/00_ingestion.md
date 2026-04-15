@@ -2,7 +2,7 @@
 
 ## Status
 
-IN_PROGRESS
+READY_FOR_REVIEW
 
 ## Sources
 
@@ -45,15 +45,23 @@ IN_PROGRESS
 
 - The "hidden pattern" in `ASH_COATED_OSMIUM` is mentioned as speculation ("rumored", "one may speculate") — not a confirmed mechanic. Do not hardcode any assumed pattern without EDA evidence.
 - "Quite steady" for `INTARIAN_PEPPER_ROOT` is qualitative guidance, not a quantified spread or drift bound. Fair value and spread must be estimated from data or treated as an assumption.
-- No data artifacts are present in `rounds/round_1/data/raw/` as of ingestion. EDA phase is blocked until data is provided.
+- Raw data was added after initial ingestion. Treat derived patterns from that data as EDA evidence, not official round rules.
+
+## Data Availability
+
+- Current raw data: 6 CSV files in `rounds/round_1/data/raw/`:
+  - `prices_round_1_day_-2.csv`, `prices_round_1_day_-1.csv`, `prices_round_1_day_0.csv`
+  - `trades_round_1_day_-2.csv`, `trades_round_1_day_-1.csv`, `trades_round_1_day_0.csv`
+- Missing data: none recorded for the initial EDA scope.
+- Last checked: 2026-04-16 during robustness pass.
+- EDA artifact using this data: `workspace/01_eda/eda_round_1.md`.
 
 ## Unknowns That May Affect Downstream Work
 
 | Unknown | Affects | Why It Matters | Next Action |
 | --- | --- | --- | --- |
-| No price/order-book data in `data/raw/` | EDA (blocked), strategy confidence, parameter estimation | Cannot estimate fair value, volatility, or pattern shape without data | Human to commit raw log/price files to `rounds/round_1/data/raw/` |
-| Hidden pattern shape for `ASH_COATED_OSMIUM` | Strategy type selection (mean reversion vs. trend vs. pattern exploitation) | Determines whether a parametric model or reactive approach is correct | EDA once data is available; defer strategy choice until pattern is observed |
-| Fair value estimate for `INTARIAN_PEPPER_ROOT` | Market-making spread and quoting logic | Stable product market-making requires an anchor fair value | EDA or use mid-price from first available order book snapshot |
+| Human review of ingestion | Phase closure | Ingestion facts and caveats need sign-off before marking `COMPLETED` | Human review: approve, approve with caveats, or request corrections |
+| EDA-derived fair value models | Strategy confidence | Data supports candidate strategies but is not official wiki fact | Keep labeled as EDA evidence; review `01_eda/eda_round_1.md` |
 | Manual auction: other participants' bids/asks not known | Manual submission decision | Optimal price/quantity depends on where others bid; player submits last but cannot see others' orders before submitting | Treat as a decision under uncertainty; use guaranteed buyback floors as risk anchors |
 | Manual fee impact on `EMBER_MUSHROOM` net P&L | Manual submission decision | 0.10/unit fee reduces effective buyback from 20.00 to 19.90; affects whether buying at certain prices is profitable | Include fee in all manual P&L calculations |
  
@@ -71,17 +79,15 @@ Unknowns must stay separate from facts. Each material unknown needs a next actio
 - [x] Unknowns that may affect EDA, strategy, or implementation are actionable.
 - [x] No facts were inferred from bots, performances, memory, or playbook heuristics.
 
-## Downstream Actions 
+## Downstream Actions
 
-- EDA: **BLOCKED** — no data in `rounds/round_1/data/raw/`. Once data lands: (1) classify `INTARIAN_PEPPER_ROOT` price stability and estimate fair value range; (2) test for periodicity, trend, or mean-reversion signature in `ASH_COATED_OSMIUM`.
-- Understanding: Can begin partial structure from wiki facts alone (product roles, manual mechanics, position limits). Full understanding requires EDA output.
-- Strategy: Provisional framing possible without data (see notes below); shortlist requires EDA confirmation.
-  - `INTARIAN_PEPPER_ROOT`: market making around a stable fair value — analogous to `EMERALDS` (Tutorial). Low-risk baseline candidate.
-  - `ASH_COATED_OSMIUM`: strategy class depends on observed pattern. Candidates: (a) market making with wider spread; (b) mean reversion; (c) pattern/cycle exploitation if periodicity confirmed in EDA.
-  - Manual (`DRYLAND_FLAX`, `EMBER_MUSHROOM`): use guaranteed buyback prices as floor. Bid aggressively below buyback net of fees. Treat as bounded-upside separate track.
-- Implementation: Blocked behind reviewed strategy spec gate.
+- EDA: `READY_FOR_REVIEW` — raw data was analyzed in `workspace/01_eda/eda_round_1.md`; human review is pending.
+- Understanding: `READY_FOR_REVIEW` — downstream synthesis exists but still inherits ingestion/EDA review debt.
+- Strategy: `READY_FOR_REVIEW` — candidates exist but remain pending shortlist approval.
+- Implementation: blocked until the canonical bot file exists and validation can run.
 
 ## Review
 
 - Reviewer: Unassigned
-- Status: READY_FOR_REVIEW (pending human sign-off; blocked on data for EDA downstream)
+- Review outcome: not reviewed
+- Status: READY_FOR_REVIEW (pending human sign-off; data is now available and EDA exists)

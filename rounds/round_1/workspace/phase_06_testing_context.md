@@ -11,7 +11,7 @@ NOT_STARTED
 
 ## Last Updated
 
-TBD
+2026-04-16
 
 ## What Has Been Done
 
@@ -28,7 +28,7 @@ TBD
 
 ## Open Questions / Blockers
 
-- Bot candidate required.
+- Canonical bot candidate required. Intended file `rounds/round_1/bots/bruno/canonical/candidate_03_combined.py` is missing.
 
 ## Linked Artifacts
 
@@ -37,7 +37,7 @@ TBD
 
 ## Next Priority Action
 
-After implementation, run the fastest meaningful validation and create a run summary.
+After the canonical bot exists, run the fastest meaningful validation and create a run summary.
 
 ## Deadline Risk
 

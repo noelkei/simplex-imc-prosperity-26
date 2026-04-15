@@ -7,11 +7,12 @@ READY_FOR_REVIEW
 ## Owner / Reviewer
 
 - Owner: Claude
-- Reviewer: Unassigned (human sign-off needed before spec)
+- Reviewer: Unassigned
+- Review outcome: not reviewed
 
 ## Last Updated
 
-2026-04-15
+2026-04-16
 
 ## What Has Been Done
 
@@ -36,7 +37,8 @@ READY_FOR_REVIEW
 
 ## Open Questions / Blockers
 
-- None blocking strategy phase.
+- Human review pending before marking Understanding `COMPLETED`.
+- Specs were written under deadline deferral; if review changes understanding, update strategy/spec artifacts before final submission readiness.
 - Live round drift rate and FV need to be verified in first ~100 ticks.
 
 ## Linked Artifacts
@@ -48,6 +50,5 @@ READY_FOR_REVIEW
 
 ## Next Priority Action
 
-1. **Human:** Review `02_understanding.md` and approve or correct.
-2. **Agent:** Once approved, write strategy specs for `candidate_01_ipr_drift` and `candidate_02_aco_fixedfv`.
-
+1. **Human:** Review `02_understanding.md` and approve, approve with caveats, or request corrections.
+2. **Agent:** If review changes material assumptions, update downstream strategy/spec artifacts before final submission readiness.

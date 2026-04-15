@@ -8,27 +8,29 @@ COMPLETED
 
 - Owner: Claude
 - Reviewer: Bruno (shortlist approval 2026-04-15, deadline deferral recorded)
+- Review outcome: deferred under deadline
 
 ## Last Updated
 
-2026-04-15
+2026-04-16
 
 ## What Has Been Done
 
 - Wrote `spec_candidate_01_ipr_drift.md` and `spec_candidate_02_aco_fixedfv.md`.
 - Both specs cover signal, execution, position/risk, state, failure cases, validation, and parameters.
-- Reviewed existing bot `TEST1_merged.py` — ACO structure reused, IPR strategy replaced.
+- Inspected historical bot `TEST1_merged.py` as non-authoritative implementation context; linked specs remain the authoritative implementation source.
 
 ## Current Findings
 
 - IPR spec: FV = `ipr_start_price + timestamp * 0.001`. Day-reset detection. HALF_SPREAD=4.
 - ACO spec: FV = 10000 (constant). HALF_SPREAD=5. Stateless.
-- Both approved for immediate implementation under deadline deferral.
+- Both specs are implementation-eligible under recorded deadline deferral.
 
 ## Decisions Made
 
 - Deadline deferral: full independent review waived. Human shortlist approval accepted as review.
-- Combined into single bot `candidate_03_combined.py`.
+- Intended combined bot: `candidate_03_combined.py`.
+- Robustness pass found the canonical bot file is missing, so implementation tracking is blocked until it is restored or created.
 
 ## Linked Artifacts
 
@@ -37,5 +39,4 @@ COMPLETED
 
 ## Next Priority Action
 
-Run bot on platform simulator and record results.
-
+Restore or create the missing canonical bot from the linked specs, then run platform simulator and record results.

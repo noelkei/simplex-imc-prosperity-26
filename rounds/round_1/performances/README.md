@@ -1,6 +1,11 @@
 # Round 1 Performances
 
-No performance artifacts have been added yet.
+Historical performance artifacts exist under `bruno/historical/`:
+
+- `114919.json`
+- `114919.log`
+
+They are non-authoritative historical evidence only. They are not active canonical validation evidence and should not be used to promote a current candidate without a current run summary.
 
 Performance results are non-authoritative evidence. Preserve durable run evidence as `.md` and/or `.json` summaries using `docs/templates/run_summary_template.md`.
 

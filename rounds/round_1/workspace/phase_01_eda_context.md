@@ -2,16 +2,17 @@
 
 ## Status
 
-COMPLETED
+READY_FOR_REVIEW
 
 ## Owner / Reviewer
 
 - Owner: Claude
-- Reviewer: Unassigned (human sign-off recommended before spec)
+- Reviewer: Unassigned
+- Review outcome: not reviewed
 
 ## Last Updated
 
-2026-04-15
+2026-04-16
 
 ## What Has Been Done
 
@@ -21,6 +22,7 @@ COMPLETED
 - Checked mean-reversion and autocorrelation for ASH_COATED_OSMIUM.
 - Analyzed spread distributions and order book depth for both products.
 - Analyzed trades file for price range and typical trade size.
+- Robustness pass added explicit data-quality/filter caveat: incomplete top-of-book rows and `mid_price = 0.0` rows exist; EDA findings should be reviewed with those filters in mind.
 
 ## Current Findings
 
@@ -38,13 +40,14 @@ COMPLETED
 
 ## Decisions Made
 
-- INTARIAN_PEPPER_ROOT fair value = `day_start + t * 0.001` (not static). This overrides wiki's "quite steady" description — the product has predictable drift, not a flat level.
+- INTARIAN_PEPPER_ROOT fair value hypothesis = `day_start + t * 0.001` (not static). This is EDA evidence for strategy use, not a replacement for the wiki wording.
 - ASH_COATED_OSMIUM fair value = 10,000. "Hidden pattern" is likely that its fair value is knowable despite apparent volatility.
 - Both strategies will be market-making variants, distinguished by their fair value model.
 
 ## Open Questions / Blockers
 
-- None blocking strategy phase. Open questions are noted in `01_eda/eda_round_1.md`.
+- Human review pending before marking EDA `COMPLETED`.
+- Open questions are noted in `01_eda/eda_round_1.md`.
 - Drift rate 0.001/tick is an estimate — implementation should allow easy parameter adjustment.
 
 ## Linked Artifacts
@@ -57,5 +60,4 @@ COMPLETED
 ## Next Priority Action
 
 1. **Human:** Review `01_eda/eda_round_1.md` findings and confirm or correct.
-2. **Agent:** Once EDA is confirmed, write phase 02 Understanding and phase 03 Strategy candidates.
-
+2. **Agent/Human:** Keep EDA `READY_FOR_REVIEW` until review is approved, approved with caveats, or explicitly deferred under deadline.
