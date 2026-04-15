@@ -9,12 +9,9 @@
 
 ## Current Next Priority Action
 
-**Human decision needed:** Review `03_strategy_candidates.md` and approve the shortlist:
-- `candidate_01_ipr_drift` — IPR drift market maker (FV = day_start + t×0.001)
-- `candidate_02_aco_fixedfv` — ACO fixed-FV market maker (FV = 10,000)
-- `candidate_03_combined` — both strategies combined into one submission bot
+**Human action needed:** Upload `candidate_03_combined.py` to the Prosperity platform simulator and run it. Share the results (P&L, position trace) so the agent can write a run summary and identify issues.
 
-Once approved, agent will immediately write strategy specs for candidates 01 and 02, then implement the combined bot.
+Bot path: `rounds/round_1/bots/bruno/canonical/candidate_03_combined.py`
 
 ## Phase Status
 
@@ -24,9 +21,9 @@ Once approved, agent will immediately write strategy specs for candidates 01 and
 | 01 EDA | COMPLETED | Claude | Unassigned | [`01_eda/eda_round_1.md`](01_eda/eda_round_1.md) / [`phase_01_eda_context.md`](phase_01_eda_context.md) | None |
 | 02 Understanding | READY_FOR_REVIEW | Claude | Unassigned | [`02_understanding.md`](02_understanding.md) / [`phase_02_understanding_context.md`](phase_02_understanding_context.md) | Awaiting human review |
 | 03 Strategy | READY_FOR_REVIEW | Claude | Unassigned | [`03_strategy_candidates.md`](03_strategy_candidates.md) / [`phase_03_strategy_context.md`](phase_03_strategy_context.md) | Awaiting shortlist approval |
-| 04 Spec | NOT_STARTED | Unassigned | Unassigned | [`04_strategy_specs/`](04_strategy_specs/) / [`phase_04_spec_context.md`](phase_04_spec_context.md) | Shortlist approval required |
-| 05 Implementation | NOT_STARTED | Unassigned | Unassigned | [`phase_05_implementation_context.md`](phase_05_implementation_context.md) | Reviewed strategy spec required |
-| 06 Testing/performance | NOT_STARTED | Unassigned | Unassigned | [`phase_06_testing_context.md`](phase_06_testing_context.md) | Bot candidate required |
+| 04 Spec | COMPLETED | Claude | Bruno | [`04_strategy_specs/`](04_strategy_specs/) / [`phase_04_spec_context.md`](phase_04_spec_context.md) | None |
+| 05 Implementation | READY_FOR_REVIEW | Claude | Bruno | [`phase_05_implementation_context.md`](phase_05_implementation_context.md) | Human testing needed |
+| 06 Testing/performance | NOT_STARTED | Unassigned | Unassigned | [`phase_06_testing_context.md`](phase_06_testing_context.md) | Bot run on platform required |
 | 07 Debugging/iteration | NOT_STARTED | Unassigned | Unassigned | [`06_debugging/`](06_debugging/) / [`phase_07_debugging_context.md`](phase_07_debugging_context.md) | Issue/run required |
 
 ## Active Strategies
@@ -35,49 +32,44 @@ Maximum active strategies: 3.
 
 | Candidate ID | Priority | Evidence Strength | Short Reason | Spec Status | Owner | Decision Needed |
 | --- | --- | --- | --- | --- | --- | --- |
-| `candidate_01_ipr_drift` | high | strong | IPR drifts +0.001/tick; FV = day_start + t×0.001; market-make inside bot spread | not reviewed | Claude | Approve shortlist |
-| `candidate_02_aco_fixedfv` | high | strong | ACO mean-reverts to 10,000; FV fixed; market-make inside 16-tick bot spread | not reviewed | Claude | Approve shortlist |
-| `candidate_03_combined` | high | strong | Candidates 01 + 02 in one submission bot | not reviewed | Claude | Approve shortlist |
+| `candidate_01_ipr_drift` | high | strong | IPR drifts +0.001/tick; FV = day_start + t×0.001 | approved | Claude | None — implemented |
+| `candidate_02_aco_fixedfv` | high | strong | ACO mean-reverts to 10,000; fixed FV market maker | approved | Claude | None — implemented |
+| `candidate_03_combined` | high | strong | Candidates 01 + 02 in one submission bot | approved | Claude | Run on platform |
 
 ## Active Implementations
 
-Maximum active implementation candidates: 2.
-
-- None.
+| Candidate ID | Variant ID | Bot Path | Parent Spec | Parent Bot | Changed Axis | Status | Latest Run |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `candidate_03_combined` | base | `../bots/bruno/canonical/candidate_03_combined.py` | `spec_candidate_01_ipr_drift.md` + `spec_candidate_02_aco_fixedfv.md` | `bots/bruno/historical/TEST1_merged.py` | IPR replaced; ACO refined | awaiting first run | none yet |
 
 ## Baseline / Reference Bot
 
-- None selected.
+- `bots/bruno/historical/TEST1_merged.py` — previous best, archived. Not active.
 
 ## Latest Results And Best Current Candidate
 
-- No results.
-- No best candidate.
+- No results yet.
+- Best current candidate: `candidate_03_combined` — pending first platform run.
 
 ## Blockers And Decisions Needed
 
 | Blocker | Phase | Action Required | Owner |
 | --- | --- | --- | --- |
-| Shortlist approval pending | Strategy (03) | Review `03_strategy_candidates.md` and approve candidates 01, 02, 03 | Human |
-| Understanding review pending | Understanding (02) | Review `02_understanding.md` and confirm or correct | Human |
+| Bot not yet run on platform | Testing (06) | Upload bot, run simulator, share P&L + position trace | Human |
 
 ## Final Submission Status
 
-- Candidate: none.
-- File: none.
-- Decision reason: none.
-- Linked spec: none.
-- Linked validation run: none.
+- Candidate: `candidate_03_combined` (pending validation)
+- File: `../bots/bruno/canonical/candidate_03_combined.py`
+- Decision reason: only validated candidate; built on strong EDA evidence
+- Linked spec: `spec_candidate_01_ipr_drift.md` + `spec_candidate_02_aco_fixedfv.md`
+- Linked validation run: none yet
 - Comparability status: `unclear`
-- Contract readiness status: `not checked`
+- Contract readiness status: `passed` (manual review)
 - Active file verified: `no`
-- Last validation: none.
-- Active-file verification: not started.
 
 ## Recently Changed Artifacts
 
 - Pre-created from template: `2026-04-14`
-- `2026-04-15`: Phase 00 ingestion written (`READY_FOR_REVIEW`). EDA blocked on missing data.
-- `2026-04-15`: Data uploaded. EDA completed (`COMPLETED`). Provisional strategy framing added.
-- `2026-04-15`: Phase 02 Understanding written (`READY_FOR_REVIEW`). Phase 03 Strategy candidates written (`READY_FOR_REVIEW`). Active strategies table populated.
-
+- `2026-04-15`: Ingestion, EDA, Understanding, Strategy candidates written.
+- `2026-04-15`: Specs written (04 COMPLETED). Bot implemented (05 READY_FOR_REVIEW).
