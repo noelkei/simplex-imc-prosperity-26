@@ -19,5 +19,6 @@ Use this skill to summarize a released round for downstream EDA, strategy, imple
 5. Use playbook guidance only as heuristic context when strategy framing is requested.
 6. Do not infer missing limits or behavior from bot artifacts, performance artifacts, `non-canonical/` drafts, examples, or memory.
 7. Record unknowns that may affect EDA, strategy, or implementation separately from facts, with a next action: clarify, targeted EDA, or defer with risk.
-8. Update or create the round `_index.md` and ingestion phase context when working in an active round workspace, including blockers or next priority action for material unknowns.
-9. Handoff a concise summary with sources, caveats, downstream-impacting unknowns, phase status, and concrete next actions.
+8. If raw data, logs, or run artifacts arrive after ingestion starts or closes, update ingestion data availability, clear or replace stale "no data" blockers, update `_index.md`, update the phase context, and keep data observations labeled as evidence rather than official facts.
+9. Update or create the round `_index.md` and ingestion phase context when working in an active round workspace, including blockers or next priority action for material unknowns.
+10. Handoff a concise summary with sources, caveats, downstream-impacting unknowns, phase status, and concrete next actions.

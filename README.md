@@ -8,7 +8,7 @@ If you are new here, start with this README, then open the relevant round folder
 
 1. Read the source hierarchy below so you know what is authoritative.
 2. Open the relevant round README, for example `rounds/round_1/README.md`.
-3. Open `rounds/round_X/workspace/_index.md` to see the current phase, blockers, active strategies, active implementations, and next priority action.
+3. Open `rounds/round_X/workspace/_index.md` to see the current phase, product scope, blockers, active strategies, active implementations, and next priority action.
 4. Use the relevant phase context file as the short resumption note.
 5. If you are only drafting personal ideas, use `non-canonical/<member>/` and do not treat that work as formal evidence until it is moved or summarized into `rounds/round_X/`.
 
@@ -91,6 +91,30 @@ docs/templates/
 
 `workstreams/round_template/` is the scaffold used to create or repair round workspaces. Do not put active round work there.
 
+Repo task skills live in:
+
+```text
+skills/
+```
+
+Use them as phase-specific operating guides after reading the relevant workflow:
+
+| Task | Skill |
+| --- | --- |
+| New round setup | `skills/add_new_round.md` |
+| Round ingestion | `skills/analyze_round.md` |
+| EDA | `skills/run_eda.md` |
+| Understanding synthesis | `skills/synthesize_understanding.md` |
+| Strategy candidates / shortlist | `skills/generate_strategy_candidates.md` |
+| Strategy specs / implementation readiness | `skills/write_strategy_spec.md` |
+| Trader implementation | `skills/create_trader.md` |
+| Validation/run summaries | `skills/validate_trader.md` |
+| Debugging | `skills/debug_trader.md` |
+| Controlled variants | `skills/generate_trader_variant.md` |
+| Phase state sync / drift repair | `skills/manage_phase_state.md` |
+
+Use `skills/manage_phase_state.md` when starting, resuming, or closing a phase, or when status, blocker, review state, artifact link, or next-action drift appears across the round index, phase context, and main artifact.
+
 Each phase also has a short context file:
 
 ```text
@@ -123,6 +147,7 @@ Open `rounds/round_X/workspace/_index.md` and read:
 
 - `Current Next Priority Action`
 - `Phase Status`
+- `Product Scope`
 - `Blockers And Decisions Needed`
 - `Active Strategies`
 - `Active Implementations`
@@ -210,8 +235,8 @@ Agents should proceed without asking when the next step is determined by the rep
 | Phase | User provides | Agent produces | Done when |
 | --- | --- | --- | --- |
 | Round ingestion | Active round or source material | Products, limits, algorithmic/manual split, caveats | Reviewed ingestion context and `_index.md` links |
-| EDA | Data/log path and question | Reproducible outputs and summary | Facts, patterns, hypotheses, open questions, reusable metrics, and downstream use are clear |
-| Understanding | Reviewed ingestion and EDA | Evidence-aware market understanding | Enough structure exists to generate candidates without reinterpreting data |
+| EDA | Data/log path and question | Reproducible outputs and summary | Product scope, data quality, feature inventory, feature engineering notes, signal hypotheses, open questions, reusable metrics, and downstream agent notes are clear |
+| Understanding | Reviewed ingestion and EDA | Evidence-aware market understanding | Strategy-relevant insights, what to try, what not to trust yet, risks, and candidate implications are clear |
 | Strategy generation | Priorities and risk appetite | Grouped candidates and shortlist | 1-3 non-duplicative candidates are selected |
 | Strategy specification | Shortlisted candidate | Implementation-ready spec | Signal, execution, risk, state, failure cases, and validation checks are defined |
 | Implementation | Reviewed spec | Bot implementation | Contract, signs, limits, runtime/imports, and spec alignment are checked |

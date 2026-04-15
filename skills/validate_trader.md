@@ -10,6 +10,7 @@ Use this skill to review a `Trader` implementation for contract, rule, and evide
 - Trading rules: `../docs/prosperity_wiki/trading/01_exchange_mechanics.md`, `../docs/prosperity_wiki/trading/02_orders_and_position_limits.md`
 - Active round: the relevant file in `../docs/prosperity_wiki/rounds/`
 - Round state: `../rounds/round_X/workspace/_index.md` and `../rounds/round_X/workspace/phase_06_testing_context.md`
+- Linked strategy spec, including its EDA and understanding references when evaluating behavior evidence.
 - Round performances: `../rounds/round_X/performances/<member>/canonical/` and `../rounds/round_X/performances/<member>/historical/`
 - Template: `../docs/templates/run_summary_template.md`
 - Trader production template: `../docs/templates/trader_production_template.md`
@@ -28,10 +29,12 @@ Use this skill to review a `Trader` implementation for contract, rule, and evide
 9. Do not treat round-local artifacts, `non-canonical/` drafts, or sample PnL as official rules.
 10. Determine the owning member from the bot path, round index, task request, or current phase owner. Use one of `isaac`, `bruno`, `amin`, `daniela`, or `noel`; ask only if ownership is unclear and matters for handoff.
 11. Write current decision-supporting run summaries under `../rounds/round_X/performances/<member>/canonical/` using `run_YYYYMMDD_HHMM_<candidate_id>.md` or `run_YYYYMMDD_HHMM_<candidate_id>_<issue_id>.md`.
-12. Include bot path, linked spec, raw artifact path if available, run id, metrics, errors/rejections/limit concerns, comparability, contract readiness status, interpretation limits, decision, and next action.
+12. Include bot path, linked spec, insight being tested when applicable, linked signal/regime assumption, raw artifact path if available, run id, metrics, errors/rejections/limit concerns, comparability, contract readiness status, interpretation limits, signal/regime evidence verdict, decision, and next action.
 13. Record whether the run is comparable to the baseline or prior run as `yes`, `no`, or `unclear`; non-comparable runs can support debugging but should not drive promotion without an explicit caveat.
-14. Promote a candidate only when the evidence summary includes linked spec, bot path, contract/rule checks, one meaningful run or validation summary, concerns/caveats, and an explicit continue/promote/debug/discard/revise/rerun/stop decision.
-15. Move or mark superseded, non-comparable, stale, or no-longer-decision-relevant summaries under `../rounds/round_X/performances/<member>/historical/`.
-16. If valid behavior performs poorly, suggest returning to strategy/spec rather than treating the result as an implementation bug by default.
-17. Update `../rounds/round_X/workspace/_index.md` and `../rounds/round_X/workspace/phase_06_testing_context.md`, including latest validation run reference, comparability, contract readiness status, decision, and one-line note.
-18. Report pass/fail, sources checked, linked spec/run if available, reproduction steps, caveats, and next action.
+14. State whether validation supports, weakens, contradicts, or does not test the linked signal/regime assumption, with a brief basis.
+15. Promote a candidate only when the evidence summary includes linked spec, bot path, contract/rule checks, one meaningful run or validation summary, concerns/caveats, and an explicit continue/promote/debug/discard/revise/rerun/stop decision.
+16. Move or mark superseded, non-comparable, stale, or no-longer-decision-relevant summaries under `../rounds/round_X/performances/<member>/historical/`.
+17. If valid behavior performs poorly, suggest returning to strategy/spec rather than treating the result as an implementation bug by default.
+18. If validation contradicts the linked signal/regime assumption, route to strategy/spec or EDA before changing code unless there is also a rule or implementation failure.
+19. Update `../rounds/round_X/workspace/_index.md` and `../rounds/round_X/workspace/phase_06_testing_context.md`, including latest validation run reference, comparability, contract readiness status, decision, and one-line note.
+20. Report pass/fail, sources checked, linked spec/run if available, reproduction steps, caveats, and next action.
