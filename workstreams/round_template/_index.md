@@ -24,6 +24,18 @@ Start phase 00 ingestion after copying this template to `rounds/round_X/workspac
 | 06 Testing/performance | NOT_STARTED | Unassigned | Unassigned | [`phase_06_testing_context.md`](phase_06_testing_context.md) | Bot candidate required |
 | 07 Debugging/iteration | NOT_STARTED | Unassigned | Unassigned | [`06_debugging/`](06_debugging/) / [`phase_07_debugging_context.md`](phase_07_debugging_context.md) | Issue/run required |
 
+Review outcomes: `not reviewed`, `approved`, `approved with caveats`, `changes requested`, or `deferred under deadline`.
+
+Do not mark a phase `COMPLETED` while review is merely recommended, unassigned, or pending. Use `READY_FOR_REVIEW` until a review outcome is recorded.
+
+## Product Scope
+
+Track products as they move from ingestion and EDA into strategy and implementation.
+
+| Product | Present In Data | Usable Evidence | Likely Trader Scope | Decision / Caveat |
+| --- | --- | --- | --- | --- |
+| TBD | yes / no | yes / no / partial | likely / possible / no / unknown | include / defer / exclude / investigate |
+
 ## Active Strategies
 
 Maximum active strategies: 3.
@@ -32,9 +44,9 @@ Maximum active strategies: 3.
 
 Example when active:
 
-| Candidate ID | Priority | Evidence Strength | Short Reason | Spec Status | Owner | Decision Needed |
-| --- | --- | --- | --- | --- | --- | --- |
-| `candidate_01` | high | medium | concise rationale from understanding/EDA | not reviewed | Unassigned | Review spec |
+| Candidate ID | Priority | Evidence Strength | Linked EDA Signals | Understanding Insight | Short Reason | Spec Status | Owner | Decision Needed |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `candidate_01` | high | medium | `01_eda/eda_example.md#signal-hypotheses` | concise insight | concise rationale from understanding/EDA | not reviewed | Unassigned | Review spec |
 
 ## Active Implementations
 
@@ -44,13 +56,19 @@ Maximum active implementation candidates: 2.
 
 Example when active:
 
-| Candidate ID | Variant ID | Bot Path | Parent Spec | Parent Bot | Changed Axis | Status | Latest Run |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| `candidate_01` | base | `../bots/<member>/canonical/candidate_01_short_name.py` | `04_strategy_specs/spec_candidate_01_short_name.md` | none | none | validating | `../performances/<member>/canonical/run_YYYYMMDD_HHMM_candidate_01.md` |
+| Candidate ID | Variant ID | Bot Path | Parent Spec | Parent Bot | Insight Being Tested | Changed Axis | Expected Effect | Status | Latest Run |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `candidate_01` | base | `../bots/<member>/canonical/candidate_01_short_name.py` | `04_strategy_specs/spec_candidate_01_short_name.md` | none | linked understanding insight | none | expected effect from EDA/understanding | validating | `../performances/<member>/canonical/run_YYYYMMDD_HHMM_candidate_01.md` |
 
 ## Baseline / Reference Bot
 
 - None selected.
+
+## Historical / Non-Decision Artifacts
+
+- None recorded.
+
+Historical bots, raw logs, and superseded runs are non-authoritative. Mention them here only when they could be mistaken for active state.
 
 ## Latest Results And Best Current Candidate
 

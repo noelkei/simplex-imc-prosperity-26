@@ -14,12 +14,16 @@ Raw logs are not durable by default. Preserve current decision evidence in `roun
 - Bot path:
 - Parent bot:
 - Strategy spec:
+- Variant hypothesis:
+- Insight being tested:
+- Linked signal/regime assumption:
 - Raw artifact path:
 - Data day / source:
 - Baseline / comparison run:
 - Changed axis:
 - Exact change:
-- Expected effect:
+- Expected effect based on EDA/understanding:
+- Falsification metric:
 - Validation check:
 
 ## Result Summary
@@ -46,6 +50,8 @@ Raw logs are not durable by default. Preserve current decision evidence in `roun
 ## Findings
 
 - Finding:
+- Signal/regime evidence verdict: `supports | weakens | contradicts | not tested`
+- Verdict basis:
 
 ## Decision
 

@@ -70,27 +70,49 @@ Use these statuses in each round index:
 - `READY_FOR_REVIEW`
 - `COMPLETED`
 
+Review outcomes:
+
+- `not reviewed`
+- `approved`
+- `approved with caveats`
+- `changes requested`
+- `deferred under deadline`
+
 Transitions:
 
 - `NOT_STARTED -> IN_PROGRESS`: an owner begins work and creates or updates the phase context file.
 - `IN_PROGRESS -> BLOCKED`: missing artifact, source conflict, human decision, or platform/run access blocks useful progress.
 - `BLOCKED -> IN_PROGRESS`: blocker is resolved or explicitly accepted as an assumption or risk.
 - `IN_PROGRESS -> READY_FOR_REVIEW`: required artifact exists and owner believes exit criteria are met.
-- `READY_FOR_REVIEW -> COMPLETED`: reviewer approves or records corrections.
+- `READY_FOR_REVIEW -> COMPLETED`: reviewer approves, approves with caveats, or review is explicitly deferred under deadline pressure.
 - `COMPLETED -> IN_PROGRESS`: allowed only if new round facts, new EDA evidence, implementation behavior, or performance/debug results materially change the phase.
 
-General completion rule: outputs must be usable without reinterpretation, facts and hypotheses must be labeled, artifacts must be non-duplicative, links must be present in `_index.md`, and downstream work must be able to proceed without rework.
+Do not mark a phase `COMPLETED` while review is merely recommended, unassigned, or pending. Use `READY_FOR_REVIEW` until a review outcome is recorded.
+
+General completion rule: outputs must be usable without reinterpretation, facts and hypotheses must be labeled, artifacts must be non-duplicative, links must be present in `_index.md`, statuses must match across `_index.md`, phase context, and the main artifact, and downstream work must be able to proceed without rework.
 
 Phase-specific completion:
 
 - Ingestion: products, limits, algorithmic/manual split, and caveats reviewed.
-- EDA: targeted findings separated into facts, patterns, hypotheses, open questions, and at least one downstream use.
-- Understanding: evidence and caveats are summarized enough to generate candidates.
+- EDA: product scope, data quality, feature inventory, feature engineering notes, conditional patterns/regimes, signal hypotheses, open questions, and downstream agent notes are clear.
+- Understanding: EDA evidence and caveats are compressed into strategy-relevant insights, what to try, what not to trust yet, open risks, and candidate implications.
 - Strategy generation: 1-3 shortlisted candidates selected.
 - Strategy spec: at least one reviewed implementation-ready spec exists.
 - Implementation: bot maps to a reviewed spec and passes contract/rule checks.
 - Testing/performance: readable run summary links bot, spec, raw run, metrics, and limits.
 - Debugging: issue has reproduction, expected vs observed behavior, linked spec/run, classification, and next action.
+
+## Data Arrival Rule
+
+When raw data, logs, or run artifacts arrive after ingestion has already started or closed:
+
+- update the ingestion artifact's data availability and stale unknowns
+- update the relevant phase context blockers and next action
+- update `_index.md` blockers, recently changed artifacts, and current next priority action
+- update the round data or performance README if it previously said no artifacts existed
+- keep data observations labeled as EDA evidence, not official wiki facts
+
+Do this before or during EDA so downstream phases do not inherit obsolete "no data" blockers.
 
 ## Phase Context Files
 
@@ -133,9 +155,11 @@ Required sections:
 - Round and deadline.
 - Current next priority action.
 - Phase status table with phase, status, owner, reviewer, artifact link, and blocker.
+- Product scope.
 - Active strategies, max 3.
 - Active implementations, max 2.
 - Baseline/reference bot, if any.
+- Historical / non-decision artifacts, if any exist and could confuse active state.
 - Latest results and best current candidate.
 - Blockers and decisions needed.
 - Final submission status: candidate, file, last validation, active-file verification.
@@ -175,6 +199,10 @@ When blocked:
 Before closing a phase:
 
 - Check exit criteria.
+- Check status is synchronized across `_index.md`, phase context, and the main artifact.
+- Check blocker and next-action text is not stale.
+- Check artifact links point to files that exist, or record the missing artifact as a blocker.
+- Record review outcome as `not reviewed`, `approved`, `approved with caveats`, `changes requested`, or `deferred under deadline`.
 - Update `_index.md` and the relevant phase context.
 - Mark the phase `READY_FOR_REVIEW`, `COMPLETED`, or `BLOCKED`, or record a deadline-mode deferral.
 - Request human review when closure changes direction, priority, risk, or submission readiness.

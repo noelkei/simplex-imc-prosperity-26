@@ -30,6 +30,14 @@ NOT_STARTED
 
 - Caveat:
 
+## Data Availability
+
+- Current raw data:
+- Missing data:
+- Last checked:
+
+If raw data arrives after this ingestion artifact is started or closed, update this section, remove or replace stale "no data" blockers, update `_index.md`, update `phase_00_ingestion_context.md`, and keep later data observations labeled as EDA evidence rather than official facts.
+
 ## Unknowns That May Affect Downstream Work
 
 | Unknown | Affects | Why It Matters | Next Action |

@@ -41,9 +41,10 @@ The main EDA output is a readable artifact, not a plot or notebook. A good EDA s
 
 - understand the data source and column meanings
 - see what was analyzed and why
-- reuse metrics or derived features
-- distinguish facts, observations, hypotheses, and assumptions
+- reuse feature inventory entries, engineered features, and metrics
+- distinguish facts, conditional patterns/regimes, signal hypotheses, and assumptions
 - understand signal strength, uncertainty, and limitations
+- see what downstream agents should use, avoid, or validate next
 - decide whether to proceed to understanding, strategy, specification, validation, debugging, or more EDA
 
 ## Signal Strength

@@ -38,6 +38,7 @@ The round `_index.md` in `rounds/round_X/workspace/` is the control panel. It sh
 
 - current next priority action
 - status for every phase
+- product scope
 - active strategies, max 3
 - active implementations, max 2
 - latest results

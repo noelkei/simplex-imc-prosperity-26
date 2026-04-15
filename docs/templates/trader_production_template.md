@@ -41,6 +41,7 @@ class Trader:
 - [ ] Round-specific methods such as `bid()` are considered.
 - [ ] Imports are supported by the wiki runtime guidance.
 - [ ] Implementation links to a reviewed or deadline-deferred strategy spec.
+- [ ] Strategy signal, feature evidence, and regime assumptions are traceable through the linked spec.
 - [ ] Latest validation run summary is linked.
 - [ ] Active submission file is verified.
 

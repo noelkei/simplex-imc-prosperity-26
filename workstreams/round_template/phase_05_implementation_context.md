@@ -25,6 +25,7 @@ TBD
 
 - Maximum active implementations: 2.
 - Implementation requires a reviewed strategy spec.
+- Variants must record parent spec, parent bot if any, insight being tested, changed axis, expected effect, and validation check.
 
 ## Open Questions / Blockers
 

@@ -23,6 +23,26 @@
 | --- | --- | --- | --- | --- |
 | ITEM | ingestion / EDA / playbook | strong / medium / weak / contradictory | high / medium / low | CONDITION |
 
+## Strategy-Relevant Insights
+
+Prioritize the few insights another agent should actually use. Link back to EDA evidence instead of restating full EDA.
+
+| Insight | Linked EDA Signals | Feature Evidence | Regime Assumptions | Confidence | Strategy Impact |
+| --- | --- | --- | --- | --- | --- |
+| INSIGHT | SIGNAL_OR_ARTIFACT | FEATURES | REGIME_OR_NONE | high / medium / low | ACTIONABLE_IMPACT |
+
+## What Should Be Tried
+
+| Candidate Direction | Supporting Insight | Product Scope | Why Try It | Validation Needed |
+| --- | --- | --- | --- | --- |
+| DIRECTION | INSIGHT | PRODUCTS | RATIONALE | CHECK |
+
+## What Should Not Be Trusted Yet
+
+| Signal Or Claim | Why Not Trusted | Risk If Used | Next Validation |
+| --- | --- | --- | --- |
+| SIGNAL | REASON | RISK | CHECK_OR_DEFER |
+
 ## Confidence And Impact
 
 - Overall confidence: `high | medium | low`
@@ -36,6 +56,12 @@
 ## Open Questions
 
 - Question:
+
+## Open Risks And Unknowns
+
+| Risk Or Unknown | Affects | Severity | Mitigation Or Next Action |
+| --- | --- | --- | --- |
+| RISK | strategy / spec / implementation / validation | high / medium / low | ACTION |
 
 ## Prioritized Unknowns
 

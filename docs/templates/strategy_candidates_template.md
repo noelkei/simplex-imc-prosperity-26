@@ -15,15 +15,15 @@ Maximum active candidates per round: 3.
 
 ## Candidate Table
 
-| Candidate ID | Product Scope | Source Of Edge | Evidence / Heuristic Basis | Key Assumptions | Main Risk | Evidence Strength | Implementation Cost | Validation Speed | Risk Level | Expected Upside | Priority | Status |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| CANDIDATE_ID | PRODUCT | EDGE | BASIS | ASSUMPTIONS | RISK | strong / medium / weak / contradictory | high / medium / low | high / medium / low | high / medium / low | high / medium / low | high / medium / low | draft |
+| Candidate ID | Product Scope | Source Of Edge | Linked EDA Signals | Feature Evidence | Regime Assumptions | Understanding Insight | Key Assumptions | Main Risk | Evidence Strength | Implementation Cost | Validation Speed | Risk Level | Expected Upside | Priority | Status |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| CANDIDATE_ID | PRODUCT | EDGE | SIGNALS | FEATURES | REGIMES | INSIGHT | ASSUMPTIONS | RISK | strong / medium / weak / contradictory | high / medium / low | high / medium / low | high / medium / low | high / medium / low | high / medium / low | draft |
 
 ## Rejected Or Deferred Ideas
 
-| Idea | Reason |
-| --- | --- |
-| IDEA | REASON |
+| Idea | Reason | Evidence Gap Or Risk |
+| --- | --- | --- |
+| IDEA | REASON | GAP_OR_RISK |
 
 ## Shortlist
 

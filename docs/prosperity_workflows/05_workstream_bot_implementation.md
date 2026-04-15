@@ -7,6 +7,7 @@ Bot implementation turns a documented strategy into code that respects the Prosp
 - Wiki API and datamodel docs for method signatures, return values, field names, order signs, and runtime constraints.
 - The active round wiki doc for products and position limits.
 - A reviewed strategy spec from the active round workstream. In fast mode this can be a one-page spec, but it must still define signal, execution, risk, state, and validation checks.
+- Evidence traceability from the spec: linked EDA signals, feature evidence, regime assumptions, and understanding insight.
 - The Trader production template: `docs/templates/trader_production_template.md`.
 - Debugging or validation findings when fixing existing behavior.
 
@@ -28,8 +29,9 @@ Variants are allowed only as controlled implementations of a reviewed or deadlin
 - Change one axis per variant: parameter, threshold, execution logic, risk band, or feature toggle.
 - Use naming: `candidate_<id>_v01_<short_name>.py`.
 - Keep max 2 active implementation candidates total.
-- Record parent spec, parent bot if any, changed axis, exact change, expected effect, validation check, and linked run.
+- Record parent spec, parent bot if any, insight being tested, changed axis, exact change, expected effect based on EDA/understanding, validation check, and linked run.
 - Do not drift into a new strategy without updating the spec.
+- If a variant tests a new signal, feature relationship, or regime assumption, update the strategy spec before coding.
 - Archive superseded variants under the owner's `historical/` folder.
 
 ## Good outputs
@@ -38,6 +40,7 @@ Variants are allowed only as controlled implementations of a reviewed or deadlin
 - Clear handling of missing products, empty order books, and current positions when relevant.
 - Validation notes showing which constraints were checked.
 - Any strategy parameters or assumptions documented in or linked from the strategy spec, not hidden as unexplained magic.
+- Variant metadata that makes clear which insight is being tested and why the expected effect follows from EDA or understanding.
 
 ## Safe practice
 
@@ -50,6 +53,7 @@ Variants are allowed only as controlled implementations of a reviewed or deadlin
 
 - What behavior was implemented or changed.
 - Link to the reviewed strategy spec.
+- Insight being implemented or tested, with EDA/understanding link when relevant.
 - Link to the Trader production readiness checklist or note which items passed.
 - Which wiki facts constrained the implementation.
 - Which strategy assumption or heuristic the code follows.

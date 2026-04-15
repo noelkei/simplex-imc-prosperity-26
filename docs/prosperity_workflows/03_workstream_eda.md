@@ -1,6 +1,6 @@
 # Workstream: Exploratory Data Analysis
 
-EDA turns sample data and run outputs into evidence. It does not need to produce bot code.
+EDA turns sample data and run outputs into evidence another agent can consume without prior context. It does not need to produce bot code, but it should make strategy-relevant signals, limits, caveats, and next actions easy to use.
 
 Use [`11_dataset_eda_framework.md`](11_dataset_eda_framework.md) to classify columns and choose analyses that fit the data actually available in the current round.
 
@@ -16,18 +16,33 @@ Use [`11_dataset_eda_framework.md`](11_dataset_eda_framework.md) to classify col
 - A short summary of the question, method, and result.
 - Reproducible artifacts: notebook, script, table, plot, or command notes.
 - Clear source references for the data used.
+- Data quality and filter notes: row counts, missingness, incomplete books, zero/blank mid prices, timestamp coverage, and which rows were used for each major result.
 - A distinction between observed evidence and strategy interpretation.
 - A recommendation for the next workstream: more EDA, strategy research, implementation, or validation.
 - A knowledge-transfer artifact another agent can use without rerunning EDA.
 
+Every important feature, pattern, or signal should state:
+
+- what it means
+- why it matters
+- how it could be used in a strategy
+- limitations or caveats
+- confidence level
+
+Fewer clear, reusable signals are better than many unclear findings.
+
 For active round workspaces, close EDA with the sections required by the round template:
 
+- Product scope
+- Data quality and filters
+- Feature inventory
+- Feature engineering notes
 - Facts
-- Patterns observed
-- Hypotheses
+- Conditional patterns / regimes
+- Signal hypotheses
 - Open questions
 - Reusable metrics
-- Downstream use
+- Downstream use / agent notes
 
 ## How to do EDA well
 
@@ -41,6 +56,13 @@ Before analyzing, state:
 - decision the result may affect
 - time budget
 
+Track product scope explicitly:
+
+- products present in the data
+- products with enough usable evidence
+- products likely needed in the trader
+- products deferred or excluded, with rationale
+
 Useful analysis dimensions include:
 
 - Descriptive stats: count, missingness, min/max, mean/median, quantiles, and outliers.
@@ -53,7 +75,11 @@ Useful analysis dimensions include:
 - Volume behavior: trade count, size distribution, concentration, bursts, and quiet periods.
 - Order book dynamics: imbalance, depth changes, best-level persistence, and spread widening or narrowing.
 
-Useful derived features include:
+## Feature engineering
+
+Feature engineering is a core EDA responsibility. Raw columns are rarely enough for edge, so create simple derived features when they can expose a tradable pattern or make a hypothesis testable.
+
+Prefer simple, hypothesis-driven transformations before complex ones:
 
 - OHLC by meaningful time bucket.
 - Returns or log returns.
@@ -63,7 +89,35 @@ Useful derived features include:
 - RSI only when momentum or mean-reversion framing makes it useful.
 - Spread features: absolute spread, relative spread, rolling spread, and spread z-score.
 - Normalized price features: price vs rolling mean, price percentile, or deviation from reference.
+- Imbalance, liquidity, or trade-pressure proxies when order book or trade data supports them.
+- Fair-value deviations when a reference value can be justified.
+- Feature combinations when a specific interaction is plausible, such as imbalance plus spread or price deviation plus liquidity regime.
 - Custom signals from observed data, clearly labeled as hypotheses.
+
+Do not brute-force feature combinations or produce feature catalogs that no downstream phase can use. Document only features that are useful, potentially useful, or meaningfully rejected because the result changes a decision.
+
+## Conditional patterns and regimes
+
+EDA should look for conditions where behavior changes, without turning into unbounded exploration. Useful checks include:
+
+- high vs low volatility periods
+- wide vs tight spread regimes
+- high vs low liquidity or book imbalance
+- quiet vs bursty trade flow
+- product-specific differences
+- cross-product relationships when products plausibly interact
+
+If no meaningful conditional pattern is found, record the checks attempted and mark the signal as weak or unconfirmed.
+
+## Product branching
+
+Use one combined EDA summary by default. Split into product-specific notes only when product behavior is materially different or the combined file becomes hard to consume. Product-specific notes are supporting artifacts; merge the decision-useful findings back into the canonical EDA handoff before closing the phase.
+
+## Optional notebooks
+
+Markdown is the canonical handoff for downstream agents. Notebooks are optional secondary artifacts for human inspection, charts, exploratory code, feature experiments, and reproducibility.
+
+Create a notebook when the EDA uses nontrivial plots, transformations, or exploratory code that a human may want to inspect or extend. Do not require a notebook for small checks where commands or tables are enough.
 
 EDA is shallow if it only lists stats or plots without explaining what changed, what remains uncertain, and how a downstream phase should use it.
 
@@ -72,12 +126,17 @@ EDA is shallow if it only lists stats or plots without explaining what changed, 
 Every durable EDA summary should include:
 
 - column classification summary
-- facts, observations, hypotheses, and assumptions separated
+- feature inventory with raw and derived features that matter
+- feature engineering notes: attempted transformations, useful results, rejected results, and promising validation targets
+- facts, conditional patterns/regimes, signal hypotheses, and assumptions separated
 - signal strength: strong, medium, weak, or contradictory
+- signal dependencies: raw/derived features used and whether they appear stable, regime-dependent, or unknown
 - uncertainty and interpretation limits
 - reusable metrics or derived features
-- downstream impact for understanding, strategy, specification, validation, and debugging
+- downstream use / agent notes for understanding, strategy, specification, validation, and debugging
 - prioritized follow-up EDA only when it could change a decision
+
+The downstream notes should say which signals are strong enough to consider, which are exploratory only, which should not be used yet, and what additional validation is needed.
 
 ## Safe practice
 
@@ -93,12 +152,13 @@ Every durable EDA summary should include:
 EDA is done only when:
 
 - the data/log source is named
+- data quality and filters are documented, including row counts, timestamp coverage, missing bid/ask counts when order books are used, zero/blank `mid_price` counts when mid prices are used, and whether findings use raw or filtered rows
 - relevant columns are classified or explicitly marked unclear
 - reproduction steps or artifact paths are recorded
-- facts, observed patterns, hypotheses, assumptions, and open questions are separated
+- facts, conditional patterns/regimes, signal hypotheses, assumptions, and open questions are separated
 - signal strength and uncertainty are stated for important findings
 - reusable metrics or derived features are listed when created
-- downstream use is explicit, or the result is marked not actionable
+- downstream use / agent notes are explicit, or the result is marked not actionable
 - at least one downstream stage can use the result directly, or EDA is explicitly skipped/deferred with a reason
 - the round `_index.md` and phase context are updated
 - human review is requested, completed, or explicitly deferred under deadline pressure
@@ -107,7 +167,9 @@ EDA is done only when:
 
 - Data source and date or run identifier.
 - Exact question answered.
+- Data quality caveats and filters used.
 - Main findings in a few bullets.
+- Signals/features another agent should consider, avoid, or validate next.
 - Files or commands needed to reproduce.
 - Assumptions and unresolved questions.
 - Suggested next action.

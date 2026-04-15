@@ -24,6 +24,24 @@ NOT_STARTED
 | --- | --- | --- | --- | --- |
 | TBD | ingestion / EDA / playbook | strong / medium / weak / contradictory | high / medium / low | TBD |
 
+## Strategy-Relevant Insights
+
+| Insight | Linked EDA Signals | Feature Evidence | Regime Assumptions | Confidence | Strategy Impact |
+| --- | --- | --- | --- | --- | --- |
+| TBD | TBD | TBD | TBD | high / medium / low | TBD |
+
+## What Should Be Tried
+
+| Candidate Direction | Supporting Insight | Product Scope | Why Try It | Validation Needed |
+| --- | --- | --- | --- | --- |
+| TBD | TBD | TBD | TBD | TBD |
+
+## What Should Not Be Trusted Yet
+
+| Signal Or Claim | Why Not Trusted | Risk If Used | Next Validation |
+| --- | --- | --- | --- |
+| TBD | TBD | TBD | TBD |
+
 ## Confidence And Impact
 
 - Overall confidence: `high | medium | low`
@@ -37,6 +55,12 @@ NOT_STARTED
 ## Open Questions
 
 - Question:
+
+## Open Risks And Unknowns
+
+| Risk Or Unknown | Affects | Severity | Mitigation Or Next Action |
+| --- | --- | --- | --- |
+| TBD | strategy / spec / implementation / validation | high / medium / low | TBD |
 
 ## Prioritized Unknowns
 

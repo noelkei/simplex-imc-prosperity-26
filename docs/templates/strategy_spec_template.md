@@ -5,6 +5,7 @@ Implementation must not start until this spec is reviewed. In fast mode, keep it
 ## Spec Quality Checklist
 
 - Candidate ID, priority, and evidence basis are linked from the shortlist.
+- Linked EDA signals, feature evidence, regime assumptions, and understanding insight are recorded.
 - Signal or fair value logic is defined.
 - Execution behavior says when to buy, sell, rest orders, or stay idle.
 - Missing-data and missing-signal behavior is defined.
@@ -33,7 +34,7 @@ Implementation must not start until this spec is reviewed. In fast mode, keep it
 
 ## Review Decision
 
-- `_index.md` spec status: `approved | deferred | not reviewed`
+- `_index.md` spec status: `approved | deferred under deadline | not reviewed`
 - Approved for implementation: `yes | no | deferred under deadline`
 - Reviewer decision notes:
 - Required changes before coding:
@@ -44,6 +45,14 @@ Implementation must not start until this spec is reviewed. In fast mode, keep it
 - EDA evidence:
 - Understanding summary:
 - Playbook heuristics:
+
+## Evidence Traceability
+
+- Linked EDA Signals:
+- Feature Evidence:
+- Regime Assumptions:
+- Understanding Insight:
+- Evidence gaps or strategy assumptions:
 
 ## Signal / Fair Value Logic
 
