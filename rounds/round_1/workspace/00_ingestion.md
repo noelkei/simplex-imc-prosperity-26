@@ -50,7 +50,7 @@ Unknowns must stay separate from facts. Each material unknown needs a next actio
 - [ ] Unknowns that may affect EDA, strategy, or implementation are actionable.
 - [ ] No facts were inferred from bots, performances, memory, or playbook heuristics.
 
-## Downstream Actions
+## Downstream Actions 
 
 - EDA:
 - Understanding:
