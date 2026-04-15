@@ -12,6 +12,16 @@ If you are new here, start with this README, then open the relevant round folder
 4. Use the relevant phase context file as the short resumption note.
 5. If you are only drafting personal ideas, use `non-canonical/<member>/` and do not treat that work as formal evidence until it is moved or summarized into `rounds/round_X/`.
 
+## Current Repository State
+
+The live source of truth remains the active round `_index.md`; this section is only a short orientation snapshot.
+
+- `rounds/round_1/` is active.
+- Round 1 ingestion, EDA, understanding, and strategy artifacts are written but still need human review before they can be marked `COMPLETED`.
+- Round 1 specs are implementation-eligible under recorded `deferred under deadline` review state.
+- The intended combined bot is blocked because `rounds/round_1/bots/bruno/canonical/candidate_03_combined.py` is missing.
+- No final submission candidate is ready until a canonical bot exists, validation runs, and a readable run summary is written.
+
 ## Source Hierarchy
 
 - `docs/prosperity_wiki/`: operational factual source for API contracts, datamodel fields, exchange mechanics, position limits, runtime constraints, platform flow, round facts, and caveats.
@@ -46,7 +56,7 @@ Every round should run through the same phases, but under a 2 day constraint the
 
 Mandatory gates:
 
-- No implementation without a reviewed strategy spec.
+- No implementation without an approved strategy spec or an explicit `deferred under deadline` review decision.
 - No final submission without a readable validation or performance summary.
 - No phase is complete if facts, hypotheses, assumptions, and evidence are mixed together.
 
@@ -165,13 +175,17 @@ Use the phase status table in `_index.md`:
 - `READY_FOR_REVIEW`: the artifact exists and the owner believes exit criteria are met.
 - `COMPLETED`: review is done, or review deferral is explicitly recorded under deadline pressure.
 
-Do not mark a phase `COMPLETED` unless the next phase can use its outputs without reinterpretation. If a phase is skipped or compressed, record the reason in both `_index.md` and the phase context.
+Review outcomes are `not reviewed`, `approved`, `approved with caveats`, `changes requested`, or `deferred under deadline`.
+
+Do not mark a phase `COMPLETED` while review is pending, recommended, or unassigned. Do not mark a phase `COMPLETED` unless the next phase can use its outputs without reinterpretation and status is synchronized across `_index.md`, the phase context, and the main phase artifact. If a phase is skipped or compressed, record the reason in both `_index.md` and the phase context.
 
 ## Closing Work Cleanly
 
 Before leaving a task or closing a phase:
 
 - Confirm the required artifact exists or the deferral is explicit.
+- Confirm review outcome is recorded when closure depends on review.
+- Confirm `_index.md`, the phase context, and the main phase artifact agree on status, blocker, artifact link, and next action.
 - Update `_index.md` with status, blockers, active candidates, latest results, or final submission state as relevant.
 - Update the matching phase context with what changed, decisions made, open questions, and next action.
 - Link sources and artifacts rather than relying on memory.
@@ -204,7 +218,7 @@ Start round ingestion for Round X.
 Start targeted EDA for Round X using the current round index.
 Synthesize understanding for Round X from ingestion and EDA.
 Continue strategy generation and shortlist candidates.
-Develop strategy candidates for Round X.
+Generate strategy candidates for Round X.
 Write a strategy spec for candidate Y.
 Implement candidate Y from its reviewed spec.
 Analyze performance of candidate Y run Z.
@@ -238,8 +252,8 @@ Agents should proceed without asking when the next step is determined by the rep
 | EDA | Data/log path and question | Reproducible outputs and summary | Product scope, data quality, feature inventory, feature engineering notes, signal hypotheses, open questions, reusable metrics, and downstream agent notes are clear |
 | Understanding | Reviewed ingestion and EDA | Evidence-aware market understanding | Strategy-relevant insights, what to try, what not to trust yet, risks, and candidate implications are clear |
 | Strategy generation | Priorities and risk appetite | Grouped candidates and shortlist | 1-3 non-duplicative candidates are selected |
-| Strategy specification | Shortlisted candidate | Implementation-ready spec | Signal, execution, risk, state, failure cases, and validation checks are defined |
-| Implementation | Reviewed spec | Bot implementation | Contract, signs, limits, runtime/imports, and spec alignment are checked |
+| Strategy specification | Shortlisted candidate | Implementation-ready spec | Signal, execution, risk, state, failure cases, validation checks, and evidence traceability are defined, with review outcome recorded |
+| Implementation | Approved or deadline-deferred spec | Bot implementation | Contract, signs, limits, runtime/imports, and spec alignment are checked |
 | Testing | Bot, spec, run artifact | Run summary | Results link bot, spec, raw run, metrics, limits, and next action |
 | Debugging | Issue or suspicious run | Classified debugging note | Reproduction, expected vs observed behavior, linked spec/run, classification, and next action are present |
 
@@ -255,7 +269,7 @@ Use fast mode when less than 24 hours remain, exploration is no longer the bottl
 - Debugging: fix rule, contract, and limit bugs before speculative tuning.
 - Freeze: with less than 6 hours left, only correctness fixes or extremely low-risk parameter changes.
 
-Fast mode does not relax source hierarchy, strategy spec requirement, Trader contract, position-limit checks, or final validation summary.
+Fast mode does not relax source hierarchy, strategy spec requirement, Trader contract, position-limit checks, review outcome recording, or final validation summary.
 
 ## Performance Artifacts
 
