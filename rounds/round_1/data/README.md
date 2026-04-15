@@ -1,6 +1,15 @@
 # Round 1 Data
 
-No data artifacts have been added yet.
+Raw data artifacts have been added for Round 1:
+
+- `raw/prices_round_1_day_-2.csv`
+- `raw/prices_round_1_day_-1.csv`
+- `raw/prices_round_1_day_0.csv`
+- `raw/trades_round_1_day_-2.csv`
+- `raw/trades_round_1_day_-1.csv`
+- `raw/trades_round_1_day_0.csv`
+
+These files are used by `../workspace/01_eda/eda_round_1.md`.
 
 Store only round-local data artifacts here. Do not treat data observations as official rules; use `docs/prosperity_wiki/` for facts.
 

@@ -17,8 +17,9 @@
 
 ## Review Decision
 
-- Approved for implementation: yes
-- Notes: existing bot `TEST1_merged.py` already implements compatible ACO strategy — refine rather than rewrite.
+- `_index.md` spec status: deferred under deadline
+- Approved for implementation: deferred under deadline
+- Notes: historical bot `TEST1_merged.py` may contain compatible behavior, but this spec is the authoritative implementation source.
 - Required changes before coding: none
 
 ## Sources
@@ -26,6 +27,14 @@
 - Wiki facts: `docs/prosperity_wiki/rounds/round_1.md` (limit 80)
 - EDA evidence: `rounds/round_1/workspace/01_eda/eda_round_1.md` (FV=10,000, stdev 4–5, autocorr 0.79, bot spread 16)
 - Understanding summary: `rounds/round_1/workspace/02_understanding.md`
+
+## Evidence Traceability
+
+- Linked EDA Signals: ACO fixed fair value in `01_eda/eda_round_1.md`
+- Feature Evidence: mid deviation from 10,000, spread distribution, lag autocorrelation
+- Regime Assumptions: live fair value remains near 10,000; reversion remains slow enough to require inventory skew
+- Understanding Insight: ACO should trade from fixed FV 10,000 with inventory skew, not aggressive directional reversion
+- Evidence gaps or strategy assumptions: live FV level and fill behavior still require validation
 
 ## Signal / Fair Value Logic
 
@@ -74,5 +83,5 @@
 
 ## Implementation Handoff
 
-- Bot: `rounds/round_1/bots/bruno/canonical/candidate_03_combined.py`
+- Target bot path: `rounds/round_1/bots/bruno/canonical/candidate_03_combined.py` (currently missing; restore or create before validation)
 - Parameters at top of file, easily tunable.

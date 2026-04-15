@@ -17,7 +17,8 @@
 
 ## Review Decision
 
-- Approved for implementation: yes
+- `_index.md` spec status: deferred under deadline
+- Approved for implementation: deferred under deadline
 - Required changes before coding: none
 
 ## Sources
@@ -25,6 +26,14 @@
 - Wiki facts: `docs/prosperity_wiki/rounds/round_1.md` (limit 80)
 - EDA evidence: `rounds/round_1/workspace/01_eda/eda_round_1.md` (drift +0.001/tick, residual stdev 2.36, bot spread 12–14)
 - Understanding summary: `rounds/round_1/workspace/02_understanding.md`
+
+## Evidence Traceability
+
+- Linked EDA Signals: IPR drift fair value in `01_eda/eda_round_1.md`
+- Feature Evidence: timestamp, first usable mid, drift rate, residual to drift fair value, top-of-book spread
+- Regime Assumptions: live drift rate remains close to historical sample; first usable mid is a valid day-start proxy
+- Understanding Insight: IPR should trade from a drifting fair value, not a static price
+- Evidence gaps or strategy assumptions: live slope/start price still require validation
 
 ## Signal / Fair Value Logic
 
@@ -74,5 +83,5 @@
 
 ## Implementation Handoff
 
-- Bot: `rounds/round_1/bots/bruno/canonical/candidate_03_combined.py`
+- Target bot path: `rounds/round_1/bots/bruno/canonical/candidate_03_combined.py` (currently missing; restore or create before validation)
 - Parameters at top of file, easily tunable.

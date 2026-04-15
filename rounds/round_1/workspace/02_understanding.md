@@ -51,6 +51,30 @@ READY_FOR_REVIEW
 | DRYLAND_FLAX buyback 30, no fee | Wiki fact | strong | medium — sets manual floor | None — this is a stated fact |
 | EMBER_MUSHROOM buyback 20, fee 0.10 | Wiki fact | strong | medium — sets manual floor | None — this is a stated fact |
 
+## Strategy-Relevant Insights
+
+| Insight | Linked EDA Signals | Feature Evidence | Regime Assumptions | Confidence | Strategy Impact |
+| --- | --- | --- | --- | --- | --- |
+| IPR should trade from a drifting fair value, not a static price | `01_eda/eda_round_1.md` — IPR drift fair value | timestamp, first usable mid, drift rate, residual to FV | drift rate remains close to historical sample | high | implement drift-tracking market maker |
+| ACO should trade from fixed FV 10,000 with inventory skew | `01_eda/eda_round_1.md` — ACO fixed fair value | mid deviation from 10,000, spread, lag autocorrelation | live level remains around 10,000 and reversion stays slow | high for FV, medium for timing | implement fixed-FV market maker, avoid aggressive reversion |
+| Manual products are outside bot implementation | round wiki manual auction facts | guaranteed buyback and fee rules | manual auction format unchanged | high | human bid decision only |
+
+## What Should Be Tried
+
+| Candidate Direction | Supporting Insight | Product Scope | Why Try It | Validation Needed |
+| --- | --- | --- | --- | --- |
+| Drift-tracking market maker | IPR drifting fair value | `INTARIAN_PEPPER_ROOT` | strong fair-value estimate with spread larger than residual noise | live slope/start-price sanity check and platform validation |
+| Fixed-FV market maker with position skew | ACO fixed FV 10,000 | `ASH_COATED_OSMIUM` | stable center and wide spread create plausible market-making edge | live level check and inventory/rejection validation |
+| Combined independent trader | both product signals | IPR + ACO | products appear independent and both have low implementation cost | validate individually before combining |
+
+## What Should Not Be Trusted Yet
+
+| Signal Or Claim | Why Not Trusted | Risk If Used | Next Validation |
+| --- | --- | --- | --- |
+| Static IPR fair value | contradicted by EDA drift | quotes become stale immediately | do not use |
+| Aggressive ACO directional reversion | autocorrelation shows slow persistence | position can accumulate before reversion | validate with inventory-aware run before using |
+| Historical spread as guaranteed fill behavior | spread observed in samples, not platform guarantee | quote placement may not fill or may reject | platform validation |
+
 ## Confidence And Impact
 
 - Overall confidence: `high` for fair value models; `medium` for exact spread/parameter choices.
@@ -71,6 +95,15 @@ READY_FOR_REVIEW
 - Does the drift rate reset or continue across multiple live round days?
 - Manual: how are other participants likely to bid? (Unknown. Use guaranteed buyback floor as anchor.)
 
+## Open Risks And Unknowns
+
+| Risk Or Unknown | Affects | Severity | Mitigation Or Next Action |
+| --- | --- | --- | --- |
+| Live IPR drift differs from historical estimate | strategy/spec/implementation | medium | observe first live ticks and keep drift rate explicit |
+| ACO live fair value shifts away from 10,000 | strategy/validation | medium | inspect early live mids and validation run logs |
+| Platform validation rejects orders or hits limits | implementation/validation | high | restore/create canonical bot and run validation before submission readiness |
+| Ingestion/EDA/understanding/strategy review debt remains | final submission readiness | medium | human review before final ready state |
+
 ## Prioritized Unknowns
 
 | Unknown | Affects | Priority | Next Action |
@@ -88,6 +121,5 @@ READY_FOR_REVIEW
 
 ## Next Action
 
-- Write strategy candidates for IPR drift market maker and ACO fixed-FV market maker.
-- Human decision needed: review shortlist before spec is written.
-
+- Human review needed: approve, approve with caveats, or request corrections.
+- If review changes material assumptions, update downstream strategy/spec artifacts before final submission readiness.

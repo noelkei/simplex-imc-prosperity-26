@@ -15,11 +15,11 @@ READY_FOR_REVIEW
 
 ## Candidate Table
 
-| Candidate ID | Product Scope | Source Of Edge | Evidence / Heuristic Basis | Key Assumptions | Main Risk | Evidence Strength | Implementation Cost | Validation Speed | Risk Level | Expected Upside | Priority | Status |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `candidate_01_ipr_drift` | `INTARIAN_PEPPER_ROOT` | Predictable linear drift — fair value is knowable tick-by-tick | EDA: drift +0.001/tick confirmed across 3 days; residual stdev 2.36 vs spread 12–14 | Drift rate ~0.001/tick holds in live round; `day_start_price` observable on first tick | Drift rate wrong or absent in live round | strong | low | high | low | medium | high | draft |
-| `candidate_02_aco_fixedfv` | `ASH_COATED_OSMIUM` | Fixed fair value 10,000 with tight market spread | EDA: FV=10,000 confirmed 3 days, stdev 4–5, AR(1) autocorr 0.79, bot spread 16 | FV=10,000 holds in live round; slow reversion continues | Position accumulates before reversion; inventory risk | strong | low | high | low | medium | high | draft |
-| `candidate_03_combined` | `INTARIAN_PEPPER_ROOT` + `ASH_COATED_OSMIUM` | Candidates 01 + 02 combined into one submission bot | Derived from candidates 01 and 02 — no new edge, just packaging | Both individual candidates are valid | Either individual strategy fails and drags overall P&L | strong | low | high | low | high | high | draft |
+| Candidate ID | Product Scope | Source Of Edge | Linked EDA Signals | Feature Evidence | Regime Assumptions | Understanding Insight | Key Assumptions | Main Risk | Evidence Strength | Implementation Cost | Validation Speed | Risk Level | Expected Upside | Priority | Status |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `candidate_01_ipr_drift` | `INTARIAN_PEPPER_ROOT` | Predictable linear drift; fair value is knowable tick-by-tick | `01_eda/eda_round_1.md` — IPR drift fair value | drift +0.001/tick across 3 days; residual stdev 2.36 vs spread 12–14 | drift rate remains close to sample; first usable mid is observable | Understanding: IPR should trade from drifting FV, not static price | Drift rate ~0.001/tick holds in live round; `day_start_price` observable on first tick | Drift rate wrong or absent in live round | strong | low | high | low | medium | high | draft |
+| `candidate_02_aco_fixedfv` | `ASH_COATED_OSMIUM` | Fixed fair value 10,000 with tight market spread | `01_eda/eda_round_1.md` — ACO fixed fair value | FV=10,000 across 3 days, stdev 4–5, AR(1) autocorr 0.79, bot spread 16 | live level remains around 10,000; slow reversion continues | Understanding: ACO should trade fixed FV with inventory skew | FV=10,000 holds in live round; slow reversion continues | Position accumulates before reversion; inventory risk | strong | low | high | low | medium | high | draft |
+| `candidate_03_combined` | `INTARIAN_PEPPER_ROOT` + `ASH_COATED_OSMIUM` | Candidates 01 + 02 combined into one submission bot | linked signals from candidates 01 and 02 | no new feature evidence; packaging of two independent signals | products remain independent enough to run separately in one trader | Understanding: combined independent trader should be tried after individual validation | Both individual candidates are valid | Either individual strategy fails and drags overall P&L | strong | low | high | low | high | high | draft |
 
 ---
 
@@ -68,12 +68,12 @@ Both strategies run inside one `Trader.run()`. Products are independent — no c
 
 ## Rejected Or Deferred Ideas
 
-| Idea | Reason |
-| --- | --- |
-| Trend-following for IPR (buy and hold) | Position limit 80 caps absolute gain; market making captures spread continuously |
-| Aggressive mean-reversion for ACO | Slow reversion (autocorr 0.79) makes timing unreliable; market making is safer |
-| Static fair value for IPR | EDA shows drift of +1,000/day — a static FV is wrong within the first tick |
-| Manual challenge as algorithmic strategy | Requires human submission via platform UI, not bot code |
+| Idea | Reason | Evidence Gap Or Risk |
+| --- | --- | --- |
+| Trend-following for IPR (buy and hold) | Position limit 80 caps absolute gain; market making captures spread continuously | directional exposure with capped inventory |
+| Aggressive mean-reversion for ACO | Slow reversion (autocorr 0.79) makes timing unreliable; market making is safer | position can accumulate before reversion |
+| Static fair value for IPR | EDA shows drift of +1,000/day — a static FV is wrong within the first tick | contradicted by core signal |
+| Manual challenge as algorithmic strategy | Requires human submission via platform UI, not bot code | not executable by `Trader.run()` |
 
 ## Shortlist
 
@@ -84,9 +84,9 @@ Rationale: both products have strong EDA evidence. Implementation cost is low. V
 
 ## Human Decisions Needed
 
-- **Shortlist approval:** Approve candidates 01, 02, and 03? If yes, agent writes full specs next.
+- **Shortlist review:** Approve candidates 01, 02, and 03; approve with caveats; or request changes. Specs were already written under deadline deferral, so any shortlist changes must update downstream specs and implementation tracking.
 - **Manual challenge:** Recommended bids — DRYLAND_FLAX ≤ 29, EMBER_MUSHROOM ≤ 19.80. Human platform action.
 
 ## Next Action
 
-- Human approves shortlist → agent writes specs for candidates 01 and 02, then implements candidate 03.
+- Human reviews shortlist. If approved or approved with caveats, restore/create the missing canonical `candidate_03_combined.py` from the linked specs before platform validation.

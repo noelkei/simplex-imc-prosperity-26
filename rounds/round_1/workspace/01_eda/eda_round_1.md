@@ -2,22 +2,70 @@
 
 ## Status
 
-COMPLETED
+READY_FOR_REVIEW
+
+Review outcome: not reviewed.
+
+## Product Scope
+
+| Product | Present In Data | Usable Evidence | Likely Trader Scope | Decision |
+| --- | --- | --- | --- | --- |
+| `INTARIAN_PEPPER_ROOT` | yes | yes | likely | include for algorithmic trader; drift-tracking signal is strong but review pending |
+| `ASH_COATED_OSMIUM` | yes | yes | likely | include for algorithmic trader; fixed fair value signal is strong but review pending |
+| `DRYLAND_FLAX` | no historical price CSV rows | wiki/manual only | no bot scope | manual auction only |
+| `EMBER_MUSHROOM` | no historical price CSV rows | wiki/manual only | no bot scope | manual auction only |
+
+Product branches: analysis is kept in one canonical EDA file because the two algorithmic products have simple, separable behavior.
 
 ## Data Sources
 
 | File | Rows | Days |
 | --- | --- | --- |
-| `rounds/round_1/data/raw/prices_round_1_day_-2.csv` | 10,000 | -2 |
-| `rounds/round_1/data/raw/prices_round_1_day_-1.csv` | 10,000 | -1 |
-| `rounds/round_1/data/raw/prices_round_1_day_0.csv` | 10,000 | 0 |
-| `rounds/round_1/data/raw/trades_round_1_day_-2.csv` | — | -2 |
-| `rounds/round_1/data/raw/trades_round_1_day_-1.csv` | — | -1 |
-| `rounds/round_1/data/raw/trades_round_1_day_0.csv` | — | 0 |
+| `rounds/round_1/data/raw/prices_round_1_day_-2.csv` | 20,000 total / 10,000 per product | -2 |
+| `rounds/round_1/data/raw/prices_round_1_day_-1.csv` | 20,000 total / 10,000 per product | -1 |
+| `rounds/round_1/data/raw/prices_round_1_day_0.csv` | 20,000 total / 10,000 per product | 0 |
+| `rounds/round_1/data/raw/trades_round_1_day_-2.csv` | 773 | -2 |
+| `rounds/round_1/data/raw/trades_round_1_day_-1.csv` | 760 | -1 |
+| `rounds/round_1/data/raw/trades_round_1_day_0.csv` | 743 | 0 |
 
 Prices file columns: `day;timestamp;product;bid_price_1..3;bid_volume_1..3;ask_price_1..3;ask_volume_1..3;mid_price;profit_and_loss`
 Trades file columns: `timestamp;buyer;seller;symbol;currency;price;quantity`
 Delimiter: semicolon. Timestamps run 0–999,900 in steps of ~100 per day.
+
+## Data Quality And Filters
+
+Prices files contain 10,000 rows per product per day. Some rows have an incomplete top-of-book or `mid_price = 0.0`.
+
+| Day | Product | Rows | Both best bid/ask present | Missing best bid | Missing best ask | `mid_price = 0.0` |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| -2 | `INTARIAN_PEPPER_ROOT` | 10,000 | 9,216 | 413 | 387 | 16 |
+| -1 | `INTARIAN_PEPPER_ROOT` | 10,000 | 9,219 | 415 | 383 | 17 |
+| 0 | `INTARIAN_PEPPER_ROOT` | 10,000 | 9,253 | 388 | 380 | 21 |
+| -2 | `ASH_COATED_OSMIUM` | 10,000 | 9,187 | 413 | 418 | 18 |
+| -1 | `ASH_COATED_OSMIUM` | 10,000 | 9,225 | 398 | 394 | 17 |
+| 0 | `ASH_COATED_OSMIUM` | 10,000 | 9,232 | 393 | 389 | 14 |
+
+Interpretation caveat: spread and mid-based dispersion claims should be read as filtered book analyses using rows with usable bid/ask or positive mid data. The original EDA did not store a reusable command/script, so human review should confirm these filters before marking the phase `COMPLETED`.
+
+## Feature Inventory
+
+| Feature | Source | Meaning | Classification | Strategy Use | Stability | Notes / Caveats |
+| --- | --- | --- | --- | --- | --- | --- |
+| `mid_price` | raw | observed mid from CSV | predictive | center fair-value estimates | regime-dependent | rows with `mid_price = 0.0` need filtering |
+| best bid/ask spread | derived from raw book | top-of-book execution width | execution/risk | choose quote width inside market spread | stable in sample | requires usable bid and ask rows |
+| IPR drift rate | derived | slope of `mid_price` over timestamp | predictive | set `fair_value = day_start + t * 0.001` | stable in sample, unconfirmed live | estimated from 3 historical days |
+| IPR residual to drift FV | derived | noise around drift fair value | execution/risk | size quote edge vs noise | unknown live | original EDA did not store reusable script |
+| ACO deviation from 10,000 | derived | distance from fixed fair value proxy | predictive | quote around 10,000 and manage inventory | stable in sample, unconfirmed live | slow reversion means position risk |
+| ACO lag autocorrelation | derived | persistence of deviation | execution/risk | avoid expecting instant reversion | regime-dependent | validation needed on live sample |
+
+## Feature Engineering Notes
+
+| Transformation Or Feature | Purpose | Result | Keep? | Next Validation |
+| --- | --- | --- | --- | --- |
+| IPR linear drift fit | test whether "steady" means predictable slope | worked; residual stdev small vs spread | yes | confirm live first ticks match slope scale |
+| ACO fixed-FV deviation | test hidden fixed fair value around 10,000 | worked across 3 days | yes | confirm no live-day level shift |
+| Spread distribution | estimate executable quote width | worked for both products | yes | check platform run fill/rejection behavior |
+| ACO autocorrelation | test reversion speed | promising but not enough alone for aggressive reversion | maybe | validate inventory holding time in runs |
 
 ## Key Findings
 
@@ -115,6 +163,21 @@ The process is persistent: if the price is currently 9,992, it is likely to stay
 
 ---
 
+## Conditional Patterns / Regimes
+
+| Condition Or Regime | Dependent Features | Observed Behavior | Strategy Relevance | Confidence | Caveats |
+| --- | --- | --- | --- | --- | --- |
+| IPR timestamp progression | `mid_price`, timestamp, drift rate | fair value rises about 0.001 per timestamp unit | static FV should not be used | strong | live drift rate still needs confirmation |
+| ACO deviation from 10,000 | `mid_price - 10000`, autocorrelation | deviations persist before reverting | use position skew; avoid over-aggressive reversion | medium | based on 3 historical days |
+| Wide enough top-of-book spread | best bid/ask spread | spreads exceed residual/noise estimates | market making has plausible edge | medium | fill behavior must be validated on platform |
+
+## Signal Hypotheses
+
+| Signal | Feature Dependencies | What It Means | Why It Matters | Strategy Use | Stability | Confidence | Limitations / Caveats |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| IPR drift fair value | timestamp, first usable mid, drift rate | fair value moves upward predictably | quoting around stale mid loses edge | drift-tracking market maker | stable in sample, unknown live | live slope/start price must be checked |
+| ACO fixed fair value | mid deviation from 10,000, spread, autocorrelation | price oscillates around 10,000 | quoting around 10,000 can capture spread | fixed-FV market maker with inventory skew | stable in sample, regime-dependent live | slow reversion can create inventory pressure |
+
 ## Open Questions
 
 - What is `day_start_price` for the live round? The bot needs to observe the first mid price at t=0. If t=0 data is unavailable, use first available mid.
@@ -123,8 +186,13 @@ The process is persistent: if the price is currently 9,992, it is likely to stay
 
 ---
 
-## Downstream Use
+## Downstream Use / Agent Notes
 
-- **Understanding phase:** Use these findings as the factual basis. Label drift rate and fair value as evidence-based estimates, not confirmed rules.
-- **Strategy phase:** IPR → drift-tracking market maker. ACO → fixed-fair-value market maker.
+- **Strong enough to consider:** IPR drift fair value and ACO fixed fair value, with review caveat.
+- **Exploratory only:** ACO autocorrelation as a timing signal; use it for risk/inventory reasoning before using it for aggressive directional entry.
+- **Do not use yet:** static IPR fair value; aggressive ACO mean-reversion without inventory controls.
+- **Additional validation needed:** confirm live IPR slope/start price, confirm ACO live level near 10,000, validate fill/rejection behavior on platform.
+- **Understanding phase:** use these findings as the factual basis. Label drift rate and fair value as evidence-based estimates, not confirmed rules.
+- **Strategy phase:** IPR -> drift-tracking market maker. ACO -> fixed-fair-value market maker.
+- **Specification:** cite the signal hypotheses above and preserve missing-signal behavior.
 - **Implementation:** IPR needs timestamp access and a first-tick initializer. ACO can use a hardcoded fair value with position skew.

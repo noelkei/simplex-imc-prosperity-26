@@ -6,11 +6,17 @@ EDA is optional only when skipped or deferred with an explicit reason in `_index
 
 Required closure summary sections:
 
+- Product scope
+- Data quality and filters
+- Feature inventory
+- Feature engineering notes
 - Facts
-- Patterns observed
-- Hypotheses
+- Conditional patterns / regimes
+- Signal hypotheses
 - Open questions
 - Reusable metrics
-- Downstream use
+- Downstream use / agent notes
 
 Do not treat sample data patterns, existing bots, or performance outputs as official rules.
+
+Markdown is the canonical handoff. Optional notebooks may support human inspection, charts, exploratory code, or feature experiments, but downstream agents should be able to use the Markdown without rerunning EDA.
