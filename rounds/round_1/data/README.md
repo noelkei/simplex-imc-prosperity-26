@@ -1,32 +1,13 @@
 # Round 1 Data
 
-Raw data artifacts have been added for Round 1:
-
-- `raw/prices_round_1_day_-2.csv`
-- `raw/prices_round_1_day_-1.csv`
-- `raw/prices_round_1_day_0.csv`
-- `raw/trades_round_1_day_-2.csv`
-- `raw/trades_round_1_day_-1.csv`
-- `raw/trades_round_1_day_0.csv`
-
-These files are used by `../workspace/01_eda/eda_round_1.md`.
-
-Store only round-local data artifacts here. Do not treat data observations as official rules; use `docs/prosperity_wiki/` for facts.
+Este directorio contiene datos locales de la ronda.
 
 ## Folders
 
-- `raw/`: unmodified platform, sample, or run files. Treat this as append-only; do not clean or edit files in place.
-- `processed/`: derived or cleaned data created from named sources. Each artifact must link or state its source and processing method.
-- `external/`: teammate-provided or non-platform context. These artifacts are non-authoritative and must not be treated as official Prosperity facts.
+- raw/: datos sin modificar
+- processed/: datos derivados
+- external/: insumos externos
 
-## Naming
+## Estado inicial
 
-- `raw/`: `<source>_<day_or_run>_<description>.<ext>`
-- `processed/`: `derived_<source>_<purpose>.<ext>`
-- `external/`: `external_<source>_<description>.<ext>`
-
-## Update Rules
-
-- Link any data used by EDA from `workspace/01_eda/` or `workspace/phase_01_eda_context.md`.
-- When processed data changes, update the EDA summary or phase context with the source and method.
-- If data contradicts wiki facts, keep the wiki as authoritative and record the data issue as a caveat.
+Se conservan los CSV existentes en raw/ para reiniciar el trabajo desde datos.

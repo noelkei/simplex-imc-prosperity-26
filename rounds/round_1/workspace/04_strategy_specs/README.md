@@ -1,7 +1,9 @@
-# Strategy Specs
+# Phase 04 Strategy Specs
 
-Put reviewed or explicitly deadline-deferred, implementation-ready strategy specs here.
+## Status
 
-Use [`docs/templates/strategy_spec_template.md`](../../../../docs/templates/strategy_spec_template.md) for each spec.
+NOT_STARTED
 
-Implementation must not start from a loose candidate note alone. Fast mode may use a one-page spec, but it still requires signal, execution, risk, state, validation checks, and evidence traceability back to EDA signals, feature evidence, regime assumptions, and understanding insight.
+## Objective
+
+Documentar specs revisables antes de implementar bots.

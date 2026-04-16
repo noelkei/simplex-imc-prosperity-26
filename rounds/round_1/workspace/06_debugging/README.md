@@ -1,7 +1,9 @@
-# Debugging Notes
+# Phase 07 Debugging
 
-Put debugging and iteration notes here.
+## Status
 
-Use [`docs/templates/debug_issue_template.md`](../../../../docs/templates/debug_issue_template.md) for each issue.
+NOT_STARTED
 
-Every issue note must include reproduction steps, expected vs observed behavior, linked strategy spec, linked performance or validation run, classification, and next action.
+## Objective
+
+Registrar issues reproducibles y su resolución iterativa.

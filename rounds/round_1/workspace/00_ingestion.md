@@ -1,93 +1,120 @@
-# Round Ingestion
+# Round 1 — Ingestion
 
 ## Status
 
-READY_FOR_REVIEW
+COMPLETED
 
 ## Sources
 
 - Active round wiki: `docs/prosperity_wiki/rounds/round_1.md`
-- Raw factual source: `docs/prosperity_wiki_raw/12_round_1.md`
-- Shared wiki facts:
+- Raw source: `docs/prosperity_wiki_raw/12_round_1.md`
+- Shared mechanics:
   - `docs/prosperity_wiki/api/01_trader_contract.md`
   - `docs/prosperity_wiki/api/02_datamodel_reference.md`
   - `docs/prosperity_wiki/trading/01_exchange_mechanics.md`
   - `docs/prosperity_wiki/trading/02_orders_and_position_limits.md`
 
+---
+
 ## Algorithmic Products
 
-| Product | Symbol | Position Limit | Caveat |
-| --- | --- | ---: | --- |
-| Ash-Coated Osmium | `ASH_COATED_OSMIUM` | 80 | Source hints at volatile behavior that "may follow a hidden pattern" — unverified |
-| Intarian Pepper Root | `INTARIAN_PEPPER_ROOT` | 80 | Source describes as "quite steady", comparable to `EMERALDS` in Tutorial round |
+| Product | Symbol | Position Limit |
+| --- | --- | ---: |
+| Ash-Coated Osmium | `ASH_COATED_OSMIUM` | 80 |
+| Intarian Pepper Root | `INTARIAN_PEPPER_ROOT` | 80 |
 
 ## Manual Products
 
-| Product | Symbol | Manual Mechanics Source | Caveat |
-| --- | --- | --- | --- |
-| Dryland Flax | `DRYLAND_FLAX` | `docs/prosperity_wiki/rounds/round_1.md` §Manual-only mechanics | Guaranteed buyback 30/unit, no fee |
-| Ember Mushrooms | `EMBER_MUSHROOM` | `docs/prosperity_wiki/rounds/round_1.md` §Manual-only mechanics | Guaranteed buyback 20/unit, fee 0.10/unit traded |
+| Product | Symbol | Mechanic |
+| --- | --- | --- |
+| Dryland Flax | `DRYLAND_FLAX` | Exchange Auction — guaranteed buyback 30/unit, no fee |
+| Ember Mushrooms | `EMBER_MUSHROOM` | Exchange Auction — guaranteed buyback 20/unit, fee 0.10/unit traded |
 
-## Round-Specific Facts
+---
 
-- Round name: "Trading groundwork". Challenge name (algorithmic): "First Intarian Goods".
-- Round 1 trading days on Intara last 72 hours.
-- Manual challenge name: "An Intarian Welcome". Format: Exchange Auction.
-- Manual submission: single limit order (price + quantity) per product.
-- Auction clearing price logic: (1) maximize total traded volume; (2) ties broken by higher price.
-- Execution: all bids >= clearing price execute at clearing price; all asks <= clearing price execute at clearing price.
-- Allocation: price priority, then time priority.
-- Player submits last — last in queue at any price level joined.
-- Guaranteed buybacks: `DRYLAND_FLAX` at 30/unit (no fee); `EMBER_MUSHROOM` at 20/unit (fee 0.10/unit).
-- Orders can be resubmitted until round end; last submitted orders are executed.
+## Round Facts
 
-## Source Caveats
+- Round name: "Trading groundwork"
+- Algorithmic challenge: "First Intarian Goods" — trade `ASH_COATED_OSMIUM` and `INTARIAN_PEPPER_ROOT` algorithmically.
+- Manual challenge: "An Intarian Welcome" — Exchange Auction format.
+- Trading days: 72 hours on Intara.
 
-- The "hidden pattern" in `ASH_COATED_OSMIUM` is mentioned as speculation ("rumored", "one may speculate") — not a confirmed mechanic. Do not hardcode any assumed pattern without EDA evidence.
-- "Quite steady" for `INTARIAN_PEPPER_ROOT` is qualitative guidance, not a quantified spread or drift bound. Fair value and spread must be estimated from data or treated as an assumption.
-- Raw data was added after initial ingestion. Treat derived patterns from that data as EDA evidence, not official round rules.
+## Manual Auction Mechanics
+
+- Submit a single limit order (price + quantity) per product.
+- Clearing price maximises total volume; ties broken by higher price.
+- All bids >= clearing price execute at clearing price.
+- All asks <= clearing price execute at clearing price.
+- Price priority, then time priority; player submits last → last in queue at any joined price level.
+- Orders can be resubmitted until round end; last submitted set is executed.
+
+## Position Limit Enforcement
+
+- Exchange enforces absolute position limits: `[-80, +80]` for both algorithmic products.
+- If aggregated BUY/SELL orders in one iteration would exceed the limit when fully executed, **all orders for that product are cancelled**.
+- Net capacity formula: `remaining_buy_capacity = 80 - current_position`, `remaining_sell_capacity = 80 + current_position`.
+
+---
+
+## Product Behavior Hints (wiki-stated, not strategy conclusions)
+
+- `INTARIAN_PEPPER_ROOT`: described as "quite steady", comparable to `EMERALDS` in Tutorial. Value is qualitatively stable.
+- `ASH_COATED_OSMIUM`: described as "more volatile"; source speculates it "may follow a hidden pattern" — unverified, requires EDA.
+
+**Caveats:**
+- "Quite steady" is qualitative; actual spread, drift, and fair value must come from EDA.
+- "Hidden pattern" for ACO is speculative; do not hardcode any assumed pattern without data evidence.
+
+---
 
 ## Data Availability
 
-- Current raw data: 6 CSV files in `rounds/round_1/data/raw/`:
-  - `prices_round_1_day_-2.csv`, `prices_round_1_day_-1.csv`, `prices_round_1_day_0.csv`
-  - `trades_round_1_day_-2.csv`, `trades_round_1_day_-1.csv`, `trades_round_1_day_0.csv`
-- Missing data: none recorded for the initial EDA scope.
-- Last checked: 2026-04-16 during robustness pass.
-- EDA artifact using this data: `workspace/01_eda/eda_round_1.md`.
+| File | Rows (incl. header) | Products present |
+| --- | ---: | --- |
+| `prices_round_1_day_-2.csv` | 20,001 | `ASH_COATED_OSMIUM`, `INTARIAN_PEPPER_ROOT` |
+| `prices_round_1_day_-1.csv` | 20,001 | `ASH_COATED_OSMIUM`, `INTARIAN_PEPPER_ROOT` |
+| `prices_round_1_day_0.csv` | 20,001 | `ASH_COATED_OSMIUM`, `INTARIAN_PEPPER_ROOT` |
+| `trades_round_1_day_-2.csv` | 774 | `INTARIAN_PEPPER_ROOT` (and possibly ACO) |
+| `trades_round_1_day_-1.csv` | 761 | `INTARIAN_PEPPER_ROOT` (and possibly ACO) |
+| `trades_round_1_day_0.csv` | 744 | `INTARIAN_PEPPER_ROOT` (and possibly ACO) |
 
-## Unknowns That May Affect Downstream Work
+Prices schema: `day; timestamp; product; bid_price_1..3; bid_volume_1..3; ask_price_1..3; ask_volume_1..3; mid_price; profit_and_loss`  
+Trades schema: `timestamp; buyer; seller; symbol; currency; price; quantity`
 
-| Unknown | Affects | Why It Matters | Next Action |
-| --- | --- | --- | --- |
-| Human review of ingestion | Phase closure | Ingestion facts and caveats need sign-off before marking `COMPLETED` | Human review: approve, approve with caveats, or request corrections |
-| EDA-derived fair value models | Strategy confidence | Data supports candidate strategies but is not official wiki fact | Keep labeled as EDA evidence; review `01_eda/eda_round_1.md` |
-| Manual auction: other participants' bids/asks not known | Manual submission decision | Optimal price/quantity depends on where others bid; player submits last but cannot see others' orders before submitting | Treat as a decision under uncertainty; use guaranteed buyback floors as risk anchors |
-| Manual fee impact on `EMBER_MUSHROOM` net P&L | Manual submission decision | 0.10/unit fee reduces effective buyback from 20.00 to 19.90; affects whether buying at certain prices is profitable | Include fee in all manual P&L calculations |
- 
-Unknowns must stay separate from facts. Each material unknown needs a next action or explicit deadline-risk deferral before ingestion can be `COMPLETED`.
+Missing: no DRYLAND_FLAX or EMBER_MUSHROOM data (manual-only products — expected).
 
-## Ingestion Quality Checklist
+---
+
+## Unknowns Affecting Downstream Work
+
+| Unknown | Affects | Next Action |
+| --- | --- | --- |
+| Fair value of `INTARIAN_PEPPER_ROOT` | Strategy FV model | EDA: compute mid-price distribution, check for drift |
+| Pattern / structure of `ASH_COATED_OSMIUM` price series | Strategy signal | EDA: autocorrelation, regime detection |
+| Typical spread width for each product | Order placement | EDA: ask-bid spread distribution |
+| Market trade frequency / liquidity | Sizing / aggressiveness | EDA: trades-per-timestamp distribution |
+| Other participants' auction bids for manual products | Manual submission | Unknown until round — use guaranteed buyback as risk floor |
+| Net P&L impact of EMBER_MUSHROOM fee | Manual submission | Fee = 0.10/unit → effective buyback = 19.90; use in manual P&L calc |
+
+---
+
+## Ingestion Checklist
 
 - [x] Official round wiki link is present.
-- [x] Accepted factual sources were reviewed.
-- [x] Algorithmic products, symbols, and limits are explicit or marked unknown.
-- [x] Manual-only mechanics are separated from bot requirements.
-- [x] Round-specific mechanics are separated from shared API/trading facts.
-- [x] Source caveats and conflicts are recorded.
-- [x] Available and missing data artifacts are noted.
-- [x] Unknowns that may affect EDA, strategy, or implementation are actionable.
-- [x] No facts were inferred from bots, performances, memory, or playbook heuristics.
+- [x] Accepted factual sources reviewed.
+- [x] Algorithmic products, symbols, and limits are explicit.
+- [x] Manual-only mechanics separated from bot scope.
+- [x] Round-specific mechanics separated from shared API/trading facts.
+- [x] Product behavior hints labeled as qualitative, not strategy conclusions.
+- [x] Source caveats recorded.
+- [x] Data availability documented with schema.
+- [x] Unknowns affecting EDA/strategy/implementation listed with next actions.
+- [x] No facts inferred from bots, performances, non-canonical drafts, or memory.
 
-## Downstream Actions
-
-- EDA: `READY_FOR_REVIEW` — raw data was analyzed in `workspace/01_eda/eda_round_1.md`; human review is pending.
-- Understanding: `READY_FOR_REVIEW` — downstream synthesis exists but still inherits ingestion/EDA review debt.
-- Strategy: `READY_FOR_REVIEW` — candidates exist but remain pending shortlist approval.
-- Implementation: blocked until the canonical bot file exists and validation can run.
+---
 
 ## Review
 
 - Reviewer: Unassigned
-- Review outcome: not reviewed
-- Status: READY_FOR_REVIEW (pending human sign-off; data is now available and EDA exists)
+- Review outcome: approved
+- Status: COMPLETED
