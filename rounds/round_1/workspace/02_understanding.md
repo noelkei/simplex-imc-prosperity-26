@@ -166,3 +166,7 @@ The EDA observes autocorr 0.717 at lag 50. This is dramatically higher than the 
 
 - Human review needed: approve, approve with caveats, or request corrections.
 - If review changes material assumptions, update downstream strategy/spec artifacts before final submission readiness.
+
+
+- Human review needed: approve, approve with caveats, or request corrections.
+- If review changes material assumptions, update downstream strategy/spec artifacts before final submission readiness.

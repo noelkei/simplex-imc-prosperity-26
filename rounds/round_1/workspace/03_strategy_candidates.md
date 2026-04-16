@@ -62,12 +62,12 @@ EDA shows autocorr at lag 50 = 0.717. Pure AR(1) with φ=0.789 would predict lag
 2. Compute `skew = round((position / pos_limit) * SKEW_FACTOR)` (proportional inventory skew).
 3. `my_bid = fv - HALF_SPREAD - skew`, `my_ask = fv + HALF_SPREAD + skew`.
 4. Aggressive: take any ask strictly below fv; hit any bid strictly above fv.
-5. Passive: place resting bid if `position < ONE_SIDED_THRESHOLD`; place resting ask if `position > -ONE_SIDED_THRESHOLD`.
+5. Passive: place resting bid only if `position < ONE_SIDED_THRESHOLD`; place resting ask only if `position > -ONE_SIDED_THRESHOLD`.
    - `ONE_SIDED_THRESHOLD = 40` (half of position limit). When |position| ≥ 40, suppress the quote on the accumulating side.
 
 **Parameters (tunable):** `HALF_SPREAD` (default 5), `FV` (default 10000), `SKEW_FACTOR` (default 3), `ONE_SIDED_THRESHOLD` (default 40).
 
-**Validation check:** P&L should grow. Position should oscillate around 0, rarely hitting ±80. With one-sided quoting active, absolute position should rarely exceed 40–50.
+**Validation check:** P&L should grow. Position should oscillate around 0, rarely exceeding ±40 with one-sided quoting active. If position still hits ±80, lower ONE_SIDED_THRESHOLD.
 
 ---
 
@@ -79,16 +79,18 @@ Combines:
 - `candidate_01_ipr_directional`: buy max long, hold, never sell
 - `candidate_02_aco_fixedfv`: fixed-FV MM with proportional skew and one-sided quoting
 
+Bot file: `rounds/round_1/bots/bruno/canonical/candidate_03_combined.py` (v3)
+
 ---
 
 ## Rejected Or Deferred Ideas
 
 | Idea | Reason | Evidence Gap Or Risk |
 | --- | --- | --- |
-| Drift-tracking market maker for IPR | EDA magnitude shows buy-max-long earns ~7,200 vs ~1,000–2,000 from MM (4–8x); drift gain requires holding inventory, not trading around it | drift must continue in live round; but even if drift is weaker, directional still likely better |
+| Drift-tracking market maker for IPR | EDA magnitude shows buy-max-long earns ~7,200 vs ~1,000–2,000 from MM (4–8x); drift gain requires holding inventory, not trading around it | even if drift is weaker in live round, directional still likely better unless drift ≈ 0 |
 | Static fair value for IPR | EDA shows drift of +1,003/day — a static FV is wrong within the first tick | contradicted by core signal |
 | Aggressive mean-reversion for ACO | Slow persistent reversion (lag-50 autocorr = 0.717 >> AR(1) prediction) makes timing unreliable; position risk is high without inventory controls | position can accumulate for 100+ ticks before reversion |
-| No one-sided quoting for ACO | Without it, position hits limit during prolonged deviations | lag-50 autocorr = 0.717 confirms deviations can last 100+ ticks |
+| ACO market-making without one-sided quoting | Without it, passive bids/asks keep filling during prolonged deviations, pushing position to limit | lag-50 autocorr = 0.717 confirms deviations can last 100+ ticks |
 | Manual challenge as algorithmic strategy | Requires human submission via platform UI, not bot code | not executable by `Trader.run()` |
 
 ## Shortlist
@@ -106,4 +108,5 @@ Rationale: both products have strong EDA evidence. Implementation cost is low. V
 
 ## Next Action
 
-- Human reviews shortlist. If approved or approved with caveats, implement `candidate_03_combined.py` with the one-sided quoting logic from candidate_02_aco_fixedfv.
+- Human reviews shortlist. If approved, upload `candidate_03_combined.py` (v3) to platform and run. Compare P&L to baseline 9,419.
+
