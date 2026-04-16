@@ -1,49 +1,61 @@
 """
 IMC Prosperity 4 - Round 1
-candidate_03_combined (v4):
+candidate_03_combined (v5):
   - INTARIAN_PEPPER_ROOT: directional max-long (unchanged)
   - ASH_COATED_OSMIUM: fixed fair-value market maker (FV=10000)
 
 Evidence base:
   rounds/round_1/workspace/01_eda/eda_round_1.md
   rounds/round_1/workspace/02_understanding.md
-  rounds/round_1/workspace/03_strategy_candidates.md
 
-Changes vs v3 (two separate improvements to ACO):
+--- What happened in v4 and why it failed ---
 
-  1. Fixed ask skew direction (v3 bug):
-       OLD: my_ask = FV + HS + skew  (when long: raises ask UP — harder to sell)
-       NEW: my_ask = FV + HS - skew  (when long: lowers ask DOWN — easier to sell)
-     Effect: centered shift — both bid and ask shift DOWN when long, UP when short.
-     The spread stays constant at 2*HS=4. This is correct inventory management:
-     long position → sell more easily (lower ask), buy less eagerly (lower bid).
-     Short position → buy more eagerly (higher bid), sell less eagerly (higher ask).
+v4 introduced two changes: centered skew formula AND tighter spread (HS=5→2).
+Result: ACO P&L dropped from ~2,133 (baseline) to ~1,214.
 
-  2. Tighter passive spread:
-       ACO_HALF_SPREAD: 5 → 2
-     Old bid/ask at neutral: 9995 / 10005 (10 tick spread)
-     New bid/ask at neutral: 9998 / 10002 (4 tick spread)
-     Effect: our quotes beat market bots who quote at ~9992/10008. We are the
-     best bid and ask in the market most of the time, so all incoming market
-     flow fills us. Earns less per fill but dramatically more fills.
-     This alone should bring ACO P&L from ~2k to 4-6k per test run.
+Root cause of v4 failure:
+  Centered skew: my_ask = FV + HS - skew
+  With HS=2 and SKEW=4, at position +60 (skew=3): ask = 10000+2-3 = 9999
+  At position +80 (skew=4): ask = 10000+2-4 = 9998
 
-  3. Removed one-sided quoting:
-     v3 introduced ACO_ONE_SIDED_THRESHOLD=40 which HURT performance (-194 P&L).
-     With the centered skew and tight spread, inventory management is handled
-     naturally: at position limits, buy_cap/sell_cap = 0 (no quote placed).
+  We were selling BELOW fair value to exit accumulated positions.
+  Tight spread (HS=2) causes fast accumulation to +80, then bot is forced
+  to sell at 9998-9999 to exit. Every exit loses 1-2 ticks per unit.
+  Net effect: more fills but at negative exit margin → lower total P&L.
 
-  Skew table with new formula (HS=2, SKEW_FACTOR=4):
-    pos=0   : bid=9998, ask=10002  (spread 4, center at 10000)
-    pos=+40 : bid=9996, ask=10000  (center at 9998 — actively selling at FV)
-    pos=+80 : bid not placed (buy_cap=0), ask=9998  (2 below FV — exit fast)
-    pos=-40 : bid=10000, ask=10004  (center at 10002 — actively buying at FV)
-    pos=-80 : bid=10002, ask not placed (sell_cap=0)  (2 above FV — exit fast)
+--- v5 fix: revert to widening skew, only tighten the spread ---
 
-  Test run P&L targets:
-    IPR: ~7,286  (unchanged, same directional logic)
-    ACO: ~4,000–6,000  (vs ~2,000 in v3)
-    Total: ~11,000–13,000  (vs baseline 9,419)
+The widening formula (my_ask = FV + HS + skew) is safe because:
+  - Ask ALWAYS stays above FV + HS at neutral, and widens further when long
+  - There is never a situation where we sell below FV
+  - It correctly disincentivizes further buying when long (wider spread)
+
+The only v5 change versus baseline (TEST1_merged):
+  ACO_HALF_SPREAD: 5 → 3
+
+Spread analysis at neutral position:
+  Baseline: bid=9995, ask=10005 (market bots bid ~9992, ask ~10008)
+  v5:       bid=9997, ask=10003 (2 ticks inside market bots on each side)
+
+v5 is inside the market bots more often → more incoming orders fill us first.
+Per-fill profit: 3 ticks per side (vs 5 before). Fill frequency: higher.
+For v5 to beat baseline, we need >1.67x more fills. Plausible given we now
+beat market bots consistently when they quote at 9992-9995 / 10008.
+
+Widening skew with HS=3, SKEW=3 at position +40 (skew=2):
+  bid=9995, ask=10005 — same as baseline neutral spread. Safe.
+
+No one-sided quoting (confirmed harmful in v3: -194 P&L).
+
+P&L targets (test run, 1,000 iterations):
+  IPR: ~7,286 (unchanged)
+  ACO: ~2,800–3,500 (vs ~2,133 baseline, vs ~1,214 in failed v4)
+  Total: ~10,000–10,800
+
+Next iteration if v5 still doesn't reach 4-6k ACO:
+  Need to investigate WHY other teams earn 4-6k.
+  Possible explanations: different market-making logic, directional bets,
+  reading market_trades flow, or they are also running IPR differently.
 """
 
 from datamodel import Order, OrderDepth, TradingState
@@ -58,8 +70,8 @@ POSITION_LIMITS = {
 
 # ── Parameters ─────────────────────────────────────────────────────────────────
 ACO_FAIR_VALUE  = 10000
-ACO_HALF_SPREAD = 2    # tighter: was 5. Puts us inside market bots (~9992/10008)
-ACO_SKEW_FACTOR = 4    # centered shift per unit of position/limit
+ACO_HALF_SPREAD = 3    # was 5 in baseline. 3 puts us inside market bots (~9992/10008)
+ACO_SKEW_FACTOR = 3    # widening skew, unchanged from baseline
 
 
 class Trader:
@@ -76,8 +88,6 @@ class Trader:
         return json.dumps(data)
 
     # ── INTARIAN_PEPPER_ROOT: directional max-long ─────────────────────────────
-    # EDA: price drifts +0.001/tick. Holding max long captures full drift.
-    # Selling surrenders drift gain for a spread tick — bad trade in trend.
 
     def _trade_ipr(
         self,
@@ -107,9 +117,9 @@ class Trader:
         return orders
 
     # ── ASH_COATED_OSMIUM: fixed fair-value market maker ──────────────────────
-    # EDA: mean-reverts around 10,000. Spread dominated by 16 ticks.
-    # Centered skew: both bid and ask shift together in direction that reduces
-    # inventory. Tight spread (HS=2) captures more fills than wider spread.
+    # Widening skew: ask = FV + HS + skew (ask widens AWAY from FV when long).
+    # This ensures ask is always above FV+HS — never selling below fair value.
+    # Tight spread (HS=3) keeps us inside market bots for more fills.
 
     def _trade_aco(
         self,
@@ -126,10 +136,10 @@ class Trader:
         fair_value = ACO_FAIR_VALUE
         skew = round((position / pos_limit) * ACO_SKEW_FACTOR)
 
-        # Centered shift: both quotes move DOWN when long, UP when short.
-        # Spread stays constant at 2 * ACO_HALF_SPREAD = 4.
+        # Widening skew: both quotes widen away from FV when position is non-zero.
+        # bid always below FV, ask always above FV.
         my_bid = fair_value - ACO_HALF_SPREAD - skew
-        my_ask = fair_value + ACO_HALF_SPREAD - skew  # KEY FIX: was +skew in v3
+        my_ask = fair_value + ACO_HALF_SPREAD + skew  # widening: +skew, not -skew
 
         buy_cap  = pos_limit - position
         sell_cap = pos_limit + position
@@ -154,7 +164,6 @@ class Trader:
                 sell_cap  -= qty
                 position  -= qty
 
-        # Passive resting quotes (one-sided naturally when at position limits)
         if buy_cap > 0:
             orders.append(Order(product, my_bid, buy_cap))
         if sell_cap > 0:
