@@ -1,21 +1,23 @@
 """
 IMC Prosperity 4 - Round 1
-candidate_03_combined (v2):
-  - INTARIAN_PEPPER_ROOT: directional max-long (captures +~100 tick drift/day)
+candidate_03_combined (v3):
+  - INTARIAN_PEPPER_ROOT: directional max-long (captures +~90 tick drift/run)
   - ASH_COATED_OSMIUM: fixed fair-value market maker (FV=10000)
 
 Evidence base:
   rounds/round_1/workspace/01_eda/eda_round_1.md
+  rounds/round_1/workspace/02_understanding.md
   rounds/round_1/workspace/03_strategy_candidates.md
 
-Baseline performance (TEST1_merged, same IPR logic):
-  rounds/round_1/performances/bruno/canonical/190076.json
-  Total P&L: 9,419  |  IPR final pos: +80  |  ACO final pos: +44 (peaked +65)
-
-Changes vs TEST1_merged:
-  - ACO_SKEW_FACTOR: 2 -> 3  (baseline peaked at pos +65/-36; more aggressive skew)
-  - Removed print() statements (slow execution, pollute logs)
-  - Removed unused _update_ema helper
+Changes vs v2:
+  - ACO one-sided quoting added (ACO_ONE_SIDED_THRESHOLD = 40):
+      suppress passive bid when position >= +40
+      suppress passive ask when position <= -40
+    Reason: EDA lag-50 autocorr = 0.717 (far above AR(1) prediction ~0).
+    ACO price can stay deviated from 10,000 for 100+ ticks. Without this
+    guard the bot accumulates inventory to the position limit before price
+    reverts. One-sided quoting caps exposure at ~half the limit.
+  - No other logic changes vs v2.
 """
 
 from datamodel import Order, OrderDepth, TradingState
@@ -30,10 +32,10 @@ POSITION_LIMITS = {
 
 # ── Parameters ─────────────────────────────────────────────────────────────────
 # ASH_COATED_OSMIUM — mean-reverts around 10,000 (EDA: stdev 4-5, spread 16)
-# Baseline peaked at ACO pos +65 → SKEW_FACTOR raised to 3
-ACO_FAIR_VALUE  = 10000
-ACO_HALF_SPREAD = 5    # inside the 8-tick market half-spread
-ACO_SKEW_FACTOR = 3    # raised from 2; flattens inventory faster
+ACO_FAIR_VALUE          = 10000
+ACO_HALF_SPREAD         = 5    # inside the 8-tick market half-spread
+ACO_SKEW_FACTOR         = 3    # proportional skew: skew = round(pos/limit * 3)
+ACO_ONE_SIDED_THRESHOLD = 40   # suppress passive bid above this; ask below -this
 
 
 class Trader:
@@ -50,9 +52,9 @@ class Trader:
         return json.dumps(data)
 
     # ── INTARIAN_PEPPER_ROOT: directional max-long ─────────────────────────────
-    # EDA: price drifts +0.001/tick (+~100 ticks per simulation day).
-    # Holding max long captures full drift gain (~7,286 in baseline run).
-    # Drift-tracking market maker would sell on the way up: far less profitable.
+    # EDA: price drifts +0.001/tick (+~90 price units per sim run).
+    # Holding max long captures full drift gain. Selling surrenders drift gain
+    # in exchange for spread ticks — a losing trade in a trending market.
 
     def _trade_ipr(
         self,
@@ -84,8 +86,10 @@ class Trader:
         return orders
 
     # ── ASH_COATED_OSMIUM: fixed fair-value market maker ──────────────────────
-    # EDA: oscillates around 10,000 (stdev 4-5, spread 16, autocorr 0.79).
-    # Slow reversion → position skew prevents pinning at limit.
+    # EDA: oscillates around 10,000 (stdev 4-5, spread 16).
+    # Lag-50 autocorr = 0.717: deviations persist for 100+ ticks, not ~3 ticks.
+    # One-sided quoting: stop bidding when long >= threshold; stop asking when
+    # short <= -threshold. Prevents hitting position limit during long deviations.
 
     def _trade_aco(
         self,
@@ -128,10 +132,10 @@ class Trader:
                 sell_cap  -= qty
                 position  -= qty
 
-        # Passive resting quotes
-        if buy_cap > 0:
+        # Passive resting quotes — one-sided quoting at extreme positions
+        if buy_cap > 0 and position < ACO_ONE_SIDED_THRESHOLD:
             orders.append(Order(product, my_bid, buy_cap))
-        if sell_cap > 0:
+        if sell_cap > 0 and position > -ACO_ONE_SIDED_THRESHOLD:
             orders.append(Order(product, my_ask, -sell_cap))
 
         return orders
