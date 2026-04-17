@@ -1,0 +1,2375 @@
+{
+  "artifacts_analyzed": 25,
+  "insights": [
+    {
+      "action": "Rank with JSON profit, then use the final activitiesLog rows for IPR/ACO attribution.",
+      "detail": "The final per-product profit_and_loss rows sum to JSON profit with zero delta in every analyzed artifact.",
+      "title": "ActivitiesLog gives the exact product PnL split"
+    },
+    {
+      "action": "Do not rank bots by local reconstruction; use it only to catch obvious logging or inventory inconsistencies.",
+      "detail": "Max absolute graph delta is 8.07; max absolute tradeHistory rebuild delta is 32.28 where logs exist.",
+      "title": "Graph/trade rebuild are audit tools, not the score"
+    },
+    {
+      "action": "Keep IPR target at +80 unless live evidence shows drift failure.",
+      "detail": "Runs ending at +80 IPR average 7286.0 IPR PnL; +75-cap runs average 6836.5.",
+      "title": "IPR max-long dominates lower caps"
+    },
+    {
+      "action": "Iterate ACO quote size/skew/passive fill behavior around FV=10000; keep IPR carry stable.",
+      "detail": "Best ACO run is candidate_26_v3_a3b1_one_sided_exit_overlay with 2804.5 ACO PnL, 235 buy qty, 226 sell qty.",
+      "title": "ACO is the main improvement surface after IPR carry"
+    },
+    {
+      "action": "Optimize quote selection and inventory skew before increasing size blindly.",
+      "detail": "candidate_26_v3_a3b1_one_sided_exit_overlay earns 2804.5 ACO PnL at edge 12.04; 23-bot trades more matched qty but edge is 4.49.",
+      "title": "ACO quality beats raw ACO volume"
+    },
+    {
+      "action": "Steal the ACO filters from bot 04/05 only after locking the IPR +80 base layer.",
+      "detail": "Markov/adaptive Noel variants show ACO PnL of 2689.9/2448.4, but their IPR PnL stays below the +80 baseline.",
+      "title": "Model overlays are useful on ACO, harmful if they replace IPR carry"
+    },
+    {
+      "action": "Use this artifact as the primary ranking baseline, not the local replay scale.",
+      "detail": "candidate_10_bot02_carry_tight_mm official profit is 10007.0: IPR 7286.0, ACO 2721.0.",
+      "title": "Current Noel canonical candidate crossed 10k on platform artifact"
+    },
+    {
+      "action": "Do not promote microstructure-only bots unless they keep +80 IPR carry as a base layer.",
+      "detail": "candidate_11_bot03_micro_scalper official profit is 1542.2, with only 694.6 IPR PnL.",
+      "title": "Pure microstructure underuses the dominant IPR carry"
+    }
+  ],
+  "method": "Platform JSON/log artifact analysis. Official ranking uses JSON `profit`; activities and tradeHistory are audit methods.",
+  "ranking": [
+    {
+      "aco_pnl": 2804.46875,
+      "bot_path": "rounds/round_1/bots/noel/canonical/candidate_26_v3_a3b1_one_sided_exit_overlay.py",
+      "ipr_pnl": 7286.0,
+      "json_path": "rounds/round_1/performances/noel/canonical/candidate_26_v3_a3b1_one_sided_exit_overlay.json",
+      "official_profit": 10090.46875,
+      "run_key": "candidate_26_v3_a3b1_one_sided_exit_overlay"
+    },
+    {
+      "aco_pnl": 2790.3125,
+      "bot_path": "rounds/round_1/bots/noel/historical/candidate_28_v1_c26_strict_one_sided.py",
+      "ipr_pnl": 7286.0,
+      "json_path": "rounds/round_1/performances/noel/historical/candidate_28_v1_c26_strict_one_sided.json",
+      "official_profit": 10076.3125,
+      "run_key": "candidate_28_v1_c26_strict_one_sided"
+    },
+    {
+      "aco_pnl": 2721.0,
+      "bot_path": "rounds/round_1/bots/noel/historical/candidate_10_bot02_carry_tight_mm.py",
+      "ipr_pnl": 7286.0,
+      "json_path": "rounds/round_1/performances/noel/historical/candidate_10_bot02_carry_tight_mm.json",
+      "official_profit": 10007.0,
+      "run_key": "candidate_10_bot02_carry_tight_mm"
+    },
+    {
+      "aco_pnl": 2721.0,
+      "bot_path": "rounds/round_1/bots/noel/historical/candidate_19_ipr_execution_upgrade.py",
+      "ipr_pnl": 7286.0,
+      "json_path": "rounds/round_1/performances/noel/historical/candidate_19_ipr_execution_upgrade.json",
+      "official_profit": 10007.0,
+      "run_key": "candidate_19_ipr_execution_upgrade"
+    },
+    {
+      "aco_pnl": 2665.28125,
+      "bot_path": "rounds/round_1/bots/noel/historical/candidate_24_v1_a1b1_size_skew_refine.py",
+      "ipr_pnl": 7286.0,
+      "json_path": "rounds/round_1/performances/noel/historical/candidate_24_v1_a1b1_size_skew_refine.json",
+      "official_profit": 9951.28125,
+      "run_key": "candidate_24_v1_a1b1_size_skew_refine"
+    },
+    {
+      "aco_pnl": 2644.15625,
+      "bot_path": "rounds/round_1/bots/noel/historical/candidate_25_v2_a2b1_conservative_regime_gate.py",
+      "ipr_pnl": 7286.0,
+      "json_path": "rounds/round_1/performances/noel/historical/candidate_25_v2_a2b1_conservative_regime_gate.json",
+      "official_profit": 9930.15625,
+      "run_key": "candidate_25_v2_a2b1_conservative_regime_gate"
+    },
+    {
+      "aco_pnl": 2634.1875,
+      "bot_path": "rounds/round_1/bots/noel/historical/candidate_27_v1_c26_soft_flatten.py",
+      "ipr_pnl": 7286.0,
+      "json_path": "rounds/round_1/performances/noel/historical/candidate_27_v1_c26_soft_flatten.json",
+      "official_profit": 9920.1875,
+      "run_key": "candidate_27_v1_c26_soft_flatten"
+    },
+    {
+      "aco_pnl": 2553.75,
+      "bot_path": "rounds/round_1/bots/noel/historical/candidate_14_aco_kalman_latent_fv.py",
+      "ipr_pnl": 7286.0,
+      "json_path": "rounds/round_1/performances/noel/historical/candidate_14_aco_kalman_latent_fv.json",
+      "official_profit": 9839.75,
+      "run_key": "candidate_14_aco_kalman_latent_fv"
+    },
+    {
+      "aco_pnl": 2477.46875,
+      "bot_path": "rounds/round_1/bots/noel/historical/candidate_21_one_sided_book_specialist.py",
+      "ipr_pnl": 7286.0,
+      "json_path": "rounds/round_1/performances/noel/historical/candidate_21_one_sided_book_specialist.json",
+      "official_profit": 9763.46875,
+      "run_key": "candidate_21_one_sided_book_specialist"
+    },
+    {
+      "aco_pnl": 2371.21875,
+      "bot_path": "rounds/round_1/bots/noel/historical/candidate_22_micro_alpha_rescue.py",
+      "ipr_pnl": 7286.0,
+      "json_path": "rounds/round_1/performances/noel/historical/candidate_22_micro_alpha_rescue.json",
+      "official_profit": 9657.21875,
+      "run_key": "candidate_22_micro_alpha_rescue"
+    },
+    {
+      "aco_pnl": 2293.25,
+      "bot_path": "rounds/round_1/bots/noel/historical/candidate_18_aco_offline_policy_table.py",
+      "ipr_pnl": 7286.0,
+      "json_path": "rounds/round_1/performances/noel/historical/candidate_18_aco_offline_policy_table.json",
+      "official_profit": 9579.25,
+      "run_key": "candidate_18_aco_offline_policy_table"
+    },
+    {
+      "aco_pnl": 2146.0625,
+      "bot_path": "rounds/round_1/bots/amin/canonical/26-candidate_03_combined.py",
+      "ipr_pnl": 7286.0,
+      "json_path": "rounds/round_1/bots/amin/canonical/26-candidate_03_combined.json",
+      "official_profit": 9432.0625,
+      "run_key": "26-candidate_03_combined"
+    },
+    {
+      "aco_pnl": 2042.53125,
+      "bot_path": "rounds/round_1/bots/noel/historical/candidate_15_aco_hmm_regime_mm.py",
+      "ipr_pnl": 7286.0,
+      "json_path": "rounds/round_1/performances/noel/historical/candidate_15_aco_hmm_regime_mm.json",
+      "official_profit": 9328.53125,
+      "run_key": "candidate_15_aco_hmm_regime_mm"
+    },
+    {
+      "aco_pnl": 2027.09375,
+      "bot_path": "rounds/round_1/bots/noel/historical/candidate_16_aco_edge_quality_gate.py",
+      "ipr_pnl": 7286.0,
+      "json_path": "rounds/round_1/performances/noel/historical/candidate_16_aco_edge_quality_gate.json",
+      "official_profit": 9313.09375,
+      "run_key": "candidate_16_aco_edge_quality_gate"
+    },
+    {
+      "aco_pnl": 2022.375,
+      "bot_path": "rounds/round_1/bots/noel/historical/candidate_17_aco_inventory_lifecycle.py",
+      "ipr_pnl": 7286.0,
+      "json_path": "rounds/round_1/performances/noel/historical/candidate_17_aco_inventory_lifecycle.json",
+      "official_profit": 9308.375,
+      "run_key": "candidate_17_aco_inventory_lifecycle"
+    },
+    {
+      "aco_pnl": 2139.34375,
+      "bot_path": "rounds/round_1/bots/amin/historical/22-candidate_03_combined.py",
+      "ipr_pnl": 6836.5,
+      "json_path": "rounds/round_1/performances/amin/historical/22-candidate_03_combined.json",
+      "official_profit": 8975.84375,
+      "run_key": "22-candidate_03_combined"
+    },
+    {
+      "aco_pnl": 2139.34375,
+      "bot_path": "rounds/round_1/bots/amin/historical/24-bot.py",
+      "ipr_pnl": 6836.5,
+      "json_path": "rounds/round_1/performances/amin/historical/24-bot.json",
+      "official_profit": 8975.84375,
+      "run_key": "24-bot"
+    },
+    {
+      "aco_pnl": 1666.15625,
+      "bot_path": "rounds/round_1/bots/noel/historical/candidate_23_adaptive_aco_controller.py",
+      "ipr_pnl": 7286.0,
+      "json_path": "rounds/round_1/performances/noel/historical/candidate_23_adaptive_aco_controller.json",
+      "official_profit": 8952.15625,
+      "run_key": "candidate_23_adaptive_aco_controller"
+    },
+    {
+      "aco_pnl": 1621.5,
+      "bot_path": "rounds/round_1/bots/amin/historical/25-bot.py",
+      "ipr_pnl": 7286.0,
+      "json_path": "rounds/round_1/performances/amin/historical/25-bot.json",
+      "official_profit": 8907.5,
+      "run_key": "25-bot"
+    },
+    {
+      "aco_pnl": 1535.09375,
+      "bot_path": "rounds/round_1/bots/noel/historical/candidate_20_dual_product_risk_scheduler.py",
+      "ipr_pnl": 7286.0,
+      "json_path": "rounds/round_1/performances/noel/historical/candidate_20_dual_product_risk_scheduler.json",
+      "official_profit": 8821.09375,
+      "run_key": "candidate_20_dual_product_risk_scheduler"
+    },
+    {
+      "aco_pnl": 1259.59375,
+      "bot_path": "rounds/round_1/bots/amin/historical/23-bot.py",
+      "ipr_pnl": 7286.0,
+      "json_path": "rounds/round_1/performances/amin/historical/23-bot.json",
+      "official_profit": 8545.59375,
+      "run_key": "23-bot"
+    },
+    {
+      "aco_pnl": 2448.4375,
+      "bot_path": "rounds/round_1/bots/noel/historical/candidate_13_bot05_hybrid_adaptive.py",
+      "ipr_pnl": 5194.4375,
+      "json_path": "rounds/round_1/performances/noel/historical/candidate_13_bot05_hybrid_adaptive.json",
+      "official_profit": 7642.875,
+      "run_key": "candidate_13_bot05_hybrid_adaptive"
+    },
+    {
+      "aco_pnl": 2689.9375,
+      "bot_path": "rounds/round_1/bots/noel/historical/candidate_12_bot04_aco_markov.py",
+      "ipr_pnl": 1862.0,
+      "json_path": "rounds/round_1/performances/noel/historical/candidate_12_bot04_aco_markov.json",
+      "official_profit": 4551.9375,
+      "run_key": "candidate_12_bot04_aco_markov"
+    },
+    {
+      "aco_pnl": 2230.71875,
+      "bot_path": "rounds/round_1/bots/noel/historical/candidate_09_bot01_baseline_fv_combo.py",
+      "ipr_pnl": 1862.0,
+      "json_path": "rounds/round_1/performances/noel/historical/candidate_09_bot01_baseline_fv_combo.json",
+      "official_profit": 4092.71875,
+      "run_key": "candidate_09_bot01_baseline_fv_combo"
+    },
+    {
+      "aco_pnl": 847.65625,
+      "bot_path": "rounds/round_1/bots/noel/historical/candidate_11_bot03_micro_scalper.py",
+      "ipr_pnl": 694.59375,
+      "json_path": "rounds/round_1/performances/noel/historical/candidate_11_bot03_micro_scalper.json",
+      "official_profit": 1542.25,
+      "run_key": "candidate_11_bot03_micro_scalper"
+    }
+  ],
+  "runs": [
+    {
+      "activity_rows": 2000,
+      "bot_hash": "18a52ebe6af5",
+      "bot_path": "rounds/round_1/bots/noel/canonical/candidate_26_v3_a3b1_one_sided_exit_overlay.py",
+      "bucket": "canonical",
+      "drawdown": {
+        "final_pnl": 10090.46875,
+        "max_drawdown": 682.0,
+        "max_drawdown_time": 300,
+        "max_pnl": 10090.46875,
+        "max_pnl_time": 99900,
+        "min_pnl": -682.0,
+        "min_pnl_time": 300
+      },
+      "final_mid": {
+        "ASH_COATED_OSMIUM": 10003.0,
+        "INTARIAN_PEPPER_ROOT": 12099.5
+      },
+      "final_product_pnl": {
+        "ASH_COATED_OSMIUM": 2804.46875,
+        "INTARIAN_PEPPER_ROOT": 7286.0
+      },
+      "graph_rows": 500,
+      "has_trade_log": true,
+      "json_path": "rounds/round_1/performances/noel/canonical/candidate_26_v3_a3b1_one_sided_exit_overlay.json",
+      "log_issue_count": 0,
+      "log_path": "rounds/round_1/performances/noel/canonical/candidate_26_v3_a3b1_one_sided_exit_overlay.log",
+      "member": "noel",
+      "pnl_methods": {
+        "graph_delta_vs_official": -7.40625,
+        "graph_final": 10083.0625,
+        "official_profit": 10090.46875,
+        "product_pnl_sum_from_activities": 10090.46875,
+        "product_sum_delta_vs_official": 0.0,
+        "trade_reconstruction_delta_vs_official": -29.46875,
+        "trade_reconstruction_sum": 10061.0
+      },
+      "positions": {
+        "ASH_COATED_OSMIUM": 9,
+        "INTARIAN_PEPPER_ROOT": 80,
+        "XIRECS": -1047926
+      },
+      "round": "1",
+      "run_key": "candidate_26_v3_a3b1_one_sided_exit_overlay",
+      "status": "FINISHED",
+      "submission_id": "b8e9679d-c7a5-4e89-a6f7-c5b1dbca6124",
+      "trade_stats": {
+        "by_product": {
+          "ASH_COATED_OSMIUM": {
+            "avg_buy": 9993.451064,
+            "avg_sell": 10005.49115,
+            "buy_qty": 235,
+            "cash": -87220.0,
+            "first_abs_75_ts": null,
+            "first_abs_80_ts": null,
+            "first_nonzero_position_ts": 1000,
+            "gross_spread_capture": 2721.059574,
+            "matched_qty": 226,
+            "max_abs_position_from_own_trades": 55,
+            "net_qty": 9,
+            "own_trade_count": 76,
+            "reconstructed_pnl": 2807.0,
+            "sell_qty": 226
+          },
+          "INTARIAN_PEPPER_ROOT": {
+            "avg_buy": 12008.825,
+            "avg_sell": null,
+            "buy_qty": 80,
+            "cash": -960706.0,
+            "first_abs_75_ts": 200,
+            "first_abs_80_ts": 200,
+            "first_nonzero_position_ts": 0,
+            "gross_spread_capture": null,
+            "matched_qty": 0,
+            "max_abs_position_from_own_trades": 80,
+            "net_qty": 80,
+            "own_trade_count": 5,
+            "reconstructed_pnl": 7254.0,
+            "sell_qty": 0
+          }
+        },
+        "market_trade_count": 41,
+        "own_trade_count": 81
+      }
+    },
+    {
+      "activity_rows": 2000,
+      "bot_hash": "fbfdb6923c50",
+      "bot_path": "rounds/round_1/bots/noel/historical/candidate_28_v1_c26_strict_one_sided.py",
+      "bucket": "historical",
+      "drawdown": {
+        "final_pnl": 10076.3125,
+        "max_drawdown": 682.0,
+        "max_drawdown_time": 300,
+        "max_pnl": 10076.3125,
+        "max_pnl_time": 99900,
+        "min_pnl": -682.0,
+        "min_pnl_time": 300
+      },
+      "final_mid": {
+        "ASH_COATED_OSMIUM": 10003.0,
+        "INTARIAN_PEPPER_ROOT": 12099.5
+      },
+      "final_product_pnl": {
+        "ASH_COATED_OSMIUM": 2790.3125,
+        "INTARIAN_PEPPER_ROOT": 7286.0
+      },
+      "graph_rows": 500,
+      "has_trade_log": true,
+      "json_path": "rounds/round_1/performances/noel/historical/candidate_28_v1_c26_strict_one_sided.json",
+      "log_issue_count": 0,
+      "log_path": "rounds/round_1/performances/noel/historical/candidate_28_v1_c26_strict_one_sided.log",
+      "member": "noel",
+      "pnl_methods": {
+        "graph_delta_vs_official": -7.601562,
+        "graph_final": 10068.710938,
+        "official_profit": 10076.3125,
+        "product_pnl_sum_from_activities": 10076.3125,
+        "product_sum_delta_vs_official": 0.0,
+        "trade_reconstruction_delta_vs_official": -30.3125,
+        "trade_reconstruction_sum": 10046.0
+      },
+      "positions": {
+        "ASH_COATED_OSMIUM": 6,
+        "INTARIAN_PEPPER_ROOT": 80,
+        "XIRECS": -1017932
+      },
+      "round": "1",
+      "run_key": "candidate_28_v1_c26_strict_one_sided",
+      "status": "FINISHED",
+      "submission_id": "b9c030c7-1664-4c94-85fc-591af8998065",
+      "trade_stats": {
+        "by_product": {
+          "ASH_COATED_OSMIUM": {
+            "avg_buy": 9993.422414,
+            "avg_sell": 10005.522124,
+            "buy_qty": 232,
+            "cash": -57226.0,
+            "first_abs_75_ts": null,
+            "first_abs_80_ts": null,
+            "first_nonzero_position_ts": 1000,
+            "gross_spread_capture": 2734.534483,
+            "matched_qty": 226,
+            "max_abs_position_from_own_trades": 55,
+            "net_qty": 6,
+            "own_trade_count": 75,
+            "reconstructed_pnl": 2792.0,
+            "sell_qty": 226
+          },
+          "INTARIAN_PEPPER_ROOT": {
+            "avg_buy": 12008.825,
+            "avg_sell": null,
+            "buy_qty": 80,
+            "cash": -960706.0,
+            "first_abs_75_ts": 200,
+            "first_abs_80_ts": 200,
+            "first_nonzero_position_ts": 0,
+            "gross_spread_capture": null,
+            "matched_qty": 0,
+            "max_abs_position_from_own_trades": 80,
+            "net_qty": 80,
+            "own_trade_count": 5,
+            "reconstructed_pnl": 7254.0,
+            "sell_qty": 0
+          }
+        },
+        "market_trade_count": 40,
+        "own_trade_count": 80
+      }
+    },
+    {
+      "activity_rows": 2000,
+      "bot_hash": "87c4b025ca9a",
+      "bot_path": "rounds/round_1/bots/noel/historical/candidate_10_bot02_carry_tight_mm.py",
+      "bucket": "historical",
+      "drawdown": {
+        "final_pnl": 10007.0,
+        "max_drawdown": 682.0,
+        "max_drawdown_time": 300,
+        "max_pnl": 10007.0,
+        "max_pnl_time": 99900,
+        "min_pnl": -682.0,
+        "min_pnl_time": 300
+      },
+      "final_mid": {
+        "ASH_COATED_OSMIUM": 10003.0,
+        "INTARIAN_PEPPER_ROOT": 12099.5
+      },
+      "final_product_pnl": {
+        "ASH_COATED_OSMIUM": 2721.0,
+        "INTARIAN_PEPPER_ROOT": 7286.0
+      },
+      "graph_rows": 500,
+      "has_trade_log": true,
+      "json_path": "rounds/round_1/performances/noel/historical/candidate_10_bot02_carry_tight_mm.json",
+      "log_issue_count": 0,
+      "log_path": "rounds/round_1/performances/noel/historical/candidate_10_bot02_carry_tight_mm.log",
+      "member": "noel",
+      "pnl_methods": {
+        "graph_delta_vs_official": -8.0,
+        "graph_final": 9999.0,
+        "official_profit": 10007.0,
+        "product_pnl_sum_from_activities": 10007.0,
+        "product_sum_delta_vs_official": 0.0,
+        "trade_reconstruction_delta_vs_official": -32.0,
+        "trade_reconstruction_sum": 9975.0
+      },
+      "positions": {
+        "ASH_COATED_OSMIUM": 0,
+        "INTARIAN_PEPPER_ROOT": 80,
+        "XIRECS": -957985
+      },
+      "round": "1",
+      "run_key": "candidate_10_bot02_carry_tight_mm",
+      "status": "FINISHED",
+      "submission_id": "d49ecdc1-b057-4395-97b2-882b44e924ec",
+      "trade_stats": {
+        "by_product": {
+          "ASH_COATED_OSMIUM": {
+            "avg_buy": 9993.404444,
+            "avg_sell": 10005.497778,
+            "buy_qty": 225,
+            "cash": 2721.0,
+            "first_abs_75_ts": null,
+            "first_abs_80_ts": null,
+            "first_nonzero_position_ts": 1000,
+            "gross_spread_capture": 2721.0,
+            "matched_qty": 225,
+            "max_abs_position_from_own_trades": 60,
+            "net_qty": 0,
+            "own_trade_count": 74,
+            "reconstructed_pnl": 2721.0,
+            "sell_qty": 225
+          },
+          "INTARIAN_PEPPER_ROOT": {
+            "avg_buy": 12008.825,
+            "avg_sell": null,
+            "buy_qty": 80,
+            "cash": -960706.0,
+            "first_abs_75_ts": 200,
+            "first_abs_80_ts": 200,
+            "first_nonzero_position_ts": 0,
+            "gross_spread_capture": null,
+            "matched_qty": 0,
+            "max_abs_position_from_own_trades": 80,
+            "net_qty": 80,
+            "own_trade_count": 5,
+            "reconstructed_pnl": 7254.0,
+            "sell_qty": 0
+          }
+        },
+        "market_trade_count": 42,
+        "own_trade_count": 79
+      }
+    },
+    {
+      "activity_rows": 2000,
+      "bot_hash": "122098e0d57f",
+      "bot_path": "rounds/round_1/bots/noel/historical/candidate_19_ipr_execution_upgrade.py",
+      "bucket": "historical",
+      "drawdown": {
+        "final_pnl": 10007.0,
+        "max_drawdown": 682.0,
+        "max_drawdown_time": 300,
+        "max_pnl": 10007.0,
+        "max_pnl_time": 99900,
+        "min_pnl": -682.0,
+        "min_pnl_time": 300
+      },
+      "final_mid": {
+        "ASH_COATED_OSMIUM": 10003.0,
+        "INTARIAN_PEPPER_ROOT": 12099.5
+      },
+      "final_product_pnl": {
+        "ASH_COATED_OSMIUM": 2721.0,
+        "INTARIAN_PEPPER_ROOT": 7286.0
+      },
+      "graph_rows": 500,
+      "has_trade_log": true,
+      "json_path": "rounds/round_1/performances/noel/historical/candidate_19_ipr_execution_upgrade.json",
+      "log_issue_count": 0,
+      "log_path": "rounds/round_1/performances/noel/historical/candidate_19_ipr_execution_upgrade.log",
+      "member": "noel",
+      "pnl_methods": {
+        "graph_delta_vs_official": -8.0,
+        "graph_final": 9999.0,
+        "official_profit": 10007.0,
+        "product_pnl_sum_from_activities": 10007.0,
+        "product_sum_delta_vs_official": 0.0,
+        "trade_reconstruction_delta_vs_official": -32.0,
+        "trade_reconstruction_sum": 9975.0
+      },
+      "positions": {
+        "ASH_COATED_OSMIUM": 0,
+        "INTARIAN_PEPPER_ROOT": 80,
+        "XIRECS": -957985
+      },
+      "round": "1",
+      "run_key": "candidate_19_ipr_execution_upgrade",
+      "status": "FINISHED",
+      "submission_id": "a90169cf-e771-4fe6-aaeb-8a0e24af4616",
+      "trade_stats": {
+        "by_product": {
+          "ASH_COATED_OSMIUM": {
+            "avg_buy": 9993.404444,
+            "avg_sell": 10005.497778,
+            "buy_qty": 225,
+            "cash": 2721.0,
+            "first_abs_75_ts": null,
+            "first_abs_80_ts": null,
+            "first_nonzero_position_ts": 1000,
+            "gross_spread_capture": 2721.0,
+            "matched_qty": 225,
+            "max_abs_position_from_own_trades": 60,
+            "net_qty": 0,
+            "own_trade_count": 74,
+            "reconstructed_pnl": 2721.0,
+            "sell_qty": 225
+          },
+          "INTARIAN_PEPPER_ROOT": {
+            "avg_buy": 12008.825,
+            "avg_sell": null,
+            "buy_qty": 80,
+            "cash": -960706.0,
+            "first_abs_75_ts": 200,
+            "first_abs_80_ts": 200,
+            "first_nonzero_position_ts": 0,
+            "gross_spread_capture": null,
+            "matched_qty": 0,
+            "max_abs_position_from_own_trades": 80,
+            "net_qty": 80,
+            "own_trade_count": 5,
+            "reconstructed_pnl": 7254.0,
+            "sell_qty": 0
+          }
+        },
+        "market_trade_count": 42,
+        "own_trade_count": 79
+      }
+    },
+    {
+      "activity_rows": 2000,
+      "bot_hash": "06b111e4027d",
+      "bot_path": "rounds/round_1/bots/noel/historical/candidate_24_v1_a1b1_size_skew_refine.py",
+      "bucket": "historical",
+      "drawdown": {
+        "final_pnl": 9951.28125,
+        "max_drawdown": 682.0,
+        "max_drawdown_time": 300,
+        "max_pnl": 9951.28125,
+        "max_pnl_time": 99900,
+        "min_pnl": -682.0,
+        "min_pnl_time": 300
+      },
+      "final_mid": {
+        "ASH_COATED_OSMIUM": 10003.0,
+        "INTARIAN_PEPPER_ROOT": 12099.5
+      },
+      "final_product_pnl": {
+        "ASH_COATED_OSMIUM": 2665.28125,
+        "INTARIAN_PEPPER_ROOT": 7286.0
+      },
+      "graph_rows": 500,
+      "has_trade_log": true,
+      "json_path": "rounds/round_1/performances/noel/historical/candidate_24_v1_a1b1_size_skew_refine.json",
+      "log_issue_count": 0,
+      "log_path": "rounds/round_1/performances/noel/historical/candidate_24_v1_a1b1_size_skew_refine.log",
+      "member": "noel",
+      "pnl_methods": {
+        "graph_delta_vs_official": -8.066406,
+        "graph_final": 9943.214844,
+        "official_profit": 9951.28125,
+        "product_pnl_sum_from_activities": 9951.28125,
+        "product_sum_delta_vs_official": 0.0,
+        "trade_reconstruction_delta_vs_official": -32.28125,
+        "trade_reconstruction_sum": 9919.0
+      },
+      "positions": {
+        "ASH_COATED_OSMIUM": -1,
+        "INTARIAN_PEPPER_ROOT": 80,
+        "XIRECS": -948038
+      },
+      "round": "1",
+      "run_key": "candidate_24_v1_a1b1_size_skew_refine",
+      "status": "FINISHED",
+      "submission_id": "6781b864-ceb4-4aab-9463-95a548ed6e5e",
+      "trade_stats": {
+        "by_product": {
+          "ASH_COATED_OSMIUM": {
+            "avg_buy": 9993.40991,
+            "avg_sell": 10005.403587,
+            "buy_qty": 222,
+            "cash": 12668.0,
+            "first_abs_75_ts": null,
+            "first_abs_80_ts": null,
+            "first_nonzero_position_ts": 1000,
+            "gross_spread_capture": 2662.596413,
+            "matched_qty": 222,
+            "max_abs_position_from_own_trades": 52,
+            "net_qty": -1,
+            "own_trade_count": 73,
+            "reconstructed_pnl": 2665.0,
+            "sell_qty": 223
+          },
+          "INTARIAN_PEPPER_ROOT": {
+            "avg_buy": 12008.825,
+            "avg_sell": null,
+            "buy_qty": 80,
+            "cash": -960706.0,
+            "first_abs_75_ts": 200,
+            "first_abs_80_ts": 200,
+            "first_nonzero_position_ts": 0,
+            "gross_spread_capture": null,
+            "matched_qty": 0,
+            "max_abs_position_from_own_trades": 80,
+            "net_qty": 80,
+            "own_trade_count": 5,
+            "reconstructed_pnl": 7254.0,
+            "sell_qty": 0
+          }
+        },
+        "market_trade_count": 43,
+        "own_trade_count": 78
+      }
+    },
+    {
+      "activity_rows": 2000,
+      "bot_hash": "62534439dec9",
+      "bot_path": "rounds/round_1/bots/noel/historical/candidate_25_v2_a2b1_conservative_regime_gate.py",
+      "bucket": "historical",
+      "drawdown": {
+        "final_pnl": 9930.15625,
+        "max_drawdown": 682.0,
+        "max_drawdown_time": 300,
+        "max_pnl": 9930.15625,
+        "max_pnl_time": 99900,
+        "min_pnl": -682.0,
+        "min_pnl_time": 300
+      },
+      "final_mid": {
+        "ASH_COATED_OSMIUM": 10003.0,
+        "INTARIAN_PEPPER_ROOT": 12099.5
+      },
+      "final_product_pnl": {
+        "ASH_COATED_OSMIUM": 2644.15625,
+        "INTARIAN_PEPPER_ROOT": 7286.0
+      },
+      "graph_rows": 500,
+      "has_trade_log": true,
+      "json_path": "rounds/round_1/performances/noel/historical/candidate_25_v2_a2b1_conservative_regime_gate.json",
+      "log_issue_count": 0,
+      "log_path": "rounds/round_1/performances/noel/historical/candidate_25_v2_a2b1_conservative_regime_gate.log",
+      "member": "noel",
+      "pnl_methods": {
+        "graph_delta_vs_official": -7.800781,
+        "graph_final": 9922.355469,
+        "official_profit": 9930.15625,
+        "product_pnl_sum_from_activities": 9930.15625,
+        "product_sum_delta_vs_official": 0.0,
+        "trade_reconstruction_delta_vs_official": -31.15625,
+        "trade_reconstruction_sum": 9899.0
+      },
+      "positions": {
+        "ASH_COATED_OSMIUM": 3,
+        "INTARIAN_PEPPER_ROOT": 80,
+        "XIRECS": -988070
+      },
+      "round": "1",
+      "run_key": "candidate_25_v2_a2b1_conservative_regime_gate",
+      "status": "FINISHED",
+      "submission_id": "c43e4c6f-4106-4ac7-a931-8af329e0fb07",
+      "trade_stats": {
+        "by_product": {
+          "ASH_COATED_OSMIUM": {
+            "avg_buy": 9993.373874,
+            "avg_sell": 10005.319635,
+            "buy_qty": 222,
+            "cash": -27364.0,
+            "first_abs_75_ts": null,
+            "first_abs_80_ts": null,
+            "first_nonzero_position_ts": 1000,
+            "gross_spread_capture": 2616.121622,
+            "matched_qty": 219,
+            "max_abs_position_from_own_trades": 48,
+            "net_qty": 3,
+            "own_trade_count": 73,
+            "reconstructed_pnl": 2645.0,
+            "sell_qty": 219
+          },
+          "INTARIAN_PEPPER_ROOT": {
+            "avg_buy": 12008.825,
+            "avg_sell": null,
+            "buy_qty": 80,
+            "cash": -960706.0,
+            "first_abs_75_ts": 200,
+            "first_abs_80_ts": 200,
+            "first_nonzero_position_ts": 0,
+            "gross_spread_capture": null,
+            "matched_qty": 0,
+            "max_abs_position_from_own_trades": 80,
+            "net_qty": 80,
+            "own_trade_count": 5,
+            "reconstructed_pnl": 7254.0,
+            "sell_qty": 0
+          }
+        },
+        "market_trade_count": 42,
+        "own_trade_count": 78
+      }
+    },
+    {
+      "activity_rows": 2000,
+      "bot_hash": "342bb0841978",
+      "bot_path": "rounds/round_1/bots/noel/historical/candidate_27_v1_c26_soft_flatten.py",
+      "bucket": "historical",
+      "drawdown": {
+        "final_pnl": 9920.1875,
+        "max_drawdown": 682.0,
+        "max_drawdown_time": 300,
+        "max_pnl": 9920.1875,
+        "max_pnl_time": 99900,
+        "min_pnl": -682.0,
+        "min_pnl_time": 300
+      },
+      "final_mid": {
+        "ASH_COATED_OSMIUM": 10003.0,
+        "INTARIAN_PEPPER_ROOT": 12099.5
+      },
+      "final_product_pnl": {
+        "ASH_COATED_OSMIUM": 2634.1875,
+        "INTARIAN_PEPPER_ROOT": 7286.0
+      },
+      "graph_rows": 500,
+      "has_trade_log": true,
+      "json_path": "rounds/round_1/performances/noel/historical/candidate_27_v1_c26_soft_flatten.json",
+      "log_issue_count": 0,
+      "log_path": "rounds/round_1/performances/noel/historical/candidate_27_v1_c26_soft_flatten.log",
+      "member": "noel",
+      "pnl_methods": {
+        "graph_delta_vs_official": -7.335938,
+        "graph_final": 9912.851562,
+        "official_profit": 9920.1875,
+        "product_pnl_sum_from_activities": 9920.1875,
+        "product_sum_delta_vs_official": 0.0,
+        "trade_reconstruction_delta_vs_official": -29.1875,
+        "trade_reconstruction_sum": 9891.0
+      },
+      "positions": {
+        "ASH_COATED_OSMIUM": 10,
+        "INTARIAN_PEPPER_ROOT": 80,
+        "XIRECS": -1058099
+      },
+      "round": "1",
+      "run_key": "candidate_27_v1_c26_soft_flatten",
+      "status": "FINISHED",
+      "submission_id": "9b44b969-ea4c-4045-a58f-96360f93bad7",
+      "trade_stats": {
+        "by_product": {
+          "ASH_COATED_OSMIUM": {
+            "avg_buy": 9993.414097,
+            "avg_sell": 10005.124424,
+            "buy_qty": 227,
+            "cash": -97393.0,
+            "first_abs_75_ts": null,
+            "first_abs_80_ts": null,
+            "first_nonzero_position_ts": 1000,
+            "gross_spread_capture": 2541.140969,
+            "matched_qty": 217,
+            "max_abs_position_from_own_trades": 54,
+            "net_qty": 10,
+            "own_trade_count": 72,
+            "reconstructed_pnl": 2637.0,
+            "sell_qty": 217
+          },
+          "INTARIAN_PEPPER_ROOT": {
+            "avg_buy": 12008.825,
+            "avg_sell": null,
+            "buy_qty": 80,
+            "cash": -960706.0,
+            "first_abs_75_ts": 200,
+            "first_abs_80_ts": 200,
+            "first_nonzero_position_ts": 0,
+            "gross_spread_capture": null,
+            "matched_qty": 0,
+            "max_abs_position_from_own_trades": 80,
+            "net_qty": 80,
+            "own_trade_count": 5,
+            "reconstructed_pnl": 7254.0,
+            "sell_qty": 0
+          }
+        },
+        "market_trade_count": 45,
+        "own_trade_count": 77
+      }
+    },
+    {
+      "activity_rows": 2000,
+      "bot_hash": "8ead19c5e92a",
+      "bot_path": "rounds/round_1/bots/noel/historical/candidate_14_aco_kalman_latent_fv.py",
+      "bucket": "historical",
+      "drawdown": {
+        "final_pnl": 9839.75,
+        "max_drawdown": 682.0,
+        "max_drawdown_time": 300,
+        "max_pnl": 9839.75,
+        "max_pnl_time": 99900,
+        "min_pnl": -682.0,
+        "min_pnl_time": 300
+      },
+      "final_mid": {
+        "ASH_COATED_OSMIUM": 10003.0,
+        "INTARIAN_PEPPER_ROOT": 12099.5
+      },
+      "final_product_pnl": {
+        "ASH_COATED_OSMIUM": 2553.75,
+        "INTARIAN_PEPPER_ROOT": 7286.0
+      },
+      "graph_rows": 500,
+      "has_trade_log": true,
+      "json_path": "rounds/round_1/performances/noel/historical/candidate_14_aco_kalman_latent_fv.json",
+      "log_issue_count": 0,
+      "log_path": "rounds/round_1/performances/noel/historical/candidate_14_aco_kalman_latent_fv.log",
+      "member": "noel",
+      "pnl_methods": {
+        "graph_delta_vs_official": -5.34375,
+        "graph_final": 9834.40625,
+        "official_profit": 9839.75,
+        "product_pnl_sum_from_activities": 9839.75,
+        "product_sum_delta_vs_official": 0.0,
+        "trade_reconstruction_delta_vs_official": -20.75,
+        "trade_reconstruction_sum": 9819.0
+      },
+      "positions": {
+        "ASH_COATED_OSMIUM": 40,
+        "INTARIAN_PEPPER_ROOT": 80,
+        "XIRECS": -1358261
+      },
+      "round": "1",
+      "run_key": "candidate_14_aco_kalman_latent_fv",
+      "status": "FINISHED",
+      "submission_id": "f26b5915-5edc-4090-9833-9ec3223727c6",
+      "trade_stats": {
+        "by_product": {
+          "ASH_COATED_OSMIUM": {
+            "avg_buy": 9992.259669,
+            "avg_sell": 10007.404255,
+            "buy_qty": 181,
+            "cash": -397555.0,
+            "first_abs_75_ts": null,
+            "first_abs_80_ts": null,
+            "first_nonzero_position_ts": 1000,
+            "gross_spread_capture": 2135.38674,
+            "matched_qty": 141,
+            "max_abs_position_from_own_trades": 57,
+            "net_qty": 40,
+            "own_trade_count": 55,
+            "reconstructed_pnl": 2565.0,
+            "sell_qty": 141
+          },
+          "INTARIAN_PEPPER_ROOT": {
+            "avg_buy": 12008.825,
+            "avg_sell": null,
+            "buy_qty": 80,
+            "cash": -960706.0,
+            "first_abs_75_ts": 200,
+            "first_abs_80_ts": 200,
+            "first_nonzero_position_ts": 0,
+            "gross_spread_capture": null,
+            "matched_qty": 0,
+            "max_abs_position_from_own_trades": 80,
+            "net_qty": 80,
+            "own_trade_count": 5,
+            "reconstructed_pnl": 7254.0,
+            "sell_qty": 0
+          }
+        },
+        "market_trade_count": 38,
+        "own_trade_count": 60
+      }
+    },
+    {
+      "activity_rows": 2000,
+      "bot_hash": "c757f7466899",
+      "bot_path": "rounds/round_1/bots/noel/historical/candidate_21_one_sided_book_specialist.py",
+      "bucket": "historical",
+      "drawdown": {
+        "final_pnl": 9763.46875,
+        "max_drawdown": 682.0,
+        "max_drawdown_time": 300,
+        "max_pnl": 9763.46875,
+        "max_pnl_time": 99900,
+        "min_pnl": -682.0,
+        "min_pnl_time": 300
+      },
+      "final_mid": {
+        "ASH_COATED_OSMIUM": 10003.0,
+        "INTARIAN_PEPPER_ROOT": 12099.5
+      },
+      "final_product_pnl": {
+        "ASH_COATED_OSMIUM": 2477.46875,
+        "INTARIAN_PEPPER_ROOT": 7286.0
+      },
+      "graph_rows": 500,
+      "has_trade_log": true,
+      "json_path": "rounds/round_1/performances/noel/historical/candidate_21_one_sided_book_specialist.json",
+      "log_issue_count": 0,
+      "log_path": "rounds/round_1/performances/noel/historical/candidate_21_one_sided_book_specialist.log",
+      "member": "noel",
+      "pnl_methods": {
+        "graph_delta_vs_official": -5.28125,
+        "graph_final": 9758.1875,
+        "official_profit": 9763.46875,
+        "product_pnl_sum_from_activities": 9763.46875,
+        "product_sum_delta_vs_official": 0.0,
+        "trade_reconstruction_delta_vs_official": -20.46875,
+        "trade_reconstruction_sum": 9743.0
+      },
+      "positions": {
+        "ASH_COATED_OSMIUM": 41,
+        "INTARIAN_PEPPER_ROOT": 80,
+        "XIRECS": -1368340
+      },
+      "round": "1",
+      "run_key": "candidate_21_one_sided_book_specialist",
+      "status": "FINISHED",
+      "submission_id": "d01295de-7f85-413d-8f52-932936f16585",
+      "trade_stats": {
+        "by_product": {
+          "ASH_COATED_OSMIUM": {
+            "avg_buy": 9992.16092,
+            "avg_sell": 10007.533835,
+            "buy_qty": 174,
+            "cash": -407634.0,
+            "first_abs_75_ts": null,
+            "first_abs_80_ts": null,
+            "first_nonzero_position_ts": 1000,
+            "gross_spread_capture": 2044.597701,
+            "matched_qty": 133,
+            "max_abs_position_from_own_trades": 68,
+            "net_qty": 41,
+            "own_trade_count": 51,
+            "reconstructed_pnl": 2489.0,
+            "sell_qty": 133
+          },
+          "INTARIAN_PEPPER_ROOT": {
+            "avg_buy": 12008.825,
+            "avg_sell": null,
+            "buy_qty": 80,
+            "cash": -960706.0,
+            "first_abs_75_ts": 200,
+            "first_abs_80_ts": 200,
+            "first_nonzero_position_ts": 0,
+            "gross_spread_capture": null,
+            "matched_qty": 0,
+            "max_abs_position_from_own_trades": 80,
+            "net_qty": 80,
+            "own_trade_count": 5,
+            "reconstructed_pnl": 7254.0,
+            "sell_qty": 0
+          }
+        },
+        "market_trade_count": 46,
+        "own_trade_count": 56
+      }
+    },
+    {
+      "activity_rows": 2000,
+      "bot_hash": "9d64a6d61100",
+      "bot_path": "rounds/round_1/bots/noel/historical/candidate_22_micro_alpha_rescue.py",
+      "bucket": "historical",
+      "drawdown": {
+        "final_pnl": 9657.21875,
+        "max_drawdown": 682.0,
+        "max_drawdown_time": 300,
+        "max_pnl": 9657.21875,
+        "max_pnl_time": 99900,
+        "min_pnl": -682.0,
+        "min_pnl_time": 300
+      },
+      "final_mid": {
+        "ASH_COATED_OSMIUM": 10003.0,
+        "INTARIAN_PEPPER_ROOT": 12099.5
+      },
+      "final_product_pnl": {
+        "ASH_COATED_OSMIUM": 2371.21875,
+        "INTARIAN_PEPPER_ROOT": 7286.0
+      },
+      "graph_rows": 500,
+      "has_trade_log": true,
+      "json_path": "rounds/round_1/performances/noel/historical/candidate_22_micro_alpha_rescue.json",
+      "log_issue_count": 0,
+      "log_path": "rounds/round_1/performances/noel/historical/candidate_22_micro_alpha_rescue.log",
+      "member": "noel",
+      "pnl_methods": {
+        "graph_delta_vs_official": -6.875,
+        "graph_final": 9650.34375,
+        "official_profit": 9657.21875,
+        "product_pnl_sum_from_activities": 9657.21875,
+        "product_sum_delta_vs_official": 0.0,
+        "trade_reconstruction_delta_vs_official": -27.21875,
+        "trade_reconstruction_sum": 9630.0
+      },
+      "positions": {
+        "ASH_COATED_OSMIUM": 17,
+        "INTARIAN_PEPPER_ROOT": 80,
+        "XIRECS": -1128381
+      },
+      "round": "1",
+      "run_key": "candidate_22_micro_alpha_rescue",
+      "status": "FINISHED",
+      "submission_id": "bdda20a5-1e81-4550-9cb1-577fa6b8d83a",
+      "trade_stats": {
+        "by_product": {
+          "ASH_COATED_OSMIUM": {
+            "avg_buy": 9992.0,
+            "avg_sell": 10007.201389,
+            "buy_qty": 161,
+            "cash": -167675.0,
+            "first_abs_75_ts": null,
+            "first_abs_80_ts": null,
+            "first_nonzero_position_ts": 1000,
+            "gross_spread_capture": 2189.0,
+            "matched_qty": 144,
+            "max_abs_position_from_own_trades": 34,
+            "net_qty": 17,
+            "own_trade_count": 52,
+            "reconstructed_pnl": 2376.0,
+            "sell_qty": 144
+          },
+          "INTARIAN_PEPPER_ROOT": {
+            "avg_buy": 12008.825,
+            "avg_sell": null,
+            "buy_qty": 80,
+            "cash": -960706.0,
+            "first_abs_75_ts": 200,
+            "first_abs_80_ts": 200,
+            "first_nonzero_position_ts": 0,
+            "gross_spread_capture": null,
+            "matched_qty": 0,
+            "max_abs_position_from_own_trades": 80,
+            "net_qty": 80,
+            "own_trade_count": 5,
+            "reconstructed_pnl": 7254.0,
+            "sell_qty": 0
+          }
+        },
+        "market_trade_count": 38,
+        "own_trade_count": 57
+      }
+    },
+    {
+      "activity_rows": 2000,
+      "bot_hash": "a56184ef16ca",
+      "bot_path": "rounds/round_1/bots/noel/historical/candidate_18_aco_offline_policy_table.py",
+      "bucket": "historical",
+      "drawdown": {
+        "final_pnl": 9579.25,
+        "max_drawdown": 682.0,
+        "max_drawdown_time": 300,
+        "max_pnl": 9579.25,
+        "max_pnl_time": 99900,
+        "min_pnl": -682.0,
+        "min_pnl_time": 300
+      },
+      "final_mid": {
+        "ASH_COATED_OSMIUM": 10003.0,
+        "INTARIAN_PEPPER_ROOT": 12099.5
+      },
+      "final_product_pnl": {
+        "ASH_COATED_OSMIUM": 2293.25,
+        "INTARIAN_PEPPER_ROOT": 7286.0
+      },
+      "graph_rows": 500,
+      "has_trade_log": true,
+      "json_path": "rounds/round_1/performances/noel/historical/candidate_18_aco_offline_policy_table.json",
+      "log_issue_count": 0,
+      "log_path": "rounds/round_1/performances/noel/historical/candidate_18_aco_offline_policy_table.log",
+      "member": "noel",
+      "pnl_methods": {
+        "graph_delta_vs_official": -6.40625,
+        "graph_final": 9572.84375,
+        "official_profit": 9579.25,
+        "product_pnl_sum_from_activities": 9579.25,
+        "product_sum_delta_vs_official": 0.0,
+        "trade_reconstruction_delta_vs_official": -25.25,
+        "trade_reconstruction_sum": 9554.0
+      },
+      "positions": {
+        "ASH_COATED_OSMIUM": 24,
+        "INTARIAN_PEPPER_ROOT": 80,
+        "XIRECS": -1198478
+      },
+      "round": "1",
+      "run_key": "candidate_18_aco_offline_policy_table",
+      "status": "FINISHED",
+      "submission_id": "26513b45-9529-4840-bba2-ce1345c53a7c",
+      "trade_stats": {
+        "by_product": {
+          "ASH_COATED_OSMIUM": {
+            "avg_buy": 9991.733333,
+            "avg_sell": 10007.84127,
+            "buy_qty": 150,
+            "cash": -237772.0,
+            "first_abs_75_ts": null,
+            "first_abs_80_ts": null,
+            "first_nonzero_position_ts": 1000,
+            "gross_spread_capture": 2029.6,
+            "matched_qty": 126,
+            "max_abs_position_from_own_trades": 43,
+            "net_qty": 24,
+            "own_trade_count": 47,
+            "reconstructed_pnl": 2300.0,
+            "sell_qty": 126
+          },
+          "INTARIAN_PEPPER_ROOT": {
+            "avg_buy": 12008.825,
+            "avg_sell": null,
+            "buy_qty": 80,
+            "cash": -960706.0,
+            "first_abs_75_ts": 200,
+            "first_abs_80_ts": 200,
+            "first_nonzero_position_ts": 0,
+            "gross_spread_capture": null,
+            "matched_qty": 0,
+            "max_abs_position_from_own_trades": 80,
+            "net_qty": 80,
+            "own_trade_count": 5,
+            "reconstructed_pnl": 7254.0,
+            "sell_qty": 0
+          }
+        },
+        "market_trade_count": 45,
+        "own_trade_count": 52
+      }
+    },
+    {
+      "activity_rows": 2000,
+      "bot_hash": "16cab76e4fb4",
+      "bot_path": "rounds/round_1/bots/amin/canonical/26-candidate_03_combined.py",
+      "bucket": "canonical",
+      "drawdown": {
+        "final_pnl": 9432.0625,
+        "max_drawdown": 682.0,
+        "max_drawdown_time": 300,
+        "max_pnl": 9432.0625,
+        "max_pnl_time": 99900,
+        "min_pnl": -682.0,
+        "min_pnl_time": 300
+      },
+      "final_mid": {
+        "ASH_COATED_OSMIUM": 10003.0,
+        "INTARIAN_PEPPER_ROOT": 12099.5
+      },
+      "final_product_pnl": {
+        "ASH_COATED_OSMIUM": 2146.0625,
+        "INTARIAN_PEPPER_ROOT": 7286.0
+      },
+      "graph_rows": 500,
+      "has_trade_log": false,
+      "json_path": "rounds/round_1/bots/amin/canonical/26-candidate_03_combined.json",
+      "log_issue_count": 0,
+      "log_path": null,
+      "member": "amin",
+      "pnl_methods": {
+        "graph_delta_vs_official": -4.9375,
+        "graph_final": 9427.125,
+        "official_profit": 9432.0625,
+        "product_pnl_sum_from_activities": 9432.0625,
+        "product_sum_delta_vs_official": 0.0,
+        "trade_reconstruction_delta_vs_official": null,
+        "trade_reconstruction_sum": null
+      },
+      "positions": {
+        "ASH_COATED_OSMIUM": 46,
+        "INTARIAN_PEPPER_ROOT": 80,
+        "XIRECS": -1418685
+      },
+      "round": "1",
+      "run_key": "26-candidate_03_combined",
+      "status": "FINISHED",
+      "submission_id": null,
+      "trade_stats": {
+        "by_product": {
+          "ASH_COATED_OSMIUM": {
+            "avg_buy": null,
+            "avg_sell": null,
+            "buy_qty": 0,
+            "cash": 0.0,
+            "first_abs_75_ts": null,
+            "first_abs_80_ts": null,
+            "first_nonzero_position_ts": null,
+            "gross_spread_capture": null,
+            "matched_qty": 0,
+            "max_abs_position_from_own_trades": 0,
+            "net_qty": 0,
+            "own_trade_count": 0,
+            "reconstructed_pnl": 0.0,
+            "sell_qty": 0
+          },
+          "INTARIAN_PEPPER_ROOT": {
+            "avg_buy": null,
+            "avg_sell": null,
+            "buy_qty": 0,
+            "cash": 0.0,
+            "first_abs_75_ts": null,
+            "first_abs_80_ts": null,
+            "first_nonzero_position_ts": null,
+            "gross_spread_capture": null,
+            "matched_qty": 0,
+            "max_abs_position_from_own_trades": 0,
+            "net_qty": 0,
+            "own_trade_count": 0,
+            "reconstructed_pnl": 0.0,
+            "sell_qty": 0
+          }
+        },
+        "market_trade_count": 0,
+        "own_trade_count": 0
+      }
+    },
+    {
+      "activity_rows": 2000,
+      "bot_hash": "cbbb26822b68",
+      "bot_path": "rounds/round_1/bots/noel/historical/candidate_15_aco_hmm_regime_mm.py",
+      "bucket": "historical",
+      "drawdown": {
+        "final_pnl": 9328.53125,
+        "max_drawdown": 682.0,
+        "max_drawdown_time": 300,
+        "max_pnl": 9328.53125,
+        "max_pnl_time": 99900,
+        "min_pnl": -682.0,
+        "min_pnl_time": 300
+      },
+      "final_mid": {
+        "ASH_COATED_OSMIUM": 10003.0,
+        "INTARIAN_PEPPER_ROOT": 12099.5
+      },
+      "final_product_pnl": {
+        "ASH_COATED_OSMIUM": 2042.53125,
+        "INTARIAN_PEPPER_ROOT": 7286.0
+      },
+      "graph_rows": 500,
+      "has_trade_log": true,
+      "json_path": "rounds/round_1/performances/noel/historical/candidate_15_aco_hmm_regime_mm.json",
+      "log_issue_count": 0,
+      "log_path": "rounds/round_1/performances/noel/historical/candidate_15_aco_hmm_regime_mm.log",
+      "member": "noel",
+      "pnl_methods": {
+        "graph_delta_vs_official": -6.46875,
+        "graph_final": 9322.0625,
+        "official_profit": 9328.53125,
+        "product_pnl_sum_from_activities": 9328.53125,
+        "product_sum_delta_vs_official": 0.0,
+        "trade_reconstruction_delta_vs_official": -25.53125,
+        "trade_reconstruction_sum": 9303.0
+      },
+      "positions": {
+        "ASH_COATED_OSMIUM": 23,
+        "INTARIAN_PEPPER_ROOT": 80,
+        "XIRECS": -1188726
+      },
+      "round": "1",
+      "run_key": "candidate_15_aco_hmm_regime_mm",
+      "status": "FINISHED",
+      "submission_id": "4651df38-4a26-42b1-a528-2ea6882c6267",
+      "trade_stats": {
+        "by_product": {
+          "ASH_COATED_OSMIUM": {
+            "avg_buy": 9991.465116,
+            "avg_sell": 10008.292453,
+            "buy_qty": 129,
+            "cash": -228020.0,
+            "first_abs_75_ts": null,
+            "first_abs_80_ts": null,
+            "first_nonzero_position_ts": 3100,
+            "gross_spread_capture": 1783.697674,
+            "matched_qty": 106,
+            "max_abs_position_from_own_trades": 43,
+            "net_qty": 23,
+            "own_trade_count": 39,
+            "reconstructed_pnl": 2049.0,
+            "sell_qty": 106
+          },
+          "INTARIAN_PEPPER_ROOT": {
+            "avg_buy": 12008.825,
+            "avg_sell": null,
+            "buy_qty": 80,
+            "cash": -960706.0,
+            "first_abs_75_ts": 200,
+            "first_abs_80_ts": 200,
+            "first_nonzero_position_ts": 0,
+            "gross_spread_capture": null,
+            "matched_qty": 0,
+            "max_abs_position_from_own_trades": 80,
+            "net_qty": 80,
+            "own_trade_count": 5,
+            "reconstructed_pnl": 7254.0,
+            "sell_qty": 0
+          }
+        },
+        "market_trade_count": 50,
+        "own_trade_count": 44
+      }
+    },
+    {
+      "activity_rows": 2000,
+      "bot_hash": "f225ee279dcc",
+      "bot_path": "rounds/round_1/bots/noel/historical/candidate_16_aco_edge_quality_gate.py",
+      "bucket": "historical",
+      "drawdown": {
+        "final_pnl": 9313.09375,
+        "max_drawdown": 682.0,
+        "max_drawdown_time": 300,
+        "max_pnl": 9313.09375,
+        "max_pnl_time": 99900,
+        "min_pnl": -682.0,
+        "min_pnl_time": 300
+      },
+      "final_mid": {
+        "ASH_COATED_OSMIUM": 10003.0,
+        "INTARIAN_PEPPER_ROOT": 12099.5
+      },
+      "final_product_pnl": {
+        "ASH_COATED_OSMIUM": 2027.09375,
+        "INTARIAN_PEPPER_ROOT": 7286.0
+      },
+      "graph_rows": 500,
+      "has_trade_log": true,
+      "json_path": "rounds/round_1/performances/noel/historical/candidate_16_aco_edge_quality_gate.json",
+      "log_issue_count": 0,
+      "log_path": "rounds/round_1/performances/noel/historical/candidate_16_aco_edge_quality_gate.log",
+      "member": "noel",
+      "pnl_methods": {
+        "graph_delta_vs_official": -6.609375,
+        "graph_final": 9306.484375,
+        "official_profit": 9313.09375,
+        "product_pnl_sum_from_activities": 9313.09375,
+        "product_sum_delta_vs_official": 0.0,
+        "trade_reconstruction_delta_vs_official": -26.09375,
+        "trade_reconstruction_sum": 9287.0
+      },
+      "positions": {
+        "ASH_COATED_OSMIUM": 21,
+        "INTARIAN_PEPPER_ROOT": 80,
+        "XIRECS": -1168736
+      },
+      "round": "1",
+      "run_key": "candidate_16_aco_edge_quality_gate",
+      "status": "FINISHED",
+      "submission_id": "fcfb3ac3-3e5b-4408-b584-03183851aa40",
+      "trade_stats": {
+        "by_product": {
+          "ASH_COATED_OSMIUM": {
+            "avg_buy": 9991.304,
+            "avg_sell": 10008.490385,
+            "buy_qty": 125,
+            "cash": -208030.0,
+            "first_abs_75_ts": null,
+            "first_abs_80_ts": null,
+            "first_nonzero_position_ts": 1000,
+            "gross_spread_capture": 1787.384,
+            "matched_qty": 104,
+            "max_abs_position_from_own_trades": 34,
+            "net_qty": 21,
+            "own_trade_count": 39,
+            "reconstructed_pnl": 2033.0,
+            "sell_qty": 104
+          },
+          "INTARIAN_PEPPER_ROOT": {
+            "avg_buy": 12008.825,
+            "avg_sell": null,
+            "buy_qty": 80,
+            "cash": -960706.0,
+            "first_abs_75_ts": 200,
+            "first_abs_80_ts": 200,
+            "first_nonzero_position_ts": 0,
+            "gross_spread_capture": null,
+            "matched_qty": 0,
+            "max_abs_position_from_own_trades": 80,
+            "net_qty": 80,
+            "own_trade_count": 5,
+            "reconstructed_pnl": 7254.0,
+            "sell_qty": 0
+          }
+        },
+        "market_trade_count": 49,
+        "own_trade_count": 44
+      }
+    },
+    {
+      "activity_rows": 2000,
+      "bot_hash": "952c97988acb",
+      "bot_path": "rounds/round_1/bots/noel/historical/candidate_17_aco_inventory_lifecycle.py",
+      "bucket": "historical",
+      "drawdown": {
+        "final_pnl": 9308.375,
+        "max_drawdown": 682.0,
+        "max_drawdown_time": 300,
+        "max_pnl": 9308.375,
+        "max_pnl_time": 99900,
+        "min_pnl": -682.0,
+        "min_pnl_time": 300
+      },
+      "final_mid": {
+        "ASH_COATED_OSMIUM": 10003.0,
+        "INTARIAN_PEPPER_ROOT": 12099.5
+      },
+      "final_product_pnl": {
+        "ASH_COATED_OSMIUM": 2022.375,
+        "INTARIAN_PEPPER_ROOT": 7286.0
+      },
+      "graph_rows": 500,
+      "has_trade_log": true,
+      "json_path": "rounds/round_1/performances/noel/historical/candidate_17_aco_inventory_lifecycle.json",
+      "log_issue_count": 0,
+      "log_path": "rounds/round_1/performances/noel/historical/candidate_17_aco_inventory_lifecycle.log",
+      "member": "noel",
+      "pnl_methods": {
+        "graph_delta_vs_official": -6.671875,
+        "graph_final": 9301.703125,
+        "official_profit": 9308.375,
+        "product_pnl_sum_from_activities": 9308.375,
+        "product_sum_delta_vs_official": 0.0,
+        "trade_reconstruction_delta_vs_official": -26.375,
+        "trade_reconstruction_sum": 9282.0
+      },
+      "positions": {
+        "ASH_COATED_OSMIUM": 20,
+        "INTARIAN_PEPPER_ROOT": 80,
+        "XIRECS": -1158738
+      },
+      "round": "1",
+      "run_key": "candidate_17_aco_inventory_lifecycle",
+      "status": "FINISHED",
+      "submission_id": "cb261ae0-67a9-4cff-9f90-16cfe683ae3e",
+      "trade_stats": {
+        "by_product": {
+          "ASH_COATED_OSMIUM": {
+            "avg_buy": 9992.236111,
+            "avg_sell": 10006.854839,
+            "buy_qty": 144,
+            "cash": -198032.0,
+            "first_abs_75_ts": null,
+            "first_abs_80_ts": null,
+            "first_nonzero_position_ts": 1000,
+            "gross_spread_capture": 1812.722222,
+            "matched_qty": 124,
+            "max_abs_position_from_own_trades": 56,
+            "net_qty": 20,
+            "own_trade_count": 45,
+            "reconstructed_pnl": 2028.0,
+            "sell_qty": 124
+          },
+          "INTARIAN_PEPPER_ROOT": {
+            "avg_buy": 12008.825,
+            "avg_sell": null,
+            "buy_qty": 80,
+            "cash": -960706.0,
+            "first_abs_75_ts": 200,
+            "first_abs_80_ts": 200,
+            "first_nonzero_position_ts": 0,
+            "gross_spread_capture": null,
+            "matched_qty": 0,
+            "max_abs_position_from_own_trades": 80,
+            "net_qty": 80,
+            "own_trade_count": 5,
+            "reconstructed_pnl": 7254.0,
+            "sell_qty": 0
+          }
+        },
+        "market_trade_count": 48,
+        "own_trade_count": 50
+      }
+    },
+    {
+      "activity_rows": 2000,
+      "bot_hash": "517d2d661c9b",
+      "bot_path": "rounds/round_1/bots/amin/historical/22-candidate_03_combined.py",
+      "bucket": "historical",
+      "drawdown": {
+        "final_pnl": 8975.84375,
+        "max_drawdown": 633.5,
+        "max_drawdown_time": 300,
+        "max_pnl": 8975.84375,
+        "max_pnl_time": 99900,
+        "min_pnl": -633.5,
+        "min_pnl_time": 300
+      },
+      "final_mid": {
+        "ASH_COATED_OSMIUM": 10003.0,
+        "INTARIAN_PEPPER_ROOT": 12099.5
+      },
+      "final_product_pnl": {
+        "ASH_COATED_OSMIUM": 2139.34375,
+        "INTARIAN_PEPPER_ROOT": 6836.5
+      },
+      "graph_rows": 500,
+      "has_trade_log": false,
+      "json_path": "rounds/round_1/performances/amin/historical/22-candidate_03_combined.json",
+      "log_issue_count": 0,
+      "log_path": null,
+      "member": "amin",
+      "pnl_methods": {
+        "graph_delta_vs_official": -4.5,
+        "graph_final": 8971.34375,
+        "official_profit": 8975.84375,
+        "product_pnl_sum_from_activities": 8975.84375,
+        "product_sum_delta_vs_official": 0.0,
+        "trade_reconstruction_delta_vs_official": null,
+        "trade_reconstruction_sum": null
+      },
+      "positions": {
+        "ASH_COATED_OSMIUM": 45,
+        "INTARIAN_PEPPER_ROOT": 75,
+        "XIRECS": -1348639
+      },
+      "round": "1",
+      "run_key": "22-candidate_03_combined",
+      "status": "FINISHED",
+      "submission_id": null,
+      "trade_stats": {
+        "by_product": {
+          "ASH_COATED_OSMIUM": {
+            "avg_buy": null,
+            "avg_sell": null,
+            "buy_qty": 0,
+            "cash": 0.0,
+            "first_abs_75_ts": null,
+            "first_abs_80_ts": null,
+            "first_nonzero_position_ts": null,
+            "gross_spread_capture": null,
+            "matched_qty": 0,
+            "max_abs_position_from_own_trades": 0,
+            "net_qty": 0,
+            "own_trade_count": 0,
+            "reconstructed_pnl": 0.0,
+            "sell_qty": 0
+          },
+          "INTARIAN_PEPPER_ROOT": {
+            "avg_buy": null,
+            "avg_sell": null,
+            "buy_qty": 0,
+            "cash": 0.0,
+            "first_abs_75_ts": null,
+            "first_abs_80_ts": null,
+            "first_nonzero_position_ts": null,
+            "gross_spread_capture": null,
+            "matched_qty": 0,
+            "max_abs_position_from_own_trades": 0,
+            "net_qty": 0,
+            "own_trade_count": 0,
+            "reconstructed_pnl": 0.0,
+            "sell_qty": 0
+          }
+        },
+        "market_trade_count": 0,
+        "own_trade_count": 0
+      }
+    },
+    {
+      "activity_rows": 2000,
+      "bot_hash": "517d2d661c9b",
+      "bot_path": "rounds/round_1/bots/amin/historical/24-bot.py",
+      "bucket": "historical",
+      "drawdown": {
+        "final_pnl": 8975.84375,
+        "max_drawdown": 633.5,
+        "max_drawdown_time": 300,
+        "max_pnl": 8975.84375,
+        "max_pnl_time": 99900,
+        "min_pnl": -633.5,
+        "min_pnl_time": 300
+      },
+      "final_mid": {
+        "ASH_COATED_OSMIUM": 10003.0,
+        "INTARIAN_PEPPER_ROOT": 12099.5
+      },
+      "final_product_pnl": {
+        "ASH_COATED_OSMIUM": 2139.34375,
+        "INTARIAN_PEPPER_ROOT": 6836.5
+      },
+      "graph_rows": 500,
+      "has_trade_log": true,
+      "json_path": "rounds/round_1/performances/amin/historical/24-bot.json",
+      "log_issue_count": 0,
+      "log_path": "rounds/round_1/performances/amin/historical/24-bot.log",
+      "member": "amin",
+      "pnl_methods": {
+        "graph_delta_vs_official": -4.5,
+        "graph_final": 8971.34375,
+        "official_profit": 8975.84375,
+        "product_pnl_sum_from_activities": 8975.84375,
+        "product_sum_delta_vs_official": 0.0,
+        "trade_reconstruction_delta_vs_official": -17.34375,
+        "trade_reconstruction_sum": 8958.5
+      },
+      "positions": {
+        "ASH_COATED_OSMIUM": 45,
+        "INTARIAN_PEPPER_ROOT": 75,
+        "XIRECS": -1348639
+      },
+      "round": "1",
+      "run_key": "24-bot",
+      "status": "FINISHED",
+      "submission_id": "d1dee3db-5851-47ea-bd97-50684a4d9b45",
+      "trade_stats": {
+        "by_product": {
+          "ASH_COATED_OSMIUM": {
+            "avg_buy": 9995.453846,
+            "avg_sell": 10003.883721,
+            "buy_qty": 260,
+            "cash": -447983.0,
+            "first_abs_75_ts": 87400,
+            "first_abs_80_ts": null,
+            "first_nonzero_position_ts": 1000,
+            "gross_spread_capture": 1812.423077,
+            "matched_qty": 215,
+            "max_abs_position_from_own_trades": 75,
+            "net_qty": 45,
+            "own_trade_count": 78,
+            "reconstructed_pnl": 2152.0,
+            "sell_qty": 215
+          },
+          "INTARIAN_PEPPER_ROOT": {
+            "avg_buy": 12008.746667,
+            "avg_sell": null,
+            "buy_qty": 75,
+            "cash": -900656.0,
+            "first_abs_75_ts": 200,
+            "first_abs_80_ts": null,
+            "first_nonzero_position_ts": 0,
+            "gross_spread_capture": null,
+            "matched_qty": 0,
+            "max_abs_position_from_own_trades": 75,
+            "net_qty": 75,
+            "own_trade_count": 5,
+            "reconstructed_pnl": 6806.5,
+            "sell_qty": 0
+          }
+        },
+        "market_trade_count": 40,
+        "own_trade_count": 83
+      }
+    },
+    {
+      "activity_rows": 2000,
+      "bot_hash": "4153a9151d7d",
+      "bot_path": "rounds/round_1/bots/noel/historical/candidate_23_adaptive_aco_controller.py",
+      "bucket": "historical",
+      "drawdown": {
+        "final_pnl": 8952.15625,
+        "max_drawdown": 682.0,
+        "max_drawdown_time": 300,
+        "max_pnl": 8952.15625,
+        "max_pnl_time": 99900,
+        "min_pnl": -682.0,
+        "min_pnl_time": 300
+      },
+      "final_mid": {
+        "ASH_COATED_OSMIUM": 10003.0,
+        "INTARIAN_PEPPER_ROOT": 12099.5
+      },
+      "final_product_pnl": {
+        "ASH_COATED_OSMIUM": 1666.15625,
+        "INTARIAN_PEPPER_ROOT": 7286.0
+      },
+      "graph_rows": 500,
+      "has_trade_log": true,
+      "json_path": "rounds/round_1/performances/noel/historical/candidate_23_adaptive_aco_controller.json",
+      "log_issue_count": 0,
+      "log_path": "rounds/round_1/performances/noel/historical/candidate_23_adaptive_aco_controller.log",
+      "member": "noel",
+      "pnl_methods": {
+        "graph_delta_vs_official": -5.6875,
+        "graph_final": 8946.46875,
+        "official_profit": 8952.15625,
+        "product_pnl_sum_from_activities": 8952.15625,
+        "product_sum_delta_vs_official": 0.0,
+        "trade_reconstruction_delta_vs_official": -22.15625,
+        "trade_reconstruction_sum": 8930.0
+      },
+      "positions": {
+        "ASH_COATED_OSMIUM": 35,
+        "INTARIAN_PEPPER_ROOT": 80,
+        "XIRECS": -1309135
+      },
+      "round": "1",
+      "run_key": "candidate_23_adaptive_aco_controller",
+      "status": "FINISHED",
+      "submission_id": "9959d6e9-d8e9-485a-826f-bff792b62b40",
+      "trade_stats": {
+        "by_product": {
+          "ASH_COATED_OSMIUM": {
+            "avg_buy": 9991.782609,
+            "avg_sell": 10007.825,
+            "buy_qty": 115,
+            "cash": -348429.0,
+            "first_abs_75_ts": null,
+            "first_abs_80_ts": null,
+            "first_nonzero_position_ts": 3100,
+            "gross_spread_capture": 1283.391304,
+            "matched_qty": 80,
+            "max_abs_position_from_own_trades": 61,
+            "net_qty": 35,
+            "own_trade_count": 31,
+            "reconstructed_pnl": 1676.0,
+            "sell_qty": 80
+          },
+          "INTARIAN_PEPPER_ROOT": {
+            "avg_buy": 12008.825,
+            "avg_sell": null,
+            "buy_qty": 80,
+            "cash": -960706.0,
+            "first_abs_75_ts": 200,
+            "first_abs_80_ts": 200,
+            "first_nonzero_position_ts": 0,
+            "gross_spread_capture": null,
+            "matched_qty": 0,
+            "max_abs_position_from_own_trades": 80,
+            "net_qty": 80,
+            "own_trade_count": 5,
+            "reconstructed_pnl": 7254.0,
+            "sell_qty": 0
+          }
+        },
+        "market_trade_count": 62,
+        "own_trade_count": 36
+      }
+    },
+    {
+      "activity_rows": 2000,
+      "bot_hash": "3dfc8799e6be",
+      "bot_path": "rounds/round_1/bots/amin/historical/25-bot.py",
+      "bucket": "historical",
+      "drawdown": {
+        "final_pnl": 8907.5,
+        "max_drawdown": 682.0,
+        "max_drawdown_time": 300,
+        "max_pnl": 8907.5,
+        "max_pnl_time": 99900,
+        "min_pnl": -682.0,
+        "min_pnl_time": 300
+      },
+      "final_mid": {
+        "ASH_COATED_OSMIUM": 10003.0,
+        "INTARIAN_PEPPER_ROOT": 12099.5
+      },
+      "final_product_pnl": {
+        "ASH_COATED_OSMIUM": 1621.5,
+        "INTARIAN_PEPPER_ROOT": 7286.0
+      },
+      "graph_rows": 500,
+      "has_trade_log": true,
+      "json_path": "rounds/round_1/performances/amin/historical/25-bot.json",
+      "log_issue_count": 0,
+      "log_path": "rounds/round_1/performances/amin/historical/25-bot.log",
+      "member": "amin",
+      "pnl_methods": {
+        "graph_delta_vs_official": -6.9375,
+        "graph_final": 8900.5625,
+        "official_profit": 8907.5,
+        "product_pnl_sum_from_activities": 8907.5,
+        "product_sum_delta_vs_official": 0.0,
+        "trade_reconstruction_delta_vs_official": -27.5,
+        "trade_reconstruction_sum": 8880.0
+      },
+      "positions": {
+        "ASH_COATED_OSMIUM": 16,
+        "INTARIAN_PEPPER_ROOT": 80,
+        "XIRECS": -1119128
+      },
+      "round": "1",
+      "run_key": "25-bot",
+      "status": "FINISHED",
+      "submission_id": "899626ab-38a4-428c-80a5-99dc43274e52",
+      "trade_stats": {
+        "by_product": {
+          "ASH_COATED_OSMIUM": {
+            "avg_buy": 9996.923636,
+            "avg_sell": 10002.826255,
+            "buy_qty": 275,
+            "cash": -158422.0,
+            "first_abs_75_ts": null,
+            "first_abs_80_ts": null,
+            "first_nonzero_position_ts": 1000,
+            "gross_spread_capture": 1528.778182,
+            "matched_qty": 259,
+            "max_abs_position_from_own_trades": 55,
+            "net_qty": 16,
+            "own_trade_count": 89,
+            "reconstructed_pnl": 1626.0,
+            "sell_qty": 259
+          },
+          "INTARIAN_PEPPER_ROOT": {
+            "avg_buy": 12008.825,
+            "avg_sell": null,
+            "buy_qty": 80,
+            "cash": -960706.0,
+            "first_abs_75_ts": 200,
+            "first_abs_80_ts": 200,
+            "first_nonzero_position_ts": 0,
+            "gross_spread_capture": null,
+            "matched_qty": 0,
+            "max_abs_position_from_own_trades": 80,
+            "net_qty": 80,
+            "own_trade_count": 5,
+            "reconstructed_pnl": 7254.0,
+            "sell_qty": 0
+          }
+        },
+        "market_trade_count": 30,
+        "own_trade_count": 94
+      }
+    },
+    {
+      "activity_rows": 2000,
+      "bot_hash": "f1e173015280",
+      "bot_path": "rounds/round_1/bots/noel/historical/candidate_20_dual_product_risk_scheduler.py",
+      "bucket": "historical",
+      "drawdown": {
+        "final_pnl": 8821.09375,
+        "max_drawdown": 682.0,
+        "max_drawdown_time": 300,
+        "max_pnl": 8821.09375,
+        "max_pnl_time": 99900,
+        "min_pnl": -682.0,
+        "min_pnl_time": 300
+      },
+      "final_mid": {
+        "ASH_COATED_OSMIUM": 10003.0,
+        "INTARIAN_PEPPER_ROOT": 12099.5
+      },
+      "final_product_pnl": {
+        "ASH_COATED_OSMIUM": 1535.09375,
+        "INTARIAN_PEPPER_ROOT": 7286.0
+      },
+      "graph_rows": 500,
+      "has_trade_log": true,
+      "json_path": "rounds/round_1/performances/noel/historical/candidate_20_dual_product_risk_scheduler.json",
+      "log_issue_count": 0,
+      "log_path": "rounds/round_1/performances/noel/historical/candidate_20_dual_product_risk_scheduler.log",
+      "member": "noel",
+      "pnl_methods": {
+        "graph_delta_vs_official": -6.609375,
+        "graph_final": 8814.484375,
+        "official_profit": 8821.09375,
+        "product_pnl_sum_from_activities": 8821.09375,
+        "product_sum_delta_vs_official": 0.0,
+        "trade_reconstruction_delta_vs_official": -26.09375,
+        "trade_reconstruction_sum": 8795.0
+      },
+      "positions": {
+        "ASH_COATED_OSMIUM": 21,
+        "INTARIAN_PEPPER_ROOT": 80,
+        "XIRECS": -1169228
+      },
+      "round": "1",
+      "run_key": "candidate_20_dual_product_risk_scheduler",
+      "status": "FINISHED",
+      "submission_id": "e1c32641-436e-4611-af4b-165e843bce68",
+      "trade_stats": {
+        "by_product": {
+          "ASH_COATED_OSMIUM": {
+            "avg_buy": 9990.445652,
+            "avg_sell": 10008.43662,
+            "buy_qty": 92,
+            "cash": -208522.0,
+            "first_abs_75_ts": null,
+            "first_abs_80_ts": null,
+            "first_nonzero_position_ts": 3100,
+            "gross_spread_capture": 1277.358696,
+            "matched_qty": 71,
+            "max_abs_position_from_own_trades": 46,
+            "net_qty": 21,
+            "own_trade_count": 27,
+            "reconstructed_pnl": 1541.0,
+            "sell_qty": 71
+          },
+          "INTARIAN_PEPPER_ROOT": {
+            "avg_buy": 12008.825,
+            "avg_sell": null,
+            "buy_qty": 80,
+            "cash": -960706.0,
+            "first_abs_75_ts": 200,
+            "first_abs_80_ts": 200,
+            "first_nonzero_position_ts": 0,
+            "gross_spread_capture": null,
+            "matched_qty": 0,
+            "max_abs_position_from_own_trades": 80,
+            "net_qty": 80,
+            "own_trade_count": 5,
+            "reconstructed_pnl": 7254.0,
+            "sell_qty": 0
+          }
+        },
+        "market_trade_count": 61,
+        "own_trade_count": 32
+      }
+    },
+    {
+      "activity_rows": 2000,
+      "bot_hash": "d89c681904a9",
+      "bot_path": "rounds/round_1/bots/amin/historical/23-bot.py",
+      "bucket": "historical",
+      "drawdown": {
+        "final_pnl": 8545.59375,
+        "max_drawdown": 682.0,
+        "max_drawdown_time": 300,
+        "max_pnl": 8545.59375,
+        "max_pnl_time": 99900,
+        "min_pnl": -682.0,
+        "min_pnl_time": 300
+      },
+      "final_mid": {
+        "ASH_COATED_OSMIUM": 10003.0,
+        "INTARIAN_PEPPER_ROOT": 12099.5
+      },
+      "final_product_pnl": {
+        "ASH_COATED_OSMIUM": 1259.59375,
+        "INTARIAN_PEPPER_ROOT": 7286.0
+      },
+      "graph_rows": 500,
+      "has_trade_log": true,
+      "json_path": "rounds/round_1/performances/amin/historical/23-bot.json",
+      "log_issue_count": 0,
+      "log_path": "rounds/round_1/performances/amin/historical/23-bot.log",
+      "member": "amin",
+      "pnl_methods": {
+        "graph_delta_vs_official": -7.667969,
+        "graph_final": 8537.925781,
+        "official_profit": 8545.59375,
+        "product_pnl_sum_from_activities": 8545.59375,
+        "product_sum_delta_vs_official": 0.0,
+        "trade_reconstruction_delta_vs_official": -30.59375,
+        "trade_reconstruction_sum": 8515.0
+      },
+      "positions": {
+        "ASH_COATED_OSMIUM": 5,
+        "INTARIAN_PEPPER_ROOT": 80,
+        "XIRECS": -1009460
+      },
+      "round": "1",
+      "run_key": "23-bot",
+      "status": "FINISHED",
+      "submission_id": "138d0d2d-4a82-492f-ad8a-ecf7d30963b2",
+      "trade_stats": {
+        "by_product": {
+          "ASH_COATED_OSMIUM": {
+            "avg_buy": 9997.660714,
+            "avg_sell": 10002.149091,
+            "buy_qty": 280,
+            "cash": -48754.0,
+            "first_abs_75_ts": null,
+            "first_abs_80_ts": null,
+            "first_nonzero_position_ts": 1000,
+            "gross_spread_capture": 1234.303571,
+            "matched_qty": 275,
+            "max_abs_position_from_own_trades": 60,
+            "net_qty": 5,
+            "own_trade_count": 92,
+            "reconstructed_pnl": 1261.0,
+            "sell_qty": 275
+          },
+          "INTARIAN_PEPPER_ROOT": {
+            "avg_buy": 12008.825,
+            "avg_sell": null,
+            "buy_qty": 80,
+            "cash": -960706.0,
+            "first_abs_75_ts": 200,
+            "first_abs_80_ts": 200,
+            "first_nonzero_position_ts": 0,
+            "gross_spread_capture": null,
+            "matched_qty": 0,
+            "max_abs_position_from_own_trades": 80,
+            "net_qty": 80,
+            "own_trade_count": 5,
+            "reconstructed_pnl": 7254.0,
+            "sell_qty": 0
+          }
+        },
+        "market_trade_count": 29,
+        "own_trade_count": 97
+      }
+    },
+    {
+      "activity_rows": 2000,
+      "bot_hash": "4679e140f8e6",
+      "bot_path": "rounds/round_1/bots/noel/historical/candidate_13_bot05_hybrid_adaptive.py",
+      "bucket": "historical",
+      "drawdown": {
+        "final_pnl": 7642.875,
+        "max_drawdown": 314.629883,
+        "max_drawdown_time": 2800,
+        "max_pnl": 7642.875,
+        "max_pnl_time": 99900,
+        "min_pnl": -314.629883,
+        "min_pnl_time": 2800
+      },
+      "final_mid": {
+        "ASH_COATED_OSMIUM": 10003.0,
+        "INTARIAN_PEPPER_ROOT": 12099.5
+      },
+      "final_product_pnl": {
+        "ASH_COATED_OSMIUM": 2448.4375,
+        "INTARIAN_PEPPER_ROOT": 5194.4375
+      },
+      "graph_rows": 500,
+      "has_trade_log": true,
+      "json_path": "rounds/round_1/performances/noel/historical/candidate_13_bot05_hybrid_adaptive.json",
+      "log_issue_count": 0,
+      "log_path": "rounds/round_1/performances/noel/historical/candidate_13_bot05_hybrid_adaptive.log",
+      "member": "noel",
+      "pnl_methods": {
+        "graph_delta_vs_official": -6.492188,
+        "graph_final": 7636.382812,
+        "official_profit": 7642.875,
+        "product_pnl_sum_from_activities": 7642.875,
+        "product_sum_delta_vs_official": 0.0,
+        "trade_reconstruction_delta_vs_official": -25.875,
+        "trade_reconstruction_sum": 7617.0
+      },
+      "positions": {
+        "ASH_COATED_OSMIUM": 2,
+        "INTARIAN_PEPPER_ROOT": 66,
+        "XIRECS": -810956
+      },
+      "round": "1",
+      "run_key": "candidate_13_bot05_hybrid_adaptive",
+      "status": "FINISHED",
+      "submission_id": "c77794b3-6265-4162-be1b-e5c5edd43096",
+      "trade_stats": {
+        "by_product": {
+          "ASH_COATED_OSMIUM": {
+            "avg_buy": 9994.331915,
+            "avg_sell": 10004.76824,
+            "buy_qty": 235,
+            "cash": -17557.0,
+            "first_abs_75_ts": null,
+            "first_abs_80_ts": null,
+            "first_nonzero_position_ts": 300,
+            "gross_spread_capture": 2431.66383,
+            "matched_qty": 233,
+            "max_abs_position_from_own_trades": 57,
+            "net_qty": 2,
+            "own_trade_count": 79,
+            "reconstructed_pnl": 2449.0,
+            "sell_qty": 233
+          },
+          "INTARIAN_PEPPER_ROOT": {
+            "avg_buy": 12032.696774,
+            "avg_sell": 12041.224719,
+            "buy_qty": 155,
+            "cash": -793399.0,
+            "first_abs_75_ts": null,
+            "first_abs_80_ts": null,
+            "first_nonzero_position_ts": 300,
+            "gross_spread_capture": 758.987097,
+            "matched_qty": 89,
+            "max_abs_position_from_own_trades": 69,
+            "net_qty": 66,
+            "own_trade_count": 43,
+            "reconstructed_pnl": 5168.0,
+            "sell_qty": 89
+          }
+        },
+        "market_trade_count": 42,
+        "own_trade_count": 122
+      }
+    },
+    {
+      "activity_rows": 2000,
+      "bot_hash": "5e30780bb99e",
+      "bot_path": "rounds/round_1/bots/noel/historical/candidate_12_bot04_aco_markov.py",
+      "bucket": "historical",
+      "drawdown": {
+        "final_pnl": 4551.9375,
+        "max_drawdown": 107.1875,
+        "max_drawdown_time": 82200,
+        "max_pnl": 4553.4375,
+        "max_pnl_time": 99700,
+        "min_pnl": 0.0,
+        "min_pnl_time": 0
+      },
+      "final_mid": {
+        "ASH_COATED_OSMIUM": 10003.0,
+        "INTARIAN_PEPPER_ROOT": 12099.5
+      },
+      "final_product_pnl": {
+        "ASH_COATED_OSMIUM": 2689.9375,
+        "INTARIAN_PEPPER_ROOT": 1862.0
+      },
+      "graph_rows": 500,
+      "has_trade_log": true,
+      "json_path": "rounds/round_1/performances/noel/historical/candidate_12_bot04_aco_markov.json",
+      "log_issue_count": 0,
+      "log_path": "rounds/round_1/performances/noel/historical/candidate_12_bot04_aco_markov.log",
+      "member": "noel",
+      "pnl_methods": {
+        "graph_delta_vs_official": 1.1875,
+        "graph_final": 4553.125,
+        "official_profit": 4551.9375,
+        "product_pnl_sum_from_activities": 4551.9375,
+        "product_sum_delta_vs_official": 0.0,
+        "trade_reconstruction_delta_vs_official": 5.0625,
+        "trade_reconstruction_sum": 4557.0
+      },
+      "positions": {
+        "ASH_COATED_OSMIUM": 18,
+        "INTARIAN_PEPPER_ROOT": 0,
+        "XIRECS": -175497
+      },
+      "round": "1",
+      "run_key": "candidate_12_bot04_aco_markov",
+      "status": "FINISHED",
+      "submission_id": "f71327c5-a26b-4632-8eae-916817cc336f",
+      "trade_stats": {
+        "by_product": {
+          "ASH_COATED_OSMIUM": {
+            "avg_buy": 9993.72103,
+            "avg_sell": 10005.47907,
+            "buy_qty": 233,
+            "cash": -177359.0,
+            "first_abs_75_ts": null,
+            "first_abs_80_ts": null,
+            "first_nonzero_position_ts": 1000,
+            "gross_spread_capture": 2527.978541,
+            "matched_qty": 215,
+            "max_abs_position_from_own_trades": 50,
+            "net_qty": 18,
+            "own_trade_count": 75,
+            "reconstructed_pnl": 2695.0,
+            "sell_qty": 215
+          },
+          "INTARIAN_PEPPER_ROOT": {
+            "avg_buy": 12045.632353,
+            "avg_sell": 12073.014706,
+            "buy_qty": 68,
+            "cash": 1862.0,
+            "first_abs_75_ts": null,
+            "first_abs_80_ts": null,
+            "first_nonzero_position_ts": 19300,
+            "gross_spread_capture": 1862.0,
+            "matched_qty": 68,
+            "max_abs_position_from_own_trades": 39,
+            "net_qty": 0,
+            "own_trade_count": 27,
+            "reconstructed_pnl": 1862.0,
+            "sell_qty": 68
+          }
+        },
+        "market_trade_count": 29,
+        "own_trade_count": 102
+      }
+    },
+    {
+      "activity_rows": 2000,
+      "bot_hash": "5b736e8d309f",
+      "bot_path": "rounds/round_1/bots/noel/historical/candidate_09_bot01_baseline_fv_combo.py",
+      "bucket": "historical",
+      "drawdown": {
+        "final_pnl": 4092.71875,
+        "max_drawdown": 47.15625,
+        "max_drawdown_time": 82200,
+        "max_pnl": 4092.801758,
+        "max_pnl_time": 99700,
+        "min_pnl": 0.0,
+        "min_pnl_time": 0
+      },
+      "final_mid": {
+        "ASH_COATED_OSMIUM": 10003.0,
+        "INTARIAN_PEPPER_ROOT": 12099.5
+      },
+      "final_product_pnl": {
+        "ASH_COATED_OSMIUM": 2230.71875,
+        "INTARIAN_PEPPER_ROOT": 1862.0
+      },
+      "graph_rows": 500,
+      "has_trade_log": true,
+      "json_path": "rounds/round_1/performances/noel/historical/candidate_09_bot01_baseline_fv_combo.json",
+      "log_issue_count": 0,
+      "log_path": "rounds/round_1/performances/noel/historical/candidate_09_bot01_baseline_fv_combo.log",
+      "member": "noel",
+      "pnl_methods": {
+        "graph_delta_vs_official": 0.066406,
+        "graph_final": 4092.785156,
+        "official_profit": 4092.71875,
+        "product_pnl_sum_from_activities": 4092.71875,
+        "product_sum_delta_vs_official": 0.0,
+        "trade_reconstruction_delta_vs_official": 0.28125,
+        "trade_reconstruction_sum": 4093.0
+      },
+      "positions": {
+        "ASH_COATED_OSMIUM": 1,
+        "INTARIAN_PEPPER_ROOT": 0,
+        "XIRECS": -5910
+      },
+      "round": "1",
+      "run_key": "candidate_09_bot01_baseline_fv_combo",
+      "status": "FINISHED",
+      "submission_id": "1097d672-8ee2-4d9a-b951-540bb079b048",
+      "trade_stats": {
+        "by_product": {
+          "ASH_COATED_OSMIUM": {
+            "avg_buy": 9991.661972,
+            "avg_sell": 10007.404255,
+            "buy_qty": 142,
+            "cash": -7772.0,
+            "first_abs_75_ts": null,
+            "first_abs_80_ts": null,
+            "first_nonzero_position_ts": 1000,
+            "gross_spread_capture": 2219.661972,
+            "matched_qty": 141,
+            "max_abs_position_from_own_trades": 23,
+            "net_qty": 1,
+            "own_trade_count": 50,
+            "reconstructed_pnl": 2231.0,
+            "sell_qty": 141
+          },
+          "INTARIAN_PEPPER_ROOT": {
+            "avg_buy": 12045.632353,
+            "avg_sell": 12073.014706,
+            "buy_qty": 68,
+            "cash": 1862.0,
+            "first_abs_75_ts": null,
+            "first_abs_80_ts": null,
+            "first_nonzero_position_ts": 19300,
+            "gross_spread_capture": 1862.0,
+            "matched_qty": 68,
+            "max_abs_position_from_own_trades": 39,
+            "net_qty": 0,
+            "own_trade_count": 27,
+            "reconstructed_pnl": 1862.0,
+            "sell_qty": 68
+          }
+        },
+        "market_trade_count": 26,
+        "own_trade_count": 77
+      }
+    },
+    {
+      "activity_rows": 2000,
+      "bot_hash": "c00f5f9c8bb2",
+      "bot_path": "rounds/round_1/bots/noel/historical/candidate_11_bot03_micro_scalper.py",
+      "bucket": "historical",
+      "drawdown": {
+        "final_pnl": 1542.25,
+        "max_drawdown": 179.734375,
+        "max_drawdown_time": 42800,
+        "max_pnl": 1604.835938,
+        "max_pnl_time": 97000,
+        "min_pnl": -58.34375,
+        "min_pnl_time": 42800
+      },
+      "final_mid": {
+        "ASH_COATED_OSMIUM": 10003.0,
+        "INTARIAN_PEPPER_ROOT": 12099.5
+      },
+      "final_product_pnl": {
+        "ASH_COATED_OSMIUM": 847.65625,
+        "INTARIAN_PEPPER_ROOT": 694.59375
+      },
+      "graph_rows": 500,
+      "has_trade_log": true,
+      "json_path": "rounds/round_1/performances/noel/historical/candidate_11_bot03_micro_scalper.json",
+      "log_issue_count": 0,
+      "log_path": "rounds/round_1/performances/noel/historical/candidate_11_bot03_micro_scalper.log",
+      "member": "noel",
+      "pnl_methods": {
+        "graph_delta_vs_official": -0.25,
+        "graph_final": 1542.0,
+        "official_profit": 1542.25,
+        "product_pnl_sum_from_activities": 1542.25,
+        "product_sum_delta_vs_official": 0.0,
+        "trade_reconstruction_delta_vs_official": -1.25,
+        "trade_reconstruction_sum": 1541.0
+      },
+      "positions": {
+        "ASH_COATED_OSMIUM": -13,
+        "INTARIAN_PEPPER_ROOT": -6,
+        "XIRECS": 204177
+      },
+      "round": "1",
+      "run_key": "candidate_11_bot03_micro_scalper",
+      "status": "FINISHED",
+      "submission_id": "6415454d-a704-431f-b1a4-9ed8681cb400",
+      "trade_stats": {
+        "by_product": {
+          "ASH_COATED_OSMIUM": {
+            "avg_buy": 9993.777778,
+            "avg_sell": 10004.031915,
+            "buy_qty": 81,
+            "cash": 130883.0,
+            "first_abs_75_ts": null,
+            "first_abs_80_ts": null,
+            "first_nonzero_position_ts": 3100,
+            "gross_spread_capture": 830.585106,
+            "matched_qty": 81,
+            "max_abs_position_from_own_trades": 41,
+            "net_qty": -13,
+            "own_trade_count": 29,
+            "reconstructed_pnl": 844.0,
+            "sell_qty": 94
+          },
+          "INTARIAN_PEPPER_ROOT": {
+            "avg_buy": 12050.987952,
+            "avg_sell": 12062.089888,
+            "buy_qty": 83,
+            "cash": 73294.0,
+            "first_abs_75_ts": null,
+            "first_abs_80_ts": null,
+            "first_nonzero_position_ts": 6100,
+            "gross_spread_capture": 921.460674,
+            "matched_qty": 83,
+            "max_abs_position_from_own_trades": 26,
+            "net_qty": -6,
+            "own_trade_count": 33,
+            "reconstructed_pnl": 697.0,
+            "sell_qty": 89
+          }
+        },
+        "market_trade_count": 61,
+        "own_trade_count": 62
+      }
+    }
+  ]
+}
