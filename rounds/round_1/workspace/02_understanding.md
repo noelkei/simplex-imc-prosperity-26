@@ -1,5 +1,9 @@
 # Round 1 — Understanding Summary
 
+## Post-Completion Note
+
+On 2026-04-16, Phase 03 was reopened for strategy expansion. Core understanding remains unchanged: IPR has a strong drift FV, ACO has a fixed-FV mean-reversion signal, and no cross-product relationship is currently supported. Expanded candidates now cite the new EDA artifacts under `workspace/01_eda/` directly.
+
 ## Status
 
 COMPLETED

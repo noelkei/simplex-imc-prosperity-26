@@ -4,14 +4,44 @@
 
 COMPLETED
 
-## Current Notes
+## Owner / Reviewer
 
-- Understanding completado 2026-04-16 a partir de ingestion (COMPLETED) y EDA (COMPLETED).
-- IPR: drift lineal FV(t) = day_start + 0.001*t, R2=0.9999. Spread ~13. Market-making viable.
-- ACO: FV fijo ~10000, 94.4% dentro de +/-10. Spread ~16. Market-making viable.
-- Ambos productos independientes. Sin señal cross-product.
-- Riesgo principal: slope y FV son supuestos históricos — monitorear en ronda real.
+- Owner: Claude
+- Reviewer: Approved 2026-04-16
+- Last updated: 2026-04-16
 
-## Next Action
+## What Has Been Done
 
-Aprobado. Iniciar Fase 03 Strategy Candidates.
+- Understanding summary completed and approved on 2026-04-16.
+- Added a post-completion note after Phase 03 strategy expansion was reopened.
+
+## Current Findings
+
+- Core understanding remains valid:
+  - IPR has deterministic drift FV evidence.
+  - ACO has fixed-FV mean-reversion evidence.
+  - Cross-product directional relationship is not supported by current EDA.
+- New strategy expansion candidates cite the new EDA artifacts directly rather than changing the core understanding summary.
+
+## Decisions Made
+
+- Do not reopen Phase 02 unless new EDA contradicts the core product understanding.
+
+## Open Questions / Blockers
+
+- None for Phase 02.
+
+## Linked Artifacts
+
+- `02_understanding.md`
+- `01_eda/eda_strategy_expansion_feature_lab.md`
+- `01_eda/eda_strategy_expansion_models.md`
+- `01_eda/eda_cross_product_relationships.md`
+
+## Next Priority Action
+
+Continue with Phase 03 strategy review.
+
+## Deadline Risk
+
+Low for this phase.
