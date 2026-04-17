@@ -51,6 +51,14 @@ Stop iterating when one of these is true:
 - Remaining issues are strategy uncertainty rather than correctness.
 - New changes would not get enough validation time.
 
+Strong-incumbent rule:
+
+- Once a platform-validated candidate is above the current target, treat it as the champion and stop broad exploration.
+- New bots should be challengers with one clear improvement axis and practical ROI.
+- A challenger replaces the champion only if it has better real platform PnL, or slightly lower PnL with materially better robustness.
+- If the robustness gain is small, keep the higher-PnL champion.
+- Near deadline, prioritize final validation, artifact preservation, and active-file verification over new complexity.
+
 ## Complexity Limits
 
 - Keep at most 3 active strategy candidates per round.
@@ -161,6 +169,7 @@ Required sections:
 - Baseline/reference bot, if any.
 - Historical / non-decision artifacts, if any exist and could confuse active state.
 - Latest results and best current candidate.
+- Post-run research memory link, if present and decision-relevant.
 - Blockers and decisions needed.
 - Final submission status: candidate, file, last validation, active-file verification.
 - Recently changed artifacts.
@@ -219,6 +228,6 @@ Rules:
 - Implementation: one primary candidate plus one fallback/baseline at most.
 - Testing: run the fastest meaningful validation first; store raw output and a short summary.
 - Debugging: fix rule/contract/limit bugs first; defer speculative tuning unless it is clearly high impact.
-- Freeze: with less than 6 hours left, only fix correctness issues or extremely low-risk parameter changes, then validate and submit.
+- Freeze: with less than 6 hours left, only fix correctness issues or extremely low-risk parameter changes, then validate, verify the active upload file, and submit.
 
 Fast mode does not relax source hierarchy, strategy spec requirement, Trader contract, position-limit checks, or final validation summary.

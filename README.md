@@ -14,13 +14,9 @@ If you are new here, start with this README, then open the relevant round folder
 
 ## Current Repository State
 
-The live source of truth remains the active round `_index.md`; this section is only a short orientation snapshot.
-
-- `rounds/round_1/` is active.
-- Round 1 ingestion, EDA, understanding, and strategy artifacts are written but still need human review before they can be marked `COMPLETED`.
-- Round 1 specs are implementation-eligible under recorded `deferred under deadline` review state.
-- The intended combined bot is blocked because `rounds/round_1/bots/bruno/canonical/candidate_03_combined.py` is missing.
-- No final submission candidate is ready until a canonical bot exists, validation runs, and a readable run summary is written.
+The active round `_index.md` is the live source of truth. Do not rely on this
+README for current phase status, blockers, active candidates, latest PnL, or
+final submission decisions.
 
 ## Source Hierarchy
 
@@ -123,6 +119,10 @@ Use them as phase-specific operating guides after reading the relevant workflow:
 | Controlled variants | `skills/generate_trader_variant.md` |
 | Phase state sync / drift repair | `skills/manage_phase_state.md` |
 
+`skills/develop_strategy.md` is a deprecated compatibility wrapper. Use
+`skills/generate_strategy_candidates.md` for candidate work and
+`skills/write_strategy_spec.md` for implementation-ready specs.
+
 Use `skills/manage_phase_state.md` when starting, resuming, or closing a phase, or when status, blocker, review state, artifact link, or next-action drift appears across the round index, phase context, and main artifact.
 
 Each phase also has a short context file:
@@ -145,6 +145,7 @@ These files are resumption notes. Update them whenever work is added, decisions 
 | Live round state | `rounds/round_X/workspace/_index.md` |
 | Phase resumption notes | `rounds/round_X/workspace/phase_YY_<phase>_context.md` |
 | Round data | `rounds/round_X/data/` |
+| Post-run research memory | `rounds/round_X/workspace/post_run_research_memory.md` |
 | Formal bot candidates | `rounds/round_X/bots/<member>/canonical/` |
 | Archived bot attempts | `rounds/round_X/bots/<member>/historical/` |
 | Current run evidence | `rounds/round_X/performances/<member>/canonical/` |
@@ -273,7 +274,18 @@ Fast mode does not relax source hierarchy, strategy spec requirement, Trader con
 
 ## Performance Artifacts
 
-Raw `.log` files are ignored by the repository by default. Preserve current round evidence as tracked `.md` and/or `.json` summaries under `rounds/round_X/performances/<member>/canonical/`, and archive superseded evidence under `rounds/round_X/performances/<member>/historical/`, using `docs/templates/run_summary_template.md`.
+Raw `.log` files are ignored by the repository by default. Preserve platform
+`.json`, exact bot path, and a tracked run summary under
+`rounds/round_X/performances/<member>/canonical/`; keep the matching `.log`
+with the run when possible, or record a provenance caveat if it is unavailable
+or untracked. Archive superseded evidence under
+`rounds/round_X/performances/<member>/historical/`, using
+`docs/templates/run_summary_template.md`.
+
+When a platform run adds reusable learning, update
+`rounds/round_X/workspace/post_run_research_memory.md` from
+`docs/templates/post_run_research_memory_template.md`. If the run teaches
+nothing new, mark `Memory update: no change` in the run summary.
 
 ## Trader Production Readiness
 

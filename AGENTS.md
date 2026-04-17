@@ -38,6 +38,7 @@
 - Do not implement a strategy without a reviewed strategy spec; in fast mode, create or request a one-page spec rather than skipping the gate.
 - Treat EDA as targeted signal discovery: state the decision it may affect, use hypothesis-driven feature engineering, classify signals as usable, exploratory, or not ready, and stop when more analysis will not change the next decision.
 - Ground strategy candidates, specs, and variants in linked EDA signals, feature evidence, regime assumptions, and understanding insights when those artifacts exist; otherwise label the missing evidence as an assumption or route it to targeted EDA.
+- When `rounds/round_X/workspace/post_run_research_memory.md` exists for the active round, read it before EDA, understanding, strategy generation, spec writing, or trader variant work. Treat it as evidence input, not passive documentation; cite relevant insight IDs or descriptions when they influence decisions. Missing memory does not block work; record the absence only when it affects confidence or direction.
 - Consume current phase artifacts before rethinking earlier phases. Reopen an earlier phase only when material new evidence, a blocker, implementation behavior, validation, or debugging changes the decision.
 - Write phase artifacts for downstream agents. EDA and understanding should make clear what to use, what not to trust yet, and what to validate next.
 - Do not treat a final submission as ready without a readable validation or performance summary.
@@ -56,13 +57,14 @@ When a task matches a file in `skills/`, read that skill after the workflows and
 - `skills/add_new_round.md` for new round setup.
 - `skills/run_eda.md` for EDA.
 - `skills/synthesize_understanding.md` for understanding summaries.
-- `skills/generate_strategy_candidates.md` for strategy candidates, scoring, rejection, and shortlisting.
+- `skills/generate_strategy_candidates.md` for strategy candidates, lightweight prioritization, rejection, and shortlisting.
 - `skills/write_strategy_spec.md` for strategy specs, review state, and implementation readiness.
 - `skills/create_trader.md` for implementation.
 - `skills/validate_trader.md` for validation and run summaries.
 - `skills/debug_trader.md` for debugging.
 - `skills/generate_trader_variant.md` for controlled variants.
 - `skills/manage_phase_state.md` for phase starts, resumes after time gaps, closures, drift detection, and state repair.
+- `skills/develop_strategy.md` is deprecated; use `skills/generate_strategy_candidates.md` or `skills/write_strategy_spec.md` instead.
 
 ## Start and continue behavior
 

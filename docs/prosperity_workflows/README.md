@@ -20,6 +20,11 @@ For active round work, start from `rounds/round_X/workspace/_index.md`, then rea
 
 When starting a phase, confirm required inputs and update the phase context. When continuing, update the existing artifact instead of creating duplicates. When closing, check the exit criteria, update `_index.md`, update the phase context, and leave a concrete next action.
 
+When `rounds/round_X/workspace/post_run_research_memory.md` exists, treat it as
+round-local evidence input for EDA, understanding, strategy, spec, and variant
+decisions. Cite relevant insights when they influence a decision; do not treat
+the memory as official Prosperity rules.
+
 ## Workstream map
 
 - [`01_project_operating_model.md`](01_project_operating_model.md): shared operating model for contributors and agents.
@@ -34,7 +39,7 @@ When starting a phase, confirm required inputs and update the phase context. Whe
 - [`10_time_aware_team_pipeline.md`](10_time_aware_team_pipeline.md): 2-day deadline workflow, phase state tracking, round indexes, and fast mode.
 - [`11_dataset_eda_framework.md`](11_dataset_eda_framework.md): column classification, adaptive EDA, and EDA-as-knowledge-transfer guidance.
 - [`12_top_level_artifact_audit.md`](12_top_level_artifact_audit.md): historical cleanup audit for removed top-level `bots/` and `performances/`.
-- [`../templates/`](../templates/): reusable Markdown templates for understanding summaries, strategy candidates, strategy specs, run summaries, and debugging issues.
+- [`../templates/`](../templates/): reusable Markdown templates for EDA, understanding, strategy candidates, strategy specs, run summaries, post-run research memory, and debugging issues.
 
 ## Operating rule
 

@@ -46,6 +46,7 @@ The next useful step and who can pick it up.
 - Strategy/spec to variant generation: provide parent spec, insight being tested, allowed changed axes, expected effect, and validation check.
 - Implementation to validation: provide changed behavior, expected outputs, and known risk areas.
 - Validation to strategy: provide failures, logs, and whether the issue is factual, implementation-level, or heuristic.
+- Platform run to post-run memory: provide reusable failure patterns, edge decomposition, counterfactuals, negative evidence, and links back to per-run artifacts.
 - Round preparation to all workstreams: provide products, limits, manual/algorithmic separation, caveats, and data availability.
 
 ## Documentation rules
@@ -55,6 +56,41 @@ The next useful step and who can pick it up.
 - Keep docs operational: what to do, what to check, and what to hand off.
 - Prefer concise notes over long narratives.
 - Do not hide uncertainty; make it easy to find and resolve.
+
+## Platform run provenance
+
+For each new platform run, save these together when possible:
+
+- exact bot `.py`
+- platform `.json`
+- platform `.log`
+- short decision note or run summary
+
+Do not require hashes for normal competition flow. Raw `.log` files may be
+untracked by repository ignore rules; keep them with the run when possible and
+preserve decision evidence in tracked `.md` or `.json` summaries. If one of the
+`.py`, `.json`, or `.log` artifacts is missing, keep analyzing, but record the
+provenance caveat where the run is used for ranking, promotion, or post-run
+memory.
+
+## Minimal submission manifest
+
+A final submission manifest should stay small and decision-focused:
+
+```md
+## Upload Decision
+
+- Primary:
+- Backup:
+- Fallback:
+- Rejected / not upload:
+- Caveats:
+- Last validation:
+- Active file verified: yes | no
+```
+
+Do not turn the manifest into a large dashboard. Link out to run summaries or
+platform artifact analysis for details.
 
 ## Good next actions
 
