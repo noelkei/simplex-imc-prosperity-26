@@ -34,12 +34,17 @@ Fewer clear, reusable signals are better than many unclear findings.
 For active round workspaces, close EDA with the sections required by the round template:
 
 - Product scope
+- Algorithmic vs manual scope
+- Artifact index
 - Data quality and filters
 - Feature inventory
 - Feature engineering notes
+- Distribution hypotheses, when decision-relevant
 - Facts
 - Conditional patterns / regimes
+- Threshold / execution findings, when decision-relevant
 - Signal hypotheses
+- Negative evidence for meaningful failed checks
 - Open questions
 - Reusable metrics
 - Downstream use / agent notes
@@ -109,6 +114,25 @@ EDA should look for conditions where behavior changes, without turning into unbo
 
 If no meaningful conditional pattern is found, record the checks attempted and mark the signal as weak or unconfirmed.
 
+### Regime-ROI gate
+
+Before recommending dynamic thresholds, regime filters, CUSUM, HMM-style logic,
+or other adaptive behavior, keep the check practical:
+
+- Is the regime observable online from fields the bot receives?
+- Is it persistent enough to act on?
+- Is the effect size meaningful enough to change signal, execution, or risk?
+- Is the extra complexity likely to beat the current champion or solve a known weakness?
+
+Close the check with one verdict:
+
+- `actionable`
+- `defensive only`
+- `weak`
+- `not worth implementing`
+
+This is a decision checklist, not a mandate to build a regime model.
+
 ## Product branching
 
 Use one combined EDA summary by default. Split into product-specific notes only when product behavior is materially different or the combined file becomes hard to consume. Product-specific notes are supporting artifacts; merge the decision-useful findings back into the canonical EDA handoff before closing the phase.
@@ -125,10 +149,15 @@ EDA is shallow if it only lists stats or plots without explaining what changed, 
 
 Every durable EDA summary should include:
 
+- `Algorithmic vs Manual Scope` when both exist
+- `Artifact Index` for persisted tables, plots, notebooks, scripts, processed files, or raw logs
 - column classification summary
 - feature inventory with raw and derived features that matter
 - feature engineering notes: attempted transformations, useful results, rejected results, and promising validation targets
+- `Distribution Hypotheses` when they could affect strategy, risk, or validation
 - facts, conditional patterns/regimes, signal hypotheses, and assumptions separated
+- `Threshold / Execution Findings` when they affect signal, sizing, fills, or validation
+- `Negative Evidence` for meaningful failed checks
 - signal strength: strong, medium, weak, or contradictory
 - signal dependencies: raw/derived features used and whether they appear stable, regime-dependent, or unknown
 - uncertainty and interpretation limits
