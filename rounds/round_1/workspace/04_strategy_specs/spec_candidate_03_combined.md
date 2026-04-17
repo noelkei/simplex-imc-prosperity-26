@@ -1,5 +1,11 @@
 # Spec: candidate_03_combined
 
+## Reopen Notice
+
+- Historical note: this spec was written for the previous shortlist before Phase 03 strategy expansion was reopened on 2026-04-16.
+- Current pipeline note: Phase 04 is now `BLOCKED` until the expanded strategy shortlist is reviewed.
+- Use this spec as the baseline reference for `candidate_03_combined`, not as approval to implement or validate newly shortlisted `candidate_05_microstructure_edge_scalper` or `candidate_06_aco_markov_regime_mm`.
+
 Implementation must not start until this spec is reviewed.
 
 ## Review Status
