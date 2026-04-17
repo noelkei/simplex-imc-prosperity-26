@@ -43,7 +43,24 @@ class Trader:
 - [ ] Implementation links to a reviewed or deadline-deferred strategy spec.
 - [ ] Strategy signal, feature evidence, and regime assumptions are traceable through the linked spec.
 - [ ] Latest validation run summary is linked.
+- [ ] Pre-upload overfit / cheat audit is passed, failed, or explicitly caveated.
 - [ ] Active submission file is verified.
+
+## Pre-upload Overfit / Cheat Audit
+
+Before final upload, quickly check for:
+
+- [ ] Use of `timestamp`, day, iteration count, known sample length, or time-to-end assumptions.
+- [ ] End-of-sample flattening, liquidation, or close-before-sample-end logic.
+- [ ] Reads of platform `.json`, `.log`, `activitiesLog`, `graphLog`, or `tradeHistory`.
+- [ ] File IO or external state not required by the reviewed spec.
+- [ ] Random or seed-dependent behavior.
+- [ ] Unsupported imports.
+- [ ] Excessive logging.
+- [ ] Hidden state that depends on sample-specific behavior.
+- [ ] Suspicious constants that reference sample length rather than strategy parameters.
+
+Outcome: `passed | failed | caveat`.
 
 ## Contract Smoke Check
 

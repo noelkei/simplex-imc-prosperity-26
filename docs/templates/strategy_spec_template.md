@@ -5,6 +5,7 @@ Implementation must not start until this spec is reviewed. In fast mode, keep it
 ## Spec Quality Checklist
 
 - Candidate ID, priority, and evidence basis are linked from the shortlist.
+- Selection trace from the candidate decision is copied or summarized.
 - Linked EDA signals, feature evidence, regime assumptions, and understanding insight are recorded.
 - Signal or fair value logic is defined.
 - Execution behavior says when to buy, sell, rest orders, or stay idle.
@@ -44,7 +45,16 @@ Implementation must not start until this spec is reviewed. In fast mode, keep it
 - Wiki facts:
 - EDA evidence:
 - Understanding summary:
+- Post-run research memory:
 - Playbook heuristics:
+
+## Selection Trace
+
+- Based on candidate:
+- Signals used:
+- Alternatives considered:
+- Why selected:
+- Known caveats:
 
 ## Evidence Traceability
 

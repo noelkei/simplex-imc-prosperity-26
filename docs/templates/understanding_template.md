@@ -8,6 +8,7 @@
 
 - Wiki facts:
 - EDA evidence:
+- Post-run research memory:
 - Playbook heuristics:
 - Other named artifacts:
 
@@ -23,6 +24,14 @@
 | --- | --- | --- | --- | --- |
 | ITEM | ingestion / EDA / playbook | strong / medium / weak / contradictory | high / medium / low | CONDITION |
 
+## Signal Ledger
+
+Retain the compact signal memory that strategy agents should use.
+
+| Signal | Product | Source Artifact | Feature Basis | Confidence | Strategy Use | Risk | Next Phase Action |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| SIGNAL | PRODUCT | ARTIFACT | FEATURES | high / medium / low | use / validate / avoid / defer | RISK | ACTION |
+
 ## Strategy-Relevant Insights
 
 Prioritize the few insights another agent should actually use. Link back to EDA evidence instead of restating full EDA.
@@ -30,6 +39,18 @@ Prioritize the few insights another agent should actually use. Link back to EDA 
 | Insight | Linked EDA Signals | Feature Evidence | Regime Assumptions | Confidence | Strategy Impact |
 | --- | --- | --- | --- | --- | --- |
 | INSIGHT | SIGNAL_OR_ARTIFACT | FEATURES | REGIME_OR_NONE | high / medium / low | ACTIONABLE_IMPACT |
+
+## Product Attribution View
+
+| Product | Opportunity / Risk Status | Evidence | Main Uncertainty | Strategy Implication |
+| --- | --- | --- | --- | --- |
+| PRODUCT | edge likely / unclear / risk-heavy / low priority | EVIDENCE | UNCERTAINTY | IMPLICATION |
+
+## Cross-Product Verdict
+
+- Verdict: `useful | weak | not applicable | needs targeted EDA`
+- Evidence:
+- Caveat:
 
 ## What Should Be Tried
 
@@ -42,6 +63,12 @@ Prioritize the few insights another agent should actually use. Link back to EDA 
 | Signal Or Claim | Why Not Trusted | Risk If Used | Next Validation |
 | --- | --- | --- | --- |
 | SIGNAL | REASON | RISK | CHECK_OR_DEFER |
+
+## Research Memory
+
+- Promising:
+- Rejected:
+- Unresolved:
 
 ## Confidence And Impact
 

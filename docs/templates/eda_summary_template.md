@@ -21,12 +21,29 @@ EDA turns named data or run artifacts into evidence. Do not turn sample patterns
 - Product-scope rationale:
 - Product branches, if any:
 
+## Algorithmic vs Manual Scope
+
+Separate findings usable inside `Trader.run()` from manual-challenge findings.
+
+| Finding | Scope | Why | Caveat |
+| --- | --- | --- | --- |
+| FINDING | algorithmic / manual / both / not applicable | REASON | CAVEAT |
+
 ## Data Sources
 
 - Raw data:
 - Processed data:
 - External context:
 - Run or log artifact:
+- Post-run research memory:
+
+## Artifact Index
+
+Persist reusable artifacts under existing round-local paths and link them here.
+
+| Artifact Path | Type | Source Data | Useful For | Decision-Relevant? |
+| --- | --- | --- | --- | --- |
+| PATH | table / plot / notebook / script / processed file / raw log | SOURCE | USE | yes / no / maybe |
 
 ## Data Quality And Filters
 
@@ -71,6 +88,14 @@ Target simple, hypothesis-driven transformations before complex ones. Do not doc
 - Volume behavior:
 - Order book dynamics:
 
+## Distribution Hypotheses
+
+Use lightweight interpretations only when they affect strategy, risk, or validation.
+
+| Product Or Scope | Hypothesis | Evidence | Strategy Implication | Caveat |
+| --- | --- | --- | --- | --- |
+| PRODUCT_OR_SCOPE | mean-reverting / trending / mixture / regime-switching / noisy/unclear | EVIDENCE | IMPLICATION | CAVEAT |
+
 ## Facts
 
 - Wiki fact:
@@ -81,11 +106,27 @@ Target simple, hypothesis-driven transformations before complex ones. Do not doc
 | --- | --- | --- | --- | --- | --- |
 | CONDITION | FEATURES | BEHAVIOR | USE_OR_AVOID | strong / medium / weak / contradictory | CAVEATS |
 
+## Threshold / Execution Findings
+
+Capture execution-relevant breakpoints rather than broad parameter sweeps.
+
+| Finding | Feature Basis | Threshold Or Zone | Execution / Risk Use | Readiness | Caveat |
+| --- | --- | --- | --- | --- | --- |
+| FINDING | FEATURES | LEVEL_OR_ZONE | USE | usable / exploratory / not ready | CAVEAT |
+
 ## Signal Hypotheses
 
 | Signal | Feature Dependencies | What It Means | Why It Matters | Strategy Use | Stability | Confidence | Limitations / Caveats |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | SIGNAL | RAW_OR_DERIVED_FEATURES | MEANING | DECISION_IMPACT | HOW_TO_USE | stable / regime-dependent / unknown | strong / medium / weak / contradictory | CAVEATS |
+
+## Negative Evidence
+
+Preserve meaningful failed checks so later agents do not rediscover weak ideas.
+
+| Idea Or Signal | Why It Was Plausible | Evidence Against It | When To Reopen |
+| --- | --- | --- | --- |
+| IDEA_OR_SIGNAL | RATIONALE | EVIDENCE | CONDITION |
 
 ## Assumptions
 

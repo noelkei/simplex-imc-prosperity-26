@@ -8,6 +8,7 @@ This folder contains reusable Markdown templates for round workstreams.
 - `strategy_spec_template.md`: phase 04 reviewed implementation specs.
 - `trader_production_template.md`: minimal Trader skeleton, submission readiness checklist, and contract smoke check.
 - `run_summary_template.md`: phase 06 testing and performance summaries.
+- `post_run_research_memory_template.md`: curated round-level memory from reusable platform-run insights.
 - `debug_issue_template.md`: phase 07 debugging issues.
 
 Templates are generic. Do not add round-specific facts here.
