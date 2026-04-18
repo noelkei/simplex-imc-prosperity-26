@@ -19,7 +19,7 @@ Use this skill to turn ingestion and EDA artifacts into a concise understanding 
 3. Convert ingestion unknowns and EDA findings into evidence synthesis, confidence/impact, prioritized unknowns, and strategy implications.
 4. Compress EDA Round Adaptation Checks into Assumptions Carried Forward. Do not promote prior-round assumptions unless current-round evidence supports them or the risk/action is explicit.
 5. Prioritize the strongest EDA signals and downgrade or discard weak, contradictory, under-validated, or not-online-usable signals.
-6. Identify actionable features/signals, high-confidence vs low-confidence areas, and regime assumptions that strategy agents must preserve.
+6. Identify actionable features/signals, high-confidence vs low-confidence areas, and regime assumptions that strategy agents must preserve. Use EDA statistical tests, effect sizes, confidence intervals, change-point/regime evidence, and negative evidence as confidence inputs when available; do not rerun broad research during synthesis.
 7. Convert only promoted EDA features and relevant post-run memory insights into the `Signal Ledger`, including product, source artifact, feature basis, feature origin, online usability, role, stability, confidence, decision action, risk, and next phase action.
 8. Require each retained signal to state whether it is a direct signal, execution filter, risk control, diagnostic, manual signal, or avoid/do-not-use item.
 9. Preserve meaningful intermediate findings in `Research Memory`: promising, rejected/noisy, and unresolved/log-needed. Carry forward negative evidence so strategy agents do not rediscover weak ideas.

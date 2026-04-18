@@ -65,14 +65,16 @@ Raw logs are not durable by default. Preserve current decision evidence in `roun
 - Max drawdown:
 - Max abs position:
 - Inventory / mark caveat:
+- Advanced diagnostics used, if any:
+- Statistical or regime confidence:
 
 ## Feature Diagnostics
 
 Optional but recommended when the run tests a feature, signal, or feature toggle.
 
-| Feature Or Signal | Expected Effect | Observed Effect | Confidence Update | Next Action |
-| --- | --- | --- | --- | --- |
-| FEATURE | EXPECTED | OBSERVED | up / down / unchanged / unclear | keep / variant / EDA / discard |
+| Feature Or Signal | Expected Effect | Observed Effect | Diagnostic Method | Confidence Update | Next Action |
+| --- | --- | --- | --- | --- | --- |
+| FEATURE | EXPECTED | OBSERVED | fill stats / markout / statistical test / regime split / none | up / down / unchanged / unclear | keep / variant / EDA / discard |
 
 ## Comparability
 

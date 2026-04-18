@@ -37,9 +37,17 @@ Dedup heuristic: `candidate + strategy family + changed axis + tested feature/si
 
 Use this to update feature confidence after serious platform or platform-style runs. Keep only feedback that changes a future decision.
 
-| Feature Or Signal | Runs | Outcome | Confidence Change | Next Action |
-| --- | --- | --- | --- | --- |
-| FEATURE | RUNS | helped / failed / unclear | up / down / unchanged | keep / variant / EDA / discard |
+| Feature Or Signal | Runs | Outcome | Evidence Method | Confidence Change | Next Action |
+| --- | --- | --- | --- | --- | --- |
+| FEATURE | RUNS | helped / failed / unclear | fill stats / markout / statistical test / regime split / counterfactual / none | up / down / unchanged | keep / variant / EDA / discard |
+
+## Statistical Confidence Notes
+
+Record only confidence evidence that changes future decisions. Examples: adverse-selection markouts, fill quality differences, effect sizes, confidence intervals, volatility/regime shifts, or change-point windows.
+
+- Decision-relevant confidence update:
+- Tool or method used:
+- Caveat or overfit risk:
 
 ## Log-Derived Feature Discoveries
 

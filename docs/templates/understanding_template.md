@@ -24,6 +24,14 @@
 | --- | --- | --- | --- | --- |
 | ITEM | ingestion / EDA / playbook | strong / medium / weak / contradictory | high / medium / low | CONDITION |
 
+## Signal Validation Expectations
+
+Use EDA research outputs to compress confidence, not to rerun broad analysis. Retain effect sizes, stability checks, regime/change-point evidence, statistical tests, and negative evidence only when they change strategy, spec, validation, or debugging decisions.
+
+- Statistical or regime evidence used:
+- Features downgraded for weak confidence, instability, or offline-only status:
+- Research outputs not trusted yet:
+
 ## Assumptions Carried Forward
 
 Only carry assumptions from prior rounds when current-round evidence supports them or the risk is explicit.

@@ -122,6 +122,8 @@ Promote only features that change a concrete downstream decision. EDA-only featu
 ## Analyses Run
 
 - Reproduction notes: commands, script, table, plot, or manual steps:
+- Research tools used and why:
+- Research tools considered but skipped:
 - Output artifacts:
 - Optional notebook:
 - Descriptive stats:
@@ -133,6 +135,14 @@ Promote only features that change a concrete downstream decision. EDA-only featu
 - Price vs trade alignment:
 - Volume behavior:
 - Order book dynamics:
+
+## Research Tool Notes
+
+Use tools only when they improve decision quality. Typical use: `pandas`/`numpy` for core tables, `polars` for large logs, `numba` for heavy loops, `scipy`/`statsmodels`/`pingouin` for tests and confidence, `arch` for volatility regimes, `ruptures` for change points, and `sklearn` for lightweight clustering or feature screening.
+
+- Tools that changed a decision:
+- Tools that were unnecessary:
+- Risk of overfitting or over-modeling:
 
 ## Distribution Hypotheses
 

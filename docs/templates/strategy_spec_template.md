@@ -66,6 +66,7 @@ Implementation must not start until this spec is reviewed. In fast mode, keep it
 - Feature Evidence:
 - Regime Assumptions:
 - Understanding Insight:
+- Research tool evidence used, if any:
 - Evidence gaps or strategy assumptions:
 
 ## Round-Specific Mechanics Contract
@@ -117,6 +118,7 @@ List important features considered but intentionally not implemented.
 - `traderData` use:
 - Imports:
 - Runtime risk:
+- Research-only dependencies excluded from uploadable bot: `yes | no | not applicable`
 
 ## Expected Failure Cases
 

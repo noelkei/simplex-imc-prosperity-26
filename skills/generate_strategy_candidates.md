@@ -26,6 +26,7 @@ Use this skill to generate, lightly prioritize, reject, defer, or shortlist stra
 - Evaluate multi-product combinations conceptually when relevant, including compatibility, risk interaction, execution alignment, and cross-product dependency.
 - Use post-run failure patterns, edge decomposition, counterfactual backlog, and negative evidence when present to prune weak branches and prioritize high-ROI candidates.
 - Enforce the feature budget for each serious candidate: at most one primary edge feature or fair-value model, up to two supporting execution/risk filters, plus diagnostics that do not change decisions.
+- Treat outputs from `arch`, `ruptures`, `sklearn`, `pingouin`, `statsmodels`, or notebooks as evidence for simpler trading decisions, not as a reason to add offline model complexity. If a candidate relies on a research-only feature, require an online proxy or route it back to EDA/spec before implementation.
 - Require each serious candidate to link `feature -> signal -> decision -> expected edge -> validation check`.
 - Reject or defer feature-dump candidates, candidates that depend on non-online-usable features without an online proxy, candidates whose features are weak or contradictory, and candidates whose feature set does not target a known opportunity or failure mode.
 - Keep facts, EDA evidence, understanding insights, playbook heuristics, hypotheses, and assumptions separate.
