@@ -35,6 +35,7 @@ For active round workspaces, close EDA with the sections required by the round t
 
 - Product scope
 - Algorithmic vs manual scope
+- Round Adaptation Check
 - Artifact index
 - Data quality and filters
 - Feature inventory
@@ -60,6 +61,8 @@ Before analyzing, state:
 - exact question
 - decision the result may affect
 - time budget
+
+Before deeper analysis, fill a Round Adaptation Check. It should identify current-round mechanics, products/limits, schema changes, new fields, and prior-round assumptions at risk. Only items that can change a downstream decision need detail.
 
 Track product scope explicitly:
 
@@ -100,6 +103,45 @@ Prefer simple, hypothesis-driven transformations before complex ones:
 - Custom signals from observed data, clearly labeled as hypotheses.
 
 Do not brute-force feature combinations or produce feature catalogs that no downstream phase can use. Document only features that are useful, potentially useful, or meaningfully rejected because the result changes a decision.
+
+## Feature lifecycle and promotion
+
+Use a lightweight feature lifecycle inside the EDA artifact. Do not create a
+central feature registry.
+
+Lifecycle states:
+
+- `observed`: feature appears in CSV, `TradingState`, logs, manual mechanics,
+  or a combined analysis.
+- `classified`: origin, online usability, and role are known.
+- `evaluated`: signal strength, stability, and actionability are checked.
+- `promoted`: feature should enter Understanding / strategy as a signal.
+- `rejected`: meaningful negative evidence exists.
+- `specified`: exact bot use belongs in a reviewed strategy spec.
+- `implemented`: feature is present in a bot and validated through runs.
+
+Classify serious features with:
+
+- Origin: `csv`, `online`, `log/post-run`, `combined`, or `manual-only`.
+- Online usability: `usable online`, `EDA-only`, `log-only`, or `unknown`.
+- Role: `direct signal`, `execution filter`, `risk control`, `diagnostic`,
+  `manual`, or `avoid`.
+
+Evaluate serious features through three gates:
+
+- Signal gate: predicts, explains, or classifies something useful.
+- Stability gate: persists across days, timestamps, products, or regimes.
+- Actionability gate: changes strategy, parameters, risk, validation, or
+  debugging.
+
+Promotion decisions:
+
+- Promote only features that change a concrete downstream decision.
+- Keep EDA-only features as calibration or reasoning evidence; do not let them
+  enter bot specs unless an online proxy is defined.
+- Preserve high-plausibility failed features as negative evidence.
+- Prefer 5-8 serious feature candidates and 1-3 promoted signal hypotheses per
+  EDA artifact unless breadth is explicitly requested.
 
 ## Conditional patterns and regimes
 
@@ -154,6 +196,7 @@ Every durable EDA summary should include:
 - column classification summary
 - feature inventory with raw and derived features that matter
 - feature engineering notes: attempted transformations, useful results, rejected results, and promising validation targets
+- feature promotion decisions: promote, exploratory, negative evidence, EDA-only calibration, needs logs, or reject
 - `Distribution Hypotheses` when they could affect strategy, risk, or validation
 - facts, conditional patterns/regimes, signal hypotheses, and assumptions separated
 - `Threshold / Execution Findings` when they affect signal, sizing, fills, or validation
@@ -185,6 +228,7 @@ EDA is done only when:
 - relevant columns are classified or explicitly marked unclear
 - reproduction steps or artifact paths are recorded
 - facts, conditional patterns/regimes, signal hypotheses, assumptions, and open questions are separated
+- current-round mechanics/schema changes and prior-round assumptions at risk are either addressed, routed, or explicitly deferred
 - signal strength and uncertainty are stated for important findings
 - reusable metrics or derived features are listed when created
 - downstream use / agent notes are explicit, or the result is marked not actionable

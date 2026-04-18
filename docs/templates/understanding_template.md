@@ -24,13 +24,21 @@
 | --- | --- | --- | --- | --- |
 | ITEM | ingestion / EDA / playbook | strong / medium / weak / contradictory | high / medium / low | CONDITION |
 
+## Assumptions Carried Forward
+
+Only carry assumptions from prior rounds when current-round evidence supports them or the risk is explicit.
+
+| Assumption | Source | Current-Round Evidence | Risk | Action |
+| --- | --- | --- | --- | --- |
+| ASSUMPTION | ingestion / EDA / post-run memory / playbook / prior round | EVIDENCE_OR_NONE | high / medium / low | use / validate / reject / defer |
+
 ## Signal Ledger
 
-Retain the compact signal memory that strategy agents should use.
+Retain the compact signal memory that strategy agents should use. Keep one row per usable signal, not one row per raw column.
 
-| Signal | Product | Source Artifact | Feature Basis | Confidence | Strategy Use | Risk | Next Phase Action |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| SIGNAL | PRODUCT | ARTIFACT | FEATURES | high / medium / low | use / validate / avoid / defer | RISK | ACTION |
+| Signal | Product | Source Artifact | Feature Basis | Feature Origin | Online Usability | Role | Stability | Confidence | Decision Action | Risk | Next Phase Action |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| SIGNAL | PRODUCT | ARTIFACT | FEATURES | csv / online / log/post-run / combined / manual-only | usable online / EDA-only / log-only / unknown | direct signal / execution filter / risk control / diagnostic / manual / avoid | stable / day-sensitive / timestamp-sensitive / regime-dependent / unknown | high / medium / low | use / validate / avoid / defer | RISK | ACTION |
 
 ## Strategy-Relevant Insights
 
@@ -66,9 +74,25 @@ Prioritize the few insights another agent should actually use. Link back to EDA 
 
 ## Research Memory
 
-- Promising:
-- Rejected:
-- Unresolved:
+Preserve useful feature evidence without promoting weak ideas into strategy.
+
+Promising features:
+
+| Feature Or Signal | Source | Why Promising | Needed Before Strategy |
+| --- | --- | --- | --- |
+| FEATURE | ARTIFACT | REASON | VALIDATION |
+
+Rejected / noisy features:
+
+| Feature Or Signal | Source | Evidence Against | Reopen Only If |
+| --- | --- | --- | --- |
+| FEATURE | ARTIFACT | EVIDENCE | CONDITION |
+
+Unresolved / log-needed features:
+
+| Feature Or Signal | Source | Missing Evidence | Next Action |
+| --- | --- | --- | --- |
+| FEATURE | ARTIFACT | GAP | ACTION |
 
 ## Confidence And Impact
 

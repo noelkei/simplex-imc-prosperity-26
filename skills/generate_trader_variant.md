@@ -28,11 +28,14 @@ Use this skill to create a controlled `Trader` variant from a reviewed or deadli
    - What result would make us discard it?
    - What is the max number of variants in this batch?
 6. Choose exactly one changed axis: parameter, threshold, execution logic, risk band, or feature toggle.
-7. Record parent spec, parent bot if any, variant hypothesis, linked signal or regime assumption, post-run memory insight if used, insight being tested, changed axis, exact change, expected effect based on EDA/understanding, falsification metric, and validation check before editing.
-8. Name the variant `candidate_<id>_v01_<short_name>.py`, incrementing the variant number for the same candidate.
-9. Keep the variant within the reviewed strategy hypothesis; update the spec before changing strategy direction or testing a new signal, feature relationship, or regime assumption.
-10. Do not create performance-only parameter fishing variants. If the variant cannot name a falsification metric or practical ROI, route back to spec, strategy, or EDA.
-11. Check Trader production readiness and contract smoke-check items before validation.
-12. Do not use `non-canonical/` draft code as the parent bot unless the user explicitly points to it and the behavior is first captured in the reviewed/deferred spec.
-13. Update `_index.md`, `phase_05_implementation_context.md`, and later the run summary with variant metadata and linked run.
-14. Archive superseded variants under `../rounds/round_X/bots/<member>/historical/`.
+7. When post-run memory has a Run Knowledge Index or Counterfactual Backlog, require the changed axis to match an `untested` or worth-retesting backlog item, unresolved failure pattern, or explicit user-requested exploration. Do not create variants for duplicate axes already marked `tested-reject`, `discard`, or `superseded` unless new evidence changes the decision.
+8. Record whether the variant axis is `new`, `confirms`, `retests`, or `contradicts` prior run knowledge, and cite the prior run or memory row when applicable.
+9. For feature-toggle variants, name the feature, role, online source fields, expected effect, and the evidence source from EDA or post-run memory.
+10. Record parent spec, parent bot if any, variant hypothesis, linked signal or regime assumption, post-run memory insight if used, insight being tested, changed axis, exact change, expected effect based on EDA/understanding, falsification metric, and validation check before editing.
+11. Name the variant `candidate_<id>_v01_<short_name>.py`, incrementing the variant number for the same candidate.
+12. Keep the variant within the reviewed strategy hypothesis; update the spec before changing strategy direction or testing a new signal, feature relationship, feature role, or regime assumption.
+13. Do not create performance-only parameter fishing variants. If the variant cannot name a falsification metric or practical ROI, route back to spec, strategy, or EDA.
+14. Check Trader production readiness and contract smoke-check items before validation.
+15. Do not use `non-canonical/` draft code as the parent bot unless the user explicitly points to it and the behavior is first captured in the reviewed/deferred spec.
+16. Update `_index.md`, `phase_05_implementation_context.md`, and later the run summary with variant metadata, changed-axis knowledge status, feature diagnostic target when applicable, and linked run.
+17. Archive superseded variants under `../rounds/round_X/bots/<member>/historical/`.

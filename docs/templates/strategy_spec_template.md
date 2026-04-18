@@ -7,6 +7,10 @@ Implementation must not start until this spec is reviewed. In fast mode, keep it
 - Candidate ID, priority, and evidence basis are linked from the shortlist.
 - Selection trace from the candidate decision is copied or summarized.
 - Linked EDA signals, feature evidence, regime assumptions, and understanding insight are recorded.
+- Each implemented feature has a Feature Contract.
+- Important features intentionally excluded from the bot are listed.
+- Round-specific mechanics, Trader methods, and changed fields are classified.
+- No prior-round assumption is used without current-round evidence or an explicit strategy assumption.
 - Signal or fair value logic is defined.
 - Execution behavior says when to buy, sell, rest orders, or stay idle.
 - Missing-data and missing-signal behavior is defined.
@@ -63,6 +67,30 @@ Implementation must not start until this spec is reviewed. In fast mode, keep it
 - Regime Assumptions:
 - Understanding Insight:
 - Evidence gaps or strategy assumptions:
+
+## Round-Specific Mechanics Contract
+
+Use this for round mechanics that are not normal features, such as special Trader methods or auction mechanics.
+
+| Mechanic / Trader Function / Field | Source | Decision | Bot Behavior | Validation Check |
+| --- | --- | --- | --- | --- |
+| MECHANIC | ROUND_DOC_OR_SPEC | implement / exclude / not applicable / blocked | BEHAVIOR_OR_REASON | CHECK |
+
+## Feature Contract
+
+Define every feature that changes trading behavior. EDA-only features must not be implemented unless this spec names an online proxy.
+
+| Feature | Source Fields | Online Availability | Role | Parameters | Missing-Signal Behavior | State / `traderData` Required | Validation Check |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| FEATURE | FIELDS | usable online / EDA-only with proxy / log-only diagnostic / unknown | direct signal / execution filter / risk control / diagnostic | PARAMS | FALLBACK_OR_DISABLE | STATE | CHECK |
+
+## Feature Exclusions
+
+List important features considered but intentionally not implemented.
+
+| Feature | Why Excluded | Reopen Only If |
+| --- | --- | --- |
+| FEATURE | CSV-only / weak evidence / too complex / no decision impact / not in shortlist | CONDITION |
 
 ## Signal / Fair Value Logic
 

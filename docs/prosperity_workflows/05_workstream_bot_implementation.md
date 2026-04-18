@@ -8,6 +8,7 @@ Bot implementation turns a documented strategy into code that respects the Prosp
 - The active round wiki doc for products and position limits.
 - A reviewed strategy spec from the active round workstream. In fast mode this can be a one-page spec, but it must still define signal, execution, risk, state, and validation checks.
 - Evidence traceability from the spec: linked EDA signals, feature evidence, regime assumptions, and understanding insight.
+- Feature Contract from the spec for every feature that changes trading behavior.
 - The Trader production template: `docs/templates/trader_production_template.md`.
 - Debugging or validation findings when fixing existing behavior.
 
@@ -18,9 +19,23 @@ Bot implementation turns a documented strategy into code that respects the Prosp
 - Respect per-product position limits and account for aggregate orders in an iteration.
 - Treat `traderData` as the persistence path for state that must survive between calls.
 - Keep runtime and supported-library constraints in mind when adding computation or imports.
-- Consider round-specific methods such as `bid()` before submission.
+- Follow the spec Round-Specific Mechanics Contract for round-specific methods, mechanics, or changed online fields.
+- Implement only features named in the reviewed or deadline-deferred Feature Contract.
+- Do not hardcode CSV-only or EDA-only features into trading behavior unless the spec defines an online proxy.
 - Do not infer official API behavior from round-local or legacy bot code or performance outputs.
 - Do not implement from a loose strategy note, chat summary, or performance result. If a reviewed spec is missing, create or request the spec before coding.
+
+## Feature implementation rules
+
+Features in bots should be small and inspectable.
+
+- Compute features in O(1) or with tiny rolling windows in `traderData`.
+- Do not train models inside the bot.
+- Do not store large feature tables in `traderData`.
+- For every implemented feature, preserve the spec-defined source fields,
+  role, parameters, missing-data fallback, state needs, and validation check.
+- If a feature is only diagnostic, it may be logged or tracked but must not
+  change trading decisions until the spec says so.
 
 ## Controlled variants
 
@@ -41,12 +56,14 @@ Variants are allowed only as controlled implementations of a reviewed or deadlin
 - Validation notes showing which constraints were checked.
 - Any strategy parameters or assumptions documented in or linked from the strategy spec, not hidden as unexplained magic.
 - Variant metadata that makes clear which insight is being tested and why the expected effect follows from EDA or understanding.
+- Feature metadata that makes clear which implemented features came from the reviewed spec and what role each plays.
 
 ## Safe practice
 
 - Keep strategy logic, risk/inventory logic, and execution behavior understandable enough to debug.
 - Avoid broad rewrites when the task only needs a narrow implementation change.
 - Do not add round facts directly from memory or sample code; use the wiki round docs.
+- Treat prior-round fair values, constants, limits, and product behavior as invalid until the active spec cites current-round evidence or labels them as assumptions.
 - If a strategy assumption is unclear, return to the spec or record it as a blocker instead of pretending it is official.
 
 ## Handoff checklist
@@ -56,6 +73,7 @@ Variants are allowed only as controlled implementations of a reviewed or deadlin
 - Insight being implemented or tested, with EDA/understanding link when relevant.
 - Link to the Trader production readiness checklist or note which items passed.
 - Which wiki facts constrained the implementation.
+- Which implemented features came from the spec Feature Contract.
 - Which strategy assumption or heuristic the code follows.
 - How position limits and order signs were checked.
 - Tests, simulations, or logs reviewed.

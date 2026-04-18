@@ -14,13 +14,36 @@ Maximum active candidates per round: 3.
 - Post-run research memory:
 - Playbook heuristics:
 
+## Feature Budget
+
+Strategies should be feature-light by default:
+
+- Primary edge: max 1 feature, signal, or fair-value model.
+- Supporting logic: max 2 execution filters or risk controls.
+- Diagnostics may be included when they do not change trading decisions.
+- More features require explicit justification in the decision trace.
+
+Link every serious feature chain as:
+
+```text
+feature -> signal -> decision -> expected edge -> validation check
+```
+
+## Round Coverage Check
+
+List only current-round mechanics, fields, or product behaviors that could change candidate selection.
+
+| Item | Source | Candidate Impact | Decision |
+| --- | --- | --- | --- |
+| MECHANIC_FIELD_OR_BEHAVIOR | EDA / understanding / round doc / post-run memory | affects edge / execution / risk / validation / none | use / exclude / defer / needs EDA |
+
 ## Exploration Board
 
 Conceptual candidate ideas before commitment. These are not active strategies yet.
 
-| Idea ID | Product | Source Signal | Approach | Expected Edge | Main Risk | Implementation Realism | Status |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| IDEA_ID | PRODUCT | SIGNAL | APPROACH | EDGE | RISK | high / medium / low | explore / prune / candidate |
+| Idea ID | Product | Source Signal | Primary Feature / Signal | Supporting Features | Approach | Expected Edge | Main Risk | Implementation Realism | Status |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| IDEA_ID | PRODUCT | SIGNAL | FEATURE | FEATURES_OR_NONE | APPROACH | EDGE | RISK | high / medium / low | explore / prune / candidate |
 
 ## Per-Product Branches
 
@@ -38,15 +61,15 @@ Use this for multi-product rounds before writing specs. Mark `not applicable` wh
 
 ## Candidate Table
 
-| Candidate ID | Product Scope | Source Of Edge | Linked EDA Signals | Feature Evidence | Regime Assumptions | Understanding Insight | Key Assumptions | Main Risk | Evidence Strength | Implementation Cost | Validation Speed | Risk Level | Expected Upside | Priority | Status |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| CANDIDATE_ID | PRODUCT | EDGE | SIGNALS | FEATURES | REGIMES | INSIGHT | ASSUMPTIONS | RISK | strong / medium / weak / contradictory | high / medium / low | high / medium / low | high / medium / low | high / medium / low | high / medium / low | draft |
+| Candidate ID | Product Scope | Source Of Edge | Primary Feature / Signal | Supporting Features | Feature Role | Linked EDA Signals | Feature Evidence | Regime Assumptions | Understanding Insight | Key Assumptions | Main Risk | Why Not Feature Dumping | Evidence Strength | Implementation Cost | Validation Speed | Risk Level | Expected Upside | Priority | Status |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| CANDIDATE_ID | PRODUCT | EDGE | FEATURE_OR_FV | FEATURES_OR_NONE | direct signal / execution filter / risk control / diagnostic | SIGNALS | FEATURES | REGIMES | INSIGHT | ASSUMPTIONS | RISK | FEATURE_BUDGET_RATIONALE | strong / medium / weak / contradictory | high / medium / low | high / medium / low | high / medium / low | high / medium / low | high / medium / low | draft |
 
 ## Rejected Or Deferred Ideas
 
 | Idea | Reason | Evidence Gap Or Risk |
 | --- | --- | --- |
-| IDEA | REASON | GAP_OR_RISK |
+| IDEA | feature weak / not online-usable / too complex / no decision impact / duplicate / unsupported / other | GAP_OR_RISK |
 
 ## Shortlist
 

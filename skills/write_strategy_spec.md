@@ -21,12 +21,16 @@ Use this skill to convert a shortlisted candidate into a reviewed or deadline-de
 - Write specs only for shortlisted candidates.
 - Preserve links to EDA signals, feature evidence, regime assumptions, and understanding insights.
 - Copy or summarize the candidate decision trace so the spec shows signals used, alternatives considered, why this strategy was selected, and known caveats.
+- Define a Feature Contract for every feature that changes trading behavior, including source fields, online availability, role, parameters, missing-signal behavior, `traderData` state requirements, and validation checks.
+- Define a Round-Specific Mechanics Contract for every current-round mechanic, Trader method, or changed online field that could affect implementation. Mark each as implement, exclude, not applicable, or blocked.
+- Record important Feature Exclusions for features that were considered but intentionally left out because they are CSV-only, weak, too complex, not online-usable, or not decision-relevant.
 - Define signal or fair value, execution, missing-signal behavior, position/risk handling, state/runtime, expected failures, validation checks, and allowed variant axes when useful.
 - Keep facts, EDA evidence, understanding insights, playbook heuristics, hypotheses, and assumptions separate.
 - Set initial spec status to `not reviewed`.
 - Mark `approved` only when a recorded review outcome is approved or approved with caveats.
 - Mark `deferred under deadline` only when deadline deferral is explicit.
 - Refuse implementation handoff unless the spec status is `approved` or `deferred under deadline`, and unless the spec has a signal basis plus selection rationale. Deadline deferral must explicitly record any missing traceability.
+- Do not add unreviewed new features in the spec if they were absent from strategy candidates or understanding; route back to strategy/understanding/EDA unless the deadline deferral explicitly records the assumption.
 - Update relevant spec files, `_index.md`, and `phase_04_spec_context.md`.
 
 ## Boundaries
@@ -34,7 +38,8 @@ Use this skill to convert a shortlisted candidate into a reviewed or deadline-de
 - Do not create new strategy candidates.
 - Do not approve your own spec without a recorded review outcome.
 - Do not implement Trader code.
-- If the shortlisted candidate lacks evidence needed for implementation, record the gap and route back to candidates, understanding, or EDA.
+- Do not leave current-round mechanics implicit. If a mechanic is relevant but unused, record the exclusion reason in the spec.
+- If the shortlisted candidate lacks evidence or a Feature Contract needed for implementation, record the gap and route back to candidates, understanding, or EDA.
 
 ## Handoff
 

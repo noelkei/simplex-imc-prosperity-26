@@ -29,6 +29,7 @@ TBD
 
 - Data/log artifact path not recorded.
 - EDA question not selected.
+- Round Adaptation Check not filled.
 
 ## Linked Artifacts
 
@@ -37,7 +38,7 @@ TBD
 
 ## Next Priority Action
 
-Choose one targeted EDA question and link the data/log artifact, or record an EDA skipped/deferred decision.
+Choose one targeted EDA question, fill the Round Adaptation Check, and link the data/log artifact, or record an EDA skipped/deferred decision.
 
 ## Deadline Risk
 

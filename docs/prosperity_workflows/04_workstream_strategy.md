@@ -36,6 +36,7 @@ Good candidates are specific enough to compare and reject. Each candidate should
 - strategy family or source of edge
 - evidence or heuristic basis, including linked EDA signals and understanding insight when available
 - feature evidence and regime assumptions
+- primary feature or fair-value model, plus any supporting features
 - key assumptions
 - main risk
 - expected failure case
@@ -48,6 +49,29 @@ Prioritize serious candidates with lightweight fields for evidence strength (`st
 Understanding implications and prioritized unknowns should drive candidate generation. If a candidate depends on an unresolved high-impact unknown, either route that unknown to EDA or record the risk before shortlisting.
 
 Do not create candidates from scratch when EDA or understanding exists. Ground candidates in prior artifacts, or label the missing evidence as a strategy assumption and route it back to EDA when it could change the decision.
+
+## Feature budget
+
+Strategy candidates should be feature-light by default.
+
+- Use at most one primary edge feature or fair-value model per candidate.
+- Add at most two supporting execution filters or risk controls.
+- Diagnostics are allowed when they do not change trading decisions.
+- More features require explicit justification in the candidate decision trace.
+
+Every serious candidate should be traceable as:
+
+```text
+feature -> signal -> decision -> expected edge -> validation check
+```
+
+Prune feature-dump strategies, candidates whose features are not online-usable
+without a defined proxy, weak features that do not target a known failure mode,
+and feature combinations that do not change shortlist/spec decisions.
+
+## Round coverage
+
+Before shortlisting, check current-round mechanics, fields, and product behaviors from EDA/understanding. Use them only when decision-relevant, but do not leave relevant new mechanics implicit. Prior-round assumptions need current-round evidence or must remain labeled assumptions.
 
 ## Branch Before Commit
 
@@ -118,6 +142,7 @@ Strategy generation is done when:
 - candidates are grouped to avoid duplicate ideas
 - candidates cite linked EDA signals, feature evidence, regime assumptions, and understanding insight when those artifacts exist
 - each serious candidate has assumptions, main risk, and a validation/falsification path
+- each serious candidate respects the feature budget or records why it does not
 - each shortlisted candidate has priority, evidence strength, and a short rationale
 - each shortlisted candidate has a decision trace naming signals used, alternatives rejected, and why it was selected
 - weak or redundant ideas are rejected or deferred with a reason

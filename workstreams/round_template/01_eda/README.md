@@ -7,12 +7,17 @@ EDA is optional only when skipped or deferred with an explicit reason in `_index
 Required closure summary sections:
 
 - Product scope
+- Algorithmic vs manual scope
+- Round Adaptation Check
 - Data quality and filters
 - Feature inventory
 - Feature engineering notes
+- Feature promotion decisions
 - Facts
 - Conditional patterns / regimes
+- Threshold / execution findings, when decision-relevant
 - Signal hypotheses
+- Negative evidence for meaningful failed checks
 - Open questions
 - Reusable metrics
 - Downstream use / agent notes

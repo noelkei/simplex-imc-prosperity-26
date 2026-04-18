@@ -37,6 +37,18 @@ Separate findings usable inside `Trader.run()` from manual-challenge findings.
 - Run or log artifact:
 - Post-run research memory:
 
+## Round Adaptation Check
+
+Use this once per EDA artifact to prevent hidden prior-round assumptions.
+
+| Check | Current-Round Evidence | Decision / Action |
+| --- | --- | --- |
+| Active round mechanics/API | ROUND_DOC_OR_SOURCE | use / exclude / not applicable / blocker |
+| Products and limits | ROUND_DOC_OR_SOURCE | verified / unknown / blocker |
+| Data schema | ARTIFACT_OR_SOURCE | classified / changed / unclear |
+| New or changed fields/mechanics | FIELD_OR_MECHANIC | EDA question / spec decision / no action |
+| Prior-round assumption at risk | ASSUMPTION | reject / revalidate / carry as assumption |
+
 ## Artifact Index
 
 Persist reusable artifacts under existing round-local paths and link them here.
@@ -59,19 +71,53 @@ Persist reusable artifacts under existing round-local paths and link them here.
 
 Use [`docs/prosperity_workflows/11_dataset_eda_framework.md`](../prosperity_workflows/11_dataset_eda_framework.md) as the checklist.
 
-Include raw features and derived features created during EDA. Keep this compact; detail features that could change a downstream decision.
+Include raw features and derived features created during EDA. Keep this compact; detail only features that could change a downstream decision.
 
-| Feature | Source | Meaning | Classification | Strategy Use | Stability | Notes / Caveats |
-| --- | --- | --- | --- | --- | --- | --- |
-| FEATURE | raw / derived | MEANING | predictive / descriptive / execution/risk / noisy / unknown | HOW_TO_USE_OR_AVOID | stable / regime-dependent / unknown | NOTES |
+Feature lifecycle states:
+
+- `observed`: appears in CSV, `TradingState`, logs, manual mechanics, or a combined analysis.
+- `classified`: origin, online usability, and role are known.
+- `evaluated`: signal strength, stability, and actionability are checked.
+- `promoted`: should enter Understanding / strategy as a signal.
+- `rejected`: meaningful negative evidence exists.
+- `specified`: exact bot use belongs in a reviewed strategy spec.
+- `implemented`: present in a bot and validated through runs.
+
+Origins: `csv | online | log/post-run | combined | manual-only`.
+Online usability: `usable online | EDA-only | log-only | unknown`.
+Roles: `direct signal | execution filter | risk control | diagnostic | manual | avoid`.
+
+| Feature | Origin | Online Usability | Meaning | Role | Signal Strength | Stability | Actionability | Lifecycle Decision | Notes / Caveats |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| FEATURE | csv / online / log/post-run / combined / manual-only | usable online / EDA-only / log-only / unknown | MEANING | direct signal / execution filter / risk control / diagnostic / manual / avoid | strong / medium / weak / contradictory | stable / day-sensitive / timestamp-sensitive / regime-dependent / unknown | changes strategy / changes parameters / changes validation / no decision impact | promote / exploratory / negative evidence / EDA-only calibration / needs logs / reject | NOTES |
 
 ## Feature Engineering Notes
 
 Target simple, hypothesis-driven transformations before complex ones. Do not document brute-force feature explosion.
 
-| Transformation Or Feature | Purpose | Result | Keep? | Next Validation |
+Evaluate each serious feature against:
+
+- Signal gate: does it predict, explain, or classify something useful?
+- Stability gate: does it persist across days, timestamps, products, or regimes?
+- Actionability gate: would it change strategy, parameters, risk, validation, or debugging?
+
+Feature explosion controls:
+
+- Max 5-8 serious feature candidates in this artifact unless explicitly justified.
+- Max 1-3 promoted signal hypotheses.
+- Do not document every failed transform; preserve only decision-relevant negative evidence.
+
+| Transformation Or Feature | Purpose | Gate Result | Keep? | Next Validation |
 | --- | --- | --- | --- | --- |
-| FEATURE_OR_TRANSFORM | WHY_ATTEMPTED | worked / did not work / promising / unclear | yes / no / maybe | VALIDATION |
+| FEATURE_OR_TRANSFORM | WHY_ATTEMPTED | signal / stability / actionability result | yes / no / maybe | VALIDATION |
+
+## Feature Promotion Decisions
+
+Promote only features that change a concrete downstream decision. EDA-only features may support reasoning, but must not enter bot specs unless an online proxy exists.
+
+| Feature Or Signal | Decision | Destination | Reason | Caveat / Reopen Condition |
+| --- | --- | --- | --- | --- |
+| FEATURE_OR_SIGNAL | promote to understanding / keep exploratory / negative evidence / EDA-only calibration / needs logs / reject | Signal Ledger / Research Memory / Negative Evidence / none | REASON | CAVEAT |
 
 ## Analyses Run
 
