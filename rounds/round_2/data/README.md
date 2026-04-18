@@ -1,8 +1,33 @@
 # Round 2 Data
 
-No data artifacts have been added yet.
+Raw Round 2 sample data artifacts are present under `raw/`.
 
 Store only round-local data artifacts here. Do not treat data observations as official rules; use `docs/prosperity_wiki/` for facts.
+
+## Current Raw Artifacts
+
+| File | Rows incl. header | Product rows / trades |
+| --- | ---: | --- |
+| `raw/prices_round_2_day_-1.csv` | 20,001 | 10,000 `ASH_COATED_OSMIUM`, 10,000 `INTARIAN_PEPPER_ROOT` |
+| `raw/prices_round_2_day_0.csv` | 20,001 | 10,000 `ASH_COATED_OSMIUM`, 10,000 `INTARIAN_PEPPER_ROOT` |
+| `raw/prices_round_2_day_1.csv` | 20,001 | 10,000 `ASH_COATED_OSMIUM`, 10,000 `INTARIAN_PEPPER_ROOT` |
+| `raw/trades_round_2_day_-1.csv` | 791 | 459 `ASH_COATED_OSMIUM`, 331 `INTARIAN_PEPPER_ROOT` |
+| `raw/trades_round_2_day_0.csv` | 804 | 471 `ASH_COATED_OSMIUM`, 332 `INTARIAN_PEPPER_ROOT` |
+| `raw/trades_round_2_day_1.csv` | 799 | 465 `ASH_COATED_OSMIUM`, 333 `INTARIAN_PEPPER_ROOT` |
+
+Prices schema:
+
+```text
+day;timestamp;product;bid_price_1;bid_volume_1;bid_price_2;bid_volume_2;bid_price_3;bid_volume_3;ask_price_1;ask_volume_1;ask_price_2;ask_volume_2;ask_price_3;ask_volume_3;mid_price;profit_and_loss
+```
+
+Trades schema:
+
+```text
+timestamp;buyer;seller;symbol;currency;price;quantity
+```
+
+Source caveat: the Round 2 wiki source references `Wiki_ROUND_2_data.zip`; this folder currently stores extracted CSV files, not the original zip attachment.
 
 ## Folders
 

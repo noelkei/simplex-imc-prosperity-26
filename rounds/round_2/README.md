@@ -1,19 +1,19 @@
 # Round 2 Workspace
 
-Official round facts expected path: `../../docs/prosperity_wiki/rounds/round_2.md`
+Official round facts path: `../../docs/prosperity_wiki/rounds/round_2.md`
 
-The official Round 2 facts file is not present in this repository yet. Do not start round work until that curated wiki file exists.
+The official Round 2 facts file is present. Use it as the factual source before doing EDA, strategy, implementation, validation, or final submission work.
 
 Do NOT duplicate or modify official round facts here. This folder contains derived artifacts only.
 
-This round workspace is pre-created; no round work has begun yet.
+This round workspace is pre-created. Phase 00 ingestion has been drafted from the official round facts and is ready for human review.
 
 ## How To Start
 
 1. Confirm `../../docs/prosperity_wiki/rounds/round_2.md` exists.
 2. Open [`workspace/_index.md`](workspace/_index.md).
-3. Keep all phases `NOT_STARTED` until official facts are available.
-4. Start phase 00 ingestion in [`workspace/00_ingestion.md`](workspace/00_ingestion.md).
+3. Review phase 00 ingestion in [`workspace/00_ingestion.md`](workspace/00_ingestion.md).
+4. If approved, start targeted EDA from [`workspace/phase_01_eda_context.md`](workspace/phase_01_eda_context.md).
 5. Update the relevant phase context whenever status, decisions, blockers, or next actions change.
 
 ## How To Continue
