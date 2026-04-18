@@ -104,6 +104,20 @@ Prefer simple, hypothesis-driven transformations before complex ones:
 
 Do not brute-force feature combinations or produce feature catalogs that no downstream phase can use. Document only features that are useful, potentially useful, or meaningfully rejected because the result changes a decision.
 
+## Research tool guidance
+
+Use the shared research environment to improve EDA quality when the question warrants it:
+
+- Use `pandas`/`numpy` by default for moderate CSVs, rolling features, markouts, and compact tables.
+- Use `polars` for larger CSV/log scans, repeated grouping, or lazy filtering where pandas becomes slow.
+- Use `scipy`, `statsmodels`, or `pingouin` for signal validation, effect sizes, confidence intervals, distribution checks, correlations, and lightweight regressions.
+- Use `arch` only when volatility clustering or risk regimes could change strategy, sizing, or validation.
+- Use `ruptures` only when change points, drift breaks, or failure windows could change a downstream decision.
+- Use `sklearn` for lightweight clustering, dimensional checks, or baseline predictive tests; do not turn EDA into a model search unless explicitly requested.
+- Use `numba` for repeated replay, markout, or rolling loops when normal Python is a bottleneck.
+
+Always record which tools were used, what decision they affected, and why skipped tools were unnecessary when the omission matters. Do not make every EDA use every library.
+
 ## Feature lifecycle and promotion
 
 Use a lightweight feature lifecycle inside the EDA artifact. Do not create a

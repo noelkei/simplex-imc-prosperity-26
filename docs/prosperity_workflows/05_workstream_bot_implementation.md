@@ -19,6 +19,7 @@ Bot implementation turns a documented strategy into code that respects the Prosp
 - Respect per-product position limits and account for aggregate orders in an iteration.
 - Treat `traderData` as the persistence path for state that must survive between calls.
 - Keep runtime and supported-library constraints in mind when adding computation or imports.
+- Treat the repo research environment as offline tooling only. Do not import research-only packages into uploadable bots unless the wiki runtime docs allow them and the reviewed spec explicitly names the import.
 - Follow the spec Round-Specific Mechanics Contract for round-specific methods, mechanics, or changed online fields.
 - Implement only features named in the reviewed or deadline-deferred Feature Contract.
 - Do not hardcode CSV-only or EDA-only features into trading behavior unless the spec defines an online proxy.

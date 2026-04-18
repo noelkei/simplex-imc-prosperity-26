@@ -33,6 +33,38 @@ Keep the lightweight gates aligned across phases:
 - Specs define the Feature Contract and Round-Specific Mechanics Contract.
 - Validation owns the ROI-gated run update decision: `update`, `update lightly`, or `no update`.
 
+## Research Environment Use
+
+Use the repo `.venv` and `requirements.txt` for research, EDA, notebooks, validation, and post-run diagnostics when they improve decision quality. These packages do not expand Prosperity bot runtime permissions; uploadable `Trader` files must still follow the wiki runtime docs and reviewed specs.
+
+Use research tools only when they answer a decision-relevant question faster or more rigorously. Record the method and caveat in the artifact. Do not force libraries into small checks, overfit sample data, or turn offline models into bot logic without an online-usable Feature Contract.
+
+### Phase Usage Rules
+
+| Phase | Should Use | Optional | Do Not Use |
+| --- | --- | --- | --- |
+| Round preparation / ingestion | Standard library for file/source checks | `pandas` for schema summaries when data exists | modeling libraries; strategy conclusions |
+| EDA | `pandas`/`numpy`, `scipy`, `statsmodels`, `pingouin`, plots for distributions, signals, and tests | `polars` for large CSV/logs, `numba` for repeated loops, `arch`/`ruptures` for regime questions, `sklearn` for clustering or feature screening | broad ML, feature catalogs, or tests that cannot change a downstream decision |
+| Understanding | statistical confidence, effect size, stability, and negative evidence from EDA | small follow-up summaries using existing processed data | rerunning broad EDA or promoting weak/offline-only features |
+| Strategy candidates | EDA/understanding outputs as evidence for feature-light candidates | request targeted EDA for unresolved high-impact unknowns | adding models or research-library dependencies to candidates just because they exist |
+| Strategy spec | research outputs only as traceable evidence and parameter rationale | validation checks derived from statistical confidence or regimes | requiring bot imports from research-only packages unless the wiki runtime allows them |
+| Implementation | none beyond local static/smoke tooling | tiny standard-library online proxies named in the spec | importing research-only packages into uploadable bots |
+| Validation / post-run | `pandas`/`polars` for logs, `numba` for replay loops, statistics for fill quality and adverse selection | `ruptures` for failure windows, `arch` for volatility regimes, `pingouin`/`scipy` for confidence checks | precise PnL prediction models, heavy ML, or proxy rankings presented as real PnL |
+
+### Library Map
+
+| Library | Phase(s) | Use Case | When To Use | When Not To Use |
+| --- | --- | --- | --- | --- |
+| `numpy`, `pandas` | EDA, validation, post-run | core arrays, tables, rolling features, PnL splits | default for moderate data and durable tables | tiny one-off checks where standard library is clearer |
+| `polars` | EDA, validation, post-run | fast CSV/log scans and group/window operations | large multi-day files, big platform logs, repeated aggregations | small tables where it adds a second dataframe style for no gain |
+| `scipy`, `statsmodels` | EDA, understanding | distributions, correlations, regressions, time-series diagnostics | signal strength, stability, or uncertainty affects decisions | to create opaque models without a strategy use |
+| `pingouin` | EDA, understanding, post-run | effect sizes, confidence intervals, compact statistical tests | comparing features, regimes, fills, or variants | when a simple descriptive table is enough |
+| `arch` | EDA, understanding | volatility/regime diagnostics | volatility clustering could change risk, sizing, or filters | if volatility does not affect the next decision |
+| `ruptures` | EDA, validation, post-run | change-point and failure-window detection | regime shifts, drift breaks, or run failures need segmentation | as a decorative regime label with no action |
+| `scikit-learn` | EDA, strategy evidence | clustering, feature screening, simple predictive baselines | hypotheses need lightweight validation or grouping | training complex offline models for direct bot use |
+| `numba` | EDA, validation, post-run | fast replay, markouts, rolling loops, order-book sweeps | repeated Python loops are a bottleneck | small scripts where JIT startup costs more than it saves |
+| `matplotlib`, `seaborn`, `plotly`, `jupyterlab` | EDA, handoffs | charts, notebooks, exploratory inspection | visuals make distributions/regimes/fills easier to review | when a table and Markdown handoff are clearer |
+
 ## Workstream map
 
 - [`01_project_operating_model.md`](01_project_operating_model.md): shared operating model for contributors and agents.

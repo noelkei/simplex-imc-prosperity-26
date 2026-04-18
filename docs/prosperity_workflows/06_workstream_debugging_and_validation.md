@@ -72,6 +72,21 @@ When platform evidence exists, keep calibration heuristic and practical:
 Do not build a regression model, weighted scoring system, or precise PnL
 prediction as part of this workflow.
 
+## Advanced Diagnostics
+
+Use the shared research environment when it makes validation faster or more
+decision-useful:
+
+- Use `pandas` or `polars` to parse platform JSON/logs, own trades, market trades, and activities logs.
+- Use `numba` only for repeated replay, markout, or order-book loops that are actually slow.
+- Use `scipy`, `pingouin`, or `statsmodels` for fill-quality, adverse-selection, and variant confidence checks when the result could change promotion or backlog decisions.
+- Use `ruptures` to locate failure windows or regime breaks in a run.
+- Use `arch` only when volatility regimes plausibly explain performance or risk.
+
+Keep diagnostics practical. They should explain product PnL, fills, inventory,
+adverse selection, or a counterfactual. They should not replace platform-first
+ranking or promote weak proxies to real PnL.
+
 ## Champion and challenger decisions
 
 After a candidate has the best comparable platform evidence, treat it as the

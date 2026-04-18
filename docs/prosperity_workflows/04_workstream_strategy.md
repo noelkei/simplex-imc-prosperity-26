@@ -69,6 +69,12 @@ Prune feature-dump strategies, candidates whose features are not online-usable
 without a defined proxy, weak features that do not target a known failure mode,
 and feature combinations that do not change shortlist/spec decisions.
 
+Research-library output is evidence, not a mandate for complexity. Use EDA
+tests, regime labels, clustering, and diagnostics to choose simpler strategies,
+parameters, or validation checks. Do not shortlist a candidate that requires
+offline-only research packages in `Trader.run()` unless the spec defines an
+online proxy and the wiki runtime supports the needed imports.
+
 ## Round coverage
 
 Before shortlisting, check current-round mechanics, fields, and product behaviors from EDA/understanding. Use them only when decision-relevant, but do not leave relevant new mechanics implicit. Prior-round assumptions need current-round evidence or must remain labeled assumptions.
