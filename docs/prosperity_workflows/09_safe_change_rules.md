@@ -23,6 +23,8 @@ These rules apply across docs, research, implementation, and validation.
 
 - Check order signs, position signs, and aggregate order capacity before relying on an algorithm change.
 - Keep `traderData`, runtime, and supported-library constraints visible when adding state or dependencies.
+- Follow the reviewed spec's Feature Contract and Round-Specific Mechanics Contract; do not invent feature behavior or round mechanics in code.
+- Treat prior-round products, limits, fair values, constants, and mechanics as invalid until current-round evidence or a labeled assumption supports them.
 - Treat manual challenge mechanics as separate from algorithmic implementation requirements.
 - Use logs and sample data for validation, but do not treat sample performance as proof of future performance.
 
@@ -32,6 +34,7 @@ These rules apply across docs, research, implementation, and validation.
 - Distinguish observation from interpretation.
 - Do not overstate a strategy from one sample, one run, or one chart.
 - Prefer falsifiable strategy notes with explicit failure modes.
+- Keep strategy candidates feature-light; use the feature budget and reject feature dumping unless explicitly justified.
 
 ## Before handoff
 

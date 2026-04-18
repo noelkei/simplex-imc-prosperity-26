@@ -55,6 +55,8 @@ Mandatory gates:
 - No implementation without an approved strategy spec or an explicit `deferred under deadline` review decision.
 - No final submission without a readable validation or performance summary.
 - No phase is complete if facts, hypotheses, assumptions, and evidence are mixed together.
+- No stale prior-round assumption moves forward unless current-round evidence supports it or the risk is explicitly labeled.
+- Round-specific mechanics and changed online fields must be implemented, excluded, marked not applicable, or blocked in the reviewed spec before coding.
 
 ## Round Folders
 
@@ -249,13 +251,13 @@ Agents should proceed without asking when the next step is determined by the rep
 
 | Phase | User provides | Agent produces | Done when |
 | --- | --- | --- | --- |
-| Round ingestion | Active round or source material | Products, limits, algorithmic/manual split, caveats | Reviewed ingestion context and `_index.md` links |
-| EDA | Data/log path and question | Reproducible outputs and summary | Product scope, data quality, feature inventory, feature engineering notes, signal hypotheses, open questions, reusable metrics, and downstream agent notes are clear |
-| Understanding | Reviewed ingestion and EDA | Evidence-aware market understanding | Strategy-relevant insights, what to try, what not to trust yet, risks, and candidate implications are clear |
-| Strategy generation | Priorities and risk appetite | Grouped candidates and shortlist | 1-3 non-duplicative candidates are selected |
-| Strategy specification | Shortlisted candidate | Implementation-ready spec | Signal, execution, risk, state, failure cases, validation checks, and evidence traceability are defined, with review outcome recorded |
-| Implementation | Approved or deadline-deferred spec | Bot implementation | Contract, signs, limits, runtime/imports, and spec alignment are checked |
-| Testing | Bot, spec, run artifact | Run summary | Results link bot, spec, raw run, metrics, limits, and next action |
+| Round ingestion | Active round or source material | Products, limits, algorithmic/manual split, caveats | Reviewed ingestion context, Round Mechanics Delta, and `_index.md` links |
+| EDA | Data/log path and question | Reproducible outputs and summary | Product scope, Round Adaptation Check, data quality, feature lifecycle, signal hypotheses, open questions, reusable metrics, and downstream agent notes are clear |
+| Understanding | Reviewed ingestion and EDA | Evidence-aware market understanding | Strategy-relevant insights, signal ledger, research memory, assumptions carried forward, risks, and candidate implications are clear |
+| Strategy generation | Priorities and risk appetite | Grouped candidates and shortlist | 1-3 non-duplicative candidates are selected, feature budget is respected, and Round Coverage Check is addressed |
+| Strategy specification | Shortlisted candidate | Implementation-ready spec | Signal, execution, risk, state, Feature Contract, Round-Specific Mechanics Contract, validation checks, and evidence traceability are defined, with review outcome recorded |
+| Implementation | Approved or deadline-deferred spec | Bot implementation | Contract, signs, limits, runtime/imports, Feature Contract, Round-Specific Mechanics Contract, and spec alignment are checked |
+| Testing | Bot, spec, run artifact | Run summary | Results link bot, spec, raw run, metrics, limits, run classification, ROI-gated memory action, and next action |
 | Debugging | Issue or suspicious run | Classified debugging note | Reproduction, expected vs observed behavior, linked spec/run, classification, and next action are present |
 
 ## Fast Mode
@@ -285,8 +287,8 @@ or untracked. Archive superseded evidence under
 When a platform run adds reusable learning, update
 `rounds/round_X/workspace/post_run_research_memory.md` from
 `docs/templates/post_run_research_memory_template.md`. If the run teaches
-nothing new, mark `Memory update: no change` in the run summary.
+nothing new, mark `ROI-gated memory action: no update` in the run summary.
 
 ## Trader Production Readiness
 
-Use `docs/templates/trader_production_template.md` before treating a bot as submission-ready. It contains the minimal `Trader` skeleton, submission readiness checklist, and contract smoke-check guidance.
+Use `docs/templates/trader_production_template.md` before treating a bot as submission-ready. It contains the minimal `Trader` skeleton, submission readiness checklist, contract smoke-check guidance, and Round Adaptation Smoke Check.

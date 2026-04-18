@@ -12,6 +12,7 @@ This repository supports multiple valid workstreams. Not every contributor is ex
 - The Prosperity API contract should be treated as stable unless active round documentation explicitly says otherwise.
 - Official rules, limits, product names, field names, and runtime constraints must not be inferred from examples, repo-local bot implementations, or performance outputs.
 - Round-specific facts belong in round documentation or clearly labeled notes, not in reusable workflow rules.
+- Prior-round assumptions must be revalidated, rejected, or explicitly carried as assumptions before they affect strategy, spec, implementation, or validation.
 
 ## Valid contribution types
 

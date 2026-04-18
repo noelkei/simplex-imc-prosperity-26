@@ -20,8 +20,8 @@ Use this skill to investigate and narrow a failing or suspicious `Trader` behavi
 2. Determine the owning member from the linked run, bot path, round index, task request, or current phase owner. Use one of `isaac`, `bruno`, `amin`, `daniela`, or `noel`; ask only if ownership is unclear and matters for handoff.
 3. Link the strategy spec and canonical performance/validation run that exposed the issue, or record the missing link as a blocker.
 4. State expected behavior and observed behavior before proposing a fix.
-5. Compare the behavior against wiki contract, datamodel, trading rules, runtime constraints, and round limits.
-6. Check empty order books, missing products, current positions, order signs, aggregate order capacity, conversions, and `traderData`.
+5. Compare the behavior against wiki contract, datamodel, trading rules, runtime constraints, round limits, and the spec Round-Specific Mechanics Contract.
+6. Check empty order books, missing products, current positions, order signs, aggregate order capacity, conversions, `traderData`, and stale prior-round constants or mechanics.
 7. Classify the issue as rule or contract failure, implementation bug, data/EDA gap, heuristic weakness, execution tuning issue, or evidence gap.
 8. Make narrow fixes when executing; avoid broad strategy rewrites unless the task asks for them.
 9. Do not infer official behavior from round-local bot artifacts, performance artifacts, `non-canonical/` drafts, or old run outputs.

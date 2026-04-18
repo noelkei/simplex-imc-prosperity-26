@@ -36,9 +36,13 @@
 - Do not assume products, position limits, runtime behavior, or manual mechanics outside the round docs.
 - Do not turn playbook advice or sample-data observations into official rules.
 - Do not implement a strategy without a reviewed strategy spec; in fast mode, create or request a one-page spec rather than skipping the gate.
+- Do not carry prior-round products, fair values, limits, mechanics, or constants forward unless current-round evidence supports them or they are explicitly labeled as assumptions.
+- Before EDA, understanding, strategy, spec, implementation, or validation depends on current-round mechanics or changed fields, route them through the Round Adaptation Check, Assumptions Carried Forward, Round Coverage Check, or Round-Specific Mechanics Contract as appropriate.
 - Treat EDA as targeted signal discovery: state the decision it may affect, use hypothesis-driven feature engineering, classify signals as usable, exploratory, or not ready, and stop when more analysis will not change the next decision.
 - Ground strategy candidates, specs, and variants in linked EDA signals, feature evidence, regime assumptions, and understanding insights when those artifacts exist; otherwise label the missing evidence as an assumption or route it to targeted EDA.
 - When `rounds/round_X/workspace/post_run_research_memory.md` exists for the active round, read it before EDA, understanding, strategy generation, spec writing, or trader variant work. Treat it as evidence input, not passive documentation; cite relevant insight IDs or descriptions when they influence decisions. Missing memory does not block work; record the absence only when it affects confidence or direction.
+- When validating new run artifacts, classify the run and apply the ROI-gated memory action: `update`, `update lightly`, or `no update`.
+- Specs must define a Feature Contract for each implemented feature and a Round-Specific Mechanics Contract for each relevant round mechanic, Trader method, or changed online field; implementation and validation must follow those contracts.
 - Consume current phase artifacts before rethinking earlier phases. Reopen an earlier phase only when material new evidence, a blocker, implementation behavior, validation, or debugging changes the decision.
 - Write phase artifacts for downstream agents. EDA and understanding should make clear what to use, what not to trust yet, and what to validate next.
 - Do not treat a final submission as ready without a readable validation or performance summary.
@@ -81,6 +85,7 @@ Implement `Trader.run(state)` and return `result, conversions, traderData`.
 Use wiki-defined datamodel fields, order signs, and position signs.
 Use `traderData` as string persistence between calls.
 Add round-specific methods only when round docs say they apply.
+Classify those methods in the spec Round-Specific Mechanics Contract before coding.
 
 ## Closing a phase
 

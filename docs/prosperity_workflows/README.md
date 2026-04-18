@@ -25,6 +25,14 @@ round-local evidence input for EDA, understanding, strategy, spec, and variant
 decisions. Cite relevant insights when they influence a decision; do not treat
 the memory as official Prosperity rules.
 
+Keep the lightweight gates aligned across phases:
+
+- EDA owns the feature lifecycle and Round Adaptation Check.
+- Understanding compresses promoted signals and assumptions carried forward.
+- Strategy enforces the feature budget and Round Coverage Check.
+- Specs define the Feature Contract and Round-Specific Mechanics Contract.
+- Validation owns the ROI-gated run update decision: `update`, `update lightly`, or `no update`.
+
 ## Workstream map
 
 - [`01_project_operating_model.md`](01_project_operating_model.md): shared operating model for contributors and agents.

@@ -52,6 +52,7 @@ Do not use:
 5. [platform/01_submission_flow.md](platform/01_submission_flow.md)
 6. [rounds/tutorial.md](rounds/tutorial.md)
 7. [rounds/round_1.md](rounds/round_1.md)
+8. [rounds/round_2.md](rounds/round_2.md)
 
 ## Directory map
 
