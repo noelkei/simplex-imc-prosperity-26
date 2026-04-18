@@ -31,6 +31,10 @@ Respeta esta jerarquía:
 - rounds/ = trabajo formal de cada ronda
 - non-canonical/ = borradores personales informales, no evidencia ni fuente de verdad
 
+El repo tiene un entorno compartido en `.venv` / `requirements.txt` para EDA, research, notebooks, validación y análisis post-run. Usa sus librerías cuando mejoren la calidad de la decisión: feature engineering, tests estadísticos, regímenes, change-points, análisis de fills, markouts o descomposición de PnL. No las uses por obligación ni conviertas modelos offline en lógica de bot sin un proxy online revisado.
+
+Separa siempre herramientas de research de restricciones de runtime: que una librería esté en `requirements.txt` no significa que pueda importarse en un archivo `Trader` subible. Los bots siguen limitados por la wiki de runtime y por el spec revisado.
+
 No inventes reglas de Prosperity, productos, límites, mecánicas, APIs ni estrategias. No uses bots, performances ni non-canonical como fuente de verdad. Si algo falta o está ambiguo, dilo como caveat o blocker.
 
 Quiero que me expliques:
@@ -96,6 +100,10 @@ Respect this hierarchy:
 - docs/templates/ = reusable templates
 - rounds/ = formal round work
 - non-canonical/ = informal personal drafts, not evidence or source of truth
+
+The repo has a shared `.venv` / `requirements.txt` environment for EDA, research, notebooks, validation, and post-run analysis. Use its libraries when they improve decision quality: feature engineering, statistical tests, regimes, change-points, fill analysis, markouts, or PnL decomposition. Do not use them by default, and do not turn offline models into bot logic without a reviewed online proxy.
+
+Always separate research tools from runtime constraints: a package in `requirements.txt` is not automatically allowed in uploadable `Trader` files. Bots remain governed by the runtime wiki and the reviewed strategy spec.
 
 Do not invent Prosperity rules, products, limits, mechanics, APIs, or strategies. Do not use bots, performances, or non-canonical drafts as source of truth. If something is missing or ambiguous, state it as a caveat or blocker.
 

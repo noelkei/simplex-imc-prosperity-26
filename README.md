@@ -4,6 +4,31 @@ This repository supports a small team building Prosperity trading bots under a t
 
 If you are new here, start with this README, then open the relevant round folder under `rounds/round_X/`. The live control panel for a round is `rounds/round_X/workspace/_index.md`.
 
+## Environment Setup
+
+Use a project-local virtual environment for EDA, research, notebooks, validation, and development scripts. Do not rely on a global Anaconda/pyenv environment.
+
+Required Python version: Python 3.11.x.
+
+```bash
+python3.11 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```
+
+Optional notebook kernel:
+
+```bash
+python -m ipykernel install --user --name simplex-imc-prosperity-26 --display-name "simplex-imc-prosperity-26"
+```
+
+This environment is for repo research work only. EDA, understanding synthesis, strategy research, plotting, notebooks, replay analysis, validation, and debugging scripts may use the packages in `requirements.txt`.
+
+Prosperity bot submissions must remain platform-compatible. Do not import repo-only research dependencies in uploadable `Trader` files unless the official Prosperity runtime docs explicitly allow them. Keep the existing feature lifecycle rule: EDA-only features must not enter a bot unless a reviewed spec defines an online-usable proxy.
+
+The research stack is a toolbelt, not a checklist. Use these libraries when they improve signal validation, regime detection, feature engineering, fill analysis, or handoff clarity; skip them when a simple table or standard-library script answers the decision.
+
 ## Quick Start
 
 1. Read the source hierarchy below so you know what is authoritative.
