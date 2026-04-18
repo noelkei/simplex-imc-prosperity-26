@@ -17,11 +17,43 @@ dump of every metric; keep only insights that change future decisions.
 | --- | --- | --- | --- | --- | --- |
 | RUN_ID | CANDIDATE | .py / .json / .log / summary | real platform PnL / calibrated proxy / weak proxy | primary / backup / fallback / rejected / research | NOTES |
 
+## Run Knowledge Index
+
+Compact index for deduplication and run-aware updates. Use this to decide whether a run adds knowledge, confirms a known belief, contradicts a current decision, or can be ignored in future reasoning.
+
+| Run | Candidate | Strategy Family | Changed Axis | Tested Feature / Signal | PnL Source | Comparable To | Knowledge Delta | Memory Action |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| RUN_ID | CANDIDATE | FAMILY | parameter / threshold / feature toggle / execution / risk / baseline | FEATURE_OR_NONE | real platform / calibrated proxy / weak proxy | RUN_OR_CHAMPION | new / confirms / contradicts / duplicate / unclear | update / update lightly / no update |
+
+Dedup heuristic: `candidate + strategy family + changed axis + tested feature/signal + data/source + PnL source`.
+
 ## Current Reusable Insights
 
-| Insight ID | Products | Based On Runs | Analysis Mode | Finding | Confidence | Reuse In | Caveat |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| INSIGHT_ID | PRODUCTS | RUNS | failure / edge / counterfactual / negative evidence | FINDING | high / medium / low | EDA / understanding / strategy / spec / variant | CAVEAT |
+| Insight ID | Products | Based On Runs | Analysis Mode | Finding | Confidence | Portability | Reuse In | Caveat |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| INSIGHT_ID | PRODUCTS | RUNS | failure / edge / counterfactual / negative evidence | FINDING | high / medium / low | round-specific / likely reusable / uncertain | EDA / understanding / strategy / spec / variant | CAVEAT |
+
+## Feature Feedback
+
+Use this to update feature confidence after serious platform or platform-style runs. Keep only feedback that changes a future decision.
+
+| Feature Or Signal | Runs | Outcome | Confidence Change | Next Action |
+| --- | --- | --- | --- | --- |
+| FEATURE | RUNS | helped / failed / unclear | up / down / unchanged | keep / variant / EDA / discard |
+
+## Log-Derived Feature Discoveries
+
+Features discovered from `own_trades`, `market_trades`, execution diagnostics, or logs should enter the pipeline as targeted EDA questions, counterfactuals, or spec updates.
+
+| Feature Or Signal | Source Runs / Logs | Evidence | Online Usability | Proposed Use | Next Step |
+| --- | --- | --- | --- | --- | --- |
+| FEATURE | RUNS_OR_LOGS | EVIDENCE | usable online / log-only / unknown | direct signal / execution filter / risk control / diagnostic | EDA / strategy / spec / variant / discard |
+
+## Feature Confidence Updates
+
+| Feature Or Signal | Previous Confidence | New Confidence | Reason | Affected Artifact |
+| --- | --- | --- | --- | --- |
+| FEATURE | high / medium / low / unknown | high / medium / low / rejected | REASON | EDA / understanding / strategy / spec / variant |
 
 ## Failure Patterns
 
@@ -37,9 +69,11 @@ dump of every metric; keep only insights that change future decisions.
 
 ## Counterfactual Backlog
 
+Status values: `untested | tested-promote | tested-reject | defer | discard | superseded`.
+
 | Idea | Source Run | Improvement Axis | Expected ROI | Status | Next Action |
 | --- | --- | --- | --- | --- | --- |
-| IDEA | RUN | thresholds / timing / filter / inventory / sizing / execution | high / medium / low | test / defer / discard | ACTION |
+| IDEA | RUN | thresholds / timing / filter / inventory / sizing / execution | high / medium / low | untested / tested-promote / tested-reject / defer / discard / superseded | ACTION |
 
 ## Negative Evidence / Do Not Rediscover
 

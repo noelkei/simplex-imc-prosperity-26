@@ -38,6 +38,21 @@ Raw logs are not durable by default. Preserve current decision evidence in `roun
 - Proxy confidence: `high | medium | low | not applicable`
 - Proxy evidence basis:
 
+## Run Classification
+
+- Strategy family:
+- Tested feature / signal:
+- Changed axis type: `parameter | threshold | feature toggle | execution | risk | baseline | unclear`
+- Dedup key:
+- Dedup verdict: `new | confirms | contradicts | duplicate | unclear`
+- Knowledge delta: `new | confirms | contradicts | duplicate | unclear`
+- ROI-gated memory action: `update | update lightly | no update`
+- Memory action rationale:
+- Round adaptation audit: `passed | caveat | failed | not checked`
+- Round adaptation caveat:
+- Portability: `round-specific | likely reusable | uncertain | not applicable`
+- Reroute: `champion decision | targeted EDA | spec revision | debugging | one-axis variant | ignore`
+
 ## Run Diagnostics
 
 - Product PnL split:
@@ -50,6 +65,14 @@ Raw logs are not durable by default. Preserve current decision evidence in `roun
 - Max drawdown:
 - Max abs position:
 - Inventory / mark caveat:
+
+## Feature Diagnostics
+
+Optional but recommended when the run tests a feature, signal, or feature toggle.
+
+| Feature Or Signal | Expected Effect | Observed Effect | Confidence Update | Next Action |
+| --- | --- | --- | --- | --- |
+| FEATURE | EXPECTED | OBSERVED | up / down / unchanged / unclear | keep / variant / EDA / discard |
 
 ## Comparability
 
@@ -76,8 +99,9 @@ Raw logs are not durable by default. Preserve current decision evidence in `roun
 - Analysis status: `not needed | lightweight | full`
 - Source artifacts:
 - Compared against:
-- Memory update: `added | updated | no change`
-- Memory update reason:
+- Memory file change: `added | updated | no change`
+- ROI-gated memory action: `update | update lightly | no update`
+- Memory action / file-change reason:
 
 ### Failure-Driven Analysis
 
@@ -100,7 +124,7 @@ Raw logs are not durable by default. Preserve current decision evidence in `roun
 
 | Counterfactual | Expected Improvement Axis | Evidence Basis | Cost | Verdict |
 | --- | --- | --- | --- | --- |
-| IDEA | thresholds / timing / filter / inventory / sizing / execution | EVIDENCE | low / medium / high | test / defer / discard |
+| IDEA | thresholds / timing / filter / inventory / sizing / execution | EVIDENCE | low / medium / high | untested / tested-promote / tested-reject / defer / discard / superseded |
 
 ## Decision
 

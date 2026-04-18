@@ -26,6 +26,12 @@ NOT_STARTED
 
 - Fact:
 
+## Round Mechanics Delta
+
+| Area | Current-Round Evidence | Prior Assumption At Risk | Downstream Action |
+| --- | --- | --- | --- |
+| products / limits / Trader/API mechanics / data schema / manual-only mechanics | SOURCE | ASSUMPTION_OR_NONE | EDA / understanding / spec / not applicable / blocker |
+
 ## Source Caveats
 
 - Caveat:
@@ -53,6 +59,8 @@ Unknowns must stay separate from facts. Each material unknown needs a next actio
 - [ ] Algorithmic products, symbols, and limits are explicit or marked unknown.
 - [ ] Manual-only mechanics are separated from bot requirements.
 - [ ] Round-specific mechanics are separated from shared API/trading facts.
+- [ ] New or changed Trader/API mechanics are recorded as implement / exclude / not applicable / blocker candidates for later spec work.
+- [ ] Prior-round assumptions at risk are listed for EDA or understanding.
 - [ ] Source caveats and conflicts are recorded.
 - [ ] Available and missing data artifacts are noted.
 - [ ] Unknowns that may affect EDA, strategy, or implementation are actionable.

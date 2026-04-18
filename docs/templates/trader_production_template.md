@@ -38,13 +38,22 @@ class Trader:
 - [ ] Order signs are correct: positive buy, negative sell.
 - [ ] Position limits and aggregate order capacity are considered.
 - [ ] Missing products, empty order books, and missing signals are handled safely.
-- [ ] Round-specific methods such as `bid()` are considered.
+- [ ] Round-specific mechanics/functions match the spec Round-Specific Mechanics Contract.
 - [ ] Imports are supported by the wiki runtime guidance.
 - [ ] Implementation links to a reviewed or deadline-deferred strategy spec.
 - [ ] Strategy signal, feature evidence, and regime assumptions are traceable through the linked spec.
+- [ ] Implemented features match the spec Feature Contract.
+- [ ] No CSV-only or EDA-only feature is hardcoded unless the spec defines an online proxy.
 - [ ] Latest validation run summary is linked.
 - [ ] Pre-upload overfit / cheat audit is passed, failed, or explicitly caveated.
 - [ ] Active submission file is verified.
+
+## Round Adaptation Smoke Check
+
+- [ ] Product symbols and limits come from the active round doc/spec.
+- [ ] Round-specific mechanics/functions are implemented, excluded, or marked not applicable in the spec.
+- [ ] No stale prior-round products, fair values, limits, or constants are used without current-round evidence.
+- [ ] New online fields or mechanics are intentionally used or excluded in the spec.
 
 ## Pre-upload Overfit / Cheat Audit
 

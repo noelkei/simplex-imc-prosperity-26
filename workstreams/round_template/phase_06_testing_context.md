@@ -25,6 +25,7 @@ TBD
 
 - Final submission requires a readable validation or performance summary.
 - Logs should be converted into `.md` and/or `.json` summaries for durable tracking.
+- New runs should record run classification and ROI-gated memory action.
 
 ## Open Questions / Blockers
 
@@ -37,7 +38,7 @@ TBD
 
 ## Next Priority Action
 
-After implementation, run the fastest meaningful validation and create a run summary.
+After implementation, run the fastest meaningful validation and create a run summary with run classification and ROI-gated memory action.
 
 ## Deadline Risk
 

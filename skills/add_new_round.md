@@ -22,9 +22,10 @@ Use this skill when documenting a newly released Prosperity round in the repo wi
 5. Initialize all phase context files with `NOT_STARTED`, unassigned owner/reviewer, links to the new round index, and the first next action.
 6. Confirm member-first bot and performance folders exist for `isaac`, `bruno`, `amin`, `daniela`, and `noel`: `../rounds/round_X/bots/<member>/canonical/`, `../rounds/round_X/bots/<member>/historical/`, `../rounds/round_X/performances/<member>/canonical/`, and `../rounds/round_X/performances/<member>/historical/`.
 7. Extract products, limits, challenge names, algorithmic facts, manual facts, and source caveats into the new round ingestion artifact.
-8. Record unknowns that may affect EDA, strategy, or implementation separately from facts, with a next action: clarify, targeted EDA, or defer with risk.
-9. Keep manual-only mechanics separate from bot implementation requirements.
-10. If the source appears to change the API contract, quote or paraphrase the exact source and mark the caveat before implementation depends on it.
-11. Update `_index.md` blockers or next priority action when a downstream-impacting unknown remains.
-12. Do not use round-local bot artifacts, performance artifacts, `non-canonical/` drafts, sample outputs, or memory as authority.
-13. Handoff with reviewed sources, new or updated round doc path, initialized round workspace path, unresolved facts, downstream-impacting unknowns, and downstream actions.
+8. Record a compact Round Mechanics Delta for downstream phases: active products/limits, new or changed Trader/API mechanics, data/schema changes, manual-only mechanics, and prior-round assumptions at risk.
+9. Record unknowns that may affect EDA, strategy, or implementation separately from facts, with a next action: clarify, targeted EDA, or defer with risk.
+10. Keep manual-only mechanics separate from bot implementation requirements.
+11. If the source appears to change the API contract, quote or paraphrase the exact source and mark the caveat before implementation depends on it.
+12. Update `_index.md` blockers or next priority action when a downstream-impacting unknown remains.
+13. Do not use round-local bot artifacts, performance artifacts, `non-canonical/` drafts, sample outputs, or memory as authority.
+14. Handoff with reviewed sources, new or updated round doc path, initialized round workspace path, Round Mechanics Delta, unresolved facts, downstream-impacting unknowns, and downstream actions.

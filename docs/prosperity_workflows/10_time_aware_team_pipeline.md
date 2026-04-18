@@ -21,6 +21,8 @@ Required gates:
 - No implementation without a reviewed strategy spec.
 - No final submission without a readable validation or performance summary.
 - No phase is complete if facts, hypotheses, assumptions, and evidence are mixed together.
+- No stale prior-round assumption may move forward unless current-round evidence supports it or the risk is explicitly labeled.
+- Round-specific mechanics, Trader methods, and changed fields must be implemented, excluded, marked not applicable, or blocked in the spec before coding.
 - Round-local member-owned bot/performance folders remain non-authoritative execution artifacts; removed top-level `bots/` and `performances/` must not be recreated.
 - `non-canonical/` can hold personal drafts, but it is outside this pipeline until useful content is moved or summarized into a formal round artifact.
 
@@ -101,13 +103,13 @@ General completion rule: outputs must be usable without reinterpretation, facts 
 
 Phase-specific completion:
 
-- Ingestion: products, limits, algorithmic/manual split, and caveats reviewed.
-- EDA: product scope, data quality, feature inventory, feature engineering notes, conditional patterns/regimes, signal hypotheses, open questions, and downstream agent notes are clear.
-- Understanding: EDA evidence and caveats are compressed into strategy-relevant insights, what to try, what not to trust yet, open risks, and candidate implications.
-- Strategy generation: 1-3 shortlisted candidates selected.
-- Strategy spec: at least one reviewed implementation-ready spec exists.
-- Implementation: bot maps to a reviewed spec and passes contract/rule checks.
-- Testing/performance: readable run summary links bot, spec, raw run, metrics, and limits.
+- Ingestion: products, limits, algorithmic/manual split, caveats, and Round Mechanics Delta reviewed.
+- EDA: product scope, Round Adaptation Check, data quality, feature inventory/lifecycle, feature promotion decisions, signal hypotheses, open questions, and downstream agent notes are clear.
+- Understanding: EDA evidence, promoted signals, rejected/unresolved research memory, assumptions carried forward, open risks, and candidate implications are compressed.
+- Strategy generation: 1-3 shortlisted candidates selected, feature budget respected, and Round Coverage Check addressed.
+- Strategy spec: at least one reviewed implementation-ready spec exists with Feature Contract and Round-Specific Mechanics Contract.
+- Implementation: bot maps to a reviewed spec and passes contract/rule plus round adaptation checks.
+- Testing/performance: readable run summary links bot, spec, raw run, metrics, limits, run classification, and ROI-gated memory action.
 - Debugging: issue has reproduction, expected vs observed behavior, linked spec/run, classification, and next action.
 
 ## Data Arrival Rule

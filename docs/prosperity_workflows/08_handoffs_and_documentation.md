@@ -33,6 +33,9 @@ Known gaps, ambiguity, or fragility.
 ## Downstream use
 What the next agent should use, avoid, or validate next.
 
+## Run classification
+When handing off a platform or proxy run: strategy family, changed axis, tested feature/signal, knowledge delta, ROI-gated memory action, portability, and dedup caveat.
+
 ## Next action
 The next useful step and who can pick it up.
 ```
@@ -40,14 +43,26 @@ The next useful step and who can pick it up.
 ## Common handoff paths
 
 - EDA to strategy: provide observed patterns, feature/signal hypotheses, reproduction steps, evidence limits, and which signals are usable, exploratory, or not ready.
-- EDA to understanding: provide product scope, feature inventory, conditional patterns, signal confidence, caveats, and validation needs.
+- EDA to understanding: provide product scope, feature inventory, feature origin, online usability, role, lifecycle decision, conditional patterns, signal confidence, caveats, and validation needs.
 - Understanding to strategy: provide prioritized strategy-relevant insights, what should be tried, what should not be trusted yet, and open risks.
-- Strategy spec to implementation: provide reviewed spec, parameters, risk behavior, and tests.
-- Strategy/spec to variant generation: provide parent spec, insight being tested, allowed changed axes, expected effect, and validation check.
+- Strategy spec to implementation: provide reviewed spec, Feature Contract, Round-Specific Mechanics Contract, parameters, risk behavior, and tests.
+- Strategy/spec to variant generation: provide parent spec, insight being tested, allowed changed axes, feature toggle if applicable, expected effect, and validation check.
 - Implementation to validation: provide changed behavior, expected outputs, and known risk areas.
 - Validation to strategy: provide failures, logs, and whether the issue is factual, implementation-level, or heuristic.
-- Platform run to post-run memory: provide reusable failure patterns, edge decomposition, counterfactuals, negative evidence, and links back to per-run artifacts.
+- Platform run to post-run memory: provide run classification, knowledge delta, ROI-gated memory action, reusable failure patterns, edge decomposition, feature feedback, counterfactuals, negative evidence, and links back to per-run artifacts.
 - Round preparation to all workstreams: provide products, limits, manual/algorithmic separation, caveats, and data availability.
+
+## Platform run handoff fields
+
+When a handoff includes a platform or platform-style run, include these fields if available:
+
+- Candidate and strategy family.
+- Changed axis and tested feature/signal.
+- PnL source and comparability.
+- Knowledge delta: `new | confirms | contradicts | duplicate | unclear`.
+- ROI-gated memory action: `update | update lightly | no update`.
+- Portability: `round-specific | likely reusable | uncertain | not applicable`.
+- Reroute: champion decision, targeted EDA, spec revision, debugging, one-axis variant, or ignore.
 
 ## Documentation rules
 

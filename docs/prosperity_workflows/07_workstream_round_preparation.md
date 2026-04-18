@@ -12,6 +12,7 @@ Round preparation extracts new official facts and prepares the repo for EDA, str
 
 - A round document with products, limits, challenge names, algorithmic facts, manual facts, and source caveats.
 - Clear separation between algorithmic and manual mechanics.
+- A compact Round Mechanics Delta: products/limits, changed Trader/API mechanics, data/schema changes, manual-only mechanics, and prior-round assumptions at risk.
 - A short prep note for downstream contributors: available products, limits, data artifacts, and unresolved questions.
 - Links to the wiki pages that define shared API, trading, runtime, and platform behavior.
 
@@ -32,6 +33,8 @@ Before ingestion is marked complete:
 - Algorithmic products, symbols, and position limits are explicit or marked unknown.
 - Manual-only mechanics are separated from bot implementation requirements.
 - Round-specific mechanics are separated from shared API and trading facts.
+- New or changed Trader/API mechanics are recorded as implement / exclude / not applicable / blocker candidates for later spec work.
+- Prior-round assumptions at risk are listed for EDA or understanding.
 - Source caveats and conflicts are recorded.
 - Available and missing data artifacts are noted.
 - Unknowns that may affect EDA, strategy, or implementation are separated from facts and have a next action.
