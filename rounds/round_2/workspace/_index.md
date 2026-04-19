@@ -49,6 +49,7 @@ Maximum active strategies: 3.
 - `r2_amin_hybrid_01`: fixed-FV hybrid candidate already implemented.
 - `r2_amin_feeaware_kalman_02`: new adaptive fee-aware Kalman candidate implemented.
 - `r2_amin_feeaware_microprice_03`: new adaptive fee-aware microprice candidate implemented.
+- `r2_amin_regime_depth_04`: new adaptive regime-aware depth candidate implemented.
 
 ## Active Implementations
 
@@ -57,6 +58,7 @@ Maximum active implementation candidates: 2.
 - `rounds/round_2/bots/amin/canonical/candidate_r2_amin_hybrid_01.py`
 - `rounds/round_2/bots/amin/canonical/candidate_r2_amin_feeaware_kalman_02.py`
 - `rounds/round_2/bots/amin/canonical/candidate_r2_amin_feeaware_microprice_03.py`
+- `rounds/round_2/bots/amin/canonical/candidate_r2_amin_regime_depth_04.py`
 
 ## Baseline / Reference Bot
 
@@ -68,6 +70,7 @@ Maximum active implementation candidates: 2.
 - Lightweight local replay comparison now exists in `../performances/amin/canonical/candidate_comparison_2026-04-19.json`.
 - In the latest tuned comparison, `r2_amin_feeaware_kalman_02` is nearly tied with `r2_amin_hybrid_01` on average and wins day 0, but still trails slightly overall in the lightweight replay harness.
 - Follow-up fast replay work introduced `r2_amin_feeaware_microprice_03`, a sibling branch that shifts ACO toward microprice pressure while preserving the Kalman backbone; in the local stub it edges `_02` across the three sample days, but platform validation is still required.
+- Round-2-specific follow-up work then introduced `r2_amin_regime_depth_04`, which uses depth-price information selectively by spread regime so it stays robust on the 80% randomized test books while preserving upside if extra quote access is won.
 - Best current candidate on available sample-data evidence: slight edge to `r2_amin_hybrid_01`, but the gap is now very small.
 - Raw Round 2 sample data is present under `../data/raw/`.
 - Decision-support script: [`01_eda/round_2_decision_tools.py`](01_eda/round_2_decision_tools.py).

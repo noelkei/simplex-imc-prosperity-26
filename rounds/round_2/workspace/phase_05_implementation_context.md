@@ -20,6 +20,8 @@ IN_PROGRESS
 - Added fast-mode one-page spec `04_strategy_specs/spec_candidate_r2_amin_feeaware_kalman_02.md` to preserve the implementation gate under user-requested hackathon pressure.
 - Added new implementation `../../bots/amin/canonical/candidate_r2_amin_feeaware_microprice_03.py`.
 - Added fast-mode one-page spec `04_strategy_specs/spec_candidate_r2_amin_feeaware_microprice_03.md` for the pressure-following microprice branch.
+- Added new implementation `../../bots/amin/canonical/candidate_r2_amin_regime_depth_04.py`.
+- Added fast-mode one-page spec `04_strategy_specs/spec_candidate_r2_amin_regime_depth_04.md` for the regime-aware depth branch.
 - Local syntax compile passed for both active Amin candidates.
 
 ## Current Findings
@@ -32,7 +34,7 @@ IN_PROGRESS
 
 - Maximum active implementations remains 2.
 - Proceeded under deadline-deferred spec flow due to explicit user request.
-- Active Amin candidates are now `candidate_r2_amin_hybrid_01.py`, `candidate_r2_amin_feeaware_kalman_02.py`, and `candidate_r2_amin_feeaware_microprice_03.py`.
+- Active Amin candidates are now `candidate_r2_amin_hybrid_01.py`, `candidate_r2_amin_feeaware_kalman_02.py`, `candidate_r2_amin_feeaware_microprice_03.py`, and `candidate_r2_amin_regime_depth_04.py`.
 - Placeholder Market Access Fee bid for the Kalman candidate is `12` pending scenario review.
 
 ## Open Questions / Blockers
@@ -48,9 +50,11 @@ IN_PROGRESS
 - [`04_strategy_specs/spec_candidate_r2_amin_hybrid_ipr_drift_aco_mm.md`](04_strategy_specs/spec_candidate_r2_amin_hybrid_ipr_drift_aco_mm.md)
 - [`04_strategy_specs/spec_candidate_r2_amin_feeaware_kalman_02.md`](04_strategy_specs/spec_candidate_r2_amin_feeaware_kalman_02.md)
 - [`04_strategy_specs/spec_candidate_r2_amin_feeaware_microprice_03.md`](04_strategy_specs/spec_candidate_r2_amin_feeaware_microprice_03.md)
+- [`04_strategy_specs/spec_candidate_r2_amin_regime_depth_04.md`](04_strategy_specs/spec_candidate_r2_amin_regime_depth_04.md)
 - [`../bots/amin/canonical/candidate_r2_amin_hybrid_01.py`](../bots/amin/canonical/candidate_r2_amin_hybrid_01.py)
 - [`../bots/amin/canonical/candidate_r2_amin_feeaware_kalman_02.py`](../bots/amin/canonical/candidate_r2_amin_feeaware_kalman_02.py)
 - [`../bots/amin/canonical/candidate_r2_amin_feeaware_microprice_03.py`](../bots/amin/canonical/candidate_r2_amin_feeaware_microprice_03.py)
+- [`../bots/amin/canonical/candidate_r2_amin_regime_depth_04.py`](../bots/amin/canonical/candidate_r2_amin_regime_depth_04.py)
 - [`../performances/amin/canonical/candidate_comparison_2026-04-19.json`](../performances/amin/canonical/candidate_comparison_2026-04-19.json)
 
 ## Next Priority Action
