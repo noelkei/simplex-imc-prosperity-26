@@ -2,7 +2,7 @@
 
 ## Status
 
-READY_FOR_REVIEW
+COMPLETED
 
 ## Sources
 
@@ -114,6 +114,14 @@ Unknowns must stay separate from facts. Each material unknown needs a next actio
 
 ## Review
 
-- Reviewer: Unassigned
-- Review outcome: not reviewed
-- Status: READY_FOR_REVIEW
+- Reviewer: Human
+- Review outcome: approved with caveats
+- Status: COMPLETED
+
+Caveats:
+
+- Exact Round 2 deadline remains unknown.
+- Market Access Fee bid value, manual Speed rank, and extra-access value remain
+  downstream strategy/EDA questions rather than ingestion facts.
+- Pre-kickoff EDA outputs were found in the EDA workspace and archived as
+  historical/unreviewed artifacts before fresh Round 2 EDA begins.

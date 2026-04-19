@@ -1,0 +1,9 @@
+feature_or_signal,decision,destination,reason,caveat_reopen_condition
+IPR drift plus residual,promote,Understanding / strategy candidates,"strong signal, stable stability, changes strategy.",Mean linear R2 1.000; must avoid sample-end assumptions.
+ACO short-horizon mean reversion,promote,Understanding / strategy candidates,"strong signal, stable stability, changes strategy.",Mean delta AC1 -0.501; needs execution validation.
+top imbalance,promote,Understanding / strategy candidates,"strong signal, stable stability, changes parameters.",Mean IC@1 0.648; test conditional stability.
+full-book imbalance,promote,Understanding / strategy candidates,"strong signal, stable stability, changes parameters.",Mean IC@1 0.390; top imbalance may be simpler.
+spread regime,exploratory,EDA report only,Potentially useful but not ready for spec or implementation.,Mean spread q95 18.17; filter needs PnL validation.
+liquidity/depth regime,exploratory,EDA report only,Potentially useful but not ready for spec or implementation.,Mean one-sided rate 0.075; use defensively first.
+trade pressure proxy,needs logs,Future platform diagnostics,Sample trades are insufficient for implementation decisions.,Mean trade rows per product/day 398.5; needs platform market_trades logs.
+platform quote-subset comparability,EDA-only calibration,Validation planning,"Diagnostic evidence affects comparability, not bot logic.",Platform overlap rows min 1000.0; no printed state probe lines.

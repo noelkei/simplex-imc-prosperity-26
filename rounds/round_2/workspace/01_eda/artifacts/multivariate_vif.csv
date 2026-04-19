@@ -1,0 +1,17 @@
+product,feature,vif,decision_note
+ASH_COATED_OSMIUM,top_imbalance,12.98080307487,high redundancy
+ASH_COATED_OSMIUM,microprice_deviation,12.758041296546013,high redundancy
+ASH_COATED_OSMIUM,drift_residual_z,1.0841285184051994,acceptable
+ASH_COATED_OSMIUM,spread,1.0532850158990943,acceptable
+ASH_COATED_OSMIUM,book_total_volume,1.0369711069489012,acceptable
+ASH_COATED_OSMIUM,book_imbalance,1.0261417010779224,acceptable
+ASH_COATED_OSMIUM,trade_pressure_qty,1.0003452055248454,acceptable
+ASH_COATED_OSMIUM,mid_delta_lag1,1.0002017567005672,acceptable
+INTARIAN_PEPPER_ROOT,top_imbalance,35.9091745551045,high redundancy
+INTARIAN_PEPPER_ROOT,microprice_deviation,22.30921399031569,high redundancy
+INTARIAN_PEPPER_ROOT,drift_residual_z,5.370095080730031,high redundancy
+INTARIAN_PEPPER_ROOT,trade_pressure_qty,1.0786513260384865,acceptable
+INTARIAN_PEPPER_ROOT,spread,1.0514824021080518,acceptable
+INTARIAN_PEPPER_ROOT,book_total_volume,1.04690533082269,acceptable
+INTARIAN_PEPPER_ROOT,book_imbalance,1.0367633694397784,acceptable
+INTARIAN_PEPPER_ROOT,mid_delta_lag1,1.0003829190457523,acceptable

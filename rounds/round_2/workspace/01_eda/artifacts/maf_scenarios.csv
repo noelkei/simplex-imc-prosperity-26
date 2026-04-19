@@ -1,0 +1,21 @@
+edge_threshold,gross_edge_opportunity,extra_access_incremental_gross_proxy,capture_rate_assumption,incremental_pnl_proxy,break_even_bid_proxy,conservative_bid_floor,conservative_bid_ceiling,caveat
+0,31451.287966917524,7862.821991729381,0.01,78.6282199172938,78.6282199172938,0,39,Proxy only: bid acceptance depends on competitors; testing ignores bid().
+0,31451.287966917524,7862.821991729381,0.025,196.57054979323453,196.57054979323453,0,98,Proxy only: bid acceptance depends on competitors; testing ignores bid().
+0,31451.287966917524,7862.821991729381,0.05,393.14109958646907,393.14109958646907,0,196,Proxy only: bid acceptance depends on competitors; testing ignores bid().
+0,31451.287966917524,7862.821991729381,0.1,786.2821991729381,786.2821991729381,0,393,Proxy only: bid acceptance depends on competitors; testing ignores bid().
+1,30834.328628950454,7708.5821572376135,0.01,77.08582157237613,77.08582157237613,0,38,Proxy only: bid acceptance depends on competitors; testing ignores bid().
+1,30834.328628950454,7708.5821572376135,0.025,192.71455393094035,192.71455393094035,0,96,Proxy only: bid acceptance depends on competitors; testing ignores bid().
+1,30834.328628950454,7708.5821572376135,0.05,385.4291078618807,385.4291078618807,0,192,Proxy only: bid acceptance depends on competitors; testing ignores bid().
+1,30834.328628950454,7708.5821572376135,0.1,770.8582157237614,770.8582157237614,0,385,Proxy only: bid acceptance depends on competitors; testing ignores bid().
+2,29030.761905594452,7257.690476398613,0.01,72.57690476398614,72.57690476398614,0,36,Proxy only: bid acceptance depends on competitors; testing ignores bid().
+2,29030.761905594452,7257.690476398613,0.025,181.44226190996534,181.44226190996534,0,90,Proxy only: bid acceptance depends on competitors; testing ignores bid().
+2,29030.761905594452,7257.690476398613,0.05,362.8845238199307,362.8845238199307,0,181,Proxy only: bid acceptance depends on competitors; testing ignores bid().
+2,29030.761905594452,7257.690476398613,0.1,725.7690476398614,725.7690476398614,0,362,Proxy only: bid acceptance depends on competitors; testing ignores bid().
+3,24311.66225793881,6077.915564484702,0.01,60.77915564484702,60.77915564484702,0,30,Proxy only: bid acceptance depends on competitors; testing ignores bid().
+3,24311.66225793881,6077.915564484702,0.025,151.94788911211756,151.94788911211756,0,75,Proxy only: bid acceptance depends on competitors; testing ignores bid().
+3,24311.66225793881,6077.915564484702,0.05,303.89577822423513,303.89577822423513,0,151,Proxy only: bid acceptance depends on competitors; testing ignores bid().
+3,24311.66225793881,6077.915564484702,0.1,607.7915564484703,607.7915564484703,0,303,Proxy only: bid acceptance depends on competitors; testing ignores bid().
+5,1557.4690110690753,389.36725276726884,0.01,3.8936725276726887,3.8936725276726887,0,1,Proxy only: bid acceptance depends on competitors; testing ignores bid().
+5,1557.4690110690753,389.36725276726884,0.025,9.734181319181722,9.734181319181722,0,4,Proxy only: bid acceptance depends on competitors; testing ignores bid().
+5,1557.4690110690753,389.36725276726884,0.05,19.468362638363445,19.468362638363445,0,9,Proxy only: bid acceptance depends on competitors; testing ignores bid().
+5,1557.4690110690753,389.36725276726884,0.1,38.93672527672689,38.93672527672689,0,19,Proxy only: bid acceptance depends on competitors; testing ignores bid().

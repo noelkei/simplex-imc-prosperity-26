@@ -1,0 +1,9 @@
+feature,origin,online_usability,meaning,role,signal_strength,stability,actionability,lifecycle_decision,notes_caveats
+IPR drift plus residual,csv,usable online,Linear current-round IPR drift with smaller residual variation.,direct signal,strong,stable,changes strategy,promote,Mean linear R2 1.000; must avoid sample-end assumptions.
+ACO short-horizon mean reversion,csv,usable online,ACO mid deltas tend to reverse at lag 1.,direct signal,strong,stable,changes strategy,promote,Mean delta AC1 -0.501; needs execution validation.
+top imbalance,csv,usable online,Best-level bid/ask volume skew.,direct signal,strong,stable,changes parameters,promote,Mean IC@1 0.648; test conditional stability.
+full-book imbalance,csv,usable online,Three-level total bid/ask depth skew.,direct signal,strong,stable,changes parameters,promote,Mean IC@1 0.390; top imbalance may be simpler.
+spread regime,csv,usable online,Wide/tight spread state from best bid/ask.,execution filter,medium,day-sensitive,changes validation,exploratory,Mean spread q95 18.17; filter needs PnL validation.
+liquidity/depth regime,csv,usable online,Total visible depth and one-sided-book conditions.,risk control,medium,regime-dependent,changes risk,exploratory,Mean one-sided rate 0.075; use defensively first.
+trade pressure proxy,combined,usable online,Trade price relative to mid signs recent flow.,diagnostic,weak,unknown,changes validation,needs logs,Mean trade rows per product/day 398.5; needs platform market_trades logs.
+platform quote-subset comparability,log/post-run,EDA-only,Difference between sample day 1 and platform activitiesLog quote subset.,diagnostic,medium,unknown,changes validation,EDA-only calibration,Platform overlap rows min 1000.0; no printed state probe lines.

@@ -1,0 +1,17 @@
+product,metric,sample_value,platform_value,difference,verdict,notes
+ASH_COATED_OSMIUM,rows,10000.0,1000.0,-9000.0,no,Platform run has 1000 timestamps and no printed ROUND2_STATE_PROBE lines.
+ASH_COATED_OSMIUM,overlap_rows,10000.0,1000.0,0.0,yes,Platform run has 1000 timestamps and no printed ROUND2_STATE_PROBE lines.
+ASH_COATED_OSMIUM,two_sided_rate,0.9214,0.907,-0.014399999999999968,yes,Platform run has 1000 timestamps and no printed ROUND2_STATE_PROBE lines.
+ASH_COATED_OSMIUM,one_sided_rate,0.0764,0.092,0.015600000000000003,unclear,Platform run has 1000 timestamps and no printed ROUND2_STATE_PROBE lines.
+ASH_COATED_OSMIUM,mean_spread,16.228890818319947,16.251378169790517,0.022487351470569905,yes,Platform run has 1000 timestamps and no printed ROUND2_STATE_PROBE lines.
+ASH_COATED_OSMIUM,mean_book_total_volume,60.6045,60.372,-0.2325000000000017,yes,Platform run has 1000 timestamps and no printed ROUND2_STATE_PROBE lines.
+ASH_COATED_OSMIUM,mid_std,5.0186759441888515,3.941924241107946,-1.0767517030809057,unclear,Platform run has 1000 timestamps and no printed ROUND2_STATE_PROBE lines.
+INTARIAN_PEPPER_ROOT,rows,10000.0,1000.0,-9000.0,no,Platform run has 1000 timestamps and no printed ROUND2_STATE_PROBE lines.
+INTARIAN_PEPPER_ROOT,overlap_rows,10000.0,1000.0,0.0,yes,Platform run has 1000 timestamps and no printed ROUND2_STATE_PROBE lines.
+INTARIAN_PEPPER_ROOT,two_sided_rate,0.9248,0.929,0.0042000000000000925,yes,Platform run has 1000 timestamps and no printed ROUND2_STATE_PROBE lines.
+INTARIAN_PEPPER_ROOT,one_sided_rate,0.0736,0.07,-0.003599999999999992,yes,Platform run has 1000 timestamps and no printed ROUND2_STATE_PROBE lines.
+INTARIAN_PEPPER_ROOT,mean_spread,15.177011245674741,14.594187298170075,-0.5828239475046662,yes,Platform run has 1000 timestamps and no printed ROUND2_STATE_PROBE lines.
+INTARIAN_PEPPER_ROOT,mean_book_total_volume,48.4738,48.46,-0.01379999999999626,yes,Platform run has 1000 timestamps and no printed ROUND2_STATE_PROBE lines.
+INTARIAN_PEPPER_ROOT,mid_std,288.74642315861286,29.079731585861296,-259.6666915727516,unclear,Platform run has 1000 timestamps and no printed ROUND2_STATE_PROBE lines.
+ALL,platform_profit,,0.0,,not_applicable,"No-trade diagnostic logger, so PnL is not alpha evidence."
+ALL,graph_rows,,500.0,,yes,Expected PnL graph is flat for no-trade logger.

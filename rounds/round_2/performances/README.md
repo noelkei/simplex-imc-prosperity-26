@@ -1,6 +1,17 @@
 # Round 2 Performances
 
-No performance artifacts have been added yet.
+Saved platform artifacts:
+
+- `noel/historical/baseline_state_logger.json`
+- `noel/historical/candidate_r2_cand_*.json`
+- `noel/canonical/run_20260419_battery01_*.md`
+
+The baseline logger is historical EDA evidence for quote-subset comparability,
+not alpha evidence or a candidate validation result.
+
+Battery 01 candidate JSONs are raw platform evidence. The canonical decision
+evidence is the generated run summaries under `noel/canonical/` and the
+aggregate report at `../workspace/06_testing/round2_battery_01_analysis.md`.
 
 Performance results are non-authoritative evidence. Preserve durable run evidence as `.md` and/or `.json` summaries using `docs/templates/run_summary_template.md`.
 

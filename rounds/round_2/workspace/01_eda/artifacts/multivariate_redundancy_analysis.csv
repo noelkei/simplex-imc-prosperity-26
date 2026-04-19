@@ -1,0 +1,10 @@
+product,feature_a,feature_b,correlation,abs_correlation,decision,downstream_effect
+ASH_COATED_OSMIUM,spread,relative_spread,0.9999957620094307,0.9999957620094307,merge_or_choose_simpler,Use absolute spread for execution unless relative spread adds cross-product comparability.
+ASH_COATED_OSMIUM,top_imbalance,microprice_deviation,0.9587478212384434,0.9587478212384434,merge_or_choose_simpler,Prefer top_imbalance unless microprice gives controlled lift.
+INTARIAN_PEPPER_ROOT,top_imbalance,microprice_deviation,0.957490673049146,0.957490673049146,merge_or_choose_simpler,Prefer top_imbalance unless microprice gives controlled lift.
+INTARIAN_PEPPER_ROOT,trade_count,trade_quantity,0.9549294963267898,0.9549294963267898,merge_or_choose_simpler,Check controlled model before stacking both features.
+INTARIAN_PEPPER_ROOT,spread,relative_spread,0.9337790636521556,0.9337790636521556,merge_or_choose_simpler,Use absolute spread for execution unless relative spread adds cross-product comparability.
+INTARIAN_PEPPER_ROOT,book_imbalance,depth_ratio,0.9175827712387933,0.9175827712387933,merge_or_choose_simpler,Check controlled model before stacking both features.
+ASH_COATED_OSMIUM,trade_count,trade_quantity,0.9163585503870384,0.9163585503870384,merge_or_choose_simpler,Check controlled model before stacking both features.
+INTARIAN_PEPPER_ROOT,z_mid_50,drift_residual_z,0.9143640760430388,0.9143640760430388,merge_or_choose_simpler,Check controlled model before stacking both features.
+ASH_COATED_OSMIUM,book_imbalance,depth_ratio,0.8817808596579121,0.8817808596579121,merge_or_choose_simpler,Check controlled model before stacking both features.

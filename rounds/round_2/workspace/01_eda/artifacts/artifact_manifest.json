@@ -1,0 +1,28 @@
+{
+  "plots": [
+    "rounds/round_2/workspace/01_eda/artifacts/plot_mid_price_by_product_day.png",
+    "rounds/round_2/workspace/01_eda/artifacts/plot_spread_distribution.png",
+    "rounds/round_2/workspace/01_eda/artifacts/plot_returns_distribution.png",
+    "rounds/round_2/workspace/01_eda/artifacts/plot_imbalance_ic.png",
+    "rounds/round_2/workspace/01_eda/artifacts/plot_platform_comparability.png",
+    "rounds/round_2/workspace/01_eda/artifacts/plot_maf_scenarios.png",
+    "rounds/round_2/workspace/01_eda/artifacts/plot_manual_scenarios.png",
+    "rounds/round_2/workspace/01_eda/artifacts/plot_drift_residuals.png"
+  ],
+  "report": "rounds/round_2/workspace/01_eda/eda_round2_fresh.md",
+  "tables": {
+    "conditional_imbalance_ic": "rounds/round_2/workspace/01_eda/artifacts/conditional_imbalance_ic.csv",
+    "data_quality": "rounds/round_2/workspace/01_eda/artifacts/data_quality_summary.csv",
+    "feature_inventory": "rounds/round_2/workspace/01_eda/artifacts/feature_inventory.csv",
+    "feature_promotion_decisions": "rounds/round_2/workspace/01_eda/artifacts/feature_promotion_decisions.csv",
+    "imbalance_ic": "rounds/round_2/workspace/01_eda/artifacts/imbalance_ic.csv",
+    "maf_scenarios": "rounds/round_2/workspace/01_eda/artifacts/maf_scenarios.csv",
+    "manual_scenario_grid_top": "rounds/round_2/workspace/01_eda/artifacts/manual_scenario_grid_top.csv",
+    "manual_scenario_summary": "rounds/round_2/workspace/01_eda/artifacts/manual_scenario_summary.csv",
+    "platform_comparability": "rounds/round_2/workspace/01_eda/artifacts/platform_comparability.csv",
+    "product_behavior": "rounds/round_2/workspace/01_eda/artifacts/product_behavior_summary.csv",
+    "round1_assumption_check": "rounds/round_2/workspace/01_eda/artifacts/round1_assumption_check.csv",
+    "trade_flow_summary": "rounds/round_2/workspace/01_eda/artifacts/trade_flow_summary.csv",
+    "trade_pressure_proxy": "rounds/round_2/workspace/01_eda/artifacts/trade_pressure_proxy.csv"
+  }
+}

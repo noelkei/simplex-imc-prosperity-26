@@ -1,0 +1,282 @@
+[
+  {
+    "artifact_path": "rounds/round_2/workspace/01_eda/artifacts/data_quality_summary.csv",
+    "type": "table",
+    "source_data": "Round 2 raw CSVs / platform JSON / derived EDA tables",
+    "useful_for": "data_quality_summary",
+    "decision_relevant": "yes"
+  },
+  {
+    "artifact_path": "rounds/round_2/workspace/01_eda/artifacts/product_behavior_summary.csv",
+    "type": "table",
+    "source_data": "Round 2 raw CSVs / platform JSON / derived EDA tables",
+    "useful_for": "product_behavior_summary",
+    "decision_relevant": "yes"
+  },
+  {
+    "artifact_path": "rounds/round_2/workspace/01_eda/artifacts/round1_assumption_check.csv",
+    "type": "table",
+    "source_data": "Round 2 raw CSVs / platform JSON / derived EDA tables",
+    "useful_for": "round1_assumption_check",
+    "decision_relevant": "yes"
+  },
+  {
+    "artifact_path": "rounds/round_2/workspace/01_eda/artifacts/imbalance_ic.csv",
+    "type": "table",
+    "source_data": "Round 2 raw CSVs / platform JSON / derived EDA tables",
+    "useful_for": "imbalance_ic",
+    "decision_relevant": "yes"
+  },
+  {
+    "artifact_path": "rounds/round_2/workspace/01_eda/artifacts/conditional_imbalance_ic.csv",
+    "type": "table",
+    "source_data": "Round 2 raw CSVs / platform JSON / derived EDA tables",
+    "useful_for": "conditional_imbalance_ic",
+    "decision_relevant": "yes"
+  },
+  {
+    "artifact_path": "rounds/round_2/workspace/01_eda/artifacts/trade_flow_summary.csv",
+    "type": "table",
+    "source_data": "Round 2 raw CSVs / platform JSON / derived EDA tables",
+    "useful_for": "trade_flow_summary",
+    "decision_relevant": "yes"
+  },
+  {
+    "artifact_path": "rounds/round_2/workspace/01_eda/artifacts/trade_pressure_proxy.csv",
+    "type": "table",
+    "source_data": "Round 2 raw CSVs / platform JSON / derived EDA tables",
+    "useful_for": "trade_pressure_proxy",
+    "decision_relevant": "yes"
+  },
+  {
+    "artifact_path": "rounds/round_2/workspace/01_eda/artifacts/platform_comparability.csv",
+    "type": "table",
+    "source_data": "Round 2 raw CSVs / platform JSON / derived EDA tables",
+    "useful_for": "platform_comparability",
+    "decision_relevant": "yes"
+  },
+  {
+    "artifact_path": "rounds/round_2/workspace/01_eda/artifacts/maf_scenarios.csv",
+    "type": "table",
+    "source_data": "Round 2 wiki Market Access Fee mechanics / sample-data opportunity proxy",
+    "useful_for": "maf_scenarios",
+    "decision_relevant": "yes"
+  },
+  {
+    "artifact_path": "rounds/round_2/workspace/01_eda/artifacts/manual_scenario_grid_top.csv",
+    "type": "table",
+    "source_data": "Round 2 wiki manual formula / Research-Scale-Speed scenario grid",
+    "useful_for": "manual_scenario_grid_top",
+    "decision_relevant": "yes"
+  },
+  {
+    "artifact_path": "rounds/round_2/workspace/01_eda/artifacts/manual_scenario_summary.csv",
+    "type": "table",
+    "source_data": "Round 2 wiki manual formula / Research-Scale-Speed scenario grid",
+    "useful_for": "manual_scenario_summary",
+    "decision_relevant": "yes"
+  },
+  {
+    "artifact_path": "rounds/round_2/workspace/01_eda/artifacts/feature_inventory.csv",
+    "type": "table",
+    "source_data": "Round 2 raw CSVs / platform JSON / derived EDA tables",
+    "useful_for": "feature_inventory",
+    "decision_relevant": "yes"
+  },
+  {
+    "artifact_path": "rounds/round_2/workspace/01_eda/artifacts/feature_promotion_decisions.csv",
+    "type": "table",
+    "source_data": "Round 2 raw CSVs / platform JSON / derived EDA tables",
+    "useful_for": "feature_promotion_decisions",
+    "decision_relevant": "yes"
+  },
+  {
+    "artifact_path": "rounds/round_2/workspace/01_eda/artifacts/plot_mid_price_by_product_day.png",
+    "type": "plot",
+    "source_data": "Round 2 raw CSVs / platform JSON / derived EDA tables",
+    "useful_for": "plot_mid_price_by_product_day",
+    "decision_relevant": "yes"
+  },
+  {
+    "artifact_path": "rounds/round_2/workspace/01_eda/artifacts/plot_spread_distribution.png",
+    "type": "plot",
+    "source_data": "Round 2 raw CSVs / platform JSON / derived EDA tables",
+    "useful_for": "plot_spread_distribution",
+    "decision_relevant": "yes"
+  },
+  {
+    "artifact_path": "rounds/round_2/workspace/01_eda/artifacts/plot_returns_distribution.png",
+    "type": "plot",
+    "source_data": "Round 2 raw CSVs / platform JSON / derived EDA tables",
+    "useful_for": "plot_returns_distribution",
+    "decision_relevant": "yes"
+  },
+  {
+    "artifact_path": "rounds/round_2/workspace/01_eda/artifacts/plot_imbalance_ic.png",
+    "type": "plot",
+    "source_data": "Round 2 raw CSVs / platform JSON / derived EDA tables",
+    "useful_for": "plot_imbalance_ic",
+    "decision_relevant": "yes"
+  },
+  {
+    "artifact_path": "rounds/round_2/workspace/01_eda/artifacts/plot_platform_comparability.png",
+    "type": "plot",
+    "source_data": "Round 2 raw CSVs / platform JSON / derived EDA tables",
+    "useful_for": "plot_platform_comparability",
+    "decision_relevant": "yes"
+  },
+  {
+    "artifact_path": "rounds/round_2/workspace/01_eda/artifacts/plot_maf_scenarios.png",
+    "type": "plot",
+    "source_data": "Round 2 wiki Market Access Fee mechanics / sample-data opportunity proxy",
+    "useful_for": "plot_maf_scenarios",
+    "decision_relevant": "yes"
+  },
+  {
+    "artifact_path": "rounds/round_2/workspace/01_eda/artifacts/plot_manual_scenarios.png",
+    "type": "plot",
+    "source_data": "Round 2 wiki manual formula / Research-Scale-Speed scenario grid",
+    "useful_for": "plot_manual_scenarios",
+    "decision_relevant": "yes"
+  },
+  {
+    "artifact_path": "rounds/round_2/workspace/01_eda/artifacts/plot_drift_residuals.png",
+    "type": "plot",
+    "source_data": "Round 2 raw CSVs / platform JSON / derived EDA tables",
+    "useful_for": "plot_drift_residuals",
+    "decision_relevant": "yes"
+  },
+  {
+    "artifact_path": "rounds/round_2/workspace/01_eda/artifacts/multivariate_feature_correlation.csv",
+    "type": "table",
+    "source_data": "Round 2 raw CSVs / platform JSON / derived EDA tables",
+    "useful_for": "multivariate_feature_correlation",
+    "decision_relevant": "yes"
+  },
+  {
+    "artifact_path": "rounds/round_2/workspace/01_eda/artifacts/multivariate_feature_covariance.csv",
+    "type": "table",
+    "source_data": "Round 2 raw CSVs / platform JSON / derived EDA tables",
+    "useful_for": "multivariate_feature_covariance",
+    "decision_relevant": "yes"
+  },
+  {
+    "artifact_path": "rounds/round_2/workspace/01_eda/artifacts/multivariate_top_correlations.csv",
+    "type": "table",
+    "source_data": "Round 2 raw CSVs / platform JSON / derived EDA tables",
+    "useful_for": "multivariate_top_correlations",
+    "decision_relevant": "yes"
+  },
+  {
+    "artifact_path": "rounds/round_2/workspace/01_eda/artifacts/multivariate_redundancy_analysis.csv",
+    "type": "table",
+    "source_data": "Round 2 raw CSVs / platform JSON / derived EDA tables",
+    "useful_for": "multivariate_redundancy_analysis",
+    "decision_relevant": "yes"
+  },
+  {
+    "artifact_path": "rounds/round_2/workspace/01_eda/artifacts/multivariate_vif.csv",
+    "type": "table",
+    "source_data": "Round 2 raw CSVs / platform JSON / derived EDA tables",
+    "useful_for": "multivariate_vif",
+    "decision_relevant": "yes"
+  },
+  {
+    "artifact_path": "rounds/round_2/workspace/01_eda/artifacts/multivariate_regression_summary.csv",
+    "type": "table",
+    "source_data": "Round 2 raw CSVs / platform JSON / derived EDA tables",
+    "useful_for": "multivariate_regression_summary",
+    "decision_relevant": "yes"
+  },
+  {
+    "artifact_path": "rounds/round_2/workspace/01_eda/artifacts/multivariate_mutual_information.csv",
+    "type": "table",
+    "source_data": "Round 2 raw CSVs / platform JSON / derived EDA tables",
+    "useful_for": "multivariate_mutual_information",
+    "decision_relevant": "yes"
+  },
+  {
+    "artifact_path": "rounds/round_2/workspace/01_eda/artifacts/multivariate_pca_explained_variance.csv",
+    "type": "table",
+    "source_data": "Round 2 raw CSVs / platform JSON / derived EDA tables",
+    "useful_for": "multivariate_pca_explained_variance",
+    "decision_relevant": "yes"
+  },
+  {
+    "artifact_path": "rounds/round_2/workspace/01_eda/artifacts/multivariate_pca_loadings.csv",
+    "type": "table",
+    "source_data": "Round 2 raw CSVs / platform JSON / derived EDA tables",
+    "useful_for": "multivariate_pca_loadings",
+    "decision_relevant": "yes"
+  },
+  {
+    "artifact_path": "rounds/round_2/workspace/01_eda/artifacts/multivariate_cross_product_relationships.csv",
+    "type": "table",
+    "source_data": "Round 2 raw CSVs / platform JSON / derived EDA tables",
+    "useful_for": "multivariate_cross_product_relationships",
+    "decision_relevant": "yes"
+  },
+  {
+    "artifact_path": "rounds/round_2/workspace/01_eda/artifacts/multivariate_cluster_summary.csv",
+    "type": "table",
+    "source_data": "Round 2 raw CSVs / platform JSON / derived EDA tables",
+    "useful_for": "multivariate_cluster_summary",
+    "decision_relevant": "yes"
+  },
+  {
+    "artifact_path": "rounds/round_2/workspace/01_eda/artifacts/process_distribution_metrics.csv",
+    "type": "table",
+    "source_data": "Round 2 raw CSVs / platform JSON / derived EDA tables",
+    "useful_for": "process_distribution_metrics",
+    "decision_relevant": "yes"
+  },
+  {
+    "artifact_path": "rounds/round_2/workspace/01_eda/artifacts/process_distribution_hypotheses.csv",
+    "type": "table",
+    "source_data": "Round 2 raw CSVs / platform JSON / derived EDA tables",
+    "useful_for": "process_distribution_hypotheses",
+    "decision_relevant": "yes"
+  },
+  {
+    "artifact_path": "rounds/round_2/workspace/01_eda/artifacts/expanded_feature_promotion_decisions.csv",
+    "type": "table",
+    "source_data": "Round 2 raw CSVs / platform JSON / derived EDA tables",
+    "useful_for": "expanded_feature_promotion_decisions",
+    "decision_relevant": "yes"
+  },
+  {
+    "artifact_path": "rounds/round_2/workspace/01_eda/artifacts/plot_multivariate_correlation_ASH_COATED_OSMIUM.png",
+    "type": "plot",
+    "source_data": "Round 2 raw CSVs / platform JSON / derived EDA tables",
+    "useful_for": "plot_multivariate_correlation_ASH_COATED_OSMIUM",
+    "decision_relevant": "yes"
+  },
+  {
+    "artifact_path": "rounds/round_2/workspace/01_eda/artifacts/plot_multivariate_correlation_INTARIAN_PEPPER_ROOT.png",
+    "type": "plot",
+    "source_data": "Round 2 raw CSVs / platform JSON / derived EDA tables",
+    "useful_for": "plot_multivariate_correlation_INTARIAN_PEPPER_ROOT",
+    "decision_relevant": "yes"
+  },
+  {
+    "artifact_path": "rounds/round_2/workspace/01_eda/artifacts/plot_multivariate_pca_explained_variance.png",
+    "type": "plot",
+    "source_data": "Round 2 raw CSVs / platform JSON / derived EDA tables",
+    "useful_for": "plot_multivariate_pca_explained_variance",
+    "decision_relevant": "yes"
+  },
+  {
+    "artifact_path": "rounds/round_2/workspace/01_eda/artifacts/plot_multivariate_cross_product_lead_lag.png",
+    "type": "plot",
+    "source_data": "Round 2 raw CSVs / platform JSON / derived EDA tables",
+    "useful_for": "plot_multivariate_cross_product_lead_lag",
+    "decision_relevant": "yes"
+  },
+  {
+    "artifact_path": "rounds/round_2/workspace/01_eda/artifacts/plot_process_diagnostics.png",
+    "type": "plot",
+    "source_data": "Round 2 raw CSVs / platform JSON / derived EDA tables",
+    "useful_for": "plot_process_diagnostics",
+    "decision_relevant": "yes"
+  }
+]

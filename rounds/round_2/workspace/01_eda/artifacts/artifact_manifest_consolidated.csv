@@ -1,0 +1,41 @@
+artifact_path,type,source_data,useful_for,decision_relevant
+rounds/round_2/workspace/01_eda/artifacts/data_quality_summary.csv,table,Round 2 raw CSVs / platform JSON / derived EDA tables,data_quality_summary,yes
+rounds/round_2/workspace/01_eda/artifacts/product_behavior_summary.csv,table,Round 2 raw CSVs / platform JSON / derived EDA tables,product_behavior_summary,yes
+rounds/round_2/workspace/01_eda/artifacts/round1_assumption_check.csv,table,Round 2 raw CSVs / platform JSON / derived EDA tables,round1_assumption_check,yes
+rounds/round_2/workspace/01_eda/artifacts/imbalance_ic.csv,table,Round 2 raw CSVs / platform JSON / derived EDA tables,imbalance_ic,yes
+rounds/round_2/workspace/01_eda/artifacts/conditional_imbalance_ic.csv,table,Round 2 raw CSVs / platform JSON / derived EDA tables,conditional_imbalance_ic,yes
+rounds/round_2/workspace/01_eda/artifacts/trade_flow_summary.csv,table,Round 2 raw CSVs / platform JSON / derived EDA tables,trade_flow_summary,yes
+rounds/round_2/workspace/01_eda/artifacts/trade_pressure_proxy.csv,table,Round 2 raw CSVs / platform JSON / derived EDA tables,trade_pressure_proxy,yes
+rounds/round_2/workspace/01_eda/artifacts/platform_comparability.csv,table,Round 2 raw CSVs / platform JSON / derived EDA tables,platform_comparability,yes
+rounds/round_2/workspace/01_eda/artifacts/maf_scenarios.csv,table,Round 2 wiki Market Access Fee mechanics / sample-data opportunity proxy,maf_scenarios,yes
+rounds/round_2/workspace/01_eda/artifacts/manual_scenario_grid_top.csv,table,Round 2 wiki manual formula / Research-Scale-Speed scenario grid,manual_scenario_grid_top,yes
+rounds/round_2/workspace/01_eda/artifacts/manual_scenario_summary.csv,table,Round 2 wiki manual formula / Research-Scale-Speed scenario grid,manual_scenario_summary,yes
+rounds/round_2/workspace/01_eda/artifacts/feature_inventory.csv,table,Round 2 raw CSVs / platform JSON / derived EDA tables,feature_inventory,yes
+rounds/round_2/workspace/01_eda/artifacts/feature_promotion_decisions.csv,table,Round 2 raw CSVs / platform JSON / derived EDA tables,feature_promotion_decisions,yes
+rounds/round_2/workspace/01_eda/artifacts/plot_mid_price_by_product_day.png,plot,Round 2 raw CSVs / platform JSON / derived EDA tables,plot_mid_price_by_product_day,yes
+rounds/round_2/workspace/01_eda/artifacts/plot_spread_distribution.png,plot,Round 2 raw CSVs / platform JSON / derived EDA tables,plot_spread_distribution,yes
+rounds/round_2/workspace/01_eda/artifacts/plot_returns_distribution.png,plot,Round 2 raw CSVs / platform JSON / derived EDA tables,plot_returns_distribution,yes
+rounds/round_2/workspace/01_eda/artifacts/plot_imbalance_ic.png,plot,Round 2 raw CSVs / platform JSON / derived EDA tables,plot_imbalance_ic,yes
+rounds/round_2/workspace/01_eda/artifacts/plot_platform_comparability.png,plot,Round 2 raw CSVs / platform JSON / derived EDA tables,plot_platform_comparability,yes
+rounds/round_2/workspace/01_eda/artifacts/plot_maf_scenarios.png,plot,Round 2 wiki Market Access Fee mechanics / sample-data opportunity proxy,plot_maf_scenarios,yes
+rounds/round_2/workspace/01_eda/artifacts/plot_manual_scenarios.png,plot,Round 2 wiki manual formula / Research-Scale-Speed scenario grid,plot_manual_scenarios,yes
+rounds/round_2/workspace/01_eda/artifacts/plot_drift_residuals.png,plot,Round 2 raw CSVs / platform JSON / derived EDA tables,plot_drift_residuals,yes
+rounds/round_2/workspace/01_eda/artifacts/multivariate_feature_correlation.csv,table,Round 2 raw CSVs / platform JSON / derived EDA tables,multivariate_feature_correlation,yes
+rounds/round_2/workspace/01_eda/artifacts/multivariate_feature_covariance.csv,table,Round 2 raw CSVs / platform JSON / derived EDA tables,multivariate_feature_covariance,yes
+rounds/round_2/workspace/01_eda/artifacts/multivariate_top_correlations.csv,table,Round 2 raw CSVs / platform JSON / derived EDA tables,multivariate_top_correlations,yes
+rounds/round_2/workspace/01_eda/artifacts/multivariate_redundancy_analysis.csv,table,Round 2 raw CSVs / platform JSON / derived EDA tables,multivariate_redundancy_analysis,yes
+rounds/round_2/workspace/01_eda/artifacts/multivariate_vif.csv,table,Round 2 raw CSVs / platform JSON / derived EDA tables,multivariate_vif,yes
+rounds/round_2/workspace/01_eda/artifacts/multivariate_regression_summary.csv,table,Round 2 raw CSVs / platform JSON / derived EDA tables,multivariate_regression_summary,yes
+rounds/round_2/workspace/01_eda/artifacts/multivariate_mutual_information.csv,table,Round 2 raw CSVs / platform JSON / derived EDA tables,multivariate_mutual_information,yes
+rounds/round_2/workspace/01_eda/artifacts/multivariate_pca_explained_variance.csv,table,Round 2 raw CSVs / platform JSON / derived EDA tables,multivariate_pca_explained_variance,yes
+rounds/round_2/workspace/01_eda/artifacts/multivariate_pca_loadings.csv,table,Round 2 raw CSVs / platform JSON / derived EDA tables,multivariate_pca_loadings,yes
+rounds/round_2/workspace/01_eda/artifacts/multivariate_cross_product_relationships.csv,table,Round 2 raw CSVs / platform JSON / derived EDA tables,multivariate_cross_product_relationships,yes
+rounds/round_2/workspace/01_eda/artifacts/multivariate_cluster_summary.csv,table,Round 2 raw CSVs / platform JSON / derived EDA tables,multivariate_cluster_summary,yes
+rounds/round_2/workspace/01_eda/artifacts/process_distribution_metrics.csv,table,Round 2 raw CSVs / platform JSON / derived EDA tables,process_distribution_metrics,yes
+rounds/round_2/workspace/01_eda/artifacts/process_distribution_hypotheses.csv,table,Round 2 raw CSVs / platform JSON / derived EDA tables,process_distribution_hypotheses,yes
+rounds/round_2/workspace/01_eda/artifacts/expanded_feature_promotion_decisions.csv,table,Round 2 raw CSVs / platform JSON / derived EDA tables,expanded_feature_promotion_decisions,yes
+rounds/round_2/workspace/01_eda/artifacts/plot_multivariate_correlation_ASH_COATED_OSMIUM.png,plot,Round 2 raw CSVs / platform JSON / derived EDA tables,plot_multivariate_correlation_ASH_COATED_OSMIUM,yes
+rounds/round_2/workspace/01_eda/artifacts/plot_multivariate_correlation_INTARIAN_PEPPER_ROOT.png,plot,Round 2 raw CSVs / platform JSON / derived EDA tables,plot_multivariate_correlation_INTARIAN_PEPPER_ROOT,yes
+rounds/round_2/workspace/01_eda/artifacts/plot_multivariate_pca_explained_variance.png,plot,Round 2 raw CSVs / platform JSON / derived EDA tables,plot_multivariate_pca_explained_variance,yes
+rounds/round_2/workspace/01_eda/artifacts/plot_multivariate_cross_product_lead_lag.png,plot,Round 2 raw CSVs / platform JSON / derived EDA tables,plot_multivariate_cross_product_lead_lag,yes
+rounds/round_2/workspace/01_eda/artifacts/plot_process_diagnostics.png,plot,Round 2 raw CSVs / platform JSON / derived EDA tables,plot_process_diagnostics,yes

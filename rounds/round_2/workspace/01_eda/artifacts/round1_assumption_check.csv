@@ -1,0 +1,6 @@
+assumption_or_hint,round2_evidence,verdict,downstream_action
+IPR is steady from Round 1 hint,"Mean day total change 999.67, mean linear R2 1.000.",contradicted,Model current-round drift explicitly before using any fixed fair value.
+IPR may have stable drift/residual structure,Mean linear R2 1.000; residual std mean 2.37.,supported,"Consider drift plus residual features in understanding, with validation on all days."
+ACO is volatile or patterned,Mean mid std 5.05; mean delta AC1 -0.501.,supported,"Consider short-horizon mean-reversion evidence, not a broad volatility claim."
+Book imbalance can help predict short horizon movement,Mean IC@1 for top imbalance 0.648.,supported,Promote only if stable by product/day and still online-usable.
+Round 1 trade frequency/fill assumptions carry forward,Trade rows by product/day exist but market flow is sparse: mean rows 398.5.,unknown,Do not carry fill assumptions; use Round 2 platform validation later.
