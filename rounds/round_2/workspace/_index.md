@@ -10,7 +10,7 @@
 
 ## Current Next Priority Action
 
-Review phase 00 ingestion for Round 2 facts. If approved, start targeted EDA on Round 2 sample data, Market Access Fee value, and manual Research/Scale/Speed allocation scenarios.
+Tune or de-risk the new fee-aware Kalman variant using the initial comparison results, or commit the new artifacts on the current branch while keeping the existing hybrid as the better-performing sample-data candidate for now.
 
 ## Phase Status
 
@@ -19,10 +19,10 @@ Review phase 00 ingestion for Round 2 facts. If approved, start targeted EDA on 
 | 00 Ingestion | READY_FOR_REVIEW | Codex | Unassigned | [`00_ingestion.md`](00_ingestion.md) / [`phase_00_ingestion_context.md`](phase_00_ingestion_context.md) | Human review pending |
 | 01 EDA | NOT_STARTED | Unassigned | Unassigned | [`01_eda/README.md`](01_eda/README.md) / [`phase_01_eda_context.md`](phase_01_eda_context.md) | Select targeted EDA question after ingestion review |
 | 02 Understanding | NOT_STARTED | Unassigned | Unassigned | [`02_understanding.md`](02_understanding.md) / [`phase_02_understanding_context.md`](phase_02_understanding_context.md) | None recorded |
-| 03 Strategy | NOT_STARTED | Unassigned | Unassigned | [`03_strategy_candidates.md`](03_strategy_candidates.md) / [`phase_03_strategy_context.md`](phase_03_strategy_context.md) | None recorded |
-| 04 Spec | NOT_STARTED | Unassigned | Unassigned | [`04_strategy_specs/`](04_strategy_specs/) / [`phase_04_spec_context.md`](phase_04_spec_context.md) | None recorded |
-| 05 Implementation | NOT_STARTED | Unassigned | Unassigned | [`phase_05_implementation_context.md`](phase_05_implementation_context.md) | Reviewed strategy spec required; `Trader.bid()` decision belongs in spec |
-| 06 Testing/performance | NOT_STARTED | Unassigned | Unassigned | [`phase_06_testing_context.md`](phase_06_testing_context.md) | Bot candidate required |
+| 03 Strategy | IN_PROGRESS | Amin / OpenClaw | Unassigned | [`03_strategy_candidates.md`](03_strategy_candidates.md) / [`phase_03_strategy_context.md`](phase_03_strategy_context.md) | Understanding artifact still sparse |
+| 04 Spec | IN_PROGRESS | Amin / OpenClaw | Unassigned | [`04_strategy_specs/`](04_strategy_specs/) / [`phase_04_spec_context.md`](phase_04_spec_context.md) | Human review still needed; one spec deadline-deferred |
+| 05 Implementation | IN_PROGRESS | Amin / OpenClaw | Unassigned | [`phase_05_implementation_context.md`](phase_05_implementation_context.md) | Validation still needed before promotion |
+| 06 Testing/performance | NOT_STARTED | Amin / OpenClaw | Unassigned | [`phase_06_testing_context.md`](phase_06_testing_context.md) | Compare active candidates |
 | 07 Debugging/iteration | NOT_STARTED | Unassigned | Unassigned | [`06_debugging/`](06_debugging/) / [`phase_07_debugging_context.md`](phase_07_debugging_context.md) | Issue/run required |
 
 ## Product Scope
@@ -46,13 +46,15 @@ Manual decision:
 
 Maximum active strategies: 3.
 
-- None.
+- `r2_amin_hybrid_01`: fixed-FV hybrid candidate already implemented.
+- `r2_amin_feeaware_kalman_02`: new adaptive fee-aware Kalman candidate implemented.
 
 ## Active Implementations
 
 Maximum active implementation candidates: 2.
 
-- None.
+- `rounds/round_2/bots/amin/canonical/candidate_r2_amin_hybrid_01.py`
+- `rounds/round_2/bots/amin/canonical/candidate_r2_amin_feeaware_kalman_02.py`
 
 ## Baseline / Reference Bot
 
@@ -61,31 +63,32 @@ Maximum active implementation candidates: 2.
 
 ## Latest Results And Best Current Candidate
 
-- No results.
-- No best candidate.
+- Lightweight local replay comparison now exists in `../performances/amin/canonical/candidate_comparison_2026-04-19.json`.
+- In that comparison, `r2_amin_hybrid_01` beats `r2_amin_feeaware_kalman_02` on all three sample days.
+- Best current candidate on available sample-data evidence: `r2_amin_hybrid_01`.
 - Raw Round 2 sample data is present under `../data/raw/`.
 - Decision-support script: [`01_eda/round_2_decision_tools.py`](01_eda/round_2_decision_tools.py).
 - Interpretation limit: results are non-authoritative evidence, not rules
 
 ## Blockers And Decisions Needed
 
-- Human review of phase 00 ingestion.
+- Human review of phase 00 ingestion still pending formally.
 - Exact Round 2 deadline is unknown.
-- Select first targeted EDA question.
-- Decide a Market Access Fee bid only after estimating incremental extra-access value and choosing a risk posture.
+- Need validation comparison between fixed-FV and fee-aware Kalman candidates.
+- Market Access Fee bid remains a scenario decision; current Kalman candidate uses conservative placeholder `12`.
 - Decide manual Speed allocation under rank uncertainty.
 
 ## Final Submission Status
 
-- Candidate: none.
-- File: none.
-- Decision reason: none.
-- Linked spec: none.
-- Linked validation run: none.
-- Comparability status: `unclear`
-- Contract readiness status: `not checked`
+- Candidate: `r2_amin_hybrid_01` is currently favored on sample-data evidence, but no final submission decision is locked.
+- File: `../bots/amin/canonical/candidate_r2_amin_hybrid_01.py`
+- Decision reason: initial local replay comparison favored the hybrid over the new fee-aware Kalman candidate.
+- Linked spec: `04_strategy_specs/spec_candidate_r2_amin_hybrid_ipr_drift_aco_mm.md`, `04_strategy_specs/spec_candidate_r2_amin_feeaware_kalman_02.md`
+- Linked validation run: `../performances/amin/canonical/candidate_comparison_2026-04-19.json`
+- Comparability status: `partial`
+- Contract readiness status: `partial, compile checked and lightweight replay only`
 - Active file verified: `no`
-- Last validation: none.
+- Last validation: local syntax compile plus lightweight replay comparison.
 - Active-file verification: not started.
 
 ## Recently Changed Artifacts
@@ -98,3 +101,8 @@ Maximum active implementation candidates: 2.
 - Updated EDA context: [`phase_01_eda_context.md`](phase_01_eda_context.md)
 - Updated data README: [`../data/README.md`](../data/README.md)
 - Added decision-support script: [`01_eda/round_2_decision_tools.py`](01_eda/round_2_decision_tools.py)
+- Updated strategy candidates: [`03_strategy_candidates.md`](03_strategy_candidates.md)
+- Added spec: [`04_strategy_specs/spec_candidate_r2_amin_feeaware_kalman_02.md`](04_strategy_specs/spec_candidate_r2_amin_feeaware_kalman_02.md)
+- Added bot: [`../bots/amin/canonical/candidate_r2_amin_feeaware_kalman_02.py`](../bots/amin/canonical/candidate_r2_amin_feeaware_kalman_02.py)
+- Added comparison runner: [`01_eda/compare_candidates.py`](01_eda/compare_candidates.py)
+- Added comparison results: [`../performances/amin/canonical/candidate_comparison_2026-04-19.json`](../performances/amin/canonical/candidate_comparison_2026-04-19.json)

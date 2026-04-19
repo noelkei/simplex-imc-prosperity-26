@@ -1,0 +1,264 @@
+from datamodel import Order, OrderDepth, TradingState
+import json
+
+
+IPR = "INTARIAN_PEPPER_ROOT"
+ACO = "ASH_COATED_OSMIUM"
+LIMITS = {IPR: 80, ACO: 80}
+
+ACO_FAIR_DEFAULT = 10000.0
+ACO_KALMAN_Q = 0.1
+ACO_KALMAN_R = 8.0
+ACO_BASE_HALF_SPREAD = 5
+ACO_IMBALANCE_SHIFT_CLIP = 2.0
+ACO_MAX_SKEW = 4
+ACO_TAKE_EDGE = 2.0
+IPR_RICH_TRIM_EDGE = 8
+IPR_REPOST_MAX_EXTRA = 2
+MARKET_ACCESS_BID = 12
+
+
+class Trader:
+    def bid(self):
+        return MARKET_ACCESS_BID
+
+    def _load(self, trader_data: str) -> dict:
+        if not trader_data:
+            return {}
+        try:
+            data = json.loads(trader_data)
+            return data if isinstance(data, dict) else {}
+        except Exception:
+            return {}
+
+    def _save(self, data: dict) -> str:
+        try:
+            return json.dumps(data, separators=(",", ":"))
+        except Exception:
+            return "{}"
+
+    def _best_bid(self, od: OrderDepth):
+        return max(od.buy_orders) if od and od.buy_orders else None
+
+    def _best_ask(self, od: OrderDepth):
+        return min(od.sell_orders) if od and od.sell_orders else None
+
+    def _clip(self, value: float, lo: float, hi: float) -> float:
+        return min(max(value, lo), hi)
+
+    def _imbalance(self, od: OrderDepth) -> float:
+        best_bid = self._best_bid(od)
+        best_ask = self._best_ask(od)
+        if best_bid is None or best_ask is None:
+            return 0.0
+        bid_vol = od.buy_orders.get(best_bid, 0)
+        ask_vol = -od.sell_orders.get(best_ask, 0)
+        total = bid_vol + ask_vol
+        if total <= 0:
+            return 0.0
+        return (bid_vol - ask_vol) / total
+
+    def _reset_caps(self, start_pos: int):
+        self._start_pos = start_pos
+        self._buy_used = 0
+        self._sell_used = 0
+
+    def _buy_cap(self, limit: int) -> int:
+        return max(0, limit - self._start_pos - self._buy_used)
+
+    def _sell_cap(self, limit: int) -> int:
+        return max(0, limit + self._start_pos - self._sell_used)
+
+    def _add_buy(self, orders, product, price, qty, limit):
+        q = min(max(int(qty), 0), self._buy_cap(limit))
+        if q > 0:
+            orders.append(Order(product, int(round(price)), q))
+            self._buy_used += q
+
+    def _add_sell(self, orders, product, price, qty, limit):
+        q = min(max(int(qty), 0), self._sell_cap(limit))
+        if q > 0:
+            orders.append(Order(product, int(round(price)), -q))
+            self._sell_used += q
+
+    def _kalman_update(self, state_dict: dict, obs):
+        fair = float(state_dict.get("fair", ACO_FAIR_DEFAULT))
+        var = float(state_dict.get("var", 25.0))
+        if obs is None:
+            var = min(var + ACO_KALMAN_Q, 100.0)
+            state_dict["fair"] = fair
+            state_dict["var"] = var
+            return fair
+
+        pred_var = min(var + ACO_KALMAN_Q, 100.0)
+        k = pred_var / (pred_var + ACO_KALMAN_R)
+        fair = fair + k * (obs - fair)
+        var = (1.0 - k) * pred_var
+        state_dict["fair"] = fair
+        state_dict["var"] = var
+        return fair
+
+    def _observe_aco_mid(self, od: OrderDepth, prior_fair: float):
+        best_bid = self._best_bid(od)
+        best_ask = self._best_ask(od)
+        if best_bid is not None and best_ask is not None:
+            return (best_bid + best_ask) / 2.0
+        if best_bid is not None:
+            return min(best_bid + 8.0, prior_fair + 6.0)
+        if best_ask is not None:
+            return max(best_ask - 8.0, prior_fair - 6.0)
+        return None
+
+    def _trade_ipr(self, state: TradingState, sd: dict):
+        od = state.order_depths.get(IPR)
+        if od is None:
+            return []
+
+        pos = state.position.get(IPR, 0)
+        limit = LIMITS[IPR]
+        self._reset_caps(pos)
+        orders = []
+
+        best_bid = self._best_bid(od)
+        best_ask = self._best_ask(od)
+        visible_mid = None
+        if best_bid is not None and best_ask is not None:
+            visible_mid = (best_bid + best_ask) / 2.0
+        elif best_bid is not None:
+            visible_mid = best_bid + 7.0
+        elif best_ask is not None:
+            visible_mid = best_ask - 7.0
+        if visible_mid is not None:
+            sd["ipr_mid"] = visible_mid
+
+        for ask in sorted(od.sell_orders):
+            if self._buy_cap(limit) <= 0:
+                break
+            ask_qty = -od.sell_orders[ask]
+            take_qty = ask_qty
+            if pos + self._buy_used >= 70 and visible_mid is not None and ask > visible_mid + 4:
+                take_qty = min(take_qty, 6)
+            self._add_buy(orders, IPR, ask, take_qty, limit)
+
+        if best_bid is not None and self._buy_cap(limit) > 0:
+            imbalance = self._imbalance(od)
+            repost_extra = 1
+            if imbalance > 0.2:
+                repost_extra = 2
+            repost_extra = min(repost_extra, IPR_REPOST_MAX_EXTRA)
+            bid_px = best_bid + repost_extra
+            if best_ask is not None:
+                bid_px = min(bid_px, best_ask - 1)
+            self._add_buy(orders, IPR, bid_px, self._buy_cap(limit), limit)
+
+        effective_pos = pos + self._buy_used - self._sell_used
+        if effective_pos > 60 and best_bid is not None and visible_mid is not None and best_bid >= visible_mid + IPR_RICH_TRIM_EDGE:
+            self._add_sell(orders, IPR, best_bid, min(12, effective_pos - 60), limit)
+
+        return orders
+
+    def _trade_aco(self, state: TradingState, sd: dict):
+        od = state.order_depths.get(ACO)
+        if od is None:
+            return []
+
+        pos = state.position.get(ACO, 0)
+        limit = LIMITS[ACO]
+        self._reset_caps(pos)
+        orders = []
+        best_bid = self._best_bid(od)
+        best_ask = self._best_ask(od)
+
+        if best_bid is None and best_ask is None:
+            return orders
+
+        aco_state = sd.get("aco", {})
+        prior_fair = float(aco_state.get("fair", ACO_FAIR_DEFAULT))
+        obs = self._observe_aco_mid(od, prior_fair)
+        fair = self._kalman_update(aco_state, obs)
+        sd["aco"] = aco_state
+
+        imbalance = self._imbalance(od)
+        imbalance_shift = self._clip(2.0 * imbalance, -ACO_IMBALANCE_SHIFT_CLIP, ACO_IMBALANCE_SHIFT_CLIP)
+        inv_skew = round(self._clip((pos / limit) * ACO_MAX_SKEW, -ACO_MAX_SKEW, ACO_MAX_SKEW))
+
+        if od.sell_orders:
+            for ask in sorted(od.sell_orders):
+                if self._buy_cap(limit) <= 0:
+                    break
+                edge = fair - ask
+                if edge < ACO_TAKE_EDGE:
+                    break
+                ask_qty = -od.sell_orders[ask]
+                take_qty = ask_qty
+                if edge < ACO_TAKE_EDGE + 1:
+                    take_qty = min(take_qty, 10)
+                self._add_buy(orders, ACO, ask, take_qty, limit)
+
+        if od.buy_orders:
+            for bid in sorted(od.buy_orders, reverse=True):
+                if self._sell_cap(limit) <= 0:
+                    break
+                edge = bid - fair
+                if edge < ACO_TAKE_EDGE:
+                    break
+                bid_qty = od.buy_orders[bid]
+                take_qty = bid_qty
+                if edge < ACO_TAKE_EDGE + 1:
+                    take_qty = min(take_qty, 10)
+                self._add_sell(orders, ACO, bid, take_qty, limit)
+
+        quote_fair = fair + imbalance_shift - inv_skew
+        half_spread = ACO_BASE_HALF_SPREAD
+        if abs(pos) > 45:
+            half_spread += 1
+
+        bid_px = int(round(quote_fair - half_spread))
+        ask_px = int(round(quote_fair + half_spread))
+
+        if best_bid is not None:
+            bid_px = min(bid_px, best_bid + 1)
+        if best_ask is not None:
+            ask_px = max(ask_px, best_ask - 1)
+
+        if best_ask is not None and bid_px >= best_ask:
+            bid_px = best_ask - 1
+        if best_bid is not None and ask_px <= best_bid:
+            ask_px = best_bid + 1
+
+        if best_bid is None and best_ask is not None:
+            bid_px = min(best_ask - 1, int(round(fair - half_spread)))
+        if best_ask is None and best_bid is not None:
+            ask_px = max(best_bid + 1, int(round(fair + half_spread)))
+
+        buy_size = 24
+        sell_size = 24
+        if pos < -25:
+            buy_size = 36
+            sell_size = 14
+        elif pos > 25:
+            buy_size = 14
+            sell_size = 36
+
+        if self._buy_cap(limit) > 0 and (best_ask is None or bid_px < best_ask):
+            self._add_buy(orders, ACO, bid_px, buy_size, limit)
+        if self._sell_cap(limit) > 0 and (best_bid is None or ask_px > best_bid):
+            self._add_sell(orders, ACO, ask_px, sell_size, limit)
+
+        return orders
+
+    def run(self, state: TradingState):
+        sd = self._load(state.traderData)
+        result = {}
+
+        try:
+            result[IPR] = self._trade_ipr(state, sd)
+        except Exception:
+            result[IPR] = []
+
+        try:
+            result[ACO] = self._trade_aco(state, sd)
+        except Exception:
+            result[ACO] = []
+
+        return result, 0, self._save(sd)

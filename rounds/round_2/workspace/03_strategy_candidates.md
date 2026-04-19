@@ -6,36 +6,41 @@ Maximum active candidates per round: 3.
 
 ## Status
 
-NOT_STARTED
+IN_PROGRESS
 
 ## Sources
 
-- Wiki facts:
-- Understanding summary:
-- EDA evidence:
-- Playbook heuristics:
+- Wiki facts: `../../../docs/prosperity_wiki/rounds/round_2.md`, `../../../docs/prosperity_wiki/api/01_trader_contract.md`, `../../../docs/prosperity_wiki/trading/02_orders_and_position_limits.md`
+- Understanding summary: `02_understanding.md` (still sparse, caveat carried forward)
+- EDA evidence: `01_eda/eda_report.md`
+- Playbook heuristics: not used as facts
 
 ## Candidate Table
 
 | Candidate ID | Product Scope | Source Of Edge | Evidence / Heuristic Basis | Key Assumptions | Main Risk | Evidence Strength | Implementation Cost | Validation Speed | Risk Level | Expected Upside | Priority | Status |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| TBD | TBD | TBD | TBD | TBD | TBD | strong / medium / weak / contradictory | high / medium / low | high / medium / low | high / medium / low | high / medium / low | high / medium / low | draft |
+| `r2_amin_hybrid_01` | IPR + ACO | IPR drift + ACO fixed-FV MM | EDA supports strong IPR drift and ACO mean reversion around 10000 | ACO fixed FV is stable enough | fixed FV underreacts to visible-book distortions | medium | low | high | medium | medium | high | implemented |
+| `r2_amin_feeaware_kalman_02` | IPR + ACO | IPR drift + ACO adaptive Kalman MM + fee-aware extra-access robustness | EDA Kalman grid for ACO favored `Q=0.1`, `R=8.0`; user reports Bruno Kalman line worked best so far | Round 2 extra quotes help but are not required; conservative positive bid can be worth it | bid may reduce net PnL if too high; adaptive FV may overfit noisy one-sided books | medium | medium | medium | medium | high | high | implemented |
 
 ## Rejected Or Deferred Ideas
 
 | Idea | Reason |
 | --- | --- |
-| TBD | TBD |
+| Full HMM regime-switching ACO bot | Too complex for current round pressure, not clearly justified by existing evidence |
+| Aggressive symmetric IPR long/short bot | Current evidence still heavily favors long-drift posture |
+| EV-optimized nontrivial Market Access Fee model | Testing ignores `bid()`, so official evidence is missing |
 
 ## Shortlist
 
-- None.
-- Rationale:
+- `r2_amin_hybrid_01`
+- `r2_amin_feeaware_kalman_02`
+- Rationale: keep one simple robust baseline and one adaptive Kalman variant closer to the strongest line the team has seen so far.
 
 ## Human Decisions Needed
 
-- Decision:
+- Decide whether to validate both candidates or promote the Kalman variant directly for final iteration.
+- Decide whether `MARKET_ACCESS_BID = 12` is acceptably conservative or should be changed after scenario analysis.
 
 ## Next Action
 
-- Next:
+- Run validation / replay comparison between the two active Amin candidates on Round 2 sample data, then update testing artifacts and pick the stronger PR target.
