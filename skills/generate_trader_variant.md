@@ -18,8 +18,11 @@ Use this skill to create a controlled `Trader` variant from a reviewed or deadli
 
 1. Confirm the parent strategy spec is `approved` or explicitly `deferred under deadline`.
 2. If `../rounds/round_X/workspace/post_run_research_memory.md` exists, read it before proposing variants; prefer counterfactual backlog and failure patterns for one-axis variant selection, and cite relevant insights when they justify the changed axis.
-3. Confirm active implementations remain at max 2 after adding the variant.
-4. Identify the current champion or parent bot. If a platform-validated strong champion exists, default to 1-3 variants in the batch and do not create broad parameter sweeps unless explicitly requested.
+3. Confirm validation capacity and deadline risk can support another active
+   implementation after adding the variant.
+4. Identify the current champion or parent bot. If a platform-validated strong
+   champion exists, default to a small batch of distinct high-ROI variants and
+   do not create broad parameter sweeps unless explicitly requested.
 5. Run variant ROI triage before coding:
    - What weakness of the champion does this target?
    - What exactly changes?

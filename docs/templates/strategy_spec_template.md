@@ -4,9 +4,10 @@ Implementation must not start until this spec is reviewed. In fast mode, keep it
 
 ## Spec Quality Checklist
 
-- Candidate ID, priority, and evidence basis are linked from the shortlist.
+- Candidate ID, priority tier, and evidence basis are linked from the
+  prioritized candidate queue.
 - Selection trace from the candidate decision is copied or summarized.
-- Linked EDA signals, feature evidence, regime assumptions, and understanding insight are recorded.
+- Linked EDA signals, feature evidence, multivariate evidence, process/distribution assumptions, redundancy decisions, regime assumptions, and understanding insight are recorded.
 - Each implemented feature has a Feature Contract.
 - Important features intentionally excluded from the bot are listed.
 - Round-specific mechanics, Trader methods, and changed fields are classified.
@@ -32,7 +33,7 @@ Implementation must not start until this spec is reviewed. In fast mode, keep it
 ## Candidate
 
 - Candidate ID:
-- Shortlist priority: `high | medium | low`
+- Candidate priority tier: `spec-first | implement-first | validate-next | backlog | defer`
 - Evidence strength: `strong | medium | weak | contradictory`
 - Product scope:
 - Linked candidate file:
@@ -64,6 +65,9 @@ Implementation must not start until this spec is reviewed. In fast mode, keep it
 
 - Linked EDA Signals:
 - Feature Evidence:
+- Multivariate Evidence:
+- Process / Distribution Assumptions:
+- Redundancy Decisions:
 - Regime Assumptions:
 - Understanding Insight:
 - Research tool evidence used, if any:
@@ -81,9 +85,9 @@ Use this for round mechanics that are not normal features, such as special Trade
 
 Define every feature that changes trading behavior. EDA-only features must not be implemented unless this spec names an online proxy.
 
-| Feature | Source Fields | Online Availability | Role | Parameters | Missing-Signal Behavior | State / `traderData` Required | Validation Check |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| FEATURE | FIELDS | usable online / EDA-only with proxy / log-only diagnostic / unknown | direct signal / execution filter / risk control / diagnostic | PARAMS | FALLBACK_OR_DISABLE | STATE | CHECK |
+| Feature | Source Fields | Online Availability | Role | Parameters | Multivariate Relationship | Process Assumption | Redundancy Decision | Missing-Signal Behavior | State / `traderData` Required | Validation / Invalidation Check |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| FEATURE | FIELDS | usable online / EDA-only with proxy / log-only diagnostic / unknown | direct signal / execution filter / risk control / diagnostic | PARAMS | corr / covariance / regression / lead-lag / none / unknown | PROCESS_OR_NONE | keep / merged / downgraded / not applicable / unknown | FALLBACK_OR_DISABLE | STATE | CHECK |
 
 ## Feature Exclusions
 
@@ -91,13 +95,15 @@ List important features considered but intentionally not implemented.
 
 | Feature | Why Excluded | Reopen Only If |
 | --- | --- | --- |
-| FEATURE | CSV-only / weak evidence / too complex / no decision impact / not in shortlist | CONDITION |
+| FEATURE | CSV-only / weak evidence / too complex / no decision impact / not in candidate queue | CONDITION |
 
 ## Signal / Fair Value Logic
 
 - Signal:
 - Inputs:
 - Missing-signal behavior:
+- Process assumption that would invalidate this logic:
+- Multivariate or redundancy caveat:
 
 ## Execution Logic
 

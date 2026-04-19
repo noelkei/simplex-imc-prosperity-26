@@ -1,6 +1,7 @@
 # Generate Strategy Candidates
 
-Use this skill to generate, lightly prioritize, reject, defer, or shortlist strategy candidates from existing ingestion, EDA, and understanding evidence.
+Use this skill to generate, prioritize, reject, or defer strategy candidates
+from existing ingestion, EDA, and understanding evidence.
 
 ## Required sources
 
@@ -21,12 +22,14 @@ Use this skill to generate, lightly prioritize, reject, defer, or shortlist stra
 - Read the Understanding Assumptions Carried Forward and EDA Round Adaptation Check before branching. Fill Round Coverage Check for current-round mechanics, fields, or product behaviors that could affect candidate selection.
 - Consume existing understanding, EDA summaries, and candidates before adding new ideas.
 - Generate only non-duplicative candidates tied to linked EDA signals, feature evidence, regime assumptions, understanding insights, playbook heuristics, or explicit strategy assumptions.
+- Use EDA process/distribution hypotheses as strategy-family evidence when available; for example, mean-reverting evidence should support mean-reversion candidates, while trending or regime-switching evidence should shape momentum, threshold, defensive, or validation logic.
+- Use EDA multivariate evidence to decide whether features are independent, redundant, controlled by spread/depth/regime, or cross-product useful. Reject candidates that stack redundant features unless the decision trace explains why the extra feature changes behavior.
 - Start with an exploration board when evidence supports more than one plausible direction; keep these as conceptual branches, not active strategies.
-- Generate conceptual branches by product or source of edge before shortlisting.
+- Generate conceptual branches by product or source of edge before prioritizing.
 - Evaluate multi-product combinations conceptually when relevant, including compatibility, risk interaction, execution alignment, and cross-product dependency.
 - Use post-run failure patterns, edge decomposition, counterfactual backlog, and negative evidence when present to prune weak branches and prioritize high-ROI candidates.
 - Enforce the feature budget for each serious candidate: at most one primary edge feature or fair-value model, up to two supporting execution/risk filters, plus diagnostics that do not change decisions.
-- Treat outputs from `arch`, `ruptures`, `sklearn`, `pingouin`, `statsmodels`, or notebooks as evidence for simpler trading decisions, not as a reason to add offline model complexity. If a candidate relies on a research-only feature, require an online proxy or route it back to EDA/spec before implementation.
+- Treat outputs from `arch`, `ruptures`, `sklearn`, `pingouin`, `statsmodels`, PCA/loadings, clustering, mutual information, or notebooks as evidence for simpler trading decisions, not as a reason to add offline model complexity. If a candidate relies on a research-only feature, latent state, PCA component, or cluster label, require an online proxy or route it back to EDA/spec before implementation.
 - Require each serious candidate to link `feature -> signal -> decision -> expected edge -> validation check`.
 - Reject or defer feature-dump candidates, candidates that depend on non-online-usable features without an online proxy, candidates whose features are weak or contradictory, and candidates whose feature set does not target a known opportunity or failure mode.
 - Keep facts, EDA evidence, understanding insights, playbook heuristics, hypotheses, and assumptions separate.
@@ -35,12 +38,22 @@ Use this skill to generate, lightly prioritize, reject, defer, or shortlist stra
 - Prune candidates whose family/axis/feature combination was already tested and marked `duplicate`, `tested-reject`, `discard`, or `superseded`, unless new evidence makes the retest decision-relevant.
 - Reject or defer candidates that rely on prior-round product behavior, fair values, limits, or mechanics without current-round evidence.
 - Prefer high-ROI Counterfactual Backlog items with `untested` or worth-retesting status when they have a clear falsification check and match the current champion weakness.
-- Record a decision trace for shortlisted candidates: signals used, alternatives rejected, reason selected, and caveat.
-- Include why each shortlisted candidate is not feature dumping.
-- Apply the exploration stop rule before writing specs; stop when more branches are duplicate, weak, unimplementable, unlikely to change the shortlist, blocked by implementation/validation bottlenecks, dominated by a strong incumbent, or constrained by deadline pressure.
-- Ask a lightweight human checkpoint only when the answer materially affects shortlist, risk appetite, or product priority; record the default if there is no answer.
-- Keep at most 3 active strategies in `_index.md`.
-- Shortlist 1-3 candidates and reject or defer weak/redundant ideas with a reason and evidence gap or risk.
+- Record a decision trace for serious and prioritized candidates: signals used,
+  alternatives rejected or deferred, reason selected, role, priority tier, and
+  caveat.
+- Include why each prioritized candidate is not feature dumping.
+- Fill multivariate evidence, process hypothesis, redundancy note, and online proxy fields for serious candidates. Mark `not checked` only when the source EDA does not contain the evidence and the gap is not worth reopening.
+- Apply the exploration stop rule before writing specs; stop when more branches
+  are duplicate, weak, unimplementable, unlikely to change the prioritized
+  candidate queue, blocked by implementation/validation bottlenecks, dominated
+  by a strong incumbent, or constrained by deadline pressure.
+- Ask a lightweight human checkpoint only when the answer materially affects
+  prioritization, risk appetite, product priority, or final submission posture;
+  record the default if there is no answer.
+- Keep all non-duplicative high-ROI candidates in `_index.md` or linked from it;
+  use role, priority tier, and implementation wave instead of a hard count cap.
+- Reject or defer only weak, duplicate, unsupported, non-online-usable, or
+  low-ROI ideas, and record the reason plus evidence gap or risk.
 - Update `../rounds/round_X/workspace/03_strategy_candidates.md`, `_index.md`, and `phase_03_strategy_context.md`.
 
 ## Boundaries
@@ -48,10 +61,15 @@ Use this skill to generate, lightly prioritize, reject, defer, or shortlist stra
 - Do not write implementation-ready specs.
 - Do not mark spec review status.
 - Do not hand off implementation directly.
-- Do not implement combinations from the exploration board or compatibility matrix; they must first become shortlisted candidates and then reviewed specs.
+- Do not implement combinations from the exploration board or compatibility
+  matrix; they must first become prioritized candidates and then reviewed specs.
 - Do not create candidates from scratch when EDA or understanding exists. If evidence is missing, label the gap and route it to targeted EDA when it could change the decision.
-- Do not use `non-canonical/` drafts as evidence unless the user explicitly points to one; convert useful draft ideas into labeled assumptions before shortlisting.
+- Do not use `non-canonical/` drafts as evidence unless the user explicitly
+  points to one; convert useful draft ideas into labeled assumptions before
+  prioritizing.
 
 ## Handoff
 
-Pass shortlisted candidate IDs, evidence links, decision trace, priority rationale, risks, stop-rule reason, and unresolved unknowns to `skills/write_strategy_spec.md`.
+Pass prioritized candidate IDs, evidence links, decision trace, priority
+rationale, risks, stop-rule reason, and unresolved unknowns to
+`skills/write_strategy_spec.md`.

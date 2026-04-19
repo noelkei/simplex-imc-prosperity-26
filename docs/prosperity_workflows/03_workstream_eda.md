@@ -40,7 +40,8 @@ For active round workspaces, close EDA with the sections required by the round t
 - Data quality and filters
 - Feature inventory
 - Feature engineering notes
-- Distribution hypotheses, when decision-relevant
+- Multivariate feature map and redundancy decisions
+- Process / distribution hypotheses, when decision-relevant
 - Facts
 - Conditional patterns / regimes
 - Threshold / execution findings, when decision-relevant
@@ -104,16 +105,74 @@ Prefer simple, hypothesis-driven transformations before complex ones:
 
 Do not brute-force feature combinations or produce feature catalogs that no downstream phase can use. Document only features that are useful, potentially useful, or meaningfully rejected because the result changes a decision.
 
+## Default multivariate layer
+
+Every serious EDA should include a compact multivariate layer over the serious
+engineered feature set, not over every raw column. Its job is to prevent
+feature dumping and to show which relationships are stable enough for
+understanding, strategy, specification, or validation.
+
+Use these defaults:
+
+| Analysis | Default level | Use when | Decision it helps |
+| --- | --- | --- | --- |
+| Correlation matrix | mandatory by default | serious engineered features exist | redundancy, sign, stability, feature budget |
+| Covariance matrix | expected unless irrelevant | magnitude matters for prices, returns, depth, spread, or products | scale-sensitive relationships and product interaction |
+| Feature redundancy analysis | mandatory for promoted or near-promoted signals | multiple features may explain the same behavior | keep, merge, downgrade, or reject |
+| Multivariate regression | expected when a target exists | future mid delta, return sign, fill/markout proxy, or PnL proxy is available | whether a signal survives controls |
+| Cross-product correlation / lead-lag | expected when multiple aligned products exist | products could interact or proxy each other | combine, separate, hedge, or reject cross-product logic |
+| PCA or loadings | optional / conditional | 5+ correlated candidates or unclear redundancy | simplify feature families, not create bot logic |
+| Mutual information / non-linear dependence | optional / conditional | linear checks are weak but bins, scatter, or regimes suggest non-linearity | threshold or regime follow-up |
+| Clustering | optional / conditional | clusters map to online-observable regimes and change behavior | regime filter, defensive mode, or reject |
+
+Close this layer with a `Multivariate Feature Map`: which features overlap,
+which survive controls, whether cross-product behavior matters, and what a
+downstream phase should use, avoid, or validate.
+
+### Multivariate ROI gate
+
+Before adding PCA, mutual information, clustering, or more regressions, ask:
+
+- Would this change a feature promotion or rejection?
+- Would this change the strategy family, execution filter, risk control, or spec parameter?
+- Would this expose a validation or debugging failure mode?
+- Can the result be observed or approximated online if it affects bot behavior?
+
+If not, record the check as skipped or low ROI and stop.
+
+## Lightweight process / distribution modeling
+
+EDA should also state what process or distribution a serious product or signal
+family appears to resemble when that interpretation could affect strategy,
+risk, or validation. This is hypothesis generation, not formal proof.
+
+Useful lightweight process checks include:
+
+- distribution summaries: quantiles, tails, skew, outliers, and multimodality hints
+- time-series summaries: returns, rolling volatility, autocorrelation, and short-horizon persistence or reversal
+- trend and mean-reversion checks: simple drift fits, AR-style persistence, and residual stability
+- regime checks: rolling spread, depth, volatility, trade-flow, or imbalance bins
+- heteroskedasticity checks: rolling volatility or ARCH-style tests only when risk or sizing could change
+- mixture or latent-state hypotheses: describe first; formal clustering, GMM, HMM, or change-point tooling only when the output maps to an online decision
+
+Record process findings as:
+
+| Product / scope | Hypothesized process | Evidence | Confidence | Online observables | Downstream implication | Suggested next test | Status |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+
+Every process hypothesis should answer: what should understanding, strategy,
+specification, or validation do differently because of this?
+
 ## Research tool guidance
 
 Use the shared research environment to improve EDA quality when the question warrants it:
 
 - Use `pandas`/`numpy` by default for moderate CSVs, rolling features, markouts, and compact tables.
 - Use `polars` for larger CSV/log scans, repeated grouping, or lazy filtering where pandas becomes slow.
-- Use `scipy`, `statsmodels`, or `pingouin` for signal validation, effect sizes, confidence intervals, distribution checks, correlations, and lightweight regressions.
+- Use `scipy`, `statsmodels`, or `pingouin` for signal validation, effect sizes, confidence intervals, distribution checks, correlations, redundancy checks, and lightweight regressions.
 - Use `arch` only when volatility clustering or risk regimes could change strategy, sizing, or validation.
 - Use `ruptures` only when change points, drift breaks, or failure windows could change a downstream decision.
-- Use `sklearn` for lightweight clustering, dimensional checks, or baseline predictive tests; do not turn EDA into a model search unless explicitly requested.
+- Use `sklearn` for lightweight clustering, PCA/loadings, mutual information, dimensional checks, or baseline predictive tests; do not turn EDA into a model search unless explicitly requested.
 - Use `numba` for repeated replay, markout, or rolling loops when normal Python is a bottleneck.
 
 Always record which tools were used, what decision they affected, and why skipped tools were unnecessary when the omission matters. Do not make every EDA use every library.
@@ -210,8 +269,9 @@ Every durable EDA summary should include:
 - column classification summary
 - feature inventory with raw and derived features that matter
 - feature engineering notes: attempted transformations, useful results, rejected results, and promising validation targets
+- multivariate feature map: correlation/covariance, controlled relationships, cross-product checks, and redundancy decisions when applicable
 - feature promotion decisions: promote, exploratory, negative evidence, EDA-only calibration, needs logs, or reject
-- `Distribution Hypotheses` when they could affect strategy, risk, or validation
+- `Process / Distribution Hypotheses` when they could affect strategy, risk, or validation
 - facts, conditional patterns/regimes, signal hypotheses, and assumptions separated
 - `Threshold / Execution Findings` when they affect signal, sizing, fills, or validation
 - `Negative Evidence` for meaningful failed checks
@@ -240,6 +300,9 @@ EDA is done only when:
 - the data/log source is named
 - data quality and filters are documented, including row counts, timestamp coverage, missing bid/ask counts when order books are used, zero/blank `mid_price` counts when mid prices are used, and whether findings use raw or filtered rows
 - relevant columns are classified or explicitly marked unclear
+- serious engineered features have a correlation/redundancy check, or an explicit low-ROI deferral
+- process/distribution hypotheses are recorded for serious product behavior, or explicitly marked not decision-relevant
+- cross-product relationships are checked when multiple aligned products exist, or explicitly deferred
 - reproduction steps or artifact paths are recorded
 - facts, conditional patterns/regimes, signal hypotheses, assumptions, and open questions are separated
 - current-round mechanics/schema changes and prior-round assumptions at risk are either addressed, routed, or explicitly deferred

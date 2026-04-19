@@ -27,11 +27,11 @@ the memory as official Prosperity rules.
 
 Keep the lightweight gates aligned across phases:
 
-- EDA owns the feature lifecycle and Round Adaptation Check.
-- Understanding compresses promoted signals and assumptions carried forward.
+- EDA owns the feature lifecycle, Round Adaptation Check, compact multivariate/redundancy layer, and process/distribution hypotheses.
+- Understanding compresses promoted signals, multivariate/process evidence, redundancy decisions, and assumptions carried forward.
 - Strategy enforces the feature budget and Round Coverage Check.
-- Specs define the Feature Contract and Round-Specific Mechanics Contract.
-- Validation owns the ROI-gated run update decision: `update`, `update lightly`, or `no update`.
+- Specs define the Feature Contract, including online proxies and invalidation checks for process or multivariate assumptions, and Round-Specific Mechanics Contract.
+- Validation owns the ROI-gated run update decision: `update`, `update lightly`, or `no update`, including process/multivariate feedback when it changes future decisions.
 
 ## Research Environment Use
 
@@ -44,7 +44,7 @@ Use research tools only when they answer a decision-relevant question faster or 
 | Phase | Should Use | Optional | Do Not Use |
 | --- | --- | --- | --- |
 | Round preparation / ingestion | Standard library for file/source checks | `pandas` for schema summaries when data exists | modeling libraries; strategy conclusions |
-| EDA | `pandas`/`numpy`, `scipy`, `statsmodels`, `pingouin`, plots for distributions, signals, and tests | `polars` for large CSV/logs, `numba` for repeated loops, `arch`/`ruptures` for regime questions, `sklearn` for clustering or feature screening | broad ML, feature catalogs, or tests that cannot change a downstream decision |
+| EDA | `pandas`/`numpy`, `scipy`, `statsmodels`, `pingouin`, plots for distributions, signals, multivariate checks, redundancy, process hypotheses, and tests | `polars` for large CSV/logs, `numba` for repeated loops, `arch`/`ruptures` for regime questions, `sklearn` for PCA, clustering, mutual information, or feature screening | broad ML, feature catalogs, or tests that cannot change a downstream decision |
 | Understanding | statistical confidence, effect size, stability, and negative evidence from EDA | small follow-up summaries using existing processed data | rerunning broad EDA or promoting weak/offline-only features |
 | Strategy candidates | EDA/understanding outputs as evidence for feature-light candidates | request targeted EDA for unresolved high-impact unknowns | adding models or research-library dependencies to candidates just because they exist |
 | Strategy spec | research outputs only as traceable evidence and parameter rationale | validation checks derived from statistical confidence or regimes | requiring bot imports from research-only packages unless the wiki runtime allows them |
@@ -61,7 +61,7 @@ Use research tools only when they answer a decision-relevant question faster or 
 | `pingouin` | EDA, understanding, post-run | effect sizes, confidence intervals, compact statistical tests | comparing features, regimes, fills, or variants | when a simple descriptive table is enough |
 | `arch` | EDA, understanding | volatility/regime diagnostics | volatility clustering could change risk, sizing, or filters | if volatility does not affect the next decision |
 | `ruptures` | EDA, validation, post-run | change-point and failure-window detection | regime shifts, drift breaks, or run failures need segmentation | as a decorative regime label with no action |
-| `scikit-learn` | EDA, strategy evidence | clustering, feature screening, simple predictive baselines | hypotheses need lightweight validation or grouping | training complex offline models for direct bot use |
+| `scikit-learn` | EDA, strategy evidence | PCA/loadings, mutual information, clustering, feature screening, simple predictive baselines | hypotheses need lightweight validation, redundancy analysis, or grouping | training complex offline models for direct bot use |
 | `numba` | EDA, validation, post-run | fast replay, markouts, rolling loops, order-book sweeps | repeated Python loops are a bottleneck | small scripts where JIT startup costs more than it saves |
 | `matplotlib`, `seaborn`, `plotly`, `jupyterlab` | EDA, handoffs | charts, notebooks, exploratory inspection | visuals make distributions/regimes/fills easier to review | when a table and Markdown handoff are clearer |
 

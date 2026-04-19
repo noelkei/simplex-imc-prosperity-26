@@ -17,6 +17,9 @@ Raw logs are not durable by default. Preserve current decision evidence in `roun
 - Variant hypothesis:
 - Insight being tested:
 - Linked signal/regime assumption:
+- Linked process hypothesis:
+- Linked multivariate relationship:
+- Linked redundancy decision:
 - Raw artifact path:
 - Data day / source:
 - Baseline / comparison run:
@@ -76,6 +79,16 @@ Optional but recommended when the run tests a feature, signal, or feature toggle
 | --- | --- | --- | --- | --- | --- |
 | FEATURE | EXPECTED | OBSERVED | fill stats / markout / statistical test / regime split / none | up / down / unchanged / unclear | keep / variant / EDA / discard |
 
+## Process And Multivariate Diagnostics
+
+Optional but recommended when the strategy depends on an EDA process
+hypothesis, cross-product relationship, controlled feature relationship, or
+redundancy decision.
+
+| Assumption Or Relationship | Expected In Run | Observed In Run | Diagnostic Method | Verdict | Next Action |
+| --- | --- | --- | --- | --- | --- |
+| PROCESS_OR_RELATIONSHIP | EXPECTED | OBSERVED | markout / fill stats / regime split / product split / controlled comparison / none | supports / weakens / contradicts / not tested | keep / targeted EDA / spec revision / variant / discard |
+
 ## Comparability
 
 - Comparable to baseline: `yes | no | unclear`
@@ -94,6 +107,7 @@ Optional but recommended when the run tests a feature, signal, or feature toggle
 
 - Finding:
 - Signal/regime evidence verdict: `supports | weakens | contradicts | not tested`
+- Process/multivariate evidence verdict: `supports | weakens | contradicts | not tested`
 - Verdict basis:
 
 ## Post-Run Research

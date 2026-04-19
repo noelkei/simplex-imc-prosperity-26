@@ -27,7 +27,7 @@ TBD
 
 ## Open Questions / Blockers
 
-- No shortlisted candidate yet.
+- No prioritized candidate yet.
 
 ## Linked Artifacts
 
@@ -36,7 +36,7 @@ TBD
 
 ## Next Priority Action
 
-Write a reviewed strategy spec for the highest-priority shortlisted candidate.
+Write a reviewed strategy spec for the highest-priority candidate.
 
 ## Deadline Risk
 

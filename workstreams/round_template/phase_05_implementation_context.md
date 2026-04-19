@@ -23,7 +23,8 @@ TBD
 
 ## Decisions Made
 
-- Maximum active implementations: 2.
+- Implementation count is driven by reviewed specs, validation capacity,
+  deadline risk, and distinct test axes.
 - Implementation requires a reviewed strategy spec.
 - Variants must record parent spec, parent bot if any, insight being tested, changed axis, expected effect, and validation check.
 

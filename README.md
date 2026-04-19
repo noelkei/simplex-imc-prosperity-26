@@ -27,7 +27,15 @@ This environment is for repo research work only. EDA, understanding synthesis, s
 
 Prosperity bot submissions must remain platform-compatible. Do not import repo-only research dependencies in uploadable `Trader` files unless the official Prosperity runtime docs explicitly allow them. Keep the existing feature lifecycle rule: EDA-only features must not enter a bot unless a reviewed spec defines an online-usable proxy.
 
-The research stack is a toolbelt, not a checklist. Use these libraries when they improve signal validation, regime detection, feature engineering, fill analysis, or handoff clarity; skip them when a simple table or standard-library script answers the decision.
+The research stack is a toolbelt, not a checklist. Use these libraries when they improve signal validation, multivariate/redundancy checks, process hypotheses, regime detection, feature engineering, fill analysis, or handoff clarity; skip them when a simple table or standard-library script answers the decision.
+
+Serious EDA should include a compact multivariate and process-hypothesis layer
+when it can change downstream decisions: correlation/redundancy checks over the
+serious feature set, controlled relationships when a target exists,
+cross-product checks when products plausibly interact, and lightweight
+distribution/process hypotheses. Do not turn PCA, clusters, latent states, or
+other offline research outputs into bot behavior unless a reviewed spec defines
+an online-usable proxy.
 
 ## Quick Start
 
@@ -68,7 +76,7 @@ Every round should run through the same phases, but under a 2 day constraint the
 1. Round ingestion.
 2. Minimal EDA, or an explicit "EDA skipped with reason."
 3. Research / understanding summary.
-4. Strategy generation and shortlist.
+4. Strategy generation and prioritized candidate queue.
 5. Reviewed strategy specification.
 6. Implementation.
 7. Testing / performance analysis.
@@ -138,7 +146,7 @@ Use them as phase-specific operating guides after reading the relevant workflow:
 | Round ingestion | `skills/analyze_round.md` |
 | EDA | `skills/run_eda.md` |
 | Understanding synthesis | `skills/synthesize_understanding.md` |
-| Strategy candidates / shortlist | `skills/generate_strategy_candidates.md` |
+| Strategy candidates / prioritized queue | `skills/generate_strategy_candidates.md` |
 | Strategy specs / implementation readiness | `skills/write_strategy_spec.md` |
 | Trader implementation | `skills/create_trader.md` |
 | Validation/run summaries | `skills/validate_trader.md` |
@@ -226,13 +234,16 @@ For a roughly 48 hour round-to-submission window:
 - Hours 0-3: round ingestion and `_index.md` setup.
 - Hours 3-10: targeted EDA only for questions likely to affect bot behavior.
 - Hours 10-14: understanding summary and bounded strategy generation.
-- Hours 14-20: shortlist and write 1-2 implementation-ready specs.
+- Hours 14-20: prioritize the ROI-driven candidate queue and write the
+  highest-ROI implementation-ready specs.
 - Hours 20-32: implement and validate first candidates.
 - Hours 32-42: debug and iterate on the best 1-2 candidates.
 - Hours 42-46: freeze feature work, run final validation, choose active submission.
 - Hours 46-48: submit, verify active file, document final state.
 
-Stop exploring when there is enough evidence for 1-2 plausible specs, EDA is no longer changing decisions, less than 24 hours remain, or implementation/validation is the bottleneck.
+Stop exploring when there is enough evidence to prioritize the next
+implementation-ready specs, EDA is no longer changing decisions, less than 24
+hours remain, or implementation/validation is the bottleneck.
 
 Stop iterating when less than 6 hours remain, the best candidate is rule-valid and better than baseline by available evidence, remaining issues are strategy uncertainty rather than correctness, or new changes would not get enough validation time.
 
@@ -245,7 +256,7 @@ Start round X.
 Start round ingestion for Round X.
 Start targeted EDA for Round X using the current round index.
 Synthesize understanding for Round X from ingestion and EDA.
-Continue strategy generation and shortlist candidates.
+Continue strategy generation and prioritize the candidate queue.
 Generate strategy candidates for Round X.
 Write a strategy spec for candidate Y.
 Implement candidate Y from its reviewed spec.
@@ -266,7 +277,8 @@ Agents should guide the work:
 - Read `_index.md`, the relevant phase context, wiki facts, and the task-specific workflow before acting.
 - Report missing artifacts and suggest the smallest useful next action.
 - Preserve the source hierarchy and label facts, evidence, heuristics, hypotheses, and assumptions.
-- Ask for human decisions on strategy shortlist, spec approval, deadline tradeoffs, and final submission choice.
+- Ask for human decisions on strategy prioritization, spec approval, deadline
+  tradeoffs, and final submission choice.
 - Redirect attempts to skip mandatory strategy spec or validation gates.
 - Update `_index.md` and the relevant phase context when status or priority changes.
 
@@ -279,8 +291,8 @@ Agents should proceed without asking when the next step is determined by the rep
 | Round ingestion | Active round or source material | Products, limits, algorithmic/manual split, caveats | Reviewed ingestion context, Round Mechanics Delta, and `_index.md` links |
 | EDA | Data/log path and question | Reproducible outputs and summary | Product scope, Round Adaptation Check, data quality, feature lifecycle, signal hypotheses, open questions, reusable metrics, and downstream agent notes are clear |
 | Understanding | Reviewed ingestion and EDA | Evidence-aware market understanding | Strategy-relevant insights, signal ledger, research memory, assumptions carried forward, risks, and candidate implications are clear |
-| Strategy generation | Priorities and risk appetite | Grouped candidates and shortlist | 1-3 non-duplicative candidates are selected, feature budget is respected, and Round Coverage Check is addressed |
-| Strategy specification | Shortlisted candidate | Implementation-ready spec | Signal, execution, risk, state, Feature Contract, Round-Specific Mechanics Contract, validation checks, and evidence traceability are defined, with review outcome recorded |
+| Strategy generation | Priorities and risk appetite | Grouped candidates and prioritized ROI-driven queue | All high-ROI non-duplicative candidates are retained, weak/duplicate ideas are pruned or deferred, feature budget is respected, and Round Coverage Check is addressed |
+| Strategy specification | Prioritized candidate | Implementation-ready spec | Signal, execution, risk, state, Feature Contract, Round-Specific Mechanics Contract, validation checks, and evidence traceability are defined, with review outcome recorded |
 | Implementation | Approved or deadline-deferred spec | Bot implementation | Contract, signs, limits, runtime/imports, Feature Contract, Round-Specific Mechanics Contract, and spec alignment are checked |
 | Testing | Bot, spec, run artifact | Run summary | Results link bot, spec, raw run, metrics, limits, run classification, ROI-gated memory action, and next action |
 | Debugging | Issue or suspicious run | Classified debugging note | Reproduction, expected vs observed behavior, linked spec/run, classification, and next action are present |
@@ -290,9 +302,11 @@ Agents should proceed without asking when the next step is determined by the rep
 Use fast mode when less than 24 hours remain, exploration is no longer the bottleneck, or the team needs a valid candidate quickly.
 
 - EDA: one or two targeted questions only.
-- Strategy generation: max 3-5 candidates; shortlist 1-2.
+- Strategy generation: prioritize the highest-ROI candidates first; keep useful
+  backlog candidates only when they remain differentiated and validation-ready.
 - Spec: one page is acceptable if signal, execution, risk, state, and validation checks are clear.
-- Implementation: one primary candidate plus one fallback/baseline at most.
+- Implementation: start with the minimum set that can be validated quickly,
+  then add distinct reviewed candidates only when validation capacity remains.
 - Testing: fastest meaningful validation first, with raw output and a short summary.
 - Debugging: fix rule, contract, and limit bugs before speculative tuning.
 - Freeze: with less than 6 hours left, only correctness fixes or extremely low-risk parameter changes.

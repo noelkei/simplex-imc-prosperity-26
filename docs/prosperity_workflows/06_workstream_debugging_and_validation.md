@@ -31,6 +31,7 @@ Check whether the work:
 - Matches the documented strategy hypothesis.
 - Matches the linked reviewed strategy spec.
 - Uses EDA evidence or logs consistently.
+- Reports whether linked process hypotheses, multivariate relationships, cross-product assumptions, or redundancy decisions are supported, weakened, contradicted, or not tested when they influenced the spec.
 - Manages inventory in the way the strategy claimed.
 - Fails gracefully when order books are empty or signals are unavailable.
 - Produces interpretable logs or artifacts for follow-up.
@@ -82,6 +83,7 @@ decision-useful:
 - Use `scipy`, `pingouin`, or `statsmodels` for fill-quality, adverse-selection, and variant confidence checks when the result could change promotion or backlog decisions.
 - Use `ruptures` to locate failure windows or regime breaks in a run.
 - Use `arch` only when volatility regimes plausibly explain performance or risk.
+- Use lightweight controlled comparisons only when they can confirm, weaken, or contradict an EDA process hypothesis, multivariate relationship, or redundancy decision that affected the spec.
 
 Keep diagnostics practical. They should explain product PnL, fills, inventory,
 adverse selection, or a counterfactual. They should not replace platform-first
@@ -228,7 +230,8 @@ Every aggregate memory insight must link back to a per-run summary or raw
 artifact. Treat the memory as evidence input for later phases, not as official
 Prosperity rules.
 
-Post-run-discovered features should enter the pipeline as post-run insight,
+Post-run-discovered features, contradicted process hypotheses, and weakened
+multivariate relationships should enter the pipeline as post-run insight,
 targeted EDA question, strategy branch/counterfactual backlog item, or
 controlled variant only after spec update when signal logic changes.
 
@@ -249,6 +252,7 @@ Separate issues into:
 - Rule or contract failure: conflicts with wiki facts.
 - Implementation bug: code does not do what the strategy or task described.
 - Data/EDA gap: more data, metrics, or interpretation is needed before deciding.
+- Process/multivariate gap: the run contradicts or fails to test a process hypothesis, cross-product relationship, controlled feature relationship, or redundancy decision that affected behavior.
 - Heuristic weakness: the approach is allowed but likely fragile, overfit, slow, or hard to debug.
 - Execution tuning issue: behavior is valid but likely needs parameter, sizing, or quoting adjustment.
 - Evidence gap: more data, logging, or reproduction is needed.

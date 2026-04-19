@@ -32,6 +32,34 @@ Use EDA research outputs to compress confidence, not to rerun broad analysis. Re
 - Features downgraded for weak confidence, instability, or offline-only status:
 - Research outputs not trusted yet:
 
+## Multivariate Relationships Carried Forward
+
+Use only compact EDA relationships that change product scope, feature
+selection, strategy family, spec parameters, or validation checks. Do not rerun
+broad EDA here.
+
+| Relationship | Source EDA Artifact | Evidence | Decision Impact | Confidence | Caveat |
+| --- | --- | --- | --- | --- | --- |
+| FEATURE_OR_PRODUCT_RELATIONSHIP | ARTIFACT | correlation / covariance / regression / lead-lag / MI / other | use / validate / avoid / defer | high / medium / low | CAVEAT |
+
+## Redundancy Decisions
+
+Carry forward which features should be kept, merged, downgraded, or avoided so
+strategy candidates do not rediscover feature dumps.
+
+| Feature Family | Keep | Merge / Downgrade / Drop | Evidence | Strategy Impact |
+| --- | --- | --- | --- | --- |
+| FAMILY | FEATURES | FEATURES | corr / covariance / VIF / PCA / controlled model / other | IMPACT |
+
+## Process Hypotheses Carried Forward
+
+Preserve only process interpretations that should influence strategy,
+specification, risk, or validation.
+
+| Product Or Scope | Process Hypothesis | EDA Evidence | Confidence | Online Observable / Proxy | Strategy Or Validation Implication |
+| --- | --- | --- | --- | --- | --- |
+| PRODUCT_OR_SCOPE | trending / mean-reverting / random-walk-like / jumpy / multimodal / volatility-clustered / regime-switching / flow-driven / unclear | EVIDENCE | high / medium / low | FIELD_OR_PROXY | IMPLICATION |
+
 ## Assumptions Carried Forward
 
 Only carry assumptions from prior rounds when current-round evidence supports them or the risk is explicit.

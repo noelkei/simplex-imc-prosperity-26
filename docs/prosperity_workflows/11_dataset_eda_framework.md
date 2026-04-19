@@ -33,7 +33,50 @@ Use it as a guided checklist, not a rigid schema. Classify the columns you actua
 2. Classify relevant columns using the table above.
 3. Choose analyses that match those categories and can affect a downstream decision.
 4. Create reusable metrics or derived features only when they support understanding, strategy, specification, validation, or debugging.
-5. Write a structured EDA artifact that another agent can use without rerunning the analysis.
+5. Build a serious engineered feature set for decision-relevant checks.
+6. Run the default multivariate and process-hypothesis layers when applicable.
+7. Write a structured EDA artifact that another agent can use without rerunning the analysis.
+
+## Default Multivariate Layer
+
+Run this on meaningful engineered features, not on every raw column. If the
+feature set is tiny or the check cannot change a downstream decision, record
+the deferral and why.
+
+| Check | Default | Use For | Stop / Deepen Rule |
+| --- | --- | --- | --- |
+| Correlation matrix | mandatory by default | redundancy, sign, stability, feature budget | stop when feature families are clear; deepen if promoted signals overlap |
+| Covariance matrix | expected unless irrelevant | magnitude-sensitive prices, returns, depths, spreads, product relationships | skip when standardized correlations already answer the decision |
+| Redundancy analysis | mandatory for promoted or near-promoted signals | keep, merge, downgrade, or reject similar features | deepen with VIF/PCA only if pairwise checks are unclear |
+| Multivariate regression | expected when a target exists | test whether a signal survives controls | keep explanatory and simple; stop before model tuning |
+| Cross-product correlation / lead-lag | expected for multiple aligned products | decide whether products interact, diversify, or should be modeled separately | stop if unstable or not online-actionable |
+| PCA / loadings | optional / conditional | simplify 5+ correlated feature candidates | do not use components directly in bots without an online proxy |
+| Mutual information / non-linear dependence | optional / conditional | test threshold or non-linear relationships missed by correlation | use only when it may change a feature or regime decision |
+| Clustering | optional / conditional | identify online-observable regimes or groups | reject clusters that do not map to an action |
+
+The output should be a compact `Multivariate Feature Map` that says which
+features overlap, which survive controls, whether cross-product signals matter,
+and what downstream phases should do.
+
+## Process / Distribution Hypothesis Layer
+
+For serious products or signal families, summarize the approximate process
+only as far as it changes decisions. Examples include trending,
+mean-reverting, random-walk-like, jumpy, multimodal, volatility-clustered,
+regime-switching, or flow-driven behavior.
+
+Recommended lightweight evidence:
+
+- distribution summaries: quantiles, tails, skew, outliers, multimodality hints
+- time-series summaries: returns, rolling volatility, autocorrelation, persistence, reversal
+- trend / mean-reversion checks: drift fit, AR-style persistence, residual stability
+- regime checks: spread, depth, volatility, trade-flow, or imbalance bins
+- heteroskedasticity checks only when risk, sizing, or validation may change
+- formal mixture, latent-state, clustering, or change-point tooling only after the ROI gate passes
+
+Process hypotheses should include product/scope, hypothesized process,
+evidence, confidence, online observables, downstream implication, suggested
+next test, caveat, and lifecycle status.
 
 ## EDA As Knowledge Transfer
 
@@ -58,13 +101,17 @@ The main EDA output is a readable artifact, not a plot or notebook. A good EDA s
 
 Deepen EDA when:
 
-- a finding could change shortlist, spec, validation, or debugging decisions
+- a finding could change candidate queue, spec, validation, or debugging decisions
 - a signal looks actionable but uncertain
 - evidence contradicts an assumption
 - debugging exposes a data or interpretation gap
+- redundancy checks could prevent a feature-dump strategy
+- a process hypothesis could change strategy family, risk, sizing, or validation
+- cross-product behavior could change product scope or execution logic
 
 Stop EDA when:
 
 - additional analysis will not change the next implementation decision
 - less than 24 hours remain and implementation/validation is the bottleneck
-- the result is enough to support 1-2 implementation-ready specs
+- the result is enough to prioritize the next implementation-ready specs
+- PCA, clustering, mutual information, latent-state, or change-point work would only produce a decorative stats report

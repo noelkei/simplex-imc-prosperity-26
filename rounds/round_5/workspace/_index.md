@@ -26,19 +26,21 @@ This round workspace is pre-created and `NOT_STARTED`. Start phase 00 ingestion 
 
 ## Active Strategies
 
-Maximum active strategies: 3.
+Candidate count is ROI-driven, not fixed. Track all high-ROI active candidates
+with roles, priority tiers, and implementation waves.
 
 - None.
 
 Example when active:
 
-| Candidate ID | Priority | Evidence Strength | Short Reason | Spec Status | Owner | Decision Needed |
-| --- | --- | --- | --- | --- | --- | --- |
-| `candidate_01` | high | medium | concise rationale from understanding/EDA | not reviewed | Unassigned | Review spec |
+| Candidate ID | Role | Priority Tier | Implementation Wave | Evidence Strength | Short Reason | Spec Status | Owner | Decision Needed |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `candidate_01` | primary | spec-first | wave 1 | medium | concise rationale from understanding/EDA | not reviewed | Unassigned | Review spec |
 
 ## Active Implementations
 
-Maximum active implementation candidates: 2.
+Implementation count is driven by reviewed specs, validation capacity,
+deadline risk, and distinct test axes.
 
 - None.
 

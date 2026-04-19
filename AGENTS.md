@@ -39,8 +39,10 @@
 - Do not carry prior-round products, fair values, limits, mechanics, or constants forward unless current-round evidence supports them or they are explicitly labeled as assumptions.
 - Before EDA, understanding, strategy, spec, implementation, or validation depends on current-round mechanics or changed fields, route them through the Round Adaptation Check, Assumptions Carried Forward, Round Coverage Check, or Round-Specific Mechanics Contract as appropriate.
 - Treat EDA as targeted signal discovery: state the decision it may affect, use hypothesis-driven feature engineering, classify signals as usable, exploratory, or not ready, and stop when more analysis will not change the next decision.
+- EDA should consider compact multivariate, redundancy, cross-product, and process/distribution layers when decision-relevant. Do not force PCA, clustering, latent-state models, or heavy regressions into every EDA, and do not turn offline research outputs into bot logic without an online-usable Feature Contract.
 - Use the shared research environment libraries when they improve decision quality, research speed, or evidence clarity; document the method when it matters. Do not force libraries into simple checks, overfit sample data, or treat research-only packages as allowed imports for uploadable bots.
 - Ground strategy candidates, specs, and variants in linked EDA signals, feature evidence, regime assumptions, and understanding insights when those artifacts exist; otherwise label the missing evidence as an assumption or route it to targeted EDA.
+- Avoid arbitrary limits on strategy exploration or implementation when ROI justifies additional candidates. Control complexity through evidence strength, non-duplication, feature budget, reviewed specs, distinct test axes, deadline risk, and validation capacity rather than fixed candidate or bot counts.
 - When `rounds/round_X/workspace/post_run_research_memory.md` exists for the active round, read it before EDA, understanding, strategy generation, spec writing, or trader variant work. Treat it as evidence input, not passive documentation; cite relevant insight IDs or descriptions when they influence decisions. Missing memory does not block work; record the absence only when it affects confidence or direction.
 - When validating new run artifacts, classify the run and apply the ROI-gated memory action: `update`, `update lightly`, or `no update`.
 - Specs must define a Feature Contract for each implemented feature and a Round-Specific Mechanics Contract for each relevant round mechanic, Trader method, or changed online field; implementation and validation must follow those contracts.
@@ -62,7 +64,7 @@ When a task matches a file in `skills/`, read that skill after the workflows and
 - `skills/add_new_round.md` for new round setup.
 - `skills/run_eda.md` for EDA.
 - `skills/synthesize_understanding.md` for understanding summaries.
-- `skills/generate_strategy_candidates.md` for strategy candidates, lightweight prioritization, rejection, and shortlisting.
+- `skills/generate_strategy_candidates.md` for strategy candidates, lightweight prioritization, rejection, and candidate queue updates.
 - `skills/write_strategy_spec.md` for strategy specs, review state, and implementation readiness.
 - `skills/create_trader.md` for implementation.
 - `skills/validate_trader.md` for validation and run summaries.

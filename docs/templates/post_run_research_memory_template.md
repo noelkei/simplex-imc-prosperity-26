@@ -41,6 +41,34 @@ Use this to update feature confidence after serious platform or platform-style r
 | --- | --- | --- | --- | --- | --- |
 | FEATURE | RUNS | helped / failed / unclear | fill stats / markout / statistical test / regime split / counterfactual / none | up / down / unchanged | keep / variant / EDA / discard |
 
+## Multivariate Relationship Feedback
+
+Record only run evidence that confirms, weakens, or contradicts a relationship
+used by understanding, strategy, or a spec.
+
+| Relationship | Runs | EDA Expectation | Run Evidence | Confidence Change | Next Action |
+| --- | --- | --- | --- | --- | --- |
+| FEATURE_OR_PRODUCT_RELATIONSHIP | RUNS | EXPECTATION | confirms / weakens / contradicts / unclear | up / down / unchanged | keep / EDA / spec revision / discard |
+
+## Process Hypothesis Feedback
+
+Use this when platform or platform-style runs provide evidence about a process
+assumption such as mean reversion, trend, regime switching, flow sensitivity, or
+volatility clustering.
+
+| Process Hypothesis | Products | Runs | Run Evidence | Confidence Change | Strategy / Spec Impact |
+| --- | --- | --- | --- | --- | --- |
+| HYPOTHESIS | PRODUCTS | RUNS | supports / weakens / contradicts / unclear | up / down / unchanged | IMPACT |
+
+## Redundancy Decision Feedback
+
+Use this when a run tests whether a feature was unnecessary, duplicate,
+harmful, or worth adding back.
+
+| Feature Family | Prior Redundancy Decision | Runs | Evidence | Next Action |
+| --- | --- | --- | --- | --- |
+| FAMILY | keep / merge / downgrade / drop / unclear | RUNS | EVIDENCE | keep / reopen EDA / spec revision / discard |
+
 ## Statistical Confidence Notes
 
 Record only confidence evidence that changes future decisions. Examples: adverse-selection markouts, fill quality differences, effect sizes, confidence intervals, volatility/regime shifts, or change-point windows.

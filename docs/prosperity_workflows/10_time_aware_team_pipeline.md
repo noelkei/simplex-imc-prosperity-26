@@ -9,7 +9,7 @@ Every round still passes through:
 1. Round ingestion.
 2. EDA, or an explicit "EDA skipped with reason."
 3. Research / understanding.
-4. Strategy generation and shortlist.
+4. Strategy generation and prioritized candidate queue.
 5. Strategy specification.
 6. Implementation.
 7. Testing / performance analysis.
@@ -33,7 +33,8 @@ For a 48 hour window:
 - Hours 0-3: round ingestion and `_index.md` setup.
 - Hours 3-10: targeted EDA only for questions likely to affect bot behavior.
 - Hours 10-14: understanding summary and bounded strategy generation.
-- Hours 14-20: shortlist and write 1-2 implementation-ready specs.
+- Hours 14-20: prioritize the ROI-driven candidate queue and write the
+  highest-ROI implementation-ready specs.
 - Hours 20-32: implement and validate first candidates.
 - Hours 32-42: debug and iterate on the best 1-2 candidates.
 - Hours 42-46: freeze feature work, run final validation, choose active submission.
@@ -41,7 +42,7 @@ For a 48 hour window:
 
 Stop exploring when one of these is true:
 
-- There is enough evidence for 1-2 plausible specs.
+- There is enough evidence to prioritize the next implementation-ready specs.
 - EDA is no longer changing decisions.
 - Less than 24 hours remain.
 - Implementation or validation is the bottleneck.
@@ -61,14 +62,22 @@ Strong-incumbent rule:
 - If the robustness gain is small, keep the higher-PnL champion.
 - Near deadline, prioritize final validation, artifact preservation, and active-file verification over new complexity.
 
-## Complexity Limits
+## ROI And Capacity Controls
 
-- Keep at most 3 active strategy candidates per round.
-- Keep at most 2 implementation candidates in active testing.
+- Strategy candidates are ROI-driven, not count-driven. Keep all
+  non-duplicative high-ROI candidates supported by evidence or a clearly
+  labeled testable assumption.
+- Implementation candidates are constrained by reviewed specs, validation
+  capacity, differentiation between candidates, and deadline risk, not by a
+  fixed count.
 - Keep one baseline/reference bot separate from active candidates.
-- Treat broad idea generation as optional. Default to 5-8 ideas, and use 10-20 only when the team explicitly needs breadth.
-- Converge to 1-3 shortlisted candidates before strategy specification.
-- Do not create a new strategy candidate for a parameter tweak unless it materially changes signal, execution, or risk behavior.
+- Treat broad idea generation as optional. A typical target is 5+ strong
+  candidates when evidence supports them; use more only when they are distinct,
+  testable, and likely to change decisions.
+- Prioritize candidates into implementation waves before strategy
+  specification. Spec and implement the highest-ROI wave first.
+- Do not create a new strategy candidate for a parameter tweak unless it
+  materially changes signal, execution, or risk behavior.
 
 ## Phase Statuses
 
@@ -104,9 +113,11 @@ General completion rule: outputs must be usable without reinterpretation, facts 
 Phase-specific completion:
 
 - Ingestion: products, limits, algorithmic/manual split, caveats, and Round Mechanics Delta reviewed.
-- EDA: product scope, Round Adaptation Check, data quality, feature inventory/lifecycle, feature promotion decisions, signal hypotheses, open questions, and downstream agent notes are clear.
+- EDA: product scope, Round Adaptation Check, data quality, feature inventory/lifecycle, multivariate/redundancy checks or explicit deferrals, process/distribution hypotheses or explicit deferrals, feature promotion decisions, signal hypotheses, open questions, and downstream agent notes are clear.
 - Understanding: EDA evidence, promoted signals, rejected/unresolved research memory, assumptions carried forward, open risks, and candidate implications are compressed.
-- Strategy generation: 1-3 shortlisted candidates selected, feature budget respected, and Round Coverage Check addressed.
+- Strategy generation: ROI-driven candidate queue completed, feature budget
+  respected, priority/implementation wave recorded, and Round Coverage Check
+  addressed.
 - Strategy spec: at least one reviewed implementation-ready spec exists with Feature Contract and Round-Specific Mechanics Contract.
 - Implementation: bot maps to a reviewed spec and passes contract/rule plus round adaptation checks.
 - Testing/performance: readable run summary links bot, spec, raw run, metrics, limits, run classification, and ROI-gated memory action.
@@ -166,8 +177,9 @@ Required sections:
 - Current next priority action.
 - Phase status table with phase, status, owner, reviewer, artifact link, and blocker.
 - Product scope.
-- Active strategies, max 3.
-- Active implementations, max 2.
+- Active strategy candidate queue, with roles and priority tiers.
+- Active implementation queue, with spec links, validation status, and changed
+  axes.
 - Baseline/reference bot, if any.
 - Historical / non-decision artifacts, if any exist and could confuse active state.
 - Latest results and best current candidate.
@@ -176,7 +188,9 @@ Required sections:
 - Final submission status: candidate, file, last validation, active-file verification.
 - Recently changed artifacts.
 
-Agents should update `_index.md` after any phase closure, shortlist change, implementation candidate change, performance result, blocker, or final submission decision.
+Agents should update `_index.md` after any phase closure, candidate queue change,
+implementation candidate change, performance result, blocker, or final
+submission decision.
 
 ## Agent Behavior
 
@@ -194,7 +208,8 @@ During work:
 - Keep changes small.
 - Preserve fact/hypothesis separation.
 - Update phase context.
-- Ask for human decisions when direction, prioritization, shortlist, spec approval, deadline tradeoff, or final submission choice matters.
+- Ask for human decisions when direction, prioritization, spec approval,
+  deadline tradeoff, or final submission choice matters.
 
 When asked to skip ahead:
 
@@ -224,10 +239,12 @@ Use fast mode when less than 24 hours remain, exploration is no longer the bottl
 
 Rules:
 
-- EDA: one or two targeted questions only; no broad chart suite unless already available.
-- Strategy generation: max 3-5 candidates; shortlist 1-2.
+- EDA: one or two targeted questions only; include the minimum viable multivariate/process layer when signal decisions depend on it: correlation/redundancy check, one controlled model if a target exists, process hypothesis table, and explicit deferrals for PCA, mutual information, clustering, or latent-state work.
+- Strategy generation: prioritize the highest-ROI candidates first; keep useful
+  backlog candidates only when they remain differentiated and validation-ready.
 - Spec: one page is acceptable if it includes signal, execution, risk, state, and validation checks.
-- Implementation: one primary candidate plus one fallback/baseline at most.
+- Implementation: start with the minimum set that can be validated quickly,
+  then add distinct reviewed candidates only when validation capacity remains.
 - Testing: run the fastest meaningful validation first; store raw output and a short summary.
 - Debugging: fix rule/contract/limit bugs first; defer speculative tuning unless it is clearly high impact.
 - Freeze: with less than 6 hours left, only fix correctness issues or extremely low-risk parameter changes, then validate, verify the active upload file, and submit.

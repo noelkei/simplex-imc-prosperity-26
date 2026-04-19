@@ -23,7 +23,9 @@ TBD
 
 ## Decisions Made
 
-- Maximum active strategies: 3.
+- Strategy candidate count is ROI-driven, not fixed.
+- Keep all non-duplicative high-ROI candidates and manage focus with roles,
+  priority tiers, and implementation waves.
 
 ## Open Questions / Blockers
 
@@ -36,7 +38,8 @@ TBD
 
 ## Next Priority Action
 
-Generate a bounded candidate set, group duplicates, and shortlist 1-3 candidates for specs.
+Generate a bounded candidate set, group duplicates, and produce a prioritized
+candidate queue for specs.
 
 ## Deadline Risk
 

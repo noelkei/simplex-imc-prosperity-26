@@ -38,19 +38,21 @@ Track products as they move from ingestion and EDA into strategy and implementat
 
 ## Active Strategies
 
-Maximum active strategies: 3.
+Candidate count is ROI-driven, not fixed. Track all high-ROI active candidates
+with roles, priority tiers, and implementation waves.
 
 - None.
 
 Example when active:
 
-| Candidate ID | Priority | Evidence Strength | Linked EDA Signals | Understanding Insight | Short Reason | Spec Status | Owner | Decision Needed |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `candidate_01` | high | medium | `01_eda/eda_example.md#signal-hypotheses` | concise insight | concise rationale from understanding/EDA | not reviewed | Unassigned | Review spec |
+| Candidate ID | Role | Priority Tier | Implementation Wave | Evidence Strength | Linked EDA Signals | Understanding Insight | Short Reason | Spec Status | Owner | Decision Needed |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `candidate_01` | primary | spec-first | wave 1 | medium | `01_eda/eda_example.md#signal-hypotheses` | concise insight | concise rationale from understanding/EDA | not reviewed | Unassigned | Review spec |
 
 ## Active Implementations
 
-Maximum active implementation candidates: 2.
+Implementation count is driven by reviewed specs, validation capacity,
+deadline risk, and distinct test axes.
 
 - None.
 

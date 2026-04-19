@@ -119,6 +119,51 @@ Promote only features that change a concrete downstream decision. EDA-only featu
 | --- | --- | --- | --- | --- |
 | FEATURE_OR_SIGNAL | promote to understanding / keep exploratory / negative evidence / EDA-only calibration / needs logs / reject | Signal Ledger / Research Memory / Negative Evidence / none | REASON | CAVEAT |
 
+## Multivariate Feature Map
+
+Run this on the serious engineered feature set, not every raw column. Mark
+skipped checks when they are low ROI or not applicable.
+
+| Feature Set / Scope | Target Or Relationship | Method | Result | Decision Impact | Caveat |
+| --- | --- | --- | --- | --- | --- |
+| FEATURES_OR_SCOPE | future delta / return sign / feature relation / cross-product relation | correlation / covariance / regression / lead-lag / MI / other | RESULT | promote / downgrade / merge / reject / defer | CAVEAT |
+
+## Redundancy / Dimensionality Check
+
+Use this to avoid feature dumping. PCA/loadings are optional and should explain
+feature structure, not become bot logic.
+
+| Feature Family | Redundant Or Dominant Features | Evidence | Decision | Downstream Effect |
+| --- | --- | --- | --- | --- |
+| FAMILY | FEATURES | pairwise corr / covariance / VIF / PCA-loading / regression control / other | keep / merge / drop / exploratory / deferred | UNDERSTANDING_STRATEGY_SPEC_EFFECT |
+
+## Cross-Product Relationships
+
+Use when multiple products have aligned timestamps or plausible interaction.
+Mark `not applicable` for single-product or clearly independent scopes.
+
+| Product Pair / Scope | Check | Horizon / Alignment | Result | Decision | Caveat |
+| --- | --- | --- | --- | --- | --- |
+| PRODUCT_A_PRODUCT_B | correlation / covariance / lead-lag / controlled model | HORIZON_OR_ALIGNMENT | RESULT | use / separate / hedge / reject / defer | CAVEAT |
+
+## Process / Distribution Hypotheses
+
+Use lightweight interpretations only when they affect strategy, risk,
+specification, or validation. This is hypothesis generation, not formal proof.
+
+| Product Or Scope | Hypothesized Process | Evidence | Confidence | Online Observables | Downstream Implication | Suggested Next Test | Status | Caveat |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| PRODUCT_OR_SCOPE | trending / mean-reverting / random-walk-like / jumpy / multimodal / volatility-clustered / regime-switching / flow-driven / unclear | ACF / rolling vol / drift fit / residuals / spread-depth regime / mixture hint / regression result | high / medium / low | FIELDS_OR_PROXY | strategy family / feature contract / execution filter / risk rule / validation check | TEST | promote / exploratory / negative evidence / EDA-only calibration / needs logs / reject | CAVEAT |
+
+## Multivariate Model Notes
+
+Keep models explanatory and lightweight. Do not tune heavy predictors or
+recommend offline-only model logic for `Trader.run()`.
+
+| Model / Check | Response | Predictors / Controls | Data Slice | Result | Leakage / Overfit Check | Actionability |
+| --- | --- | --- | --- | --- | --- | --- |
+| OLS / logit / ridge / MI / clustering / PCA / change-point / other | TARGET | FEATURES | SLICE | RESULT | CHECK | use / calibrate / exploratory / reject / defer |
+
 ## Analyses Run
 
 - Reproduction notes: commands, script, table, plot, or manual steps:
@@ -131,22 +176,42 @@ Promote only features that change a concrete downstream decision. EDA-only featu
 - Volatility / regime checks:
 - Spread / microstructure checks:
 - Correlation / covariance checks:
+- Feature redundancy checks:
+- Multivariate regression / controlled checks:
+- PCA / dimensionality checks:
+- Mutual information / non-linear checks:
+- Cross-product correlation / covariance:
 - Lead-lag checks:
+- Cross-product lead-lag checks:
+- Process / distribution checks:
+- Clustering / grouping checks:
 - Price vs trade alignment:
 - Volume behavior:
 - Order book dynamics:
 
+| Analysis | Status | Reason / Decision Impact | Artifact |
+| --- | --- | --- | --- |
+| correlation matrix | run / skipped / deferred | REASON | PATH_OR_NONE |
+| covariance matrix | run / skipped / deferred | REASON | PATH_OR_NONE |
+| redundancy analysis | run / skipped / deferred | REASON | PATH_OR_NONE |
+| multivariate regression | run / skipped / deferred | REASON | PATH_OR_NONE |
+| cross-product checks | run / skipped / deferred | REASON | PATH_OR_NONE |
+| PCA / loadings | run / skipped / deferred | REASON | PATH_OR_NONE |
+| mutual information / non-linear dependence | run / skipped / deferred | REASON | PATH_OR_NONE |
+| clustering / grouping | run / skipped / deferred | REASON | PATH_OR_NONE |
+| process / distribution hypotheses | run / skipped / deferred | REASON | PATH_OR_NONE |
+
 ## Research Tool Notes
 
-Use tools only when they improve decision quality. Typical use: `pandas`/`numpy` for core tables, `polars` for large logs, `numba` for heavy loops, `scipy`/`statsmodels`/`pingouin` for tests and confidence, `arch` for volatility regimes, `ruptures` for change points, and `sklearn` for lightweight clustering or feature screening.
+Use tools only when they improve decision quality. Typical use: `pandas`/`numpy` for core tables, `polars` for large logs, `numba` for heavy loops, `scipy`/`statsmodels`/`pingouin` for tests, confidence, correlations, and lightweight regressions, `arch` for volatility regimes, `ruptures` for change points, and `sklearn` for PCA/loadings, mutual information, lightweight clustering, or feature screening.
 
 - Tools that changed a decision:
 - Tools that were unnecessary:
 - Risk of overfitting or over-modeling:
 
-## Distribution Hypotheses
+## Distribution Hypotheses (Optional Compact Summary)
 
-Use lightweight interpretations only when they affect strategy, risk, or validation.
+Use only when a shorter summary helps review. Prefer the richer `Process / Distribution Hypotheses` table above for new decision work.
 
 | Product Or Scope | Hypothesis | Evidence | Strategy Implication | Caveat |
 | --- | --- | --- | --- | --- |
@@ -175,6 +240,14 @@ Capture execution-relevant breakpoints rather than broad parameter sweeps.
 | Signal | Feature Dependencies | What It Means | Why It Matters | Strategy Use | Stability | Confidence | Limitations / Caveats |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | SIGNAL | RAW_OR_DERIVED_FEATURES | MEANING | DECISION_IMPACT | HOW_TO_USE | stable / regime-dependent / unknown | strong / medium / weak / contradictory | CAVEATS |
+
+## Downstream Feature Contract Implications
+
+Use this to prepare later strategy specs without writing implementation logic.
+
+| Feature Or Relationship | Contract Implication | Online Proxy Needed? | Validation / Invalidation Check | Do Not Use Until |
+| --- | --- | --- | --- | --- |
+| FEATURE_OR_RELATIONSHIP | source fields / role / missing-signal behavior / risk caveat | yes / no / unknown | CHECK | CONDITION |
 
 ## Negative Evidence
 

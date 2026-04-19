@@ -44,7 +44,8 @@ Variants are allowed only as controlled implementations of a reviewed or deadlin
 
 - Change one axis per variant: parameter, threshold, execution logic, risk band, or feature toggle.
 - Use naming: `candidate_<id>_v01_<short_name>.py`.
-- Keep max 2 active implementation candidates total.
+- Keep the active implementation queue limited by reviewed specs, validation
+  capacity, deadline risk, and distinct test axes rather than by a fixed count.
 - Record parent spec, parent bot if any, insight being tested, changed axis, exact change, expected effect based on EDA/understanding, validation check, and linked run.
 - Do not drift into a new strategy without updating the spec.
 - If a variant tests a new signal, feature relationship, or regime assumption, update the strategy spec before coding.

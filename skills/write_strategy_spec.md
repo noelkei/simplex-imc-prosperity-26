@@ -1,6 +1,7 @@
 # Write Strategy Spec
 
-Use this skill to convert a shortlisted candidate into a reviewed or deadline-deferred implementation-ready strategy spec.
+Use this skill to convert a prioritized candidate into a reviewed or
+deadline-deferred implementation-ready strategy spec.
 
 ## Required sources
 
@@ -18,11 +19,13 @@ Use this skill to convert a shortlisted candidate into a reviewed or deadline-de
 
 - Own phase 04 strategy specification work.
 - Read `../rounds/round_X/workspace/post_run_research_memory.md` when it exists before writing specs; carry relevant insights into `Selection Trace`, evidence traceability, risk, or validation checks when they influence the spec.
-- Write specs only for shortlisted candidates.
-- Preserve links to EDA signals, feature evidence, regime assumptions, and understanding insights.
-- Record research-tool evidence when it affects the spec, such as statistical confidence, volatility/regime findings, change points, clustering, or post-run diagnostics.
+- Write specs only for candidates from the prioritized candidate queue.
+- Preserve links to EDA signals, feature evidence, multivariate relationships, process/distribution assumptions, redundancy decisions, regime assumptions, and understanding insights.
+- Record research-tool evidence when it affects the spec, such as statistical confidence, correlation/covariance, controlled regressions, cross-product lead-lag, redundancy/PCA findings, volatility/regime findings, change points, clustering, or post-run diagnostics.
 - Copy or summarize the candidate decision trace so the spec shows signals used, alternatives considered, why this strategy was selected, and known caveats.
-- Define a Feature Contract for every feature that changes trading behavior, including source fields, online availability, role, parameters, missing-signal behavior, `traderData` state requirements, and validation checks.
+- Define a Feature Contract for every feature that changes trading behavior, including source fields, online availability, role, parameters, multivariate relationship, process assumption, redundancy decision, missing-signal behavior, `traderData` state requirements, and validation/invalidation checks.
+- Name any process/distribution assumption that changes trading behavior. If the assumption fails in validation, the spec must say whether to disable the feature, change thresholds, reroute to EDA, or treat the result as expected risk.
+- Require an online proxy before implementing PCA components, cluster labels, latent states, HMM-style regimes, change-point labels, or any other research-only representation. If no proxy exists, record the finding as EDA-only evidence or exclude it.
 - Define a Round-Specific Mechanics Contract for every current-round mechanic, Trader method, or changed online field that could affect implementation. Mark each as implement, exclude, not applicable, or blocked.
 - Record important Feature Exclusions for features that were considered but intentionally left out because they are CSV-only, weak, too complex, not online-usable, or not decision-relevant.
 - Define signal or fair value, execution, missing-signal behavior, position/risk handling, state/runtime, expected failures, validation checks, and allowed variant axes when useful.
@@ -41,7 +44,9 @@ Use this skill to convert a shortlisted candidate into a reviewed or deadline-de
 - Do not approve your own spec without a recorded review outcome.
 - Do not implement Trader code.
 - Do not leave current-round mechanics implicit. If a mechanic is relevant but unused, record the exclusion reason in the spec.
-- If the shortlisted candidate lacks evidence or a Feature Contract needed for implementation, record the gap and route back to candidates, understanding, or EDA.
+- If the prioritized candidate lacks evidence or a Feature Contract needed for
+  implementation, record the gap and route back to candidates, understanding, or
+  EDA.
 
 ## Handoff
 
