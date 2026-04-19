@@ -1,0 +1,6 @@
+{
+  "env": {
+    "VIRTUAL_ENV": "/home/user/simplex-imc-prosperity-26/.venv",
+    "PATH": "/home/user/simplex-imc-prosperity-26/.venv/bin:$PATH"
+  }
+}
