@@ -53,7 +53,7 @@
 
 ## Implementation Handoff
 
-- Target bot path: `../../bots/amin/canonical/candidate_r2_amin_feeaware_microprice_03.py`
+- Target bot path: `../../bots/amin/historical/candidate_r2_amin_feeaware_microprice_03.py`
 - Filename rule followed: incremented suffix to `_03`
 - Core parameters:
   - `ACO_MICROPRICE_WEIGHT = 0.75`

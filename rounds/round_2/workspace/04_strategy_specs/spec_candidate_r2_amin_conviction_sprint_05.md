@@ -57,7 +57,7 @@ Treat this candidate as a deliberate upside shot, not the safest default. Upload
 
 ## Implementation Handoff
 
-- Target bot path: `../../bots/amin/canonical/candidate_r2_amin_conviction_sprint_05.py`
+- Target bot path: `../../bots/amin/historical/candidate_r2_amin_conviction_sprint_05.py`
 - Filename rule followed: incremented suffix to `_05`
 - Core parameters:
   - `ACO_MEDIUM_CONVICTION = 1.75`

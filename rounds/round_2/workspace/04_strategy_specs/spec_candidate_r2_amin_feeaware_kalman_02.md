@@ -147,7 +147,7 @@
 
 ## Implementation Handoff
 
-- Target bot path: `../../bots/amin/canonical/candidate_r2_amin_feeaware_kalman_02.py`
+- Target bot path: `../../bots/amin/historical/candidate_r2_amin_feeaware_kalman_02.py`
 - Parameters to implement:
   - `ACO_KALMAN_Q = 0.1`
   - `ACO_KALMAN_R = 8.0`

@@ -162,7 +162,7 @@
 
 ## Implementation Handoff
 
-- Target bot path, normally `rounds/round_X/bots/<member>/canonical/...`: `../../bots/amin/canonical/candidate_r2_amin_hybrid_01.py`
+- Target bot path, normally `rounds/round_X/bots/<member>/canonical/...`: `../../bots/amin/historical/candidate_r2_amin_hybrid_01.py`
 - Parameters to implement:
   - `ACO_FAIR_VALUE = 10000`
   - `ACO_HALF_SPREAD = 5`
