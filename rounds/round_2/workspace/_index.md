@@ -64,8 +64,8 @@ Maximum active implementation candidates: 2.
 ## Latest Results And Best Current Candidate
 
 - Lightweight local replay comparison now exists in `../performances/amin/canonical/candidate_comparison_2026-04-19.json`.
-- In that comparison, `r2_amin_hybrid_01` beats `r2_amin_feeaware_kalman_02` on all three sample days.
-- Best current candidate on available sample-data evidence: `r2_amin_hybrid_01`.
+- In the latest tuned comparison, `r2_amin_feeaware_kalman_02` is nearly tied with `r2_amin_hybrid_01` on average and wins day 0, but still trails slightly overall in the lightweight replay harness.
+- Best current candidate on available sample-data evidence: slight edge to `r2_amin_hybrid_01`, but the gap is now very small.
 - Raw Round 2 sample data is present under `../data/raw/`.
 - Decision-support script: [`01_eda/round_2_decision_tools.py`](01_eda/round_2_decision_tools.py).
 - Interpretation limit: results are non-authoritative evidence, not rules
@@ -80,9 +80,9 @@ Maximum active implementation candidates: 2.
 
 ## Final Submission Status
 
-- Candidate: `r2_amin_hybrid_01` is currently favored on sample-data evidence, but no final submission decision is locked.
+- Candidate: `r2_amin_hybrid_01` is still slightly favored on current sample-data evidence, but no final submission decision is locked.
 - File: `../bots/amin/canonical/candidate_r2_amin_hybrid_01.py`
-- Decision reason: initial local replay comparison favored the hybrid over the new fee-aware Kalman candidate.
+- Decision reason: latest lightweight replay still gives the hybrid a tiny average edge, though the tuned fee-aware Kalman variant is now competitive.
 - Linked spec: `04_strategy_specs/spec_candidate_r2_amin_hybrid_ipr_drift_aco_mm.md`, `04_strategy_specs/spec_candidate_r2_amin_feeaware_kalman_02.md`
 - Linked validation run: `../performances/amin/canonical/candidate_comparison_2026-04-19.json`
 - Comparability status: `partial`

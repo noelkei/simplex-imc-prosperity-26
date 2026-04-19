@@ -9,13 +9,15 @@ LIMITS = {IPR: 80, ACO: 80}
 ACO_FAIR_DEFAULT = 10000.0
 ACO_KALMAN_Q = 0.1
 ACO_KALMAN_R = 8.0
-ACO_BASE_HALF_SPREAD = 5
+ACO_BASE_HALF_SPREAD = 2
 ACO_IMBALANCE_SHIFT_CLIP = 2.0
-ACO_MAX_SKEW = 4
-ACO_TAKE_EDGE = 2.0
-IPR_RICH_TRIM_EDGE = 8
+ACO_MAX_SKEW = 8
+ACO_TAKE_EDGE = 1.0
+ACO_TARGET_POSITION = 0
+ACO_RESERVATION_SIGMA2 = 2.0
+IPR_RICH_TRIM_EDGE = 10
 IPR_REPOST_MAX_EXTRA = 2
-MARKET_ACCESS_BID = 12
+MARKET_ACCESS_BID = 8
 
 
 class Trader:
@@ -131,29 +133,35 @@ class Trader:
         if visible_mid is not None:
             sd["ipr_mid"] = visible_mid
 
+        aggressive_limit = 72
         for ask in sorted(od.sell_orders):
             if self._buy_cap(limit) <= 0:
                 break
             ask_qty = -od.sell_orders[ask]
+            target_pos = pos + self._buy_used
             take_qty = ask_qty
-            if pos + self._buy_used >= 70 and visible_mid is not None and ask > visible_mid + 4:
-                take_qty = min(take_qty, 6)
+            if target_pos >= aggressive_limit:
+                if visible_mid is not None and ask >= visible_mid:
+                    take_qty = min(take_qty, 4)
+                else:
+                    take_qty = min(take_qty, 8)
             self._add_buy(orders, IPR, ask, take_qty, limit)
 
         if best_bid is not None and self._buy_cap(limit) > 0:
             imbalance = self._imbalance(od)
-            repost_extra = 1
-            if imbalance > 0.2:
-                repost_extra = 2
+            repost_extra = 1 if imbalance <= 0.2 else 2
             repost_extra = min(repost_extra, IPR_REPOST_MAX_EXTRA)
             bid_px = best_bid + repost_extra
             if best_ask is not None:
                 bid_px = min(bid_px, best_ask - 1)
-            self._add_buy(orders, IPR, bid_px, self._buy_cap(limit), limit)
+            desired_repost = self._buy_cap(limit)
+            if pos + self._buy_used >= aggressive_limit:
+                desired_repost = min(desired_repost, 12)
+            self._add_buy(orders, IPR, bid_px, desired_repost, limit)
 
         effective_pos = pos + self._buy_used - self._sell_used
-        if effective_pos > 60 and best_bid is not None and visible_mid is not None and best_bid >= visible_mid + IPR_RICH_TRIM_EDGE:
-            self._add_sell(orders, IPR, best_bid, min(12, effective_pos - 60), limit)
+        if effective_pos > 68 and best_bid is not None and visible_mid is not None and best_bid >= visible_mid + IPR_RICH_TRIM_EDGE:
+            self._add_sell(orders, IPR, best_bid, min(8, effective_pos - 68), limit)
 
         return orders
 
@@ -179,19 +187,21 @@ class Trader:
         sd["aco"] = aco_state
 
         imbalance = self._imbalance(od)
-        imbalance_shift = self._clip(2.0 * imbalance, -ACO_IMBALANCE_SHIFT_CLIP, ACO_IMBALANCE_SHIFT_CLIP)
-        inv_skew = round(self._clip((pos / limit) * ACO_MAX_SKEW, -ACO_MAX_SKEW, ACO_MAX_SKEW))
+        imbalance_shift = self._clip(1.5 * imbalance, -ACO_IMBALANCE_SHIFT_CLIP, ACO_IMBALANCE_SHIFT_CLIP)
+        reservation_price = fair - (pos - ACO_TARGET_POSITION) * (ACO_RESERVATION_SIGMA2 / limit)
+        quote_fair = reservation_price + imbalance_shift
 
+        dynamic_take_edge = ACO_TAKE_EDGE + (1 if abs(pos) > 60 else 0)
         if od.sell_orders:
             for ask in sorted(od.sell_orders):
                 if self._buy_cap(limit) <= 0:
                     break
-                edge = fair - ask
-                if edge < ACO_TAKE_EDGE:
+                edge = quote_fair - ask
+                if edge < dynamic_take_edge:
                     break
                 ask_qty = -od.sell_orders[ask]
-                take_qty = ask_qty
-                if edge < ACO_TAKE_EDGE + 1:
+                take_qty = min(ask_qty, 18 if edge < dynamic_take_edge + 1 else 28)
+                if pos + self._buy_used > 55:
                     take_qty = min(take_qty, 10)
                 self._add_buy(orders, ACO, ask, take_qty, limit)
 
@@ -199,20 +209,16 @@ class Trader:
             for bid in sorted(od.buy_orders, reverse=True):
                 if self._sell_cap(limit) <= 0:
                     break
-                edge = bid - fair
-                if edge < ACO_TAKE_EDGE:
+                edge = bid - quote_fair
+                if edge < dynamic_take_edge:
                     break
                 bid_qty = od.buy_orders[bid]
-                take_qty = bid_qty
-                if edge < ACO_TAKE_EDGE + 1:
+                take_qty = min(bid_qty, 18 if edge < dynamic_take_edge + 1 else 28)
+                if pos - self._sell_used < -55:
                     take_qty = min(take_qty, 10)
                 self._add_sell(orders, ACO, bid, take_qty, limit)
 
-        quote_fair = fair + imbalance_shift - inv_skew
-        half_spread = ACO_BASE_HALF_SPREAD
-        if abs(pos) > 45:
-            half_spread += 1
-
+        half_spread = ACO_BASE_HALF_SPREAD + (1 if abs(pos) > 65 else 0)
         bid_px = int(round(quote_fair - half_spread))
         ask_px = int(round(quote_fair + half_spread))
 
@@ -227,18 +233,26 @@ class Trader:
             ask_px = best_bid + 1
 
         if best_bid is None and best_ask is not None:
-            bid_px = min(best_ask - 1, int(round(fair - half_spread)))
+            bid_px = min(best_ask - 1, int(round(quote_fair - half_spread)))
         if best_ask is None and best_bid is not None:
-            ask_px = max(best_bid + 1, int(round(fair + half_spread)))
+            ask_px = max(best_bid + 1, int(round(quote_fair + half_spread)))
 
-        buy_size = 24
-        sell_size = 24
-        if pos < -25:
-            buy_size = 36
-            sell_size = 14
-        elif pos > 25:
-            buy_size = 14
-            sell_size = 36
+        buy_size = 40
+        sell_size = 40
+        if pos < -20:
+            buy_size = 56
+            sell_size = 18
+        elif pos > 20:
+            buy_size = 18
+            sell_size = 56
+
+        if abs(pos) > 60:
+            if pos > 0:
+                buy_size = 8
+                sell_size = 64
+            else:
+                buy_size = 64
+                sell_size = 8
 
         if self._buy_cap(limit) > 0 and (best_ask is None or bid_px < best_ask):
             self._add_buy(orders, ACO, bid_px, buy_size, limit)

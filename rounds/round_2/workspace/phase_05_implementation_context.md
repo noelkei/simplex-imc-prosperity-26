@@ -24,7 +24,7 @@ IN_PROGRESS
 
 - New candidate keeps IPR long-drift posture while making ACO fair value adaptive via a tiny Kalman state.
 - New candidate is explicitly Round-2 aware via a conservative nonzero `bid()` and logic that should benefit from extra quote visibility without depending on it.
-- A lightweight local replay comparison now exists and currently favors `candidate_r2_amin_hybrid_01.py` over the new Kalman variant on all three sample days, so promotion of the new bot would be premature without further tuning.
+- A lightweight local replay comparison now exists. After tuning, the Kalman variant is now nearly tied with the hybrid on average sample-day score and wins day 0, but still trails slightly overall in this harness.
 
 ## Decisions Made
 
@@ -51,7 +51,7 @@ IN_PROGRESS
 
 ## Next Priority Action
 
-Either tune the new Kalman candidate using the replay findings or, if speed matters more, commit the new research artifacts and comparison on the current branch without promoting the new bot as best yet.
+Decide whether to do one more targeted tuning pass on the Kalman variant or present both candidates in the PR as near-tied options with different fee/bid posture.
 
 ## Deadline Risk
 

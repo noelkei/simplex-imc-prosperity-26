@@ -38,37 +38,37 @@
   {
     "candidate": "feeaware_kalman_02",
     "day": -1,
-    "cash": -1679858.0,
-    "mtm": 1760120.0,
-    "total": 80262.0,
+    "cash": -1167769.0,
+    "mtm": 1250018.0,
+    "total": 82249.0,
     "positions": {
       "INTARIAN_PEPPER_ROOT": 80,
-      "ASH_COATED_OSMIUM": 80
+      "ASH_COATED_OSMIUM": 29
     },
-    "bid": 12
+    "bid": 8
   },
   {
     "candidate": "feeaware_kalman_02",
     "day": 0,
-    "cash": -1760273.0,
-    "mtm": 1840640.0,
-    "total": 80367.0,
+    "cash": -1117603.0,
+    "mtm": 1200128.0,
+    "total": 82525.0,
     "positions": {
       "INTARIAN_PEPPER_ROOT": 80,
-      "ASH_COATED_OSMIUM": 80
+      "ASH_COATED_OSMIUM": 16
     },
-    "bid": 12
+    "bid": 8
   },
   {
     "candidate": "feeaware_kalman_02",
     "day": 1,
-    "cash": -1840332.0,
-    "mtm": 1919400.0,
-    "total": 79068.0,
+    "cash": -1257497.0,
+    "mtm": 1339806.0,
+    "total": 82309.0,
     "positions": {
       "INTARIAN_PEPPER_ROOT": 80,
-      "ASH_COATED_OSMIUM": 80
+      "ASH_COATED_OSMIUM": 22
     },
-    "bid": 12
+    "bid": 8
   }
 ]
