@@ -16,13 +16,13 @@ IN_PROGRESS
 ## What Has Been Done
 
 - Existing Amin candidate `candidate_r2_amin_hybrid_01.py` was reviewed as current baseline implementation context.
-- Added new implementation `../../bots/amin/canonical/candidate_r2_amin_feeaware_kalman_02.py`.
+- Added new implementation `../../bots/amin/historical/candidate_r2_amin_feeaware_kalman_02.py`.
 - Added fast-mode one-page spec `04_strategy_specs/spec_candidate_r2_amin_feeaware_kalman_02.md` to preserve the implementation gate under user-requested hackathon pressure.
-- Added new implementation `../../bots/amin/canonical/candidate_r2_amin_feeaware_microprice_03.py`.
+- Added new implementation `../../bots/amin/historical/candidate_r2_amin_feeaware_microprice_03.py`.
 - Added fast-mode one-page spec `04_strategy_specs/spec_candidate_r2_amin_feeaware_microprice_03.md` for the pressure-following microprice branch.
 - Added new implementation `../../bots/amin/canonical/candidate_r2_amin_regime_depth_04.py`.
 - Added fast-mode one-page spec `04_strategy_specs/spec_candidate_r2_amin_regime_depth_04.md` for the regime-aware depth branch.
-- Added new implementation `../../bots/amin/canonical/candidate_r2_amin_conviction_sprint_05.py`.
+- Added new implementation `../../bots/amin/historical/candidate_r2_amin_conviction_sprint_05.py`.
 - Added fast-mode one-page spec `04_strategy_specs/spec_candidate_r2_amin_conviction_sprint_05.md` for the aggressive conviction-sprint branch.
 - Local syntax compile passed for both active Amin candidates.
 
@@ -36,7 +36,8 @@ IN_PROGRESS
 
 - Maximum active implementations remains 2.
 - Proceeded under deadline-deferred spec flow due to explicit user request.
-- Active Amin candidates are now `candidate_r2_amin_hybrid_01.py`, `candidate_r2_amin_feeaware_kalman_02.py`, `candidate_r2_amin_feeaware_microprice_03.py`, `candidate_r2_amin_regime_depth_04.py`, and `candidate_r2_amin_conviction_sprint_05.py`.
+- Active Amin canonical candidates are now `candidate_r2_amin_regime_depth_04.py` and `candidate_r2_amin_stateaware_dual_06.py`.
+- Historical Amin candidates retained for reference are `candidate_r2_amin_hybrid_01.py`, `candidate_r2_amin_feeaware_kalman_02.py`, `candidate_r2_amin_feeaware_microprice_03.py`, and `candidate_r2_amin_conviction_sprint_05.py`.
 - Placeholder Market Access Fee bid for the Kalman candidate is `12` pending scenario review.
 
 ## Open Questions / Blockers
@@ -54,11 +55,12 @@ IN_PROGRESS
 - [`04_strategy_specs/spec_candidate_r2_amin_feeaware_microprice_03.md`](04_strategy_specs/spec_candidate_r2_amin_feeaware_microprice_03.md)
 - [`04_strategy_specs/spec_candidate_r2_amin_regime_depth_04.md`](04_strategy_specs/spec_candidate_r2_amin_regime_depth_04.md)
 - [`04_strategy_specs/spec_candidate_r2_amin_conviction_sprint_05.md`](04_strategy_specs/spec_candidate_r2_amin_conviction_sprint_05.md)
-- [`../bots/amin/canonical/candidate_r2_amin_hybrid_01.py`](../bots/amin/canonical/candidate_r2_amin_hybrid_01.py)
-- [`../bots/amin/canonical/candidate_r2_amin_feeaware_kalman_02.py`](../bots/amin/canonical/candidate_r2_amin_feeaware_kalman_02.py)
-- [`../bots/amin/canonical/candidate_r2_amin_feeaware_microprice_03.py`](../bots/amin/canonical/candidate_r2_amin_feeaware_microprice_03.py)
+- [`../bots/amin/historical/candidate_r2_amin_hybrid_01.py`](../bots/amin/historical/candidate_r2_amin_hybrid_01.py)
+- [`../bots/amin/historical/candidate_r2_amin_feeaware_kalman_02.py`](../bots/amin/historical/candidate_r2_amin_feeaware_kalman_02.py)
+- [`../bots/amin/historical/candidate_r2_amin_feeaware_microprice_03.py`](../bots/amin/historical/candidate_r2_amin_feeaware_microprice_03.py)
 - [`../bots/amin/canonical/candidate_r2_amin_regime_depth_04.py`](../bots/amin/canonical/candidate_r2_amin_regime_depth_04.py)
-- [`../bots/amin/canonical/candidate_r2_amin_conviction_sprint_05.py`](../bots/amin/canonical/candidate_r2_amin_conviction_sprint_05.py)
+- [`../bots/amin/historical/candidate_r2_amin_conviction_sprint_05.py`](../bots/amin/historical/candidate_r2_amin_conviction_sprint_05.py)
+- [`../bots/amin/canonical/candidate_r2_amin_stateaware_dual_06.py`](../bots/amin/canonical/candidate_r2_amin_stateaware_dual_06.py)
 - [`../performances/amin/canonical/candidate_comparison_2026-04-19.json`](../performances/amin/canonical/candidate_comparison_2026-04-19.json)
 
 ## Next Priority Action

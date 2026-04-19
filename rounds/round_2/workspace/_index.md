@@ -56,11 +56,12 @@ Maximum active strategies: 3.
 
 Maximum active implementation candidates: 2.
 
-- `rounds/round_2/bots/amin/canonical/candidate_r2_amin_hybrid_01.py`
-- `rounds/round_2/bots/amin/canonical/candidate_r2_amin_feeaware_kalman_02.py`
-- `rounds/round_2/bots/amin/canonical/candidate_r2_amin_feeaware_microprice_03.py`
 - `rounds/round_2/bots/amin/canonical/candidate_r2_amin_regime_depth_04.py`
-- `rounds/round_2/bots/amin/canonical/candidate_r2_amin_conviction_sprint_05.py`
+- `rounds/round_2/bots/amin/canonical/candidate_r2_amin_stateaware_dual_06.py`
+- `rounds/round_2/bots/amin/historical/candidate_r2_amin_hybrid_01.py`
+- `rounds/round_2/bots/amin/historical/candidate_r2_amin_feeaware_kalman_02.py`
+- `rounds/round_2/bots/amin/historical/candidate_r2_amin_feeaware_microprice_03.py`
+- `rounds/round_2/bots/amin/historical/candidate_r2_amin_conviction_sprint_05.py`
 
 ## Baseline / Reference Bot
 
@@ -90,7 +91,7 @@ Maximum active implementation candidates: 2.
 ## Final Submission Status
 
 - Candidate: `r2_amin_hybrid_01` is still slightly favored on current sample-data evidence, but no final submission decision is locked.
-- File: `../bots/amin/canonical/candidate_r2_amin_hybrid_01.py`
+- File: `../bots/amin/historical/candidate_r2_amin_hybrid_01.py`
 - Decision reason: latest lightweight replay still gives the hybrid a tiny average edge, though the tuned fee-aware Kalman variant is now competitive.
 - Linked spec: `04_strategy_specs/spec_candidate_r2_amin_hybrid_ipr_drift_aco_mm.md`, `04_strategy_specs/spec_candidate_r2_amin_feeaware_kalman_02.md`
 - Linked validation run: `../performances/amin/canonical/candidate_comparison_2026-04-19.json`
@@ -112,6 +113,7 @@ Maximum active implementation candidates: 2.
 - Added decision-support script: [`01_eda/round_2_decision_tools.py`](01_eda/round_2_decision_tools.py)
 - Updated strategy candidates: [`03_strategy_candidates.md`](03_strategy_candidates.md)
 - Added spec: [`04_strategy_specs/spec_candidate_r2_amin_feeaware_kalman_02.md`](04_strategy_specs/spec_candidate_r2_amin_feeaware_kalman_02.md)
-- Added bot: [`../bots/amin/canonical/candidate_r2_amin_feeaware_kalman_02.py`](../bots/amin/canonical/candidate_r2_amin_feeaware_kalman_02.py)
+- Added bot: [`../bots/amin/historical/candidate_r2_amin_feeaware_kalman_02.py`](../bots/amin/historical/candidate_r2_amin_feeaware_kalman_02.py)
+- Added bot: [`../bots/amin/canonical/candidate_r2_amin_stateaware_dual_06.py`](../bots/amin/canonical/candidate_r2_amin_stateaware_dual_06.py)
 - Added comparison runner: [`01_eda/compare_candidates.py`](01_eda/compare_candidates.py)
 - Added comparison results: [`../performances/amin/canonical/candidate_comparison_2026-04-19.json`](../performances/amin/canonical/candidate_comparison_2026-04-19.json)
