@@ -21,6 +21,7 @@ IN_PROGRESS
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `r2_amin_hybrid_01` | IPR + ACO | IPR drift + ACO fixed-FV MM | EDA supports strong IPR drift and ACO mean reversion around 10000 | ACO fixed FV is stable enough | fixed FV underreacts to visible-book distortions | medium | low | high | medium | medium | high | implemented |
 | `r2_amin_feeaware_kalman_02` | IPR + ACO | IPR drift + ACO adaptive Kalman MM + fee-aware extra-access robustness | EDA Kalman grid for ACO favored `Q=0.1`, `R=8.0`; user reports Bruno Kalman line worked best so far | Round 2 extra quotes help but are not required; conservative positive bid can be worth it | bid may reduce net PnL if too high; adaptive FV may overfit noisy one-sided books | medium | medium | medium | medium | high | high | implemented |
+| `r2_amin_feeaware_microprice_03` | IPR + ACO | IPR pressure-follow reposting + ACO Kalman microprice MM | Fast raw-data check shows ACO top-of-book imbalance and microprice displacement have strong next-tick predictive value | Faster response to one-sided books while keeping `_02` latent fair-value backbone; still fee-aware and extra-depth-friendly | stronger pressure-following could overreact in noisy books or widen inventory swings | medium | medium | medium | medium | high | high | implemented |
 
 ## Rejected Or Deferred Ideas
 
