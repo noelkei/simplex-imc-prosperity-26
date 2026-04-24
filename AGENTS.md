@@ -10,12 +10,13 @@
 6. Current round doc under `docs/prosperity_wiki/rounds/` when the task names or implies an active round.
 7. `docs/prosperity_workflows/README.md` and the task-specific workflow.
 8. `docs/prosperity_workflows/10_time_aware_team_pipeline.md` when the task involves round execution, phase status, implementation readiness, validation, or deadline tradeoffs.
-9. Task-specific repo skill under `skills/` when the task matches one.
-10. Current round README: `rounds/round_X/README.md` when working on a round.
-11. Current round control panel: `rounds/round_X/workspace/_index.md`.
-12. Current phase context: `rounds/round_X/workspace/phase_YY_*_context.md` if it matches the task.
-13. `non-canonical/<member>/` only when the user explicitly points to a specific draft.
-14. `docs/prosperity_playbook/00_agent_playbook.md` only for heuristics, after facts are known.
+9. `docs/prosperity_workflows/13_external_paper_research.md` when the task involves external paper research, uploaded papers, or strategy use of processed papers.
+10. Task-specific repo skill under `skills/` when the task matches one.
+11. Current round README: `rounds/round_X/README.md` when working on a round.
+12. Current round control panel: `rounds/round_X/workspace/_index.md`.
+13. Current phase context: `rounds/round_X/workspace/phase_YY_*_context.md` if it matches the task.
+14. `non-canonical/<member>/` only when the user explicitly points to a specific draft.
+15. `docs/prosperity_playbook/00_agent_playbook.md` only for heuristics, after facts are known.
 
 ## Source hierarchy
 
@@ -42,6 +43,9 @@
 - EDA should consider compact multivariate, redundancy, cross-product, and process/distribution layers when decision-relevant. Do not force PCA, clustering, latent-state models, or heavy regressions into every EDA, and do not turn offline research outputs into bot logic without an online-usable Feature Contract.
 - Use the shared research environment libraries when they improve decision quality, research speed, or evidence clarity; document the method when it matters. Do not force libraries into simple checks, overfit sample data, or treat research-only packages as allowed imports for uploadable bots.
 - Ground strategy candidates, specs, and variants in linked EDA signals, feature evidence, regime assumptions, and understanding insights when those artifacts exist; otherwise label the missing evidence as an assumption or route it to targeted EDA.
+- Treat processed paper summaries under `rounds/round_X/research/papers_processed/` as idea sources and method references, not as official facts or replacements for current-round evidence.
+- Run Phase 02b by default after Understanding: generate the prompt, enter a wait state, and let Strategy proceed without waiting for the full paper pipeline.
+- In Strategy, always check `rounds/round_X/research/papers_processed/` when it exists and explicitly classify paper-derived ideas as `used`, `hybrid`, `validation`, `rejected`, or `inspiration-only`.
 - Avoid arbitrary limits on strategy exploration or implementation when ROI justifies additional candidates. Control complexity through evidence strength, non-duplication, feature budget, reviewed specs, distinct test axes, deadline risk, and validation capacity rather than fixed candidate or bot counts.
 - When `rounds/round_X/workspace/post_run_research_memory.md` exists for the active round, read it before EDA, understanding, strategy generation, spec writing, or trader variant work. Treat it as evidence input, not passive documentation; cite relevant insight IDs or descriptions when they influence decisions. Missing memory does not block work; record the absence only when it affects confidence or direction.
 - When validating new run artifacts, classify the run and apply the ROI-gated memory action: `update`, `update lightly`, or `no update`.
@@ -52,7 +56,7 @@
 - Keep `rounds/round_X/workspace/_index.md` and the relevant phase context current when changing phase status, active strategies, implementations, blockers, or final submission decisions.
 - Use `skills/manage_phase_state.md` when starting, resuming after a time gap, closing, detecting inconsistency, or repairing drift in a phase; do not silently update only one of `_index.md`, the phase context, or the main artifact.
 - Before changing or closing a phase, compare phase status across `_index.md`, the phase context, and the main artifact. Update all three or record the mismatch as a blocker.
-- Do not mark a phase `COMPLETED` while human review is merely recommended or unassigned. Use `READY_FOR_REVIEW` unless review is approved or explicitly deferred under deadline pressure.
+- Do not mark a phase `COMPLETED` while human review is merely recommended or unassigned. Use `READY_FOR_REVIEW` unless review is approved or explicitly deferred under deadline pressure. Exception: Phase `02b External Paper Research` may be marked `COMPLETED` operationally once the prompt exists and at least one processed paper exists, or when the user explicitly skips it with reason.
 - Do not put active round work in `workstreams/round_template/`; it is only a scaffold source for round workspaces.
 - If the next step is determined by repository state, proceed and update the relevant artifact. Ask the human only when the choice affects strategy direction, prioritization, review approval, deadline tradeoffs, or final submission selection.
 
@@ -64,6 +68,7 @@ When a task matches a file in `skills/`, read that skill after the workflows and
 - `skills/add_new_round.md` for new round setup.
 - `skills/run_eda.md` for EDA.
 - `skills/synthesize_understanding.md` for understanding summaries.
+- `skills/external_paper_research.md` for prompt generation, wait-state tracking, and uploaded paper processing.
 - `skills/generate_strategy_candidates.md` for strategy candidates, lightweight prioritization, rejection, and candidate queue updates.
 - `skills/write_strategy_spec.md` for strategy specs, review state, and implementation readiness.
 - `skills/create_trader.md` for implementation.
@@ -78,6 +83,8 @@ When a task matches a file in `skills/`, read that skill after the workflows and
 When a user asks "where are we?", "what now?", or "continue round_X", open `rounds/round_X/workspace/_index.md` first, then the matching phase context. Report the current phase status, blockers, active strategies or implementations, and next priority action before doing deeper work.
 
 When starting a phase, confirm required inputs, set the phase `IN_PROGRESS` if work begins, and create or update the phase context. When continuing a phase, prefer updating the existing phase artifact over creating a duplicate.
+
+When external paper research artifacts exist for the active round, read them before strategy generation, check processed papers when present, and use them only as optional inspiration tied back to current-round signals, risks, regimes, or open questions.
 
 When an artifact is missing, say what is missing and propose the smallest useful next action. Do not skip required gates; use fast-mode compression only when the required spec, validation, or handoff information still exists in short form.
 

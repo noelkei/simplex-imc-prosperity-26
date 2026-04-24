@@ -76,17 +76,19 @@ Every round should run through the same phases, but under a 2 day constraint the
 1. Round ingestion.
 2. Minimal EDA, or an explicit "EDA skipped with reason."
 3. Research / understanding summary.
-4. Strategy generation and prioritized candidate queue.
-5. Reviewed strategy specification.
-6. Implementation.
-7. Testing / performance analysis.
-8. Debugging / iteration.
-9. Final submission decision.
+4. External paper research, or an explicit "external paper research skipped/deferred with reason."
+5. Strategy generation and prioritized candidate queue.
+6. Reviewed strategy specification.
+7. Implementation.
+8. Testing / performance analysis.
+9. Debugging / iteration.
+10. Final submission decision.
 
 Mandatory gates:
 
 - No implementation without an approved strategy spec or an explicit `deferred under deadline` review decision.
 - No final submission without a readable validation or performance summary.
+- External paper research generates a prompt by default after understanding, but strategy does not wait for the full paper pipeline.
 - No phase is complete if facts, hypotheses, assumptions, and evidence are mixed together.
 - No stale prior-round assumption moves forward unless current-round evidence supports it or the risk is explicitly labeled.
 - Round-specific mechanics and changed online fields must be implemented, excluded, marked not applicable, or blocked in the reviewed spec before coding.
@@ -109,6 +111,10 @@ Each round has:
 rounds/round_X/
   README.md
   workspace/
+  research/
+    papers_raw/
+    papers_md/
+    papers_processed/
   bots/
     <member>/
       canonical/
@@ -123,6 +129,13 @@ rounds/round_X/
 Start with `rounds/round_X/README.md`, then open `rounds/round_X/workspace/_index.md`.
 
 The `_index.md` file tracks phase status, active strategies, active implementations, latest results, blockers, and the next priority action. Agents should read it first when continuing a round.
+
+For Phase `02b External Paper Research`, the normal flow is:
+
+- generate the external research prompt after understanding
+- leave the phase in a wait state while papers are absent
+- let strategy proceed without blocking
+- always check `research/papers_processed/` when processed papers exist
 
 Reusable artifact templates live in:
 
@@ -146,6 +159,7 @@ Use them as phase-specific operating guides after reading the relevant workflow:
 | Round ingestion | `skills/analyze_round.md` |
 | EDA | `skills/run_eda.md` |
 | Understanding synthesis | `skills/synthesize_understanding.md` |
+| External paper research | `skills/external_paper_research.md` |
 | Strategy candidates / prioritized queue | `skills/generate_strategy_candidates.md` |
 | Strategy specs / implementation readiness | `skills/write_strategy_spec.md` |
 | Trader implementation | `skills/create_trader.md` |
@@ -179,6 +193,7 @@ These files are resumption notes. Update them whenever work is added, decisions 
 | Reusable artifact templates | `docs/templates/` |
 | Live round state | `rounds/round_X/workspace/_index.md` |
 | Phase resumption notes | `rounds/round_X/workspace/phase_YY_<phase>_context.md` |
+| External paper research files | `rounds/round_X/research/` |
 | Round data | `rounds/round_X/data/` |
 | Post-run research memory | `rounds/round_X/workspace/post_run_research_memory.md` |
 | Formal bot candidates | `rounds/round_X/bots/<member>/canonical/` |
@@ -213,7 +228,7 @@ Use the phase status table in `_index.md`:
 
 Review outcomes are `not reviewed`, `approved`, `approved with caveats`, `changes requested`, or `deferred under deadline`.
 
-Do not mark a phase `COMPLETED` while review is pending, recommended, or unassigned. Do not mark a phase `COMPLETED` unless the next phase can use its outputs without reinterpretation and status is synchronized across `_index.md`, the phase context, and the main phase artifact. If a phase is skipped or compressed, record the reason in both `_index.md` and the phase context.
+Do not mark a phase `COMPLETED` while review is pending, recommended, or unassigned. Do not mark a phase `COMPLETED` unless the next phase can use its outputs without reinterpretation and status is synchronized across `_index.md`, the phase context, and the main phase artifact. Exception: Phase `02b External Paper Research` may be marked `COMPLETED` operationally once the prompt exists and at least one processed paper exists, or when the user explicitly skips it with reason. If a phase is skipped or compressed, record the reason in both `_index.md` and the phase context.
 
 ## Closing Work Cleanly
 
@@ -233,8 +248,9 @@ For a roughly 48 hour round-to-submission window:
 
 - Hours 0-3: round ingestion and `_index.md` setup.
 - Hours 3-10: targeted EDA only for questions likely to affect bot behavior.
-- Hours 10-14: understanding summary and bounded strategy generation.
-- Hours 14-20: prioritize the ROI-driven candidate queue and write the
+- Hours 10-13: understanding summary and external paper research prompt generation.
+- Hours 13-16: proceed with bounded strategy generation while processing uploaded papers incrementally if any arrive.
+- Hours 16-20: prioritize the ROI-driven candidate queue and write the
   highest-ROI implementation-ready specs.
 - Hours 20-32: implement and validate first candidates.
 - Hours 32-42: debug and iterate on the best 1-2 candidates.
@@ -257,6 +273,7 @@ Start round ingestion for Round X.
 Start targeted EDA for Round X using the current round index.
 Synthesize understanding for Round X from ingestion and EDA.
 Continue strategy generation and prioritize the candidate queue.
+Run external paper research for Round X from the understanding summary.
 Generate strategy candidates for Round X.
 Write a strategy spec for candidate Y.
 Implement candidate Y from its reviewed spec.

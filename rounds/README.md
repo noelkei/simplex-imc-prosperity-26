@@ -28,6 +28,7 @@ Use `_index.md` as the control panel for phase status, blockers, active strategi
 Folder roles:
 
 - `workspace/`: formal phase artifacts, phase contexts, and decision state.
+- `research/`: external paper uploads, Markdown conversions, and processed summaries.
 - `data/`: round-local raw, processed, and external data artifacts.
 - `bots/`: member-owned implementation candidates and archived attempts.
 - `performances/`: member-owned validation and run summaries.
