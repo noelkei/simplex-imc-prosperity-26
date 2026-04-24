@@ -29,6 +29,7 @@ Keep the lightweight gates aligned across phases:
 
 - EDA owns the feature lifecycle, Round Adaptation Check, compact multivariate/redundancy layer, and process/distribution hypotheses.
 - Understanding compresses promoted signals, multivariate/process evidence, redundancy decisions, and assumptions carried forward.
+- External paper research converts understanding outputs into a grounded external research prompt, leaves strategy free to proceed after prompt generation, and distills uploaded papers into strategy-useful summaries without treating papers as truth.
 - Strategy enforces the feature budget and Round Coverage Check.
 - Specs define the Feature Contract, including online proxies and invalidation checks for process or multivariate assumptions, and Round-Specific Mechanics Contract.
 - Validation owns the ROI-gated run update decision: `update`, `update lightly`, or `no update`, including process/multivariate feedback when it changes future decisions.
@@ -46,6 +47,7 @@ Use research tools only when they answer a decision-relevant question faster or 
 | Round preparation / ingestion | Standard library for file/source checks | `pandas` for schema summaries when data exists | modeling libraries; strategy conclusions |
 | EDA | `pandas`/`numpy`, `scipy`, `statsmodels`, `pingouin`, plots for distributions, signals, multivariate checks, redundancy, process hypotheses, and tests | `polars` for large CSV/logs, `numba` for repeated loops, `arch`/`ruptures` for regime questions, `sklearn` for PCA, clustering, mutual information, or feature screening | broad ML, feature catalogs, or tests that cannot change a downstream decision |
 | Understanding | statistical confidence, effect size, stability, and negative evidence from EDA | small follow-up summaries using existing processed data | rerunning broad EDA or promoting weak/offline-only features |
+| External paper research | Markdown prompt writing, local file checks, and incremental raw -> md -> processed tracking | local PDF/Markdown conversion tooling when available in-repo | internet fetching, hallucinated paper contents, full-pipeline blocking, or paper conclusions treated as truth |
 | Strategy candidates | EDA/understanding outputs as evidence for feature-light candidates | request targeted EDA for unresolved high-impact unknowns | adding models or research-library dependencies to candidates just because they exist |
 | Strategy spec | research outputs only as traceable evidence and parameter rationale | validation checks derived from statistical confidence or regimes | requiring bot imports from research-only packages unless the wiki runtime allows them |
 | Implementation | none beyond local static/smoke tooling | tiny standard-library online proxies named in the spec | importing research-only packages into uploadable bots |
@@ -79,6 +81,7 @@ Use research tools only when they answer a decision-relevant question faster or 
 - [`10_time_aware_team_pipeline.md`](10_time_aware_team_pipeline.md): 2-day deadline workflow, phase state tracking, round indexes, and fast mode.
 - [`11_dataset_eda_framework.md`](11_dataset_eda_framework.md): column classification, adaptive EDA, and EDA-as-knowledge-transfer guidance.
 - [`12_top_level_artifact_audit.md`](12_top_level_artifact_audit.md): historical cleanup audit for removed top-level `bots/` and `performances/`.
+- [`13_external_paper_research.md`](13_external_paper_research.md): external paper prompt generation, wait-state handling, and raw -> md -> processed paper pipeline.
 - [`../templates/`](../templates/): reusable Markdown templates for EDA, understanding, strategy candidates, strategy specs, run summaries, post-run research memory, and debugging issues.
 
 ## Operating rule
