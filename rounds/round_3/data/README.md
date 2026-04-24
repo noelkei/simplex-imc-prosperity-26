@@ -1,6 +1,15 @@
 # Round 3 Data
 
-No data artifacts have been added yet.
+Current raw artifacts:
+
+- `raw/prices_round_3_day_0.csv`
+- `raw/prices_round_3_day_1.csv`
+- `raw/prices_round_3_day_2.csv`
+- `raw/trades_round_3_day_0.csv`
+- `raw/trades_round_3_day_1.csv`
+- `raw/trades_round_3_day_2.csv`
+
+These are semicolon-delimited raw files for historical days 0, 1, and 2. Treat them as evidence inputs for EDA, not as official Prosperity facts.
 
 Store only round-local data artifacts here. Do not treat data observations as official rules; use `docs/prosperity_wiki/` for facts.
 

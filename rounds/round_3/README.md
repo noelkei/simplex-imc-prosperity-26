@@ -2,18 +2,18 @@
 
 Official round facts expected path: `../../docs/prosperity_wiki/rounds/round_3.md`
 
-The official Round 3 facts file is not present in this repository yet. Do not start round work until that curated wiki file exists.
+The official Round 3 facts file is now present in this repository.
 
 Do NOT duplicate or modify official round facts here. This folder contains derived artifacts only.
 
-This round workspace is pre-created; no round work has begun yet.
+This round workspace is pre-created; phase 00 ingestion has not begun yet.
 
 ## How To Start
 
-1. Confirm `../../docs/prosperity_wiki/rounds/round_3.md` exists.
+1. Read `../../docs/prosperity_wiki/rounds/round_3.md`.
 2. Open [`workspace/_index.md`](workspace/_index.md).
-3. Keep all phases `NOT_STARTED` until official facts are available.
-4. Start phase 00 ingestion in [`workspace/00_ingestion.md`](workspace/00_ingestion.md).
+3. Start phase 00 ingestion in [`workspace/00_ingestion.md`](workspace/00_ingestion.md).
+4. Keep phase state synchronized across the main artifact, the phase context, and the control panel.
 5. Update the relevant phase context whenever status, decisions, blockers, or next actions change.
 
 ## How To Continue

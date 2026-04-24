@@ -1,0 +1,4 @@
+source_file,rows,unique_products,unique_timestamps,min_timestamp,max_timestamp,mid_zero_count,missing_bid_2,missing_ask_2,missing_bid_3,missing_ask_3
+prices_round_3_day_0.csv,120000,12,10000,0,999900,0,68999,69059,119352,119322
+prices_round_3_day_1.csv,120000,12,10000,0,999900,0,69262,69473,119335,119328
+prices_round_3_day_2.csv,120000,12,10000,0,999900,0,69525,69440,119369,119330

@@ -1,0 +1,4 @@
+day,monotone_ok_rate,convex_ok_rate,avg_monotone_breaks,avg_convex_breaks
+0,1.0,0.9991,0.0,0.0009
+1,1.0,1.0,0.0,0.0
+2,1.0,1.0,0.0,0.0

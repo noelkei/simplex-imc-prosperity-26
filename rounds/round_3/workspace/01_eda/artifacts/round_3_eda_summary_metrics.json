@@ -1,0 +1,595 @@
+{
+  "raw_counts": {
+    "price_rows": 360000,
+    "trade_rows": 4048,
+    "products_in_prices": [
+      "HYDROGEL_PACK",
+      "VELVETFRUIT_EXTRACT",
+      "VEV_4000",
+      "VEV_4500",
+      "VEV_5000",
+      "VEV_5100",
+      "VEV_5200",
+      "VEV_5300",
+      "VEV_5400",
+      "VEV_5500",
+      "VEV_6000",
+      "VEV_6500"
+    ],
+    "symbols_in_trades": [
+      "HYDROGEL_PACK",
+      "VELVETFRUIT_EXTRACT",
+      "VEV_4000",
+      "VEV_4500",
+      "VEV_5000",
+      "VEV_5100",
+      "VEV_5200",
+      "VEV_5300",
+      "VEV_5400",
+      "VEV_5500",
+      "VEV_6000",
+      "VEV_6500"
+    ]
+  },
+  "quality_highlights": [
+    {
+      "product": "HYDROGEL_PACK",
+      "rows": 30000,
+      "days_present": 3,
+      "mean_mid": 9990.806866666666,
+      "std_mid": 31.935213763349072,
+      "mean_spread": 15.7208,
+      "median_spread": 16.0,
+      "mean_rel_spread_bps": 15.735268953201995,
+      "mean_depth_1": 24.799266666666668,
+      "missing_bid_2_share": 0.0,
+      "missing_ask_2_share": 0.0,
+      "missing_bid_3_share": 0.9842,
+      "missing_ask_3_share": 0.9828,
+      "zero_mid_count": 0
+    },
+    {
+      "product": "VELVETFRUIT_EXTRACT",
+      "rows": 30000,
+      "days_present": 3,
+      "mean_mid": 5250.0981,
+      "std_mid": 15.630415436566697,
+      "mean_spread": 4.988133333333334,
+      "median_spread": 5.0,
+      "mean_rel_spread_bps": 9.500996233742304,
+      "mean_depth_1": 75.62643333333334,
+      "missing_bid_2_share": 0.4563,
+      "missing_ask_2_share": 0.4546333333333333,
+      "missing_bid_3_share": 0.9797333333333332,
+      "missing_ask_3_share": 0.9809333333333332,
+      "zero_mid_count": 0
+    },
+    {
+      "product": "VEV_4000",
+      "rows": 30000,
+      "days_present": 3,
+      "mean_mid": 1250.1098,
+      "std_mid": 15.647242733685244,
+      "mean_spread": 20.813466666666667,
+      "median_spread": 21.0,
+      "mean_rel_spread_bps": 166.49258576105004,
+      "mean_depth_1": 21.841433333333335,
+      "missing_bid_2_share": 0.0,
+      "missing_ask_2_share": 0.0,
+      "missing_bid_3_share": 0.9911666666666666,
+      "missing_ask_3_share": 0.9905333333333334,
+      "zero_mid_count": 0
+    },
+    {
+      "product": "VEV_4500",
+      "rows": 30000,
+      "days_present": 3,
+      "mean_mid": 750.1095666666666,
+      "std_mid": 15.639930159459048,
+      "mean_spread": 15.852666666666666,
+      "median_spread": 16.0,
+      "mean_rel_spread_bps": 211.34108477798137,
+      "mean_depth_1": 17.8998,
+      "missing_bid_2_share": 0.0,
+      "missing_ask_2_share": 0.0,
+      "missing_bid_3_share": 0.9911666666666666,
+      "missing_ask_3_share": 0.9905333333333334,
+      "zero_mid_count": 0
+    },
+    {
+      "product": "VEV_5000",
+      "rows": 30000,
+      "days_present": 3,
+      "mean_mid": 255.0224,
+      "std_mid": 14.375585906517747,
+      "mean_spread": 6.043333333333333,
+      "median_spread": 6.0,
+      "mean_rel_spread_bps": 237.0700022011594,
+      "mean_depth_1": 30.810366666666667,
+      "missing_bid_2_share": 0.3543666666666666,
+      "missing_ask_2_share": 0.3634333333333333,
+      "missing_bid_3_share": 0.9942333333333332,
+      "missing_ask_3_share": 0.9941,
+      "zero_mid_count": 0
+    },
+    {
+      "product": "VEV_5100",
+      "rows": 30000,
+      "days_present": 3,
+      "mean_mid": 166.80545,
+      "std_mid": 12.742624184727658,
+      "mean_spread": 4.295833333333333,
+      "median_spread": 4.0,
+      "mean_rel_spread_bps": 257.8870145771924,
+      "mean_depth_1": 38.5963,
+      "missing_bid_2_share": 0.5721,
+      "missing_ask_2_share": 0.5784,
+      "missing_bid_3_share": 0.9962666666666666,
+      "missing_ask_3_share": 0.9961666666666666,
+      "zero_mid_count": 0
+    },
+    {
+      "product": "VEV_5200",
+      "rows": 30000,
+      "days_present": 3,
+      "mean_mid": 95.54876666666668,
+      "std_mid": 9.664217594591456,
+      "mean_spread": 2.888133333333333,
+      "median_spread": 3.0,
+      "mean_rel_spread_bps": 303.42635407189346,
+      "mean_depth_1": 45.07216666666667,
+      "missing_bid_2_share": 0.7570333333333333,
+      "missing_ask_2_share": 0.7539,
+      "missing_bid_3_share": 0.9984333333333332,
+      "missing_ask_3_share": 0.9987,
+      "zero_mid_count": 0
+    },
+    {
+      "product": "VEV_5300",
+      "rows": 30000,
+      "days_present": 3,
+      "mean_mid": 46.759933333333336,
+      "std_mid": 6.228141321483164,
+      "mean_spread": 2.1068,
+      "median_spread": 2.0,
+      "mean_rel_spread_bps": 454.8304665772336,
+      "mean_depth_1": 40.526666666666664,
+      "missing_bid_2_share": 0.8537666666666667,
+      "missing_ask_2_share": 0.8525,
+      "missing_bid_3_share": 1.0,
+      "missing_ask_3_share": 0.9989,
+      "zero_mid_count": 0
+    },
+    {
+      "product": "VEV_5400",
+      "rows": 30000,
+      "days_present": 3,
+      "mean_mid": 15.951916666666667,
+      "std_mid": 3.429181870747851,
+      "mean_spread": 1.3814333333333333,
+      "median_spread": 1.0,
+      "mean_rel_spread_bps": 900.1054361848522,
+      "mean_depth_1": 43.482166666666664,
+      "missing_bid_2_share": 0.9523333333333334,
+      "missing_ask_2_share": 0.9498,
+      "missing_bid_3_share": 1.0,
+      "missing_ask_3_share": 1.0,
+      "zero_mid_count": 0
+    },
+    {
+      "product": "VEV_5500",
+      "rows": 30000,
+      "days_present": 3,
+      "mean_mid": 6.64135,
+      "std_mid": 1.738849034284489,
+      "mean_spread": 1.1497666666666666,
+      "median_spread": 1.0,
+      "mean_rel_spread_bps": 1858.6394195053288,
+      "mean_depth_1": 44.34973333333333,
+      "missing_bid_2_share": 0.9803,
+      "missing_ask_2_share": 0.9797333333333332,
+      "missing_bid_3_share": 1.0,
+      "missing_ask_3_share": 1.0,
+      "zero_mid_count": 0
+    },
+    {
+      "product": "VEV_6000",
+      "rows": 30000,
+      "days_present": 3,
+      "mean_mid": 0.5,
+      "std_mid": 0.0,
+      "mean_spread": 1.0,
+      "median_spread": 1.0,
+      "mean_rel_spread_bps": 20000.0,
+      "mean_depth_1": 44.95503333333333,
+      "missing_bid_2_share": 1.0,
+      "missing_ask_2_share": 1.0,
+      "missing_bid_3_share": 1.0,
+      "missing_ask_3_share": 1.0,
+      "zero_mid_count": 0
+    },
+    {
+      "product": "VEV_6500",
+      "rows": 30000,
+      "days_present": 3,
+      "mean_mid": 0.5,
+      "std_mid": 0.0,
+      "mean_spread": 1.0,
+      "median_spread": 1.0,
+      "mean_rel_spread_bps": 20000.0,
+      "mean_depth_1": 30.961566666666663,
+      "missing_bid_2_share": 1.0,
+      "missing_ask_2_share": 1.0,
+      "missing_bid_3_share": 1.0,
+      "missing_ask_3_share": 1.0,
+      "zero_mid_count": 0
+    }
+  ],
+  "surface_summary": [
+    {
+      "day": 0,
+      "monotone_ok_rate": 1.0,
+      "convex_ok_rate": 0.9991,
+      "avg_monotone_breaks": 0.0,
+      "avg_convex_breaks": 0.0009
+    },
+    {
+      "day": 1,
+      "monotone_ok_rate": 1.0,
+      "convex_ok_rate": 1.0,
+      "avg_monotone_breaks": 0.0,
+      "avg_convex_breaks": 0.0
+    },
+    {
+      "day": 2,
+      "monotone_ok_rate": 1.0,
+      "convex_ok_rate": 1.0,
+      "avg_monotone_breaks": 0.0,
+      "avg_convex_breaks": 0.0
+    }
+  ],
+  "trade_alignment": [
+    {
+      "symbol": "HYDROGEL_PACK",
+      "trade_count": 1010,
+      "avg_trade_minus_mid": 0.2544554455445544,
+      "abs_trade_minus_mid": 7.868316831683169,
+      "share_at_or_below_bid": 0.4811881188118811,
+      "share_at_or_above_ask": 0.5188118811881188
+    },
+    {
+      "symbol": "VELVETFRUIT_EXTRACT",
+      "trade_count": 1372,
+      "avg_trade_minus_mid": 0.1424927113702624,
+      "abs_trade_minus_mid": 2.2620262390670556,
+      "share_at_or_below_bid": 0.4307580174927113,
+      "share_at_or_above_ask": 0.5692419825072886
+    },
+    {
+      "symbol": "VEV_4000",
+      "trade_count": 464,
+      "avg_trade_minus_mid": -0.3049568965517241,
+      "abs_trade_minus_mid": 10.429956896551724,
+      "share_at_or_below_bid": 0.5129310344827587,
+      "share_at_or_above_ask": 0.4870689655172414
+    },
+    {
+      "symbol": "VEV_4500",
+      "trade_count": 1,
+      "avg_trade_minus_mid": 3.5,
+      "abs_trade_minus_mid": 3.5,
+      "share_at_or_below_bid": 0.0,
+      "share_at_or_above_ask": 1.0
+    },
+    {
+      "symbol": "VEV_5000",
+      "trade_count": 1,
+      "avg_trade_minus_mid": 1.0,
+      "abs_trade_minus_mid": 1.0,
+      "share_at_or_below_bid": 0.0,
+      "share_at_or_above_ask": 1.0
+    },
+    {
+      "symbol": "VEV_5100",
+      "trade_count": 1,
+      "avg_trade_minus_mid": 1.0,
+      "abs_trade_minus_mid": 1.0,
+      "share_at_or_below_bid": 0.0,
+      "share_at_or_above_ask": 1.0
+    },
+    {
+      "symbol": "VEV_5200",
+      "trade_count": 18,
+      "avg_trade_minus_mid": -0.9166666666666666,
+      "abs_trade_minus_mid": 0.9722222222222222,
+      "share_at_or_below_bid": 0.9444444444444444,
+      "share_at_or_above_ask": 0.0555555555555555
+    },
+    {
+      "symbol": "VEV_5300",
+      "trade_count": 121,
+      "avg_trade_minus_mid": -0.962809917355372,
+      "abs_trade_minus_mid": 0.9710743801652892,
+      "share_at_or_below_bid": 0.9834710743801652,
+      "share_at_or_above_ask": 0.0082644628099173
+    },
+    {
+      "symbol": "VEV_5400",
+      "trade_count": 225,
+      "avg_trade_minus_mid": -0.6288888888888889,
+      "abs_trade_minus_mid": 0.6288888888888889,
+      "share_at_or_below_bid": 1.0,
+      "share_at_or_above_ask": 0.0
+    },
+    {
+      "symbol": "VEV_5500",
+      "trade_count": 267,
+      "avg_trade_minus_mid": -0.5468164794007491,
+      "abs_trade_minus_mid": 0.5468164794007491,
+      "share_at_or_below_bid": 1.0,
+      "share_at_or_above_ask": 0.0
+    },
+    {
+      "symbol": "VEV_6000",
+      "trade_count": 284,
+      "avg_trade_minus_mid": -0.5,
+      "abs_trade_minus_mid": 0.5,
+      "share_at_or_below_bid": 1.0,
+      "share_at_or_above_ask": 0.0
+    },
+    {
+      "symbol": "VEV_6500",
+      "trade_count": 284,
+      "avg_trade_minus_mid": -0.5,
+      "abs_trade_minus_mid": 0.5,
+      "share_at_or_below_bid": 1.0,
+      "share_at_or_above_ask": 0.0
+    }
+  ],
+  "product_signals": [
+    {
+      "product": "HYDROGEL_PACK",
+      "delta_acf_1": -0.1291549584062666,
+      "delta_acf_5": 0.0016485269772514,
+      "zero_delta_share": 0.1801666666666666,
+      "imbalance_corr_future_delta_5": 0.1386899657012489,
+      "spread_corr_future_abs_delta_5": -0.0824412224250231,
+      "mean_rel_spread_bps": 15.735268953202
+    },
+    {
+      "product": "VELVETFRUIT_EXTRACT",
+      "delta_acf_1": -0.1585264053551321,
+      "delta_acf_5": 0.0014770942396096,
+      "zero_delta_share": 0.2466666666666666,
+      "imbalance_corr_future_delta_5": 0.1440646908899179,
+      "spread_corr_future_abs_delta_5": -0.066167693015223,
+      "mean_rel_spread_bps": 9.500996233742304
+    },
+    {
+      "product": "VEV_4000",
+      "delta_acf_1": -0.2841341261145195,
+      "delta_acf_5": 0.0014855897627314,
+      "zero_delta_share": 0.2706,
+      "imbalance_corr_future_delta_5": 0.2837720643376282,
+      "spread_corr_future_abs_delta_5": -0.2922778181162655,
+      "mean_rel_spread_bps": 166.49258576105004
+    },
+    {
+      "product": "VEV_4500",
+      "delta_acf_1": -0.2245339418027801,
+      "delta_acf_5": 0.0005197147898165,
+      "zero_delta_share": 0.2653333333333333,
+      "imbalance_corr_future_delta_5": 0.2184686137384605,
+      "spread_corr_future_abs_delta_5": -0.1896557510910714,
+      "mean_rel_spread_bps": 211.3410847779813
+    },
+    {
+      "product": "VEV_5000",
+      "delta_acf_1": -0.0977722840085144,
+      "delta_acf_5": -0.0008941588114359,
+      "zero_delta_share": 0.2858,
+      "imbalance_corr_future_delta_5": 0.1021428237662742,
+      "spread_corr_future_abs_delta_5": -0.0111044788684184,
+      "mean_rel_spread_bps": 237.0700022011594
+    },
+    {
+      "product": "VEV_5100",
+      "delta_acf_1": -0.0937828830783534,
+      "delta_acf_5": -0.0002416287776773,
+      "zero_delta_share": 0.2993333333333333,
+      "imbalance_corr_future_delta_5": 0.1007445627535957,
+      "spread_corr_future_abs_delta_5": 0.0107435772714995,
+      "mean_rel_spread_bps": 257.8870145771924
+    },
+    {
+      "product": "VEV_5200",
+      "delta_acf_1": -0.1353188366614404,
+      "delta_acf_5": -0.0030429189757174,
+      "zero_delta_share": 0.4289,
+      "imbalance_corr_future_delta_5": 0.1510732838162469,
+      "spread_corr_future_abs_delta_5": 0.0205442311313518,
+      "mean_rel_spread_bps": 303.42635407189346
+    },
+    {
+      "product": "VEV_5300",
+      "delta_acf_1": -0.2100827759190024,
+      "delta_acf_5": -0.0042326623037487,
+      "zero_delta_share": 0.5766666666666667,
+      "imbalance_corr_future_delta_5": 0.2061026124299626,
+      "spread_corr_future_abs_delta_5": 0.0532343187218272,
+      "mean_rel_spread_bps": 454.8304665772336
+    },
+    {
+      "product": "VEV_5400",
+      "delta_acf_1": -0.2542044938201165,
+      "delta_acf_5": -0.0006865741137829,
+      "zero_delta_share": 0.7196,
+      "imbalance_corr_future_delta_5": 0.1932823019746982,
+      "spread_corr_future_abs_delta_5": 0.100082367638533,
+      "mean_rel_spread_bps": 900.1054361848524
+    },
+    {
+      "product": "VEV_5500",
+      "delta_acf_1": -0.245342527860796,
+      "delta_acf_5": -0.0123376312859451,
+      "zero_delta_share": 0.8783666666666666,
+      "imbalance_corr_future_delta_5": 0.2262604759185145,
+      "spread_corr_future_abs_delta_5": 0.3192095124100779,
+      "mean_rel_spread_bps": 1858.639419505329
+    },
+    {
+      "product": "VEV_6000",
+      "delta_acf_1": NaN,
+      "delta_acf_5": NaN,
+      "zero_delta_share": 0.9999,
+      "imbalance_corr_future_delta_5": NaN,
+      "spread_corr_future_abs_delta_5": NaN,
+      "mean_rel_spread_bps": 20000.0
+    },
+    {
+      "product": "VEV_6500",
+      "delta_acf_1": NaN,
+      "delta_acf_5": NaN,
+      "zero_delta_share": 0.9999,
+      "imbalance_corr_future_delta_5": NaN,
+      "spread_corr_future_abs_delta_5": NaN,
+      "mean_rel_spread_bps": 20000.0
+    }
+  ],
+  "option_reversion": [
+    {
+      "product": "VEV_4000",
+      "extrinsic_dev_vs_future_change_5_corr": -0.7022863994468641,
+      "extrinsic_std": 0.8286752480649815,
+      "mean_abs_extrinsic_dev_day": 0.2616091333333333
+    },
+    {
+      "product": "VEV_4500",
+      "extrinsic_dev_vs_future_change_5_corr": -0.7030098710968501,
+      "extrinsic_std": 0.7588946213126874,
+      "mean_abs_extrinsic_dev_day": 0.4276908033333333
+    },
+    {
+      "product": "VEV_5000",
+      "extrinsic_dev_vs_future_change_5_corr": -0.3026085609184123,
+      "extrinsic_std": 1.9298040439695865,
+      "mean_abs_extrinsic_dev_day": 1.01893349
+    },
+    {
+      "product": "VEV_5100",
+      "extrinsic_dev_vs_future_change_5_corr": -0.1413942466637282,
+      "extrinsic_std": 4.842467961762693,
+      "mean_abs_extrinsic_dev_day": 2.249875856666667
+    },
+    {
+      "product": "VEV_5200",
+      "extrinsic_dev_vs_future_change_5_corr": -0.0852629226928591,
+      "extrinsic_std": 7.846557555296425,
+      "mean_abs_extrinsic_dev_day": 4.852802423333333
+    },
+    {
+      "product": "VEV_5300",
+      "extrinsic_dev_vs_future_change_5_corr": -0.0724138247641717,
+      "extrinsic_std": 6.22814132148312,
+      "mean_abs_extrinsic_dev_day": 4.85079334
+    },
+    {
+      "product": "VEV_5400",
+      "extrinsic_dev_vs_future_change_5_corr": -0.0790528132841057,
+      "extrinsic_std": 3.429181870747807,
+      "mean_abs_extrinsic_dev_day": 2.321348803333333
+    },
+    {
+      "product": "VEV_5500",
+      "extrinsic_dev_vs_future_change_5_corr": -0.1099286765801418,
+      "extrinsic_std": 1.738849034284364,
+      "mean_abs_extrinsic_dev_day": 1.07602335
+    },
+    {
+      "product": "VEV_6000",
+      "extrinsic_dev_vs_future_change_5_corr": NaN,
+      "extrinsic_std": 0.0,
+      "mean_abs_extrinsic_dev_day": 0.0
+    },
+    {
+      "product": "VEV_6500",
+      "extrinsic_dev_vs_future_change_5_corr": NaN,
+      "extrinsic_std": 0.0,
+      "mean_abs_extrinsic_dev_day": 0.0
+    }
+  ],
+  "linear_model": [
+    {
+      "feature": "underlying_delta_1",
+      "standardized_coef": -0.0041150807001326,
+      "pooled_r2": 0.0158990874226634
+    },
+    {
+      "feature": "imbalance_1",
+      "standardized_coef": 0.1261001676980424,
+      "pooled_r2": 0.0158990874226634
+    },
+    {
+      "feature": "extrinsic_dev_day",
+      "standardized_coef": 0.0090835167038964,
+      "pooled_r2": 0.0158990874226634
+    }
+  ],
+  "mutual_information": [
+    {
+      "feature": "underlying_delta_1",
+      "mutual_information": 0.0002607695879914
+    },
+    {
+      "feature": "imbalance_1",
+      "mutual_information": 0.0565140428230206
+    },
+    {
+      "feature": "extrinsic_dev_day",
+      "mutual_information": 0.3357679793452757
+    },
+    {
+      "feature": "spread",
+      "mutual_information": 0.2223877755462098
+    }
+  ],
+  "pca_explained": [
+    {
+      "component": "PC1",
+      "explained_variance_ratio": 0.7201251607593615
+    },
+    {
+      "component": "PC2",
+      "explained_variance_ratio": 0.1666937639769331
+    },
+    {
+      "component": "PC3",
+      "explained_variance_ratio": 0.1079614226642226
+    }
+  ],
+  "artifact_paths": {
+    "quality_by_file": "rounds/round_3/data/processed/derived_round_3_data_quality_by_file.csv",
+    "quality_by_product": "rounds/round_3/data/processed/derived_round_3_data_quality_by_product.csv",
+    "trade_summary": "rounds/round_3/data/processed/derived_round_3_trade_summary_by_symbol.csv",
+    "trade_alignment": "rounds/round_3/data/processed/derived_round_3_trade_alignment_summary.csv",
+    "surface_checks": "rounds/round_3/data/processed/derived_round_3_option_surface_checks.csv",
+    "surface_summary": "rounds/round_3/data/processed/derived_round_3_option_surface_summary.csv",
+    "extrinsic_by_tte": "rounds/round_3/data/processed/derived_round_3_option_extrinsic_by_tte.csv",
+    "return_corr": "rounds/round_3/data/processed/derived_round_3_same_time_return_corr.csv",
+    "return_cov": "rounds/round_3/data/processed/derived_round_3_same_time_return_covariance.csv",
+    "lead_lag": "rounds/round_3/data/processed/derived_round_3_underlying_option_lead_lag.csv",
+    "product_signals": "rounds/round_3/data/processed/derived_round_3_product_signal_metrics.csv",
+    "option_reversion": "rounds/round_3/data/processed/derived_round_3_option_reversion_metrics.csv",
+    "linear_summary": "rounds/round_3/data/processed/derived_round_3_pooled_option_linear_model.csv",
+    "mi_scores": "rounds/round_3/data/processed/derived_round_3_option_mutual_information.csv",
+    "pca_loadings": "rounds/round_3/data/processed/derived_round_3_option_pca_loadings.csv",
+    "pca_explained": "rounds/round_3/data/processed/derived_round_3_option_pca_explained_variance.csv",
+    "feature_corr": "rounds/round_3/data/processed/derived_round_3_option_feature_corr.csv",
+    "feature_cov": "rounds/round_3/data/processed/derived_round_3_option_feature_covariance.csv",
+    "plot_extrinsic_surface": "rounds/round_3/workspace/01_eda/artifacts/round_3_option_extrinsic_by_tte.png",
+    "plot_return_corr_heatmap": "rounds/round_3/workspace/01_eda/artifacts/round_3_return_corr_heatmap.png",
+    "plot_imbalance_bins": "rounds/round_3/workspace/01_eda/artifacts/round_3_imbalance_signal_bins.png",
+    "plot_extrinsic_reversion": "rounds/round_3/workspace/01_eda/artifacts/round_3_extrinsic_reversion_bins.png",
+    "plot_rel_spread_box": "rounds/round_3/workspace/01_eda/artifacts/round_3_relative_spread_boxplot.png"
+  }
+}
