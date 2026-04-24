@@ -1,46 +1,40 @@
-# External Paper Research — Round 3
+# External Paper Research
+
+Use `docs/templates/external_paper_research_template.md` as the structure for this file.
 
 ## Status
 
-`IN_PROGRESS`
-
-Phase logic: prompt generated; waiting for paper uploads. Strategy may proceed
-while this phase is in a wait state. Phase is complete once at least one
-processed paper exists in `../research/papers_processed/`.
+COMPLETED
 
 ## Sources
 
-- Understanding summary: `02_understanding.md`
-- Understanding context: `phase_02_understanding_context.md`
-- EDA evidence: `01_eda/eda_option_surface_and_microstructure.md`
-- Post-run research memory: none (first time in Round 3)
+- Understanding summary: [`02_understanding.md`](02_understanding.md)
+- Understanding context: [`phase_02_understanding_context.md`](phase_02_understanding_context.md)
+- EDA evidence: [`01_eda/eda_option_surface_and_microstructure.md`](01_eda/eda_option_surface_and_microstructure.md)
+- Post-run research memory: none present for Round 3
 - Other named artifacts:
-  - `../data/processed/derived_round_3_option_reversion_metrics.csv`
-  - `../data/processed/derived_round_3_option_extrinsic_by_tte.csv`
-  - `../data/processed/derived_round_3_option_surface_summary.csv`
-  - `../data/processed/derived_round_3_underlying_option_lead_lag.csv`
-  - `01_eda/artifacts/round_3_eda_summary_metrics.json`
+  - `../research/papers_raw/`
+  - `../research/papers_md/`
+  - `../research/papers_processed/`
 
 ## Research Goals
 
-- Goal: find 5–8 high-ROI academic papers or practitioner resources that can
-  inspire implementable techniques for short-dated call-option market-making
-  and residual/extrinsic-value exploitation in a discrete, position-limited,
-  low-TTE environment.
-- Why this matters before strategy generation: understanding supplies the
-  signal ledger and process hypotheses but does not provide calibrated methods
-  for theta decay, surface arbitrage, or execution under wide option spreads.
-  External literature can close the gap between "we see extrinsic reversion"
-  and "here is a concrete formula or algorithm to exploit it."
+- Goal: collect high-ROI external methods that can sharpen Round 3 option fair
+  value, residual logic, inventory control, and execution heuristics without
+  violating Prosperity runtime constraints.
+- Why this matters before strategy generation:
+  - Round 3 is the first option-heavy round in this repo.
+  - Current EDA / understanding already identify residual mispricing, surface
+    sanity, and inventory / execution risk as the main open areas.
+  - Papers should improve candidate design, validation checks, or
+    inventory / execution heuristics rather than replace current-round
+    evidence.
 - Prosperity runtime / Trader constraints to preserve:
-  - `Trader.run()` must be a single Python function; no external libraries
-    (no `scipy`, no `numpy`, no `pandas`) unless standard builtins.
-  - All state must pass through `traderData` as a JSON string.
-  - Per-symbol position limit is ±300 for each `VEV_*` voucher; ±50 for
-    `HYDROGEL_PACK` and `VELVETFRUIT_EXTRACT` (confirm exact limits in spec).
-  - Orders are discrete integer price ticks; no fractional prices.
-  - Historical TTE window is 6–8 days; live round runs at TTE 5 days
-    (one step out-of-sample vs history).
+  - simple Python `Trader`
+  - no external scientific libraries in the uploadable bot
+  - integer prices
+  - per-symbol position limits
+  - online logic should stay compact and state-light
 
 ## Current Round Inputs
 
@@ -48,195 +42,175 @@ processed paper exists in `../research/papers_processed/`.
 
 | Signal / Feature / Risk | Product Or Scope | Source | Why It Matters |
 | --- | --- | --- | --- |
-| `extrinsic_dev_day` (residual above day-product baseline) | `VEV_4000`–`VEV_5300` | `derived_round_3_option_reversion_metrics.csv` | strongest MI-ranked option signal; reversion corr `–0.7` for ITM strikes |
-| intrinsic / extrinsic decomposition (call payoff structure) | all vouchers | `derived_round_3_option_extrinsic_by_tte.csv` | converts raw prices into option-theoretic space; needed for residual frame |
-| same-time `VELVETFRUIT_EXTRACT` coupling | `VEV_5000`–`VEV_5300` | `derived_round_3_same_time_return_corr.csv` | correlations 0.72–0.76; defines anchor relationship, not lagged follow |
-| `imbalance_1` (top-of-book bid/ask volume asymmetry) | `HYDROGEL_PACK`, `VELVETFRUIT_EXTRACT`, active vouchers | `derived_round_3_product_signal_metrics.csv` | PCA isolates this on PC2 (16.7%); mild directional/overlay role |
-| surface monotonicity / convexity across strikes | voucher family | `derived_round_3_option_surface_summary.csv` | 99.91%–100% stable in sample; useful as sanity check and residual frame |
-| theta / TTE decay calibration | all vouchers | `derived_round_3_option_extrinsic_by_tte.csv` | extrinsic shrinks day-on-day; live is TTE 5d vs 6–8d in history |
-| spread-aware execution filter | `VEV_5400`, `VEV_5500` and all options | `derived_round_3_trade_alignment_summary.csv` | relative spreads 900–1859 bps; raw signal likely dominated by costs |
+| intrinsic / extrinsic decomposition | voucher family | understanding / EDA | strongest structural pricing frame for vouchers |
+| `extrinsic_dev_day` mean reversion | `VEV_4000` to `VEV_5300` | understanding / EDA | strongest option-specific signal currently promoted |
+| same-time `VELVETFRUIT_EXTRACT` anchor | active vouchers | understanding / EDA | natural fair-value anchor for option logic |
+| surface monotonicity / convexity | voucher family | understanding / EDA | structural guardrail and residual frame |
+| `imbalance_1` | delta-1 and active vouchers | understanding / EDA | simple online directional modifier or execution filter |
+| multi-symbol inventory coupling | voucher family | understanding | key open risk because products are correlated despite separate limits |
+| wide-spread passive execution | `VEV_5400`, `VEV_5500` | understanding / EDA | edge may be execution-limited rather than signal-limited |
 
 ### Negative Evidence And Failure Modes
 
 | Item | Source | Why It Should Be Avoided Or Addressed |
 | --- | --- | --- |
-| Lagged underlying-delta follow into vouchers | `derived_round_3_underlying_option_lead_lag.csv` | correlations collapse to near zero at lag 1, 2, 5, 10; complexity with no sample edge |
-| Feature dumping across price-anchor family | `derived_round_3_option_pca_loadings.csv` | PC1 (72%) loads evenly on mid, intrinsic, moneyness, spread; they are all the same axis |
-| Dynamic alpha from `VEV_6000` / `VEV_6500` | `derived_round_3_product_signal_metrics.csv` | constant 0.5 mids, zero variance, 20000 bps relative spread; floor regime only |
-| Pooled linear model as standalone predictor | `derived_round_3_pooled_option_linear_model.csv` | `R² = 0.0159`; ranking evidence only, not direct bot logic |
-| Treating hydrogel and velvetfruit as a cross-hedge | `derived_round_3_same_time_return_corr.csv` | correlation 0.006; independent processes |
+| lagged underlying-follow | understanding / EDA | sample evidence rejects it as alpha after lag `0` |
+| hydrogel-voucher hedge framing | understanding / EDA | products are effectively independent in current sample |
+| dynamic alpha in floor vouchers | understanding / EDA | `VEV_6000` / `VEV_6500` are constant-floor in sample |
+| feature dumping across price-anchor transforms | understanding / EDA | redundancy is high and strategy should stay parsimonious |
 
 ### Open Questions And Regime Hypotheses
 
 | Question Or Hypothesis | Why It Matters | Desired External Research Help |
 | --- | --- | --- |
-| How much does extrinsic residual reversion strengthen or weaken at TTE 5d vs 8d? | live round is one step out-of-sample; misfit here could mean bad baselines | papers on short-dated option residual dynamics and theta acceleration near expiry |
-| Is there a simple closed-form approximation for extrinsic value that works online without `scipy`? | Trader needs a fast per-tick valuation formula | analytic approximations to Black-Scholes or binomial near-expiry that avoid special functions |
-| What is the cleanest way to detect and exploit cross-strike monotonicity / convexity violations? | surface sanity is a guardrail; residual logic may be improvable if structural breaks are detectable | calendar / butterfly spread arbitrage literature; surface arbitrage bounds |
-| Is `imbalance_1` a stronger signal in option books than in equity books, given the wide spreads? | MI rank is modest; deciding primary vs overlay role shapes spec complexity | literature on order-book imbalance in illiquid or wide-spread derivative markets |
-| What position-sizing or inventory management rules best handle ±300-limit multi-strike portfolios? | 10 voucher symbols with independent limits; cross-strike delta exposure is implicit | multi-asset inventory management under position limits; Avellaneda-Stoikov extensions |
-| Are there simple passive execution heuristics for OTM options that survive costs better than aggressive fills? | `VEV_5400` / `VEV_5500` may only be viable passively | passive market-making with asymmetric fill probability and wide-spread environments |
+| TTE `5d` may behave differently from `6d-8d` history | live round is one step out-of-sample | near-expiry option-return / residual / inventory behavior |
+| residual signals may need a simple analytic fair-value backbone | online implementation needs a compact formula | normal-model or short-dated call approximations |
+| correlated inventory should skew per-symbol quotes | many voucher symbols share risk | multi-asset or option market-making approximations |
+| wide-spread OTM options likely need passive execution rules | raw spread cost may dominate signal | limit-order placement or quote-skew heuristics |
 
 ## Target Research Questions
 
-- Q1: What are the best simple online algorithms for tracking extrinsic /
-  time value of a short-dated call option using only observable book data
-  (mid, strike, TTE), and how do they handle the final few days before expiry?
-- Q2: Are there closed-form or lookup-table approximations to call option fair
-  value near expiry (TTE < 10 days) that require no `scipy` or special math
-  functions, suitable for embedding in a Trader class?
-- Q3: What does the literature say about residual mispricing and mean
-  reversion in listed option markets, and which signal features predict
-  reversion best in empirical studies?
-- Q4: How should a market-maker or relative-value trader handle a strip of
-  call options at multiple strikes simultaneously, given monotonicity and
-  convexity surface constraints?
-- Q5: What is the evidence for (or against) `imbalance_1`-style order-book
-  signals in derivative markets, especially when spreads are very wide?
-- Q6: How can a multi-product bot manage inventory across 10 correlated option
-  symbols with individual position limits, without access to a proper portfolio
-  delta / greeks calculator in real time?
-- Q7: What execution models exist for passively market-making in illiquid
-  options (relative spread > 500 bps), and what are their known failure modes?
+- What is the highest-ROI simple online fair-value approximation for short-dated
+  call-like instruments when only `S`, `K`, and `T` are available?
+- What literature is most useful for interpreting extrinsic / time-value
+  residuals and their behaviour close to expiry?
+- Which papers give implementable static-arbitrage or surface-sanity guardrails
+  for cross-strike pricing?
+- Which option-market or dealer-inventory papers most directly justify using
+  imbalance as a secondary modifier rather than a primary alpha?
+- Which multi-asset market-making papers best translate correlated inventory
+  into per-symbol quote shifts without a full online Greeks stack?
+- Which execution papers are actually helpful for wide-spread, low-liquidity
+  option-like quoting under passive-first assumptions?
 
 ## Generated External Research Prompt
 
 ```text
-You are helping a team competing in IMC Prosperity 4, an algorithmic trading
-competition. We are in Round 3, which introduces a set of call-option-like
-instruments called "vouchers" (symbols VEV_4000 through VEV_6500) written on
-an underlying called VELVETFRUIT_EXTRACT, plus a separate product
-HYDROGEL_PACK. Our bots run as a simple Python Trader class with no external
-libraries (no scipy, no numpy), discrete integer prices, ±300 position limits
-per voucher, and all state passed as a JSON string.
+You are helping a team competing in IMC Prosperity 4, an algorithmic trading competition. We are in Round 3, which introduces a set of call-option-like instruments called vouchers (symbols VEV_4000 through VEV_6500) written on an underlying called VELVETFRUIT_EXTRACT, plus a separate product HYDROGEL_PACK.
 
-Our EDA and understanding work has produced the following key findings:
+Our current round evidence says:
+- HYDROGEL_PACK should be treated separately from the VELVETFRUIT_EXTRACT plus voucher family.
+- VELVETFRUIT_EXTRACT is the natural anchor for voucher valuation.
+- The strongest option-specific signal so far is extrinsic-value residual mean reversion, especially in VEV_4000 to VEV_5300.
+- The voucher surface is almost always monotone and convex across strike.
+- Order-book imbalance is a modest online modifier, not a proven primary alpha.
+- Delayed underlying-follow is rejected by the data.
+- VEV_5400 and VEV_5500 are execution-sensitive; VEV_6000 and VEV_6500 behave like floor instruments in sample data.
 
-SIGNALS WE TRUST:
-• Extrinsic value (= mid_price - max(0, underlying - strike)) tracks a
-  day-product baseline, and deviations from that baseline mean-revert
-  (reversion correlation ~-0.70 for ITM strikes VEV_4000/4500). This is our
-  strongest option signal.
-• VELVETFRUIT_EXTRACT is the natural anchor for voucher valuation; same-time
-  return correlations of 0.72–0.76 with VEV_5000/5100/5200 make it the
-  best real-time fair-value proxy.
-• The option surface is essentially always monotone (100%) and convex
-  (~99.9%) across strikes, suggesting surface structure is useful as a
-  sanity guardrail or residual frame.
-• Top-of-book order imbalance (bid vol – ask vol / total) has a modest
-  directional effect (MI rank 4th out of 5 features, R² contribution ~zero
-  in pooled linear model), but is simple and online.
+We want 5-10 highest-ROI papers or practitioner resources that improve one or more of these problems:
+1. Simple online short-dated call fair value approximation usable in a basic Python Trader with no external libraries.
+2. Near-expiry residual or extrinsic dynamics, especially around TTE 5-6 days.
+3. Cross-strike no-arbitrage or surface-aware pricing constraints for a small set of call-like instruments.
+4. Option-market order-flow / dealer-inventory interpretation relevant to imbalance and expected returns.
+5. Correlated multi-product inventory-aware market making that can inspire simple quote skewing rules.
+6. Passive execution or quote placement heuristics for wide-spread, low-liquidity option-like instruments.
 
-SIGNALS WE REJECT:
-• Lagged underlying-to-option delta-follow: correlations collapse near zero
-  at lag 1 and beyond. Complexity with no edge.
-• VEV_6000/VEV_6500: constant 0.5 mids, zero variance — floor regime only.
-  Not tradable for alpha.
-• Feature stacking across price/intrinsic/moneyness/spread: all load onto
-  the same PCA component (PC1 = 72%). Pick one anchor, not all of them.
+Please prioritize practical relevance over theory. For each paper/resource, provide:
+- full title, authors, year
+- primary link (arXiv / SSRN / DOI / PDF)
+- 2-3 sentence summary of the core method
+- how it maps to our setting
+- whether it suggests an implementable heuristic for a simple Trader
 
-KEY OPEN PROBLEMS:
-1. We need a simple ONLINE call option fair value formula (no scipy.stats)
-   for TTE 5–8 days, integer strikes, using only the underlying mid price
-   and strike. It must be fast enough to call 1000+ times per backtest day.
-2. We need to understand how extrinsic residual reversion behaves specifically
-   in the TTE 5–6 day range (our live round is TTE 5d; our history only has
-   TTE 6–8d). Does reversion speed accelerate near expiry? 
-3. We need to manage inventory across 10 correlated option symbols with
-   independent ±300 position limits, without computing Greeks in real time.
-4. We need execution heuristics for very wide-spread OTM options (relative
-   spread > 900 bps for VEV_5400/5500) where passive fills are the only
-   viable approach.
-5. We'd like to know whether order-book imbalance in option markets (vs
-   equity markets) carries different predictive properties, especially near
-   expiry.
-
-Please find 5–8 high-ROI papers or practitioner resources that address our
-open problems. For each, provide:
-• Full title, authors, year
-• arXiv / SSRN / DOI link or PDF source if available
-• 2–3 sentence summary of the core method
-• How it maps to our specific situation (short-dated calls, wide spreads,
-  discrete prices, no scipy, position limits)
-• Whether it suggests a concrete implementable formula or heuristic we
-  could embed in a Python Trader class
-
-Priority order for papers:
-1. Simple closed-form / analytic approximations for short-dated call option
-   fair value (Black-Scholes near-expiry, binomial trees, Bachelier model)
-2. Extrinsic / time value residual dynamics and mean reversion in option
-   markets near expiry
-3. Multi-strike option surface arbitrage / monotonicity-aware pricing
-4. Order-book imbalance signals in derivative / option markets
-5. Inventory management for multi-product market-makers under position limits
-   (Avellaneda-Stoikov extensions or similar)
-6. Passive execution strategies for wide-spread / illiquid options
-
-Please use internet search, deep research mode, and extended reasoning if
-available. Focus on practical relevance over theoretical elegance. Prefer
-results that can inspire a bot implementable in fewer than 200 lines of Python
-with no external dependencies.
-
-After generating your response, instruct us to download the most relevant
-PDFs and upload them to:
-  rounds/round_3/research/papers_raw/
-so our pipeline can convert them to Markdown and extract strategy implications.
+Please instruct us to place the selected PDFs or source folders into:
+rounds/round_3/research/papers_raw/
 ```
 
 ## Prompt Requirements Checklist
 
 - Ask external AI to use internet / deep research / extended reasoning if available: `yes`
-- Ask for roughly 5-10 highest-ROI papers or resources: `yes` (5–8)
+- Ask for roughly 5-10 highest-ROI papers or resources: `yes`
 - Prioritize implementable methods for simple online trading bots: `yes`
 - Ask for links / citations / PDFs if available: `yes`
-- Include upload instruction for `rounds/round_3/research/papers_raw/`: `yes`
+- Include upload instruction for `rounds/round_X/research/papers_raw/`: `yes`
+
+## Online Search / Shortlist Notes
+
+- Mode used: `mixed`
+  External prompt generation, direct in-agent online shortlist / metadata
+  verification, and local manual normalization of uploaded paper inputs.
+- Queries / intent:
+  - shortlist simple short-dated call-pricing papers with online-usable formulas
+  - find option order-flow / inventory papers relevant to imbalance
+  - find near-expiry / expiration-day option-return papers
+  - find surface-arbitrage guardrail papers for small call sets
+  - find multi-asset or option-MM papers that can be simplified into quote skew rules
+- Accepted shortlist:
+  - `choi_2022_bachelier_guide`
+  - `muravyev_2015_option_order_flow`
+  - `stoikov_saglam_2009_option_mm_inventory`
+  - `garcia_ares_2023_expiration_days`
+  - `fengler_2005_surface_smoothing`
+  - `bergault_2022_multi_asset_mm`
+  - `crr_1979_simplified_approach`
+  - `west_2004_cumulative_normal`
+- Rejected shortlist and why:
+  - `cont_kukanov_optimal_order_placement`
+    useful intuition but lower ROI than direct option-specific inventory papers
+  - `baviera_massaria_additive_bachelier`
+    variant-only once `Choi` already covered the normal-model backbone better
+  - `andreasen_huge` and `breeden_litzenberger`
+    interesting background, but lower immediate impact for a single-expiry,
+    10-strike Round 3 bot
+
+## Batch Plan
+
+| Batch | Goal | Papers | Stop condition |
+| --- | --- | --- | --- |
+| 1 | unlock the first serious candidate family | `choi_2022_bachelier_guide`, `muravyev_2015_option_order_flow`, `stoikov_saglam_2009_option_mm_inventory` | stop once Strategy can branch with a paper intake pass plus at least one serious voucher candidate family |
+| 2 | tighten guardrails and live-regime posture | `garcia_ares_2023_expiration_days`, `fengler_2005_surface_smoothing` | stop once these papers no longer change thresholds, validation posture, or cross-strike guardrails |
+| 3 | add support variants and implementation-quality backstops | `bergault_2022_multi_asset_mm`, `crr_1979_simplified_approach`, `west_2004_cumulative_normal` | process only while they can still change spec boundaries, implementation quality, or second-wave candidate ranking |
 
 ## Paper Pipeline Status
 
 - Expected upload folder: `../research/papers_raw/`
-- Raw papers detected: none
+- Raw papers detected: `8`
 - Markdown conversions pending: none
 - Processed summaries pending: none
-- Strategy may proceed now: `yes` — proceed data-driven while waiting for papers
-- Waiting state: `prompt-generated-waiting`
+- Strategy may proceed now: `yes`
+- Waiting state: `fully-processed`
 
 ## Processed Paper Index
 
-| Paper ID | Raw File | Markdown File | Processed Summary | Status | Action Classification |
-| --- | --- | --- | --- | --- | --- |
-| TBD | none | none | none | waiting | no action yet |
+| Paper ID | Input Type | Raw File | Markdown File | MD Fidelity | Processed Summary | Batch | Status | Action Classification |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `choi_2022_bachelier_guide` | `latex_source` | `../research/papers_raw/choi_kwak_tee_wang_2022_black_scholes_users_guide_to_the_bachelier_model/` | `../research/papers_md/choi_kwak_tee_wang_2022_black_scholes_users_guide_to_the_bachelier_model.md` | `high` | `../research/papers_processed/choi_2022_bachelier_guide_processed.md` | `1` | `processed` | `new candidate` |
+| `muravyev_2015_option_order_flow` | `pdf` | `../research/papers_raw/muravyev_2015_order_flow_and_expected_option_returns.pdf` | `../research/papers_md/muravyev_2015_order_flow_and_expected_option_returns.md` | `medium` | `../research/papers_processed/muravyev_2015_option_order_flow_processed.md` | `1` | `processed` | `variant` |
+| `stoikov_saglam_2009_option_mm_inventory` | `pdf` | `../research/papers_raw/stoikov_saglam_2009_option_market_making_under_inventory_risk.pdf` | `../research/papers_md/stoikov_saglam_2009_option_market_making_under_inventory_risk.md` | `medium` | `../research/papers_processed/stoikov_saglam_2009_option_mm_inventory_processed.md` | `1` | `processed` | `variant` |
+| `garcia_ares_2023_expiration_days` | `pdf` | `../research/papers_raw/garcia_ares_2023_equity_option_return_predictability_and_expiration_days.pdf` | `../research/papers_md/garcia_ares_2023_equity_option_return_predictability_and_expiration_days.md` | `medium` | `../research/papers_processed/garcia_ares_2023_expiration_days_processed.md` | `2` | `processed` | `validation check` |
+| `fengler_2005_surface_smoothing` | `pdf` | `../research/papers_raw/fengler_2005_arbitrage_free_smoothing_of_the_implied_volatility_surface.pdf` | `../research/papers_md/fengler_2005_arbitrage_free_smoothing_of_the_implied_volatility_surface.md` | `medium` | `../research/papers_processed/fengler_2005_surface_smoothing_processed.md` | `2` | `processed` | `validation check` |
+| `bergault_2022_multi_asset_mm` | `latex_source` | `../research/papers_raw/bergault_evangelista_gueant_vieira_2022_closed_form_approximations_in_multi_asset_market_making/` | `../research/papers_md/bergault_evangelista_gueant_vieira_2022_closed_form_approximations_in_multi_asset_market_making.md` | `high` | `../research/papers_processed/bergault_2022_multi_asset_mm_processed.md` | `3` | `processed` | `variant` |
+| `crr_1979_simplified_approach` | `pdf` | `../research/papers_raw/cox_ross_rubinstein_1979_option_pricing_a_simplified_approach.pdf` | `../research/papers_md/cox_ross_rubinstein_1979_option_pricing_a_simplified_approach.md` | `medium` | `../research/papers_processed/crr_1979_simplified_approach_processed.md` | `3` | `processed` | `validation check` |
+| `west_2004_cumulative_normal` | `pdf` | `../research/papers_raw/west_2004_better_approximations_to_cumulative_normal_functions.pdf` | `../research/papers_md/west_2004_better_approximations_to_cumulative_normal_functions.md` | `medium` | `../research/papers_processed/west_2004_cumulative_normal_processed.md` | `3` | `processed` | `validation check` |
 
 ## Guardrails
 
 - Papers are idea sources, not official facts.
-- Paper ideas must map back to current-round evidence, risks, or open questions.
-- Non-implementable ideas should be marked `inspiration only` or routed to
-  validation / EDA, not forced into Trader logic.
-- Do not hallucinate paper contents before files exist.
-- Do not block strategy on the full raw → md → processed pipeline.
+- Paper ideas must map back to current-round evidence, risks, or open
+  questions.
+- Non-implementable ideas should be marked `inspiration-only`,
+  `validation-only`, or routed to EDA / validation, not forced into `Trader`
+  logic.
+- Online shortlist-building is allowed, but canonical pipeline inputs remain the
+  local files under `../research/papers_raw/`.
+- Do not block Strategy on the full paper pipeline.
 
 ## Assumptions
 
-- The voucher instruments behave like vanilla call options (call-payoff at
-  expiry) written on `VELVETFRUIT_EXTRACT`.
-- Historical TTE labels (day 0 = 8d, day 1 = 7d, day 2 = 6d) are correct.
-- The live round runs at TTE 5d, one step beyond the historical sample.
-- Simple Python arithmetic (no scipy) can produce a usable fair value estimate
-  if we find the right approximation formula.
+- Source-first papers should be converted before PDF-only papers when possible
+  because formulas and figure references are more reliable.
+- Strategy should not wait for every paper to be fully processed, but it should
+  perform a paper intake pass once Batch 1 or any materially relevant processed
+  set exists.
 
 ## Open Questions / Blockers
 
-- No processed papers yet; pipeline is in wait state.
-- TTE 5d residual behavior remains unobserved in historical data.
+- No blocker remains for Strategy.
+- No paper-processing follow-on work is pending for the current raw set.
 
 ## Next Action
 
-- **You (human + external AI)**: paste the prompt above into an AI with
-  internet or deep-research access (e.g. Perplexity Pro, ChatGPT with
-  browsing, Gemini Deep Research). Download the most relevant PDFs it
-  recommends and upload them to `rounds/round_3/research/papers_raw/`.
-- **This pipeline**: once any file appears in `papers_raw/`, convert it to
-  Markdown in `papers_md/` and produce a processed summary in
-  `papers_processed/`, then mark this phase `COMPLETED`.
-- **Strategy (Phase 03)**: proceed now, data-driven; consume any processed
-  papers incrementally as they become available.
+- Next: start Phase 03 Strategy with a paper intake pass over the current
+  `papers_processed/` set, then build the prioritized candidate queue using
+  EDA, Understanding, and paper-derived ideas classified as `used`, `hybrid`,
+  `validation`, `rejected`, or `inspiration-only`.

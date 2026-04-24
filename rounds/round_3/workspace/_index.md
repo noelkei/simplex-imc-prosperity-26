@@ -9,7 +9,7 @@
 
 ## Current Next Priority Action
 
-Phase 02b external paper research prompt is generated and waiting for uploads. The next action is: (1) paste the prompt from [`02b_external_paper_research.md`](02b_external_paper_research.md) into an external AI with internet/deep-research access, (2) upload recommended PDFs to `../research/papers_raw/`, (3) proceed to Phase 03 strategy generation now (data-driven, without waiting for papers).
+Phase 02b External Paper Research is fully processed for the current paper set. The next action is to start Phase 03 Strategy with a paper intake pass over the current `papers_processed/` stack, then build the candidate queue alongside EDA and Understanding.
 
 ## Phase Status
 
@@ -18,8 +18,8 @@ Phase 02b external paper research prompt is generated and waiting for uploads. T
 | 00 Ingestion | READY_FOR_REVIEW | Unassigned | Unassigned | [`00_ingestion.md`](00_ingestion.md) / [`phase_00_ingestion_context.md`](phase_00_ingestion_context.md) | Review pending |
 | 01 EDA | READY_FOR_REVIEW | Unassigned | Unassigned | [`01_eda/eda_option_surface_and_microstructure.md`](01_eda/eda_option_surface_and_microstructure.md) / [`phase_01_eda_context.md`](phase_01_eda_context.md) | Review pending |
 | 02 Understanding | READY_FOR_REVIEW | Unassigned | Unassigned | [`02_understanding.md`](02_understanding.md) / [`phase_02_understanding_context.md`](phase_02_understanding_context.md) | Review pending |
-| 02b External Paper Research | IN_PROGRESS | Unassigned | Unassigned | [`02b_external_paper_research.md`](02b_external_paper_research.md) / [`phase_02b_external_paper_research_context.md`](phase_02b_external_paper_research_context.md) | Waiting for paper uploads in `../research/papers_raw/` |
-| 03 Strategy | NOT_STARTED | Unassigned | Unassigned | [`03_strategy_candidates.md`](03_strategy_candidates.md) / [`phase_03_strategy_context.md`](phase_03_strategy_context.md) | Ready to start (02b prompt generated; proceed data-driven) |
+| 02b External Paper Research | COMPLETED | Unassigned | Unassigned | [`02b_external_paper_research.md`](02b_external_paper_research.md) / [`phase_02b_external_paper_research_context.md`](phase_02b_external_paper_research_context.md) | None |
+| 03 Strategy | NOT_STARTED | Unassigned | Unassigned | [`03_strategy_candidates.md`](03_strategy_candidates.md) / [`phase_03_strategy_context.md`](phase_03_strategy_context.md) | None recorded; start with a paper intake pass over the current processed set |
 | 04 Spec | NOT_STARTED | Unassigned | Unassigned | [`04_strategy_specs/`](04_strategy_specs/) / [`phase_04_spec_context.md`](phase_04_spec_context.md) | None recorded |
 | 05 Implementation | NOT_STARTED | Unassigned | Unassigned | [`phase_05_implementation_context.md`](phase_05_implementation_context.md) | Reviewed strategy spec required |
 | 06 Testing/performance | NOT_STARTED | Unassigned | Unassigned | [`phase_06_testing_context.md`](phase_06_testing_context.md) | Bot candidate required |
@@ -35,10 +35,32 @@ Phase 02b external paper research prompt is generated and waiting for uploads. T
 
 ## External Paper Research Status
 
-- Status: `in progress — prompt generated, waiting for uploads`
+- Status: `completed`
 - Expected folder: `../research/papers_raw/`
-- Processed paper summaries: none yet
-- Strategy dependency: prompt generated; Phase 03 may proceed data-driven now; papers will be consumed incrementally when uploaded
+- Raw papers present: `8`
+- Input types present: `2 latex_source`, `6 pdf`
+- Waiting state: `fully-processed`
+- Markdown conversions present:
+  - `../research/papers_md/choi_kwak_tee_wang_2022_black_scholes_users_guide_to_the_bachelier_model.md`
+  - `../research/papers_md/bergault_evangelista_gueant_vieira_2022_closed_form_approximations_in_multi_asset_market_making.md`
+  - `../research/papers_md/cox_ross_rubinstein_1979_option_pricing_a_simplified_approach.md`
+  - `../research/papers_md/west_2004_better_approximations_to_cumulative_normal_functions.md`
+  - `../research/papers_md/stoikov_saglam_2009_option_market_making_under_inventory_risk.md`
+  - `../research/papers_md/muravyev_2015_order_flow_and_expected_option_returns.md`
+  - `../research/papers_md/garcia_ares_2023_equity_option_return_predictability_and_expiration_days.md`
+  - `../research/papers_md/fengler_2005_arbitrage_free_smoothing_of_the_implied_volatility_surface.md`
+- Processed paper summaries:
+  - `../research/papers_processed/choi_2022_bachelier_guide_processed.md`
+  - `../research/papers_processed/bergault_2022_multi_asset_mm_processed.md`
+  - `../research/papers_processed/crr_1979_simplified_approach_processed.md`
+  - `../research/papers_processed/west_2004_cumulative_normal_processed.md`
+  - `../research/papers_processed/muravyev_2015_option_order_flow_processed.md`
+  - `../research/papers_processed/stoikov_saglam_2009_option_mm_inventory_processed.md`
+  - `../research/papers_processed/garcia_ares_2023_expiration_days_processed.md`
+  - `../research/papers_processed/fengler_2005_surface_smoothing_processed.md`
+- Strategy dependency: Strategy should start with a paper intake pass over the
+  current processed set; no further 02b work is pending unless new papers
+  arrive or Strategy identifies a new literature gap
 
 ## Active Strategies
 
@@ -89,7 +111,6 @@ Example when active:
 - Phase 00 review is pending.
 - Phase 01 review is pending.
 - Phase 02 review is pending.
-- Phase 02b: prompt generated on 2026-04-24; waiting for paper uploads in `../research/papers_raw/`.
 - Exact round-end timestamp is still unknown.
 
 ## Final Submission Status
@@ -129,4 +150,26 @@ Example when active:
 - Updated Phase 01 EDA context: `phase_01_eda_context.md` on `2026-04-24`
 - Updated Phase 02 understanding summary: `02_understanding.md` on `2026-04-24`
 - Updated Phase 02 understanding context: `phase_02_understanding_context.md` on `2026-04-24`
+- Updated Phase 02b external paper research artifact: `02b_external_paper_research.md` on `2026-04-24`
+- Updated Phase 02b external paper research context: `phase_02b_external_paper_research_context.md` on `2026-04-24`
+- Added source-first paper markdown conversion: `../research/papers_md/choi_kwak_tee_wang_2022_black_scholes_users_guide_to_the_bachelier_model.md` on `2026-04-24`
+- Added source-first paper markdown conversion: `../research/papers_md/bergault_evangelista_gueant_vieira_2022_closed_form_approximations_in_multi_asset_market_making.md` on `2026-04-24`
+- Added PDF-first paper markdown conversion: `../research/papers_md/stoikov_saglam_2009_option_market_making_under_inventory_risk.md` on `2026-04-24`
+- Added PDF-first paper markdown conversion: `../research/papers_md/muravyev_2015_order_flow_and_expected_option_returns.md` on `2026-04-24`
+- Added PDF-first paper markdown conversion: `../research/papers_md/garcia_ares_2023_equity_option_return_predictability_and_expiration_days.md` on `2026-04-24`
+- Added PDF-first paper markdown conversion: `../research/papers_md/fengler_2005_arbitrage_free_smoothing_of_the_implied_volatility_surface.md` on `2026-04-24`
+- Added PDF-first paper markdown conversion: `../research/papers_md/cox_ross_rubinstein_1979_option_pricing_a_simplified_approach.md` on `2026-04-24`
+- Added PDF-first paper markdown conversion: `../research/papers_md/west_2004_better_approximations_to_cumulative_normal_functions.md` on `2026-04-24`
+- Added Batch 1 processed paper summary: `../research/papers_processed/choi_2022_bachelier_guide_processed.md` on `2026-04-24`
+- Added Batch 1 processed paper summary: `../research/papers_processed/muravyev_2015_option_order_flow_processed.md` on `2026-04-24`
+- Added Batch 1 processed paper summary: `../research/papers_processed/stoikov_saglam_2009_option_mm_inventory_processed.md` on `2026-04-24`
+- Added Batch 2 processed paper summary: `../research/papers_processed/garcia_ares_2023_expiration_days_processed.md` on `2026-04-24`
+- Added Batch 2 processed paper summary: `../research/papers_processed/fengler_2005_surface_smoothing_processed.md` on `2026-04-24`
+- Added Batch 3 processed paper summary: `../research/papers_processed/bergault_2022_multi_asset_mm_processed.md` on `2026-04-24`
+- Added Batch 3 processed paper summary: `../research/papers_processed/crr_1979_simplified_approach_processed.md` on `2026-04-24`
+- Added Batch 3 processed paper summary: `../research/papers_processed/west_2004_cumulative_normal_processed.md` on `2026-04-24`
+- Updated Phase 02b external paper research artifact: `02b_external_paper_research.md` on `2026-04-24`
+- Updated Phase 02b external paper research context: `phase_02b_external_paper_research_context.md` on `2026-04-24`
+- Normalized Round 3 paper pipeline metadata under `../research/papers_md/` and `../research/papers_processed/` on `2026-04-24`
+- Aligned the live 02b artifact and context to the refactored paper-research workflow on `2026-04-24`
 - Pre-created from template: `2026-04-14`
