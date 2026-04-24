@@ -9,6 +9,7 @@ deadline-deferred implementation-ready strategy spec.
 - Phase context: `../rounds/round_X/workspace/phase_04_spec_context.md`
 - Candidates: `../rounds/round_X/workspace/03_strategy_candidates.md`
 - Understanding: `../rounds/round_X/workspace/02_understanding.md`
+- External paper research when present: `../rounds/round_X/workspace/02b_external_paper_research.md` and `../rounds/round_X/research/papers_processed/`
 - EDA summaries: `../rounds/round_X/workspace/01_eda/`
 - Post-run research memory, when present: `../rounds/round_X/workspace/post_run_research_memory.md`
 - Specs: `../rounds/round_X/workspace/04_strategy_specs/`
@@ -22,6 +23,7 @@ deadline-deferred implementation-ready strategy spec.
 - Write specs only for candidates from the prioritized candidate queue.
 - Preserve links to EDA signals, feature evidence, multivariate relationships, process/distribution assumptions, redundancy decisions, regime assumptions, and understanding insights.
 - Record research-tool evidence when it affects the spec, such as statistical confidence, correlation/covariance, controlled regressions, cross-product lead-lag, redundancy/PCA findings, volatility/regime findings, change points, clustering, or post-run diagnostics.
+- Allow processed paper summaries to appear in the evidence trace as non-authoritative inspiration or method references, never as substitutes for current-round EDA, understanding, or round facts.
 - Copy or summarize the candidate decision trace so the spec shows signals used, alternatives considered, why this strategy was selected, and known caveats.
 - Define a Feature Contract for every feature that changes trading behavior, including source fields, online availability, role, parameters, multivariate relationship, process assumption, redundancy decision, missing-signal behavior, `traderData` state requirements, and validation/invalidation checks.
 - Name any process/distribution assumption that changes trading behavior. If the assumption fails in validation, the spec must say whether to disable the feature, change thresholds, reroute to EDA, or treat the result as expected risk.

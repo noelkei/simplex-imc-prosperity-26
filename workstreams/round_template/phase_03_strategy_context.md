@@ -29,7 +29,7 @@ TBD
 
 ## Open Questions / Blockers
 
-- Understanding summary not completed.
+- Understanding summary and default 02b prompt generation not completed yet, unless the user explicitly skips Phase 02b.
 
 ## Linked Artifacts
 
@@ -39,7 +39,8 @@ TBD
 ## Next Priority Action
 
 Generate a bounded candidate set, group duplicates, and produce a prioritized
-candidate queue for specs.
+candidate queue for specs, always checking processed papers when present and
+otherwise proceeding data-driven.
 
 ## Deadline Risk
 

@@ -13,6 +13,7 @@ focus instead of imposing a hard cap.
 
 - Wiki facts:
 - Understanding summary:
+- External paper research:
 - EDA evidence:
 - Post-run research memory:
 - Playbook heuristics:
@@ -38,6 +39,8 @@ Use EDA multivariate and process evidence to keep candidates feature-light:
 - A process hypothesis should support the strategy family when available.
 - PCA, clustering, latent-state, or other EDA-only findings need an online proxy before they can influence bot behavior.
 - Cross-product relationships should be used only when EDA or understanding marks them useful or worth validating.
+- Paper-inspired methods must still map back to current-round signals, risks, failure modes, or open questions.
+- Always check `research/papers_processed/` when it exists. If no processed papers are available yet, proceed data-driven instead of blocking.
 
 ## Candidate Count And Roles
 
@@ -83,15 +86,15 @@ Use this for multi-product rounds before writing specs. Mark `not applicable` wh
 
 ## Candidate Table
 
-| Candidate ID | Role | Product Scope | Source Of Edge | Primary Feature / Signal | Supporting Features | Feature Role | Linked EDA Signals | Feature Evidence | Multivariate Evidence | Supporting Process Hypothesis | Redundancy Note | Online Proxy Needed? | Regime Assumptions | Understanding Insight | Key Assumptions | Main Risk | Why Not Feature Dumping | ROI / Pruning Rationale | Evidence Strength | Implementation Cost | Validation Speed | Risk Level | Expected Upside | Priority Tier | Implementation Wave | Status |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| CANDIDATE_ID | primary / secondary / exploratory / mechanics-only / manual-only / deferred / rejected | PRODUCT | EDGE | FEATURE_OR_FV | FEATURES_OR_NONE | direct signal / execution filter / risk control / diagnostic | SIGNALS | FEATURES | corr / covariance / regression / lead-lag / redundancy / none | PROCESS_OR_NONE | keep / merge / downgrade / not checked / not applicable | yes / no / unknown | REGIMES | INSIGHT | ASSUMPTIONS | RISK | FEATURE_BUDGET_RATIONALE | WHY_KEEP_OR_PRUNE | strong / medium / weak / contradictory | high / medium / low | high / medium / low | high / medium / low | high / medium / low | spec-first / implement-first / validate-next / backlog / defer | WAVE_OR_NONE | draft |
+| Candidate ID | Role | Source Classification | Product Scope | Source Of Edge | Primary Feature / Signal | Supporting Features | Feature Role | Linked EDA Signals | Feature Evidence | External Research Input | Paper Idea Handling | Multivariate Evidence | Supporting Process Hypothesis | Redundancy Note | Online Proxy Needed? | Regime Assumptions | Understanding Insight | Key Assumptions | Main Risk | Why Not Feature Dumping | ROI / Pruning Rationale | Evidence Strength | Implementation Cost | Validation Speed | Risk Level | Expected Upside | Priority Tier | Implementation Wave | Status |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| CANDIDATE_ID | primary / secondary / exploratory / mechanics-only / manual-only / deferred / rejected | data-driven / paper-inspired / hybrid / paper-rejected | PRODUCT | EDGE | FEATURE_OR_FV | FEATURES_OR_NONE | direct signal / execution filter / risk control / diagnostic | SIGNALS | FEATURES | PAPER_SUMMARY_OR_NONE | used / hybrid / validation / rejected / inspiration-only / none | corr / covariance / regression / lead-lag / redundancy / none | PROCESS_OR_NONE | keep / merge / downgrade / not checked / not applicable | yes / no / unknown | REGIMES | INSIGHT | ASSUMPTIONS | RISK | FEATURE_BUDGET_RATIONALE | WHY_KEEP_OR_PRUNE | strong / medium / weak / contradictory | high / medium / low | high / medium / low | high / medium / low | high / medium / low | spec-first / implement-first / validate-next / backlog / defer | WAVE_OR_NONE | draft |
 
 ## Rejected Or Deferred Ideas
 
-| Idea | Reason | Evidence Gap Or Risk |
-| --- | --- | --- |
-| IDEA | feature weak / not online-usable / too complex / no decision impact / duplicate / unsupported / other | GAP_OR_RISK |
+| Idea | Source Classification | Paper Idea Handling | Reason | Evidence Gap Or Risk |
+| --- | --- | --- | --- | --- |
+| IDEA | data-driven / paper-inspired / hybrid / paper-rejected | used / hybrid / validation / rejected / inspiration-only / none | feature weak / not online-usable / too complex / no decision impact / duplicate / unsupported / other | GAP_OR_RISK |
 
 ## Prioritized Candidate Queue
 

@@ -36,7 +36,7 @@ TBD
 
 ## Next Priority Action
 
-Summarize facts, evidence, caveats, and assumptions for strategy generation.
+Summarize facts, evidence, caveats, assumptions, and research questions for Phase 02b external paper research.
 
 ## Deadline Risk
 

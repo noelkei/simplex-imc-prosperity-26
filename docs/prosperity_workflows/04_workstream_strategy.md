@@ -7,6 +7,7 @@ Strategy research converts facts and evidence into testable trading ideas. It sh
 - Wiki facts for products, limits, API behavior, matching, and runtime constraints.
 - EDA findings when available.
 - Understanding synthesis when available, especially strategy-relevant insights, what should be tried, what should not be trusted yet, and open risks.
+- External paper research outputs when available, especially processed paper summaries and the explicit action classifications attached to them.
 - Post-run research memory when present, especially failure patterns, edge decomposition, counterfactual backlog, and negative evidence.
 - Playbook heuristics for fair value, inventory management, risk, execution, and iteration.
 - Current implementation context only when the task is to adapt or compare against existing code.
@@ -14,7 +15,10 @@ Strategy research converts facts and evidence into testable trading ideas. It sh
 ## Good outputs
 
 - A strategy hypothesis with the expected source of edge.
+- A source classification for each serious candidate: `data-driven`,
+  `paper-inspired`, `hybrid`, or `paper-rejected`.
 - Links to EDA signal hypotheses, feature evidence, regime assumptions, and understanding insight.
+- Links to any processed paper summary that materially shaped the candidate, plus the current-round evidence it maps back to.
 - The fair value or signal definition, if applicable.
 - Inventory and risk rules, including how the idea avoids limit rejection.
 - Execution behavior: when it buys, sells, rests orders, or stays idle.
@@ -60,6 +64,10 @@ route that unknown to EDA or record the risk before prioritizing.
 
 Do not create candidates from scratch when EDA or understanding exists. Ground candidates in prior artifacts, or label the missing evidence as a strategy assumption and route it back to EDA when it could change the decision.
 
+Strategy should not wait for the full paper pipeline. After the 02b prompt is
+generated, proceed with data-driven candidate work and consume processed paper
+summaries whenever they become available.
+
 ## Feature budget
 
 Strategy candidates should be feature-light by default.
@@ -87,6 +95,15 @@ offline-only research packages, PCA components, latent states, or cluster labels
 in `Trader.run()` unless the spec defines an online proxy and the wiki runtime
 supports the needed imports.
 
+Paper-research output is inspiration, not truth. Use processed paper summaries
+to suggest strategy families, validation checks, or failure-mode mitigations,
+but do not let them override contradictory current-round EDA or understanding
+evidence.
+
+Always check `research/papers_processed/` when it exists. When no processed
+papers are present yet, proceed without blocking and record that paper input was
+not available.
+
 ## Round coverage
 
 Before prioritizing candidates for specs, check current-round mechanics, fields,
@@ -113,6 +130,12 @@ breadth. Group branches by product or source of edge, and keep them conceptual
 until they survive pruning. Multi-product combinations should be evaluated for
 compatibility, risk interaction, execution alignment, and cross-product
 dependency before specs are written.
+
+When paper summaries exist, cite them only when the linked idea is still
+grounded in current-round signals, risks, regimes, or open questions. Mark
+paper-derived ideas as `used`, `hybrid`, `validation`, `rejected`, or
+`inspiration-only`, and record the candidate source classification as
+`data-driven`, `paper-inspired`, `hybrid`, or `paper-rejected`.
 
 All high-ROI candidates remain available in the prioritized candidate queue.
 Every serious candidate needs decision traceability: signals used, alternatives
@@ -155,6 +178,7 @@ Label claims clearly:
 - "Wiki fact": official API, exchange, limit, runtime, platform, or round documentation.
 - "EDA evidence": observed behavior from a named artifact or dataset.
 - "Understanding insight": a synthesized decision-useful conclusion from the active understanding artifact.
+- "External paper inspiration": a processed paper summary used as a method reference, not as current-round truth.
 - "Post-run memory insight": reusable evidence from platform or platform-style runs, linked back to run summaries or raw artifacts.
 - "Playbook heuristic": recommended pattern or risk habit.
 - "Strategy assumption": a choice made for testing, not an official rule.
@@ -177,7 +201,13 @@ Strategy generation is done when:
 
 - exploration board is completed or explicitly skipped with a reason
 - candidates are grouped to avoid duplicate ideas
+- processed papers are checked when present, without blocking the phase when
+  none are available yet
 - candidates cite linked EDA signals, feature evidence, regime assumptions, and understanding insight when those artifacts exist
+- paper-derived ideas are explicitly classified as `used`, `hybrid`,
+  `validation`, `rejected`, or `inspiration-only`
+- each serious candidate records a source classification of `data-driven`,
+  `paper-inspired`, `hybrid`, or `paper-rejected`
 - candidates cite multivariate evidence, process hypotheses, redundancy decisions, and online proxies when those artifacts influence behavior
 - each serious candidate has assumptions, main risk, and a validation/falsification path
 - each serious candidate respects the feature budget or records why it does not

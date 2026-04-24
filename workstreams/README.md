@@ -38,6 +38,7 @@ The round `_index.md` in `rounds/round_X/workspace/` is the control panel. It sh
 
 - current next priority action
 - status for every phase
+- whether external paper research is pending, completed, or explicitly deferred
 - product scope
 - active strategy candidate queue with roles and priority tiers
 - active implementation queue constrained by reviewed specs and validation capacity

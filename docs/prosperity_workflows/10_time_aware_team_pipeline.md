@@ -9,17 +9,19 @@ Every round still passes through:
 1. Round ingestion.
 2. EDA, or an explicit "EDA skipped with reason."
 3. Research / understanding.
-4. Strategy generation and prioritized candidate queue.
-5. Strategy specification.
-6. Implementation.
-7. Testing / performance analysis.
-8. Debugging / iteration.
-9. Final submission decision.
+4. External paper research prompt generation and incremental paper processing, or an explicit user-directed skip.
+5. Strategy generation and prioritized candidate queue.
+6. Strategy specification.
+7. Implementation.
+8. Testing / performance analysis.
+9. Debugging / iteration.
+10. Final submission decision.
 
 Required gates:
 
 - No implementation without a reviewed strategy spec.
 - No final submission without a readable validation or performance summary.
+- External paper research should generate a prompt by default after understanding, but strategy should not wait for the full raw -> md -> processed pipeline.
 - No phase is complete if facts, hypotheses, assumptions, and evidence are mixed together.
 - No stale prior-round assumption may move forward unless current-round evidence supports it or the risk is explicitly labeled.
 - Round-specific mechanics, Trader methods, and changed fields must be implemented, excluded, marked not applicable, or blocked in the spec before coding.
@@ -32,8 +34,9 @@ For a 48 hour window:
 
 - Hours 0-3: round ingestion and `_index.md` setup.
 - Hours 3-10: targeted EDA only for questions likely to affect bot behavior.
-- Hours 10-14: understanding summary and bounded strategy generation.
-- Hours 14-20: prioritize the ROI-driven candidate queue and write the
+- Hours 10-13: understanding summary and external paper research prompt generation.
+- Hours 13-16: begin bounded strategy generation and process uploaded papers incrementally if any arrive.
+- Hours 16-20: prioritize the ROI-driven candidate queue and write the
   highest-ROI implementation-ready specs.
 - Hours 20-32: implement and validate first candidates.
 - Hours 32-42: debug and iterate on the best 1-2 candidates.
@@ -108,6 +111,14 @@ Transitions:
 
 Do not mark a phase `COMPLETED` while review is merely recommended, unassigned, or pending. Use `READY_FOR_REVIEW` until a review outcome is recorded.
 
+Exception for Phase 02b:
+
+- once the prompt has been generated and at least one file exists in
+  `research/papers_processed/`, Phase 02b may be marked `COMPLETED`
+  operationally without a separate review step
+- if the user explicitly skips Phase 02b, record the reason and let strategy
+  proceed without blocking
+
 General completion rule: outputs must be usable without reinterpretation, facts and hypotheses must be labeled, artifacts must be non-duplicative, links must be present in `_index.md`, statuses must match across `_index.md`, phase context, and the main artifact, and downstream work must be able to proceed without rework.
 
 Phase-specific completion:
@@ -115,6 +126,7 @@ Phase-specific completion:
 - Ingestion: products, limits, algorithmic/manual split, caveats, and Round Mechanics Delta reviewed.
 - EDA: product scope, Round Adaptation Check, data quality, feature inventory/lifecycle, multivariate/redundancy checks or explicit deferrals, process/distribution hypotheses or explicit deferrals, feature promotion decisions, signal hypotheses, open questions, and downstream agent notes are clear.
 - Understanding: EDA evidence, promoted signals, rejected/unresolved research memory, assumptions carried forward, open risks, and candidate implications are compressed.
+- External paper research: prompt generated from understanding outputs by default, wait state or explicit skip reason recorded, strategy left free to proceed, any uploaded papers are converted and processed incrementally without hallucinated content, and the phase becomes operationally complete once at least one processed paper exists.
 - Strategy generation: ROI-driven candidate queue completed, feature budget
   respected, priority/implementation wave recorded, and Round Coverage Check
   addressed.
@@ -143,6 +155,7 @@ Each active round should contain:
 rounds/round_X/workspace/phase_00_ingestion_context.md
 rounds/round_X/workspace/phase_01_eda_context.md
 rounds/round_X/workspace/phase_02_understanding_context.md
+rounds/round_X/workspace/phase_02b_external_paper_research_context.md
 rounds/round_X/workspace/phase_03_strategy_context.md
 rounds/round_X/workspace/phase_04_spec_context.md
 rounds/round_X/workspace/phase_05_implementation_context.md
@@ -177,6 +190,7 @@ Required sections:
 - Current next priority action.
 - Phase status table with phase, status, owner, reviewer, artifact link, and blocker.
 - Product scope.
+- External paper research status, including whether it is waiting on uploads, completed, or explicitly deferred.
 - Active strategy candidate queue, with roles and priority tiers.
 - Active implementation queue, with spec links, validation status, and changed
   axes.
@@ -208,6 +222,8 @@ During work:
 - Keep changes small.
 - Preserve fact/hypothesis separation.
 - Update phase context.
+- Treat Phase 02b as a special non-blocking phase: once the prompt exists,
+  strategy may proceed while the paper pipeline continues incrementally.
 - Ask for human decisions when direction, prioritization, spec approval,
   deadline tradeoff, or final submission choice matters.
 

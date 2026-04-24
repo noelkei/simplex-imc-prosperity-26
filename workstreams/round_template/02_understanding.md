@@ -96,3 +96,4 @@ NOT_STARTED
 ## Next Action
 
 - Next:
+- Prepare `02b_external_paper_research.md` from this understanding summary before strategy generation.

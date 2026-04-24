@@ -1,6 +1,6 @@
 # Synthesize Understanding
 
-Use this skill to turn ingestion and EDA artifacts into a concise understanding summary that strategy, spec, implementation, variant, validation, and debugging agents can consume without redoing the analysis.
+Use this skill to turn ingestion and EDA artifacts into a concise understanding summary that external paper research, strategy, spec, implementation, variant, validation, and debugging agents can consume without redoing the analysis.
 
 ## Required sources
 
@@ -27,11 +27,11 @@ Use this skill to turn ingestion and EDA artifacts into a concise understanding 
 11. Carry forward product-level opportunity, uncertainty, and risk in `Product Attribution View`.
 12. Produce a `Cross-Product Verdict` when multiple products exist: `useful`, `weak`, `not applicable`, or `needs targeted EDA`.
 13. Convert each retained signal into a decision label: try, avoid, validate next, defer, or treat as an assumption.
-14. Fill `Strategy-Relevant Insights`, `What Should Be Tried`, `What Should Not Be Trusted Yet`, and `Open Risks And Unknowns`.
+14. Fill `Strategy-Relevant Insights`, `What Should Be Tried`, `What Should Not Be Trusted Yet`, `Open Risks And Unknowns`, and a concise set of research questions or failure-mode prompts that Phase 02b can lift directly into an external paper research prompt. These questions should be good enough for the prompt to be generated immediately, even if strategy later proceeds before any processed paper exists.
 15. Do not duplicate full EDA reports; link them and summarize only decision-useful conclusions.
 16. Do not rerun broad EDA during synthesis. If EDA is insufficient, record the gap and route only high-impact unresolved questions back to phase 01.
 17. Prefer fewer clear, reusable insights over many unclear findings.
 18. Do not use `non-canonical/` drafts unless the user explicitly points to one; if useful, summarize the relevant point as a labeled assumption or question.
 19. If a high-impact unknown blocks strategy selection, set the phase or blocker accordingly and propose targeted EDA or clarification.
 20. Update `../rounds/round_X/workspace/02_understanding.md`, `_index.md`, and `phase_02_understanding_context.md`.
-21. Handoff with signal ledger, research memory, product attribution, cross-product verdict, multivariate relationships, redundancy decisions, process hypotheses, feature origin/usability/role/status, what to use, what not to trust yet, what strategy directions are implied, what validation is needed, and the next priority action.
+21. Handoff with signal ledger, research memory, product attribution, cross-product verdict, multivariate relationships, redundancy decisions, process hypotheses, feature origin/usability/role/status, what to use, what not to trust yet, what strategy directions are implied, what validation is needed, the best external research questions, and the next priority action.

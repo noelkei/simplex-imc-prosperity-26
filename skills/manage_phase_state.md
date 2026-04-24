@@ -22,7 +22,7 @@ Use this skill to keep phase state synchronized without duplicating phase workfl
 
 - Compare status, owner/reviewer, review outcome, blockers, linked artifacts, deadline risk, and next action across `_index.md`, the phase context, and the main artifact.
 - Update only the minimum state fields needed: status, owner/reviewer, review outcome, blockers, linked artifact, next priority action, deadline risk, and recently changed artifacts.
-- Before closure, confirm the required artifact exists and review rules are satisfied.
+- Before closure, confirm the required artifact exists and review rules are satisfied. Exception: for Phase `02b External Paper Research`, allow operational `COMPLETED` once the prompt exists and at least one processed paper exists, or when the user explicitly skips it with reason.
 - If status cannot be safely reconciled, preserve or set `BLOCKED` and record the mismatch as the blocker.
 
 ## Boundaries
