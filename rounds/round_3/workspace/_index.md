@@ -9,7 +9,7 @@
 
 ## Current Next Priority Action
 
-Phase 02b External Paper Research is fully processed for the current paper set. The next action is to start Phase 03 Strategy with a paper intake pass over the current `papers_processed/` stack, then build the candidate queue alongside EDA and Understanding.
+Two bots implemented under `bots/amin/canonical/`. Next: run both on the platform and compare performance to select the submission candidate.
 
 ## Phase Status
 
@@ -19,9 +19,9 @@ Phase 02b External Paper Research is fully processed for the current paper set. 
 | 01 EDA | READY_FOR_REVIEW | Unassigned | Unassigned | [`01_eda/eda_option_surface_and_microstructure.md`](01_eda/eda_option_surface_and_microstructure.md) / [`phase_01_eda_context.md`](phase_01_eda_context.md) | Review pending |
 | 02 Understanding | READY_FOR_REVIEW | Unassigned | Unassigned | [`02_understanding.md`](02_understanding.md) / [`phase_02_understanding_context.md`](phase_02_understanding_context.md) | Review pending |
 | 02b External Paper Research | COMPLETED | Unassigned | Unassigned | [`02b_external_paper_research.md`](02b_external_paper_research.md) / [`phase_02b_external_paper_research_context.md`](phase_02b_external_paper_research_context.md) | None |
-| 03 Strategy | NOT_STARTED | Unassigned | Unassigned | [`03_strategy_candidates.md`](03_strategy_candidates.md) / [`phase_03_strategy_context.md`](phase_03_strategy_context.md) | None recorded; start with a paper intake pass over the current processed set |
-| 04 Spec | NOT_STARTED | Unassigned | Unassigned | [`04_strategy_specs/`](04_strategy_specs/) / [`phase_04_spec_context.md`](phase_04_spec_context.md) | None recorded |
-| 05 Implementation | NOT_STARTED | Unassigned | Unassigned | [`phase_05_implementation_context.md`](phase_05_implementation_context.md) | Reviewed strategy spec required |
+| 03 Strategy | READY_FOR_REVIEW | Unassigned | Unassigned | [`03_strategy_candidates.md`](03_strategy_candidates.md) / [`phase_03_strategy_context.md`](phase_03_strategy_context.md) | Human checkpoint on composite-first vs voucher-first |
+| 04 Spec | READY_FOR_REVIEW | amin | Unassigned | [`04_strategy_specs/spec_c06_composite_base.md`](04_strategy_specs/spec_c06_composite_base.md), [`04_strategy_specs/spec_c06_composite_inv.md`](04_strategy_specs/spec_c06_composite_inv.md) / [`phase_04_spec_context.md`](phase_04_spec_context.md) | Deferred under deadline |
+| 05 Implementation | IN_PROGRESS | amin | Unassigned | [`phase_05_implementation_context.md`](phase_05_implementation_context.md) | Platform validation needed |
 | 06 Testing/performance | NOT_STARTED | Unassigned | Unassigned | [`phase_06_testing_context.md`](phase_06_testing_context.md) | Bot candidate required |
 | 07 Debugging/iteration | NOT_STARTED | Unassigned | Unassigned | [`06_debugging/`](06_debugging/) / [`phase_07_debugging_context.md`](phase_07_debugging_context.md) | Issue/run required |
 
@@ -67,26 +67,25 @@ Phase 02b External Paper Research is fully processed for the current paper set. 
 Candidate count is ROI-driven, not fixed. Track all high-ROI active candidates
 with roles, priority tiers, and implementation waves.
 
-- None.
-
-Example when active:
-
 | Candidate ID | Role | Priority Tier | Implementation Wave | Evidence Strength | Short Reason | Spec Status | Owner | Decision Needed |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `candidate_01` | primary | spec-first | wave 1 | medium | concise rationale from understanding/EDA | not reviewed | Unassigned | Review spec |
+| `C06` | primary | spec-first | wave 1 | strong | Full-scope composite Trader (C01+C02+C03); aggregate PnL across all products | not reviewed | Unassigned | Write spec |
+| `C03` | primary | spec-first | wave 1 | strong | Bachelier residual reversion for VEV_5000-5300; strongest individual voucher candidate | not reviewed | Unassigned | Write spec (component of C06) |
+| `C01` | secondary | implement-first | wave 1 | medium | Hydrogel microstructure MM; independent PnL stream | not reviewed | Unassigned | Write spec (component of C06) |
+| `C02` | secondary | implement-first | wave 1 | medium/high | VEX delta-1 MM + voucher anchor; dual role | not reviewed | Unassigned | Write spec (component of C06) |
+| `C04` | secondary | validate-next | wave 1 | medium/high | Bachelier residual + inventory skew variant of C03 | not reviewed | Unassigned | Write spec after C03 validates |
+| `C07` | exploratory | validate-next | wave 1 | medium | TTE-5d cautious residual reversion variant of C03 | not reviewed | Unassigned | Write spec as parameter variant |
+| `C05` | exploratory | backlog | wave 2 | medium/high | ITM structural-anchor residual reversion for VEV_4000/4500 | not reviewed | Unassigned | Defer spec |
 
 ## Active Implementations
 
 Implementation count is driven by reviewed specs, validation capacity,
 deadline risk, and distinct test axes.
 
-- None.
-
-Example when active:
-
 | Candidate ID | Variant ID | Bot Path | Parent Spec | Parent Bot | Changed Axis | Status | Latest Run |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| `candidate_01` | base | `../bots/<member>/canonical/candidate_01_short_name.py` | `04_strategy_specs/spec_candidate_01_short_name.md` | none | none | validating | `../performances/<member>/canonical/run_YYYYMMDD_HHMM_candidate_01.md` |
+| `C06` | base | `../bots/amin/canonical/candidate_c06_composite_base.py` | `04_strategy_specs/spec_c06_composite_base.md` | none | none | implemented | none |
+| `C06-inv` | inventory | `../bots/amin/canonical/candidate_c06_composite_inv.py` | `04_strategy_specs/spec_c06_composite_inv.md` | C06 base | inventory skew + imbalance confirm + TTE-cautious | implemented | none |
 
 ## Baseline / Reference Bot
 
@@ -172,4 +171,12 @@ Example when active:
 - Updated Phase 02b external paper research context: `phase_02b_external_paper_research_context.md` on `2026-04-24`
 - Normalized Round 3 paper pipeline metadata under `../research/papers_md/` and `../research/papers_processed/` on `2026-04-24`
 - Aligned the live 02b artifact and context to the refactored paper-research workflow on `2026-04-24`
+- Updated Phase 04 spec: `04_strategy_specs/spec_c06_composite_base.md` on `2026-04-24`
+- Updated Phase 04 spec: `04_strategy_specs/spec_c06_composite_inv.md` on `2026-04-24`
+- Updated Phase 04 spec context: `phase_04_spec_context.md` on `2026-04-24`
+- Implemented Bot A: `../bots/amin/canonical/candidate_c06_composite_base.py` on `2026-04-24`
+- Implemented Bot B: `../bots/amin/canonical/candidate_c06_composite_inv.py` on `2026-04-24`
+- Updated Phase 05 implementation context: `phase_05_implementation_context.md` on `2026-04-24`
+- Updated Phase 03 strategy candidates: `03_strategy_candidates.md` on `2026-04-24`
+- Updated Phase 03 strategy context: `phase_03_strategy_context.md` on `2026-04-24`
 - Pre-created from template: `2026-04-14`
