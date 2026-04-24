@@ -6,6 +6,7 @@
 
 ## Paper Metadata
 
+- Paper ID:
 - Title:
 - Source / venue:
 - Authors:
@@ -14,17 +15,24 @@
 - Markdown file:
 - Link:
 
-## Core Method Or Idea
+## Core Claim
 
-- Summary:
+- Claim:
 
 ## Assumptions
 
 - Assumption:
 
-## Problem It Solves
+## Problem Addressed for Round X
 
 - Problem:
+
+## What This Paper Gives Us
+
+- Formula / approximation:
+- Constraints / checks:
+- Point of view:
+- Simplification:
 
 ## Relevance To Current Round
 
@@ -32,18 +40,26 @@
 | --- | --- | --- | --- |
 | ITEM | WHY_RELEVANT | high / medium / low | CAVEAT |
 
+## Round X Mapping
+
+- Mapping:
+
+## Minimal Usable Adaptation
+
+- Online-usable adaptation:
+- Required proxy or simplification:
+- Runtime / state caveat:
+- Implementability: `implementable | variant-only | validation-only | EDA-follow-up | inspiration-only`
+
 ## Strategy Implications
 
 - Candidate or execution idea:
 - Failure mode addressed:
 - Validation implication:
 
-## Simple Trader Adaptation
+## Do Not Overuse
 
-- Online-usable adaptation:
-- Required proxy or simplification:
-- Runtime / state caveat:
-- Implementability: `implementable | variant-only | validation-only | EDA-follow-up | inspiration-only`
+- Do not:
 
 ## Risks And Limitations
 
@@ -54,8 +70,12 @@
 - Classification: `new candidate | variant | validation check | EDA follow-up | no action`
 - Why:
 
+## Strategy Hooks
+
+- Hook:
+
 ## Notes
 
 - Strategy must later classify actual use as `used | hybrid | validation | rejected | inspiration-only`.
-- If the method does not map to a current-round signal, feature, regime, or risk, keep it exploratory / inspiration-only.
+- Keep paper facts/paraphrase in `Paper Metadata` and `Core Claim`; keep current-round interpretation in `Relevance`, `Round X Mapping`, `Minimal Usable Adaptation`, and `Strategy Hooks`.
 - Note:

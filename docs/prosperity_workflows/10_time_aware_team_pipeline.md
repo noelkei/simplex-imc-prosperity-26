@@ -21,7 +21,7 @@ Required gates:
 
 - No implementation without a reviewed strategy spec.
 - No final submission without a readable validation or performance summary.
-- External paper research should generate a prompt by default after understanding, but strategy should not wait for the full raw -> md -> processed pipeline.
+- External paper research should generate a prompt by default after understanding, may use controlled online shortlist-building or metadata verification when needed, and strategy should not wait for the full raw -> md -> processed pipeline.
 - No phase is complete if facts, hypotheses, assumptions, and evidence are mixed together.
 - No stale prior-round assumption may move forward unless current-round evidence supports it or the risk is explicitly labeled.
 - Round-specific mechanics, Trader methods, and changed fields must be implemented, excluded, marked not applicable, or blocked in the spec before coding.
@@ -35,7 +35,7 @@ For a 48 hour window:
 - Hours 0-3: round ingestion and `_index.md` setup.
 - Hours 3-10: targeted EDA only for questions likely to affect bot behavior.
 - Hours 10-13: understanding summary and external paper research prompt generation.
-- Hours 13-16: begin bounded strategy generation and process uploaded papers incrementally if any arrive.
+- Hours 13-16: begin bounded strategy generation, consume Batch 1 processed papers as soon as they exist, and process uploaded papers incrementally if any arrive.
 - Hours 16-20: prioritize the ROI-driven candidate queue and write the
   highest-ROI implementation-ready specs.
 - Hours 20-32: implement and validate first candidates.
@@ -116,6 +116,8 @@ Exception for Phase 02b:
 - once the prompt has been generated and at least one file exists in
   `research/papers_processed/`, Phase 02b may be marked `COMPLETED`
   operationally without a separate review step
+- continue recording whether the current raw-paper set is
+  `partially-processed` or `fully-processed` in the phase artifact and context
 - if the user explicitly skips Phase 02b, record the reason and let strategy
   proceed without blocking
 
@@ -126,7 +128,7 @@ Phase-specific completion:
 - Ingestion: products, limits, algorithmic/manual split, caveats, and Round Mechanics Delta reviewed.
 - EDA: product scope, Round Adaptation Check, data quality, feature inventory/lifecycle, multivariate/redundancy checks or explicit deferrals, process/distribution hypotheses or explicit deferrals, feature promotion decisions, signal hypotheses, open questions, and downstream agent notes are clear.
 - Understanding: EDA evidence, promoted signals, rejected/unresolved research memory, assumptions carried forward, open risks, and candidate implications are compressed.
-- External paper research: prompt generated from understanding outputs by default, wait state or explicit skip reason recorded, strategy left free to proceed, any uploaded papers are converted and processed incrementally without hallucinated content, and the phase becomes operationally complete once at least one processed paper exists.
+- External paper research: prompt generated from understanding outputs by default, online shortlist / metadata-verification notes recorded when used, wait state or explicit skip reason recorded, strategy left free to proceed, raw inputs normalized locally, uploaded papers converted and processed incrementally without hallucinated content, Markdown fidelity / QA recorded, and the phase becomes operationally complete once at least one processed paper exists.
 - Strategy generation: ROI-driven candidate queue completed, feature budget
   respected, priority/implementation wave recorded, and Round Coverage Check
   addressed.
@@ -190,7 +192,7 @@ Required sections:
 - Current next priority action.
 - Phase status table with phase, status, owner, reviewer, artifact link, and blocker.
 - Product scope.
-- External paper research status, including whether it is waiting on uploads, completed, or explicitly deferred.
+- External paper research status, including whether it is waiting on uploads, partially or fully processed for the current raw set, completed, or explicitly deferred.
 - Active strategy candidate queue, with roles and priority tiers.
 - Active implementation queue, with spec links, validation status, and changed
   axes.
@@ -223,7 +225,8 @@ During work:
 - Preserve fact/hypothesis separation.
 - Update phase context.
 - Treat Phase 02b as a special non-blocking phase: once the prompt exists,
-  strategy may proceed while the paper pipeline continues incrementally.
+  strategy may proceed while the paper pipeline continues incrementally, and it
+  should consume Batch 1 papers as soon as they exist.
 - Ask for human decisions when direction, prioritization, spec approval,
   deadline tradeoff, or final submission choice matters.
 

@@ -7,10 +7,13 @@
 Phase logic:
 
 - generate the prompt by default after understanding
-- keep the phase in a wait state while no processed paper exists yet
-- strategy may proceed while the phase is waiting
-- treat the phase as complete once at least one file exists in `papers_processed/`
-- if the user explicitly skips the phase, record the reason and do not block strategy
+- strategy may proceed while the phase is waiting or only partially processed
+- Phase 02b is operationally complete once at least one file exists in
+  `papers_processed/`
+- the artifact should still distinguish between partially processed and fully
+  processed local paper sets
+- if the user explicitly skips the phase, record the reason and do not block
+  strategy
 
 ## Sources
 
@@ -50,6 +53,13 @@ Phase logic:
 
 - Question:
 
+## Online Search / Shortlist Notes
+
+- Mode used: `none | local-only | online-shortlist | online-metadata-verification | mixed`
+- Queries / intent:
+- Accepted shortlist:
+- Rejected shortlist and why:
+
 ## Generated External Research Prompt
 
 ```text
@@ -64,6 +74,14 @@ PASTE_PROMPT_HERE
 - Ask for links / citations / PDFs if available: `yes | no`
 - Include upload instruction for `rounds/round_X/research/papers_raw/`: `yes | no`
 
+## Batch Plan
+
+| Batch | Goal | Papers | Stop Condition |
+| --- | --- | --- | --- |
+| Batch 1 | FIRST-CANDIDATE-CHANGING | PAPER_IDS | CONDITION |
+| Batch 2 | GUARDRAIL_OR_REGIME | PAPER_IDS_OR_NONE | CONDITION |
+| Batch 3 | BENCHMARK_OR_UTILITY | PAPER_IDS_OR_NONE | CONDITION |
+
 ## Paper Pipeline Status
 
 - Expected upload folder: `rounds/round_X/research/papers_raw/`
@@ -71,19 +89,20 @@ PASTE_PROMPT_HERE
 - Markdown conversions pending:
 - Processed summaries pending:
 - Strategy may proceed now: `yes | no`
-- Waiting state: `prompt-generated-waiting | ready to convert | ready to process | complete-via-processed-paper | explicitly-skipped`
+- Waiting state: `prompt-generated-waiting | shortlist-ready | ready-to-convert | ready-to-process | partially-processed | fully-processed | explicitly-skipped`
 
 ## Processed Paper Index
 
-| Paper ID | Raw File | Markdown File | Processed Summary | Status | Action Classification |
-| --- | --- | --- | --- | --- | --- |
-| PAPER_ID | FILE_OR_NONE | FILE_OR_NONE | FILE_OR_NONE | waiting / converted / processed | new candidate / variant / validation check / EDA follow-up / no action |
+| Paper ID | Input Type | Raw File | Markdown File | MD Fidelity | Processed Summary | Batch | Status | Action Classification |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| PAPER_ID | pdf / latex_source / mixed / unknown | FILE_OR_NONE | FILE_OR_NONE | high / medium / needs_review / none | FILE_OR_NONE | Batch 1 / Batch 2 / Batch 3 / none | waiting / converted-usable / converted-needs-review / processed | new candidate / variant / validation check / EDA follow-up / no action |
 
 ## Guardrails
 
 - Papers are idea sources, not official facts.
 - Paper ideas must map back to current-round evidence, risks, or open questions.
-- Non-implementable ideas should be marked `inspiration only` or routed to validation / EDA, not forced into Trader logic.
+- Online shortlist-building is allowed, but canonical pipeline inputs remain the local files under `papers_raw/`.
+- Non-implementable ideas should be marked `inspiration-only` or routed to validation / EDA, not forced into Trader logic.
 - Do not hallucinate paper contents before files exist.
 - Do not block strategy on the full raw -> md -> processed pipeline.
 

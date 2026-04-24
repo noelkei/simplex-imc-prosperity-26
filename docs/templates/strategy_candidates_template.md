@@ -18,6 +18,14 @@ focus instead of imposing a hard cap.
 - Post-run research memory:
 - Playbook heuristics:
 
+When processed papers exist, record a paper intake pass before broad branching.
+
+## Paper Intake Pass
+
+| Paper ID | Current-Round Mapping | Strategy Use | Candidate Impact | Note |
+| --- | --- | --- | --- | --- |
+| PAPER_ID | SIGNAL / RISK / REGIME / OPEN_QUESTION | used / hybrid / validation / rejected / inspiration-only | changes candidate design / validation only / rejection logic / none | NOTE |
+
 ## Feature Budget
 
 Strategies should be feature-light by default:
@@ -88,7 +96,7 @@ Use this for multi-product rounds before writing specs. Mark `not applicable` wh
 
 | Candidate ID | Role | Source Classification | Product Scope | Source Of Edge | Primary Feature / Signal | Supporting Features | Feature Role | Linked EDA Signals | Feature Evidence | External Research Input | Paper Idea Handling | Multivariate Evidence | Supporting Process Hypothesis | Redundancy Note | Online Proxy Needed? | Regime Assumptions | Understanding Insight | Key Assumptions | Main Risk | Why Not Feature Dumping | ROI / Pruning Rationale | Evidence Strength | Implementation Cost | Validation Speed | Risk Level | Expected Upside | Priority Tier | Implementation Wave | Status |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| CANDIDATE_ID | primary / secondary / exploratory / mechanics-only / manual-only / deferred / rejected | data-driven / paper-inspired / hybrid / paper-rejected | PRODUCT | EDGE | FEATURE_OR_FV | FEATURES_OR_NONE | direct signal / execution filter / risk control / diagnostic | SIGNALS | FEATURES | PAPER_SUMMARY_OR_NONE | used / hybrid / validation / rejected / inspiration-only / none | corr / covariance / regression / lead-lag / redundancy / none | PROCESS_OR_NONE | keep / merge / downgrade / not checked / not applicable | yes / no / unknown | REGIMES | INSIGHT | ASSUMPTIONS | RISK | FEATURE_BUDGET_RATIONALE | WHY_KEEP_OR_PRUNE | strong / medium / weak / contradictory | high / medium / low | high / medium / low | high / medium / low | high / medium / low | spec-first / implement-first / validate-next / backlog / defer | WAVE_OR_NONE | draft |
+| CANDIDATE_ID | primary / secondary / exploratory / mechanics-only / manual-only / deferred / rejected | data-driven / paper-inspired / hybrid / paper-rejected | PRODUCT | EDGE | FEATURE_OR_FV | FEATURES_OR_NONE | direct signal / execution filter / risk control / diagnostic | SIGNALS | FEATURES | PROCESSED_PAPER_FILE_OR_NONE | used / hybrid / validation / rejected / inspiration-only / none | corr / covariance / regression / lead-lag / redundancy / none | PROCESS_OR_NONE | keep / merge / downgrade / not checked / not applicable | yes / no / unknown | REGIMES | INSIGHT | ASSUMPTIONS | RISK | FEATURE_BUDGET_RATIONALE | WHY_KEEP_OR_PRUNE | strong / medium / weak / contradictory | high / medium / low | high / medium / low | high / medium / low | high / medium / low | spec-first / implement-first / validate-next / backlog / defer | WAVE_OR_NONE | draft |
 
 ## Rejected Or Deferred Ideas
 

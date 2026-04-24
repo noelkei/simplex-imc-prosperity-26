@@ -22,7 +22,12 @@ from existing ingestion, EDA, and understanding evidence.
 - Read `../rounds/round_X/workspace/post_run_research_memory.md` when it exists before branching or pruning; use it as evidence input and cite relevant insights in `Decision Trace` when they influence selection.
 - Read `../rounds/round_X/workspace/02b_external_paper_research.md` before branching.
 - Always check `../rounds/round_X/research/papers_processed/` when the folder exists; if no processed papers exist yet, proceed data-driven instead of blocking on Phase 02b.
+- When processed papers exist, begin with a paper intake pass before branching:
+  review which papers materially map to current-round signals, risks, open
+  questions, or failure modes, and ignore the rest.
 - When `../rounds/round_X/research/papers_processed/` contains summaries, treat them as optional method inspiration and cite them only alongside the current-round evidence they map back to.
+- Classify each materially relevant processed paper by actual usage:
+  `used`, `hybrid`, `validation`, `rejected`, or `inspiration-only`.
 - When post-run memory includes a Run Knowledge Index, check tested strategy families, changed axes, tested features/signals, knowledge deltas, and memory actions before adding a new branch.
 - Read the Understanding Assumptions Carried Forward and EDA Round Adaptation Check before branching. Fill Round Coverage Check for current-round mechanics, fields, or product behaviors that could affect candidate selection.
 - Consume existing understanding, EDA summaries, and candidates before adding new ideas.
@@ -37,9 +42,14 @@ from existing ingestion, EDA, and understanding evidence.
 - Treat outputs from `arch`, `ruptures`, `sklearn`, `pingouin`, `statsmodels`, PCA/loadings, clustering, mutual information, or notebooks as evidence for simpler trading decisions, not as a reason to add offline model complexity. If a candidate relies on a research-only feature, latent state, PCA component, or cluster label, require an online proxy or route it back to EDA/spec before implementation.
 - Require each serious candidate to link `feature -> signal -> decision -> expected edge -> validation check`.
 - Require each paper-derived idea to state how it was handled: `used`, `hybrid`, `validation`, `rejected`, or `inspiration-only`.
+- Require each paper-derived candidate to cite the processed paper file, the
+  mapped current-round signal/risk/open question, and whether the paper changed
+  candidate design, validation only, or rejection logic.
 - Require each serious candidate to record a source classification of `data-driven`, `paper-inspired`, `hybrid`, or `paper-rejected`.
 - Reject or defer feature-dump candidates, candidates that depend on non-online-usable features without an online proxy, candidates whose features are weak or contradictory, and candidates whose feature set does not target a known opportunity or failure mode.
 - Reject or defer paper-inspired candidates whose method cannot be mapped back to a current-round signal, promoted feature, failure mode, regime hypothesis, or explicit open question.
+- Stop importing additional paper ideas once they stop changing candidate
+  priority, validation posture, or rejection logic.
 - Keep facts, EDA evidence, understanding insights, playbook heuristics, hypotheses, and assumptions separate.
 - Score serious candidates using evidence strength, implementation cost, validation speed, risk level, expected upside, and priority.
 - Record rejected or deferred alternatives and why they were pruned.

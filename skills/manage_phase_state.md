@@ -20,9 +20,10 @@ Use this skill to keep phase state synchronized without duplicating phase workfl
 
 ## Responsibilities
 
-- Compare status, owner/reviewer, review outcome, blockers, linked artifacts, deadline risk, and next action across `_index.md`, the phase context, and the main artifact.
+- Compare status, owner/reviewer, review outcome, blockers, linked artifacts, deadline risk, next action, and any phase-specific wait-state fields across `_index.md`, the phase context, and the main artifact.
 - Update only the minimum state fields needed: status, owner/reviewer, review outcome, blockers, linked artifact, next priority action, deadline risk, and recently changed artifacts.
 - Before closure, confirm the required artifact exists and review rules are satisfied. Exception: for Phase `02b External Paper Research`, allow operational `COMPLETED` once the prompt exists and at least one processed paper exists, or when the user explicitly skips it with reason.
+- For Phase `02b External Paper Research`, also keep the paper-pipeline state synchronized enough for resumption: wait state, current raw-set coverage, and whether the phase is only operationally complete or fully processed for the local raw set.
 - If status cannot be safely reconciled, preserve or set `BLOCKED` and record the mismatch as the blocker.
 
 ## Boundaries
@@ -31,6 +32,7 @@ Use this skill to keep phase state synchronized without duplicating phase workfl
 - Do not duplicate workflow exit criteria; link or refer to the relevant workflow.
 - Do not decide strategy direction, final submission, review approval, or deadline tradeoffs.
 - Do not silently update only one phase surface when the state change affects multiple artifacts.
+- Do not reinterpret paper contents or batch priority while doing state repair; only synchronize the paper-pipeline state that the phase already records.
 
 ## Handoff
 

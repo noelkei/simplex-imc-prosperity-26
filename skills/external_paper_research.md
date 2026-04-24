@@ -20,26 +20,44 @@ Use this skill to run the formal Phase 02b external paper research workflow.
 - Run by default after understanding unless the user explicitly skips the phase.
 - Read `_index.md`, `02_understanding.md`, `phase_02_understanding_context.md`, `phase_02b_external_paper_research_context.md`, and any existing files under `research/` before writing.
 - Generate one grounded prompt for an external AI using current-round understanding inputs such as signal ledger, feature inventory, product attribution, negative evidence, open questions, regime hypotheses, strategy-relevant risks, and Prosperity runtime constraints.
+- When the local paper set is missing or clearly insufficient, optionally run a controlled online shortlist or metadata-verification pass before or alongside prompt generation.
 - Explicitly ask the external AI to use internet, deep research, and extended reasoning if available.
 - Ask for roughly 5-10 highest-ROI papers or resources, not a broad literature dump.
 - Prefer practical, strategy-useful methods that can inspire implementable simple online trading bots.
 - Include upload instructions for `rounds/round_X/research/papers_raw/` at the end of the prompt.
-- Record the target research questions, expected upload folder, current wait state, strategy-readiness, and next action.
+- Record the target research questions, expected upload folder, online shortlist notes when used, current wait state, strategy-readiness, and next action.
 - After prompt generation, leave strategy free to proceed while this phase waits for uploads.
 - Treat the phase as complete once at least one paper exists in `papers_processed/`.
 - If the user explicitly skips the phase, record the skip/defer reason and do not block strategy.
 - Do not hallucinate paper contents, titles, methods, or processed summaries before files exist.
+- Ignore junk files such as dotfiles, cache artifacts, and `.gitkeep` when enumerating `papers_raw/`.
+- Normalize raw paper names before conversion when the uploaded filenames are vague, inconsistent, or numeric.
+- Assign a stable `paper_id` to each raw paper and record the input type as `pdf`, `latex_source`, or `mixed`.
 - When files exist in `papers_raw/` but not `papers_md/`, convert only the missing files.
+- Apply raw -> md rules by input type:
+  - formulas prefer local LaTeX source when available
+  - figures are linked back to raw assets or preserved via caption/index when embedded only
+  - tables use Markdown only when clearly clean; otherwise use fenced blocks or structured summaries
+- Use the workflow-defined `papers_md` structure and assign a fidelity of `high`, `medium`, or `needs_review`.
+- Enforce the md usability QA gate before allowing a file to move from `papers_md/` to `papers_processed/`.
 - When files exist in `papers_md/` but not `papers_processed/`, create concise processed summaries only for the missing files.
+- Process by ROI batches rather than raw-file arrival order:
+  - Batch 1: first-candidate-changing papers
+  - Batch 2: guardrail / regime / validation papers
+  - Batch 3: benchmark / utility / second-layer variant papers
 - Keep the pipeline incremental; do not reprocess all papers because one new file arrived.
 - Do not wait for every uploaded paper to finish the full pipeline before strategy starts.
 - Treat papers as idea sources and method references, not as official truth or as replacements for current-round EDA/understanding evidence.
-- Mark paper-derived ideas as `implementable`, `variant-only`, `validation-only`, `EDA follow-up`, `no action`, or `inspiration-only` when relevant.
+- Record implementability explicitly as `implementable`, `variant-only`,
+  `validation-only`, `EDA-follow-up`, or `inspiration-only`.
+- Record action classification explicitly as `new candidate`, `variant`,
+  `validation check`, `EDA follow-up`, or `no action`.
+- Update the phase artifact with batch plan, input type, md fidelity, wait-state vocabulary, and processed coverage.
 - Update `../rounds/round_X/workspace/02b_external_paper_research.md`, `_index.md`, and `phase_02b_external_paper_research_context.md`.
 
 ## Boundaries
 
-- Do not fetch papers from the internet.
+- Do not auto-download or write papers into the repo from internet sources. Online search is allowed only for shortlist-building, metadata verification, and gap-filling decisions. Canonical paper inputs remain the local files under `papers_raw/`.
 - Do not build search automation, embeddings, rankings, citation managers, or a database workflow.
 - Do not bypass strategy generation by turning papers directly into implementation work.
 - Do not let paper ideas override contradictory current-round evidence.

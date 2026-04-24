@@ -88,7 +88,7 @@ Mandatory gates:
 
 - No implementation without an approved strategy spec or an explicit `deferred under deadline` review decision.
 - No final submission without a readable validation or performance summary.
-- External paper research generates a prompt by default after understanding, but strategy does not wait for the full paper pipeline.
+- External paper research generates a prompt by default after understanding, may use controlled online shortlist-building or metadata verification when needed, and strategy does not wait for the full paper pipeline.
 - No phase is complete if facts, hypotheses, assumptions, and evidence are mixed together.
 - No stale prior-round assumption moves forward unless current-round evidence supports it or the risk is explicitly labeled.
 - Round-specific mechanics and changed online fields must be implemented, excluded, marked not applicable, or blocked in the reviewed spec before coding.
@@ -133,9 +133,16 @@ The `_index.md` file tracks phase status, active strategies, active implementati
 For Phase `02b External Paper Research`, the normal flow is:
 
 - generate the external research prompt after understanding
+- optionally use controlled online paper search or metadata verification to
+  refine the shortlist, while keeping local `research/papers_raw/` as the
+  canonical pipeline input
 - leave the phase in a wait state while papers are absent
+- normalize papers through `papers_raw/ -> papers_md/ -> papers_processed/`
+  with fidelity notes, caveats, and a usability gate before processing
 - let strategy proceed without blocking
-- always check `research/papers_processed/` when processed papers exist
+- always check `research/papers_processed/` when processed papers exist, starting
+  with a compact paper intake pass once Batch 1 or any materially relevant
+  processed set exists
 
 Reusable artifact templates live in:
 

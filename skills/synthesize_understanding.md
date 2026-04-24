@@ -27,7 +27,7 @@ Use this skill to turn ingestion and EDA artifacts into a concise understanding 
 11. Carry forward product-level opportunity, uncertainty, and risk in `Product Attribution View`.
 12. Produce a `Cross-Product Verdict` when multiple products exist: `useful`, `weak`, `not applicable`, or `needs targeted EDA`.
 13. Convert each retained signal into a decision label: try, avoid, validate next, defer, or treat as an assumption.
-14. Fill `Strategy-Relevant Insights`, `What Should Be Tried`, `What Should Not Be Trusted Yet`, `Open Risks And Unknowns`, and a concise set of research questions or failure-mode prompts that Phase 02b can lift directly into an external paper research prompt. These questions should be good enough for the prompt to be generated immediately, even if strategy later proceeds before any processed paper exists.
+14. Fill `Strategy-Relevant Insights`, `What Should Be Tried`, `What Should Not Be Trusted Yet`, `Open Risks And Unknowns`, and a concise `02b seed set` that Phase 02b can lift directly into an external paper research prompt. The seed set should contain roughly `3-6` prioritized research questions, why each matters, the desired paper type or method family, and whether each question is candidate-driving, validation-only, or guardrail-only. These questions should be good enough for the prompt to be generated immediately, even if strategy later proceeds before any processed paper exists.
 15. Do not duplicate full EDA reports; link them and summarize only decision-useful conclusions.
 16. Do not rerun broad EDA during synthesis. If EDA is insufficient, record the gap and route only high-impact unresolved questions back to phase 01.
 17. Prefer fewer clear, reusable insights over many unclear findings.

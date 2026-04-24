@@ -24,13 +24,23 @@ deadline-deferred implementation-ready strategy spec.
 - Preserve links to EDA signals, feature evidence, multivariate relationships, process/distribution assumptions, redundancy decisions, regime assumptions, and understanding insights.
 - Record research-tool evidence when it affects the spec, such as statistical confidence, correlation/covariance, controlled regressions, cross-product lead-lag, redundancy/PCA findings, volatility/regime findings, change points, clustering, or post-run diagnostics.
 - Allow processed paper summaries to appear in the evidence trace as non-authoritative inspiration or method references, never as substitutes for current-round EDA, understanding, or round facts.
+- If a paper-derived idea survives into the spec, cite the processed paper file
+  directly in the evidence traceability.
 - Copy or summarize the candidate decision trace so the spec shows signals used, alternatives considered, why this strategy was selected, and known caveats.
 - Define a Feature Contract for every feature that changes trading behavior, including source fields, online availability, role, parameters, multivariate relationship, process assumption, redundancy decision, missing-signal behavior, `traderData` state requirements, and validation/invalidation checks.
+- When a processed paper contributes a method or simplification, pull its
+  `Minimal Usable Adaptation` into the relevant `Feature Contract`, `Feature
+  Exclusions`, or `Validation Plan` instead of leaving it implicit.
 - Name any process/distribution assumption that changes trading behavior. If the assumption fails in validation, the spec must say whether to disable the feature, change thresholds, reroute to EDA, or treat the result as expected risk.
 - Require an online proxy before implementing PCA components, cluster labels, latent states, HMM-style regimes, change-point labels, or any other research-only representation. If no proxy exists, record the finding as EDA-only evidence or exclude it.
 - Define a Round-Specific Mechanics Contract for every current-round mechanic, Trader method, or changed online field that could affect implementation. Mark each as implement, exclude, not applicable, or blocked.
 - Record important Feature Exclusions for features that were considered but intentionally left out because they are CSV-only, weak, too complex, not online-usable, or not decision-relevant.
+- Carry forward `Do Not Overuse` warnings from processed papers into feature
+  exclusions, validation caveats, or implementation boundaries when they matter
+  to the selected candidate.
 - Define signal or fair value, execution, missing-signal behavior, position/risk handling, state/runtime, expected failures, validation checks, and allowed variant axes when useful.
+- Treat validation-only or utility papers as validation or implementation-quality
+  inputs, not as core signal logic.
 - Explicitly exclude research-only dependencies from uploadable bot imports unless the wiki runtime docs allow them and the reviewed spec names that import.
 - Keep facts, EDA evidence, understanding insights, playbook heuristics, hypotheses, and assumptions separate.
 - Set initial spec status to `not reviewed`.

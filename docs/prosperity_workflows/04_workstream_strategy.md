@@ -68,6 +68,22 @@ Strategy should not wait for the full paper pipeline. After the 02b prompt is
 generated, proceed with data-driven candidate work and consume processed paper
 summaries whenever they become available.
 
+## Paper Intake Pass
+
+When `research/papers_processed/` exists, strategy should begin with a short
+paper intake pass before broad branching:
+
+- Review only the materially relevant processed papers for the current round.
+- Record which current-round signal, risk, regime, or open question each paper
+  actually maps to.
+- Classify each materially relevant paper as `used`, `hybrid`, `validation`,
+  `rejected`, or `inspiration-only`.
+- Stop importing additional paper ideas once they stop changing candidate
+  priority, validation posture, or rejection logic.
+
+This pass should stay compact. It is meant to prevent paper drift, not to turn
+Strategy into literature review.
+
 ## Feature budget
 
 Strategy candidates should be feature-light by default.
@@ -203,6 +219,7 @@ Strategy generation is done when:
 - candidates are grouped to avoid duplicate ideas
 - processed papers are checked when present, without blocking the phase when
   none are available yet
+- a paper intake pass is recorded when processed papers exist
 - candidates cite linked EDA signals, feature evidence, regime assumptions, and understanding insight when those artifacts exist
 - paper-derived ideas are explicitly classified as `used`, `hybrid`,
   `validation`, `rejected`, or `inspiration-only`
