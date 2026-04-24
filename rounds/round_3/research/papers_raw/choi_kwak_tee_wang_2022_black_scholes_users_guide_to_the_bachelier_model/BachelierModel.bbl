@@ -1,0 +1,474 @@
+\providecommand{\noopsort}[1]{}
+\begin{thebibliography}{56}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\href}[2]{#2}
+\providecommand{\path}[1]{#1}
+\providecommand{\DOIprefix}{doi:}
+\providecommand{\ArXivprefix}{arXiv:}
+\providecommand{\URLprefix}{URL: }
+\providecommand{\Pubmedprefix}{pmid:}
+\providecommand{\doi}[1]{\href{http://dx.doi.org/#1}{\path{#1}}}
+\providecommand{\Pubmed}[1]{\href{pmid:#1}{\path{#1}}}
+\providecommand{\bibinfo}[2]{#2}
+\ifx\xfnm\relax \def\xfnm[#1]{\unskip,\space#1}\fi
+%Type = Article
+\bibitem[{Antonov et~al.(2015)Antonov, Konikov and Spector}]{antonov2015free}
+\bibinfo{author}{Antonov, A.}, \bibinfo{author}{Konikov, M.},
+  \bibinfo{author}{Spector, M.}, \bibinfo{year}{2015}.
+\newblock \bibinfo{title}{The free boundary {{SABR}}: {{Natural}} extension to
+  negative rates}.
+\newblock \bibinfo{journal}{Risk} \bibinfo{volume}{September},
+  \bibinfo{pages}{1--6}.
+%Type = Article
+\bibitem[{Antonov and Spector(2012)}]{antonov2012advanced}
+\bibinfo{author}{Antonov, A.}, \bibinfo{author}{Spector, M.},
+  \bibinfo{year}{2012}.
+\newblock \bibinfo{title}{Advanced analytics for the {{SABR}} model}.
+\newblock \bibinfo{journal}{Available at SSRN} \URLprefix
+  \url{https://ssrn.com/abstract=2026350}.
+%Type = Article
+\bibitem[{Bachelier(1900)}]{bachelier1900}
+\bibinfo{author}{Bachelier, L.}, \bibinfo{year}{1900}.
+\newblock \bibinfo{title}{Th\'eorie de la {{Sp\'eculation}}}.
+\newblock \bibinfo{journal}{Annales Scientifiques de l'\'Ecole Normale
+  Sup\'erieure} \bibinfo{volume}{17}, \bibinfo{pages}{21--88}.
+%Type = Article
+\bibitem[{Black(1976)}]{black1976}
+\bibinfo{author}{Black, F.}, \bibinfo{year}{1976}.
+\newblock \bibinfo{title}{The pricing of commodity contracts}.
+\newblock \bibinfo{journal}{Journal of Financial Economics}
+  \bibinfo{volume}{3}, \bibinfo{pages}{167--179}.
+\newblock \DOIprefix\doi{10.1016/0304-405X(76)90024-6}.
+%Type = Article
+\bibitem[{Black and Scholes(1973)}]{blackscholes1973}
+\bibinfo{author}{Black, F.}, \bibinfo{author}{Scholes, M.},
+  \bibinfo{year}{1973}.
+\newblock \bibinfo{title}{The {{Pricing}} of {{Options}} and {{Corporate
+  Liabilities}}}.
+\newblock \bibinfo{journal}{Journal of Political Economy} \bibinfo{volume}{81},
+  \bibinfo{pages}{637--654}.
+\newblock \DOIprefix\doi{10.1086/260062}.
+%Type = Article
+\bibitem[{Brooks and Brooks(2017)}]{brooks2017arithmetic}
+\bibinfo{author}{Brooks, R.}, \bibinfo{author}{Brooks, J.A.},
+  \bibinfo{year}{2017}.
+\newblock \bibinfo{title}{An {{Option Valuation Framework Based}} on
+  {{Arithmetic Brownian Motion}}: Justification and {{Implementation Issues}}}.
+\newblock \bibinfo{journal}{Journal of Financial Research}
+  \bibinfo{volume}{40}, \bibinfo{pages}{401--427}.
+\newblock \DOIprefix\doi{10.1111/jfir.12129}.
+%Type = Article
+\bibitem[{Castagna and Mercurio(2007)}]{castagna2007option}
+\bibinfo{author}{Castagna, A.}, \bibinfo{author}{Mercurio, F.},
+  \bibinfo{year}{2007}.
+\newblock \bibinfo{title}{The vanna-volga method for implied volatilities}.
+\newblock \bibinfo{journal}{Risk} \bibinfo{volume}{20},
+  \bibinfo{pages}{106--111}.
+%Type = Article
+\bibitem[{Choi(2018)}]{choi2018sumbsm}
+\bibinfo{author}{Choi, J.}, \bibinfo{year}{2018}.
+\newblock \bibinfo{title}{Sum of all {{Black}}-{{Scholes}}-{{Merton}} models:
+  {{An}} efficient pricing method for spread, basket, and {{Asian}} options}.
+\newblock \bibinfo{journal}{Journal of Futures Markets} \bibinfo{volume}{38},
+  \bibinfo{pages}{627--644}.
+\newblock \DOIprefix\doi{10.1002/fut.21909}.
+%Type = Article
+\bibitem[{Choi et~al.(2009)Choi, Kim and Kwak}]{choi2009impvol}
+\bibinfo{author}{Choi, J.}, \bibinfo{author}{Kim, K.}, \bibinfo{author}{Kwak,
+  M.}, \bibinfo{year}{2009}.
+\newblock \bibinfo{title}{Numerical {{Approximation}} of the {{Implied
+  Volatility Under Arithmetic Brownian Motion}}}.
+\newblock \bibinfo{journal}{Applied Mathematical Finance} \bibinfo{volume}{16},
+  \bibinfo{pages}{261--268}.
+\newblock \DOIprefix\doi{10.1080/13504860802583436}.
+%Type = Article
+\bibitem[{Choi et~al.(2019)Choi, Liu and Seo}]{choi2019nsvh}
+\bibinfo{author}{Choi, J.}, \bibinfo{author}{Liu, C.}, \bibinfo{author}{Seo,
+  B.K.}, \bibinfo{year}{2019}.
+\newblock \bibinfo{title}{Hyperbolic normal stochastic volatility model}.
+\newblock \bibinfo{journal}{Journal of Futures Markets} \bibinfo{volume}{39},
+  \bibinfo{pages}{186--204}.
+\newblock \DOIprefix\doi{10.1002/fut.21967}.
+%Type = Article
+\bibitem[{Choi and Wu(2021a)}]{choi2021sabrcev}
+\bibinfo{author}{Choi, J.}, \bibinfo{author}{Wu, L.}, \bibinfo{year}{2021}a.
+\newblock \bibinfo{title}{The equivalent constant-elasticity-of-variance
+  ({{CEV}}) volatility of the stochastic-alpha-beta-rho ({{SABR}}) model}.
+\newblock \bibinfo{journal}{Journal of Economic Dynamics and Control}
+  \bibinfo{volume}{128}, \bibinfo{pages}{104143}.
+\newblock \DOIprefix\doi{10.1016/j.jedc.2021.104143}.
+%Type = Article
+\bibitem[{Choi and Wu(2021b)}]{choi2021note}
+\bibinfo{author}{Choi, J.}, \bibinfo{author}{Wu, L.}, \bibinfo{year}{2021}b.
+\newblock \bibinfo{title}{A note on the option price and `{{Mass}} at zero in
+  the uncorrelated {{SABR}} model and implied volatility asymptotics'}.
+\newblock \bibinfo{journal}{Quantitative Finance} \bibinfo{volume}{21},
+  \bibinfo{pages}{1083--1086}.
+\newblock \DOIprefix\doi{10.1080/14697688.2021.1876908}.
+%Type = Techreport
+\bibitem[{{CME Group}(2019)}]{cme2019span}
+\bibinfo{author}{{CME Group}}, \bibinfo{year}{2019}.
+\newblock \bibinfo{title}{{{CME SPAN}}: Standard {{Portfolio Analysis}} of
+  {{Risk}}}.
+\newblock \bibinfo{type}{Technical Report}. {CME}.
+\newblock \URLprefix
+  \url{https://www.cmegroup.com/clearing/span-methodology.html}.
+%Type = Techreport
+\bibitem[{{CME Group}(2020a)}]{cme2020bachelier}
+\bibinfo{author}{{CME Group}}, \bibinfo{year}{2020}a.
+\newblock \bibinfo{title}{Switch to {{Bachelier Options Pricing Model}} -
+  {{Effective April}} 22, 2020}.
+\newblock \bibinfo{type}{Advisory {{Notice}}} \bibinfo{number}{\#20-171}.
+  {CME}.
+\newblock \URLprefix
+  \url{https://www.cmegroup.com/content/cmegroup/en/notices/clearing/2020/04/Chadv20-171.html}.
+%Type = Techreport
+\bibitem[{{CME Group}(2020b)}]{cme2020naturalgas}
+\bibinfo{author}{{CME Group}}, \bibinfo{year}{2020}b.
+\newblock \bibinfo{title}{Valuation {{Model Change}} for {{Four Natural Gas
+  Option Products}} - {{Effective May}} 26, 2020}.
+\newblock \bibinfo{type}{Advisory {{Notice}}} \bibinfo{number}{\#20-209}.
+  {CME}.
+\newblock \URLprefix
+  \url{https://www.cmegroup.com/content/cmegroup/en/notices/clearing/2020/05/Chadv20-209.html}.
+%Type = Techreport
+\bibitem[{{CME Group}(2020c)}]{cme2020transition}
+\bibinfo{author}{{CME Group}}, \bibinfo{year}{2020}c.
+\newblock \bibinfo{title}{{\noopsort{z}}Transition {{Back}} to {{Whaley}} and
+  {{Black}} 76 {{Options Pricing Methodology}} - {{Effective Trade Date
+  August}} 31, 2020}.
+\newblock \bibinfo{type}{Advisory {{Notice}}} \bibinfo{number}{\#20-320}.
+  {CME}.
+\newblock \URLprefix
+  \url{https://www.cmegroup.com/content/cmegroup/en/notices/clearing/2020/08/Chadv20-320.html}.
+%Type = Article
+\bibitem[{Courtault et~al.(2000)Courtault, Kabanov, Bru, Cr{\'e}pel, Lebon and
+  Marchand}]{courtault2000louis}
+\bibinfo{author}{Courtault, J.M.}, \bibinfo{author}{Kabanov, Y.},
+  \bibinfo{author}{Bru, B.}, \bibinfo{author}{Cr{\'e}pel, P.},
+  \bibinfo{author}{Lebon, I.}, \bibinfo{author}{Marchand, A.L.},
+  \bibinfo{year}{2000}.
+\newblock \bibinfo{title}{Louis {{Bachelier}} on the {{Centenary}} of
+  {{Th\'eorie}} de la {{Sp\'eculation}}}.
+\newblock \bibinfo{journal}{Mathematical Finance} \bibinfo{volume}{10},
+  \bibinfo{pages}{339--353}.
+\newblock \DOIprefix\doi{10.1111/1467-9965.00098}.
+%Type = Article
+\bibitem[{Derman et~al.(1995)Derman, Ergener and Kani}]{derman1995static}
+\bibinfo{author}{Derman, E.}, \bibinfo{author}{Ergener, D.},
+  \bibinfo{author}{Kani, I.}, \bibinfo{year}{1995}.
+\newblock \bibinfo{title}{Static {{Options Replication}}}.
+\newblock \bibinfo{journal}{The Journal of Derivatives} \bibinfo{volume}{2},
+  \bibinfo{pages}{78--95}.
+\newblock \DOIprefix\doi{10.3905/jod.1995.407927}.
+%Type = Article
+\bibitem[{Dimitroff et~al.(2016)Dimitroff, Fries, Lichtner and
+  Rodi}]{dimitroff2016lnvsnorm}
+\bibinfo{author}{Dimitroff, G.}, \bibinfo{author}{Fries, C.P.},
+  \bibinfo{author}{Lichtner, M.}, \bibinfo{author}{Rodi, N.},
+  \bibinfo{year}{2016}.
+\newblock \bibinfo{title}{Lognormal vs {{Normal Volatilities}} and
+  {{Sensitivities}} in {{Practice}}}.
+\newblock \bibinfo{journal}{SSRN Electronic Journal} \URLprefix
+  \url{https://papers.ssrn.com/abstract=2687742}.
+%Type = Article
+\bibitem[{Einstein(1905)}]{einstein1905bm}
+\bibinfo{author}{Einstein, A.}, \bibinfo{year}{1905}.
+\newblock \bibinfo{title}{\"uber die von der molekularkinetischen {{Theorie}}
+  der {{W\"arme}} geforderte {{Bewegung}} von in ruhenden {{Fl\"ussigkeiten}}
+  suspendierten {{Teilchen}}}.
+\newblock \bibinfo{journal}{Annalen der physik} \bibinfo{volume}{4},
+  \bibinfo{pages}{549--560}.
+%Type = Article
+\bibitem[{Grunspan(2011)}]{grunspan2011note}
+\bibinfo{author}{Grunspan, C.}, \bibinfo{year}{2011}.
+\newblock \bibinfo{title}{A {{Note}} on the {{Equivalence}} between the
+  {{Normal}} and the {{Lognormal Implied Volatility}} : A {{Model Free
+  Approach}}}.
+\newblock \bibinfo{journal}{arXiv:1112.1782 [q-fin]} \URLprefix
+  \url{http://arxiv.org/abs/1112.1782},
+  \href{http://arxiv.org/abs/1112.1782}{{\tt arXiv:1112.1782}}.
+%Type = Article
+\bibitem[{Gulisashvili et~al.(2018)Gulisashvili, Horvath and
+  Jacquier}]{gulisashvili2018mass}
+\bibinfo{author}{Gulisashvili, A.}, \bibinfo{author}{Horvath, B.},
+  \bibinfo{author}{Jacquier, A.}, \bibinfo{year}{2018}.
+\newblock \bibinfo{title}{Mass at zero in the uncorrelated {{SABR}} model and
+  implied volatility asymptotics}.
+\newblock \bibinfo{journal}{Quantitative Finance} \bibinfo{volume}{18},
+  \bibinfo{pages}{1753--1765}.
+\newblock \DOIprefix\doi{10.1080/14697688.2018.1432883}.
+%Type = Article
+\bibitem[{Hagan et~al.(2014)Hagan, Kumar, Lesniewski and
+  Woodward}]{hagan2014arbfree}
+\bibinfo{author}{Hagan, P.S.}, \bibinfo{author}{Kumar, D.},
+  \bibinfo{author}{Lesniewski, A.}, \bibinfo{author}{Woodward, D.},
+  \bibinfo{year}{2014}.
+\newblock \bibinfo{title}{Arbitrage-{{Free SABR}}}.
+\newblock \bibinfo{journal}{Wilmott} \bibinfo{volume}{2014},
+  \bibinfo{pages}{60--75}.
+\newblock \DOIprefix\doi{10.1002/wilm.10290}.
+%Type = Article
+\bibitem[{Hagan et~al.(2002)Hagan, Kumar, Lesniewski and
+  Woodward}]{hagan2002sabr}
+\bibinfo{author}{Hagan, P.S.}, \bibinfo{author}{Kumar, D.},
+  \bibinfo{author}{Lesniewski, A.S.}, \bibinfo{author}{Woodward, D.E.},
+  \bibinfo{year}{2002}.
+\newblock \bibinfo{title}{Managing {{Smile Risk}}}.
+\newblock \bibinfo{journal}{Wilmott} \bibinfo{volume}{September},
+  \bibinfo{pages}{84--108}.
+%Type = Book
+\bibitem[{Harrison(1985)}]{harrison1985brownian}
+\bibinfo{author}{Harrison, J.M.}, \bibinfo{year}{1985}.
+\newblock \bibinfo{title}{Brownian Motion and Stochastic Flow Systems}.
+\newblock \bibinfo{address}{{Malabar, Fla}}.
+%Type = Book
+\bibitem[{Haug(2007)}]{haug2007complete}
+\bibinfo{author}{Haug, E.G.}, \bibinfo{year}{2007}.
+\newblock \bibinfo{title}{The Complete Guide to Option Pricing Formulas}.
+\newblock \bibinfo{edition}{Second} ed., \bibinfo{address}{{New York}}.
+%Type = Article
+\bibitem[{Heston(1993)}]{heston1993closed}
+\bibinfo{author}{Heston, S.L.}, \bibinfo{year}{1993}.
+\newblock \bibinfo{title}{A closed-form solution for options with stochastic
+  volatility with applications to bond and currency options}.
+\newblock \bibinfo{journal}{Review of Financial Studies} \bibinfo{volume}{6},
+  \bibinfo{pages}{327--343}.
+\newblock \DOIprefix\doi{10.1093/rfs/6.2.327}.
+%Type = Article
+\bibitem[{Ho and Goodman(2003)}]{ho2003interest}
+\bibinfo{author}{Ho, J.}, \bibinfo{author}{Goodman, L.S.},
+  \bibinfo{year}{2003}.
+\newblock \bibinfo{title}{Interest {{Rates}}\textemdash{{Normal}} or
+  {{Lognormal}}?}
+\newblock \bibinfo{journal}{The Journal of Fixed Income} \bibinfo{volume}{13},
+  \bibinfo{pages}{33--45}.
+\newblock \DOIprefix\doi{10.3905/jfi.2003.319351}.
+%Type = Article
+\bibitem[{Hull and White(1987)}]{hullwhite1987sv}
+\bibinfo{author}{Hull, J.}, \bibinfo{author}{White, A.}, \bibinfo{year}{1987}.
+\newblock \bibinfo{title}{The {{Pricing}} of {{Options}} on {{Assets}} with
+  {{Stochastic Volatilities}}}.
+\newblock \bibinfo{journal}{The Journal of Finance} \bibinfo{volume}{42},
+  \bibinfo{pages}{281--300}.
+\newblock \DOIprefix\doi{10.1111/j.1540-6261.1987.tb02568.x}.
+%Type = Techreport
+\bibitem[{{ICE}(2020)}]{ice2020negative}
+\bibinfo{author}{{ICE}}, \bibinfo{year}{2020}.
+\newblock \bibinfo{title}{Negative {{Pricing}} and {{Option Model
+  Transition}}}.
+\newblock \bibinfo{type}{Circular} \bibinfo{number}{20/057}. {ICE}.
+\newblock \URLprefix
+  \url{https://www.theice.com/publicdocs/circulars/20057.pdf}.
+%Type = Article
+\bibitem[{J{\"a}ckel(2015)}]{jackel2015let}
+\bibinfo{author}{J{\"a}ckel, P.}, \bibinfo{year}{2015}.
+\newblock \bibinfo{title}{Let's be rational}.
+\newblock \bibinfo{journal}{Wilmott} \bibinfo{volume}{2015},
+  \bibinfo{pages}{40--53}.
+\newblock \DOIprefix\doi{10.1002/wilm.10395}.
+%Type = Article
+\bibitem[{J{\"a}ckel(2017)}]{jackel2017normvol}
+\bibinfo{author}{J{\"a}ckel, P.}, \bibinfo{year}{2017}.
+\newblock \bibinfo{title}{Implied {{Normal Volatility}}}.
+\newblock \bibinfo{journal}{Wilmott} \bibinfo{volume}{2017},
+  \bibinfo{pages}{54--57}.
+\newblock \DOIprefix\doi{10.1002/wilm.10581}.
+%Type = Article
+\bibitem[{Johnson(1949)}]{johnson1949systems}
+\bibinfo{author}{Johnson, N.L.}, \bibinfo{year}{1949}.
+\newblock \bibinfo{title}{Systems of {{Frequency Curves Generated}} by
+  {{Methods}} of {{Translation}}}.
+\newblock \bibinfo{journal}{Biometrika} \bibinfo{volume}{36},
+  \bibinfo{pages}{149--176}.
+\newblock \DOIprefix\doi{10.2307/2332539}.
+%Type = Article
+\bibitem[{Joshi and Rebonato(2003)}]{joshi2003lmmsv}
+\bibinfo{author}{Joshi, M.S.}, \bibinfo{author}{Rebonato, R.},
+  \bibinfo{year}{2003}.
+\newblock \bibinfo{title}{A displaced-diffusion stochastic volatility {{LIBOR}}
+  market model: Motivation, definition and implementation}.
+\newblock \bibinfo{journal}{Quantitative Finance} \bibinfo{volume}{3},
+  \bibinfo{pages}{458--469}.
+\newblock \DOIprefix\doi{10.1088/1469-7688/3/6/305}.
+%Type = Article
+\bibitem[{Karami and Shiraya(2018)}]{karami2018appl}
+\bibinfo{author}{Karami, Y.}, \bibinfo{author}{Shiraya, K.},
+  \bibinfo{year}{2018}.
+\newblock \bibinfo{title}{An approximation formula for normal implied
+  volatility under general local stochastic volatility models}.
+\newblock \bibinfo{journal}{Journal of Futures Markets} \bibinfo{volume}{38},
+  \bibinfo{pages}{1043--1061}.
+\newblock \DOIprefix\doi{10.1002/fut.21931}.
+%Type = Article
+\bibitem[{Kenyon(2008)}]{kenyon2008inflation}
+\bibinfo{author}{Kenyon, C.}, \bibinfo{year}{2008}.
+\newblock \bibinfo{title}{Inflation is normal}.
+\newblock \bibinfo{journal}{Risk} \bibinfo{volume}{2008},
+  \bibinfo{pages}{54--60}.
+\newblock \URLprefix
+  \url{https://www.risk.net/derivatives/inflation-derivatives/1500273/inflation-normal}.
+%Type = Article
+\bibitem[{Larguinho et~al.(2013)Larguinho, Dias and
+  Braumann}]{larguinho2013cev}
+\bibinfo{author}{Larguinho, M.}, \bibinfo{author}{Dias, J.C.},
+  \bibinfo{author}{Braumann, C.A.}, \bibinfo{year}{2013}.
+\newblock \bibinfo{title}{On the computation of option prices and {{Greeks}}
+  under the {{CEV}} model}.
+\newblock \bibinfo{journal}{Quantitative Finance} \bibinfo{volume}{13},
+  \bibinfo{pages}{907--917}.
+\newblock \DOIprefix\doi{10.1080/14697688.2013.765958}.
+%Type = Article
+\bibitem[{Le~Floc'h(2016)}]{floc2016fast}
+\bibinfo{author}{Le~Floc'h, F.}, \bibinfo{year}{2016}.
+\newblock \bibinfo{title}{Fast and {{Accurate Analytic Basis Point
+  Volatility}}}.
+\newblock \bibinfo{journal}{Available at SSRN} \URLprefix
+  \url{https://ssrn.com/abstract=2420757}.
+%Type = Article
+\bibitem[{Lee(2004)}]{lee2004moment}
+\bibinfo{author}{Lee, R.W.}, \bibinfo{year}{2004}.
+\newblock \bibinfo{title}{The {{Moment Formula}} for {{Implied Volatility}} at
+  {{Extreme Strikes}}}.
+\newblock \bibinfo{journal}{Mathematical Finance} \bibinfo{volume}{14},
+  \bibinfo{pages}{469--480}.
+\newblock \DOIprefix\doi{10.1111/j.0960-1627.2004.00200.x}.
+%Type = Techreport
+\bibitem[{Levin(2002)}]{levin2002interest}
+\bibinfo{author}{Levin, A.}, \bibinfo{year}{2002}.
+\newblock \bibinfo{title}{Interest {{Rate Modeling}}: A {{Conscientious
+  Choice}}}.
+\newblock \bibinfo{type}{Quantitative {{Perspectives}}}. {Andrew Davidson \&
+  Co.}
+\newblock \URLprefix
+  \url{https://www.ad-co.com/analytics_docs/InterestRateModeling.pdf}.
+%Type = Article
+\bibitem[{Levin(2004)}]{levin2004rate}
+\bibinfo{author}{Levin, A.}, \bibinfo{year}{2004}.
+\newblock \bibinfo{title}{Interest {{Rate Model Selection}}}.
+\newblock \bibinfo{journal}{The Journal of Portfolio Management}
+  \bibinfo{volume}{30}, \bibinfo{pages}{74--86}.
+\newblock \DOIprefix\doi{10.3905/jpm.2004.319932}.
+%Type = Article
+\bibitem[{Li(2008)}]{li2008approx}
+\bibinfo{author}{Li, M.}, \bibinfo{year}{2008}.
+\newblock \bibinfo{title}{Approximate inversion of the
+  {{Black}}\textendash{{Scholes}} formula using rational functions}.
+\newblock \bibinfo{journal}{European Journal of Operational Research}
+  \bibinfo{volume}{185}, \bibinfo{pages}{743--759}.
+\newblock \DOIprefix\doi{10.1016/j.ejor.2006.12.028}.
+%Type = Article
+\bibitem[{Merton(1973)}]{merton1973theory}
+\bibinfo{author}{Merton, R.}, \bibinfo{year}{1973}.
+\newblock \bibinfo{title}{The theory of rational option pricing}.
+\newblock \bibinfo{journal}{Bell Journal of Economics and Management Science}
+  \bibinfo{volume}{4}, \bibinfo{pages}{141--183}.
+\newblock \URLprefix
+  \url{https://econpapers.repec.org/article/rjebellje/v_3a4_3ay_3a1973_3ai_3aspring_3ap_3a141-183.htm}.
+%Type = Article
+\bibitem[{Neo and Tee(2019)}]{neo2019swaption}
+\bibinfo{author}{Neo, P.L.}, \bibinfo{author}{Tee, C.W.}, \bibinfo{year}{2019}.
+\newblock \bibinfo{title}{Swaption {{Portfolio Risk Management}}: Optimal
+  {{Model Selection}} in {{Different Interest Rate Regimes}}}.
+\newblock \bibinfo{journal}{The Journal of Derivatives} \bibinfo{volume}{27},
+  \bibinfo{pages}{81--107}.
+\newblock \DOIprefix\doi{10.3905/jod.2019.1.083}.
+%Type = Article
+\bibitem[{Perederiy(2018)}]{perederiy2018vannavolga}
+\bibinfo{author}{Perederiy, V.}, \bibinfo{year}{2018}.
+\newblock \bibinfo{title}{Vanna-{{Volga Method}} for {{Normal Volatilities}}}.
+\newblock \bibinfo{journal}{arXiv:1810.07457 [q-fin]} \URLprefix
+  \url{http://arxiv.org/abs/1810.07457},
+  \href{http://arxiv.org/abs/1810.07457}{{\tt arXiv:1810.07457}}.
+%Type = Article
+\bibitem[{Poitras(1998)}]{poitras1998spread}
+\bibinfo{author}{Poitras, G.}, \bibinfo{year}{1998}.
+\newblock \bibinfo{title}{Spread options, exchange options, and arithmetic
+  {{Brownian}} motion}.
+\newblock \bibinfo{journal}{Journal of Futures Markets} \bibinfo{volume}{18},
+  \bibinfo{pages}{487--517}.
+\newblock
+  \DOIprefix\doi{10.1002/(SICI)1096-9934(199808)18:5<487::AID-FUT1>3.0.CO;2-Z}.
+%Type = Article
+\bibitem[{P{\"o}tz(2019)}]{potz2019chebyshev}
+\bibinfo{author}{P{\"o}tz, C.}, \bibinfo{year}{2019}.
+\newblock \bibinfo{title}{The {{Chebyshev}} method for the implied volatility}.
+\newblock \bibinfo{journal}{Journal of Computational Finance}
+  \bibinfo{volume}{23}, \bibinfo{pages}{1--31}.
+\newblock \DOIprefix\doi{10.21314/JCF.2019.375}.
+%Type = Article
+\bibitem[{Rubinstein(1983)}]{rubinstein1983displaced}
+\bibinfo{author}{Rubinstein, M.}, \bibinfo{year}{1983}.
+\newblock \bibinfo{title}{Displaced {{Diffusion Option Pricing}}}.
+\newblock \bibinfo{journal}{The Journal of Finance} \bibinfo{volume}{38},
+  \bibinfo{pages}{213--217}.
+\newblock \DOIprefix\doi{10.1111/j.1540-6261.1983.tb03636.x}.
+%Type = Article
+\bibitem[{Schachermayer and Teichmann(2008)}]{schachermayer2008close}
+\bibinfo{author}{Schachermayer, W.}, \bibinfo{author}{Teichmann, J.},
+  \bibinfo{year}{2008}.
+\newblock \bibinfo{title}{How {{Close Are}} the {{Option Pricing Formulas}} of
+  {{Bachelier}} and {{Black}}\textendash{{Merton}}\textendash{{Scholes}}?}
+\newblock \bibinfo{journal}{Mathematical Finance} \bibinfo{volume}{18},
+  \bibinfo{pages}{155--170}.
+\newblock \DOIprefix\doi{10.1111/j.1467-9965.2007.00326.x}.
+%Type = Article
+\bibitem[{Stefanica and Radoi{\v c}i{\'c}(2017)}]{stefanica2017explicit}
+\bibinfo{author}{Stefanica, D.}, \bibinfo{author}{Radoi{\v c}i{\'c}, R.},
+  \bibinfo{year}{2017}.
+\newblock \bibinfo{title}{An explicit implied volatility formula}.
+\newblock \bibinfo{journal}{International Journal of Theoretical and Applied
+  Finance} \bibinfo{volume}{20}, \bibinfo{pages}{1750048}.
+\newblock \DOIprefix\doi{10.1142/S0219024917500480}.
+%Type = Article
+\bibitem[{Sullivan and Weithers(1991)}]{sullivan1991louis}
+\bibinfo{author}{Sullivan, E.J.}, \bibinfo{author}{Weithers, T.M.},
+  \bibinfo{year}{1991}.
+\newblock \bibinfo{title}{Louis {{Bachelier}}: The {{Father}} of {{Modern
+  Option Pricing Theory}}}.
+\newblock \bibinfo{journal}{The Journal of Economic Education}
+  \bibinfo{volume}{22}, \bibinfo{pages}{165--171}.
+\newblock \DOIprefix\doi{10.2307/1182421}.
+%Type = Article
+\bibitem[{Sun et~al.(2016)Sun, Niu, Cao and Carr}]{sun2016implied}
+\bibinfo{author}{Sun, J.}, \bibinfo{author}{Niu, Q.}, \bibinfo{author}{Cao,
+  S.}, \bibinfo{author}{Carr, P.}, \bibinfo{year}{2016}.
+\newblock \bibinfo{title}{Implied {{Remaining Variance}} with {{Application}}
+  to {{Bachelier Model}}}.
+\newblock \bibinfo{journal}{The Journal of Fixed Income} \bibinfo{volume}{26},
+  \bibinfo{pages}{78--95}.
+\newblock \DOIprefix\doi{10.3905/jfi.2016.26.2.078}.
+%Type = Article
+\bibitem[{{Svoboda-Greenwood}(2009)}]{svoboda2009disp}
+\bibinfo{author}{{Svoboda-Greenwood}, S.}, \bibinfo{year}{2009}.
+\newblock \bibinfo{title}{Displaced {{Diffusion}} as an {{Approximation}} of
+  the {{Constant Elasticity}} of {{Variance}}}.
+\newblock \bibinfo{journal}{Applied Mathematical Finance} \bibinfo{volume}{16},
+  \bibinfo{pages}{269--286}.
+\newblock \DOIprefix\doi{10.1080/13504860802628553}.
+%Type = Incollection
+\bibitem[{Takehara et~al.(2010)Takehara, Takahashi and Toda}]{takehara2010new}
+\bibinfo{author}{Takehara, K.}, \bibinfo{author}{Takahashi, A.},
+  \bibinfo{author}{Toda, M.}, \bibinfo{year}{2010}.
+\newblock \bibinfo{title}{New {{Unified Computational Algorithm}} in a
+  {{High}}-{{Order Asymptotic Expansion Scheme}}}, in:
+  \bibinfo{booktitle}{Recent {{Advances}} in {{Financial Engineering}} 2009},
+  pp. \bibinfo{pages}{231--251}.
+\newblock \DOIprefix\doi{10.1142/9789814304078_0010}.
+%Type = Article
+\bibitem[{Yang and Wan(2018)}]{yang2018survival}
+\bibinfo{author}{Yang, N.}, \bibinfo{author}{Wan, X.}, \bibinfo{year}{2018}.
+\newblock \bibinfo{title}{The survival probability of the {{SABR}} model:
+  Asymptotics and application}.
+\newblock \bibinfo{journal}{Quantitative Finance} \bibinfo{volume}{18},
+  \bibinfo{pages}{1767--1779}.
+\newblock \DOIprefix\doi{10.1080/14697688.2017.1422083}.
+%Type = Book
+\bibitem[{Zhang(2001)}]{zhang2001exotic}
+\bibinfo{author}{Zhang, P.G.}, \bibinfo{year}{2001}.
+\newblock \bibinfo{title}{Exotic Options: A Guide to the Second Generation
+  Options}.
+\newblock \bibinfo{edition}{2. ed., repr} ed., \bibinfo{address}{{Singapore}}.
+
+\end{thebibliography}
