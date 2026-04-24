@@ -9,7 +9,7 @@
 
 ## Current Next Priority Action
 
-Phase 02 Understanding is `READY_FOR_REVIEW`. The next action is to review [`02_understanding.md`](02_understanding.md), then generate the default Phase 02b external paper research prompt before Phase 03 strategy generation.
+Phase 02b external paper research prompt is generated and waiting for uploads. The next action is: (1) paste the prompt from [`02b_external_paper_research.md`](02b_external_paper_research.md) into an external AI with internet/deep-research access, (2) upload recommended PDFs to `../research/papers_raw/`, (3) proceed to Phase 03 strategy generation now (data-driven, without waiting for papers).
 
 ## Phase Status
 
@@ -18,8 +18,8 @@ Phase 02 Understanding is `READY_FOR_REVIEW`. The next action is to review [`02_
 | 00 Ingestion | READY_FOR_REVIEW | Unassigned | Unassigned | [`00_ingestion.md`](00_ingestion.md) / [`phase_00_ingestion_context.md`](phase_00_ingestion_context.md) | Review pending |
 | 01 EDA | READY_FOR_REVIEW | Unassigned | Unassigned | [`01_eda/eda_option_surface_and_microstructure.md`](01_eda/eda_option_surface_and_microstructure.md) / [`phase_01_eda_context.md`](phase_01_eda_context.md) | Review pending |
 | 02 Understanding | READY_FOR_REVIEW | Unassigned | Unassigned | [`02_understanding.md`](02_understanding.md) / [`phase_02_understanding_context.md`](phase_02_understanding_context.md) | Review pending |
-| 02b External Paper Research | NOT_STARTED | Unassigned | Unassigned | [`02b_external_paper_research.md`](02b_external_paper_research.md) / [`phase_02b_external_paper_research_context.md`](phase_02b_external_paper_research_context.md) | Prompt generation pending |
-| 03 Strategy | NOT_STARTED | Unassigned | Unassigned | [`03_strategy_candidates.md`](03_strategy_candidates.md) / [`phase_03_strategy_context.md`](phase_03_strategy_context.md) | Understanding summary and default 02b prompt generation required, unless the user explicitly skips 02b |
+| 02b External Paper Research | IN_PROGRESS | Unassigned | Unassigned | [`02b_external_paper_research.md`](02b_external_paper_research.md) / [`phase_02b_external_paper_research_context.md`](phase_02b_external_paper_research_context.md) | Waiting for paper uploads in `../research/papers_raw/` |
+| 03 Strategy | NOT_STARTED | Unassigned | Unassigned | [`03_strategy_candidates.md`](03_strategy_candidates.md) / [`phase_03_strategy_context.md`](phase_03_strategy_context.md) | Ready to start (02b prompt generated; proceed data-driven) |
 | 04 Spec | NOT_STARTED | Unassigned | Unassigned | [`04_strategy_specs/`](04_strategy_specs/) / [`phase_04_spec_context.md`](phase_04_spec_context.md) | None recorded |
 | 05 Implementation | NOT_STARTED | Unassigned | Unassigned | [`phase_05_implementation_context.md`](phase_05_implementation_context.md) | Reviewed strategy spec required |
 | 06 Testing/performance | NOT_STARTED | Unassigned | Unassigned | [`phase_06_testing_context.md`](phase_06_testing_context.md) | Bot candidate required |
@@ -35,10 +35,10 @@ Phase 02 Understanding is `READY_FOR_REVIEW`. The next action is to review [`02_
 
 ## External Paper Research Status
 
-- Status: `not started`
+- Status: `in progress — prompt generated, waiting for uploads`
 - Expected folder: `../research/papers_raw/`
-- Processed paper summaries: none
-- Strategy dependency: the Understanding summary now exists; generate the 02b prompt by default, then proceed and consume processed papers incrementally when present; explicit user skip is also valid
+- Processed paper summaries: none yet
+- Strategy dependency: prompt generated; Phase 03 may proceed data-driven now; papers will be consumed incrementally when uploaded
 
 ## Active Strategies
 
@@ -89,7 +89,7 @@ Example when active:
 - Phase 00 review is pending.
 - Phase 01 review is pending.
 - Phase 02 review is pending.
-- Default Phase 02b prompt generation is pending.
+- Phase 02b: prompt generated on 2026-04-24; waiting for paper uploads in `../research/papers_raw/`.
 - Exact round-end timestamp is still unknown.
 
 ## Final Submission Status

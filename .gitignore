@@ -208,3 +208,7 @@ __marimo__/
 
 # macOS
 .DS_Store
+
+# Session helper files (push-pending docs, not tracked)
+PENDING_UPLOADS.md
+PENDING_CHANGES.patch
