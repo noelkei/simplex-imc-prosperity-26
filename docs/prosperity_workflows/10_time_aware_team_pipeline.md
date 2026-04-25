@@ -134,7 +134,7 @@ Phase-specific completion:
   addressed.
 - Strategy spec: at least one reviewed implementation-ready spec exists with Feature Contract and Round-Specific Mechanics Contract.
 - Implementation: bot maps to a reviewed spec and passes contract/rule plus round adaptation checks.
-- Testing/performance: readable run summary links bot, spec, raw run, metrics, limits, run classification, and ROI-gated memory action.
+- Testing/performance: readable run summary links bot, spec, raw run, metrics, limits, run classification, path-quality diagnosis when artifacts allow, and ROI-gated memory action.
 - Debugging: issue has reproduction, expected vs observed behavior, linked spec/run, classification, and next action.
 
 ## Data Arrival Rule
@@ -264,7 +264,7 @@ Rules:
 - Spec: one page is acceptable if it includes signal, execution, risk, state, and validation checks.
 - Implementation: start with the minimum set that can be validated quickly,
   then add distinct reviewed candidates only when validation capacity remains.
-- Testing: run the fastest meaningful validation first; store raw output and a short summary.
+- Testing: run the fastest meaningful validation first; store raw output and a short summary, and when a batch changes direction, capture the minimum reusable path-quality and coverage signal needed for the next wave.
 - Debugging: fix rule/contract/limit bugs first; defer speculative tuning unless it is clearly high impact.
 - Freeze: with less than 6 hours left, only fix correctness issues or extremely low-risk parameter changes, then validate, verify the active upload file, and submit.
 

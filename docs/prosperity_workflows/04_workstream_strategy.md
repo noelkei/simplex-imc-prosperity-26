@@ -25,6 +25,11 @@ Strategy research converts facts and evidence into testable trading ideas. It sh
 - Required state, if any, and whether it fits within `traderData` constraints.
 - Test plan and known failure modes.
 
+When strategy work follows a meaningful validation batch, do not branch from
+terminal PnL alone. Treat strategy as a synthesis step over platform ranking,
+path-quality diagnostics, product or strike attribution, clean-vs-contaminated
+test coverage, and newly revealed failure or opportunity patterns.
+
 For active round workspaces, strategy work has two steps:
 
 - Strategy candidates: generate a prioritized, ROI-driven queue of
@@ -139,6 +144,24 @@ traceable:
 - Reject feature stacks that combine duplicate signals unless the decision trace explains the incremental behavior.
 - Route missing high-impact multivariate or process evidence back to targeted EDA instead of adding speculative features.
 
+## Post-Run Coverage Audit
+
+When a round already has meaningful run evidence, strategy should perform a
+compact coverage audit before proposing the next wave:
+
+- Which hypotheses were tested cleanly and are now sufficiently answered?
+- Which hypotheses were only tested inside contaminated composites and still
+  need an isolated or cleaner test?
+- Which paper-derived ideas changed validation posture only, versus genuinely
+  earning another live test?
+- Which branches showed `no edge`, versus `edge then reversal`, versus
+  `execution-limited` behavior?
+- Which products or subsets remain untested but still matter for current-round
+  ROI?
+
+This audit should stay decision-oriented. It exists to reduce duplicate waves
+and improve learning value, not to create unnecessary process overhead.
+
 ## Branch Before Commit
 
 Strategy research may explore 5-10 conceptual branches when evidence supports
@@ -164,6 +187,10 @@ Stop exploring when additional branches are duplicate, weak, unimplementable,
 unlikely to change the candidate queue, or when implementation/validation has
 become the bottleneck. Also stop broad branching when a strong incumbent exists
 or deadline pressure makes more exploration low ROI.
+
+When run evidence is already rich, also stop broad branching when the remaining
+open questions are mostly hold/unwind design, subset pruning, execution
+refinement, or clean coverage of still-important but untested hypotheses.
 
 ## Dynamic or regime logic
 
