@@ -1,0 +1,40 @@
+stem,short_id,analysis_bucket,candidate_family,profit,own_trades,buy_qty,sell_qty,max_abs_exec_position,exec_symbols,path_peak,path_peak_ts,path_end_from_peak,path_positive_time_ratio,path_shape,active_limit_hits,upper_limit_hits,final_active_position_abs,final_upper_position_abs
+r3_b02_itm_residual,B02-resid,legacy_itm_vex,legacy itm residual composite,1409.37060546875,0,0,0,,,2203.3843994140625,34200,-794.0137939453125,0.699,sustained_winner,0,0,0,0
+probe_l06_delta1_dual_independent,L06,wave1_delta1,delta1 dual combo,886.1015625,49,112,137,24.0,"HYDROGEL_PACK,VELVETFRUIT_EXTRACT",1649.7734375,91100,-763.671875,0.882,sustained_winner,0,0,0,0
+r3_b02_itm_anchor,B02-anchor,legacy_itm_vex,legacy itm anchor composite,726.892578125,0,0,0,,,726.892578125,99900,0.0,0.975,sustained_winner,0,0,0,0
+probe_l01_hydro_reversion,L01,wave1_delta1,delta1 reversion,556.03125,16,24,39,18.0,HYDROGEL_PACK,1254.015625,91100,-697.984375,0.876,winner_with_giveback,0,0,0,0
+probe_l02_hydro_imbalance,L02,wave1_delta1,delta1 imbalance,537.65625,19,24,47,25.0,HYDROGEL_PACK,1592.015625,91100,-1054.359375,0.863,winner_with_giveback,0,0,0,0
+probe_l05_vex_imbalance,L05,wave1_delta1,delta1 imbalance,446.38671875,38,117,112,18.0,VELVETFRUIT_EXTRACT,455.31640625,98600,-8.9296875,0.773,sustained_winner,0,0,0,0
+probe_l10_itm_pair_plus_vex,L10,wave1_itm,itm residual plus vex,326.1513671875,74,162,173,24.0,"VELVETFRUIT_EXTRACT,VEV_4000,VEV_4500",359.9874267578125,97800,-33.8360595703125,0.601,sustained_winner,0,0,0,0
+probe_l04_vex_reversion,L04,wave1_delta1,delta1 reversion,309.61328125,31,90,95,22.0,VELVETFRUIT_EXTRACT,324.99609375,97800,-15.3828125,0.651,sustained_winner,0,0,0,0
+probe_l25_vex_plus_5300,L25,wave1_active,vex plus active best strike,115.857421875,663,2804,2526,300.0,"VELVETFRUIT_EXTRACT,VEV_5300",2608.861328125,50900,-2493.00390625,0.809,winner_with_giveback,0,0,285,0
+baseline_state_logger,D01-logger,diagnostic,diagnostic logger,0.0,0,0,0,0.0,,0.0,0,0.0,0.0,flat_or_inconclusive,0,0,0,0
+probe_l24_upper_5400_5500_passive,L24,wave1_upper,upper passive maker,0.0,0,0,0,0.0,,0.0,0,0.0,0.0,flat_or_inconclusive,0,0,0,0
+probe_l07_itm_4000_residual,L07,wave1_itm,itm residual,-3.15478515625,21,37,39,15.0,VEV_4000,169.1806640625,42000,-172.33544921875,0.436,edge_then_reversal,0,0,0,0
+probe_l08_itm_4500_residual,L08,wave1_itm,itm residual,-3.15478515625,21,37,39,15.0,VEV_4500,169.1806640625,42000,-172.33544921875,0.436,edge_then_reversal,0,0,0,0
+probe_l09_itm_pair_residual,L09,wave1_itm,itm residual pair,-6.3095703125,42,74,78,15.0,"VEV_4000,VEV_4500",338.361328125,42000,-344.6708984375,0.436,edge_then_reversal,0,0,0,0
+probe_l15_active_5300_residual,L15,wave1_active,active residual,-216.603515625,631,2716,2431,300.0,VEV_5300,2376.689453125,50900,-2593.29296875,0.761,edge_then_major_reversal,0,0,285,0
+probe_l22_upper_5500_residual,L22,wave1_upper,upper residual,-320.791748046875,314,1196,1496,300.0,VEV_5500,58.65618896484375,9500,-379.44793701171875,0.04,monotonic_or_no_edge_loser,0,1,0,300
+probe_l21_upper_5400_residual,L21,wave1_upper,upper residual,-446.829833984375,407,1659,1568,300.0,VEV_5400,968.24560546875,34200,-1415.075439453125,0.468,edge_then_major_reversal,0,0,0,91
+r3_b06_tte_cautious,B06-tte,legacy_active_vouchers,legacy tte cautious,-752.8857421875,0,0,0,,,11725.77685546875,59700,-12478.66259765625,0.426,edge_then_major_reversal,3,0,900,0
+probe_l23_upper_5400_5500_residual,L23,wave1_upper,upper residual pair,-767.62158203125,721,2855,3064,300.0,"VEV_5400,VEV_5500",933.9541015625,34200,-1701.57568359375,0.425,edge_then_major_reversal,0,1,0,391
+probe_l27_surface_5300_5400_relval,L27,wave1_surface,surface relative value,-989.6220092773438,258,1227,1214,300.0,"VEV_5300,VEV_5400",50.71826171875,2600,-1040.3402709960938,0.019,monotonic_or_no_edge_loser,0,0,2,11
+r3_b07_delta_hedge,B07-hedge,legacy_active_vouchers,legacy delta hedge,-1275.9970703125,0,0,0,,,9016.92578125,59600,-10292.9228515625,0.437,edge_then_major_reversal,3,0,1009,0
+probe_l20_active_5000_5300_inventory,L20,wave1_active,active residual inventory subset,-1443.986328125,614,2631,2460,300.0,"VEV_5000,VEV_5300",1675.1474609375,50900,-3119.1337890625,0.717,edge_then_major_reversal,0,0,259,0
+r3_b08_regime_composite,B08-regime,legacy_active_vouchers,legacy regime composite,-1501.9248046875,0,0,0,,,17478.21435546875,59700,-18980.13916015625,0.423,edge_then_major_reversal,4,0,1200,0
+candidate_c06_composite_base,C06-legacy,corrected_and_legacy_composites,legacy composite raw residual,-1631.9248046875,0,0,0,,,17348.21435546875,59700,-18980.13916015625,0.424,edge_then_major_reversal,4,0,1200,0
+probe_l12_active_5000_residual,L12,wave1_active,active residual,-1715.9521484375,46,167,211,107.0,VEV_5000,1051.35546875,59700,-2767.3076171875,0.128,edge_then_major_reversal,0,0,44,0
+probe_l16_active_5000_5300_residual,L16,wave1_active,active residual subset,-1837.048828125,676,2865,2651,300.0,"VEV_5000,VEV_5300",2042.84375,23600,-3879.892578125,0.719,edge_then_major_reversal,0,0,356,0
+r3_b03_voucher_pure,B03-pure,legacy_active_vouchers,legacy active voucher pure,-2261.8486328125,0,0,0,,,12539.8759765625,59700,-14801.724609375,0.405,edge_then_major_reversal,0,0,953,0
+r3_b04_full_surface,B04-surf,legacy_active_vouchers,legacy full surface composite,-2561.846435546875,0,0,0,,,15838.492919921875,59700,-18400.33935546875,0.405,edge_then_major_reversal,3,2,1169,600
+candidate_c06_v01_centered_base,C06-base-v01,corrected_and_legacy_composites,corrected centered composite,-3008.2034912109375,319,1466,1414,300.0,"HYDROGEL_PACK,VELVETFRUIT_EXTRACT,VEV_5000,VEV_5100,VEV_5200,VEV_5300",793.537841796875,59600,-3801.7413330078125,0.445,edge_then_major_reversal,0,0,512,0
+candidate_c06_composite_inv,C06-inv-v01,corrected_and_legacy_composites,corrected centered composite inventory,-5245.4754638671875,412,2007,1973,300.0,"HYDROGEL_PACK,VELVETFRUIT_EXTRACT,VEV_5000,VEV_5100,VEV_5200,VEV_5300",0.0,0,-5245.4754638671875,0.0,monotonic_or_no_edge_loser,0,0,210,0
+probe_l14_active_5200_residual,L14,wave1_active,active residual,-5900.7119140625,195,1062,946,300.0,VEV_5200,0.0,0,-5900.7119140625,0.0,monotonic_or_no_edge_loser,0,0,116,0
+probe_l18_active_5200_5300_residual,L18,wave1_active,active residual subset,-6078.3154296875,826,3778,3377,300.0,"VEV_5200,VEV_5300",0.0,0,-6078.3154296875,0.0,monotonic_or_no_edge_loser,0,0,401,0
+r3_b01_delta1_baseline,B01-base,legacy_delta1,legacy delta1 baseline,-6414.7109375,0,0,0,,,5007.5,34100,-11422.2109375,0.303,edge_then_major_reversal,0,0,0,0
+probe_l13_active_5100_residual,L13,wave1_active,active residual,-6956.580078125,121,761,638,300.0,VEV_5100,1722.17578125,59600,-8678.755859375,0.037,edge_then_major_reversal,0,0,123,0
+probe_l17_active_5100_5300_residual,L17,wave1_active,active residual subset,-7620.939453125,759,3537,3093,300.0,"VEV_5100,VEV_5300",1850.435546875,59600,-9471.375,0.187,edge_then_major_reversal,0,0,444,0
+probe_l19_active_5000_5100_5300_residual,L19,wave1_active,active residual subset,-9241.384765625,804,3686,3313,300.0,"VEV_5000,VEV_5100,VEV_5300",3583.583984375,59600,-12824.96875,0.198,edge_then_major_reversal,0,0,515,0
+probe_l26_surface_5200_5300_relval,L26,wave1_surface,surface relative value,-10739.711669921875,670,3159,3154,300.0,"VEV_5200,VEV_5300",0.0,0,-10739.711669921875,0.0,monotonic_or_no_edge_loser,0,0,17,0
+r3_b01_delta1_optiver,B01-opt,legacy_delta1,legacy delta1 optiver,-20402.15625,0,0,0,,,0.0,0,-20402.15625,0.0,monotonic_or_no_edge_loser,0,0,0,0
+r3_b05_composite_advanced,B05-adv,legacy_active_vouchers,legacy advanced composite,-25333.7685546875,0,0,0,,,0.0,0,-25333.7685546875,0.0,monotonic_or_no_edge_loser,4,0,1200,0

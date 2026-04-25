@@ -34,10 +34,10 @@
 ## Selection Trace
 
 - Based on candidate: C06 (composite of C01 + C02 + C03)
-- Signals used: mid-price reversion (delta-1), Bachelier residual reversion (vouchers), imbalance, spread, surface guardrail
+- Signals used: mid-price reversion (delta-1), centered Bachelier residual reversion (vouchers), imbalance, spread, observed-surface guardrail
 - Alternatives considered: single-product bots (too narrow for submission), full BS/IV stack (overkill), delayed-follow (rejected by EDA)
 - Why selected: one Trader file is the submission unit; compositing independently-validated product branches maximizes aggregate PnL
-- Known caveats: TTE=5d out-of-sample; vol proxy quality untested; integration complexity
+- Known caveats: TTE=5d out-of-sample; vol proxy quality untested; online residual-anchor quality untested; integration complexity
 
 ## Evidence Traceability
 
@@ -48,7 +48,7 @@
 - Redundancy Decisions: merged price-anchor family into single Bachelier fair (PCA justification); imbalance kept as separate component (PC2=16.7%)
 - Regime Assumptions: TTE=5d directionally similar to 6d-8d; surface shape holds; VEX remains stable anchor
 - Understanding Insight: separate hydrogel branch + VEX-anchored voucher family; residual mispricing over delayed-follow
-- Evidence gaps or strategy assumptions: exact vol proxy is a strategy assumption; TTE=5d decay rate is assumed similar
+- Evidence gaps or strategy assumptions: exact vol proxy is a strategy assumption; the residual-anchor EMA is an online proxy for a day baseline, not the true offline baseline; TTE=5d decay rate is assumed similar
 
 ## Round-Specific Mechanics Contract
 
@@ -129,37 +129,37 @@
 | State / traderData Required | sigma_abs estimate (can use rolling VEX move scale or fixed calibration) |
 | Validation / Invalidation Check | compare Bachelier residuals vs intrinsic-only residuals; validate cross-strike ranking |
 
-### F5: Extrinsic Residual Reversion (vouchers)
+### F5: Centered Residual Reversion (online proxy for `extrinsic_dev_day`)
 
 | Field | Value |
 | --- | --- |
-| Feature | `extrinsic_dev_day` — deviation of observed option mid from Bachelier fair |
-| Source Fields | voucher mid from order_depths, Bachelier fair from F4 |
+| Feature | centered residual around a slow residual anchor |
+| Source Fields | voucher mid from `order_depths`, Bachelier fair from F4, per-symbol residual anchor from `traderData` |
 | Online Availability | usable online |
 | Role | direct signal |
-| Parameters | `residual = observed_mid - bachelier_fair`; trade when |residual| > entry_threshold |
+| Parameters | `raw_residual = observed_mid - bachelier_fair`; `centered_residual = raw_residual - residual_anchor`; update `residual_anchor_next = (1 - alpha) * residual_anchor + alpha * raw_residual` with a slow `alpha` |
 | Multivariate Relationship | MI 0.3358 (strongest option feature) |
 | Process Assumption | residual mean-reverts around zero |
 | Redundancy Decision | keep (primary signal) |
 | Missing-Signal Behavior | skip voucher; no orders |
-| State / traderData Required | optional: running mean for residual baseline (can start from 0) |
-| Validation / Invalidation Check | replay residual PnL; verify reversion exists at TTE=5d |
+| State / traderData Required | required: per-symbol slow residual anchor in `traderData` |
+| Validation / Invalidation Check | compare centered-residual behavior versus raw residual; verify the anchor stays slow enough to preserve signal and stable enough to prevent drift |
 
 ### F6: Surface Monotonicity/Convexity Guardrail (vouchers)
 
 | Field | Value |
 | --- | --- |
-| Feature | cross-strike shape check |
-| Source Fields | Bachelier fair values across active strikes |
+| Feature | observed cross-strike shape check |
+| Source Fields | observed voucher mids across active strikes from `order_depths` |
 | Online Availability | usable online |
 | Role | risk control |
-| Parameters | check fair_K1 >= fair_K2 for K1 < K2 (monotone decreasing); optional convexity check |
+| Parameters | check observed `mid_K1 >= mid_K2` for `K1 < K2` with small tick tolerance; when at least 3 strikes are visible, also require approximate convexity on observed mids |
 | Multivariate Relationship | surface checks across the voucher family |
 | Process Assumption | surface should be monotone and convex in call-price space |
 | Redundancy Decision | keep (structural guardrail, not signal) |
-| Missing-Signal Behavior | skip guardrail if fewer than 2 active strikes have valid books |
+| Missing-Signal Behavior | skip monotonicity if fewer than 2 active strikes have valid books; skip convexity if fewer than 3 are visible |
 | State / traderData Required | none |
-| Validation / Invalidation Check | log guardrail triggers; verify they reduce bad fills |
+| Validation / Invalidation Check | log observed-surface guardrail triggers; verify they reduce bad fills and are not trivially always true |
 
 ## Feature Exclusions
 
@@ -184,19 +184,19 @@
 
 ### Voucher Products (VEV_5000 to VEV_5300)
 
-- Signal: Bachelier fair value; trade when observed mid deviates from fair
+- Signal: centered residual around a slowly updated residual anchor; trade when observed mid deviates from `bachelier_fair + residual_anchor`
 - Inputs: VEX mid as S, strike K from symbol suffix, TTE=5/365 (annualized), sigma_abs parameter
 - Fair value: `bachelier_call(S, K, T, sigma_abs)` with hand-coded `norm_cdf` and `norm_pdf`
-- Residual: `residual = observed_voucher_mid - bachelier_fair`
-- Trade logic: buy when residual < -threshold, sell when residual > +threshold
+- Residual pieces: `raw_residual = observed_voucher_mid - bachelier_fair`; `centered_residual = raw_residual - residual_anchor`
+- Trade logic: buy when `centered_residual < -threshold`, sell when `centered_residual > +threshold`
 - Missing-signal behavior: skip voucher if VEX or voucher book is empty
 
 ## Execution Logic
 
-- **Buy behavior**: place buy orders when signal suggests underpricing. For delta-1: buy at levels below fair when ask is attractive. For vouchers: buy when residual is sufficiently negative (observed mid < fair - threshold).
-- **Sell behavior**: symmetric. For delta-1: sell at levels above fair when bid is attractive. For vouchers: sell when residual is sufficiently positive.
-- **Passive/resting order behavior**: place limit orders at fair +/- offset to capture spread when no clear residual signal exists.
-- **Stay-idle behavior**: skip product when spread is too wide, book is empty, or signal is missing. For vouchers: skip when surface guardrail is violated at that strike.
+- **Buy behavior**: place buy orders when signal suggests underpricing. For delta-1: buy at levels below fair when ask is attractive. For vouchers: buy when the centered residual is sufficiently negative.
+- **Sell behavior**: symmetric. For delta-1: sell at levels above fair when bid is attractive. For vouchers: sell when the centered residual is sufficiently positive.
+- **Passive/resting order behavior**: place limit orders around `bachelier_fair + residual_anchor`, then apply any inventory skew.
+- **Stay-idle behavior**: skip product when spread is too wide, book is empty, or signal is missing. For vouchers: skip aggressive and passive quoting when the observed-surface guardrail is violated.
 
 ## Position And Risk Handling
 
@@ -207,7 +207,7 @@
 
 ## State And Runtime
 
-- `traderData` use: JSON string storing sigma_abs estimate and optionally per-product position tracking; kept small
+- `traderData` use: JSON string storing `sigma_abs`, `prev_vex`, and per-symbol slow residual anchors; kept small
 - Imports: `datamodel` (Order, TradingState), `json`, `math` only
 - Runtime risk: low; all computations are O(1) per product per iteration
 - Research-only dependencies excluded from uploadable bot: `yes`
@@ -219,6 +219,7 @@
 | VEX book is empty (voucher fair values undefined) | skip all vouchers for that iteration |
 | Spread too wide to trade profitably | spread gate skips product |
 | Bachelier fair is negative or unreasonable | fall back to intrinsic value |
+| Residual anchor drifts too quickly and absorbs the edge | keep anchor EMA slow; compare centered vs raw residual diagnostics |
 | Position near limit | reduce order size; lean quotes to flatten |
 | TTE=5d behavior diverges from historical | explicit risk; C07 variant tests cautious calibration |
 
@@ -226,11 +227,12 @@
 
 - Contract checks: Trader class exists, run() returns 3-tuple, result has correct products, conversions=0, traderData is string
 - Order sign and limit checks: all buy quantities positive, all sell quantities negative, aggregate capacity respected
-- Performance/run checks: per-product PnL attribution, fill rate, position utilization, spread capture
-- Debug signals: log residuals, fair values, imbalance, spread, position per iteration
+- Performance/run checks: per-product PnL attribution, fill rate, position utilization, spread capture, centered-residual trigger rate, observed-surface guardrail trigger rate
+- Debug signals: log raw residuals, residual anchors, centered residuals, fair values, imbalance, spread, position per iteration
 
 ## Implementation Handoff
 
-- Target bot path: `rounds/round_3/bots/amin/canonical/candidate_c06_composite_base.py`
-- Parameters to implement: `sigma_abs` (initial estimate ~80-120 for VEX daily moves), `entry_threshold` (residual entry, ~2-5 ticks), `spread_limit` (max acceptable spread), `mm_offset` (quote offset from fair for delta-1), `inventory_skew_factor`
-- Known caveats: sigma_abs needs calibration; entry_threshold may need tuning; TTE=5d is out-of-sample
+- Historical implemented bot path: `rounds/round_3/bots/amin/historical/candidate_c06_v01_centered_base.py`
+- Frozen legacy reference: `rounds/round_3/bots/amin/historical/candidate_c06_composite_base.py` remains untouched because it already has a paired performance JSON and is archived
+- Parameters to implement: `sigma_abs` (initial estimate ~80-120 for VEX daily moves), `entry_threshold` (centered-residual entry, ~2-5 ticks), `spread_limit` (max acceptable spread), `mm_offset` (quote offset from fair for delta-1), `inventory_skew_factor`, `residual_anchor_alpha`
+- Known caveats: sigma_abs needs calibration; centered-residual anchor speed may need tuning; entry_threshold may need tuning; TTE=5d is out-of-sample

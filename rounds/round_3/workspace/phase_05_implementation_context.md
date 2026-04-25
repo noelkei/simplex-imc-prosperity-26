@@ -2,7 +2,7 @@
 
 ## Status
 
-IN_PROGRESS
+READY_FOR_REVIEW
 
 ## Owner / Reviewer
 
@@ -11,45 +11,56 @@ IN_PROGRESS
 
 ## Last Updated
 
-2026-04-24
+2026-04-25
 
 ## What Has Been Done
 
-- Implemented Bot A: `candidate_c06_composite_base.py` (C01+C02+C03).
-- Implemented Bot B: `candidate_c06_composite_inv.py` (C01+C02+C04 with inventory skew + imbalance confirmation).
-- Both bots parse successfully and follow the Trader contract.
-- Both placed under `rounds/round_3/bots/amin/canonical/`.
+- Implemented the legacy composite reference, the corrected centered base, the corrected inventory variant, and the diagnostic state logger.
+- Implemented the learning-first Wave 1 batch of 25 learner bots from `spec_learning_batch_wave1.md`.
+- Generated `05_implementation/learning_batch_wave1_manifest.md` and compiled the whole Wave 1 batch.
+- After the user uploaded paired platform artifacts, every tested Round 3 bot was moved from `canonical/` to `historical/`.
+- After that archival step, `rounds/round_3/bots/amin/canonical/` was temporarily empty until Wave 2 was generated.
+- Wrote `05_implementation/generate_learning_batch_wave2.py`, generated `05_implementation/learning_batch_wave2_manifest.md`, and materialized the full 19-bot Wave 2 batch under `../bots/amin/canonical/`.
+- Ran `py_compile` successfully on the Wave 2 generator and all 19 generated Wave 2 bot files.
 
 ## Current Findings
 
-- Bot A (base): simpler, entry threshold 3.0, light inventory skew 1.0, no imbalance filter on vouchers.
-- Bot B (inventory variant): stronger inventory skew 3.0, imbalance confirmation filter, wider entry threshold 4.0 (TTE-cautious), family-level exposure nudge.
+- The implementation work is no longer waiting on first runs; the whole Wave 1 batch has already been exercised on platform and analyzed.
+- The strongest newly validated implementation family is the clean isolated delta-1 stack (`L01`, `L02`, `L04`, `L05`, `L06`).
+- The Wave 1 active, upper, and surface learners were valuable for learning, but not ready for promotion.
+- `rounds/round_3/bots/amin/canonical/` now contains the full active Wave 2 queue: 19 bots split into 14 core decision bots and 5 controlled coverage bots.
+- The Wave 2 implementation uses a single shared generator/template so the batch stays parameter-comparable while still respecting the spec's branch differences.
+- The implementation bottleneck is now platform execution, not bot creation.
 
 ## Decisions Made
 
-- Created two distinct bots for parallel testing per user request.
-- Both use Bachelier fair-value backbone with hand-coded norm_cdf.
-- Both trade HYDROGEL_PACK, VELVETFRUIT_EXTRACT, and VEV_5000-5300.
-- VEV_4000/4500/5400/5500/6000/6500 excluded from wave 1.
+- Tested bots with paired platform artifacts are frozen under `historical/`.
+- The full Wave 1 implementation should now be treated as a completed learning batch, not as a pending queue.
+- The next implementation wave should be redesigned from the full synthesis report rather than extended mechanically from the old manifest.
+- The full 19-bot Wave 2 cut requested by the user was implemented, not reduced to the earlier 12-14 recommendation.
+- Wave 2 bots should remain in `canonical/` until they receive paired platform artifacts, at which point they can be archived like the earlier waves.
 
 ## Open Questions / Blockers
 
-- Need platform validation runs to compare the two bots.
-- sigma_abs parameter may need calibration after first runs.
+- No blocker on implementation mechanics remains.
+- The next blocker is external to local coding: platform runs are needed before further pruning or promotion decisions.
 
 ## Linked Artifacts
 
 - [`_index.md`](_index.md)
 - [`04_strategy_specs/spec_c06_composite_base.md`](04_strategy_specs/spec_c06_composite_base.md)
 - [`04_strategy_specs/spec_c06_composite_inv.md`](04_strategy_specs/spec_c06_composite_inv.md)
-- [`../bots/amin/canonical/candidate_c06_composite_base.py`](../bots/amin/canonical/candidate_c06_composite_base.py)
-- [`../bots/amin/canonical/candidate_c06_composite_inv.py`](../bots/amin/canonical/candidate_c06_composite_inv.py)
+- [`04_strategy_specs/spec_learning_batch_wave1.md`](04_strategy_specs/spec_learning_batch_wave1.md)
+- [`04_strategy_specs/spec_learning_batch_wave2.md`](04_strategy_specs/spec_learning_batch_wave2.md)
+- [`05_implementation/learning_batch_wave1_manifest.md`](05_implementation/learning_batch_wave1_manifest.md)
+- [`05_implementation/learning_batch_wave2_manifest.md`](05_implementation/learning_batch_wave2_manifest.md)
+- [`05_implementation/generate_learning_batch_wave2.py`](05_implementation/generate_learning_batch_wave2.py)
+- [`03_next_wave_bot_planning.md`](03_next_wave_bot_planning.md)
+- [`06_testing/round_3_full_performance_synthesis.md`](06_testing/round_3_full_performance_synthesis.md)
 
 ## Next Priority Action
 
-Run both bots on the platform, collect performance data, compare PnL, position utilization, and fill quality.
-
-Implement the smallest reviewed candidate that can be validated quickly.
+Run the Wave 2 canonical batch on platform, ideally starting with the 14 core bots and then the 5 coverage bots, and feed the resulting artifacts back into Phase 06 analysis.
 
 ## Deadline Risk
 

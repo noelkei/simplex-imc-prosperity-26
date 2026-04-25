@@ -13,10 +13,12 @@ READY_FOR_REVIEW
 ## Sources
 
 - Wiki facts: `../../../docs/prosperity_wiki/rounds/round_3.md`, shared API and trading docs
+- Supplemental challenge brief confirmation from the live platform (user-provided, aligns with the wiki): voucher universe is `VEV_4000` to `VEV_6500`, vouchers start at `TTE=7d` on Round 1 day 1, so the live Round 3 regime is `TTE=5d`
 - Understanding summary: [`02_understanding.md`](02_understanding.md)
 - External paper research: [`02b_external_paper_research.md`](02b_external_paper_research.md), 8 processed papers in `../research/papers_processed/`
 - EDA evidence: [`01_eda/eda_option_surface_and_microstructure.md`](01_eda/eda_option_surface_and_microstructure.md), processed tables under `../data/processed/`
-- Post-run research memory: absent for Round 3
+- Post-run research memory: [`post_run_research_memory.md`](post_run_research_memory.md) from 11 historical Round 3 JSON artifacts; use as evidence input, not as official round fact
+- Learning / bot backlog matrix after the first live challenger runs: [`03_signal_strategy_learning_matrix.md`](03_signal_strategy_learning_matrix.md)
 - Playbook heuristics: feature-light quoting, inventory-aware skew, validate execution before adding complexity
 - Extra reference material: `docs/ML_finance/prosperity4_repo_additions.md` (feature pipeline, inventory control, mean-reversion modules), `docs/slides_options/` (BS/CRR pricing theory, Greeks)
 
@@ -57,8 +59,8 @@ C07: extrinsic_dev_day + TTE-adaptive thresholds -> cautious residual entry -> w
 
 ## Candidate Count And Roles
 
-7 candidates across 4 product branches plus 2 variants and 1 composite.
-All are differentiated, online-usable, testable, and evidence-backed.
+7 formal strategy candidates across 4 product branches plus 2 variants and 1 composite.
+The broader learner backlog now lives in [`03_signal_strategy_learning_matrix.md`](03_signal_strategy_learning_matrix.md), which expands the per-product and per-subset implementation queue without changing the formal candidate count here.
 
 - Primary candidates: C03, C06
 - Secondary candidates: C01, C02, C04
@@ -68,7 +70,7 @@ All are differentiated, online-usable, testable, and evidence-backed.
 
 | Item | Source | Candidate Impact | Decision |
 | --- | --- | --- | --- |
-| TTE=5d live regime (history only covers 6d-8d) | wiki fact + EDA | Affects residual calibration, decay speed, and entry thresholds for all voucher candidates | use as explicit risk; C07 tests cautious posture |
+| TTE=5d live regime (history only covers 6d-8d) | wiki fact + challenge brief confirmation + EDA | Affects residual calibration, decay speed, and entry thresholds for all voucher candidates | treat as confirmed live regime, not an ambiguity; C07 tests cautious posture |
 | 10 voucher symbols with independent 300 limit each | wiki fact | Inventory management across correlated products; C04 addresses directly | use in C04 and as spec requirement |
 | Integer prices | wiki fact | All fair values must round to int before order placement | use in all candidates |
 | No external scientific libraries in bot | wiki fact | Bachelier needs hand-coded norm_cdf (West 2004) | use in spec; West 2004 paper classified `used` |
@@ -83,11 +85,11 @@ All are differentiated, online-usable, testable, and evidence-backed.
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | B1 | HYDROGEL_PACK | delta_acf_1 reversion + imbalance | mid-price reversion | spread filter, imbalance | noisy delta-1 mean reversion | no | microstructure MM | spread capture from reversion | edge < cost | high | candidate (C01) |
 | B2 | VELVETFRUIT_EXTRACT | delta_acf_1 reversion + imbalance | mid-price reversion | spread filter, imbalance | tighter delta-1 anchor with mild reversion | no | microstructure MM + anchor | spread capture + anchoring | modest standalone alpha | high | candidate (C02) |
-| B3 | VEV_5000-5300 | extrinsic_dev_day reversion | Bachelier residual | spread filter, surface guardrail | active option regime with tradable residual dynamics | no | Bachelier fair + residual reversion | residual mean-reversion | TTE 5d extrapolation, costs | high | candidate (C03) |
-| B4 | VEV_5000-5300 | extrinsic_dev_day + inventory | Bachelier residual + inventory skew | imbalance filter, spread | same as B3 + inventory pressure | no | Bachelier fair + reversion + inventory skew | reversion + better flattening | over-suppression of alpha | medium | candidate (C04) |
-| B5 | VEV_4000/4500 | deep-ITM residual snap-back | Bachelier residual (ITM) | spread filter, underlying coupling | ITM dominated by intrinsic with residual snap-back | no | Bachelier fair + ITM residual | structural anchor reversion | sparse trades | medium | candidate (C05) |
-| B6 | all active products | composite independent branches | per-product primary features | per-product support | independent product processes | no | combined Trader | aggregate PnL | debugging complexity | high | candidate (C06) |
-| B7 | VEV_5000-5300 | extrinsic_dev_day + expiry caution | Bachelier residual + TTE-adaptive thresholds | same as C03 | same as B3 + near-expiry liquidity/flow shift | no | cautious C03 variant | robust edge under TTE shift | undertrade if too cautious | medium | candidate (C07) |
+| B3 | VEV_5000-5300 | extrinsic_dev_day reversion | Bachelier residual | spread filter, surface guardrail | active option regime with tradable residual dynamics | yes | Bachelier fair + residual reversion | residual mean-reversion | TTE 5d extrapolation, costs | high | candidate (C03) |
+| B4 | VEV_5000-5300 | extrinsic_dev_day + inventory | Bachelier residual + inventory skew | imbalance filter, spread | same as B3 + inventory pressure | yes | Bachelier fair + reversion + inventory skew | reversion + better flattening | over-suppression of alpha | medium | candidate (C04) |
+| B5 | VEV_4000/4500 | deep-ITM residual snap-back | Bachelier residual (ITM) | spread filter, underlying coupling | ITM dominated by intrinsic with residual snap-back | yes | Bachelier fair + ITM residual | structural anchor reversion | sparse trades | medium | candidate (C05) |
+| B6 | all active products | composite independent branches | per-product primary features | per-product support | independent product processes | yes | combined Trader | aggregate PnL | debugging complexity | high | candidate (C06) |
+| B7 | VEV_5000-5300 | extrinsic_dev_day + expiry caution | Bachelier residual + TTE-adaptive thresholds | same as C03 | same as B3 + near-expiry liquidity/flow shift | yes | cautious C03 variant | robust edge under TTE shift | undertrade if too cautious | medium | candidate (C07) |
 
 ## Per-Product Branches
 
@@ -192,7 +194,7 @@ All are differentiated, online-usable, testable, and evidence-backed.
 | Source Classification | hybrid |
 | Product Scope | `VEV_5000`, `VEV_5100`, `VEV_5200`, `VEV_5300` |
 | Source Of Edge | Extrinsic-value residual mean reversion around Bachelier-derived fair values |
-| Primary Feature / Signal | `extrinsic_dev_day` — deviation of observed extrinsic from day-baseline, measured against Bachelier fair (MI `0.3358`, reversion corrs `-0.40` to `-0.70`) |
+| Primary Feature / Signal | Online proxy for `extrinsic_dev_day`: raw Bachelier residual minus a slow per-symbol residual anchor (`centered_residual = (observed_mid - bachelier_fair) - residual_anchor_ema`) (MI `0.3358`, reversion corrs `-0.40` to `-0.70`) |
 | Supporting Features | (1) Spread filter — skip or narrow when rel spread is too wide; (2) Surface monotonicity/convexity guardrail — clamp or require larger edge when cross-strike shape breaks |
 | Feature Role | primary: direct signal (residual reversion); spread: risk control; surface check: risk control |
 | Linked EDA Signals | intrinsic/extrinsic decomposition, extrinsic residual reversion, surface sanity frame |
@@ -202,10 +204,10 @@ All are differentiated, online-usable, testable, and evidence-backed.
 | Multivariate Evidence | VEX–voucher same-time coupling 0.75+; MI ranks extrinsic_dev_day >> underlying_delta_1; PCA PC1=72% price-anchor redundancy supports choosing one anchor (Bachelier) |
 | Supporting Process Hypothesis | active option regime with meaningful extrinsic, same-time underlying coupling, and tradable residual dynamics |
 | Redundancy Note | intrinsic_value and mid_price merged into single Bachelier fair anchor (avoids price-anchor feature dumping per PCA evidence) |
-| Online Proxy Needed? | no — all features computable from top-of-book and strike metadata |
+| Online Proxy Needed? | yes — use a slow per-symbol residual-anchor EMA in `traderData` to approximate the day baseline online |
 | Regime Assumptions | residual reversion behavior at TTE=5d is directionally similar to TTE=6d-8d history; surface shape holds |
 | Understanding Insight | first-wave option work should focus on residual mispricing, not delayed-follow; VEX anchors valuation |
-| Key Assumptions | Bachelier fair with simple vol proxy is a better residual baseline than intrinsic-only; TTE=5d behavior is compatible with historical calibration; VEV_5000-5300 have enough book activity for execution |
+| Key Assumptions | Bachelier fair with simple vol proxy is a better residual baseline than intrinsic-only; the slow residual-anchor EMA is a good online proxy for the day baseline; TTE=5d behavior is compatible with historical calibration; VEV_5000-5300 have enough book activity for execution |
 | Main Risk | TTE=5d out-of-sample extrapolation; spreads may dominate alpha; vol proxy miscalibration |
 | Why Not Feature Dumping | one primary (Bachelier residual), two support filters (spread gate + surface guardrail); all online-computable |
 | ROI / Pruning Rationale | highest-evidence candidate; addresses the core round opportunity (option mispricing); paper-validated backbone; strongest EDA signals |
@@ -227,7 +229,7 @@ All are differentiated, online-usable, testable, and evidence-backed.
 | Source Classification | hybrid |
 | Product Scope | `VEV_5000`, `VEV_5100`, `VEV_5200`, `VEV_5300` |
 | Source Of Edge | Same residual reversion as C03 + inventory-aware quote skew across correlated vouchers |
-| Primary Feature / Signal | `extrinsic_dev_day` around Bachelier fair (same as C03) |
+| Primary Feature / Signal | Same centered residual proxy as C03 around Bachelier fair and a slow residual-anchor EMA |
 | Supporting Features | (1) Per-symbol inventory penalty: `penalty_i = a * pos_i / limit_i`; (2) `imbalance_1` confirmation filter: strengthen residual entry when imbalance agrees, soften when it disagrees |
 | Feature Role | primary: direct signal (residual); inventory penalty: risk control; imbalance: execution filter |
 | Linked EDA Signals | extrinsic residual reversion, multi-symbol inventory coupling, imbalance_1 as modifier |
@@ -237,10 +239,10 @@ All are differentiated, online-usable, testable, and evidence-backed.
 | Multivariate Evidence | same as C03 + imbalance is PCA PC2 (16.7%), orthogonal to price-anchor family |
 | Supporting Process Hypothesis | same active-option regime as C03, plus inventory pressure drives quote degradation when positions concentrate |
 | Redundancy Note | imbalance is non-redundant with residual (separate PCA component); inventory skew is a risk overlay not a feature |
-| Online Proxy Needed? | no |
+| Online Proxy Needed? | yes — inherits the same slow residual-anchor EMA as C03 |
 | Regime Assumptions | same as C03 + inventory concentration is a real risk in correlated vouchers |
 | Understanding Insight | multi-symbol inventory coupling is a key open risk; imbalance is modest directional aid |
-| Key Assumptions | simple per-symbol linear skew is sufficient (full matrix coupling deferred); imbalance confirmation improves net fills |
+| Key Assumptions | simple per-symbol linear skew is sufficient (full matrix coupling deferred); the slow residual-anchor EMA remains stable enough to support the signal; imbalance confirmation improves net fills |
 | Main Risk | inventory skew may suppress profitable trades; imbalance may add noise not signal; more complexity than C03 |
 | Why Not Feature Dumping | one primary (residual), two supporting (inventory skew + imbalance filter); incremental over C03 with distinct purpose each |
 | ROI / Pruning Rationale | targeted variant of C03 addressing its main risk (position concentration); paper-grounded inventory logic |
@@ -272,7 +274,7 @@ All are differentiated, online-usable, testable, and evidence-backed.
 | Multivariate Evidence | VEX-VEV_4000 same-time coupling strong; ITM extrinsic near zero means residuals are small but sharp |
 | Supporting Process Hypothesis | deep ITM call-like instruments dominated by intrinsic value with residual snap-back |
 | Redundancy Note | distinct from C03 by strike regime (ITM vs near-ATM) |
-| Online Proxy Needed? | no |
+| Online Proxy Needed? | yes — use the same slow residual-anchor EMA idea as C03 but applied to the ITM strikes |
 | Regime Assumptions | ITM structure holds at TTE=5d; sparse books still offer execution opportunities |
 | Understanding Insight | ITM vouchers are useful structural anchors but not first execution focus |
 | Key Assumptions | sparse trade prints do not invalidate book-derived signals; ITM residual logic is cleaner than it looks from print count alone |
@@ -297,7 +299,7 @@ All are differentiated, online-usable, testable, and evidence-backed.
 | Source Classification | hybrid |
 | Product Scope | `HYDROGEL_PACK`, `VELVETFRUIT_EXTRACT`, `VEV_5000`, `VEV_5100`, `VEV_5200`, `VEV_5300` |
 | Source Of Edge | Aggregate PnL across independent product branches: C01 + C02 + best-of(C03, C04, C07) |
-| Primary Feature / Signal | Per-product: mid reversion (delta-1) and Bachelier residual reversion (vouchers) |
+| Primary Feature / Signal | Per-product: mid reversion (delta-1) and centered Bachelier residual reversion (vouchers) |
 | Supporting Features | Per-product spread filters, imbalance filters (optional), surface guardrail (vouchers), inventory skew (if C04 chosen) |
 | Feature Role | composite of individual candidate roles |
 | Linked EDA Signals | all promoted signals from C01, C02, C03/C04 |
@@ -307,7 +309,7 @@ All are differentiated, online-usable, testable, and evidence-backed.
 | Multivariate Evidence | HYDROGEL independent (corr 0.006); VEX anchors vouchers (corr 0.75+); cross-product risk is additive not interactive |
 | Supporting Process Hypothesis | independent product processes aggregate cleanly |
 | Redundancy Note | no feature redundancy across branches (different products, different processes) |
-| Online Proxy Needed? | no |
+| Online Proxy Needed? | yes — composite implementation inherits the voucher residual-anchor EMA through its voucher branch |
 | Regime Assumptions | products remain independent in live data as in sample |
 | Understanding Insight | Round 3 should be treated as separate hydrogel branch + option family anchored on VEX |
 | Key Assumptions | component strategies are individually valid; aggregate Trader does not introduce interaction bugs |
@@ -332,7 +334,7 @@ All are differentiated, online-usable, testable, and evidence-backed.
 | Source Classification | hybrid |
 | Product Scope | `VEV_5000`, `VEV_5100`, `VEV_5200`, `VEV_5300` |
 | Source Of Edge | Same residual reversion as C03 with tightened entry thresholds and faster decay for near-expiry regime |
-| Primary Feature / Signal | `extrinsic_dev_day` with TTE-adaptive entry/exit thresholds (wider entry, faster exit) |
+| Primary Feature / Signal | Same centered residual proxy as C03 with TTE-adaptive entry/exit thresholds (wider entry, faster exit) |
 | Supporting Features | same as C03 (spread filter + surface guardrail) |
 | Feature Role | primary: direct signal (residual); spread: risk control; surface: risk control; TTE caution: regime modifier |
 | Linked EDA Signals | extrinsic residual reversion, TTE 5d out-of-sample risk |
@@ -342,10 +344,10 @@ All are differentiated, online-usable, testable, and evidence-backed.
 | Multivariate Evidence | same as C03 |
 | Supporting Process Hypothesis | same active-option regime as C03, but live TTE=5d may behave as a flow-driven near-expiry regime |
 | Redundancy Note | mutually exclusive with C03; same scope, different calibration |
-| Online Proxy Needed? | no |
+| Online Proxy Needed? | yes — inherits the same slow residual-anchor EMA as C03 |
 | Regime Assumptions | TTE=5d is meaningfully different from 6d-8d in residual decay speed and book behavior |
 | Understanding Insight | TTE 5d is out-of-sample; do not assume historical half-lives port directly |
-| Key Assumptions | wider entry thresholds and faster decay improve robustness even if they reduce raw alpha |
+| Key Assumptions | the slow residual-anchor EMA remains stable enough to support the signal; wider entry thresholds and faster decay improve robustness even if they reduce raw alpha |
 | Main Risk | being too cautious kills the edge entirely; undertrade in a regime where residual alpha actually increases |
 | Why Not Feature Dumping | same feature count as C03; difference is calibration, not feature addition |
 | ROI / Pruning Rationale | cheap to test alongside C03; directly addresses the round's biggest systematic risk (TTE extrapolation) |
@@ -377,12 +379,12 @@ All are differentiated, online-usable, testable, and evidence-backed.
 
 | Order | Candidate ID | Priority Tier | Implementation Wave | Why This Early / Later | Spec Action |
 | --- | --- | --- | --- | --- | --- |
-| 1 | `C06` | spec-first | wave 1 | Practical implementation target: one Trader handles all products; subsumes C01+C02+C03 as components; highest aggregate upside | write spec (composite, references component logic) |
-| 2 | `C03` | spec-first | wave 1 | Core voucher logic within C06; strongest individual evidence; must be specified first to ground the composite | write spec (component, referenced by C06) |
-| 3 | `C01` | implement-first | wave 1 | Simple, independent, low-cost; component of C06; validates delta-1 reversion separately | write spec (component, referenced by C06) |
-| 4 | `C02` | implement-first | wave 1 | Dual-role (standalone + anchor); component of C06; essential for voucher pricing | write spec (component, referenced by C06) |
-| 5 | `C04` | validate-next | wave 1 | Variant of C03 addressing inventory risk; test if C03 shows position concentration | write spec after C03 validates |
-| 6 | `C07` | validate-next | wave 1 | Cheap calibration variant of C03 testing TTE-5d robustness; compare vs C03 PnL stability | write spec as parameter variant of C03 |
+| 1 | `C06` | spec-first | wave 1 | Practical implementation target: one Trader handles all products; subsumes C01+C02+C03 as components; highest aggregate upside | corrected base spec written; fresh challenger implemented in a new file; tested legacy base frozen |
+| 2 | `C03` | spec-first | wave 1 | Core voucher logic within C06; strongest individual evidence; must be specified first to ground the composite | captured inside corrected C06 base spec |
+| 3 | `C01` | implement-first | wave 1 | Simple, independent, low-cost; component of C06; validates delta-1 reversion separately | captured inside corrected C06 base spec |
+| 4 | `C02` | implement-first | wave 1 | Dual-role (standalone + anchor); component of C06; essential for voucher pricing | captured inside corrected C06 base spec |
+| 5 | `C04` | validate-next | wave 1 | Variant of C03 addressing inventory risk; test if C03 shows position concentration | captured inside corrected C06-inv controlled variant |
+| 6 | `C07` | validate-next | wave 1 | Cheap calibration variant of C03 testing TTE-5d robustness; compare vs C03 PnL stability | hold for post-run decision; do not mix into C06-inv |
 | 7 | `C05` | backlog | wave 2 | Differentiated strike regime but sparse execution; only pursue after wave 1 validates and capacity allows | defer spec |
 
 ## Decision Trace
@@ -390,11 +392,11 @@ All are differentiated, online-usable, testable, and evidence-backed.
 | Candidate | Signals Used | Alternatives Rejected Or Deferred | Reason For Priority | Caveat |
 | --- | --- | --- | --- | --- |
 | `C06` | all promoted signals (reversion, residual, imbalance, surface, anchor coupling) | standalone single-product bots as final submission | one Trader file is the submission unit; aggregate PnL matters; component branches are independently testable within the composite | risk of integration complexity; validate components first |
-| `C03` | extrinsic_dev_day, Bachelier fair, surface guardrail, spread filter | delayed-follow (rejected), raw intrinsic residual (weaker baseline), full BS/IV stack (overkill) | strongest evidence with paper-validated backbone; core of the round's option opportunity; MI and reversion metrics are best-in-class | TTE=5d is out-of-sample; vol proxy quality is untested |
+| `C03` | centered residual proxy for `extrinsic_dev_day`, Bachelier fair, observed-surface guardrail, spread filter | delayed-follow (rejected), raw intrinsic residual (weaker baseline), raw uncentered Bachelier residual (too loose vs EDA hypothesis), full BS/IV stack (overkill) | strongest evidence with paper-validated backbone; core of the round's option opportunity; MI and reversion metrics are best-in-class | TTE=5d is out-of-sample; vol proxy and online baseline quality are untested |
 | `C01` | delta_acf_1, imbalance_1, spread | hydrogel hedge with vouchers (rejected) | independent product branch; low cost; adds PnL stream without cross-product risk | edge may be < spread cost; medium evidence only |
 | `C02` | delta_acf_1, imbalance_1, spread; anchor coupling to vouchers | VEX as anchor-only (too conservative), VEX hedge with HYDROGEL (rejected) | dual role provides value even if standalone alpha is modest; essential for voucher pricing anchor | main standalone risk is modest alpha |
-| `C04` | same as C03 + inventory penalty + imbalance confirmation | Bergault full matrix (deferred, too complex), per-symbol-only stops (weaker) | addresses C03's main operational risk (position concentration) with paper-grounded logic | may suppress alpha; more complex than C03 |
-| `C07` | same as C03 + TTE-5d regime caution | extrapolating historical thresholds directly (risky), dropping voucher trading entirely near expiry (too drastic) | cheap variant that directly tests the round's biggest systematic risk; Garcia-Ares paper supports caution | may undertrade if TTE=5d is actually friendlier than 6d-8d |
+| `C04` | same as C03 + inventory penalty + imbalance confirmation | Bergault full matrix (deferred, too complex), family-level exposure nudge inside wave-1 bot (too confounded), per-symbol-only stops (weaker) | addresses C03's main operational risk (position concentration) with paper-grounded logic | may suppress alpha; more complex than C03 |
+| `C07` | same as C03 + TTE-5d regime caution | folding TTE caution into the inventory variant before first runs (too confounded), dropping voucher trading entirely near expiry (too drastic) | cheap variant that directly tests the round's biggest systematic risk; Garcia-Ares paper supports caution | may undertrade if TTE=5d is actually friendlier than 6d-8d |
 | `C05` | ITM extrinsic_dev_day, strong reversion corrs (-0.70) | skipping ITM entirely (loses some PnL), aggressive ITM sizing (sparse fills make this risky) | differentiated reversion signal in a distinct moneyness regime | sparse execution is a real risk; only wave 2 |
 
 ## Exploration Stop Rule
@@ -407,11 +409,11 @@ All are differentiated, online-usable, testable, and evidence-backed.
 
 | Decision Needed | Default If No Answer | Options | Why It Matters |
 | --- | --- | --- | --- |
-| Should we write specs for C06 (composite) + individual components, or start with C03 (voucher-only) first and add delta-1 branches later? | Write C06 spec that references C01/C02/C03 as components; implement as one Trader from the start | (a) composite C06 first, (b) C03-only first then extend | Affects whether the first implementation tests all products or focuses on the highest-edge voucher logic first |
-| Should C04 (inventory skew) or C07 (TTE-cautious) be the priority variant to validate against C03? | C04 first (addresses operational risk), C07 second (addresses calibration risk) | (a) C04 first, (b) C07 first, (c) both simultaneously as parameter variants | Determines which risk axis we probe first after the baseline works |
+| Should we write specs for C06 (composite) + individual components, or start with C03 (voucher-only) first and add delta-1 branches later? | Resolved by default: composite C06 first, with C01/C02/C03 captured inside the base spec and bot | (a) composite C06 first, (b) C03-only first then extend | This is now fixed in the active artifacts so the first run tests the full submission shape |
+| Should C04 (inventory skew) or C07 (TTE-cautious) be the priority variant to validate against C03? | Resolved by default: C04 first as a controlled `C06-inv` variant; keep C07 for a later clean bot if the first runs justify it | (a) C04 first, (b) C07 first, (c) both simultaneously as parameter variants | Keeps the first challenger interpretable instead of mixing inventory and TTE changes in one bot |
 
 ## Next Action
 
-- Write strategy spec for C06 (composite Trader) with C01, C02, C03 as documented component blocks.
-- Include Feature Contract and Round-Specific Mechanics Contract per the workflow requirements.
-- Then implement, validate, and iterate. C04 and C07 are the priority variants to test once C06 baseline is running.
+- Keep the tested `candidate_c06_composite_base.py` frozen because it already has a paired performance JSON.
+- Compare the fresh corrected `C06` base challenger and the corrected controlled `C06-inv` variant against the existing tested base result.
+- Reopen `C07` only if first runs indicate a genuine TTE-calibration problem that deserves a separate bot.

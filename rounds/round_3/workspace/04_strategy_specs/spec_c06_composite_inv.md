@@ -1,6 +1,6 @@
 # Strategy Spec: C06-inv — Full-Scope Composite Trader (Inventory Variant)
 
-This spec inherits all logic from `spec_c06_composite_base.md` and adds inventory-skew features from C04.
+This spec inherits all logic from `spec_c06_composite_base.md` and adds the C04 inventory-skew features only.
 
 ## Review Status
 
@@ -8,7 +8,7 @@ This spec inherits all logic from `spec_c06_composite_base.md` and adds inventor
 - Owner: amin
 - Reviewer: Unassigned
 - Reviewed on: 2026-04-24 (deadline deferral)
-- Deadline deferral reason: variant of base spec; single changed axis (inventory skew)
+- Deadline deferral reason: variant of base spec; single changed axis family is inventory/risk handling
 
 ## Candidate
 
@@ -30,7 +30,8 @@ The ONLY differences from `spec_c06_composite_base.md` are:
 
 1. **Per-symbol inventory skew on vouchers**: quote mid is shifted by `penalty = skew_factor * position / limit` per voucher symbol, making the bot more eager to flatten concentrated positions.
 2. **Imbalance confirmation filter on vouchers**: residual entry is confirmed when imbalance agrees with the trade direction; softened when it disagrees.
-3. **TTE-adaptive thresholds**: entry thresholds widen slightly and exit is faster, incorporating C07 caution.
+
+This variant does NOT add TTE-cautious thresholds and does NOT add a family-level exposure nudge. Those belong to a future clean C07-style bot if later validation justifies it.
 
 ## Additional Feature Contract entries (all others inherited from base spec)
 
@@ -58,7 +59,7 @@ The ONLY differences from `spec_c06_composite_base.md` are:
 | Source Fields | voucher order_depths bid/ask volumes |
 | Online Availability | usable online |
 | Role | execution filter |
-| Parameters | if residual says buy AND imbalance > 0: strengthen entry; if residual says buy AND imbalance < -confirm_threshold: weaken entry |
+| Parameters | if centered residual says buy AND imbalance > 0: strengthen entry; if centered residual says buy AND imbalance < -confirm_threshold: weaken entry |
 | Multivariate Relationship | imbalance orthogonal to price anchor (PCA PC2) |
 | Process Assumption | option imbalance reflects inventory pressure (Muravyev) |
 | Redundancy Decision | non-redundant (different PCA component) |
@@ -68,12 +69,12 @@ The ONLY differences from `spec_c06_composite_base.md` are:
 
 ## Execution Logic Changes
 
-- Voucher buy: entry threshold is `base_threshold * (1 + 0.2)` when imbalance disagrees (negative); `base_threshold * (1 - 0.1)` when imbalance agrees (positive). Vice versa for sells.
-- Voucher fair shift: `adjusted_fair = bachelier_fair - penalty`; when long, fair moves down making the bot more eager to sell and less eager to buy
+- Voucher buy: keep the same base threshold as `spec_c06_composite_base.md`, but discount it slightly when imbalance agrees and penalize it when imbalance disagrees. Vice versa for sells.
+- Voucher fair shift: `adjusted_fair = reference_fair - penalty`, where `reference_fair = bachelier_fair + residual_anchor`; when long, fair moves down making the bot more eager to sell and less eager to buy
 - Delta-1 logic: identical to base spec
 
 ## Implementation Handoff
 
-- Target bot path: `rounds/round_3/bots/amin/canonical/candidate_c06_composite_inv.py`
-- Additional parameters: `inventory_skew_factor` (start ~3-5), `imbalance_confirm_threshold` (start ~0.2)
-- Known caveats: inventory skew may suppress profitable voucher trades; imbalance filter may reduce fill rate; compare carefully against base
+- Historical implemented bot path: `rounds/round_3/bots/amin/historical/candidate_c06_composite_inv.py`
+- Additional parameters: `inventory_skew_factor` (start ~3-5), `imbalance_confirm_threshold` (start ~0.15-0.2)
+- Known caveats: inventory skew may suppress profitable voucher trades; imbalance filter may reduce fill rate; compare carefully against base without mixing in TTE-threshold changes

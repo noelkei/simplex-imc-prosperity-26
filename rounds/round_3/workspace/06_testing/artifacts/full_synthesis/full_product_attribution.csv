@@ -1,0 +1,469 @@
+stem,short_id,analysis_bucket,candidate_family,product,profit_and_loss,final_position
+baseline_state_logger,D01-logger,diagnostic,diagnostic logger,HYDROGEL_PACK,0.0,0
+baseline_state_logger,D01-logger,diagnostic,diagnostic logger,VELVETFRUIT_EXTRACT,0.0,0
+baseline_state_logger,D01-logger,diagnostic,diagnostic logger,VEV_4000,0.0,0
+baseline_state_logger,D01-logger,diagnostic,diagnostic logger,VEV_4500,0.0,0
+baseline_state_logger,D01-logger,diagnostic,diagnostic logger,VEV_5000,0.0,0
+baseline_state_logger,D01-logger,diagnostic,diagnostic logger,VEV_5100,0.0,0
+baseline_state_logger,D01-logger,diagnostic,diagnostic logger,VEV_5200,0.0,0
+baseline_state_logger,D01-logger,diagnostic,diagnostic logger,VEV_5300,0.0,0
+baseline_state_logger,D01-logger,diagnostic,diagnostic logger,VEV_5400,0.0,0
+baseline_state_logger,D01-logger,diagnostic,diagnostic logger,VEV_5500,0.0,0
+baseline_state_logger,D01-logger,diagnostic,diagnostic logger,VEV_6000,0.0,0
+baseline_state_logger,D01-logger,diagnostic,diagnostic logger,VEV_6500,0.0,0
+candidate_c06_composite_base,C06-legacy,corrected_and_legacy_composites,legacy composite raw residual,HYDROGEL_PACK,-0.80859375,4
+candidate_c06_composite_base,C06-legacy,corrected_and_legacy_composites,legacy composite raw residual,VELVETFRUIT_EXTRACT,600.30859375,4
+candidate_c06_composite_base,C06-legacy,corrected_and_legacy_composites,legacy composite raw residual,VEV_4000,0.0,0
+candidate_c06_composite_base,C06-legacy,corrected_and_legacy_composites,legacy composite raw residual,VEV_4500,0.0,0
+candidate_c06_composite_base,C06-legacy,corrected_and_legacy_composites,legacy composite raw residual,VEV_5000,-886.0390625,-300
+candidate_c06_composite_base,C06-legacy,corrected_and_legacy_composites,legacy composite raw residual,VEV_5100,-724.70703125,-300
+candidate_c06_composite_base,C06-legacy,corrected_and_legacy_composites,legacy composite raw residual,VEV_5200,-701.26171875,-300
+candidate_c06_composite_base,C06-legacy,corrected_and_legacy_composites,legacy composite raw residual,VEV_5300,80.5830078125,-300
+candidate_c06_composite_base,C06-legacy,corrected_and_legacy_composites,legacy composite raw residual,VEV_5400,0.0,0
+candidate_c06_composite_base,C06-legacy,corrected_and_legacy_composites,legacy composite raw residual,VEV_5500,0.0,0
+candidate_c06_composite_base,C06-legacy,corrected_and_legacy_composites,legacy composite raw residual,VEV_6000,0.0,0
+candidate_c06_composite_base,C06-legacy,corrected_and_legacy_composites,legacy composite raw residual,VEV_6500,0.0,0
+candidate_c06_composite_inv,C06-inv-v01,corrected_and_legacy_composites,corrected centered composite inventory,HYDROGEL_PACK,-0.80859375,4
+candidate_c06_composite_inv,C06-inv-v01,corrected_and_legacy_composites,corrected centered composite inventory,VELVETFRUIT_EXTRACT,600.30859375,4
+candidate_c06_composite_inv,C06-inv-v01,corrected_and_legacy_composites,corrected centered composite inventory,VEV_4000,0.0,0
+candidate_c06_composite_inv,C06-inv-v01,corrected_and_legacy_composites,corrected centered composite inventory,VEV_4500,0.0,0
+candidate_c06_composite_inv,C06-inv-v01,corrected_and_legacy_composites,corrected centered composite inventory,VEV_5000,48.8138427734375,4
+candidate_c06_composite_inv,C06-inv-v01,corrected_and_legacy_composites,corrected centered composite inventory,VEV_5100,-218.538330078125,-22
+candidate_c06_composite_inv,C06-inv-v01,corrected_and_legacy_composites,corrected centered composite inventory,VEV_5200,-6058.8203125,114
+candidate_c06_composite_inv,C06-inv-v01,corrected_and_legacy_composites,corrected centered composite inventory,VEV_5300,383.5693359375,-70
+candidate_c06_composite_inv,C06-inv-v01,corrected_and_legacy_composites,corrected centered composite inventory,VEV_5400,0.0,0
+candidate_c06_composite_inv,C06-inv-v01,corrected_and_legacy_composites,corrected centered composite inventory,VEV_5500,0.0,0
+candidate_c06_composite_inv,C06-inv-v01,corrected_and_legacy_composites,corrected centered composite inventory,VEV_6000,0.0,0
+candidate_c06_composite_inv,C06-inv-v01,corrected_and_legacy_composites,corrected centered composite inventory,VEV_6500,0.0,0
+candidate_c06_v01_centered_base,C06-base-v01,corrected_and_legacy_composites,corrected centered composite,HYDROGEL_PACK,-0.80859375,4
+candidate_c06_v01_centered_base,C06-base-v01,corrected_and_legacy_composites,corrected centered composite,VELVETFRUIT_EXTRACT,600.30859375,4
+candidate_c06_v01_centered_base,C06-base-v01,corrected_and_legacy_composites,corrected centered composite,VEV_4000,0.0,0
+candidate_c06_v01_centered_base,C06-base-v01,corrected_and_legacy_composites,corrected centered composite,VEV_4500,0.0,0
+candidate_c06_v01_centered_base,C06-base-v01,corrected_and_legacy_composites,corrected centered composite,VEV_5000,45.627685546875,8
+candidate_c06_v01_centered_base,C06-base-v01,corrected_and_legacy_composites,corrected centered composite,VEV_5100,-110.7901611328125,-10
+candidate_c06_v01_centered_base,C06-base-v01,corrected_and_legacy_composites,corrected centered composite,VEV_5200,-4040.36328125,270
+candidate_c06_v01_centered_base,C06-base-v01,corrected_and_legacy_composites,corrected centered composite,VEV_5300,497.822265625,-224
+candidate_c06_v01_centered_base,C06-base-v01,corrected_and_legacy_composites,corrected centered composite,VEV_5400,0.0,0
+candidate_c06_v01_centered_base,C06-base-v01,corrected_and_legacy_composites,corrected centered composite,VEV_5500,0.0,0
+candidate_c06_v01_centered_base,C06-base-v01,corrected_and_legacy_composites,corrected centered composite,VEV_6000,0.0,0
+candidate_c06_v01_centered_base,C06-base-v01,corrected_and_legacy_composites,corrected centered composite,VEV_6500,0.0,0
+probe_l01_hydro_reversion,L01,wave1_delta1,delta1 reversion,HYDROGEL_PACK,556.03125,-15
+probe_l01_hydro_reversion,L01,wave1_delta1,delta1 reversion,VELVETFRUIT_EXTRACT,0.0,0
+probe_l01_hydro_reversion,L01,wave1_delta1,delta1 reversion,VEV_4000,0.0,0
+probe_l01_hydro_reversion,L01,wave1_delta1,delta1 reversion,VEV_4500,0.0,0
+probe_l01_hydro_reversion,L01,wave1_delta1,delta1 reversion,VEV_5000,0.0,0
+probe_l01_hydro_reversion,L01,wave1_delta1,delta1 reversion,VEV_5100,0.0,0
+probe_l01_hydro_reversion,L01,wave1_delta1,delta1 reversion,VEV_5200,0.0,0
+probe_l01_hydro_reversion,L01,wave1_delta1,delta1 reversion,VEV_5300,0.0,0
+probe_l01_hydro_reversion,L01,wave1_delta1,delta1 reversion,VEV_5400,0.0,0
+probe_l01_hydro_reversion,L01,wave1_delta1,delta1 reversion,VEV_5500,0.0,0
+probe_l01_hydro_reversion,L01,wave1_delta1,delta1 reversion,VEV_6000,0.0,0
+probe_l01_hydro_reversion,L01,wave1_delta1,delta1 reversion,VEV_6500,0.0,0
+probe_l02_hydro_imbalance,L02,wave1_delta1,delta1 imbalance,HYDROGEL_PACK,537.65625,-23
+probe_l02_hydro_imbalance,L02,wave1_delta1,delta1 imbalance,VELVETFRUIT_EXTRACT,0.0,0
+probe_l02_hydro_imbalance,L02,wave1_delta1,delta1 imbalance,VEV_4000,0.0,0
+probe_l02_hydro_imbalance,L02,wave1_delta1,delta1 imbalance,VEV_4500,0.0,0
+probe_l02_hydro_imbalance,L02,wave1_delta1,delta1 imbalance,VEV_5000,0.0,0
+probe_l02_hydro_imbalance,L02,wave1_delta1,delta1 imbalance,VEV_5100,0.0,0
+probe_l02_hydro_imbalance,L02,wave1_delta1,delta1 imbalance,VEV_5200,0.0,0
+probe_l02_hydro_imbalance,L02,wave1_delta1,delta1 imbalance,VEV_5300,0.0,0
+probe_l02_hydro_imbalance,L02,wave1_delta1,delta1 imbalance,VEV_5400,0.0,0
+probe_l02_hydro_imbalance,L02,wave1_delta1,delta1 imbalance,VEV_5500,0.0,0
+probe_l02_hydro_imbalance,L02,wave1_delta1,delta1 imbalance,VEV_6000,0.0,0
+probe_l02_hydro_imbalance,L02,wave1_delta1,delta1 imbalance,VEV_6500,0.0,0
+probe_l04_vex_reversion,L04,wave1_delta1,delta1 reversion,HYDROGEL_PACK,0.0,0
+probe_l04_vex_reversion,L04,wave1_delta1,delta1 reversion,VELVETFRUIT_EXTRACT,309.61328125,-5
+probe_l04_vex_reversion,L04,wave1_delta1,delta1 reversion,VEV_4000,0.0,0
+probe_l04_vex_reversion,L04,wave1_delta1,delta1 reversion,VEV_4500,0.0,0
+probe_l04_vex_reversion,L04,wave1_delta1,delta1 reversion,VEV_5000,0.0,0
+probe_l04_vex_reversion,L04,wave1_delta1,delta1 reversion,VEV_5100,0.0,0
+probe_l04_vex_reversion,L04,wave1_delta1,delta1 reversion,VEV_5200,0.0,0
+probe_l04_vex_reversion,L04,wave1_delta1,delta1 reversion,VEV_5300,0.0,0
+probe_l04_vex_reversion,L04,wave1_delta1,delta1 reversion,VEV_5400,0.0,0
+probe_l04_vex_reversion,L04,wave1_delta1,delta1 reversion,VEV_5500,0.0,0
+probe_l04_vex_reversion,L04,wave1_delta1,delta1 reversion,VEV_6000,0.0,0
+probe_l04_vex_reversion,L04,wave1_delta1,delta1 reversion,VEV_6500,0.0,0
+probe_l05_vex_imbalance,L05,wave1_delta1,delta1 imbalance,HYDROGEL_PACK,0.0,0
+probe_l05_vex_imbalance,L05,wave1_delta1,delta1 imbalance,VELVETFRUIT_EXTRACT,446.38671875,5
+probe_l05_vex_imbalance,L05,wave1_delta1,delta1 imbalance,VEV_4000,0.0,0
+probe_l05_vex_imbalance,L05,wave1_delta1,delta1 imbalance,VEV_4500,0.0,0
+probe_l05_vex_imbalance,L05,wave1_delta1,delta1 imbalance,VEV_5000,0.0,0
+probe_l05_vex_imbalance,L05,wave1_delta1,delta1 imbalance,VEV_5100,0.0,0
+probe_l05_vex_imbalance,L05,wave1_delta1,delta1 imbalance,VEV_5200,0.0,0
+probe_l05_vex_imbalance,L05,wave1_delta1,delta1 imbalance,VEV_5300,0.0,0
+probe_l05_vex_imbalance,L05,wave1_delta1,delta1 imbalance,VEV_5400,0.0,0
+probe_l05_vex_imbalance,L05,wave1_delta1,delta1 imbalance,VEV_5500,0.0,0
+probe_l05_vex_imbalance,L05,wave1_delta1,delta1 imbalance,VEV_6000,0.0,0
+probe_l05_vex_imbalance,L05,wave1_delta1,delta1 imbalance,VEV_6500,0.0,0
+probe_l06_delta1_dual_independent,L06,wave1_delta1,delta1 dual combo,HYDROGEL_PACK,553.640625,-18
+probe_l06_delta1_dual_independent,L06,wave1_delta1,delta1 dual combo,VELVETFRUIT_EXTRACT,332.4609375,-7
+probe_l06_delta1_dual_independent,L06,wave1_delta1,delta1 dual combo,VEV_4000,0.0,0
+probe_l06_delta1_dual_independent,L06,wave1_delta1,delta1 dual combo,VEV_4500,0.0,0
+probe_l06_delta1_dual_independent,L06,wave1_delta1,delta1 dual combo,VEV_5000,0.0,0
+probe_l06_delta1_dual_independent,L06,wave1_delta1,delta1 dual combo,VEV_5100,0.0,0
+probe_l06_delta1_dual_independent,L06,wave1_delta1,delta1 dual combo,VEV_5200,0.0,0
+probe_l06_delta1_dual_independent,L06,wave1_delta1,delta1 dual combo,VEV_5300,0.0,0
+probe_l06_delta1_dual_independent,L06,wave1_delta1,delta1 dual combo,VEV_5400,0.0,0
+probe_l06_delta1_dual_independent,L06,wave1_delta1,delta1 dual combo,VEV_5500,0.0,0
+probe_l06_delta1_dual_independent,L06,wave1_delta1,delta1 dual combo,VEV_6000,0.0,0
+probe_l06_delta1_dual_independent,L06,wave1_delta1,delta1 dual combo,VEV_6500,0.0,0
+probe_l07_itm_4000_residual,L07,wave1_itm,itm residual,HYDROGEL_PACK,0.0,0
+probe_l07_itm_4000_residual,L07,wave1_itm,itm residual,VELVETFRUIT_EXTRACT,0.0,0
+probe_l07_itm_4000_residual,L07,wave1_itm,itm residual,VEV_4000,-3.15478515625,-2
+probe_l07_itm_4000_residual,L07,wave1_itm,itm residual,VEV_4500,0.0,0
+probe_l07_itm_4000_residual,L07,wave1_itm,itm residual,VEV_5000,0.0,0
+probe_l07_itm_4000_residual,L07,wave1_itm,itm residual,VEV_5100,0.0,0
+probe_l07_itm_4000_residual,L07,wave1_itm,itm residual,VEV_5200,0.0,0
+probe_l07_itm_4000_residual,L07,wave1_itm,itm residual,VEV_5300,0.0,0
+probe_l07_itm_4000_residual,L07,wave1_itm,itm residual,VEV_5400,0.0,0
+probe_l07_itm_4000_residual,L07,wave1_itm,itm residual,VEV_5500,0.0,0
+probe_l07_itm_4000_residual,L07,wave1_itm,itm residual,VEV_6000,0.0,0
+probe_l07_itm_4000_residual,L07,wave1_itm,itm residual,VEV_6500,0.0,0
+probe_l08_itm_4500_residual,L08,wave1_itm,itm residual,HYDROGEL_PACK,0.0,0
+probe_l08_itm_4500_residual,L08,wave1_itm,itm residual,VELVETFRUIT_EXTRACT,0.0,0
+probe_l08_itm_4500_residual,L08,wave1_itm,itm residual,VEV_4000,0.0,0
+probe_l08_itm_4500_residual,L08,wave1_itm,itm residual,VEV_4500,-3.15478515625,-2
+probe_l08_itm_4500_residual,L08,wave1_itm,itm residual,VEV_5000,0.0,0
+probe_l08_itm_4500_residual,L08,wave1_itm,itm residual,VEV_5100,0.0,0
+probe_l08_itm_4500_residual,L08,wave1_itm,itm residual,VEV_5200,0.0,0
+probe_l08_itm_4500_residual,L08,wave1_itm,itm residual,VEV_5300,0.0,0
+probe_l08_itm_4500_residual,L08,wave1_itm,itm residual,VEV_5400,0.0,0
+probe_l08_itm_4500_residual,L08,wave1_itm,itm residual,VEV_5500,0.0,0
+probe_l08_itm_4500_residual,L08,wave1_itm,itm residual,VEV_6000,0.0,0
+probe_l08_itm_4500_residual,L08,wave1_itm,itm residual,VEV_6500,0.0,0
+probe_l09_itm_pair_residual,L09,wave1_itm,itm residual pair,HYDROGEL_PACK,0.0,0
+probe_l09_itm_pair_residual,L09,wave1_itm,itm residual pair,VELVETFRUIT_EXTRACT,0.0,0
+probe_l09_itm_pair_residual,L09,wave1_itm,itm residual pair,VEV_4000,-3.15478515625,-2
+probe_l09_itm_pair_residual,L09,wave1_itm,itm residual pair,VEV_4500,-3.15478515625,-2
+probe_l09_itm_pair_residual,L09,wave1_itm,itm residual pair,VEV_5000,0.0,0
+probe_l09_itm_pair_residual,L09,wave1_itm,itm residual pair,VEV_5100,0.0,0
+probe_l09_itm_pair_residual,L09,wave1_itm,itm residual pair,VEV_5200,0.0,0
+probe_l09_itm_pair_residual,L09,wave1_itm,itm residual pair,VEV_5300,0.0,0
+probe_l09_itm_pair_residual,L09,wave1_itm,itm residual pair,VEV_5400,0.0,0
+probe_l09_itm_pair_residual,L09,wave1_itm,itm residual pair,VEV_5500,0.0,0
+probe_l09_itm_pair_residual,L09,wave1_itm,itm residual pair,VEV_6000,0.0,0
+probe_l09_itm_pair_residual,L09,wave1_itm,itm residual pair,VEV_6500,0.0,0
+probe_l10_itm_pair_plus_vex,L10,wave1_itm,itm residual plus vex,HYDROGEL_PACK,0.0,0
+probe_l10_itm_pair_plus_vex,L10,wave1_itm,itm residual plus vex,VELVETFRUIT_EXTRACT,332.4609375,-7
+probe_l10_itm_pair_plus_vex,L10,wave1_itm,itm residual plus vex,VEV_4000,-3.15478515625,-2
+probe_l10_itm_pair_plus_vex,L10,wave1_itm,itm residual plus vex,VEV_4500,-3.15478515625,-2
+probe_l10_itm_pair_plus_vex,L10,wave1_itm,itm residual plus vex,VEV_5000,0.0,0
+probe_l10_itm_pair_plus_vex,L10,wave1_itm,itm residual plus vex,VEV_5100,0.0,0
+probe_l10_itm_pair_plus_vex,L10,wave1_itm,itm residual plus vex,VEV_5200,0.0,0
+probe_l10_itm_pair_plus_vex,L10,wave1_itm,itm residual plus vex,VEV_5300,0.0,0
+probe_l10_itm_pair_plus_vex,L10,wave1_itm,itm residual plus vex,VEV_5400,0.0,0
+probe_l10_itm_pair_plus_vex,L10,wave1_itm,itm residual plus vex,VEV_5500,0.0,0
+probe_l10_itm_pair_plus_vex,L10,wave1_itm,itm residual plus vex,VEV_6000,0.0,0
+probe_l10_itm_pair_plus_vex,L10,wave1_itm,itm residual plus vex,VEV_6500,0.0,0
+probe_l12_active_5000_residual,L12,wave1_active,active residual,HYDROGEL_PACK,0.0,0
+probe_l12_active_5000_residual,L12,wave1_active,active residual,VELVETFRUIT_EXTRACT,0.0,0
+probe_l12_active_5000_residual,L12,wave1_active,active residual,VEV_4000,0.0,0
+probe_l12_active_5000_residual,L12,wave1_active,active residual,VEV_4500,0.0,0
+probe_l12_active_5000_residual,L12,wave1_active,active residual,VEV_5000,-1715.9521484375,-44
+probe_l12_active_5000_residual,L12,wave1_active,active residual,VEV_5100,0.0,0
+probe_l12_active_5000_residual,L12,wave1_active,active residual,VEV_5200,0.0,0
+probe_l12_active_5000_residual,L12,wave1_active,active residual,VEV_5300,0.0,0
+probe_l12_active_5000_residual,L12,wave1_active,active residual,VEV_5400,0.0,0
+probe_l12_active_5000_residual,L12,wave1_active,active residual,VEV_5500,0.0,0
+probe_l12_active_5000_residual,L12,wave1_active,active residual,VEV_6000,0.0,0
+probe_l12_active_5000_residual,L12,wave1_active,active residual,VEV_6500,0.0,0
+probe_l13_active_5100_residual,L13,wave1_active,active residual,HYDROGEL_PACK,0.0,0
+probe_l13_active_5100_residual,L13,wave1_active,active residual,VELVETFRUIT_EXTRACT,0.0,0
+probe_l13_active_5100_residual,L13,wave1_active,active residual,VEV_4000,0.0,0
+probe_l13_active_5100_residual,L13,wave1_active,active residual,VEV_4500,0.0,0
+probe_l13_active_5100_residual,L13,wave1_active,active residual,VEV_5000,0.0,0
+probe_l13_active_5100_residual,L13,wave1_active,active residual,VEV_5100,-6956.580078125,123
+probe_l13_active_5100_residual,L13,wave1_active,active residual,VEV_5200,0.0,0
+probe_l13_active_5100_residual,L13,wave1_active,active residual,VEV_5300,0.0,0
+probe_l13_active_5100_residual,L13,wave1_active,active residual,VEV_5400,0.0,0
+probe_l13_active_5100_residual,L13,wave1_active,active residual,VEV_5500,0.0,0
+probe_l13_active_5100_residual,L13,wave1_active,active residual,VEV_6000,0.0,0
+probe_l13_active_5100_residual,L13,wave1_active,active residual,VEV_6500,0.0,0
+probe_l14_active_5200_residual,L14,wave1_active,active residual,HYDROGEL_PACK,0.0,0
+probe_l14_active_5200_residual,L14,wave1_active,active residual,VELVETFRUIT_EXTRACT,0.0,0
+probe_l14_active_5200_residual,L14,wave1_active,active residual,VEV_4000,0.0,0
+probe_l14_active_5200_residual,L14,wave1_active,active residual,VEV_4500,0.0,0
+probe_l14_active_5200_residual,L14,wave1_active,active residual,VEV_5000,0.0,0
+probe_l14_active_5200_residual,L14,wave1_active,active residual,VEV_5100,0.0,0
+probe_l14_active_5200_residual,L14,wave1_active,active residual,VEV_5200,-5900.7119140625,116
+probe_l14_active_5200_residual,L14,wave1_active,active residual,VEV_5300,0.0,0
+probe_l14_active_5200_residual,L14,wave1_active,active residual,VEV_5400,0.0,0
+probe_l14_active_5200_residual,L14,wave1_active,active residual,VEV_5500,0.0,0
+probe_l14_active_5200_residual,L14,wave1_active,active residual,VEV_6000,0.0,0
+probe_l14_active_5200_residual,L14,wave1_active,active residual,VEV_6500,0.0,0
+probe_l15_active_5300_residual,L15,wave1_active,active residual,HYDROGEL_PACK,0.0,0
+probe_l15_active_5300_residual,L15,wave1_active,active residual,VELVETFRUIT_EXTRACT,0.0,0
+probe_l15_active_5300_residual,L15,wave1_active,active residual,VEV_4000,0.0,0
+probe_l15_active_5300_residual,L15,wave1_active,active residual,VEV_4500,0.0,0
+probe_l15_active_5300_residual,L15,wave1_active,active residual,VEV_5000,0.0,0
+probe_l15_active_5300_residual,L15,wave1_active,active residual,VEV_5100,0.0,0
+probe_l15_active_5300_residual,L15,wave1_active,active residual,VEV_5200,0.0,0
+probe_l15_active_5300_residual,L15,wave1_active,active residual,VEV_5300,-216.603515625,285
+probe_l15_active_5300_residual,L15,wave1_active,active residual,VEV_5400,0.0,0
+probe_l15_active_5300_residual,L15,wave1_active,active residual,VEV_5500,0.0,0
+probe_l15_active_5300_residual,L15,wave1_active,active residual,VEV_6000,0.0,0
+probe_l15_active_5300_residual,L15,wave1_active,active residual,VEV_6500,0.0,0
+probe_l16_active_5000_5300_residual,L16,wave1_active,active residual subset,HYDROGEL_PACK,0.0,0
+probe_l16_active_5000_5300_residual,L16,wave1_active,active residual subset,VELVETFRUIT_EXTRACT,0.0,0
+probe_l16_active_5000_5300_residual,L16,wave1_active,active residual subset,VEV_4000,0.0,0
+probe_l16_active_5000_5300_residual,L16,wave1_active,active residual subset,VEV_4500,0.0,0
+probe_l16_active_5000_5300_residual,L16,wave1_active,active residual subset,VEV_5000,-1620.4453125,-71
+probe_l16_active_5000_5300_residual,L16,wave1_active,active residual subset,VEV_5100,0.0,0
+probe_l16_active_5000_5300_residual,L16,wave1_active,active residual subset,VEV_5200,0.0,0
+probe_l16_active_5000_5300_residual,L16,wave1_active,active residual subset,VEV_5300,-216.603515625,285
+probe_l16_active_5000_5300_residual,L16,wave1_active,active residual subset,VEV_5400,0.0,0
+probe_l16_active_5000_5300_residual,L16,wave1_active,active residual subset,VEV_5500,0.0,0
+probe_l16_active_5000_5300_residual,L16,wave1_active,active residual subset,VEV_6000,0.0,0
+probe_l16_active_5000_5300_residual,L16,wave1_active,active residual subset,VEV_6500,0.0,0
+probe_l17_active_5100_5300_residual,L17,wave1_active,active residual subset,HYDROGEL_PACK,0.0,0
+probe_l17_active_5100_5300_residual,L17,wave1_active,active residual subset,VELVETFRUIT_EXTRACT,0.0,0
+probe_l17_active_5100_5300_residual,L17,wave1_active,active residual subset,VEV_4000,0.0,0
+probe_l17_active_5100_5300_residual,L17,wave1_active,active residual subset,VEV_4500,0.0,0
+probe_l17_active_5100_5300_residual,L17,wave1_active,active residual subset,VEV_5000,0.0,0
+probe_l17_active_5100_5300_residual,L17,wave1_active,active residual subset,VEV_5100,-7404.3359375,159
+probe_l17_active_5100_5300_residual,L17,wave1_active,active residual subset,VEV_5200,0.0,0
+probe_l17_active_5100_5300_residual,L17,wave1_active,active residual subset,VEV_5300,-216.603515625,285
+probe_l17_active_5100_5300_residual,L17,wave1_active,active residual subset,VEV_5400,0.0,0
+probe_l17_active_5100_5300_residual,L17,wave1_active,active residual subset,VEV_5500,0.0,0
+probe_l17_active_5100_5300_residual,L17,wave1_active,active residual subset,VEV_6000,0.0,0
+probe_l17_active_5100_5300_residual,L17,wave1_active,active residual subset,VEV_6500,0.0,0
+probe_l18_active_5200_5300_residual,L18,wave1_active,active residual subset,HYDROGEL_PACK,0.0,0
+probe_l18_active_5200_5300_residual,L18,wave1_active,active residual subset,VELVETFRUIT_EXTRACT,0.0,0
+probe_l18_active_5200_5300_residual,L18,wave1_active,active residual subset,VEV_4000,0.0,0
+probe_l18_active_5200_5300_residual,L18,wave1_active,active residual subset,VEV_4500,0.0,0
+probe_l18_active_5200_5300_residual,L18,wave1_active,active residual subset,VEV_5000,0.0,0
+probe_l18_active_5200_5300_residual,L18,wave1_active,active residual subset,VEV_5100,0.0,0
+probe_l18_active_5200_5300_residual,L18,wave1_active,active residual subset,VEV_5200,-5861.7119140625,116
+probe_l18_active_5200_5300_residual,L18,wave1_active,active residual subset,VEV_5300,-216.603515625,285
+probe_l18_active_5200_5300_residual,L18,wave1_active,active residual subset,VEV_5400,0.0,0
+probe_l18_active_5200_5300_residual,L18,wave1_active,active residual subset,VEV_5500,0.0,0
+probe_l18_active_5200_5300_residual,L18,wave1_active,active residual subset,VEV_6000,0.0,0
+probe_l18_active_5200_5300_residual,L18,wave1_active,active residual subset,VEV_6500,0.0,0
+probe_l19_active_5000_5100_5300_residual,L19,wave1_active,active residual subset,HYDROGEL_PACK,0.0,0
+probe_l19_active_5000_5100_5300_residual,L19,wave1_active,active residual subset,VELVETFRUIT_EXTRACT,0.0,0
+probe_l19_active_5000_5100_5300_residual,L19,wave1_active,active residual subset,VEV_4000,0.0,0
+probe_l19_active_5000_5100_5300_residual,L19,wave1_active,active residual subset,VEV_4500,0.0,0
+probe_l19_active_5000_5100_5300_residual,L19,wave1_active,active residual subset,VEV_5000,-1620.4453125,-71
+probe_l19_active_5000_5100_5300_residual,L19,wave1_active,active residual subset,VEV_5100,-7404.3359375,159
+probe_l19_active_5000_5100_5300_residual,L19,wave1_active,active residual subset,VEV_5200,0.0,0
+probe_l19_active_5000_5100_5300_residual,L19,wave1_active,active residual subset,VEV_5300,-216.603515625,285
+probe_l19_active_5000_5100_5300_residual,L19,wave1_active,active residual subset,VEV_5400,0.0,0
+probe_l19_active_5000_5100_5300_residual,L19,wave1_active,active residual subset,VEV_5500,0.0,0
+probe_l19_active_5000_5100_5300_residual,L19,wave1_active,active residual subset,VEV_6000,0.0,0
+probe_l19_active_5000_5100_5300_residual,L19,wave1_active,active residual subset,VEV_6500,0.0,0
+probe_l20_active_5000_5300_inventory,L20,wave1_active,active residual inventory subset,HYDROGEL_PACK,0.0,0
+probe_l20_active_5000_5300_inventory,L20,wave1_active,active residual inventory subset,VELVETFRUIT_EXTRACT,0.0,0
+probe_l20_active_5000_5300_inventory,L20,wave1_active,active residual inventory subset,VEV_4000,0.0,0
+probe_l20_active_5000_5300_inventory,L20,wave1_active,active residual inventory subset,VEV_4500,0.0,0
+probe_l20_active_5000_5300_inventory,L20,wave1_active,active residual inventory subset,VEV_5000,-1626.9521484375,-44
+probe_l20_active_5000_5300_inventory,L20,wave1_active,active residual inventory subset,VEV_5100,0.0,0
+probe_l20_active_5000_5300_inventory,L20,wave1_active,active residual inventory subset,VEV_5200,0.0,0
+probe_l20_active_5000_5300_inventory,L20,wave1_active,active residual inventory subset,VEV_5300,182.9658203125,215
+probe_l20_active_5000_5300_inventory,L20,wave1_active,active residual inventory subset,VEV_5400,0.0,0
+probe_l20_active_5000_5300_inventory,L20,wave1_active,active residual inventory subset,VEV_5500,0.0,0
+probe_l20_active_5000_5300_inventory,L20,wave1_active,active residual inventory subset,VEV_6000,0.0,0
+probe_l20_active_5000_5300_inventory,L20,wave1_active,active residual inventory subset,VEV_6500,0.0,0
+probe_l21_upper_5400_residual,L21,wave1_upper,upper residual,HYDROGEL_PACK,0.0,0
+probe_l21_upper_5400_residual,L21,wave1_upper,upper residual,VELVETFRUIT_EXTRACT,0.0,0
+probe_l21_upper_5400_residual,L21,wave1_upper,upper residual,VEV_4000,0.0,0
+probe_l21_upper_5400_residual,L21,wave1_upper,upper residual,VEV_4500,0.0,0
+probe_l21_upper_5400_residual,L21,wave1_upper,upper residual,VEV_5000,0.0,0
+probe_l21_upper_5400_residual,L21,wave1_upper,upper residual,VEV_5100,0.0,0
+probe_l21_upper_5400_residual,L21,wave1_upper,upper residual,VEV_5200,0.0,0
+probe_l21_upper_5400_residual,L21,wave1_upper,upper residual,VEV_5300,0.0,0
+probe_l21_upper_5400_residual,L21,wave1_upper,upper residual,VEV_5400,-446.829833984375,91
+probe_l21_upper_5400_residual,L21,wave1_upper,upper residual,VEV_5500,0.0,0
+probe_l21_upper_5400_residual,L21,wave1_upper,upper residual,VEV_6000,0.0,0
+probe_l21_upper_5400_residual,L21,wave1_upper,upper residual,VEV_6500,0.0,0
+probe_l22_upper_5500_residual,L22,wave1_upper,upper residual,HYDROGEL_PACK,0.0,0
+probe_l22_upper_5500_residual,L22,wave1_upper,upper residual,VELVETFRUIT_EXTRACT,0.0,0
+probe_l22_upper_5500_residual,L22,wave1_upper,upper residual,VEV_4000,0.0,0
+probe_l22_upper_5500_residual,L22,wave1_upper,upper residual,VEV_4500,0.0,0
+probe_l22_upper_5500_residual,L22,wave1_upper,upper residual,VEV_5000,0.0,0
+probe_l22_upper_5500_residual,L22,wave1_upper,upper residual,VEV_5100,0.0,0
+probe_l22_upper_5500_residual,L22,wave1_upper,upper residual,VEV_5200,0.0,0
+probe_l22_upper_5500_residual,L22,wave1_upper,upper residual,VEV_5300,0.0,0
+probe_l22_upper_5500_residual,L22,wave1_upper,upper residual,VEV_5400,0.0,0
+probe_l22_upper_5500_residual,L22,wave1_upper,upper residual,VEV_5500,-320.791748046875,-300
+probe_l22_upper_5500_residual,L22,wave1_upper,upper residual,VEV_6000,0.0,0
+probe_l22_upper_5500_residual,L22,wave1_upper,upper residual,VEV_6500,0.0,0
+probe_l23_upper_5400_5500_residual,L23,wave1_upper,upper residual pair,HYDROGEL_PACK,0.0,0
+probe_l23_upper_5400_5500_residual,L23,wave1_upper,upper residual pair,VELVETFRUIT_EXTRACT,0.0,0
+probe_l23_upper_5400_5500_residual,L23,wave1_upper,upper residual pair,VEV_4000,0.0,0
+probe_l23_upper_5400_5500_residual,L23,wave1_upper,upper residual pair,VEV_4500,0.0,0
+probe_l23_upper_5400_5500_residual,L23,wave1_upper,upper residual pair,VEV_5000,0.0,0
+probe_l23_upper_5400_5500_residual,L23,wave1_upper,upper residual pair,VEV_5100,0.0,0
+probe_l23_upper_5400_5500_residual,L23,wave1_upper,upper residual pair,VEV_5200,0.0,0
+probe_l23_upper_5400_5500_residual,L23,wave1_upper,upper residual pair,VEV_5300,0.0,0
+probe_l23_upper_5400_5500_residual,L23,wave1_upper,upper residual pair,VEV_5400,-446.829833984375,91
+probe_l23_upper_5400_5500_residual,L23,wave1_upper,upper residual pair,VEV_5500,-320.791748046875,-300
+probe_l23_upper_5400_5500_residual,L23,wave1_upper,upper residual pair,VEV_6000,0.0,0
+probe_l23_upper_5400_5500_residual,L23,wave1_upper,upper residual pair,VEV_6500,0.0,0
+probe_l24_upper_5400_5500_passive,L24,wave1_upper,upper passive maker,HYDROGEL_PACK,0.0,0
+probe_l24_upper_5400_5500_passive,L24,wave1_upper,upper passive maker,VELVETFRUIT_EXTRACT,0.0,0
+probe_l24_upper_5400_5500_passive,L24,wave1_upper,upper passive maker,VEV_4000,0.0,0
+probe_l24_upper_5400_5500_passive,L24,wave1_upper,upper passive maker,VEV_4500,0.0,0
+probe_l24_upper_5400_5500_passive,L24,wave1_upper,upper passive maker,VEV_5000,0.0,0
+probe_l24_upper_5400_5500_passive,L24,wave1_upper,upper passive maker,VEV_5100,0.0,0
+probe_l24_upper_5400_5500_passive,L24,wave1_upper,upper passive maker,VEV_5200,0.0,0
+probe_l24_upper_5400_5500_passive,L24,wave1_upper,upper passive maker,VEV_5300,0.0,0
+probe_l24_upper_5400_5500_passive,L24,wave1_upper,upper passive maker,VEV_5400,0.0,0
+probe_l24_upper_5400_5500_passive,L24,wave1_upper,upper passive maker,VEV_5500,0.0,0
+probe_l24_upper_5400_5500_passive,L24,wave1_upper,upper passive maker,VEV_6000,0.0,0
+probe_l24_upper_5400_5500_passive,L24,wave1_upper,upper passive maker,VEV_6500,0.0,0
+probe_l25_vex_plus_5300,L25,wave1_active,vex plus active best strike,HYDROGEL_PACK,0.0,0
+probe_l25_vex_plus_5300,L25,wave1_active,vex plus active best strike,VELVETFRUIT_EXTRACT,332.4609375,-7
+probe_l25_vex_plus_5300,L25,wave1_active,vex plus active best strike,VEV_4000,0.0,0
+probe_l25_vex_plus_5300,L25,wave1_active,vex plus active best strike,VEV_4500,0.0,0
+probe_l25_vex_plus_5300,L25,wave1_active,vex plus active best strike,VEV_5000,0.0,0
+probe_l25_vex_plus_5300,L25,wave1_active,vex plus active best strike,VEV_5100,0.0,0
+probe_l25_vex_plus_5300,L25,wave1_active,vex plus active best strike,VEV_5200,0.0,0
+probe_l25_vex_plus_5300,L25,wave1_active,vex plus active best strike,VEV_5300,-216.603515625,285
+probe_l25_vex_plus_5300,L25,wave1_active,vex plus active best strike,VEV_5400,0.0,0
+probe_l25_vex_plus_5300,L25,wave1_active,vex plus active best strike,VEV_5500,0.0,0
+probe_l25_vex_plus_5300,L25,wave1_active,vex plus active best strike,VEV_6000,0.0,0
+probe_l25_vex_plus_5300,L25,wave1_active,vex plus active best strike,VEV_6500,0.0,0
+probe_l26_surface_5200_5300_relval,L26,wave1_surface,surface relative value,HYDROGEL_PACK,0.0,0
+probe_l26_surface_5200_5300_relval,L26,wave1_surface,surface relative value,VELVETFRUIT_EXTRACT,0.0,0
+probe_l26_surface_5200_5300_relval,L26,wave1_surface,surface relative value,VEV_4000,0.0,0
+probe_l26_surface_5200_5300_relval,L26,wave1_surface,surface relative value,VEV_4500,0.0,0
+probe_l26_surface_5200_5300_relval,L26,wave1_surface,surface relative value,VEV_5000,0.0,0
+probe_l26_surface_5200_5300_relval,L26,wave1_surface,surface relative value,VEV_5100,0.0,0
+probe_l26_surface_5200_5300_relval,L26,wave1_surface,surface relative value,VEV_5200,-11205.9033203125,11
+probe_l26_surface_5200_5300_relval,L26,wave1_surface,surface relative value,VEV_5300,466.191650390625,-6
+probe_l26_surface_5200_5300_relval,L26,wave1_surface,surface relative value,VEV_5400,0.0,0
+probe_l26_surface_5200_5300_relval,L26,wave1_surface,surface relative value,VEV_5500,0.0,0
+probe_l26_surface_5200_5300_relval,L26,wave1_surface,surface relative value,VEV_6000,0.0,0
+probe_l26_surface_5200_5300_relval,L26,wave1_surface,surface relative value,VEV_6500,0.0,0
+probe_l27_surface_5300_5400_relval,L27,wave1_surface,surface relative value,HYDROGEL_PACK,0.0,0
+probe_l27_surface_5300_5400_relval,L27,wave1_surface,surface relative value,VELVETFRUIT_EXTRACT,0.0,0
+probe_l27_surface_5300_5400_relval,L27,wave1_surface,surface relative value,VEV_4000,0.0,0
+probe_l27_surface_5300_5400_relval,L27,wave1_surface,surface relative value,VEV_4500,0.0,0
+probe_l27_surface_5300_5400_relval,L27,wave1_surface,surface relative value,VEV_5000,0.0,0
+probe_l27_surface_5300_5400_relval,L27,wave1_surface,surface relative value,VEV_5100,0.0,0
+probe_l27_surface_5300_5400_relval,L27,wave1_surface,surface relative value,VEV_5200,0.0,0
+probe_l27_surface_5300_5400_relval,L27,wave1_surface,surface relative value,VEV_5300,852.2694702148438,2
+probe_l27_surface_5300_5400_relval,L27,wave1_surface,surface relative value,VEV_5400,-1841.8914794921875,11
+probe_l27_surface_5300_5400_relval,L27,wave1_surface,surface relative value,VEV_5500,0.0,0
+probe_l27_surface_5300_5400_relval,L27,wave1_surface,surface relative value,VEV_6000,0.0,0
+probe_l27_surface_5300_5400_relval,L27,wave1_surface,surface relative value,VEV_6500,0.0,0
+r3_b01_delta1_baseline,B01-base,legacy_delta1,legacy delta1 baseline,HYDROGEL_PACK,-7655.6171875,8
+r3_b01_delta1_baseline,B01-base,legacy_delta1,legacy delta1 baseline,VELVETFRUIT_EXTRACT,1240.90625,-79
+r3_b01_delta1_baseline,B01-base,legacy_delta1,legacy delta1 baseline,VEV_4000,0.0,0
+r3_b01_delta1_baseline,B01-base,legacy_delta1,legacy delta1 baseline,VEV_4500,0.0,0
+r3_b01_delta1_baseline,B01-base,legacy_delta1,legacy delta1 baseline,VEV_5000,0.0,0
+r3_b01_delta1_baseline,B01-base,legacy_delta1,legacy delta1 baseline,VEV_5100,0.0,0
+r3_b01_delta1_baseline,B01-base,legacy_delta1,legacy delta1 baseline,VEV_5200,0.0,0
+r3_b01_delta1_baseline,B01-base,legacy_delta1,legacy delta1 baseline,VEV_5300,0.0,0
+r3_b01_delta1_baseline,B01-base,legacy_delta1,legacy delta1 baseline,VEV_5400,0.0,0
+r3_b01_delta1_baseline,B01-base,legacy_delta1,legacy delta1 baseline,VEV_5500,0.0,0
+r3_b01_delta1_baseline,B01-base,legacy_delta1,legacy delta1 baseline,VEV_6000,0.0,0
+r3_b01_delta1_baseline,B01-base,legacy_delta1,legacy delta1 baseline,VEV_6500,0.0,0
+r3_b01_delta1_optiver,B01-opt,legacy_delta1,legacy delta1 optiver,HYDROGEL_PACK,-14249.34375,-23
+r3_b01_delta1_optiver,B01-opt,legacy_delta1,legacy delta1 optiver,VELVETFRUIT_EXTRACT,-6152.8125,106
+r3_b01_delta1_optiver,B01-opt,legacy_delta1,legacy delta1 optiver,VEV_4000,0.0,0
+r3_b01_delta1_optiver,B01-opt,legacy_delta1,legacy delta1 optiver,VEV_4500,0.0,0
+r3_b01_delta1_optiver,B01-opt,legacy_delta1,legacy delta1 optiver,VEV_5000,0.0,0
+r3_b01_delta1_optiver,B01-opt,legacy_delta1,legacy delta1 optiver,VEV_5100,0.0,0
+r3_b01_delta1_optiver,B01-opt,legacy_delta1,legacy delta1 optiver,VEV_5200,0.0,0
+r3_b01_delta1_optiver,B01-opt,legacy_delta1,legacy delta1 optiver,VEV_5300,0.0,0
+r3_b01_delta1_optiver,B01-opt,legacy_delta1,legacy delta1 optiver,VEV_5400,0.0,0
+r3_b01_delta1_optiver,B01-opt,legacy_delta1,legacy delta1 optiver,VEV_5500,0.0,0
+r3_b01_delta1_optiver,B01-opt,legacy_delta1,legacy delta1 optiver,VEV_6000,0.0,0
+r3_b01_delta1_optiver,B01-opt,legacy_delta1,legacy delta1 optiver,VEV_6500,0.0,0
+r3_b02_itm_anchor,B02-anchor,legacy_itm_vex,legacy itm anchor composite,HYDROGEL_PACK,-0.80859375,4
+r3_b02_itm_anchor,B02-anchor,legacy_itm_vex,legacy itm anchor composite,VELVETFRUIT_EXTRACT,600.30859375,4
+r3_b02_itm_anchor,B02-anchor,legacy_itm_vex,legacy itm anchor composite,VEV_4000,63.6962890625,9
+r3_b02_itm_anchor,B02-anchor,legacy_itm_vex,legacy itm anchor composite,VEV_4500,63.6962890625,9
+r3_b02_itm_anchor,B02-anchor,legacy_itm_vex,legacy itm anchor composite,VEV_5000,0.0,0
+r3_b02_itm_anchor,B02-anchor,legacy_itm_vex,legacy itm anchor composite,VEV_5100,0.0,0
+r3_b02_itm_anchor,B02-anchor,legacy_itm_vex,legacy itm anchor composite,VEV_5200,0.0,0
+r3_b02_itm_anchor,B02-anchor,legacy_itm_vex,legacy itm anchor composite,VEV_5300,0.0,0
+r3_b02_itm_anchor,B02-anchor,legacy_itm_vex,legacy itm anchor composite,VEV_5400,0.0,0
+r3_b02_itm_anchor,B02-anchor,legacy_itm_vex,legacy itm anchor composite,VEV_5500,0.0,0
+r3_b02_itm_anchor,B02-anchor,legacy_itm_vex,legacy itm anchor composite,VEV_6000,0.0,0
+r3_b02_itm_anchor,B02-anchor,legacy_itm_vex,legacy itm anchor composite,VEV_6500,0.0,0
+r3_b02_itm_residual,B02-resid,legacy_itm_vex,legacy itm residual composite,HYDROGEL_PACK,0.0,0
+r3_b02_itm_residual,B02-resid,legacy_itm_vex,legacy itm residual composite,VELVETFRUIT_EXTRACT,1211.90625,-79
+r3_b02_itm_residual,B02-resid,legacy_itm_vex,legacy itm residual composite,VEV_4000,113.232177734375,3
+r3_b02_itm_residual,B02-resid,legacy_itm_vex,legacy itm residual composite,VEV_4500,84.232177734375,3
+r3_b02_itm_residual,B02-resid,legacy_itm_vex,legacy itm residual composite,VEV_5000,0.0,0
+r3_b02_itm_residual,B02-resid,legacy_itm_vex,legacy itm residual composite,VEV_5100,0.0,0
+r3_b02_itm_residual,B02-resid,legacy_itm_vex,legacy itm residual composite,VEV_5200,0.0,0
+r3_b02_itm_residual,B02-resid,legacy_itm_vex,legacy itm residual composite,VEV_5300,0.0,0
+r3_b02_itm_residual,B02-resid,legacy_itm_vex,legacy itm residual composite,VEV_5400,0.0,0
+r3_b02_itm_residual,B02-resid,legacy_itm_vex,legacy itm residual composite,VEV_5500,0.0,0
+r3_b02_itm_residual,B02-resid,legacy_itm_vex,legacy itm residual composite,VEV_6000,0.0,0
+r3_b02_itm_residual,B02-resid,legacy_itm_vex,legacy itm residual composite,VEV_6500,0.0,0
+r3_b03_voucher_pure,B03-pure,legacy_active_vouchers,legacy active voucher pure,HYDROGEL_PACK,0.0,0
+r3_b03_voucher_pure,B03-pure,legacy_active_vouchers,legacy active voucher pure,VELVETFRUIT_EXTRACT,0.0,0
+r3_b03_voucher_pure,B03-pure,legacy_active_vouchers,legacy active voucher pure,VEV_4000,0.0,0
+r3_b03_voucher_pure,B03-pure,legacy_active_vouchers,legacy active voucher pure,VEV_4500,0.0,0
+r3_b03_voucher_pure,B03-pure,legacy_active_vouchers,legacy active voucher pure,VEV_5000,-1304.0625,-192
+r3_b03_voucher_pure,B03-pure,legacy_active_vouchers,legacy active voucher pure,VEV_5100,-525.6484375,-255
+r3_b03_voucher_pure,B03-pure,legacy_active_vouchers,legacy active voucher pure,VEV_5200,-519.322265625,-255
+r3_b03_voucher_pure,B03-pure,legacy_active_vouchers,legacy active voucher pure,VEV_5300,87.1845703125,-251
+r3_b03_voucher_pure,B03-pure,legacy_active_vouchers,legacy active voucher pure,VEV_5400,0.0,0
+r3_b03_voucher_pure,B03-pure,legacy_active_vouchers,legacy active voucher pure,VEV_5500,0.0,0
+r3_b03_voucher_pure,B03-pure,legacy_active_vouchers,legacy active voucher pure,VEV_6000,0.0,0
+r3_b03_voucher_pure,B03-pure,legacy_active_vouchers,legacy active voucher pure,VEV_6500,0.0,0
+r3_b04_full_surface,B04-surf,legacy_active_vouchers,legacy full surface composite,HYDROGEL_PACK,-0.80859375,4
+r3_b04_full_surface,B04-surf,legacy_active_vouchers,legacy full surface composite,VELVETFRUIT_EXTRACT,600.30859375,4
+r3_b04_full_surface,B04-surf,legacy_active_vouchers,legacy full surface composite,VEV_4000,159.3984375,31
+r3_b04_full_surface,B04-surf,legacy_active_vouchers,legacy full surface composite,VEV_4500,159.3984375,31
+r3_b04_full_surface,B04-surf,legacy_active_vouchers,legacy full surface composite,VEV_5000,-1935.734375,-269
+r3_b04_full_surface,B04-surf,legacy_active_vouchers,legacy full surface composite,VEV_5100,-724.70703125,-300
+r3_b04_full_surface,B04-surf,legacy_active_vouchers,legacy full surface composite,VEV_5200,-701.26171875,-300
+r3_b04_full_surface,B04-surf,legacy_active_vouchers,legacy full surface composite,VEV_5300,80.5830078125,-300
+r3_b04_full_surface,B04-surf,legacy_active_vouchers,legacy full surface composite,VEV_5400,-54.2314453125,-300
+r3_b04_full_surface,B04-surf,legacy_active_vouchers,legacy full surface composite,VEV_5500,-144.791748046875,-300
+r3_b04_full_surface,B04-surf,legacy_active_vouchers,legacy full surface composite,VEV_6000,0.0,0
+r3_b04_full_surface,B04-surf,legacy_active_vouchers,legacy full surface composite,VEV_6500,0.0,0
+r3_b05_composite_advanced,B05-adv,legacy_active_vouchers,legacy advanced composite,HYDROGEL_PACK,-13943.15625,-19
+r3_b05_composite_advanced,B05-adv,legacy_active_vouchers,legacy advanced composite,VELVETFRUIT_EXTRACT,-8913.1875,114
+r3_b05_composite_advanced,B05-adv,legacy_active_vouchers,legacy advanced composite,VEV_4000,0.0,0
+r3_b05_composite_advanced,B05-adv,legacy_active_vouchers,legacy advanced composite,VEV_4500,0.0,0
+r3_b05_composite_advanced,B05-adv,legacy_active_vouchers,legacy advanced composite,VEV_5000,-1132.0390625,-300
+r3_b05_composite_advanced,B05-adv,legacy_active_vouchers,legacy advanced composite,VEV_5100,-724.70703125,-300
+r3_b05_composite_advanced,B05-adv,legacy_active_vouchers,legacy advanced composite,VEV_5200,-701.26171875,-300
+r3_b05_composite_advanced,B05-adv,legacy_active_vouchers,legacy advanced composite,VEV_5300,80.5830078125,-300
+r3_b05_composite_advanced,B05-adv,legacy_active_vouchers,legacy advanced composite,VEV_5400,0.0,0
+r3_b05_composite_advanced,B05-adv,legacy_active_vouchers,legacy advanced composite,VEV_5500,0.0,0
+r3_b05_composite_advanced,B05-adv,legacy_active_vouchers,legacy advanced composite,VEV_6000,0.0,0
+r3_b05_composite_advanced,B05-adv,legacy_active_vouchers,legacy advanced composite,VEV_6500,0.0,0
+r3_b06_tte_cautious,B06-tte,legacy_active_vouchers,legacy tte cautious,HYDROGEL_PACK,-0.80859375,4
+r3_b06_tte_cautious,B06-tte,legacy_active_vouchers,legacy tte cautious,VELVETFRUIT_EXTRACT,600.30859375,4
+r3_b06_tte_cautious,B06-tte,legacy_active_vouchers,legacy tte cautious,VEV_4000,0.0,0
+r3_b06_tte_cautious,B06-tte,legacy_active_vouchers,legacy tte cautious,VEV_4500,0.0,0
+r3_b06_tte_cautious,B06-tte,legacy_active_vouchers,legacy tte cautious,VEV_5000,-7.0,0
+r3_b06_tte_cautious,B06-tte,legacy_active_vouchers,legacy tte cautious,VEV_5100,-724.70703125,-300
+r3_b06_tte_cautious,B06-tte,legacy_active_vouchers,legacy tte cautious,VEV_5200,-701.26171875,-300
+r3_b06_tte_cautious,B06-tte,legacy_active_vouchers,legacy tte cautious,VEV_5300,80.5830078125,-300
+r3_b06_tte_cautious,B06-tte,legacy_active_vouchers,legacy tte cautious,VEV_5400,0.0,0
+r3_b06_tte_cautious,B06-tte,legacy_active_vouchers,legacy tte cautious,VEV_5500,0.0,0
+r3_b06_tte_cautious,B06-tte,legacy_active_vouchers,legacy tte cautious,VEV_6000,0.0,0
+r3_b06_tte_cautious,B06-tte,legacy_active_vouchers,legacy tte cautious,VEV_6500,0.0,0
+r3_b07_delta_hedge,B07-hedge,legacy_active_vouchers,legacy delta hedge,HYDROGEL_PACK,-0.80859375,4
+r3_b07_delta_hedge,B07-hedge,legacy_active_vouchers,legacy delta hedge,VELVETFRUIT_EXTRACT,-1021.625,200
+r3_b07_delta_hedge,B07-hedge,legacy_active_vouchers,legacy delta hedge,VEV_4000,0.0,0
+r3_b07_delta_hedge,B07-hedge,legacy_active_vouchers,legacy delta hedge,VEV_4500,0.0,0
+r3_b07_delta_hedge,B07-hedge,legacy_active_vouchers,legacy delta hedge,VEV_5000,-839.177734375,-109
+r3_b07_delta_hedge,B07-hedge,legacy_active_vouchers,legacy delta hedge,VEV_5100,121.29296875,-300
+r3_b07_delta_hedge,B07-hedge,legacy_active_vouchers,legacy delta hedge,VEV_5200,383.73828125,-300
+r3_b07_delta_hedge,B07-hedge,legacy_active_vouchers,legacy delta hedge,VEV_5300,80.5830078125,-300
+r3_b07_delta_hedge,B07-hedge,legacy_active_vouchers,legacy delta hedge,VEV_5400,0.0,0
+r3_b07_delta_hedge,B07-hedge,legacy_active_vouchers,legacy delta hedge,VEV_5500,0.0,0
+r3_b07_delta_hedge,B07-hedge,legacy_active_vouchers,legacy delta hedge,VEV_6000,0.0,0
+r3_b07_delta_hedge,B07-hedge,legacy_active_vouchers,legacy delta hedge,VEV_6500,0.0,0
+r3_b08_regime_composite,B08-regime,legacy_active_vouchers,legacy regime composite,HYDROGEL_PACK,-0.80859375,4
+r3_b08_regime_composite,B08-regime,legacy_active_vouchers,legacy regime composite,VELVETFRUIT_EXTRACT,600.30859375,4
+r3_b08_regime_composite,B08-regime,legacy_active_vouchers,legacy regime composite,VEV_4000,0.0,0
+r3_b08_regime_composite,B08-regime,legacy_active_vouchers,legacy regime composite,VEV_4500,0.0,0
+r3_b08_regime_composite,B08-regime,legacy_active_vouchers,legacy regime composite,VEV_5000,-756.0390625,-300
+r3_b08_regime_composite,B08-regime,legacy_active_vouchers,legacy regime composite,VEV_5100,-724.70703125,-300
+r3_b08_regime_composite,B08-regime,legacy_active_vouchers,legacy regime composite,VEV_5200,-701.26171875,-300
+r3_b08_regime_composite,B08-regime,legacy_active_vouchers,legacy regime composite,VEV_5300,80.5830078125,-300
+r3_b08_regime_composite,B08-regime,legacy_active_vouchers,legacy regime composite,VEV_5400,0.0,0
+r3_b08_regime_composite,B08-regime,legacy_active_vouchers,legacy regime composite,VEV_5500,0.0,0
+r3_b08_regime_composite,B08-regime,legacy_active_vouchers,legacy regime composite,VEV_6000,0.0,0
+r3_b08_regime_composite,B08-regime,legacy_active_vouchers,legacy regime composite,VEV_6500,0.0,0
