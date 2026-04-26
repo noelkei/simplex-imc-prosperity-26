@@ -3,20 +3,22 @@
 ## Round And Deadline
 
 - Round: `round_4`
-- Expected round fact source: `../../../docs/prosperity_wiki/rounds/round_4.md` (not present yet; keep NOT_STARTED)
+- Expected round fact source: [`../../../docs/prosperity_wiki/rounds/round_4.md`](../../../docs/prosperity_wiki/rounds/round_4.md)
 - Deadline: `UNKNOWN`
 - Workflow mode: standard until less than 24 hours remain, then fast mode
 
 ## Current Next Priority Action
 
-This round workspace is pre-created and `NOT_STARTED`. Start phase 00 ingestion when official round facts are available.
+Review the completed `Phase 01` EDA package, then start `Phase 02`
+understanding using the canonical EDA plus the counterparty, option-book, and
+Round 3 revalidation annexes.
 
 ## Phase Status
 
 | Phase | Status | Owner | Reviewer | Artifact | Blocker |
 | --- | --- | --- | --- | --- | --- |
-| 00 Ingestion | NOT_STARTED | Unassigned | Unassigned | [`00_ingestion.md`](00_ingestion.md) / [`phase_00_ingestion_context.md`](phase_00_ingestion_context.md) | None recorded |
-| 01 EDA | NOT_STARTED | Unassigned | Unassigned | [`01_eda/README.md`](01_eda/README.md) / [`phase_01_eda_context.md`](phase_01_eda_context.md) | None recorded |
+| 00 Ingestion | READY_FOR_REVIEW | Codex | Unassigned | [`00_ingestion.md`](00_ingestion.md) / [`phase_00_ingestion_context.md`](phase_00_ingestion_context.md) | Review pending |
+| 01 EDA | READY_FOR_REVIEW | Codex | Unassigned | [`01_eda/eda_round_4_counterparty_and_option_book.md`](01_eda/eda_round_4_counterparty_and_option_book.md) / [`phase_01_eda_context.md`](phase_01_eda_context.md) | Review pending |
 | 02 Understanding | NOT_STARTED | Unassigned | Unassigned | [`02_understanding.md`](02_understanding.md) / [`phase_02_understanding_context.md`](phase_02_understanding_context.md) | None recorded |
 | 02b External Paper Research | NOT_STARTED | Unassigned | Unassigned | [`02b_external_paper_research.md`](02b_external_paper_research.md) / [`phase_02b_external_paper_research_context.md`](phase_02b_external_paper_research_context.md) | Understanding summary required |
 | 03 Strategy | NOT_STARTED | Unassigned | Unassigned | [`03_strategy_candidates.md`](03_strategy_candidates.md) / [`phase_03_strategy_context.md`](phase_03_strategy_context.md) | Understanding summary and default 02b prompt generation required, unless the user explicitly skips 02b |
@@ -24,6 +26,17 @@ This round workspace is pre-created and `NOT_STARTED`. Start phase 00 ingestion 
 | 05 Implementation | NOT_STARTED | Unassigned | Unassigned | [`phase_05_implementation_context.md`](phase_05_implementation_context.md) | Reviewed strategy spec required |
 | 06 Testing/performance | NOT_STARTED | Unassigned | Unassigned | [`phase_06_testing_context.md`](phase_06_testing_context.md) | Bot candidate required |
 | 07 Debugging/iteration | NOT_STARTED | Unassigned | Unassigned | [`06_debugging/`](06_debugging/) / [`phase_07_debugging_context.md`](phase_07_debugging_context.md) | Issue/run required |
+
+## Product Scope
+
+- Algorithmic: `HYDROGEL_PACK`, `VELVETFRUIT_EXTRACT`, and
+  `VEV_{4000,4500,5000,5100,5200,5300,5400,5500,6000,6500}`.
+- Manual-only: `AETHER_CRYSTAL`, 2 week vanilla options, 3 week vanilla
+  options, chooser option, binary put option, knock-out put option.
+- Key round delta: counterparty IDs are now available in trade data via
+  `Trade.buyer` and `Trade.seller`.
+- Prior-round compatibility: `round_3` is compatible at product/mechanics
+  level, but counterparties are a new information layer that must be revalidated in EDA.
 
 ## External Paper Research Status
 
@@ -78,7 +91,11 @@ Example when active:
 
 ## Blockers And Decisions Needed
 
-- None recorded.
+- Need exact manual contract details from the platform or accepted source before
+  manual-order analysis can start.
+- Need deadline confirmation to assess fast-mode risk accurately.
+- Need Phase 01 review to lock which counterparty findings are trusted inputs
+  for understanding and strategy.
 
 ## Final Submission Status
 
@@ -106,4 +123,15 @@ Example when active:
 
 ## Recently Changed Artifacts
 
-- Pre-created from template: `2026-04-14`
+- Raw source added: `../../../docs/prosperity_wiki_raw/15_round_4.md` on `2026-04-26`
+- Curated wiki added: `../../../docs/prosperity_wiki/rounds/round_4.md` on `2026-04-26`
+- Raw data added: `../data/raw/prices_round_4_day_{1,2,3}.csv` and `../data/raw/trades_round_4_day_{1,2,3}.csv` on `2026-04-26`
+- Ingestion artifact updated: `00_ingestion.md` on `2026-04-26`
+- Prior-round intake added: `00_prior_round_intake.md` on `2026-04-26`
+- Ingestion context updated: `phase_00_ingestion_context.md` on `2026-04-26`
+- Canonical EDA added: `01_eda/eda_round_4_counterparty_and_option_book.md` on `2026-04-26`
+- EDA annexes added: `01_eda/eda_round_4_counterparty_profiles.md`, `01_eda/eda_round_4_option_book_structure.md`, and `01_eda/eda_round_4_round3_revalidation.md` on `2026-04-26`
+- EDA script added: `01_eda/analyze_round_4_eda.py` on `2026-04-26`
+- EDA context updated: `phase_01_eda_context.md` on `2026-04-26`
+- Data README updated: `../data/README.md` on `2026-04-26`
+- Round README updated: `../README.md` on `2026-04-26`

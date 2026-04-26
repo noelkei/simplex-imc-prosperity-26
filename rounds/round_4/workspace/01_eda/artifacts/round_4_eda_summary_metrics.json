@@ -1,0 +1,279 @@
+{
+  "concentration_top1_share_by_symbol_side": [
+    {
+      "dominant_counterparty": "Mark 38",
+      "side": "buyer",
+      "symbol": "HYDROGEL_PACK",
+      "top1_share": 0.5039138943248532
+    },
+    {
+      "dominant_counterparty": "Mark 14",
+      "side": "seller",
+      "symbol": "HYDROGEL_PACK",
+      "top1_share": 0.4960861056751467
+    },
+    {
+      "dominant_counterparty": "Mark 55",
+      "side": "buyer",
+      "symbol": "VELVETFRUIT_EXTRACT",
+      "top1_share": 0.4330195510499638
+    },
+    {
+      "dominant_counterparty": "Mark 55",
+      "side": "seller",
+      "symbol": "VELVETFRUIT_EXTRACT",
+      "top1_share": 0.4344677769732078
+    },
+    {
+      "dominant_counterparty": "Mark 14",
+      "side": "buyer",
+      "symbol": "VEV_4000",
+      "top1_share": 0.5248868778280543
+    },
+    {
+      "dominant_counterparty": "Mark 38",
+      "side": "seller",
+      "symbol": "VEV_4000",
+      "top1_share": 0.5271493212669683
+    },
+    {
+      "dominant_counterparty": "Mark 38",
+      "side": "buyer",
+      "symbol": "VEV_4500",
+      "top1_share": 0.6666666666666666
+    },
+    {
+      "dominant_counterparty": "Mark 22",
+      "side": "seller",
+      "symbol": "VEV_4500",
+      "top1_share": 0.6666666666666666
+    },
+    {
+      "dominant_counterparty": "Mark 38",
+      "side": "buyer",
+      "symbol": "VEV_5000",
+      "top1_share": 0.6666666666666666
+    },
+    {
+      "dominant_counterparty": "Mark 22",
+      "side": "seller",
+      "symbol": "VEV_5000",
+      "top1_share": 0.6666666666666666
+    },
+    {
+      "dominant_counterparty": "Mark 38",
+      "side": "buyer",
+      "symbol": "VEV_5100",
+      "top1_share": 0.6666666666666666
+    },
+    {
+      "dominant_counterparty": "Mark 22",
+      "side": "seller",
+      "symbol": "VEV_5100",
+      "top1_share": 0.6666666666666666
+    },
+    {
+      "dominant_counterparty": "Mark 14",
+      "side": "buyer",
+      "symbol": "VEV_5200",
+      "top1_share": 0.7021276595744681
+    },
+    {
+      "dominant_counterparty": "Mark 22",
+      "side": "seller",
+      "symbol": "VEV_5200",
+      "top1_share": 0.9787234042553192
+    },
+    {
+      "dominant_counterparty": "Mark 01",
+      "side": "buyer",
+      "symbol": "VEV_5300",
+      "top1_share": 0.8048780487804879
+    },
+    {
+      "dominant_counterparty": "Mark 22",
+      "side": "seller",
+      "symbol": "VEV_5300",
+      "top1_share": 0.9939024390243902
+    },
+    {
+      "dominant_counterparty": "Mark 01",
+      "side": "buyer",
+      "symbol": "VEV_5400",
+      "top1_share": 0.9528985507246376
+    },
+    {
+      "dominant_counterparty": "Mark 22",
+      "side": "seller",
+      "symbol": "VEV_5400",
+      "top1_share": 1.0
+    },
+    {
+      "dominant_counterparty": "Mark 01",
+      "side": "buyer",
+      "symbol": "VEV_5500",
+      "top1_share": 0.977124183006536
+    },
+    {
+      "dominant_counterparty": "Mark 22",
+      "side": "seller",
+      "symbol": "VEV_5500",
+      "top1_share": 1.0
+    },
+    {
+      "dominant_counterparty": "Mark 01",
+      "side": "buyer",
+      "symbol": "VEV_6000",
+      "top1_share": 1.0
+    },
+    {
+      "dominant_counterparty": "Mark 22",
+      "side": "seller",
+      "symbol": "VEV_6000",
+      "top1_share": 1.0
+    },
+    {
+      "dominant_counterparty": "Mark 01",
+      "side": "buyer",
+      "symbol": "VEV_6500",
+      "top1_share": 1.0
+    },
+    {
+      "dominant_counterparty": "Mark 22",
+      "side": "seller",
+      "symbol": "VEV_6500",
+      "top1_share": 1.0
+    }
+  ],
+  "controlled_regression_r2": 0.010083137015115,
+  "dominant_symbol_by_trade_count": {
+    "HYDROGEL_PACK": 1022,
+    "VELVETFRUIT_EXTRACT": 1381,
+    "VEV_4000": 442,
+    "VEV_5300": 164,
+    "VEV_5400": 276,
+    "VEV_5500": 306,
+    "VEV_6000": 317,
+    "VEV_6500": 317
+  },
+  "option_book_rel_spread_bps": {
+    "VEV_4000": 166.3389,
+    "VEV_4500": 211.2479,
+    "VEV_5000": 237.6412,
+    "VEV_5100": 260.1363,
+    "VEV_5200": 312.6965,
+    "VEV_5300": 493.5511,
+    "VEV_5400": 1147.0759,
+    "VEV_5500": 3227.4352,
+    "VEV_6000": 20000.0,
+    "VEV_6500": 20000.0
+  },
+  "option_book_trade_counts": {
+    "VEV_4000": 442,
+    "VEV_4500": 3,
+    "VEV_5000": 3,
+    "VEV_5100": 3,
+    "VEV_5200": 47,
+    "VEV_5300": 164,
+    "VEV_5400": 276,
+    "VEV_5500": 306,
+    "VEV_6000": 317,
+    "VEV_6500": 317
+  },
+  "price_rows_total": 360000,
+  "products_present": [
+    "HYDROGEL_PACK",
+    "VELVETFRUIT_EXTRACT",
+    "VEV_4000",
+    "VEV_4500",
+    "VEV_5000",
+    "VEV_5100",
+    "VEV_5200",
+    "VEV_5300",
+    "VEV_5400",
+    "VEV_5500",
+    "VEV_6000",
+    "VEV_6500"
+  ],
+  "top_buyers": {
+    "Mark 01": 1599,
+    "Mark 14": 1127,
+    "Mark 22": 42,
+    "Mark 38": 733,
+    "Mark 55": 598,
+    "Mark 67": 165
+  },
+  "top_regression_coefficients": [
+    {
+      "coefficient": 141.97830041741886,
+      "feature": "seller_bucket_Mark 38"
+    },
+    {
+      "coefficient": 121.24366369044252,
+      "feature": "buyer_bucket_Mark 38"
+    },
+    {
+      "coefficient": -93.16215395042978,
+      "feature": "symbol_HYDROGEL_PACK"
+    },
+    {
+      "coefficient": -87.63332190961043,
+      "feature": "symbol_VEV_4000"
+    },
+    {
+      "coefficient": 76.35283817008818,
+      "feature": "symbol_VEV_6500"
+    },
+    {
+      "coefficient": 76.2514389186477,
+      "feature": "symbol_VEV_6000"
+    },
+    {
+      "coefficient": -64.13638523633058,
+      "feature": "symbol_VEV_4500"
+    },
+    {
+      "coefficient": 61.14897374801454,
+      "feature": "symbol_VEV_5200"
+    },
+    {
+      "coefficient": 53.31917215025028,
+      "feature": "symbol_VELVETFRUIT_EXTRACT"
+    },
+    {
+      "coefficient": -46.59952141724322,
+      "feature": "buyer_bucket_Mark 14"
+    },
+    {
+      "coefficient": -41.828101116765296,
+      "feature": "seller_bucket_OTHER_SELLER"
+    },
+    {
+      "coefficient": -39.29768273163053,
+      "feature": "seller_bucket_Mark 22"
+    }
+  ],
+  "top_sellers": {
+    "Mark 01": 244,
+    "Mark 14": 1045,
+    "Mark 22": 1542,
+    "Mark 38": 745,
+    "Mark 49": 105,
+    "Mark 55": 600
+  },
+  "trade_rows_total": 4281,
+  "trade_symbols_present": [
+    "HYDROGEL_PACK",
+    "VELVETFRUIT_EXTRACT",
+    "VEV_4000",
+    "VEV_4500",
+    "VEV_5000",
+    "VEV_5100",
+    "VEV_5200",
+    "VEV_5300",
+    "VEV_5400",
+    "VEV_5500",
+    "VEV_6000",
+    "VEV_6500"
+  ]
+}

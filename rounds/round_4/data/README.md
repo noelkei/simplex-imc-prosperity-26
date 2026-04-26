@@ -1,6 +1,16 @@
 # Round 4 Data
 
-No data artifacts have been added yet.
+Raw data artifacts are now present under [`raw/`](raw/):
+
+- `prices_round_4_day_1.csv`
+- `prices_round_4_day_2.csv`
+- `prices_round_4_day_3.csv`
+- `trades_round_4_day_1.csv`
+- `trades_round_4_day_2.csv`
+- `trades_round_4_day_3.csv`
+
+These files should be treated as evidence inputs for EDA, not as official
+Prosperity rules. Official facts still live in `docs/prosperity_wiki/`.
 
 Store only round-local data artifacts here. Do not treat data observations as official rules; use `docs/prosperity_wiki/` for facts.
 
