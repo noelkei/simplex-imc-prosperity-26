@@ -41,13 +41,9 @@ READY_FOR_REVIEW
 
 ## Current Findings
 
-- The strongest current live family is no longer only `W3-15`; Wave 4 improved
-  the clean winner again:
-  - `W4-03 = 1606.305`
-  - `W4-04 = 1604.305`
-  - `W4-01 = W4-02 = W3-15 = 1527.305`
-- The best clean architecture is now explicitly `delta-1 + ITM` on the Kalman
-  base, not pure `delta-1` alone.
+- The strongest current full-stack family is now `W4-03/W4-04/W5-01`, while
+  the strongest pure fallback benchmark is `W5-04 = 1672.000`.
+- The best clean architecture remains `delta-1 + ITM` on the Kalman base, not pure `delta-1` alone, even though pure `delta-1` closes the round as the best standalone control.
 - Wave 4 also resolved a second question: `5300` is still usable only as a
   tiny rescue / overlay candidate, not as a normal finalist family.
 - The broad active voucher family remains weaker than originally expected, but
@@ -61,13 +57,10 @@ READY_FOR_REVIEW
   - then attack the upside ceiling by building descendants of `B08/C06/B04/B03/B06`
     with strike pruning, `VEX` anchoring, transformed thresholds, and strict
     retention logic.
-- The new planning artifact therefore recommends a 12-bot Wave 5:
-  - `4` clean finalist / benchmark bots,
-  - `6` `>10k` upside-distillation descendants,
-  - `2` toxic-strike-as-signal variants.
-- That recommendation is now frozen into the actual Wave 5 spec and
-  implementation set, so the next uncertainty is no longer which bots to
-  build, but which family survives live validation.
+- That Wave 5 recommendation was implemented, partially observed, and is now
+  absorbed into the closeout. The next uncertainty is no longer which Round 3
+  bots to build, but which strategy principles deserve to transfer into
+  `round_4`.
 
 ## Decisions Made
 
@@ -90,8 +83,8 @@ READY_FOR_REVIEW
 - No strategy-design blocker remains before coding.
 - No external blocker remains before the next strategy pass.
 - No strategy-design blocker remains before live execution.
-- The next blocker is no longer planning or spec shape. It is getting the Wave
-  5 evidence back from platform runs.
+- No Round 3 strategy blocker remains. The open issue is only how strongly to
+  carry these conclusions into `round_4`.
 
 ## Linked Artifacts
 
@@ -106,13 +99,14 @@ READY_FOR_REVIEW
 - [`04_strategy_specs/spec_learning_batch_wave2.md`](04_strategy_specs/spec_learning_batch_wave2.md)
 - [`05_implementation/learning_batch_wave2_manifest.md`](05_implementation/learning_batch_wave2_manifest.md)
 - [`06_testing/round_3_full_performance_synthesis.md`](06_testing/round_3_full_performance_synthesis.md)
+- [`06_testing/round_3_closeout_retrospective.md`](06_testing/round_3_closeout_retrospective.md)
 - [`post_run_research_memory.md`](post_run_research_memory.md)
 
 ## Next Priority Action
 
-Wave 5 strategy work is done. The next step is to run the 12-bot final
-exploitation / upside-distillation batch and compare winner protection versus
-distilled high-upside descendants.
+Round 3 strategy work is done. The next step is to consume the closeout
+package in `round_4` and reuse it as framing, not to open another Round 3
+strategy batch.
 
 ## Deadline Risk
 

@@ -17,12 +17,19 @@ WORKSPACE = ROUND / "workspace"
 TESTING = WORKSPACE / "06_testing"
 ARTIFACTS = TESTING / "artifacts" / "full_synthesis"
 PERF_HIST = ROUND / "performances" / "amin" / "historical"
+PERF_CANON = ROUND / "performances" / "amin" / "canonical"
 BOT_HIST = ROUND / "bots" / "amin" / "historical"
+BOT_CANON = ROUND / "bots" / "amin" / "canonical"
 WAVE1_MANIFEST = WORKSPACE / "05_implementation" / "learning_batch_wave1_manifest.md"
 WAVE2_MANIFEST = WORKSPACE / "05_implementation" / "learning_batch_wave2_manifest.md"
 WAVE3_MANIFEST = WORKSPACE / "05_implementation" / "learning_batch_wave3_manifest.md"
 WAVE4_MANIFEST = WORKSPACE / "05_implementation" / "learning_batch_wave4_manifest.md"
+WAVE5_MANIFEST = WORKSPACE / "05_implementation" / "learning_batch_wave5_manifest.md"
 REPORT = TESTING / "round_3_full_performance_synthesis.md"
+
+STEM_ALIASES = {
+    "candidate_w5_09_": "candidate_w5_09_winner_plus_tiny_trio",
+}
 
 ALL_PRODUCTS = [
     "HYDROGEL_PACK",
@@ -382,6 +389,19 @@ def infer_wave4_bucket(short_id: str) -> str:
     return "wave4_other"
 
 
+def infer_wave5_bucket(short_id: str) -> str:
+    probe_num = int(short_id.split("-")[1])
+    if probe_num in {1, 2, 3}:
+        return "wave5_winner_protection"
+    if probe_num in {4}:
+        return "wave5_fallback_benchmark"
+    if probe_num in {5, 6, 7, 8, 9, 10, 12}:
+        return "wave5_upside_distillation"
+    if probe_num in {11}:
+        return "wave5_toxic_signal"
+    return "wave5_other"
+
+
 def infer_probe_scope(stem: str) -> str:
     scope: list[str] = []
     if "hydro" in stem:
@@ -511,12 +531,40 @@ def load_wave4_meta() -> dict[str, RunMeta]:
     return rows
 
 
+def load_wave5_meta() -> dict[str, RunMeta]:
+    rows: dict[str, RunMeta] = {}
+    pattern = re.compile(
+        r"^\| `(?P<short_id>W5-\d+)` \| `\.\./bots/amin/canonical/(?P<filename>[^`]+)` \| (?P<family>[^|]+) \| (?P<products>[^|]+) \| (?P<axes>[^|]+) \| (?P<hypothesis>[^|]+) \|$"
+    )
+    for line in WAVE5_MANIFEST.read_text().splitlines():
+        match = pattern.match(line.strip())
+        if not match:
+            continue
+        short_id = match.group("short_id").strip()
+        filename = match.group("filename").strip()
+        stem = filename[:-3]
+        family = match.group("family").strip()
+        products = match.group("products").strip()
+        hypothesis = match.group("hypothesis").strip()
+        rows[stem] = RunMeta(
+            short_id=short_id,
+            era="wave5_probe",
+            candidate_family=family,
+            analysis_bucket=infer_wave5_bucket(short_id),
+            hypothesis=hypothesis,
+            product_scope=products,
+            bot_path=f"rounds/round_3/bots/amin/historical/{filename}",
+        )
+    return rows
+
+
 def load_meta() -> dict[str, RunMeta]:
     meta = dict(MANUAL_RUN_META)
     meta.update(load_wave1_meta())
     meta.update(load_wave2_meta())
     meta.update(load_wave3_meta())
     meta.update(load_wave4_meta())
+    meta.update(load_wave5_meta())
     return meta
 
 
@@ -533,11 +581,23 @@ def parse_positions(data: dict) -> dict[str, int]:
     return positions
 
 
+def collect_json_paths() -> dict[str, Path]:
+    json_paths: dict[str, Path] = {}
+    for perf_dir in (PERF_HIST, PERF_CANON):
+        for json_path in sorted(perf_dir.glob("*.json")):
+            stem = STEM_ALIASES.get(json_path.stem, json_path.stem)
+            if stem in json_paths:
+                continue
+            json_paths[stem] = json_path
+    return json_paths
+
+
 def load_log_payload(stem: str) -> dict | None:
-    log_path = PERF_HIST / f"{stem}.log"
-    if not log_path.exists() or log_path.stat().st_size == 0:
-        return None
-    return json.loads(log_path.read_text())
+    for perf_dir in (PERF_HIST, PERF_CANON):
+        log_path = perf_dir / f"{stem}.log"
+        if log_path.exists() and log_path.stat().st_size > 0:
+            return json.loads(log_path.read_text())
+    return None
 
 
 def own_trades_from_payload(payload: dict | None) -> list[dict]:
@@ -794,8 +854,7 @@ def analyze() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame, p
     markout_rows: list[dict[str, object]] = []
     peak_profile_rows: list[dict[str, object]] = []
 
-    for json_path in sorted(PERF_HIST.glob("*.json")):
-        stem = json_path.stem
+    for stem, json_path in sorted(collect_json_paths().items()):
         if stem not in meta:
             raise KeyError(f"Missing run metadata for {stem}")
 
@@ -895,6 +954,10 @@ def analyze() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame, p
             "floor_total": float(sum(product_pnl.get(symbol, 0.0) for symbol in FLOOR_PRODUCTS)),
             "active_limit_hits": int(sum(abs(positions.get(symbol, 0)) == 300 for symbol in ACTIVE_PRODUCTS)),
             "upper_limit_hits": int(sum(abs(positions.get(symbol, 0)) == 300 for symbol in UPPER_PRODUCTS)),
+            "final_active_position_abs": int(sum(abs(positions.get(symbol, 0)) for symbol in ACTIVE_PRODUCTS)),
+            "final_itm_position_abs": int(sum(abs(positions.get(symbol, 0)) for symbol in ITM_PRODUCTS)),
+            "final_upper_position_abs": int(sum(abs(positions.get(symbol, 0)) for symbol in UPPER_PRODUCTS)),
+            "final_floor_position_abs": int(sum(abs(positions.get(symbol, 0)) for symbol in FLOOR_PRODUCTS)),
             "learning_verdict": learning_verdict(profit_value),
             "post_peak_trades": post_peak_trades,
             "post_75_trades": post_75_trades,
@@ -1200,6 +1263,27 @@ def build_wave4_summary(run_df: pd.DataFrame) -> pd.DataFrame:
     return run_df[run_df["era"] == "wave4_probe"].sort_values("profit", ascending=False).loc[:, cols]
 
 
+def build_wave5_summary(run_df: pd.DataFrame) -> pd.DataFrame:
+    cols = [
+        "short_id",
+        "stem",
+        "analysis_bucket",
+        "profit",
+        "delta1_total",
+        "itm_total",
+        "active_total",
+        "path_peak",
+        "path_peak_time_frac",
+        "path_end_from_peak",
+        "final_active_position_abs",
+        "mean_markout_10000_unit",
+        "cf_gain_vs_final_dd_2000",
+        "cf_gain_vs_final_retain_75",
+        "learning_verdict",
+    ]
+    return run_df[run_df["era"] == "wave5_probe"].sort_values("profit", ascending=False).loc[:, cols]
+
+
 def build_no_trade_table(run_df: pd.DataFrame) -> pd.DataFrame:
     cols = [
         "short_id",
@@ -1275,6 +1359,116 @@ def build_markout_run_product_summary(markout_df: pd.DataFrame) -> pd.DataFrame:
     )
 
 
+def build_moneyness_role_summary(run_df: pd.DataFrame) -> pd.DataFrame:
+    rows = [
+        {
+            "role": "delta1_base",
+            "products": ",".join(DELTA1_PRODUCTS),
+            "runs_with_activity": int((run_df["delta1_total"].abs() > 1e-9).sum()),
+            "mean_family_pnl": float(run_df.loc[run_df["delta1_total"].abs() > 1e-9, "delta1_total"].mean()),
+            "best_family_pnl": float(run_df["delta1_total"].max()),
+            "worst_family_pnl": float(run_df["delta1_total"].min()),
+        },
+        {
+            "role": "itm_structural",
+            "products": ",".join(ITM_PRODUCTS),
+            "runs_with_activity": int((run_df["itm_total"].abs() > 1e-9).sum()),
+            "mean_family_pnl": float(run_df.loc[run_df["itm_total"].abs() > 1e-9, "itm_total"].mean()),
+            "best_family_pnl": float(run_df["itm_total"].max()),
+            "worst_family_pnl": float(run_df["itm_total"].min()),
+        },
+        {
+            "role": "active_zone",
+            "products": ",".join(ACTIVE_PRODUCTS),
+            "runs_with_activity": int((run_df["active_total"].abs() > 1e-9).sum()),
+            "mean_family_pnl": float(run_df.loc[run_df["active_total"].abs() > 1e-9, "active_total"].mean()),
+            "best_family_pnl": float(run_df["active_total"].max()),
+            "worst_family_pnl": float(run_df["active_total"].min()),
+        },
+        {
+            "role": "upper_execution_passive",
+            "products": ",".join(UPPER_PRODUCTS),
+            "runs_with_activity": int((run_df["upper_total"].abs() > 1e-9).sum()),
+            "mean_family_pnl": float(run_df.loc[run_df["upper_total"].abs() > 1e-9, "upper_total"].mean()),
+            "best_family_pnl": float(run_df["upper_total"].max()),
+            "worst_family_pnl": float(run_df["upper_total"].min()),
+        },
+        {
+            "role": "floor_monitor",
+            "products": ",".join(FLOOR_PRODUCTS),
+            "runs_with_activity": int((run_df["floor_total"].abs() > 1e-9).sum()),
+            "mean_family_pnl": float(run_df.loc[run_df["floor_total"].abs() > 1e-9, "floor_total"].mean()),
+            "best_family_pnl": float(run_df["floor_total"].max()),
+            "worst_family_pnl": float(run_df["floor_total"].min()),
+        },
+    ]
+    return pd.DataFrame(rows)
+
+
+def build_cross_strike_context(run_df: pd.DataFrame) -> pd.DataFrame:
+    rows = run_df[
+        (run_df["pnl_VEV_5300"].abs() > 1e-9)
+        | (run_df["pnl_VEV_5100"].abs() > 1e-9)
+        | (run_df["pnl_VEV_5200"].abs() > 1e-9)
+    ].copy()
+    rows["toxic_pair_total"] = rows["pnl_VEV_5100"] + rows["pnl_VEV_5200"]
+    rows["supports_5300_trade"] = rows.apply(
+        lambda row: "yes"
+        if float(row["pnl_VEV_5300"]) > 0 and float(row["toxic_pair_total"]) >= 0
+        else "no"
+        if float(row["pnl_VEV_5300"]) <= 0 and float(row["toxic_pair_total"]) < 0
+        else "mixed",
+        axis=1,
+    )
+    cols = [
+        "short_id",
+        "stem",
+        "analysis_bucket",
+        "profit",
+        "pnl_VEV_5100",
+        "pnl_VEV_5200",
+        "pnl_VEV_5300",
+        "toxic_pair_total",
+        "path_end_from_peak",
+        "supports_5300_trade",
+    ]
+    return rows.sort_values(["pnl_VEV_5300", "toxic_pair_total"], ascending=[False, True]).loc[:, cols]
+
+
+def build_portfolio_exposure_summary(run_df: pd.DataFrame) -> pd.DataFrame:
+    return (
+        run_df.groupby("analysis_bucket", as_index=False)
+        .agg(
+            runs=("stem", "count"),
+            mean_final_active_position_abs=("final_active_position_abs", "mean"),
+            max_final_active_position_abs=("final_active_position_abs", "max"),
+            mean_final_itm_position_abs=("final_itm_position_abs", "mean"),
+            mean_active_limit_hits=("active_limit_hits", "mean"),
+            mean_path_end_from_peak=("path_end_from_peak", "mean"),
+            mean_active_total=("active_total", "mean"),
+        )
+        .sort_values("mean_final_active_position_abs", ascending=False)
+    )
+
+
+def build_late_entry_summary(run_df: pd.DataFrame) -> pd.DataFrame:
+    filtered = run_df[run_df["post_peak_ratio"].notna()].copy()
+    if filtered.empty:
+        return pd.DataFrame()
+    return (
+        filtered.groupby("analysis_bucket", as_index=False)
+        .agg(
+            runs=("stem", "count"),
+            mean_post_peak_ratio=("post_peak_ratio", "mean"),
+            mean_post_peak_trades=("post_peak_trades", "mean"),
+            mean_peak_time_frac=("path_peak_time_frac", "mean"),
+            mean_end_from_peak=("path_end_from_peak", "mean"),
+            early_peak_flag_rate=("early_peak_post_trade_flag", "mean"),
+        )
+        .sort_values("mean_post_peak_ratio", ascending=False)
+    )
+
+
 def classify_wave4_next_action(row: pd.Series) -> str:
     overlay_vs_delta1 = (
         float(row["profit"]) - float(row["delta1_total"])
@@ -1343,6 +1537,56 @@ def build_wave4_decision_board(run_df: pd.DataFrame) -> pd.DataFrame:
         "next_action",
     ]
     return wave4.sort_values(["next_action_order", "profit"], ascending=[True, False]).loc[:, cols]
+
+
+def classify_wave5_next_action(row: pd.Series) -> str:
+    if row["era"] != "wave5_probe":
+        return ""
+    if row["analysis_bucket"] == "wave5_winner_protection" and float(row["profit"]) >= 1500:
+        return "promote"
+    if row["analysis_bucket"] == "wave5_fallback_benchmark" and float(row["profit"]) >= 1400:
+        return "promote"
+    if row["analysis_bucket"] == "wave5_toxic_signal" and float(row["profit"]) > 0:
+        return "research_only"
+    if row["analysis_bucket"] == "wave5_toxic_signal":
+        return "close"
+    if row["analysis_bucket"] == "wave5_upside_distillation" and float(row["profit"]) > 1606 and float(row["path_end_from_peak"]) > -1200:
+        return "promote"
+    if row["analysis_bucket"] == "wave5_upside_distillation" and float(row["profit"]) > 0:
+        return "research_only"
+    if row["analysis_bucket"] == "wave5_upside_distillation" and float(row["path_peak"]) > 500 and float(row["cf_gain_vs_final_retain_75"]) > 150:
+        return "research_only"
+    return "close"
+
+
+def build_wave5_decision_board(run_df: pd.DataFrame) -> pd.DataFrame:
+    wave5 = run_df[run_df["era"] == "wave5_probe"].copy()
+    if wave5.empty:
+        return pd.DataFrame()
+    wave5["next_action"] = wave5.apply(classify_wave5_next_action, axis=1)
+    order = {
+        "promote": 0,
+        "research_only": 1,
+        "close": 2,
+        "not_cleanly_tested": 3,
+    }
+    wave5["next_action_order"] = wave5["next_action"].map(order).fillna(99)
+    cols = [
+        "short_id",
+        "stem",
+        "analysis_bucket",
+        "profit",
+        "path_peak",
+        "path_end_from_peak",
+        "delta1_total",
+        "itm_total",
+        "active_total",
+        "final_active_position_abs",
+        "cf_gain_vs_final_retain_75",
+        "learning_verdict",
+        "next_action",
+    ]
+    return wave5.sort_values(["next_action_order", "profit"], ascending=[True, False]).loc[:, cols]
 
 
 def classify_wave3_next_action(row: pd.Series) -> str:
@@ -1421,10 +1665,16 @@ def render_report(
     markout_run_product_df: pd.DataFrame,
     wave3_df: pd.DataFrame,
     wave4_df: pd.DataFrame,
+    wave5_df: pd.DataFrame,
     high_peak_gt10k_df: pd.DataFrame,
     high_peak_gt10k_product_df: pd.DataFrame,
     wave3_decision_df: pd.DataFrame,
     wave4_decision_df: pd.DataFrame,
+    wave5_decision_df: pd.DataFrame,
+    moneyness_role_df: pd.DataFrame,
+    cross_strike_df: pd.DataFrame,
+    portfolio_exposure_df: pd.DataFrame,
+    late_entry_df: pd.DataFrame,
 ) -> str:
     def row_by_stem(stem: str) -> pd.Series:
         return run_df[run_df["stem"] == stem].iloc[0]
@@ -1434,11 +1684,13 @@ def render_report(
     wave2_runs = int((run_df["era"] == "wave2_probe").sum())
     wave3_runs = int((run_df["era"] == "wave3_probe").sum())
     wave4_runs = int((run_df["era"] == "wave4_probe").sum())
+    wave5_runs = int((run_df["era"] == "wave5_probe").sum())
     log_runs = int((execution_df["own_trades"] > 0).sum())
     best_row = run_df.iloc[0]
     best_wave2 = wave2_df.iloc[0]
     best_wave3 = wave3_df.iloc[0]
     best_wave4 = wave4_df.iloc[0]
+    best_wave5 = wave5_df.iloc[0] if not wave5_df.empty else None
     high_peak_count = int(high_peak_df.shape[0])
     high_peak_gt10k_count = int(high_peak_gt10k_df.shape[0])
     no_trade_candidates = int(no_trade_df.shape[0])
@@ -1447,11 +1699,15 @@ def render_report(
 
     top_overall = run_df.head(15)
     wave4_top = wave4_df.head(12)
+    wave5_top = wave5_df.head(12)
     high_peak_focus = high_peak_gt10k_product_df.head(8)
     promote_count = int((wave4_decision_df["next_action"] == "promote").sum()) if not wave4_decision_df.empty else 0
     rescue_count = int((wave4_decision_df["next_action"] == "rescue").sum()) if not wave4_decision_df.empty else 0
     close_count = int((wave4_decision_df["next_action"] == "close").sum()) if not wave4_decision_df.empty else 0
     not_tested_count = int((wave4_decision_df["next_action"] == "not_cleanly_tested").sum()) if not wave4_decision_df.empty else 0
+    wave5_promote_count = int((wave5_decision_df["next_action"] == "promote").sum()) if not wave5_decision_df.empty else 0
+    wave5_research_count = int((wave5_decision_df["next_action"] == "research_only").sum()) if not wave5_decision_df.empty else 0
+    wave5_close_count = int((wave5_decision_df["next_action"] == "close").sum()) if not wave5_decision_df.empty else 0
 
     w3_15 = row_by_stem("candidate_w3_15_delta1_kalman_control")
     w3_17 = row_by_stem("candidate_w3_17_5300_imbalance_filter")
@@ -1497,28 +1753,31 @@ def render_report(
 
 This report now consolidates the **full current Round 3 evidence base**:
 legacy runs, corrected challengers, the full 25-bot Wave 1 learner batch, the
-full 19-bot Wave 2 batch, the full 24-bot Wave 3 batch, and the full 12-bot
-Wave 4 finalist batch.
+full 19-bot Wave 2 batch, the full 24-bot Wave 3 batch, the full 12-bot Wave
+4 finalist batch, and the currently available **7-run partial Wave 5 closeout
+batch**.
 
 - Total platform JSON artifacts analyzed: `{total_runs}`.
 - Wave 1 learner JSON artifacts analyzed: `{wave1_runs}`.
 - Wave 2 learner / control JSON artifacts analyzed: `{wave2_runs}`.
 - Wave 3 learner / winner-shaping JSON artifacts analyzed: `{wave3_runs}`.
 - Wave 4 finalist JSON artifacts analyzed: `{wave4_runs}`.
+- Wave 5 partial closeout JSON artifacts analyzed: `{wave5_runs}`.
 - Runs with usable `tradeHistory` execution detail from `.log`: `{log_runs}`.
 - Best overall tested run is now `{best_row['short_id']}` / `{best_row['stem']}.json` at real platform PnL `{best_row['profit']:.3f}`.
 - Best Wave 2 run is `{best_wave2['short_id']}` / `{best_wave2['stem']}.json` at real platform PnL `{best_wave2['profit']:.3f}`.
 - Best Wave 3 run is `{best_wave3['short_id']}` / `{best_wave3['stem']}.json` at real platform PnL `{best_wave3['profit']:.3f}`.
 - Best Wave 4 run is `{best_wave4['short_id']}` / `{best_wave4['stem']}.json` at real platform PnL `{best_wave4['profit']:.3f}`.
+- Best available Wave 5 run is `{best_wave5['short_id']}` / `{best_wave5['stem']}.json` at real platform PnL `{best_wave5['profit']:.3f}`.
 - Runs with intra-run peak above `+5k`: `{high_peak_count}`.
 - Runs with intra-run peak above `+10k`: `{high_peak_gt10k_count}`.
 
 ### Bottom Line
 
-1. **Wave 4 did not produce a new giant winner**, but it did sharpen the endgame: the final race is now between the clean `delta-1` champion family and the `delta-1 + ITM` finalist stack.
-2. **The strongest reliable architecture is still delta-1 first**, and the Wave 4 question became “which overlay survives on top of it cleanly?” rather than “which family wins?”
-3. **The old `>10k` and `~18k` paths still matter**, but now specifically as a source of retention logic and strike-pruning lessons, not as a reason to reopen the raw broad active basket.
-4. **If we want a final upside push above the current `~1.5k` champion ceiling, it has to come from a distilled salvage architecture**, not from simply rerunning the old wide active cluster.
+1. **Wave 5 improved the fallback benchmark but did not reopen the architectural race**: `W5-04` is now the best pure `delta-1` control, while `W5-01` only reconfirms the already-known `W4-03` winner family rather than creating a new full-stack class.
+2. **The strongest reliable full architecture remains `delta-1 + ITM` on top of the Kalman base**, with pure `delta-1` now the cleaner fallback benchmark than before.
+3. **The old `>10k` and `~18k` paths still matter**, but now as a source of retention logic, strike pruning, and danger-signal framing, not as a reason to reopen the raw broad active basket.
+4. **Round 3 should now be closed as a retrospective evidence source for Round 4**, not left in a pseudo-active “run one more batch” state.
 
 ## Updated Ranking Snapshot
 
@@ -1562,6 +1821,57 @@ Wave 4 finalist batch.
   - `W4-10 = {w4_10['profit']:.3f}`
   This is only useful if it truly traded `VEV_5100`; otherwise it should be treated as closure evidence, not as a living final branch.
 
+## What Partial Wave 5 Changed
+
+{markdown_table(wave5_top, ['short_id', 'stem', 'analysis_bucket', 'profit', 'path_peak', 'path_end_from_peak', 'delta1_total', 'itm_total', 'active_total', 'cf_gain_vs_final_retain_75', 'learning_verdict'])}
+
+### Wave 5 Reading
+
+- Wave 5 was only observed partially (`7/12` JSONs), but it is enough to close the round's last open strategic loop.
+- `W5-01`, `W5-02`, and `W5-03` tell us whether winner protection changes anything material once the clean winner family is already known.
+- `W5-04` keeps the pure fallback benchmark in the comparison set so the round still distinguishes “best clean base” from “best full stack”.
+- `W5-08` and `W5-09` are the only observed upside-distillation descendants with real platform evidence in this partial batch.
+- `W5-11` is the only observed toxic-strike-as-signal run and therefore the direct empirical read on whether `5100/5200` are better as veto inputs than as normal inventory legs.
+- No observed Wave 5 run currently justifies reopening round execution; the partial evidence is enough to collapse the open design space into documented lessons, untested backlog, and anti-patterns.
+
+## Wave 5 Decision Board
+
+Promote count: `{wave5_promote_count}`. Research-only count: `{wave5_research_count}`. Close count: `{wave5_close_count}`.
+
+{markdown_table(wave5_decision_df, ['short_id', 'stem', 'analysis_bucket', 'profit', 'path_peak', 'path_end_from_peak', 'delta1_total', 'itm_total', 'active_total', 'final_active_position_abs', 'cf_gain_vs_final_retain_75', 'next_action'])}
+
+### Wave 5 Decision Reading
+
+- **Promote** means “retain as final retrospective winner evidence”.
+- **Research-only** means “the idea remains informative, but only as a carry-forward hypothesis or design lesson”.
+- **Close** means “do not treat this branch as still active in Round 3”.
+
+## Retrospective Structural Audit
+
+### Moneyness Role Summary
+
+{markdown_table(moneyness_role_df, ['role', 'products', 'runs_with_activity', 'mean_family_pnl', 'best_family_pnl', 'worst_family_pnl'])}
+
+### Cross-Strike Context Around `5300`
+
+{markdown_table(cross_strike_df.head(15), ['short_id', 'stem', 'analysis_bucket', 'profit', 'pnl_VEV_5100', 'pnl_VEV_5200', 'pnl_VEV_5300', 'toxic_pair_total', 'path_end_from_peak', 'supports_5300_trade'])}
+
+### Portfolio Exposure Summary
+
+{markdown_table(portfolio_exposure_df, ['analysis_bucket', 'runs', 'mean_final_active_position_abs', 'max_final_active_position_abs', 'mean_final_itm_position_abs', 'mean_active_limit_hits', 'mean_path_end_from_peak', 'mean_active_total'])}
+
+### Late-Entry / Post-Peak Churn Summary
+
+{markdown_table(late_entry_df, ['analysis_bucket', 'runs', 'mean_post_peak_ratio', 'mean_post_peak_trades', 'mean_peak_time_frac', 'mean_end_from_peak', 'early_peak_flag_rate'])}
+
+### Structural Audit Reading
+
+- `delta1_base` is the only family that stays robust across path quality, final PnL, and long-horizon markouts.
+- `itm_structural` behaves much more like a controlled additive overlay than like a standalone engine.
+- `active_zone` still contains the largest upside and the worst giveback at the same time, which is why it must be read as a regime-sensitive option book, not as a homogeneous asset basket.
+- `VEV_5100/5200` remain more useful as cross-strike context and danger signals than as default direct trading legs.
+- Post-peak churn remains concentrated in active-voucher families, which strengthens the carry-forward case for no-new-entry windows, cooldowns, and hard flatten rules.
+
 ## Path Quality Summary
 
 - Runs with a positive intra-run peak above `100` that still finished negative:
@@ -1575,12 +1885,10 @@ Wave 4 finalist batch.
 
 ### Path Reading
 
-- `wave3_delta1_controls` are now the healthiest family in the entire round on both final PnL and path quality.
-- `wave3_itm_and_stacks` are also healthy, but their edge is clearly **base-driven plus small additive overlays**, not voucher-led.
-- `wave3_active_rescue_and_filters` improved massively on the old active families, but as a group they are still negative because they continue to **give back too much** or fail to scale cleanly.
-- `wave4_delta1_finalists` and `wave4_itm_finalists` are the new decision buckets: they tell us whether the endgame is pure champion or champion-plus-ITM.
-- `wave4_peak_salvage` should be read as an exploitation experiment, not as broad strategy evidence: the real question is whether any of the old high-upside logic survives when heavily pruned and blindfolded against continuation mistakes.
-- The old `legacy_active_vouchers` bucket still owns the giant peaks, but also the giant collapses. That is exactly why the next step should be **winner-focused exploitation plus selective salvage**, not reopening the broad basket.
+- `wave5_winner_protection` confirms the winner family but does not materially expand the upside ceiling.
+- `wave5_fallback_benchmark` keeps the round honest about what is genuine voucher value-add versus what is simply the strong base carrying everything.
+- `wave5_upside_distillation` stays valuable as a design laboratory, but not as grounds for more active Round 3 execution.
+- The old `legacy_active_vouchers` bucket still owns the giant peaks, but also the giant collapses. That is now a retrospective lesson, not a live opportunity queue.
 
 ## All Round 3 Runs With Peak Above `+10k`
 
@@ -1590,8 +1898,8 @@ This section applies to **all of Round 3**, not only Wave 3.
 
 ### `>10k` Reading
 
-- All current `>10k` peak runs belong to the old legacy / broad active-voucher world. **No Wave 3 or Wave 4 bot got there**.
-- Wave 4 also failed to approach those peaks, which is exactly why the next wave should explicitly target **distilled upside retention**, not only clean champion confirmation.
+- All current `>10k` peak runs belong to the old legacy / broad active-voucher world. **No Wave 3, Wave 4, or observed partial Wave 5 bot got there**.
+- The partial Wave 5 closeout is therefore enough to say that the round's final observed winner family is the clean one, while the giant-peak family survives only as a retrospective source of design lessons.
 - That does **not** mean the upside was fake. It means the upside was being harvested in a branch that had terrible retention and product selection.
 - The simple counterfactuals are huge:
   - `B08-regime`: `+16.7k` versus final under a `2k` giveback stop proxy.
@@ -1611,7 +1919,7 @@ This section applies to **all of Round 3**, not only Wave 3.
 - `VEV_5100`, `VEV_5200`, and `VEV_5000` are still the biggest giveback drivers in the giant-peak set.
 - `VEV_5300` also gives back heavily, but it remains materially less toxic than the other active strikes.
 - `VELVETFRUIT_EXTRACT` continues to look more like a stabilizer / anchor than the main destroyer.
-- The practical implication is that any last upside push should be **VEX-anchored and strike-pruned**, with continuation limits, rather than voucher-led and basket-wide.
+- The practical implication for carry-forward work is that any future upside push should be **VEX-anchored and strike-pruned**, with continuation limits, rather than voucher-led and basket-wide.
 
 ## No-Trade / Shutdown Candidates
 
@@ -1679,16 +1987,16 @@ Promote count: `{promote_count}`. Rescue count: `{rescue_count}`. Close count: `
 - Using inverse diagnostics as evidence when the target inverse leg did not even trade.
 - Expecting Wave 4 finalist hygiene alone to recreate the old giant peaks. Cleanliness helped quality, but it also compressed upside.
 
-## Analytical Consequence
+## Closeout Consequence
 
-The next step should now be a **winner-focused exploitation pass**, not another broad exploratory wave.
+Round 3 no longer needs another exploitation pass. The next step is to consume this evidence as a closeout package.
 
-The next spec should answer:
+The carry-forward questions for Round 4 are now:
 
-1. Is the near-final base `W3-15`, `W4-01`, `W4-02`, `W4-03`, or `W4-04`?
-2. Does any `5300` branch still deserve a final overlay slot after Wave 4?
-3. Which pruned, VEX-anchored descendants of the old `>10k` paths deserve the last upside-distillation slots?
-4. Which simple online retention rules from the `>10k` counterfactual study are worth converting into real logic without overfitting?
+1. Which parts of the clean winner family are genuine universal structure versus Round 3-specific fit?
+2. Which active-voucher lessons are validated enough to become Round 4 framing rules?
+3. Which untested hypotheses from the partial Wave 5 / closeout backlog deserve re-entry only after Round 4 data confirms the same product mechanics?
+4. How should counterparty-aware Round 4 EDA incorporate the now-documented distinction between clean base, additive ITM, toxic strikes, and retention-sensitive active logic?
 
 ## Artifacts
 
@@ -1703,6 +2011,7 @@ The next spec should answer:
 - [`artifacts/full_synthesis/full_wave2_probe_summary.csv`](artifacts/full_synthesis/full_wave2_probe_summary.csv)
 - [`artifacts/full_synthesis/full_wave3_probe_summary.csv`](artifacts/full_synthesis/full_wave3_probe_summary.csv)
 - [`artifacts/full_synthesis/full_wave4_probe_summary.csv`](artifacts/full_synthesis/full_wave4_probe_summary.csv)
+- [`artifacts/full_synthesis/full_wave5_probe_summary.csv`](artifacts/full_synthesis/full_wave5_probe_summary.csv)
 - [`artifacts/full_synthesis/full_high_peak_gt5k_runs.csv`](artifacts/full_synthesis/full_high_peak_gt5k_runs.csv)
 - [`artifacts/full_synthesis/full_high_peak_gt10k_runs.csv`](artifacts/full_synthesis/full_high_peak_gt10k_runs.csv)
 - [`artifacts/full_synthesis/full_high_peak_gt5k_product_giveback.csv`](artifacts/full_synthesis/full_high_peak_gt5k_product_giveback.csv)
@@ -1712,6 +2021,11 @@ The next spec should answer:
 - [`artifacts/full_synthesis/full_trade_markout_by_run_product.csv`](artifacts/full_synthesis/full_trade_markout_by_run_product.csv)
 - [`artifacts/full_synthesis/full_wave3_decision_board.csv`](artifacts/full_synthesis/full_wave3_decision_board.csv)
 - [`artifacts/full_synthesis/full_wave4_decision_board.csv`](artifacts/full_synthesis/full_wave4_decision_board.csv)
+- [`artifacts/full_synthesis/full_wave5_decision_board.csv`](artifacts/full_synthesis/full_wave5_decision_board.csv)
+- [`artifacts/full_synthesis/full_moneyness_role_summary.csv`](artifacts/full_synthesis/full_moneyness_role_summary.csv)
+- [`artifacts/full_synthesis/full_cross_strike_context.csv`](artifacts/full_synthesis/full_cross_strike_context.csv)
+- [`artifacts/full_synthesis/full_portfolio_exposure_summary.csv`](artifacts/full_synthesis/full_portfolio_exposure_summary.csv)
+- [`artifacts/full_synthesis/full_late_entry_summary.csv`](artifacts/full_synthesis/full_late_entry_summary.csv)
 - [`artifacts/full_synthesis/full_peak_profiles.csv`](artifacts/full_synthesis/full_peak_profiles.csv)
 """
     return report
@@ -1742,11 +2056,17 @@ def main() -> None:
     wave2_df = build_wave2_summary(run_df)
     wave3_df = build_wave3_summary(run_df)
     wave4_df = build_wave4_summary(run_df)
+    wave5_df = build_wave5_summary(run_df)
     no_trade_df = build_no_trade_table(run_df)
     markout_product_df = build_markout_product_summary(markout_df)
     markout_run_product_df = build_markout_run_product_summary(markout_df)
     wave3_decision_df = build_wave3_decision_board(run_df)
     wave4_decision_df = build_wave4_decision_board(run_df)
+    wave5_decision_df = build_wave5_decision_board(run_df)
+    moneyness_role_df = build_moneyness_role_summary(run_df)
+    cross_strike_df = build_cross_strike_context(run_df)
+    portfolio_exposure_df = build_portfolio_exposure_summary(run_df)
+    late_entry_df = build_late_entry_summary(run_df)
 
     run_df.to_csv(ARTIFACTS / "full_run_metrics.csv", index=False)
     family_df.to_csv(ARTIFACTS / "full_family_summary.csv", index=False)
@@ -1759,6 +2079,7 @@ def main() -> None:
     wave2_df.to_csv(ARTIFACTS / "full_wave2_probe_summary.csv", index=False)
     wave3_df.to_csv(ARTIFACTS / "full_wave3_probe_summary.csv", index=False)
     wave4_df.to_csv(ARTIFACTS / "full_wave4_probe_summary.csv", index=False)
+    wave5_df.to_csv(ARTIFACTS / "full_wave5_probe_summary.csv", index=False)
     high_peak_df.to_csv(ARTIFACTS / "full_high_peak_gt5k_runs.csv", index=False)
     high_peak_gt10k_df.to_csv(ARTIFACTS / "full_high_peak_gt10k_runs.csv", index=False)
     high_peak_product_df.to_csv(ARTIFACTS / "full_high_peak_gt5k_product_giveback.csv", index=False)
@@ -1767,6 +2088,11 @@ def main() -> None:
     peak_profile_df.to_csv(ARTIFACTS / "full_peak_profiles.csv", index=False)
     wave3_decision_df.to_csv(ARTIFACTS / "full_wave3_decision_board.csv", index=False)
     wave4_decision_df.to_csv(ARTIFACTS / "full_wave4_decision_board.csv", index=False)
+    wave5_decision_df.to_csv(ARTIFACTS / "full_wave5_decision_board.csv", index=False)
+    moneyness_role_df.to_csv(ARTIFACTS / "full_moneyness_role_summary.csv", index=False)
+    cross_strike_df.to_csv(ARTIFACTS / "full_cross_strike_context.csv", index=False)
+    portfolio_exposure_df.to_csv(ARTIFACTS / "full_portfolio_exposure_summary.csv", index=False)
+    late_entry_df.to_csv(ARTIFACTS / "full_late_entry_summary.csv", index=False)
     if not trade_df.empty:
         trade_df.to_csv(ARTIFACTS / "full_own_trade_timeline.csv", index=False)
     if not markout_df.empty:
@@ -1792,10 +2118,16 @@ def main() -> None:
             markout_run_product_df=markout_run_product_df,
             wave3_df=wave3_df,
             wave4_df=wave4_df,
+            wave5_df=wave5_df,
             high_peak_gt10k_df=high_peak_gt10k_df,
             high_peak_gt10k_product_df=high_peak_gt10k_product_df,
             wave3_decision_df=wave3_decision_df,
             wave4_decision_df=wave4_decision_df,
+            wave5_decision_df=wave5_decision_df,
+            moneyness_role_df=moneyness_role_df,
+            cross_strike_df=cross_strike_df,
+            portfolio_exposure_df=portfolio_exposure_df,
+            late_entry_df=late_entry_df,
         )
     )
 

@@ -1,0 +1,8 @@
+short_id,stem,analysis_bucket,profit,path_peak,path_end_from_peak,delta1_total,itm_total,active_total,final_active_position_abs,cf_gain_vs_final_retain_75,learning_verdict,next_action
+W5-04,candidate_w5_04_delta1_kalman_fallback,wave5_fallback_benchmark,1672.0,2341.0625,-669.0625,1672.0,0.0,0.0,0,0.0,strong positive,promote
+W5-01,candidate_w5_01_delta1_itm_final_control,wave5_winner_protection,1606.3046875,2404.7088012695312,-798.4041137695312,1527.3046875,79.0,0.0,0,185.1328125,strong positive,promote
+W5-11,candidate_w5_11_5300_toxic_veto,wave5_toxic_signal,476.0,517.9921875,-41.9921875,512.0,0.0,-36.0,0,0.0,positive,research_only
+W5-09,candidate_w5_09_winner_plus_tiny_trio,wave5_upside_distillation,368.90234375,603.5859375,-234.68359375,449.90234375,-50.0,-31.0,0,66.73046875,positive,research_only
+W5-08,candidate_w5_08_vex_crossstrike_salvage,wave5_upside_distillation,358.0,393.994140625,-35.994140625,404.0,0.0,-46.0,0,0.0,positive,research_only
+W5-03,candidate_w5_03_delta1_itm_early_stop,wave5_winner_protection,615.0,937.41796875,-322.41796875,679.0,-64.0,0.0,0,69.359375,strong positive,close
+W5-02,candidate_w5_02_delta1_itm_retention_lock,wave5_winner_protection,518.0,706.1171875,-188.1171875,634.0,-116.0,0.0,0,0.515625,strong positive,close

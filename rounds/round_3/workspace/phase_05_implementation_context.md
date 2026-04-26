@@ -43,27 +43,17 @@ READY_FOR_REVIEW
 
 ## Current Findings
 
-- The implementation work is no longer waiting on first runs; the whole Wave 1 batch has already been exercised on platform and analyzed.
-- The strongest newly validated implementation family is the clean isolated delta-1 stack (`L01`, `L02`, `L04`, `L05`, `L06`).
-- The Wave 1 active, upper, and surface learners were valuable for learning, but not ready for promotion.
-- The Wave 2 implementation uses a single shared generator/template so the batch stays parameter-comparable while still respecting the spec's branch differences.
-- `rounds/round_3/bots/amin/canonical/` is no longer holding active Wave 3 or
-  Wave 4 challengers; both batches have already completed the
-  canonical-to-historical lifecycle.
-- The Wave 3 implementation keeps the shared-generator approach, but extends the engine with simple regime gates, transformed thresholds, lightweight trend gates, inverse direction mode, and compact Kalman state.
-- The implementation bottleneck has now shifted from coding to analyzing the new Wave 3 evidence and deciding the winner-focused architecture cut.
-- The implementation bottleneck has now shifted again from coding to post-Wave-4
-  synthesis and Wave 5 design: decide whether to simply promote the clean
-  finalists or to spend one last batch on distilled `>10k` upside descendants.
-- The implementation bottleneck has now shifted back to platform execution:
-  Wave 5 is coded and compile-clean, and the next uncertainty is live outcome
-  rather than implementation mechanics.
+- All observed Round 3 implementation artifacts now live under `historical/`.
+- The `7` observed Wave 5 bots were archived after their JSONs were absorbed into the `101`-run synthesis.
+- The `5` unpaired Wave 5 bots were retired as `untested due to round close`, not promoted as historical evidence.
+- `rounds/round_3/bots/amin/canonical/` is now intentionally empty for this round.
+- The implementation story is complete enough for handoff: no additional Round 3 coding queue remains.
 
 ## Decisions Made
 
 - Tested bots with paired platform artifacts are frozen under `historical/`.
 - The full Wave 1 implementation should now be treated as a completed learning batch, not as a pending queue.
-- The next implementation wave should be redesigned from the full synthesis report rather than extended mechanically from the old manifest.
+- The next implementation wave should not happen inside `round_3`; new implementation should start from `round_4` with the closeout package as input.
 - The full 19-bot Wave 2 cut requested by the user was implemented, not reduced to the earlier 12-14 recommendation.
 - Wave 2 bots have now completed that lifecycle: implemented in `canonical/`, run on platform, and archived to `historical/` once paired artifacts existed.
 - The Wave 3 batch is explicitly intended as a last or penultimate exploratory wave, not as a blind coverage sweep.
@@ -75,11 +65,12 @@ READY_FOR_REVIEW
   engine with realistic timestamp-scale cutoffs, per-symbol entry caps,
   cooldowns, watch-only toxic-strike contexts, and transformed-threshold
   gating.
+- Wave 5 is now treated as partially observed closeout evidence, not as an active pending queue.
 
 ## Open Questions / Blockers
 
 - No blocker on implementation mechanics remains.
-- No implementation blocker remains before the next implementation pass.
+- No Round 3 implementation pass remains open.
 
 ## Linked Artifacts
 
@@ -102,11 +93,12 @@ READY_FOR_REVIEW
 - [`05_implementation/generate_learning_batch_wave5.py`](05_implementation/generate_learning_batch_wave5.py)
 - [`03_next_wave_bot_planning.md`](03_next_wave_bot_planning.md)
 - [`06_testing/round_3_full_performance_synthesis.md`](06_testing/round_3_full_performance_synthesis.md)
+- [`06_testing/round_3_closeout_retrospective.md`](06_testing/round_3_closeout_retrospective.md)
 
 ## Next Priority Action
 
-Implementation is ready again. The next step is to run the Wave 5 batch on the
-platform and bring back the paired artifacts for final comparison.
+No further `round_3` implementation is queued. The next step is to consume the
+closeout package in `round_4` before opening any new implementation branch.
 
 ## Deadline Risk
 

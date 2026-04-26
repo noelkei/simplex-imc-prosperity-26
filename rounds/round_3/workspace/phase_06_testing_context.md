@@ -2,7 +2,7 @@
 
 ## Status
 
-IN_PROGRESS
+READY_FOR_REVIEW
 
 ## Owner / Reviewer
 
@@ -39,17 +39,24 @@ IN_PROGRESS
   salvage overlays.
 - Fed that synthesis into the concrete Wave 5 spec and a 12-bot active batch
   now waiting in `../bots/amin/canonical/`.
+- Absorbed the `7` observed Wave 5 JSON artifacts that were still in `canonical/`, normalized the malformed `W5-09` filename, and extended the synthesis from `94` to `101` runs.
+- Added Wave 5 closeout outputs plus new retrospective structural diagnostics:
+  - Wave 5 summary and decision board
+  - moneyness-role summary
+  - cross-strike context around `5100/5200/5300`
+  - portfolio-exposure summary
+  - late-entry / post-peak churn summary
+- Added the explicit closeout artifact:
+  [`06_testing/round_3_closeout_retrospective.md`](06_testing/round_3_closeout_retrospective.md)
 
 ## Current Findings
 
-- Across all `94` current JSON artifacts, the strongest clean live family is
-  now the Wave 4 Kalman `delta-1 + ITM` finalist stack:
-  - `W4-03 = +1606.305`
+- Across all `101` current JSON artifacts, the best clean full-stack family remains the Kalman `delta-1 + ITM` line:
+  - `W5-01 = W4-03 = +1606.305`
   - `W4-04 = +1604.305`
-- The pure champion remained fully stable:
-  - `W4-01 = W4-02 = W3-15 = +1527.305`
-  so the delta-1 core is confirmed, but the main incremental edge now comes
-  from the ITM overlay rather than from a new pure-base tweak.
+- The pure fallback benchmark improved further:
+  - `W5-04 = +1672.000`
+  which strengthens `delta-1` as the cleanest standalone base/control branch.
 - `VEV_5300` remains the only active strike with positive aggregate `10k`
   mean trade markout, but Wave 4 clarifies that this is no longer enough to
   justify normal finalist slots:
@@ -69,31 +76,29 @@ IN_PROGRESS
 - The inverse closure run remains unresolved rather than positive:
   `W4-10` did not trade `VEV_5100`, so direct inverse trading is currently a
   lower-ROI slot than using toxic strikes as filters or vetoes.
-- Wave 5 now attacks the remaining questions directly:
-  - protect the live winner family with realistic timestamp-scale retention
-    gates,
-  - distill the old `>10k` ceiling through pruned `VEX`-anchored descendants,
-  - and test toxic strikes mainly as signal inputs instead of normal legs.
+- Partial Wave 5 evidence closes the remaining Round 3 testing loop:
+  - winner protection mostly reconfirmed the existing winner axis,
+  - fallback `delta-1` improved the clean base benchmark,
+  - toxic-strike veto became informationally useful,
+  - upside-distillation descendants stayed research-only.
 
 ## Decisions Made
 
 - `activitiesLog` final per-product rows remain the best practical PnL proxy when JSON `profit` is unavailable.
 - Timestamp-level `activitiesLog` paths are now the preferred source for intra-run quality analysis; `graphLog` should stay as a secondary audit path only.
 - The Wave 1 batch should be treated as completed validation evidence, not as a pending run queue.
-- The redesign/spec step for Wave 3 is now also complete and fully synthesized;
-  the testing bottleneck is no longer interpretation of exploratory waves, but
-  turning the now `94`-run evidence base into a final exploitation cut.
+- The testing bottleneck is no longer live execution; the round is now closed as retrospective evidence.
 - Fast-unwind should no longer be treated as the default active-voucher rescue pattern.
-- The next testing pass should explicitly separate:
-  - clean finalist protection (`W4-03/W4-04/W4-01/W4-11` class),
-  - `>10k` upside-distillation descendants,
-  - and toxic-strike-as-signal variants.
+- Round 3 testing output should now be consumed in four buckets only:
+  - validated findings,
+  - carry-forward principles,
+  - untested hypotheses,
+  - anti-patterns.
 
 ## Open Questions / Blockers
 
-- Need the Wave 5 live runs.
-- Need the next run batch to decide whether any distilled upside branch can
-  materially beat the clean `W4-03/W4-04` finalists without collapsing.
+- No Round 3 live-run blocker remains because no further Round 3 run queue remains.
+- The only remaining judgment call is how strongly to carry these findings into `round_4` before fresh evidence re-validates them.
 
 ## Linked Artifacts
 
@@ -101,6 +106,7 @@ IN_PROGRESS
 - [`06_testing/round_3_historical_performance_analysis.md`](06_testing/round_3_historical_performance_analysis.md)
 - [`06_testing/round_3_canonical_run_analysis.md`](06_testing/round_3_canonical_run_analysis.md)
 - [`06_testing/round_3_full_performance_synthesis.md`](06_testing/round_3_full_performance_synthesis.md)
+- [`06_testing/round_3_closeout_retrospective.md`](06_testing/round_3_closeout_retrospective.md)
 - [`06_testing/artifacts/full_synthesis/full_run_metrics.csv`](06_testing/artifacts/full_synthesis/full_run_metrics.csv)
 - [`06_testing/artifacts/full_synthesis/full_path_family_summary.csv`](06_testing/artifacts/full_synthesis/full_path_family_summary.csv)
 - [`06_testing/artifacts/full_synthesis/full_path_reversal_candidates.csv`](06_testing/artifacts/full_synthesis/full_path_reversal_candidates.csv)
@@ -116,6 +122,12 @@ IN_PROGRESS
 - [`06_testing/artifacts/full_synthesis/full_trade_markout_by_run_product.csv`](06_testing/artifacts/full_synthesis/full_trade_markout_by_run_product.csv)
 - [`06_testing/artifacts/full_synthesis/full_wave3_decision_board.csv`](06_testing/artifacts/full_synthesis/full_wave3_decision_board.csv)
 - [`06_testing/artifacts/full_synthesis/full_wave4_decision_board.csv`](06_testing/artifacts/full_synthesis/full_wave4_decision_board.csv)
+- [`06_testing/artifacts/full_synthesis/full_wave5_probe_summary.csv`](06_testing/artifacts/full_synthesis/full_wave5_probe_summary.csv)
+- [`06_testing/artifacts/full_synthesis/full_wave5_decision_board.csv`](06_testing/artifacts/full_synthesis/full_wave5_decision_board.csv)
+- [`06_testing/artifacts/full_synthesis/full_moneyness_role_summary.csv`](06_testing/artifacts/full_synthesis/full_moneyness_role_summary.csv)
+- [`06_testing/artifacts/full_synthesis/full_cross_strike_context.csv`](06_testing/artifacts/full_synthesis/full_cross_strike_context.csv)
+- [`06_testing/artifacts/full_synthesis/full_portfolio_exposure_summary.csv`](06_testing/artifacts/full_synthesis/full_portfolio_exposure_summary.csv)
+- [`06_testing/artifacts/full_synthesis/full_late_entry_summary.csv`](06_testing/artifacts/full_synthesis/full_late_entry_summary.csv)
 - [`04_strategy_specs/spec_learning_batch_wave4.md`](04_strategy_specs/spec_learning_batch_wave4.md)
 - [`05_implementation/learning_batch_wave4_manifest.md`](05_implementation/learning_batch_wave4_manifest.md)
 - [`04_strategy_specs/spec_learning_batch_wave5.md`](04_strategy_specs/spec_learning_batch_wave5.md)
@@ -125,10 +137,9 @@ IN_PROGRESS
 
 ## Next Priority Action
 
-Run the Wave 5 batch on the platform, then compare:
-- protected winner family,
-- pure fallback,
-- and distilled `>10k` descendants.
+Use the closeout package as Round 4 input:
+read the `101`-run synthesis, the closeout retrospective, and the updated
+research memory before reopening testing assumptions in the next round.
 
 ## Deadline Risk
 

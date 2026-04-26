@@ -2,7 +2,7 @@
 
 ## Status
 
-IN_PROGRESS
+READY_FOR_REVIEW
 
 ## Owner / Reviewer
 
@@ -33,6 +33,7 @@ IN_PROGRESS
 - Converted the post-Wave-4 debugging conclusions into the Wave 5 batch:
   winner protection, realistic time-window retention gates, pruned
   `>10k` descendants, and toxic-strike-as-signal variants.
+- Folded the observed partial Wave 5 results back into the `101`-run synthesis and converted the debugging output into an explicit closeout artifact.
 
 ## Current Findings
 
@@ -53,33 +54,28 @@ IN_PROGRESS
 - A fourth clue is that the inverse closure bot still did not trade the target
   leg, which pushes toxic-strike logic toward veto / anti-signal use instead
   of direct inverse inventory.
-- The current debugging bottleneck is now no longer branch discovery, but how
-  to convert the old `>10k` peaks into pruned descendants with far better
-  retention.
-- Wave 5 is the direct implementation of that debugging read, so the next
-  debugging question is purely empirical: which retention pattern actually
-  preserves upside once the bots are run live.
+- The old `>10k` peaks still matter, but now as retention and strike-selection lessons rather than as an active Round 3 execution queue.
+- Partial Wave 5 evidence reinforces that toxic strikes are more useful as veto / anti-signal context than as default inventory legs.
+- The debugging output is now mature enough to be carried forward as:
+  - validated lessons,
+  - untested hypotheses,
+  - and anti-patterns.
 
 ## Decisions Made
 
-- The current issue is no longer “why did the broad active basket fail?” only; it is now “what survives after branch isolation?”
+- The current issue is no longer “why did the broad active basket fail?” only; it is now “what parts of that failure should become future framing rules?”
 - Debugging focus should move from composite rescue to branch pruning,
   selective recombination, explicit no-trade / horizon control, and deciding
-  which `>10k` descendants are worth one last exploitation-oriented pass.
+  which `>10k` lessons are worth carrying into a future round.
 - The next debugging target is strategic architecture, not Trader contract correctness.
 - Wave 3 implemented those debugging hypotheses directly; Wave 4 resolved the
-  clean winner axis. The next debugging step is now a final
-  upside-distillation wave, not another broad exploratory batch.
+  clean winner axis; Wave 5 and the closeout now convert the remaining space
+  into carry-forward principles rather than more Round 3 execution.
 
 ## Open Questions / Blockers
 
-- No design blocker remains before the next live run pass.
-- The next live questions are now narrowed to:
-  - whether any Wave 5 upside-distillation bot can beat the clean
-    `W4-03/W4-04` family,
-  - whether toxic strikes are more useful as filters than as legs,
-  - and whether any final active overlay can become both high-upside and
-    retainable.
+- No Round 3 debugging blocker remains.
+- The remaining open question is only how much of this debugging read should be treated as transferable to `round_4` before new data confirms it.
 
 ## Linked Artifacts
 
@@ -87,6 +83,7 @@ IN_PROGRESS
 - [`06_debugging/README.md`](06_debugging/README.md)
 - [`06_debugging/issue_2026-04-25_active_voucher_strike_misallocation.md`](06_debugging/issue_2026-04-25_active_voucher_strike_misallocation.md)
 - [`06_testing/round_3_full_performance_synthesis.md`](06_testing/round_3_full_performance_synthesis.md)
+- [`06_testing/round_3_closeout_retrospective.md`](06_testing/round_3_closeout_retrospective.md)
 - [`04_strategy_specs/spec_learning_batch_wave4.md`](04_strategy_specs/spec_learning_batch_wave4.md)
 - [`05_implementation/learning_batch_wave4_manifest.md`](05_implementation/learning_batch_wave4_manifest.md)
 - [`04_strategy_specs/spec_learning_batch_wave5.md`](04_strategy_specs/spec_learning_batch_wave5.md)
@@ -96,8 +93,9 @@ IN_PROGRESS
 
 ## Next Priority Action
 
-Run the Wave 5 batch and inspect which retention-aware descendants keep upside
-without collapsing.
+Consume the closeout artifact and debugging conclusions as Round 4 framing:
+book-level option thinking, toxic-strike-as-signal, horizon-aware rescue, and
+explicit no-trade / shutdown logic.
 
 ## Deadline Risk
 

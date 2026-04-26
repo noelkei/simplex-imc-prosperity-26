@@ -707,6 +707,90 @@ candidate_w4_12_5300_trend_comparator,W4-12,wave4_5300_finalists,trend-led 5300 
 candidate_w4_12_5300_trend_comparator,W4-12,wave4_5300_finalists,trend-led 5300 final comparator,VEV_5500,0.0,0
 candidate_w4_12_5300_trend_comparator,W4-12,wave4_5300_finalists,trend-led 5300 final comparator,VEV_6000,0.0,0
 candidate_w4_12_5300_trend_comparator,W4-12,wave4_5300_finalists,trend-led 5300 final comparator,VEV_6500,0.0,0
+candidate_w5_01_delta1_itm_final_control,W5-01,wave5_winner_protection,wave4 winner frozen control,HYDROGEL_PACK,994.84375,-19
+candidate_w5_01_delta1_itm_final_control,W5-01,wave5_winner_protection,wave4 winner frozen control,VELVETFRUIT_EXTRACT,532.4609375,-7
+candidate_w5_01_delta1_itm_final_control,W5-01,wave5_winner_protection,wave4 winner frozen control,VEV_4000,48.0,0
+candidate_w5_01_delta1_itm_final_control,W5-01,wave5_winner_protection,wave4 winner frozen control,VEV_4500,31.0,0
+candidate_w5_01_delta1_itm_final_control,W5-01,wave5_winner_protection,wave4 winner frozen control,VEV_5000,0.0,0
+candidate_w5_01_delta1_itm_final_control,W5-01,wave5_winner_protection,wave4 winner frozen control,VEV_5100,0.0,0
+candidate_w5_01_delta1_itm_final_control,W5-01,wave5_winner_protection,wave4 winner frozen control,VEV_5200,0.0,0
+candidate_w5_01_delta1_itm_final_control,W5-01,wave5_winner_protection,wave4 winner frozen control,VEV_5300,0.0,0
+candidate_w5_01_delta1_itm_final_control,W5-01,wave5_winner_protection,wave4 winner frozen control,VEV_5400,0.0,0
+candidate_w5_01_delta1_itm_final_control,W5-01,wave5_winner_protection,wave4 winner frozen control,VEV_5500,0.0,0
+candidate_w5_01_delta1_itm_final_control,W5-01,wave5_winner_protection,wave4 winner frozen control,VEV_6000,0.0,0
+candidate_w5_01_delta1_itm_final_control,W5-01,wave5_winner_protection,wave4 winner frozen control,VEV_6500,0.0,0
+candidate_w5_02_delta1_itm_retention_lock,W5-02,wave5_winner_protection,winner retention lock,HYDROGEL_PACK,444.0,0
+candidate_w5_02_delta1_itm_retention_lock,W5-02,wave5_winner_protection,winner retention lock,VELVETFRUIT_EXTRACT,190.0,0
+candidate_w5_02_delta1_itm_retention_lock,W5-02,wave5_winner_protection,winner retention lock,VEV_4000,-68.0,0
+candidate_w5_02_delta1_itm_retention_lock,W5-02,wave5_winner_protection,winner retention lock,VEV_4500,-48.0,0
+candidate_w5_02_delta1_itm_retention_lock,W5-02,wave5_winner_protection,winner retention lock,VEV_5000,0.0,0
+candidate_w5_02_delta1_itm_retention_lock,W5-02,wave5_winner_protection,winner retention lock,VEV_5100,0.0,0
+candidate_w5_02_delta1_itm_retention_lock,W5-02,wave5_winner_protection,winner retention lock,VEV_5200,0.0,0
+candidate_w5_02_delta1_itm_retention_lock,W5-02,wave5_winner_protection,winner retention lock,VEV_5300,0.0,0
+candidate_w5_02_delta1_itm_retention_lock,W5-02,wave5_winner_protection,winner retention lock,VEV_5400,0.0,0
+candidate_w5_02_delta1_itm_retention_lock,W5-02,wave5_winner_protection,winner retention lock,VEV_5500,0.0,0
+candidate_w5_02_delta1_itm_retention_lock,W5-02,wave5_winner_protection,winner retention lock,VEV_6000,0.0,0
+candidate_w5_02_delta1_itm_retention_lock,W5-02,wave5_winner_protection,winner retention lock,VEV_6500,0.0,0
+candidate_w5_03_delta1_itm_early_stop,W5-03,wave5_winner_protection,winner early-stop retention,HYDROGEL_PACK,545.0,0
+candidate_w5_03_delta1_itm_early_stop,W5-03,wave5_winner_protection,winner early-stop retention,VELVETFRUIT_EXTRACT,134.0,0
+candidate_w5_03_delta1_itm_early_stop,W5-03,wave5_winner_protection,winner early-stop retention,VEV_4000,-34.0,0
+candidate_w5_03_delta1_itm_early_stop,W5-03,wave5_winner_protection,winner early-stop retention,VEV_4500,-30.0,0
+candidate_w5_03_delta1_itm_early_stop,W5-03,wave5_winner_protection,winner early-stop retention,VEV_5000,0.0,0
+candidate_w5_03_delta1_itm_early_stop,W5-03,wave5_winner_protection,winner early-stop retention,VEV_5100,0.0,0
+candidate_w5_03_delta1_itm_early_stop,W5-03,wave5_winner_protection,winner early-stop retention,VEV_5200,0.0,0
+candidate_w5_03_delta1_itm_early_stop,W5-03,wave5_winner_protection,winner early-stop retention,VEV_5300,0.0,0
+candidate_w5_03_delta1_itm_early_stop,W5-03,wave5_winner_protection,winner early-stop retention,VEV_5400,0.0,0
+candidate_w5_03_delta1_itm_early_stop,W5-03,wave5_winner_protection,winner early-stop retention,VEV_5500,0.0,0
+candidate_w5_03_delta1_itm_early_stop,W5-03,wave5_winner_protection,winner early-stop retention,VEV_6000,0.0,0
+candidate_w5_03_delta1_itm_early_stop,W5-03,wave5_winner_protection,winner early-stop retention,VEV_6500,0.0,0
+candidate_w5_04_delta1_kalman_fallback,W5-04,wave5_fallback_benchmark,pure delta1 fallback benchmark,HYDROGEL_PACK,1160.0,0
+candidate_w5_04_delta1_kalman_fallback,W5-04,wave5_fallback_benchmark,pure delta1 fallback benchmark,VELVETFRUIT_EXTRACT,512.0,0
+candidate_w5_04_delta1_kalman_fallback,W5-04,wave5_fallback_benchmark,pure delta1 fallback benchmark,VEV_4000,0.0,0
+candidate_w5_04_delta1_kalman_fallback,W5-04,wave5_fallback_benchmark,pure delta1 fallback benchmark,VEV_4500,0.0,0
+candidate_w5_04_delta1_kalman_fallback,W5-04,wave5_fallback_benchmark,pure delta1 fallback benchmark,VEV_5000,0.0,0
+candidate_w5_04_delta1_kalman_fallback,W5-04,wave5_fallback_benchmark,pure delta1 fallback benchmark,VEV_5100,0.0,0
+candidate_w5_04_delta1_kalman_fallback,W5-04,wave5_fallback_benchmark,pure delta1 fallback benchmark,VEV_5200,0.0,0
+candidate_w5_04_delta1_kalman_fallback,W5-04,wave5_fallback_benchmark,pure delta1 fallback benchmark,VEV_5300,0.0,0
+candidate_w5_04_delta1_kalman_fallback,W5-04,wave5_fallback_benchmark,pure delta1 fallback benchmark,VEV_5400,0.0,0
+candidate_w5_04_delta1_kalman_fallback,W5-04,wave5_fallback_benchmark,pure delta1 fallback benchmark,VEV_5500,0.0,0
+candidate_w5_04_delta1_kalman_fallback,W5-04,wave5_fallback_benchmark,pure delta1 fallback benchmark,VEV_6000,0.0,0
+candidate_w5_04_delta1_kalman_fallback,W5-04,wave5_fallback_benchmark,pure delta1 fallback benchmark,VEV_6500,0.0,0
+candidate_w5_08_vex_crossstrike_salvage,W5-08,wave5_upside_distillation,cross-strike ordered salvage,HYDROGEL_PACK,0.0,0
+candidate_w5_08_vex_crossstrike_salvage,W5-08,wave5_upside_distillation,cross-strike ordered salvage,VELVETFRUIT_EXTRACT,404.0,0
+candidate_w5_08_vex_crossstrike_salvage,W5-08,wave5_upside_distillation,cross-strike ordered salvage,VEV_4000,0.0,0
+candidate_w5_08_vex_crossstrike_salvage,W5-08,wave5_upside_distillation,cross-strike ordered salvage,VEV_4500,0.0,0
+candidate_w5_08_vex_crossstrike_salvage,W5-08,wave5_upside_distillation,cross-strike ordered salvage,VEV_5000,0.0,0
+candidate_w5_08_vex_crossstrike_salvage,W5-08,wave5_upside_distillation,cross-strike ordered salvage,VEV_5100,-28.0,0
+candidate_w5_08_vex_crossstrike_salvage,W5-08,wave5_upside_distillation,cross-strike ordered salvage,VEV_5200,0.0,0
+candidate_w5_08_vex_crossstrike_salvage,W5-08,wave5_upside_distillation,cross-strike ordered salvage,VEV_5300,-18.0,0
+candidate_w5_08_vex_crossstrike_salvage,W5-08,wave5_upside_distillation,cross-strike ordered salvage,VEV_5400,0.0,0
+candidate_w5_08_vex_crossstrike_salvage,W5-08,wave5_upside_distillation,cross-strike ordered salvage,VEV_5500,0.0,0
+candidate_w5_08_vex_crossstrike_salvage,W5-08,wave5_upside_distillation,cross-strike ordered salvage,VEV_6000,0.0,0
+candidate_w5_08_vex_crossstrike_salvage,W5-08,wave5_upside_distillation,cross-strike ordered salvage,VEV_6500,0.0,0
+candidate_w5_09_winner_plus_tiny_trio,W5-09,wave5_upside_distillation,winner plus tiny salvage trio,HYDROGEL_PACK,114.2109375,-6
+candidate_w5_09_winner_plus_tiny_trio,W5-09,wave5_upside_distillation,winner plus tiny salvage trio,VELVETFRUIT_EXTRACT,335.69140625,-4
+candidate_w5_09_winner_plus_tiny_trio,W5-09,wave5_upside_distillation,winner plus tiny salvage trio,VEV_4000,-28.0,0
+candidate_w5_09_winner_plus_tiny_trio,W5-09,wave5_upside_distillation,winner plus tiny salvage trio,VEV_4500,-22.0,0
+candidate_w5_09_winner_plus_tiny_trio,W5-09,wave5_upside_distillation,winner plus tiny salvage trio,VEV_5000,-10.0,0
+candidate_w5_09_winner_plus_tiny_trio,W5-09,wave5_upside_distillation,winner plus tiny salvage trio,VEV_5100,-8.0,0
+candidate_w5_09_winner_plus_tiny_trio,W5-09,wave5_upside_distillation,winner plus tiny salvage trio,VEV_5200,0.0,0
+candidate_w5_09_winner_plus_tiny_trio,W5-09,wave5_upside_distillation,winner plus tiny salvage trio,VEV_5300,-13.0,0
+candidate_w5_09_winner_plus_tiny_trio,W5-09,wave5_upside_distillation,winner plus tiny salvage trio,VEV_5400,0.0,0
+candidate_w5_09_winner_plus_tiny_trio,W5-09,wave5_upside_distillation,winner plus tiny salvage trio,VEV_5500,0.0,0
+candidate_w5_09_winner_plus_tiny_trio,W5-09,wave5_upside_distillation,winner plus tiny salvage trio,VEV_6000,0.0,0
+candidate_w5_09_winner_plus_tiny_trio,W5-09,wave5_upside_distillation,winner plus tiny salvage trio,VEV_6500,0.0,0
+candidate_w5_11_5300_toxic_veto,W5-11,wave5_toxic_signal,5300 with toxic-strike veto threshold,HYDROGEL_PACK,0.0,0
+candidate_w5_11_5300_toxic_veto,W5-11,wave5_toxic_signal,5300 with toxic-strike veto threshold,VELVETFRUIT_EXTRACT,512.0,0
+candidate_w5_11_5300_toxic_veto,W5-11,wave5_toxic_signal,5300 with toxic-strike veto threshold,VEV_4000,0.0,0
+candidate_w5_11_5300_toxic_veto,W5-11,wave5_toxic_signal,5300 with toxic-strike veto threshold,VEV_4500,0.0,0
+candidate_w5_11_5300_toxic_veto,W5-11,wave5_toxic_signal,5300 with toxic-strike veto threshold,VEV_5000,0.0,0
+candidate_w5_11_5300_toxic_veto,W5-11,wave5_toxic_signal,5300 with toxic-strike veto threshold,VEV_5100,0.0,0
+candidate_w5_11_5300_toxic_veto,W5-11,wave5_toxic_signal,5300 with toxic-strike veto threshold,VEV_5200,0.0,0
+candidate_w5_11_5300_toxic_veto,W5-11,wave5_toxic_signal,5300 with toxic-strike veto threshold,VEV_5300,-36.0,0
+candidate_w5_11_5300_toxic_veto,W5-11,wave5_toxic_signal,5300 with toxic-strike veto threshold,VEV_5400,0.0,0
+candidate_w5_11_5300_toxic_veto,W5-11,wave5_toxic_signal,5300 with toxic-strike veto threshold,VEV_5500,0.0,0
+candidate_w5_11_5300_toxic_veto,W5-11,wave5_toxic_signal,5300 with toxic-strike veto threshold,VEV_6000,0.0,0
+candidate_w5_11_5300_toxic_veto,W5-11,wave5_toxic_signal,5300 with toxic-strike veto threshold,VEV_6500,0.0,0
 probe_l01_hydro_reversion,L01,wave1_delta1,delta1 reversion,HYDROGEL_PACK,556.03125,-15
 probe_l01_hydro_reversion,L01,wave1_delta1,delta1 reversion,VELVETFRUIT_EXTRACT,0.0,0
 probe_l01_hydro_reversion,L01,wave1_delta1,delta1 reversion,VEV_4000,0.0,0
