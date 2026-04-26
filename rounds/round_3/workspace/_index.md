@@ -9,11 +9,15 @@
 
 ## Current Next Priority Action
 
+<<<<<<< Updated upstream
 The full 19-bot Wave 2 batch is now implemented under
 `../bots/amin/canonical/`. Next:
 run the new canonical bots in Prosperity, ideally `W2-01` to `W2-14` first and
 `W2-15` to `W2-19` immediately after, then feed the new artifacts back into
 Phase 06.
+=======
+C06 tested: peaked 17K, closed -1.6K (sigma=95, 12x too low). C07 tested: straight down to -4.2K (Bachelier model still toxic — residuals too small for edge, passive quotes mispriced). New bot C08 (`candidate_c08_model_free_mm.py`) under `bots/amin/canonical/`: **drops Bachelier entirely**, uses Kalman-filtered microprice + Avellaneda-Stoikov reservation price + aggressive inventory control on all products. Tight position caps (40 delta-1, 50 vouchers). **Next: upload C08 to the platform.**
+>>>>>>> Stashed changes
 
 ## Phase Status
 
