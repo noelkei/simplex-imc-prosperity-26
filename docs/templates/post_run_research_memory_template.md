@@ -33,6 +33,26 @@ Dedup heuristic: `candidate + strategy family + changed axis + tested feature/si
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | INSIGHT_ID | PRODUCTS | RUNS | failure / edge / counterfactual / negative evidence | FINDING | high / medium / low | round-specific / likely reusable / uncertain | EDA / understanding / strategy / spec / variant | CAVEAT |
 
+## Carry-Forward Principles
+
+Use this for validated lessons that should survive beyond individual runs.
+
+| Principle | Runs / Artifacts | Why It Is Validated | Reuse In | Revalidation Need |
+| --- | --- | --- | --- | --- |
+| PRINCIPLE | RUNS_OR_ARTIFACTS | REASON | EDA / understanding / strategy / spec / next round | none / light / full |
+
+## Untested Hypotheses Worth Revisiting
+
+| Hypothesis | Origin | Why It Is Interesting | Clean Test Or EDA Needed | Status |
+| --- | --- | --- | --- | --- |
+| HYPOTHESIS | run / closeout / paper / EDA / other | REASON | TEST | open / deferred / superseded |
+
+## Default Anti-Patterns
+
+| Anti-Pattern | Evidence | Why It Should Stay Closed | Reopen Only If |
+| --- | --- | --- | --- |
+| ANTI_PATTERN | RUNS_OR_ARTIFACTS | REASON | CONDITION |
+
 ## Feature Feedback
 
 Use this to update feature confidence after serious platform or platform-style runs. Keep only feedback that changes a future decision.

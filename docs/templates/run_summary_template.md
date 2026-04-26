@@ -54,7 +54,8 @@ Raw logs are not durable by default. Preserve current decision evidence in `roun
 - Round adaptation audit: `passed | caveat | failed | not checked`
 - Round adaptation caveat:
 - Portability: `round-specific | likely reusable | uncertain | not applicable`
-- Reroute: `champion decision | targeted EDA | spec revision | debugging | one-axis variant | ignore`
+- Branch posture: `edge clean | edge then reversal | execution-limited | inventory-limited | signal-only candidate | no edge | not cleanly tested`
+- Reroute: `champion decision | targeted EDA | spec revision | debugging | one-axis variant | signal-only reuse | ignore`
 
 ## Run Diagnostics
 
@@ -68,6 +69,10 @@ Raw logs are not durable by default. Preserve current decision evidence in `roun
 - Max drawdown:
 - Max abs position:
 - Inventory / mark caveat:
+- Peak PnL:
+- End from peak:
+- Late-entry erosion:
+- Giveback severity:
 - Advanced diagnostics used, if any:
 - Statistical or regime confidence:
 
@@ -88,6 +93,14 @@ redundancy decision.
 | Assumption Or Relationship | Expected In Run | Observed In Run | Diagnostic Method | Verdict | Next Action |
 | --- | --- | --- | --- | --- | --- |
 | PROCESS_OR_RELATIONSHIP | EXPECTED | OBSERVED | markout / fill stats / regime split / product split / controlled comparison / none | supports / weakens / contradicts / not tested | keep / targeted EDA / spec revision / variant / discard |
+
+## Linked-Product Thesis Diagnostics
+
+Use this when the run depends on multiple related products or when a product may be more useful as signal than inventory.
+
+| Thesis Or Leg | Expected Role | Observed Role | Evidence | Interpretation | Next Action |
+| --- | --- | --- | --- | --- | --- |
+| PRODUCT_OR_THESIS | inventory / anchor / overlay / veto / monitor | OBSERVED_ROLE | EVIDENCE | worked as designed / better as signal-only / harmful inventory / unclear | keep / redesign / filter-only / discard / targeted EDA |
 
 ## Comparability
 
@@ -141,6 +154,12 @@ redundancy decision.
 | Counterfactual | Expected Improvement Axis | Evidence Basis | Cost | Verdict |
 | --- | --- | --- | --- | --- |
 | IDEA | thresholds / timing / filter / inventory / sizing / execution | EVIDENCE | low / medium / high | untested / tested-promote / tested-reject / defer / discard / superseded |
+
+## Carry-Forward Output
+
+- Validated carry-forward principle opened or reinforced:
+- Untested hypothesis opened:
+- Anti-pattern reinforced:
 
 ## Decision
 

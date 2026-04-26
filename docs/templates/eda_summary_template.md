@@ -36,6 +36,16 @@ Separate findings usable inside `Trader.run()` from manual-challenge findings.
 - External context:
 - Run or log artifact:
 - Post-run research memory:
+- Prior-round artifact reuse:
+
+## Prior-Round Compatibility
+
+Fill this only when prior-round evidence is being reused.
+
+- Source round:
+- Compatibility verdict: `compatible | partially compatible | not compatible | not used`
+- What is being reused:
+- What must be revalidated in the current round:
 
 ## Round Adaptation Check
 
@@ -91,6 +101,14 @@ Roles: `direct signal | execution filter | risk control | diagnostic | manual | 
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | FEATURE | csv / online / log/post-run / combined / manual-only | usable online / EDA-only / log-only / unknown | MEANING | direct signal / execution filter / risk control / diagnostic / manual / avoid | strong / medium / weak / contradictory | stable / day-sensitive / timestamp-sensitive / regime-dependent / unknown | changes strategy / changes parameters / changes validation / no decision impact | promote / exploratory / negative evidence / EDA-only calibration / needs logs / reject | NOTES |
 
+## Product / Role Classification
+
+Use this when products or strikes are linked and downstream strategy may need book-level framing.
+
+| Product Or Scope | Role Class | Interaction Class | Why This Role Fits | Downstream Use | Caveat |
+| --- | --- | --- | --- | --- | --- |
+| PRODUCT_OR_SCOPE | base / anchor / structural overlay / active risk leg / passive / execution leg / monitor / floor | standalone usable / usable only with anchor / mainly veto / anti-signal / too toxic as default inventory / unclear | EVIDENCE | USE | CAVEAT |
+
 ## Feature Engineering Notes
 
 Target simple, hypothesis-driven transformations before complex ones. Do not document brute-force feature explosion.
@@ -145,6 +163,13 @@ Mark `not applicable` for single-product or clearly independent scopes.
 | Product Pair / Scope | Check | Horizon / Alignment | Result | Decision | Caveat |
 | --- | --- | --- | --- | --- | --- |
 | PRODUCT_A_PRODUCT_B | correlation / covariance / lead-lag / controlled model | HORIZON_OR_ALIGNMENT | RESULT | use / separate / hedge / reject / defer | CAVEAT |
+
+## Retrospective EDA Decision
+
+- Meaningful run evidence exists: `yes | no`
+- Retrospective run-informed EDA addendum needed: `yes | no`
+- Why:
+- Addendum artifact, if created:
 
 ## Process / Distribution Hypotheses
 
@@ -226,6 +251,14 @@ Use only when a shorter summary helps review. Prefer the richer `Process / Distr
 | Condition Or Regime | Dependent Features | Observed Behavior | Strategy Relevance | Confidence | Caveats |
 | --- | --- | --- | --- | --- | --- |
 | CONDITION | FEATURES | BEHAVIOR | USE_OR_AVOID | strong / medium / weak / contradictory | CAVEATS |
+
+## Linked-Product / Book Framing Notes
+
+- Are products best treated as standalone symbols or a linked book:
+- Products that look better as signal than inventory:
+- Cross-product or cross-strike context that changes decisions:
+- Family-level exposure concerns:
+- Natural hold horizon differences across products or setups:
 
 ## Threshold / Execution Findings
 

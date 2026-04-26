@@ -31,11 +31,38 @@ Use it as a guided checklist, not a rigid schema. Classify the columns you actua
 
 1. Name the data source and product scope.
 2. Classify relevant columns using the table above.
-3. Choose analyses that match those categories and can affect a downstream decision.
-4. Create reusable metrics or derived features only when they support understanding, strategy, specification, validation, or debugging.
-5. Build a serious engineered feature set for decision-relevant checks.
-6. Run the default multivariate and process-hypothesis layers when applicable.
-7. Write a structured EDA artifact that another agent can use without rerunning the analysis.
+3. If multiple products are linked, classify product roles before deep analysis.
+4. Choose analyses that match those categories and can affect a downstream decision.
+5. Create reusable metrics or derived features only when they support understanding, strategy, specification, validation, or debugging.
+6. Build a serious engineered feature set for decision-relevant checks.
+7. Run the default multivariate and process-hypothesis layers when applicable.
+8. Decide whether the evidence is raw-data only or needs a retrospective run-informed addendum.
+9. Write a structured EDA artifact that another agent can use without rerunning the analysis.
+
+## Role Classification For Linked Products
+
+When products are structurally linked, classify them before deciding whether to model them as standalone trading legs, contextual features, or veto signals.
+
+### Product role classes
+
+| Role | Meaning | Typical downstream use |
+| --- | --- | --- |
+| `base / anchor` | Core reference product or valuation context | fair-value anchor, hedge context, state reference |
+| `structural overlay` | Product whose main value depends on the anchor or book context | residual logic, contextual entry, relative-value overlay |
+| `active risk leg` | Product likely to carry most directional or inventory risk | targeted signal leg, explicit risk sizing |
+| `passive / execution leg` | Product used mainly for execution quality or passive capture | narrower use, passive quoting, spread capture |
+| `monitor / floor` | Product or strike mainly useful as warning, confirmation, or floor | veto, regime gating, diagnostic state |
+
+### Interaction classes
+
+| Interaction class | Meaning | Typical action |
+| --- | --- | --- |
+| `standalone usable` | Can plausibly be traded on its own | candidate branch allowed |
+| `usable only with anchor` | Needs another product or book context | linked-product framing required |
+| `mainly veto / anti-signal` | Better as danger signal than inventory | strategy/filter candidate, not normal leg |
+| `too toxic as default inventory` | Repeatedly degrades path quality or retention | keep out of default trading set unless new evidence appears |
+
+Use these classes as EDA outputs, not as official market facts.
 
 ## Default Multivariate Layer
 
@@ -88,6 +115,7 @@ The main EDA output is a readable artifact, not a plot or notebook. A good EDA s
 - distinguish facts, conditional patterns/regimes, signal hypotheses, and assumptions
 - understand signal strength, uncertainty, and limitations
 - see what downstream agents should use, avoid, or validate next
+- understand whether product roles and interactions are stable enough for strategy use
 - decide whether to proceed to understanding, strategy, specification, validation, debugging, or more EDA
 
 ## Signal Strength

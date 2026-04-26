@@ -53,6 +53,12 @@ Implementation must not start until this spec is reviewed. In fast mode, keep it
 - Post-run research memory:
 - Playbook heuristics:
 
+## Carry-Forward Context
+
+- Validated carry-forward principles used:
+- Untested hypotheses intentionally being tested:
+- Anti-patterns explicitly avoided:
+
 ## Selection Trace
 
 - Based on candidate:
@@ -60,6 +66,7 @@ Implementation must not start until this spec is reviewed. In fast mode, keep it
 - Alternatives considered:
 - Why selected:
 - Known caveats:
+- Branch posture: `protect winner | rescue via retention | execution-limited | inventory-limited | clean isolation test | coverage gap | prune/reopen with new thesis | other`
 
 ## Evidence Traceability
 
@@ -80,6 +87,18 @@ Use this for round mechanics that are not normal features, such as special Trade
 | Mechanic / Trader Function / Field | Source | Decision | Bot Behavior | Validation Check |
 | --- | --- | --- | --- | --- |
 | MECHANIC | ROUND_DOC_OR_SPEC | implement / exclude / not applicable / blocked | BEHAVIOR_OR_REASON | CHECK |
+
+## Linked-Product Framing Contract
+
+Fill this when products are linked, derivative-like, or clearly book-dependent.
+
+- Product role:
+- Signal class: `valuation | microstructure | surface | regime | mixed`
+- Underlying role: `alpha | anchor | both | not applicable`
+- Trading posture: `aggressive | passive | no-trade | conditional`
+- Natural hold horizon:
+- What makes this a trading leg instead of only a signal:
+- Rule that should prevent edge from turning into giveback:
 
 ## Feature Contract
 
@@ -111,6 +130,7 @@ List important features considered but intentionally not implemented.
 - Sell behavior:
 - Passive/resting order behavior:
 - Stay-idle behavior:
+- No-trade / disable conditions:
 
 ## Position And Risk Handling
 
@@ -137,6 +157,8 @@ List important features considered but intentionally not implemented.
 - Order sign and limit checks:
 - Performance/run checks:
 - Debug signals to inspect:
+- Linked-product attribution checks, if applicable:
+- Giveback / retention checks, if applicable:
 
 ## Implementation Handoff
 

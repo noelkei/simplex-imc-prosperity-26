@@ -21,8 +21,10 @@ Required gates:
 
 - No implementation without a reviewed strategy spec.
 - No final submission without a readable validation or performance summary.
+- No prior-round strategy inheritance without an explicit Prior-Round Compatibility Gate verdict recorded in round preparation or the consuming artifact.
 - External paper research should generate a prompt by default after understanding, may use controlled online shortlist-building or metadata verification when needed, and strategy should not wait for the full raw -> md -> processed pipeline.
 - No phase is complete if facts, hypotheses, assumptions, and evidence are mixed together.
+- No closeout is complete if evidence, carry-forward principles, untested hypotheses, and anti-patterns are mixed together.
 - No stale prior-round assumption may move forward unless current-round evidence supports it or the risk is explicitly labeled.
 - Round-specific mechanics, Trader methods, and changed fields must be implemented, excluded, marked not applicable, or blocked in the spec before coding.
 - Round-local member-owned bot/performance folders remain non-authoritative execution artifacts; removed top-level `bots/` and `performances/` must not be recreated.
@@ -64,6 +66,27 @@ Strong-incumbent rule:
 - A challenger replaces the champion only if it has better real platform PnL, or slightly lower PnL with materially better robustness.
 - If the robustness gain is small, keep the higher-PnL champion.
 - Near deadline, prioritize final validation, artifact preservation, and active-file verification over new complexity.
+
+Late-stage exploitation rule:
+
+- Once run evidence is rich, stop treating every new wave as broad exploration.
+- New waves should mostly be one of:
+  - winner protection,
+  - rescue via retention,
+  - clean coverage of an important untested hypothesis,
+  - or a tightly pruned upside-distillation attempt.
+- If a branch repeatedly shows high peak PnL but poor retention, prefer
+  counterfactual analysis, subset pruning, and linked-product redesign before
+  opening many new families.
+
+Prior-round reuse rule:
+
+- `round_N+1` should inherit from `round_N` only after checking product overlap, mechanics, constraints, signal structure, and changed online fields.
+- Record the verdict as `compatible`, `partially compatible`, or `not compatible`.
+- Use `compatible` to carry forward principles and hypothesis backlog, not raw constants by default.
+- Use `partially compatible` to carry forward only abstract framing, questions, and process lessons.
+- Use `not compatible` to block strategy inheritance and keep only general workflow heuristics.
+- Do not assume `round_5` inherits from `round_4` unless the round docs and preparation artifact explicitly confirm compatibility.
 
 ## ROI And Capacity Controls
 
@@ -126,15 +149,19 @@ General completion rule: outputs must be usable without reinterpretation, facts 
 Phase-specific completion:
 
 - Ingestion: products, limits, algorithmic/manual split, caveats, and Round Mechanics Delta reviewed.
-- EDA: product scope, Round Adaptation Check, data quality, feature inventory/lifecycle, multivariate/redundancy checks or explicit deferrals, process/distribution hypotheses or explicit deferrals, feature promotion decisions, signal hypotheses, open questions, and downstream agent notes are clear.
+- EDA: product scope, Round Adaptation Check, prior-round compatibility note when used, data quality, feature inventory/lifecycle, multivariate/redundancy checks or explicit deferrals, process/distribution hypotheses or explicit deferrals, feature promotion decisions, signal hypotheses, open questions, downstream agent notes, and an explicit decision on whether retrospective run-informed EDA is needed are clear.
 - Understanding: EDA evidence, promoted signals, rejected/unresolved research memory, assumptions carried forward, open risks, and candidate implications are compressed.
 - External paper research: prompt generated from understanding outputs by default, online shortlist / metadata-verification notes recorded when used, wait state or explicit skip reason recorded, strategy left free to proceed, raw inputs normalized locally, uploaded papers converted and processed incrementally without hallucinated content, Markdown fidelity / QA recorded, and the phase becomes operationally complete once at least one processed paper exists.
 - Strategy generation: ROI-driven candidate queue completed, feature budget
-  respected, priority/implementation wave recorded, and Round Coverage Check
-  addressed.
+  respected, priority/implementation wave recorded, Round Coverage Check
+  addressed, and validated carry-forward principles vs untested hypotheses vs
+  anti-patterns separated.
 - Strategy spec: at least one reviewed implementation-ready spec exists with Feature Contract and Round-Specific Mechanics Contract.
 - Implementation: bot maps to a reviewed spec and passes contract/rule plus round adaptation checks.
-- Testing/performance: readable run summary links bot, spec, raw run, metrics, limits, run classification, path-quality diagnosis when artifacts allow, and ROI-gated memory action.
+- Testing/performance: readable run summary links bot, spec, raw run, metrics,
+  limits, run classification, path-quality diagnosis when artifacts allow,
+  product/strike attribution when decision-relevant, `signal-only candidate`
+  reinterpretation when relevant, and ROI-gated memory action.
 - Debugging: issue has reproduction, expected vs observed behavior, linked spec/run, classification, and next action.
 
 ## Data Arrival Rule
@@ -148,6 +175,28 @@ When raw data, logs, or run artifacts arrive after ingestion has already started
 - keep data observations labeled as EDA evidence, not official wiki facts
 
 Do this before or during EDA so downstream phases do not inherit obsolete "no data" blockers.
+
+## Round Closeout Checkpoint
+
+When a round is no longer an active execution problem and has become mainly retrospective, run a formal closeout checkpoint before shifting focus to the next round.
+
+Minimum closeout package:
+
+- consolidated synthesis or validation summary
+- updated post-run research memory
+- explicit round closeout retrospective
+- canonical vs historical cleanup for round-local bots and performances
+- synchronized `_index.md`, phase contexts, and next action
+- carry-forward principles, untested hypotheses, and anti-patterns separated clearly
+
+Closeout questions:
+
+- Is the round still worth active implementation and reruns, or only retrospective analysis?
+- Has all material run evidence been absorbed into synthesis or memory?
+- Are there stale `canonical/` artifacts that should be archived or removed?
+- Can the next round consume the output without reinterpreting whether something is evidence, principle, hypothesis, or anti-pattern?
+
+Do not leave a round in an ambiguous half-active state once the main ROI is learning transfer rather than more runs.
 
 ## Phase Context Files
 
@@ -241,6 +290,13 @@ When blocked:
 - Classify the blocker as missing data, source conflict, human prioritization, implementation uncertainty, platform artifact missing, or deadline tradeoff.
 - Suggest the smallest useful unblock.
 
+When closing a round:
+
+- confirm whether the round is active, paused, or retrospective-only
+- update canonical/historical state if it affects active interpretation
+- point the next action at the next round only after the closeout package exists
+- avoid writing the next round as a continuation unless compatibility is explicitly checked
+
 Before closing a phase:
 
 - Check exit criteria.
@@ -264,7 +320,10 @@ Rules:
 - Spec: one page is acceptable if it includes signal, execution, risk, state, and validation checks.
 - Implementation: start with the minimum set that can be validated quickly,
   then add distinct reviewed candidates only when validation capacity remains.
-- Testing: run the fastest meaningful validation first; store raw output and a short summary, and when a batch changes direction, capture the minimum reusable path-quality and coverage signal needed for the next wave.
+- Testing: run the fastest meaningful validation first; store raw output and a
+  short summary, and when a batch changes direction, capture the minimum
+  reusable path-quality, attribution, and coverage signal needed for the next
+  wave.
 - Debugging: fix rule/contract/limit bugs first; defer speculative tuning unless it is clearly high impact.
 - Freeze: with less than 6 hours left, only fix correctness issues or extremely low-risk parameter changes, then validate, verify the active upload file, and submit.
 
