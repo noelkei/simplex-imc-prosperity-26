@@ -47,6 +47,666 @@ candidate_c06_v01_centered_base,C06-base-v01,corrected_and_legacy_composites,cor
 candidate_c06_v01_centered_base,C06-base-v01,corrected_and_legacy_composites,corrected centered composite,VEV_5500,0.0,0
 candidate_c06_v01_centered_base,C06-base-v01,corrected_and_legacy_composites,corrected centered composite,VEV_6000,0.0,0
 candidate_c06_v01_centered_base,C06-base-v01,corrected_and_legacy_composites,corrected centered composite,VEV_6500,0.0,0
+candidate_w2_01_delta1_dual_control,W2-01,wave2_delta1_controls,delta1 champion control,HYDROGEL_PACK,521.421875,-12
+candidate_w2_01_delta1_dual_control,W2-01,wave2_delta1_controls,delta1 champion control,VELVETFRUIT_EXTRACT,351.2314453125,3
+candidate_w2_01_delta1_dual_control,W2-01,wave2_delta1_controls,delta1 champion control,VEV_4000,0.0,0
+candidate_w2_01_delta1_dual_control,W2-01,wave2_delta1_controls,delta1 champion control,VEV_4500,0.0,0
+candidate_w2_01_delta1_dual_control,W2-01,wave2_delta1_controls,delta1 champion control,VEV_5000,0.0,0
+candidate_w2_01_delta1_dual_control,W2-01,wave2_delta1_controls,delta1 champion control,VEV_5100,0.0,0
+candidate_w2_01_delta1_dual_control,W2-01,wave2_delta1_controls,delta1 champion control,VEV_5200,0.0,0
+candidate_w2_01_delta1_dual_control,W2-01,wave2_delta1_controls,delta1 champion control,VEV_5300,0.0,0
+candidate_w2_01_delta1_dual_control,W2-01,wave2_delta1_controls,delta1 champion control,VEV_5400,0.0,0
+candidate_w2_01_delta1_dual_control,W2-01,wave2_delta1_controls,delta1 champion control,VEV_5500,0.0,0
+candidate_w2_01_delta1_dual_control,W2-01,wave2_delta1_controls,delta1 champion control,VEV_6000,0.0,0
+candidate_w2_01_delta1_dual_control,W2-01,wave2_delta1_controls,delta1 champion control,VEV_6500,0.0,0
+candidate_w2_02_hydro_passive_wide,W2-02,wave2_delta1_controls,hydro passive execution carry-forward,HYDROGEL_PACK,350.0,0
+candidate_w2_02_hydro_passive_wide,W2-02,wave2_delta1_controls,hydro passive execution carry-forward,VELVETFRUIT_EXTRACT,0.0,0
+candidate_w2_02_hydro_passive_wide,W2-02,wave2_delta1_controls,hydro passive execution carry-forward,VEV_4000,0.0,0
+candidate_w2_02_hydro_passive_wide,W2-02,wave2_delta1_controls,hydro passive execution carry-forward,VEV_4500,0.0,0
+candidate_w2_02_hydro_passive_wide,W2-02,wave2_delta1_controls,hydro passive execution carry-forward,VEV_5000,0.0,0
+candidate_w2_02_hydro_passive_wide,W2-02,wave2_delta1_controls,hydro passive execution carry-forward,VEV_5100,0.0,0
+candidate_w2_02_hydro_passive_wide,W2-02,wave2_delta1_controls,hydro passive execution carry-forward,VEV_5200,0.0,0
+candidate_w2_02_hydro_passive_wide,W2-02,wave2_delta1_controls,hydro passive execution carry-forward,VEV_5300,0.0,0
+candidate_w2_02_hydro_passive_wide,W2-02,wave2_delta1_controls,hydro passive execution carry-forward,VEV_5400,0.0,0
+candidate_w2_02_hydro_passive_wide,W2-02,wave2_delta1_controls,hydro passive execution carry-forward,VEV_5500,0.0,0
+candidate_w2_02_hydro_passive_wide,W2-02,wave2_delta1_controls,hydro passive execution carry-forward,VEV_6000,0.0,0
+candidate_w2_02_hydro_passive_wide,W2-02,wave2_delta1_controls,hydro passive execution carry-forward,VEV_6500,0.0,0
+candidate_w2_03_itm_passive_pair,W2-03,wave2_itm_passive,itm passive carry-forward,HYDROGEL_PACK,0.0,0
+candidate_w2_03_itm_passive_pair,W2-03,wave2_itm_passive,itm passive carry-forward,VELVETFRUIT_EXTRACT,0.0,0
+candidate_w2_03_itm_passive_pair,W2-03,wave2_itm_passive,itm passive carry-forward,VEV_4000,0.0,0
+candidate_w2_03_itm_passive_pair,W2-03,wave2_itm_passive,itm passive carry-forward,VEV_4500,0.0,0
+candidate_w2_03_itm_passive_pair,W2-03,wave2_itm_passive,itm passive carry-forward,VEV_5000,0.0,0
+candidate_w2_03_itm_passive_pair,W2-03,wave2_itm_passive,itm passive carry-forward,VEV_5100,0.0,0
+candidate_w2_03_itm_passive_pair,W2-03,wave2_itm_passive,itm passive carry-forward,VEV_5200,0.0,0
+candidate_w2_03_itm_passive_pair,W2-03,wave2_itm_passive,itm passive carry-forward,VEV_5300,0.0,0
+candidate_w2_03_itm_passive_pair,W2-03,wave2_itm_passive,itm passive carry-forward,VEV_5400,0.0,0
+candidate_w2_03_itm_passive_pair,W2-03,wave2_itm_passive,itm passive carry-forward,VEV_5500,0.0,0
+candidate_w2_03_itm_passive_pair,W2-03,wave2_itm_passive,itm passive carry-forward,VEV_6000,0.0,0
+candidate_w2_03_itm_passive_pair,W2-03,wave2_itm_passive,itm passive carry-forward,VEV_6500,0.0,0
+candidate_w2_04_delta1_itm_overlay,W2-04,wave2_delta1_controls,delta1 plus itm overlay control,HYDROGEL_PACK,521.421875,-12
+candidate_w2_04_delta1_itm_overlay,W2-04,wave2_delta1_controls,delta1 plus itm overlay control,VELVETFRUIT_EXTRACT,351.2314453125,3
+candidate_w2_04_delta1_itm_overlay,W2-04,wave2_delta1_controls,delta1 plus itm overlay control,VEV_4000,0.0,0
+candidate_w2_04_delta1_itm_overlay,W2-04,wave2_delta1_controls,delta1 plus itm overlay control,VEV_4500,0.0,0
+candidate_w2_04_delta1_itm_overlay,W2-04,wave2_delta1_controls,delta1 plus itm overlay control,VEV_5000,0.0,0
+candidate_w2_04_delta1_itm_overlay,W2-04,wave2_delta1_controls,delta1 plus itm overlay control,VEV_5100,0.0,0
+candidate_w2_04_delta1_itm_overlay,W2-04,wave2_delta1_controls,delta1 plus itm overlay control,VEV_5200,0.0,0
+candidate_w2_04_delta1_itm_overlay,W2-04,wave2_delta1_controls,delta1 plus itm overlay control,VEV_5300,0.0,0
+candidate_w2_04_delta1_itm_overlay,W2-04,wave2_delta1_controls,delta1 plus itm overlay control,VEV_5400,0.0,0
+candidate_w2_04_delta1_itm_overlay,W2-04,wave2_delta1_controls,delta1 plus itm overlay control,VEV_5500,0.0,0
+candidate_w2_04_delta1_itm_overlay,W2-04,wave2_delta1_controls,delta1 plus itm overlay control,VEV_6000,0.0,0
+candidate_w2_04_delta1_itm_overlay,W2-04,wave2_delta1_controls,delta1 plus itm overlay control,VEV_6500,0.0,0
+candidate_w2_05_5300_bachelier_selective,W2-05,wave2_active_clean_retests,selective bachelier residual retest,HYDROGEL_PACK,0.0,0
+candidate_w2_05_5300_bachelier_selective,W2-05,wave2_active_clean_retests,selective bachelier residual retest,VELVETFRUIT_EXTRACT,0.0,0
+candidate_w2_05_5300_bachelier_selective,W2-05,wave2_active_clean_retests,selective bachelier residual retest,VEV_4000,0.0,0
+candidate_w2_05_5300_bachelier_selective,W2-05,wave2_active_clean_retests,selective bachelier residual retest,VEV_4500,0.0,0
+candidate_w2_05_5300_bachelier_selective,W2-05,wave2_active_clean_retests,selective bachelier residual retest,VEV_5000,0.0,0
+candidate_w2_05_5300_bachelier_selective,W2-05,wave2_active_clean_retests,selective bachelier residual retest,VEV_5100,0.0,0
+candidate_w2_05_5300_bachelier_selective,W2-05,wave2_active_clean_retests,selective bachelier residual retest,VEV_5200,0.0,0
+candidate_w2_05_5300_bachelier_selective,W2-05,wave2_active_clean_retests,selective bachelier residual retest,VEV_5300,-395.875,90
+candidate_w2_05_5300_bachelier_selective,W2-05,wave2_active_clean_retests,selective bachelier residual retest,VEV_5400,0.0,0
+candidate_w2_05_5300_bachelier_selective,W2-05,wave2_active_clean_retests,selective bachelier residual retest,VEV_5500,0.0,0
+candidate_w2_05_5300_bachelier_selective,W2-05,wave2_active_clean_retests,selective bachelier residual retest,VEV_6000,0.0,0
+candidate_w2_05_5300_bachelier_selective,W2-05,wave2_active_clean_retests,selective bachelier residual retest,VEV_6500,0.0,0
+candidate_w2_06_5000_5300_bachelier_selective,W2-06,wave2_active_clean_retests,selective bachelier residual subset retest,HYDROGEL_PACK,0.0,0
+candidate_w2_06_5000_5300_bachelier_selective,W2-06,wave2_active_clean_retests,selective bachelier residual subset retest,VELVETFRUIT_EXTRACT,0.0,0
+candidate_w2_06_5000_5300_bachelier_selective,W2-06,wave2_active_clean_retests,selective bachelier residual subset retest,VEV_4000,0.0,0
+candidate_w2_06_5000_5300_bachelier_selective,W2-06,wave2_active_clean_retests,selective bachelier residual subset retest,VEV_4500,0.0,0
+candidate_w2_06_5000_5300_bachelier_selective,W2-06,wave2_active_clean_retests,selective bachelier residual subset retest,VEV_5000,-1019.4241943359376,-7
+candidate_w2_06_5000_5300_bachelier_selective,W2-06,wave2_active_clean_retests,selective bachelier residual subset retest,VEV_5100,0.0,0
+candidate_w2_06_5000_5300_bachelier_selective,W2-06,wave2_active_clean_retests,selective bachelier residual subset retest,VEV_5200,0.0,0
+candidate_w2_06_5000_5300_bachelier_selective,W2-06,wave2_active_clean_retests,selective bachelier residual subset retest,VEV_5300,-316.875,90
+candidate_w2_06_5000_5300_bachelier_selective,W2-06,wave2_active_clean_retests,selective bachelier residual subset retest,VEV_5400,0.0,0
+candidate_w2_06_5000_5300_bachelier_selective,W2-06,wave2_active_clean_retests,selective bachelier residual subset retest,VEV_5500,0.0,0
+candidate_w2_06_5000_5300_bachelier_selective,W2-06,wave2_active_clean_retests,selective bachelier residual subset retest,VEV_6000,0.0,0
+candidate_w2_06_5000_5300_bachelier_selective,W2-06,wave2_active_clean_retests,selective bachelier residual subset retest,VEV_6500,0.0,0
+candidate_w2_07_5300_fast_unwind,W2-07,wave2_active_rescue,active path rescue,HYDROGEL_PACK,0.0,0
+candidate_w2_07_5300_fast_unwind,W2-07,wave2_active_rescue,active path rescue,VELVETFRUIT_EXTRACT,0.0,0
+candidate_w2_07_5300_fast_unwind,W2-07,wave2_active_rescue,active path rescue,VEV_4000,0.0,0
+candidate_w2_07_5300_fast_unwind,W2-07,wave2_active_rescue,active path rescue,VEV_4500,0.0,0
+candidate_w2_07_5300_fast_unwind,W2-07,wave2_active_rescue,active path rescue,VEV_5000,0.0,0
+candidate_w2_07_5300_fast_unwind,W2-07,wave2_active_rescue,active path rescue,VEV_5100,0.0,0
+candidate_w2_07_5300_fast_unwind,W2-07,wave2_active_rescue,active path rescue,VEV_5200,0.0,0
+candidate_w2_07_5300_fast_unwind,W2-07,wave2_active_rescue,active path rescue,VEV_5300,-5019.0,0
+candidate_w2_07_5300_fast_unwind,W2-07,wave2_active_rescue,active path rescue,VEV_5400,0.0,0
+candidate_w2_07_5300_fast_unwind,W2-07,wave2_active_rescue,active path rescue,VEV_5500,0.0,0
+candidate_w2_07_5300_fast_unwind,W2-07,wave2_active_rescue,active path rescue,VEV_6000,0.0,0
+candidate_w2_07_5300_fast_unwind,W2-07,wave2_active_rescue,active path rescue,VEV_6500,0.0,0
+candidate_w2_08_5000_5300_fast_unwind,W2-08,wave2_active_rescue,active subset path rescue,HYDROGEL_PACK,0.0,0
+candidate_w2_08_5000_5300_fast_unwind,W2-08,wave2_active_rescue,active subset path rescue,VELVETFRUIT_EXTRACT,0.0,0
+candidate_w2_08_5000_5300_fast_unwind,W2-08,wave2_active_rescue,active subset path rescue,VEV_4000,0.0,0
+candidate_w2_08_5000_5300_fast_unwind,W2-08,wave2_active_rescue,active subset path rescue,VEV_4500,0.0,0
+candidate_w2_08_5000_5300_fast_unwind,W2-08,wave2_active_rescue,active subset path rescue,VEV_5000,-1006.0,0
+candidate_w2_08_5000_5300_fast_unwind,W2-08,wave2_active_rescue,active subset path rescue,VEV_5100,0.0,0
+candidate_w2_08_5000_5300_fast_unwind,W2-08,wave2_active_rescue,active subset path rescue,VEV_5200,0.0,0
+candidate_w2_08_5000_5300_fast_unwind,W2-08,wave2_active_rescue,active subset path rescue,VEV_5300,-4641.0,0
+candidate_w2_08_5000_5300_fast_unwind,W2-08,wave2_active_rescue,active subset path rescue,VEV_5400,0.0,0
+candidate_w2_08_5000_5300_fast_unwind,W2-08,wave2_active_rescue,active subset path rescue,VEV_5500,0.0,0
+candidate_w2_08_5000_5300_fast_unwind,W2-08,wave2_active_rescue,active subset path rescue,VEV_6000,0.0,0
+candidate_w2_08_5000_5300_fast_unwind,W2-08,wave2_active_rescue,active subset path rescue,VEV_6500,0.0,0
+candidate_w2_09_5300_late_flatten,W2-09,wave2_active_rescue,expiry-aware late flatten,HYDROGEL_PACK,0.0,0
+candidate_w2_09_5300_late_flatten,W2-09,wave2_active_rescue,expiry-aware late flatten,VELVETFRUIT_EXTRACT,0.0,0
+candidate_w2_09_5300_late_flatten,W2-09,wave2_active_rescue,expiry-aware late flatten,VEV_4000,0.0,0
+candidate_w2_09_5300_late_flatten,W2-09,wave2_active_rescue,expiry-aware late flatten,VEV_4500,0.0,0
+candidate_w2_09_5300_late_flatten,W2-09,wave2_active_rescue,expiry-aware late flatten,VEV_5000,0.0,0
+candidate_w2_09_5300_late_flatten,W2-09,wave2_active_rescue,expiry-aware late flatten,VEV_5100,0.0,0
+candidate_w2_09_5300_late_flatten,W2-09,wave2_active_rescue,expiry-aware late flatten,VEV_5200,0.0,0
+candidate_w2_09_5300_late_flatten,W2-09,wave2_active_rescue,expiry-aware late flatten,VEV_5300,-291.22216796875,80
+candidate_w2_09_5300_late_flatten,W2-09,wave2_active_rescue,expiry-aware late flatten,VEV_5400,0.0,0
+candidate_w2_09_5300_late_flatten,W2-09,wave2_active_rescue,expiry-aware late flatten,VEV_5500,0.0,0
+candidate_w2_09_5300_late_flatten,W2-09,wave2_active_rescue,expiry-aware late flatten,VEV_6000,0.0,0
+candidate_w2_09_5300_late_flatten,W2-09,wave2_active_rescue,expiry-aware late flatten,VEV_6500,0.0,0
+candidate_w2_10_5000_5300_late_flatten,W2-10,wave2_active_rescue,expiry-aware subset late flatten,HYDROGEL_PACK,0.0,0
+candidate_w2_10_5000_5300_late_flatten,W2-10,wave2_active_rescue,expiry-aware subset late flatten,VELVETFRUIT_EXTRACT,0.0,0
+candidate_w2_10_5000_5300_late_flatten,W2-10,wave2_active_rescue,expiry-aware subset late flatten,VEV_4000,0.0,0
+candidate_w2_10_5000_5300_late_flatten,W2-10,wave2_active_rescue,expiry-aware subset late flatten,VEV_4500,0.0,0
+candidate_w2_10_5000_5300_late_flatten,W2-10,wave2_active_rescue,expiry-aware subset late flatten,VEV_5000,-713.017333984375,-5
+candidate_w2_10_5000_5300_late_flatten,W2-10,wave2_active_rescue,expiry-aware subset late flatten,VEV_5100,0.0,0
+candidate_w2_10_5000_5300_late_flatten,W2-10,wave2_active_rescue,expiry-aware subset late flatten,VEV_5200,0.0,0
+candidate_w2_10_5000_5300_late_flatten,W2-10,wave2_active_rescue,expiry-aware subset late flatten,VEV_5300,-263.895751953125,75
+candidate_w2_10_5000_5300_late_flatten,W2-10,wave2_active_rescue,expiry-aware subset late flatten,VEV_5400,0.0,0
+candidate_w2_10_5000_5300_late_flatten,W2-10,wave2_active_rescue,expiry-aware subset late flatten,VEV_5500,0.0,0
+candidate_w2_10_5000_5300_late_flatten,W2-10,wave2_active_rescue,expiry-aware subset late flatten,VEV_6000,0.0,0
+candidate_w2_10_5000_5300_late_flatten,W2-10,wave2_active_rescue,expiry-aware subset late flatten,VEV_6500,0.0,0
+candidate_w2_11_5000_5300_inventory_rescue,W2-11,wave2_active_rescue,inventory-aware subset rescue,HYDROGEL_PACK,0.0,0
+candidate_w2_11_5000_5300_inventory_rescue,W2-11,wave2_active_rescue,inventory-aware subset rescue,VELVETFRUIT_EXTRACT,0.0,0
+candidate_w2_11_5000_5300_inventory_rescue,W2-11,wave2_active_rescue,inventory-aware subset rescue,VEV_4000,0.0,0
+candidate_w2_11_5000_5300_inventory_rescue,W2-11,wave2_active_rescue,inventory-aware subset rescue,VEV_4500,0.0,0
+candidate_w2_11_5000_5300_inventory_rescue,W2-11,wave2_active_rescue,inventory-aware subset rescue,VEV_5000,-1006.0,0
+candidate_w2_11_5000_5300_inventory_rescue,W2-11,wave2_active_rescue,inventory-aware subset rescue,VEV_5100,0.0,0
+candidate_w2_11_5000_5300_inventory_rescue,W2-11,wave2_active_rescue,inventory-aware subset rescue,VEV_5200,0.0,0
+candidate_w2_11_5000_5300_inventory_rescue,W2-11,wave2_active_rescue,inventory-aware subset rescue,VEV_5300,-4145.0,0
+candidate_w2_11_5000_5300_inventory_rescue,W2-11,wave2_active_rescue,inventory-aware subset rescue,VEV_5400,0.0,0
+candidate_w2_11_5000_5300_inventory_rescue,W2-11,wave2_active_rescue,inventory-aware subset rescue,VEV_5500,0.0,0
+candidate_w2_11_5000_5300_inventory_rescue,W2-11,wave2_active_rescue,inventory-aware subset rescue,VEV_6000,0.0,0
+candidate_w2_11_5000_5300_inventory_rescue,W2-11,wave2_active_rescue,inventory-aware subset rescue,VEV_6500,0.0,0
+candidate_w2_12_vex_5300_fast_combo,W2-12,wave2_active_rescue,vex plus selective active combo,HYDROGEL_PACK,0.0,0
+candidate_w2_12_vex_5300_fast_combo,W2-12,wave2_active_rescue,vex plus selective active combo,VELVETFRUIT_EXTRACT,351.2314453125,3
+candidate_w2_12_vex_5300_fast_combo,W2-12,wave2_active_rescue,vex plus selective active combo,VEV_4000,0.0,0
+candidate_w2_12_vex_5300_fast_combo,W2-12,wave2_active_rescue,vex plus selective active combo,VEV_4500,0.0,0
+candidate_w2_12_vex_5300_fast_combo,W2-12,wave2_active_rescue,vex plus selective active combo,VEV_5000,0.0,0
+candidate_w2_12_vex_5300_fast_combo,W2-12,wave2_active_rescue,vex plus selective active combo,VEV_5100,0.0,0
+candidate_w2_12_vex_5300_fast_combo,W2-12,wave2_active_rescue,vex plus selective active combo,VEV_5200,0.0,0
+candidate_w2_12_vex_5300_fast_combo,W2-12,wave2_active_rescue,vex plus selective active combo,VEV_5300,-4540.0,0
+candidate_w2_12_vex_5300_fast_combo,W2-12,wave2_active_rescue,vex plus selective active combo,VEV_5400,0.0,0
+candidate_w2_12_vex_5300_fast_combo,W2-12,wave2_active_rescue,vex plus selective active combo,VEV_5500,0.0,0
+candidate_w2_12_vex_5300_fast_combo,W2-12,wave2_active_rescue,vex plus selective active combo,VEV_6000,0.0,0
+candidate_w2_12_vex_5300_fast_combo,W2-12,wave2_active_rescue,vex plus selective active combo,VEV_6500,0.0,0
+candidate_w2_13_selective_imbalance_filter,W2-13,wave2_active_rescue,selective imbalance-as-filter,HYDROGEL_PACK,0.0,0
+candidate_w2_13_selective_imbalance_filter,W2-13,wave2_active_rescue,selective imbalance-as-filter,VELVETFRUIT_EXTRACT,0.0,0
+candidate_w2_13_selective_imbalance_filter,W2-13,wave2_active_rescue,selective imbalance-as-filter,VEV_4000,0.0,0
+candidate_w2_13_selective_imbalance_filter,W2-13,wave2_active_rescue,selective imbalance-as-filter,VEV_4500,0.0,0
+candidate_w2_13_selective_imbalance_filter,W2-13,wave2_active_rescue,selective imbalance-as-filter,VEV_5000,-304.0,0
+candidate_w2_13_selective_imbalance_filter,W2-13,wave2_active_rescue,selective imbalance-as-filter,VEV_5100,0.0,0
+candidate_w2_13_selective_imbalance_filter,W2-13,wave2_active_rescue,selective imbalance-as-filter,VEV_5200,0.0,0
+candidate_w2_13_selective_imbalance_filter,W2-13,wave2_active_rescue,selective imbalance-as-filter,VEV_5300,-937.0,0
+candidate_w2_13_selective_imbalance_filter,W2-13,wave2_active_rescue,selective imbalance-as-filter,VEV_5400,0.0,0
+candidate_w2_13_selective_imbalance_filter,W2-13,wave2_active_rescue,selective imbalance-as-filter,VEV_5500,0.0,0
+candidate_w2_13_selective_imbalance_filter,W2-13,wave2_active_rescue,selective imbalance-as-filter,VEV_6000,0.0,0
+candidate_w2_13_selective_imbalance_filter,W2-13,wave2_active_rescue,selective imbalance-as-filter,VEV_6500,0.0,0
+candidate_w2_14_upper_anchored_passive,W2-14,wave2_upper_refinement,upper anchored passive refinement,HYDROGEL_PACK,0.0,0
+candidate_w2_14_upper_anchored_passive,W2-14,wave2_upper_refinement,upper anchored passive refinement,VELVETFRUIT_EXTRACT,0.0,0
+candidate_w2_14_upper_anchored_passive,W2-14,wave2_upper_refinement,upper anchored passive refinement,VEV_4000,0.0,0
+candidate_w2_14_upper_anchored_passive,W2-14,wave2_upper_refinement,upper anchored passive refinement,VEV_4500,0.0,0
+candidate_w2_14_upper_anchored_passive,W2-14,wave2_upper_refinement,upper anchored passive refinement,VEV_5000,0.0,0
+candidate_w2_14_upper_anchored_passive,W2-14,wave2_upper_refinement,upper anchored passive refinement,VEV_5100,0.0,0
+candidate_w2_14_upper_anchored_passive,W2-14,wave2_upper_refinement,upper anchored passive refinement,VEV_5200,0.0,0
+candidate_w2_14_upper_anchored_passive,W2-14,wave2_upper_refinement,upper anchored passive refinement,VEV_5300,0.0,0
+candidate_w2_14_upper_anchored_passive,W2-14,wave2_upper_refinement,upper anchored passive refinement,VEV_5400,1.7984580993652344,-2
+candidate_w2_14_upper_anchored_passive,W2-14,wave2_upper_refinement,upper anchored passive refinement,VEV_5500,0.0,0
+candidate_w2_14_upper_anchored_passive,W2-14,wave2_upper_refinement,upper anchored passive refinement,VEV_6000,0.0,0
+candidate_w2_14_upper_anchored_passive,W2-14,wave2_upper_refinement,upper anchored passive refinement,VEV_6500,0.0,0
+candidate_w2_15_5100_tiny_rescue,W2-15,wave2_toxic_rescue,toxic-strike controlled rescue,HYDROGEL_PACK,0.0,0
+candidate_w2_15_5100_tiny_rescue,W2-15,wave2_toxic_rescue,toxic-strike controlled rescue,VELVETFRUIT_EXTRACT,351.2314453125,3
+candidate_w2_15_5100_tiny_rescue,W2-15,wave2_toxic_rescue,toxic-strike controlled rescue,VEV_4000,0.0,0
+candidate_w2_15_5100_tiny_rescue,W2-15,wave2_toxic_rescue,toxic-strike controlled rescue,VEV_4500,0.0,0
+candidate_w2_15_5100_tiny_rescue,W2-15,wave2_toxic_rescue,toxic-strike controlled rescue,VEV_5000,0.0,0
+candidate_w2_15_5100_tiny_rescue,W2-15,wave2_toxic_rescue,toxic-strike controlled rescue,VEV_5100,-554.0,0
+candidate_w2_15_5100_tiny_rescue,W2-15,wave2_toxic_rescue,toxic-strike controlled rescue,VEV_5200,0.0,0
+candidate_w2_15_5100_tiny_rescue,W2-15,wave2_toxic_rescue,toxic-strike controlled rescue,VEV_5300,0.0,0
+candidate_w2_15_5100_tiny_rescue,W2-15,wave2_toxic_rescue,toxic-strike controlled rescue,VEV_5400,0.0,0
+candidate_w2_15_5100_tiny_rescue,W2-15,wave2_toxic_rescue,toxic-strike controlled rescue,VEV_5500,0.0,0
+candidate_w2_15_5100_tiny_rescue,W2-15,wave2_toxic_rescue,toxic-strike controlled rescue,VEV_6000,0.0,0
+candidate_w2_15_5100_tiny_rescue,W2-15,wave2_toxic_rescue,toxic-strike controlled rescue,VEV_6500,0.0,0
+candidate_w2_16_5200_tiny_rescue,W2-16,wave2_toxic_rescue,toxic-strike controlled rescue,HYDROGEL_PACK,0.0,0
+candidate_w2_16_5200_tiny_rescue,W2-16,wave2_toxic_rescue,toxic-strike controlled rescue,VELVETFRUIT_EXTRACT,351.2314453125,3
+candidate_w2_16_5200_tiny_rescue,W2-16,wave2_toxic_rescue,toxic-strike controlled rescue,VEV_4000,0.0,0
+candidate_w2_16_5200_tiny_rescue,W2-16,wave2_toxic_rescue,toxic-strike controlled rescue,VEV_4500,0.0,0
+candidate_w2_16_5200_tiny_rescue,W2-16,wave2_toxic_rescue,toxic-strike controlled rescue,VEV_5000,0.0,0
+candidate_w2_16_5200_tiny_rescue,W2-16,wave2_toxic_rescue,toxic-strike controlled rescue,VEV_5100,0.0,0
+candidate_w2_16_5200_tiny_rescue,W2-16,wave2_toxic_rescue,toxic-strike controlled rescue,VEV_5200,-1134.0,0
+candidate_w2_16_5200_tiny_rescue,W2-16,wave2_toxic_rescue,toxic-strike controlled rescue,VEV_5300,0.0,0
+candidate_w2_16_5200_tiny_rescue,W2-16,wave2_toxic_rescue,toxic-strike controlled rescue,VEV_5400,0.0,0
+candidate_w2_16_5200_tiny_rescue,W2-16,wave2_toxic_rescue,toxic-strike controlled rescue,VEV_5500,0.0,0
+candidate_w2_16_5200_tiny_rescue,W2-16,wave2_toxic_rescue,toxic-strike controlled rescue,VEV_6000,0.0,0
+candidate_w2_16_5200_tiny_rescue,W2-16,wave2_toxic_rescue,toxic-strike controlled rescue,VEV_6500,0.0,0
+candidate_w2_17_5300_5400_5500_bridge,W2-17,wave2_active_upper_bridge,active-upper bridge,HYDROGEL_PACK,0.0,0
+candidate_w2_17_5300_5400_5500_bridge,W2-17,wave2_active_upper_bridge,active-upper bridge,VELVETFRUIT_EXTRACT,0.0,0
+candidate_w2_17_5300_5400_5500_bridge,W2-17,wave2_active_upper_bridge,active-upper bridge,VEV_4000,0.0,0
+candidate_w2_17_5300_5400_5500_bridge,W2-17,wave2_active_upper_bridge,active-upper bridge,VEV_4500,0.0,0
+candidate_w2_17_5300_5400_5500_bridge,W2-17,wave2_active_upper_bridge,active-upper bridge,VEV_5000,0.0,0
+candidate_w2_17_5300_5400_5500_bridge,W2-17,wave2_active_upper_bridge,active-upper bridge,VEV_5100,0.0,0
+candidate_w2_17_5300_5400_5500_bridge,W2-17,wave2_active_upper_bridge,active-upper bridge,VEV_5200,0.0,0
+candidate_w2_17_5300_5400_5500_bridge,W2-17,wave2_active_upper_bridge,active-upper bridge,VEV_5300,-3765.0,0
+candidate_w2_17_5300_5400_5500_bridge,W2-17,wave2_active_upper_bridge,active-upper bridge,VEV_5400,1.7984580993652344,-2
+candidate_w2_17_5300_5400_5500_bridge,W2-17,wave2_active_upper_bridge,active-upper bridge,VEV_5500,0.0,0
+candidate_w2_17_5300_5400_5500_bridge,W2-17,wave2_active_upper_bridge,active-upper bridge,VEV_6000,0.0,0
+candidate_w2_17_5300_5400_5500_bridge,W2-17,wave2_active_upper_bridge,active-upper bridge,VEV_6500,0.0,0
+candidate_w2_18_vex_upper_anchored_combo,W2-18,wave2_upper_refinement,vex plus upper anchored combo,HYDROGEL_PACK,0.0,0
+candidate_w2_18_vex_upper_anchored_combo,W2-18,wave2_upper_refinement,vex plus upper anchored combo,VELVETFRUIT_EXTRACT,351.2314453125,3
+candidate_w2_18_vex_upper_anchored_combo,W2-18,wave2_upper_refinement,vex plus upper anchored combo,VEV_4000,0.0,0
+candidate_w2_18_vex_upper_anchored_combo,W2-18,wave2_upper_refinement,vex plus upper anchored combo,VEV_4500,0.0,0
+candidate_w2_18_vex_upper_anchored_combo,W2-18,wave2_upper_refinement,vex plus upper anchored combo,VEV_5000,0.0,0
+candidate_w2_18_vex_upper_anchored_combo,W2-18,wave2_upper_refinement,vex plus upper anchored combo,VEV_5100,0.0,0
+candidate_w2_18_vex_upper_anchored_combo,W2-18,wave2_upper_refinement,vex plus upper anchored combo,VEV_5200,0.0,0
+candidate_w2_18_vex_upper_anchored_combo,W2-18,wave2_upper_refinement,vex plus upper anchored combo,VEV_5300,0.0,0
+candidate_w2_18_vex_upper_anchored_combo,W2-18,wave2_upper_refinement,vex plus upper anchored combo,VEV_5400,1.7984580993652344,-2
+candidate_w2_18_vex_upper_anchored_combo,W2-18,wave2_upper_refinement,vex plus upper anchored combo,VEV_5500,0.0,0
+candidate_w2_18_vex_upper_anchored_combo,W2-18,wave2_upper_refinement,vex plus upper anchored combo,VEV_6000,0.0,0
+candidate_w2_18_vex_upper_anchored_combo,W2-18,wave2_upper_refinement,vex plus upper anchored combo,VEV_6500,0.0,0
+candidate_w2_19_floor_micro_probe,W2-19,wave2_floor_probe,floor micro probe,HYDROGEL_PACK,0.0,0
+candidate_w2_19_floor_micro_probe,W2-19,wave2_floor_probe,floor micro probe,VELVETFRUIT_EXTRACT,0.0,0
+candidate_w2_19_floor_micro_probe,W2-19,wave2_floor_probe,floor micro probe,VEV_4000,0.0,0
+candidate_w2_19_floor_micro_probe,W2-19,wave2_floor_probe,floor micro probe,VEV_4500,0.0,0
+candidate_w2_19_floor_micro_probe,W2-19,wave2_floor_probe,floor micro probe,VEV_5000,0.0,0
+candidate_w2_19_floor_micro_probe,W2-19,wave2_floor_probe,floor micro probe,VEV_5100,0.0,0
+candidate_w2_19_floor_micro_probe,W2-19,wave2_floor_probe,floor micro probe,VEV_5200,0.0,0
+candidate_w2_19_floor_micro_probe,W2-19,wave2_floor_probe,floor micro probe,VEV_5300,0.0,0
+candidate_w2_19_floor_micro_probe,W2-19,wave2_floor_probe,floor micro probe,VEV_5400,0.0,0
+candidate_w2_19_floor_micro_probe,W2-19,wave2_floor_probe,floor micro probe,VEV_5500,0.0,0
+candidate_w2_19_floor_micro_probe,W2-19,wave2_floor_probe,floor micro probe,VEV_6000,0.0,0
+candidate_w2_19_floor_micro_probe,W2-19,wave2_floor_probe,floor micro probe,VEV_6500,0.0,0
+candidate_w3_01_delta1_dual_control,W3-01,wave3_delta1_controls,delta1 champion control,HYDROGEL_PACK,584.6171875,-8
+candidate_w3_01_delta1_dual_control,W3-01,wave3_delta1_controls,delta1 champion control,VELVETFRUIT_EXTRACT,334.61328125,-5
+candidate_w3_01_delta1_dual_control,W3-01,wave3_delta1_controls,delta1 champion control,VEV_4000,0.0,0
+candidate_w3_01_delta1_dual_control,W3-01,wave3_delta1_controls,delta1 champion control,VEV_4500,0.0,0
+candidate_w3_01_delta1_dual_control,W3-01,wave3_delta1_controls,delta1 champion control,VEV_5000,0.0,0
+candidate_w3_01_delta1_dual_control,W3-01,wave3_delta1_controls,delta1 champion control,VEV_5100,0.0,0
+candidate_w3_01_delta1_dual_control,W3-01,wave3_delta1_controls,delta1 champion control,VEV_5200,0.0,0
+candidate_w3_01_delta1_dual_control,W3-01,wave3_delta1_controls,delta1 champion control,VEV_5300,0.0,0
+candidate_w3_01_delta1_dual_control,W3-01,wave3_delta1_controls,delta1 champion control,VEV_5400,0.0,0
+candidate_w3_01_delta1_dual_control,W3-01,wave3_delta1_controls,delta1 champion control,VEV_5500,0.0,0
+candidate_w3_01_delta1_dual_control,W3-01,wave3_delta1_controls,delta1 champion control,VEV_6000,0.0,0
+candidate_w3_01_delta1_dual_control,W3-01,wave3_delta1_controls,delta1 champion control,VEV_6500,0.0,0
+candidate_w3_02_delta1_regime_gate,W3-02,wave3_delta1_controls,delta1 simple regime gate,HYDROGEL_PACK,571.0234375,-10
+candidate_w3_02_delta1_regime_gate,W3-02,wave3_delta1_controls,delta1 simple regime gate,VELVETFRUIT_EXTRACT,334.61328125,-5
+candidate_w3_02_delta1_regime_gate,W3-02,wave3_delta1_controls,delta1 simple regime gate,VEV_4000,0.0,0
+candidate_w3_02_delta1_regime_gate,W3-02,wave3_delta1_controls,delta1 simple regime gate,VEV_4500,0.0,0
+candidate_w3_02_delta1_regime_gate,W3-02,wave3_delta1_controls,delta1 simple regime gate,VEV_5000,0.0,0
+candidate_w3_02_delta1_regime_gate,W3-02,wave3_delta1_controls,delta1 simple regime gate,VEV_5100,0.0,0
+candidate_w3_02_delta1_regime_gate,W3-02,wave3_delta1_controls,delta1 simple regime gate,VEV_5200,0.0,0
+candidate_w3_02_delta1_regime_gate,W3-02,wave3_delta1_controls,delta1 simple regime gate,VEV_5300,0.0,0
+candidate_w3_02_delta1_regime_gate,W3-02,wave3_delta1_controls,delta1 simple regime gate,VEV_5400,0.0,0
+candidate_w3_02_delta1_regime_gate,W3-02,wave3_delta1_controls,delta1 simple regime gate,VEV_5500,0.0,0
+candidate_w3_02_delta1_regime_gate,W3-02,wave3_delta1_controls,delta1 simple regime gate,VEV_6000,0.0,0
+candidate_w3_02_delta1_regime_gate,W3-02,wave3_delta1_controls,delta1 simple regime gate,VEV_6500,0.0,0
+candidate_w3_03_vex_itm_active_refresh,W3-03,wave3_itm_and_stacks,vex plus itm active refresh,HYDROGEL_PACK,0.0,0
+candidate_w3_03_vex_itm_active_refresh,W3-03,wave3_itm_and_stacks,vex plus itm active refresh,VELVETFRUIT_EXTRACT,334.61328125,-5
+candidate_w3_03_vex_itm_active_refresh,W3-03,wave3_itm_and_stacks,vex plus itm active refresh,VEV_4000,42.0,0
+candidate_w3_03_vex_itm_active_refresh,W3-03,wave3_itm_and_stacks,vex plus itm active refresh,VEV_4500,23.0,0
+candidate_w3_03_vex_itm_active_refresh,W3-03,wave3_itm_and_stacks,vex plus itm active refresh,VEV_5000,0.0,0
+candidate_w3_03_vex_itm_active_refresh,W3-03,wave3_itm_and_stacks,vex plus itm active refresh,VEV_5100,0.0,0
+candidate_w3_03_vex_itm_active_refresh,W3-03,wave3_itm_and_stacks,vex plus itm active refresh,VEV_5200,0.0,0
+candidate_w3_03_vex_itm_active_refresh,W3-03,wave3_itm_and_stacks,vex plus itm active refresh,VEV_5300,0.0,0
+candidate_w3_03_vex_itm_active_refresh,W3-03,wave3_itm_and_stacks,vex plus itm active refresh,VEV_5400,0.0,0
+candidate_w3_03_vex_itm_active_refresh,W3-03,wave3_itm_and_stacks,vex plus itm active refresh,VEV_5500,0.0,0
+candidate_w3_03_vex_itm_active_refresh,W3-03,wave3_itm_and_stacks,vex plus itm active refresh,VEV_6000,0.0,0
+candidate_w3_03_vex_itm_active_refresh,W3-03,wave3_itm_and_stacks,vex plus itm active refresh,VEV_6500,0.0,0
+candidate_w3_04_5300_early_window,W3-04,wave3_active_rescue_and_filters,5300 early-window rescue,HYDROGEL_PACK,0.0,0
+candidate_w3_04_5300_early_window,W3-04,wave3_active_rescue_and_filters,5300 early-window rescue,VELVETFRUIT_EXTRACT,0.0,0
+candidate_w3_04_5300_early_window,W3-04,wave3_active_rescue_and_filters,5300 early-window rescue,VEV_4000,0.0,0
+candidate_w3_04_5300_early_window,W3-04,wave3_active_rescue_and_filters,5300 early-window rescue,VEV_4500,0.0,0
+candidate_w3_04_5300_early_window,W3-04,wave3_active_rescue_and_filters,5300 early-window rescue,VEV_5000,0.0,0
+candidate_w3_04_5300_early_window,W3-04,wave3_active_rescue_and_filters,5300 early-window rescue,VEV_5100,0.0,0
+candidate_w3_04_5300_early_window,W3-04,wave3_active_rescue_and_filters,5300 early-window rescue,VEV_5200,0.0,0
+candidate_w3_04_5300_early_window,W3-04,wave3_active_rescue_and_filters,5300 early-window rescue,VEV_5300,-215.242919921875,65
+candidate_w3_04_5300_early_window,W3-04,wave3_active_rescue_and_filters,5300 early-window rescue,VEV_5400,0.0,0
+candidate_w3_04_5300_early_window,W3-04,wave3_active_rescue_and_filters,5300 early-window rescue,VEV_5500,0.0,0
+candidate_w3_04_5300_early_window,W3-04,wave3_active_rescue_and_filters,5300 early-window rescue,VEV_6000,0.0,0
+candidate_w3_04_5300_early_window,W3-04,wave3_active_rescue_and_filters,5300 early-window rescue,VEV_6500,0.0,0
+candidate_w3_05_5300_giveback_halt,W3-05,wave3_active_rescue_and_filters,5300 giveback halt,HYDROGEL_PACK,0.0,0
+candidate_w3_05_5300_giveback_halt,W3-05,wave3_active_rescue_and_filters,5300 giveback halt,VELVETFRUIT_EXTRACT,0.0,0
+candidate_w3_05_5300_giveback_halt,W3-05,wave3_active_rescue_and_filters,5300 giveback halt,VEV_4000,0.0,0
+candidate_w3_05_5300_giveback_halt,W3-05,wave3_active_rescue_and_filters,5300 giveback halt,VEV_4500,0.0,0
+candidate_w3_05_5300_giveback_halt,W3-05,wave3_active_rescue_and_filters,5300 giveback halt,VEV_5000,0.0,0
+candidate_w3_05_5300_giveback_halt,W3-05,wave3_active_rescue_and_filters,5300 giveback halt,VEV_5100,0.0,0
+candidate_w3_05_5300_giveback_halt,W3-05,wave3_active_rescue_and_filters,5300 giveback halt,VEV_5200,0.0,0
+candidate_w3_05_5300_giveback_halt,W3-05,wave3_active_rescue_and_filters,5300 giveback halt,VEV_5300,35.0,0
+candidate_w3_05_5300_giveback_halt,W3-05,wave3_active_rescue_and_filters,5300 giveback halt,VEV_5400,0.0,0
+candidate_w3_05_5300_giveback_halt,W3-05,wave3_active_rescue_and_filters,5300 giveback halt,VEV_5500,0.0,0
+candidate_w3_05_5300_giveback_halt,W3-05,wave3_active_rescue_and_filters,5300 giveback halt,VEV_6000,0.0,0
+candidate_w3_05_5300_giveback_halt,W3-05,wave3_active_rescue_and_filters,5300 giveback halt,VEV_6500,0.0,0
+candidate_w3_06_vex_5300_state_gate,W3-06,wave3_active_rescue_and_filters,vex-linked 5300 regime gate,HYDROGEL_PACK,0.0,0
+candidate_w3_06_vex_5300_state_gate,W3-06,wave3_active_rescue_and_filters,vex-linked 5300 regime gate,VELVETFRUIT_EXTRACT,334.61328125,-5
+candidate_w3_06_vex_5300_state_gate,W3-06,wave3_active_rescue_and_filters,vex-linked 5300 regime gate,VEV_4000,0.0,0
+candidate_w3_06_vex_5300_state_gate,W3-06,wave3_active_rescue_and_filters,vex-linked 5300 regime gate,VEV_4500,0.0,0
+candidate_w3_06_vex_5300_state_gate,W3-06,wave3_active_rescue_and_filters,vex-linked 5300 regime gate,VEV_5000,0.0,0
+candidate_w3_06_vex_5300_state_gate,W3-06,wave3_active_rescue_and_filters,vex-linked 5300 regime gate,VEV_5100,0.0,0
+candidate_w3_06_vex_5300_state_gate,W3-06,wave3_active_rescue_and_filters,vex-linked 5300 regime gate,VEV_5200,0.0,0
+candidate_w3_06_vex_5300_state_gate,W3-06,wave3_active_rescue_and_filters,vex-linked 5300 regime gate,VEV_5300,-305.91650390625,60
+candidate_w3_06_vex_5300_state_gate,W3-06,wave3_active_rescue_and_filters,vex-linked 5300 regime gate,VEV_5400,0.0,0
+candidate_w3_06_vex_5300_state_gate,W3-06,wave3_active_rescue_and_filters,vex-linked 5300 regime gate,VEV_5500,0.0,0
+candidate_w3_06_vex_5300_state_gate,W3-06,wave3_active_rescue_and_filters,vex-linked 5300 regime gate,VEV_6000,0.0,0
+candidate_w3_06_vex_5300_state_gate,W3-06,wave3_active_rescue_and_filters,vex-linked 5300 regime gate,VEV_6500,0.0,0
+candidate_w3_07_5300_slow_hold,W3-07,wave3_active_rescue_and_filters,5300 slower-horizon hold,HYDROGEL_PACK,0.0,0
+candidate_w3_07_5300_slow_hold,W3-07,wave3_active_rescue_and_filters,5300 slower-horizon hold,VELVETFRUIT_EXTRACT,0.0,0
+candidate_w3_07_5300_slow_hold,W3-07,wave3_active_rescue_and_filters,5300 slower-horizon hold,VEV_4000,0.0,0
+candidate_w3_07_5300_slow_hold,W3-07,wave3_active_rescue_and_filters,5300 slower-horizon hold,VEV_4500,0.0,0
+candidate_w3_07_5300_slow_hold,W3-07,wave3_active_rescue_and_filters,5300 slower-horizon hold,VEV_5000,0.0,0
+candidate_w3_07_5300_slow_hold,W3-07,wave3_active_rescue_and_filters,5300 slower-horizon hold,VEV_5100,0.0,0
+candidate_w3_07_5300_slow_hold,W3-07,wave3_active_rescue_and_filters,5300 slower-horizon hold,VEV_5200,0.0,0
+candidate_w3_07_5300_slow_hold,W3-07,wave3_active_rescue_and_filters,5300 slower-horizon hold,VEV_5300,-2468.0,0
+candidate_w3_07_5300_slow_hold,W3-07,wave3_active_rescue_and_filters,5300 slower-horizon hold,VEV_5400,0.0,0
+candidate_w3_07_5300_slow_hold,W3-07,wave3_active_rescue_and_filters,5300 slower-horizon hold,VEV_5500,0.0,0
+candidate_w3_07_5300_slow_hold,W3-07,wave3_active_rescue_and_filters,5300 slower-horizon hold,VEV_6000,0.0,0
+candidate_w3_07_5300_slow_hold,W3-07,wave3_active_rescue_and_filters,5300 slower-horizon hold,VEV_6500,0.0,0
+candidate_w3_08_delta1_5300_overlay,W3-08,wave3_active_rescue_and_filters,delta1 plus tiny 5300 overlay,HYDROGEL_PACK,584.6171875,-8
+candidate_w3_08_delta1_5300_overlay,W3-08,wave3_active_rescue_and_filters,delta1 plus tiny 5300 overlay,VELVETFRUIT_EXTRACT,334.61328125,-5
+candidate_w3_08_delta1_5300_overlay,W3-08,wave3_active_rescue_and_filters,delta1 plus tiny 5300 overlay,VEV_4000,0.0,0
+candidate_w3_08_delta1_5300_overlay,W3-08,wave3_active_rescue_and_filters,delta1 plus tiny 5300 overlay,VEV_4500,0.0,0
+candidate_w3_08_delta1_5300_overlay,W3-08,wave3_active_rescue_and_filters,delta1 plus tiny 5300 overlay,VEV_5000,0.0,0
+candidate_w3_08_delta1_5300_overlay,W3-08,wave3_active_rescue_and_filters,delta1 plus tiny 5300 overlay,VEV_5100,0.0,0
+candidate_w3_08_delta1_5300_overlay,W3-08,wave3_active_rescue_and_filters,delta1 plus tiny 5300 overlay,VEV_5200,0.0,0
+candidate_w3_08_delta1_5300_overlay,W3-08,wave3_active_rescue_and_filters,delta1 plus tiny 5300 overlay,VEV_5300,-102.28466796875,35
+candidate_w3_08_delta1_5300_overlay,W3-08,wave3_active_rescue_and_filters,delta1 plus tiny 5300 overlay,VEV_5400,0.0,0
+candidate_w3_08_delta1_5300_overlay,W3-08,wave3_active_rescue_and_filters,delta1 plus tiny 5300 overlay,VEV_5500,0.0,0
+candidate_w3_08_delta1_5300_overlay,W3-08,wave3_active_rescue_and_filters,delta1 plus tiny 5300 overlay,VEV_6000,0.0,0
+candidate_w3_08_delta1_5300_overlay,W3-08,wave3_active_rescue_and_filters,delta1 plus tiny 5300 overlay,VEV_6500,0.0,0
+candidate_w3_09_5000_5300_capped_salvage,W3-09,wave3_active_rescue_and_filters,5000 plus 5300 capped peak salvage,HYDROGEL_PACK,0.0,0
+candidate_w3_09_5000_5300_capped_salvage,W3-09,wave3_active_rescue_and_filters,5000 plus 5300 capped peak salvage,VELVETFRUIT_EXTRACT,0.0,0
+candidate_w3_09_5000_5300_capped_salvage,W3-09,wave3_active_rescue_and_filters,5000 plus 5300 capped peak salvage,VEV_4000,0.0,0
+candidate_w3_09_5000_5300_capped_salvage,W3-09,wave3_active_rescue_and_filters,5000 plus 5300 capped peak salvage,VEV_4500,0.0,0
+candidate_w3_09_5000_5300_capped_salvage,W3-09,wave3_active_rescue_and_filters,5000 plus 5300 capped peak salvage,VEV_5000,-306.017333984375,-5
+candidate_w3_09_5000_5300_capped_salvage,W3-09,wave3_active_rescue_and_filters,5000 plus 5300 capped peak salvage,VEV_5100,0.0,0
+candidate_w3_09_5000_5300_capped_salvage,W3-09,wave3_active_rescue_and_filters,5000 plus 5300 capped peak salvage,VEV_5200,0.0,0
+candidate_w3_09_5000_5300_capped_salvage,W3-09,wave3_active_rescue_and_filters,5000 plus 5300 capped peak salvage,VEV_5300,-1215.0,0
+candidate_w3_09_5000_5300_capped_salvage,W3-09,wave3_active_rescue_and_filters,5000 plus 5300 capped peak salvage,VEV_5400,0.0,0
+candidate_w3_09_5000_5300_capped_salvage,W3-09,wave3_active_rescue_and_filters,5000 plus 5300 capped peak salvage,VEV_5500,0.0,0
+candidate_w3_09_5000_5300_capped_salvage,W3-09,wave3_active_rescue_and_filters,5000 plus 5300 capped peak salvage,VEV_6000,0.0,0
+candidate_w3_09_5000_5300_capped_salvage,W3-09,wave3_active_rescue_and_filters,5000 plus 5300 capped peak salvage,VEV_6500,0.0,0
+candidate_w3_10_5300_nonlinear_gate,W3-10,wave3_active_rescue_and_filters,5300 transformed-threshold gate,HYDROGEL_PACK,0.0,0
+candidate_w3_10_5300_nonlinear_gate,W3-10,wave3_active_rescue_and_filters,5300 transformed-threshold gate,VELVETFRUIT_EXTRACT,0.0,0
+candidate_w3_10_5300_nonlinear_gate,W3-10,wave3_active_rescue_and_filters,5300 transformed-threshold gate,VEV_4000,0.0,0
+candidate_w3_10_5300_nonlinear_gate,W3-10,wave3_active_rescue_and_filters,5300 transformed-threshold gate,VEV_4500,0.0,0
+candidate_w3_10_5300_nonlinear_gate,W3-10,wave3_active_rescue_and_filters,5300 transformed-threshold gate,VEV_5000,0.0,0
+candidate_w3_10_5300_nonlinear_gate,W3-10,wave3_active_rescue_and_filters,5300 transformed-threshold gate,VEV_5100,0.0,0
+candidate_w3_10_5300_nonlinear_gate,W3-10,wave3_active_rescue_and_filters,5300 transformed-threshold gate,VEV_5200,0.0,0
+candidate_w3_10_5300_nonlinear_gate,W3-10,wave3_active_rescue_and_filters,5300 transformed-threshold gate,VEV_5300,-6.91650390625,60
+candidate_w3_10_5300_nonlinear_gate,W3-10,wave3_active_rescue_and_filters,5300 transformed-threshold gate,VEV_5400,0.0,0
+candidate_w3_10_5300_nonlinear_gate,W3-10,wave3_active_rescue_and_filters,5300 transformed-threshold gate,VEV_5500,0.0,0
+candidate_w3_10_5300_nonlinear_gate,W3-10,wave3_active_rescue_and_filters,5300 transformed-threshold gate,VEV_6000,0.0,0
+candidate_w3_10_5300_nonlinear_gate,W3-10,wave3_active_rescue_and_filters,5300 transformed-threshold gate,VEV_6500,0.0,0
+candidate_w3_11_5300_trend_gate,W3-11,wave3_active_rescue_and_filters,5300 lightweight trend gate,HYDROGEL_PACK,0.0,0
+candidate_w3_11_5300_trend_gate,W3-11,wave3_active_rescue_and_filters,5300 lightweight trend gate,VELVETFRUIT_EXTRACT,0.0,0
+candidate_w3_11_5300_trend_gate,W3-11,wave3_active_rescue_and_filters,5300 lightweight trend gate,VEV_4000,0.0,0
+candidate_w3_11_5300_trend_gate,W3-11,wave3_active_rescue_and_filters,5300 lightweight trend gate,VEV_4500,0.0,0
+candidate_w3_11_5300_trend_gate,W3-11,wave3_active_rescue_and_filters,5300 lightweight trend gate,VEV_5000,0.0,0
+candidate_w3_11_5300_trend_gate,W3-11,wave3_active_rescue_and_filters,5300 lightweight trend gate,VEV_5100,0.0,0
+candidate_w3_11_5300_trend_gate,W3-11,wave3_active_rescue_and_filters,5300 lightweight trend gate,VEV_5200,0.0,0
+candidate_w3_11_5300_trend_gate,W3-11,wave3_active_rescue_and_filters,5300 lightweight trend gate,VEV_5300,165.08349609375,60
+candidate_w3_11_5300_trend_gate,W3-11,wave3_active_rescue_and_filters,5300 lightweight trend gate,VEV_5400,0.0,0
+candidate_w3_11_5300_trend_gate,W3-11,wave3_active_rescue_and_filters,5300 lightweight trend gate,VEV_5500,0.0,0
+candidate_w3_11_5300_trend_gate,W3-11,wave3_active_rescue_and_filters,5300 lightweight trend gate,VEV_6000,0.0,0
+candidate_w3_11_5300_trend_gate,W3-11,wave3_active_rescue_and_filters,5300 lightweight trend gate,VEV_6500,0.0,0
+candidate_w3_12_5000_inverse_tiny,W3-12,wave3_inverse_tiny,5000 inverse diagnostic,HYDROGEL_PACK,0.0,0
+candidate_w3_12_5000_inverse_tiny,W3-12,wave3_inverse_tiny,5000 inverse diagnostic,VELVETFRUIT_EXTRACT,0.0,0
+candidate_w3_12_5000_inverse_tiny,W3-12,wave3_inverse_tiny,5000 inverse diagnostic,VEV_4000,0.0,0
+candidate_w3_12_5000_inverse_tiny,W3-12,wave3_inverse_tiny,5000 inverse diagnostic,VEV_4500,0.0,0
+candidate_w3_12_5000_inverse_tiny,W3-12,wave3_inverse_tiny,5000 inverse diagnostic,VEV_5000,0.0,0
+candidate_w3_12_5000_inverse_tiny,W3-12,wave3_inverse_tiny,5000 inverse diagnostic,VEV_5100,0.0,0
+candidate_w3_12_5000_inverse_tiny,W3-12,wave3_inverse_tiny,5000 inverse diagnostic,VEV_5200,0.0,0
+candidate_w3_12_5000_inverse_tiny,W3-12,wave3_inverse_tiny,5000 inverse diagnostic,VEV_5300,0.0,0
+candidate_w3_12_5000_inverse_tiny,W3-12,wave3_inverse_tiny,5000 inverse diagnostic,VEV_5400,0.0,0
+candidate_w3_12_5000_inverse_tiny,W3-12,wave3_inverse_tiny,5000 inverse diagnostic,VEV_5500,0.0,0
+candidate_w3_12_5000_inverse_tiny,W3-12,wave3_inverse_tiny,5000 inverse diagnostic,VEV_6000,0.0,0
+candidate_w3_12_5000_inverse_tiny,W3-12,wave3_inverse_tiny,5000 inverse diagnostic,VEV_6500,0.0,0
+candidate_w3_13_5100_inverse_tiny,W3-13,wave3_inverse_tiny,5100 inverse diagnostic,HYDROGEL_PACK,0.0,0
+candidate_w3_13_5100_inverse_tiny,W3-13,wave3_inverse_tiny,5100 inverse diagnostic,VELVETFRUIT_EXTRACT,0.0,0
+candidate_w3_13_5100_inverse_tiny,W3-13,wave3_inverse_tiny,5100 inverse diagnostic,VEV_4000,0.0,0
+candidate_w3_13_5100_inverse_tiny,W3-13,wave3_inverse_tiny,5100 inverse diagnostic,VEV_4500,0.0,0
+candidate_w3_13_5100_inverse_tiny,W3-13,wave3_inverse_tiny,5100 inverse diagnostic,VEV_5000,0.0,0
+candidate_w3_13_5100_inverse_tiny,W3-13,wave3_inverse_tiny,5100 inverse diagnostic,VEV_5100,0.0,0
+candidate_w3_13_5100_inverse_tiny,W3-13,wave3_inverse_tiny,5100 inverse diagnostic,VEV_5200,0.0,0
+candidate_w3_13_5100_inverse_tiny,W3-13,wave3_inverse_tiny,5100 inverse diagnostic,VEV_5300,0.0,0
+candidate_w3_13_5100_inverse_tiny,W3-13,wave3_inverse_tiny,5100 inverse diagnostic,VEV_5400,0.0,0
+candidate_w3_13_5100_inverse_tiny,W3-13,wave3_inverse_tiny,5100 inverse diagnostic,VEV_5500,0.0,0
+candidate_w3_13_5100_inverse_tiny,W3-13,wave3_inverse_tiny,5100 inverse diagnostic,VEV_6000,0.0,0
+candidate_w3_13_5100_inverse_tiny,W3-13,wave3_inverse_tiny,5100 inverse diagnostic,VEV_6500,0.0,0
+candidate_w3_14_5200_inverse_tiny,W3-14,wave3_inverse_tiny,5200 inverse closure test,HYDROGEL_PACK,0.0,0
+candidate_w3_14_5200_inverse_tiny,W3-14,wave3_inverse_tiny,5200 inverse closure test,VELVETFRUIT_EXTRACT,0.0,0
+candidate_w3_14_5200_inverse_tiny,W3-14,wave3_inverse_tiny,5200 inverse closure test,VEV_4000,0.0,0
+candidate_w3_14_5200_inverse_tiny,W3-14,wave3_inverse_tiny,5200 inverse closure test,VEV_4500,0.0,0
+candidate_w3_14_5200_inverse_tiny,W3-14,wave3_inverse_tiny,5200 inverse closure test,VEV_5000,0.0,0
+candidate_w3_14_5200_inverse_tiny,W3-14,wave3_inverse_tiny,5200 inverse closure test,VEV_5100,0.0,0
+candidate_w3_14_5200_inverse_tiny,W3-14,wave3_inverse_tiny,5200 inverse closure test,VEV_5200,0.0,0
+candidate_w3_14_5200_inverse_tiny,W3-14,wave3_inverse_tiny,5200 inverse closure test,VEV_5300,0.0,0
+candidate_w3_14_5200_inverse_tiny,W3-14,wave3_inverse_tiny,5200 inverse closure test,VEV_5400,0.0,0
+candidate_w3_14_5200_inverse_tiny,W3-14,wave3_inverse_tiny,5200 inverse closure test,VEV_5500,0.0,0
+candidate_w3_14_5200_inverse_tiny,W3-14,wave3_inverse_tiny,5200 inverse closure test,VEV_6000,0.0,0
+candidate_w3_14_5200_inverse_tiny,W3-14,wave3_inverse_tiny,5200 inverse closure test,VEV_6500,0.0,0
+candidate_w3_15_delta1_kalman_control,W3-15,wave3_delta1_controls,delta1 kalman control,HYDROGEL_PACK,994.84375,-19
+candidate_w3_15_delta1_kalman_control,W3-15,wave3_delta1_controls,delta1 kalman control,VELVETFRUIT_EXTRACT,532.4609375,-7
+candidate_w3_15_delta1_kalman_control,W3-15,wave3_delta1_controls,delta1 kalman control,VEV_4000,0.0,0
+candidate_w3_15_delta1_kalman_control,W3-15,wave3_delta1_controls,delta1 kalman control,VEV_4500,0.0,0
+candidate_w3_15_delta1_kalman_control,W3-15,wave3_delta1_controls,delta1 kalman control,VEV_5000,0.0,0
+candidate_w3_15_delta1_kalman_control,W3-15,wave3_delta1_controls,delta1 kalman control,VEV_5100,0.0,0
+candidate_w3_15_delta1_kalman_control,W3-15,wave3_delta1_controls,delta1 kalman control,VEV_5200,0.0,0
+candidate_w3_15_delta1_kalman_control,W3-15,wave3_delta1_controls,delta1 kalman control,VEV_5300,0.0,0
+candidate_w3_15_delta1_kalman_control,W3-15,wave3_delta1_controls,delta1 kalman control,VEV_5400,0.0,0
+candidate_w3_15_delta1_kalman_control,W3-15,wave3_delta1_controls,delta1 kalman control,VEV_5500,0.0,0
+candidate_w3_15_delta1_kalman_control,W3-15,wave3_delta1_controls,delta1 kalman control,VEV_6000,0.0,0
+candidate_w3_15_delta1_kalman_control,W3-15,wave3_delta1_controls,delta1 kalman control,VEV_6500,0.0,0
+candidate_w3_16_5300_kalman_anchor,W3-16,wave3_active_rescue_and_filters,5300 kalman anchor rescue,HYDROGEL_PACK,0.0,0
+candidate_w3_16_5300_kalman_anchor,W3-16,wave3_active_rescue_and_filters,5300 kalman anchor rescue,VELVETFRUIT_EXTRACT,532.4609375,-7
+candidate_w3_16_5300_kalman_anchor,W3-16,wave3_active_rescue_and_filters,5300 kalman anchor rescue,VEV_4000,0.0,0
+candidate_w3_16_5300_kalman_anchor,W3-16,wave3_active_rescue_and_filters,5300 kalman anchor rescue,VEV_4500,0.0,0
+candidate_w3_16_5300_kalman_anchor,W3-16,wave3_active_rescue_and_filters,5300 kalman anchor rescue,VEV_5000,0.0,0
+candidate_w3_16_5300_kalman_anchor,W3-16,wave3_active_rescue_and_filters,5300 kalman anchor rescue,VEV_5100,0.0,0
+candidate_w3_16_5300_kalman_anchor,W3-16,wave3_active_rescue_and_filters,5300 kalman anchor rescue,VEV_5200,0.0,0
+candidate_w3_16_5300_kalman_anchor,W3-16,wave3_active_rescue_and_filters,5300 kalman anchor rescue,VEV_5300,-2649.0,0
+candidate_w3_16_5300_kalman_anchor,W3-16,wave3_active_rescue_and_filters,5300 kalman anchor rescue,VEV_5400,0.0,0
+candidate_w3_16_5300_kalman_anchor,W3-16,wave3_active_rescue_and_filters,5300 kalman anchor rescue,VEV_5500,0.0,0
+candidate_w3_16_5300_kalman_anchor,W3-16,wave3_active_rescue_and_filters,5300 kalman anchor rescue,VEV_6000,0.0,0
+candidate_w3_16_5300_kalman_anchor,W3-16,wave3_active_rescue_and_filters,5300 kalman anchor rescue,VEV_6500,0.0,0
+candidate_w3_17_5300_imbalance_filter,W3-17,wave3_active_rescue_and_filters,5300 imbalance filter,HYDROGEL_PACK,0.0,0
+candidate_w3_17_5300_imbalance_filter,W3-17,wave3_active_rescue_and_filters,5300 imbalance filter,VELVETFRUIT_EXTRACT,0.0,0
+candidate_w3_17_5300_imbalance_filter,W3-17,wave3_active_rescue_and_filters,5300 imbalance filter,VEV_4000,0.0,0
+candidate_w3_17_5300_imbalance_filter,W3-17,wave3_active_rescue_and_filters,5300 imbalance filter,VEV_4500,0.0,0
+candidate_w3_17_5300_imbalance_filter,W3-17,wave3_active_rescue_and_filters,5300 imbalance filter,VEV_5000,0.0,0
+candidate_w3_17_5300_imbalance_filter,W3-17,wave3_active_rescue_and_filters,5300 imbalance filter,VEV_5100,0.0,0
+candidate_w3_17_5300_imbalance_filter,W3-17,wave3_active_rescue_and_filters,5300 imbalance filter,VEV_5200,0.0,0
+candidate_w3_17_5300_imbalance_filter,W3-17,wave3_active_rescue_and_filters,5300 imbalance filter,VEV_5300,353.14990234375,-36
+candidate_w3_17_5300_imbalance_filter,W3-17,wave3_active_rescue_and_filters,5300 imbalance filter,VEV_5400,0.0,0
+candidate_w3_17_5300_imbalance_filter,W3-17,wave3_active_rescue_and_filters,5300 imbalance filter,VEV_5500,0.0,0
+candidate_w3_17_5300_imbalance_filter,W3-17,wave3_active_rescue_and_filters,5300 imbalance filter,VEV_6000,0.0,0
+candidate_w3_17_5300_imbalance_filter,W3-17,wave3_active_rescue_and_filters,5300 imbalance filter,VEV_6500,0.0,0
+candidate_w3_18_5300_vex_agitation_gate,W3-18,wave3_active_rescue_and_filters,5300 vex-agitation gate,HYDROGEL_PACK,0.0,0
+candidate_w3_18_5300_vex_agitation_gate,W3-18,wave3_active_rescue_and_filters,5300 vex-agitation gate,VELVETFRUIT_EXTRACT,0.0,0
+candidate_w3_18_5300_vex_agitation_gate,W3-18,wave3_active_rescue_and_filters,5300 vex-agitation gate,VEV_4000,0.0,0
+candidate_w3_18_5300_vex_agitation_gate,W3-18,wave3_active_rescue_and_filters,5300 vex-agitation gate,VEV_4500,0.0,0
+candidate_w3_18_5300_vex_agitation_gate,W3-18,wave3_active_rescue_and_filters,5300 vex-agitation gate,VEV_5000,0.0,0
+candidate_w3_18_5300_vex_agitation_gate,W3-18,wave3_active_rescue_and_filters,5300 vex-agitation gate,VEV_5100,0.0,0
+candidate_w3_18_5300_vex_agitation_gate,W3-18,wave3_active_rescue_and_filters,5300 vex-agitation gate,VEV_5200,0.0,0
+candidate_w3_18_5300_vex_agitation_gate,W3-18,wave3_active_rescue_and_filters,5300 vex-agitation gate,VEV_5300,-305.91650390625,60
+candidate_w3_18_5300_vex_agitation_gate,W3-18,wave3_active_rescue_and_filters,5300 vex-agitation gate,VEV_5400,0.0,0
+candidate_w3_18_5300_vex_agitation_gate,W3-18,wave3_active_rescue_and_filters,5300 vex-agitation gate,VEV_5500,0.0,0
+candidate_w3_18_5300_vex_agitation_gate,W3-18,wave3_active_rescue_and_filters,5300 vex-agitation gate,VEV_6000,0.0,0
+candidate_w3_18_5300_vex_agitation_gate,W3-18,wave3_active_rescue_and_filters,5300 vex-agitation gate,VEV_6500,0.0,0
+candidate_w3_19_5000_5300_vex_calm_salvage,W3-19,wave3_active_rescue_and_filters,vex-calm subset salvage,HYDROGEL_PACK,0.0,0
+candidate_w3_19_5000_5300_vex_calm_salvage,W3-19,wave3_active_rescue_and_filters,vex-calm subset salvage,VELVETFRUIT_EXTRACT,334.61328125,-5
+candidate_w3_19_5000_5300_vex_calm_salvage,W3-19,wave3_active_rescue_and_filters,vex-calm subset salvage,VEV_4000,0.0,0
+candidate_w3_19_5000_5300_vex_calm_salvage,W3-19,wave3_active_rescue_and_filters,vex-calm subset salvage,VEV_4500,0.0,0
+candidate_w3_19_5000_5300_vex_calm_salvage,W3-19,wave3_active_rescue_and_filters,vex-calm subset salvage,VEV_5000,-285.2034606933594,-1
+candidate_w3_19_5000_5300_vex_calm_salvage,W3-19,wave3_active_rescue_and_filters,vex-calm subset salvage,VEV_5100,0.0,0
+candidate_w3_19_5000_5300_vex_calm_salvage,W3-19,wave3_active_rescue_and_filters,vex-calm subset salvage,VEV_5200,0.0,0
+candidate_w3_19_5000_5300_vex_calm_salvage,W3-19,wave3_active_rescue_and_filters,vex-calm subset salvage,VEV_5300,-88.227783203125,28
+candidate_w3_19_5000_5300_vex_calm_salvage,W3-19,wave3_active_rescue_and_filters,vex-calm subset salvage,VEV_5400,0.0,0
+candidate_w3_19_5000_5300_vex_calm_salvage,W3-19,wave3_active_rescue_and_filters,vex-calm subset salvage,VEV_5500,0.0,0
+candidate_w3_19_5000_5300_vex_calm_salvage,W3-19,wave3_active_rescue_and_filters,vex-calm subset salvage,VEV_6000,0.0,0
+candidate_w3_19_5000_5300_vex_calm_salvage,W3-19,wave3_active_rescue_and_filters,vex-calm subset salvage,VEV_6500,0.0,0
+candidate_w3_20_5000_inverse_vex_sidecar,W3-20,wave3_inverse_sidecars,5000 inverse with vex sidecar,HYDROGEL_PACK,0.0,0
+candidate_w3_20_5000_inverse_vex_sidecar,W3-20,wave3_inverse_sidecars,5000 inverse with vex sidecar,VELVETFRUIT_EXTRACT,334.61328125,-5
+candidate_w3_20_5000_inverse_vex_sidecar,W3-20,wave3_inverse_sidecars,5000 inverse with vex sidecar,VEV_4000,0.0,0
+candidate_w3_20_5000_inverse_vex_sidecar,W3-20,wave3_inverse_sidecars,5000 inverse with vex sidecar,VEV_4500,0.0,0
+candidate_w3_20_5000_inverse_vex_sidecar,W3-20,wave3_inverse_sidecars,5000 inverse with vex sidecar,VEV_5000,0.0,0
+candidate_w3_20_5000_inverse_vex_sidecar,W3-20,wave3_inverse_sidecars,5000 inverse with vex sidecar,VEV_5100,0.0,0
+candidate_w3_20_5000_inverse_vex_sidecar,W3-20,wave3_inverse_sidecars,5000 inverse with vex sidecar,VEV_5200,0.0,0
+candidate_w3_20_5000_inverse_vex_sidecar,W3-20,wave3_inverse_sidecars,5000 inverse with vex sidecar,VEV_5300,0.0,0
+candidate_w3_20_5000_inverse_vex_sidecar,W3-20,wave3_inverse_sidecars,5000 inverse with vex sidecar,VEV_5400,0.0,0
+candidate_w3_20_5000_inverse_vex_sidecar,W3-20,wave3_inverse_sidecars,5000 inverse with vex sidecar,VEV_5500,0.0,0
+candidate_w3_20_5000_inverse_vex_sidecar,W3-20,wave3_inverse_sidecars,5000 inverse with vex sidecar,VEV_6000,0.0,0
+candidate_w3_20_5000_inverse_vex_sidecar,W3-20,wave3_inverse_sidecars,5000 inverse with vex sidecar,VEV_6500,0.0,0
+candidate_w3_21_5100_inverse_vex_sidecar,W3-21,wave3_inverse_sidecars,5100 inverse with vex sidecar,HYDROGEL_PACK,0.0,0
+candidate_w3_21_5100_inverse_vex_sidecar,W3-21,wave3_inverse_sidecars,5100 inverse with vex sidecar,VELVETFRUIT_EXTRACT,334.61328125,-5
+candidate_w3_21_5100_inverse_vex_sidecar,W3-21,wave3_inverse_sidecars,5100 inverse with vex sidecar,VEV_4000,0.0,0
+candidate_w3_21_5100_inverse_vex_sidecar,W3-21,wave3_inverse_sidecars,5100 inverse with vex sidecar,VEV_4500,0.0,0
+candidate_w3_21_5100_inverse_vex_sidecar,W3-21,wave3_inverse_sidecars,5100 inverse with vex sidecar,VEV_5000,0.0,0
+candidate_w3_21_5100_inverse_vex_sidecar,W3-21,wave3_inverse_sidecars,5100 inverse with vex sidecar,VEV_5100,0.0,0
+candidate_w3_21_5100_inverse_vex_sidecar,W3-21,wave3_inverse_sidecars,5100 inverse with vex sidecar,VEV_5200,0.0,0
+candidate_w3_21_5100_inverse_vex_sidecar,W3-21,wave3_inverse_sidecars,5100 inverse with vex sidecar,VEV_5300,0.0,0
+candidate_w3_21_5100_inverse_vex_sidecar,W3-21,wave3_inverse_sidecars,5100 inverse with vex sidecar,VEV_5400,0.0,0
+candidate_w3_21_5100_inverse_vex_sidecar,W3-21,wave3_inverse_sidecars,5100 inverse with vex sidecar,VEV_5500,0.0,0
+candidate_w3_21_5100_inverse_vex_sidecar,W3-21,wave3_inverse_sidecars,5100 inverse with vex sidecar,VEV_6000,0.0,0
+candidate_w3_21_5100_inverse_vex_sidecar,W3-21,wave3_inverse_sidecars,5100 inverse with vex sidecar,VEV_6500,0.0,0
+candidate_w3_22_5200_inverse_vex_sidecar,W3-22,wave3_inverse_sidecars,5200 inverse with vex sidecar,HYDROGEL_PACK,0.0,0
+candidate_w3_22_5200_inverse_vex_sidecar,W3-22,wave3_inverse_sidecars,5200 inverse with vex sidecar,VELVETFRUIT_EXTRACT,334.61328125,-5
+candidate_w3_22_5200_inverse_vex_sidecar,W3-22,wave3_inverse_sidecars,5200 inverse with vex sidecar,VEV_4000,0.0,0
+candidate_w3_22_5200_inverse_vex_sidecar,W3-22,wave3_inverse_sidecars,5200 inverse with vex sidecar,VEV_4500,0.0,0
+candidate_w3_22_5200_inverse_vex_sidecar,W3-22,wave3_inverse_sidecars,5200 inverse with vex sidecar,VEV_5000,0.0,0
+candidate_w3_22_5200_inverse_vex_sidecar,W3-22,wave3_inverse_sidecars,5200 inverse with vex sidecar,VEV_5100,0.0,0
+candidate_w3_22_5200_inverse_vex_sidecar,W3-22,wave3_inverse_sidecars,5200 inverse with vex sidecar,VEV_5200,0.0,0
+candidate_w3_22_5200_inverse_vex_sidecar,W3-22,wave3_inverse_sidecars,5200 inverse with vex sidecar,VEV_5300,0.0,0
+candidate_w3_22_5200_inverse_vex_sidecar,W3-22,wave3_inverse_sidecars,5200 inverse with vex sidecar,VEV_5400,0.0,0
+candidate_w3_22_5200_inverse_vex_sidecar,W3-22,wave3_inverse_sidecars,5200 inverse with vex sidecar,VEV_5500,0.0,0
+candidate_w3_22_5200_inverse_vex_sidecar,W3-22,wave3_inverse_sidecars,5200 inverse with vex sidecar,VEV_6000,0.0,0
+candidate_w3_22_5200_inverse_vex_sidecar,W3-22,wave3_inverse_sidecars,5200 inverse with vex sidecar,VEV_6500,0.0,0
+candidate_w3_23_delta1_itm_active_combo,W3-23,wave3_itm_and_stacks,delta1 plus itm active combo,HYDROGEL_PACK,584.6171875,-8
+candidate_w3_23_delta1_itm_active_combo,W3-23,wave3_itm_and_stacks,delta1 plus itm active combo,VELVETFRUIT_EXTRACT,334.61328125,-5
+candidate_w3_23_delta1_itm_active_combo,W3-23,wave3_itm_and_stacks,delta1 plus itm active combo,VEV_4000,48.0,0
+candidate_w3_23_delta1_itm_active_combo,W3-23,wave3_itm_and_stacks,delta1 plus itm active combo,VEV_4500,31.0,0
+candidate_w3_23_delta1_itm_active_combo,W3-23,wave3_itm_and_stacks,delta1 plus itm active combo,VEV_5000,0.0,0
+candidate_w3_23_delta1_itm_active_combo,W3-23,wave3_itm_and_stacks,delta1 plus itm active combo,VEV_5100,0.0,0
+candidate_w3_23_delta1_itm_active_combo,W3-23,wave3_itm_and_stacks,delta1 plus itm active combo,VEV_5200,0.0,0
+candidate_w3_23_delta1_itm_active_combo,W3-23,wave3_itm_and_stacks,delta1 plus itm active combo,VEV_5300,0.0,0
+candidate_w3_23_delta1_itm_active_combo,W3-23,wave3_itm_and_stacks,delta1 plus itm active combo,VEV_5400,0.0,0
+candidate_w3_23_delta1_itm_active_combo,W3-23,wave3_itm_and_stacks,delta1 plus itm active combo,VEV_5500,0.0,0
+candidate_w3_23_delta1_itm_active_combo,W3-23,wave3_itm_and_stacks,delta1 plus itm active combo,VEV_6000,0.0,0
+candidate_w3_23_delta1_itm_active_combo,W3-23,wave3_itm_and_stacks,delta1 plus itm active combo,VEV_6500,0.0,0
+candidate_w3_24_delta1_itm_5300_stack,W3-24,wave3_itm_and_stacks,delta1 plus itm plus tiny 5300 stack,HYDROGEL_PACK,584.6171875,-8
+candidate_w3_24_delta1_itm_5300_stack,W3-24,wave3_itm_and_stacks,delta1 plus itm plus tiny 5300 stack,VELVETFRUIT_EXTRACT,334.61328125,-5
+candidate_w3_24_delta1_itm_5300_stack,W3-24,wave3_itm_and_stacks,delta1 plus itm plus tiny 5300 stack,VEV_4000,56.0,0
+candidate_w3_24_delta1_itm_5300_stack,W3-24,wave3_itm_and_stacks,delta1 plus itm plus tiny 5300 stack,VEV_4500,42.0,0
+candidate_w3_24_delta1_itm_5300_stack,W3-24,wave3_itm_and_stacks,delta1 plus itm plus tiny 5300 stack,VEV_5000,0.0,0
+candidate_w3_24_delta1_itm_5300_stack,W3-24,wave3_itm_and_stacks,delta1 plus itm plus tiny 5300 stack,VEV_5100,0.0,0
+candidate_w3_24_delta1_itm_5300_stack,W3-24,wave3_itm_and_stacks,delta1 plus itm plus tiny 5300 stack,VEV_5200,0.0,0
+candidate_w3_24_delta1_itm_5300_stack,W3-24,wave3_itm_and_stacks,delta1 plus itm plus tiny 5300 stack,VEV_5300,-56.3055419921875,20
+candidate_w3_24_delta1_itm_5300_stack,W3-24,wave3_itm_and_stacks,delta1 plus itm plus tiny 5300 stack,VEV_5400,0.0,0
+candidate_w3_24_delta1_itm_5300_stack,W3-24,wave3_itm_and_stacks,delta1 plus itm plus tiny 5300 stack,VEV_5500,0.0,0
+candidate_w3_24_delta1_itm_5300_stack,W3-24,wave3_itm_and_stacks,delta1 plus itm plus tiny 5300 stack,VEV_6000,0.0,0
+candidate_w3_24_delta1_itm_5300_stack,W3-24,wave3_itm_and_stacks,delta1 plus itm plus tiny 5300 stack,VEV_6500,0.0,0
+candidate_w4_01_delta1_kalman_control,W4-01,wave4_delta1_finalists,champion delta1 kalman control,HYDROGEL_PACK,994.84375,-19
+candidate_w4_01_delta1_kalman_control,W4-01,wave4_delta1_finalists,champion delta1 kalman control,VELVETFRUIT_EXTRACT,532.4609375,-7
+candidate_w4_01_delta1_kalman_control,W4-01,wave4_delta1_finalists,champion delta1 kalman control,VEV_4000,0.0,0
+candidate_w4_01_delta1_kalman_control,W4-01,wave4_delta1_finalists,champion delta1 kalman control,VEV_4500,0.0,0
+candidate_w4_01_delta1_kalman_control,W4-01,wave4_delta1_finalists,champion delta1 kalman control,VEV_5000,0.0,0
+candidate_w4_01_delta1_kalman_control,W4-01,wave4_delta1_finalists,champion delta1 kalman control,VEV_5100,0.0,0
+candidate_w4_01_delta1_kalman_control,W4-01,wave4_delta1_finalists,champion delta1 kalman control,VEV_5200,0.0,0
+candidate_w4_01_delta1_kalman_control,W4-01,wave4_delta1_finalists,champion delta1 kalman control,VEV_5300,0.0,0
+candidate_w4_01_delta1_kalman_control,W4-01,wave4_delta1_finalists,champion delta1 kalman control,VEV_5400,0.0,0
+candidate_w4_01_delta1_kalman_control,W4-01,wave4_delta1_finalists,champion delta1 kalman control,VEV_5500,0.0,0
+candidate_w4_01_delta1_kalman_control,W4-01,wave4_delta1_finalists,champion delta1 kalman control,VEV_6000,0.0,0
+candidate_w4_01_delta1_kalman_control,W4-01,wave4_delta1_finalists,champion delta1 kalman control,VEV_6500,0.0,0
+candidate_w4_02_delta1_kalman_retention,W4-02,wave4_delta1_finalists,champion delta1 with light retention gate,HYDROGEL_PACK,994.84375,-19
+candidate_w4_02_delta1_kalman_retention,W4-02,wave4_delta1_finalists,champion delta1 with light retention gate,VELVETFRUIT_EXTRACT,532.4609375,-7
+candidate_w4_02_delta1_kalman_retention,W4-02,wave4_delta1_finalists,champion delta1 with light retention gate,VEV_4000,0.0,0
+candidate_w4_02_delta1_kalman_retention,W4-02,wave4_delta1_finalists,champion delta1 with light retention gate,VEV_4500,0.0,0
+candidate_w4_02_delta1_kalman_retention,W4-02,wave4_delta1_finalists,champion delta1 with light retention gate,VEV_5000,0.0,0
+candidate_w4_02_delta1_kalman_retention,W4-02,wave4_delta1_finalists,champion delta1 with light retention gate,VEV_5100,0.0,0
+candidate_w4_02_delta1_kalman_retention,W4-02,wave4_delta1_finalists,champion delta1 with light retention gate,VEV_5200,0.0,0
+candidate_w4_02_delta1_kalman_retention,W4-02,wave4_delta1_finalists,champion delta1 with light retention gate,VEV_5300,0.0,0
+candidate_w4_02_delta1_kalman_retention,W4-02,wave4_delta1_finalists,champion delta1 with light retention gate,VEV_5400,0.0,0
+candidate_w4_02_delta1_kalman_retention,W4-02,wave4_delta1_finalists,champion delta1 with light retention gate,VEV_5500,0.0,0
+candidate_w4_02_delta1_kalman_retention,W4-02,wave4_delta1_finalists,champion delta1 with light retention gate,VEV_6000,0.0,0
+candidate_w4_02_delta1_kalman_retention,W4-02,wave4_delta1_finalists,champion delta1 with light retention gate,VEV_6500,0.0,0
+candidate_w4_03_delta1_itm_kalman_stack,W4-03,wave4_itm_finalists,champion base plus active itm overlay,HYDROGEL_PACK,994.84375,-19
+candidate_w4_03_delta1_itm_kalman_stack,W4-03,wave4_itm_finalists,champion base plus active itm overlay,VELVETFRUIT_EXTRACT,532.4609375,-7
+candidate_w4_03_delta1_itm_kalman_stack,W4-03,wave4_itm_finalists,champion base plus active itm overlay,VEV_4000,48.0,0
+candidate_w4_03_delta1_itm_kalman_stack,W4-03,wave4_itm_finalists,champion base plus active itm overlay,VEV_4500,31.0,0
+candidate_w4_03_delta1_itm_kalman_stack,W4-03,wave4_itm_finalists,champion base plus active itm overlay,VEV_5000,0.0,0
+candidate_w4_03_delta1_itm_kalman_stack,W4-03,wave4_itm_finalists,champion base plus active itm overlay,VEV_5100,0.0,0
+candidate_w4_03_delta1_itm_kalman_stack,W4-03,wave4_itm_finalists,champion base plus active itm overlay,VEV_5200,0.0,0
+candidate_w4_03_delta1_itm_kalman_stack,W4-03,wave4_itm_finalists,champion base plus active itm overlay,VEV_5300,0.0,0
+candidate_w4_03_delta1_itm_kalman_stack,W4-03,wave4_itm_finalists,champion base plus active itm overlay,VEV_5400,0.0,0
+candidate_w4_03_delta1_itm_kalman_stack,W4-03,wave4_itm_finalists,champion base plus active itm overlay,VEV_5500,0.0,0
+candidate_w4_03_delta1_itm_kalman_stack,W4-03,wave4_itm_finalists,champion base plus active itm overlay,VEV_6000,0.0,0
+candidate_w4_03_delta1_itm_kalman_stack,W4-03,wave4_itm_finalists,champion base plus active itm overlay,VEV_6500,0.0,0
+candidate_w4_04_delta1_itm_kalman_strict,W4-04,wave4_itm_finalists,champion base plus strict itm overlay,HYDROGEL_PACK,994.84375,-19
+candidate_w4_04_delta1_itm_kalman_strict,W4-04,wave4_itm_finalists,champion base plus strict itm overlay,VELVETFRUIT_EXTRACT,532.4609375,-7
+candidate_w4_04_delta1_itm_kalman_strict,W4-04,wave4_itm_finalists,champion base plus strict itm overlay,VEV_4000,41.0,0
+candidate_w4_04_delta1_itm_kalman_strict,W4-04,wave4_itm_finalists,champion base plus strict itm overlay,VEV_4500,36.0,0
+candidate_w4_04_delta1_itm_kalman_strict,W4-04,wave4_itm_finalists,champion base plus strict itm overlay,VEV_5000,0.0,0
+candidate_w4_04_delta1_itm_kalman_strict,W4-04,wave4_itm_finalists,champion base plus strict itm overlay,VEV_5100,0.0,0
+candidate_w4_04_delta1_itm_kalman_strict,W4-04,wave4_itm_finalists,champion base plus strict itm overlay,VEV_5200,0.0,0
+candidate_w4_04_delta1_itm_kalman_strict,W4-04,wave4_itm_finalists,champion base plus strict itm overlay,VEV_5300,0.0,0
+candidate_w4_04_delta1_itm_kalman_strict,W4-04,wave4_itm_finalists,champion base plus strict itm overlay,VEV_5400,0.0,0
+candidate_w4_04_delta1_itm_kalman_strict,W4-04,wave4_itm_finalists,champion base plus strict itm overlay,VEV_5500,0.0,0
+candidate_w4_04_delta1_itm_kalman_strict,W4-04,wave4_itm_finalists,champion base plus strict itm overlay,VEV_6000,0.0,0
+candidate_w4_04_delta1_itm_kalman_strict,W4-04,wave4_itm_finalists,champion base plus strict itm overlay,VEV_6500,0.0,0
+candidate_w4_05_5300_selective_control,W4-05,wave4_5300_finalists,refined standalone 5300 control,HYDROGEL_PACK,0.0,0
+candidate_w4_05_5300_selective_control,W4-05,wave4_5300_finalists,refined standalone 5300 control,VELVETFRUIT_EXTRACT,0.0,0
+candidate_w4_05_5300_selective_control,W4-05,wave4_5300_finalists,refined standalone 5300 control,VEV_4000,0.0,0
+candidate_w4_05_5300_selective_control,W4-05,wave4_5300_finalists,refined standalone 5300 control,VEV_4500,0.0,0
+candidate_w4_05_5300_selective_control,W4-05,wave4_5300_finalists,refined standalone 5300 control,VEV_5000,0.0,0
+candidate_w4_05_5300_selective_control,W4-05,wave4_5300_finalists,refined standalone 5300 control,VEV_5100,0.0,0
+candidate_w4_05_5300_selective_control,W4-05,wave4_5300_finalists,refined standalone 5300 control,VEV_5200,0.0,0
+candidate_w4_05_5300_selective_control,W4-05,wave4_5300_finalists,refined standalone 5300 control,VEV_5300,-91.0,0
+candidate_w4_05_5300_selective_control,W4-05,wave4_5300_finalists,refined standalone 5300 control,VEV_5400,0.0,0
+candidate_w4_05_5300_selective_control,W4-05,wave4_5300_finalists,refined standalone 5300 control,VEV_5500,0.0,0
+candidate_w4_05_5300_selective_control,W4-05,wave4_5300_finalists,refined standalone 5300 control,VEV_6000,0.0,0
+candidate_w4_05_5300_selective_control,W4-05,wave4_5300_finalists,refined standalone 5300 control,VEV_6500,0.0,0
+candidate_w4_06_delta1_5300_selective_overlay,W4-06,wave4_5300_finalists,champion base plus tiny selective 5300,HYDROGEL_PACK,994.84375,-19
+candidate_w4_06_delta1_5300_selective_overlay,W4-06,wave4_5300_finalists,champion base plus tiny selective 5300,VELVETFRUIT_EXTRACT,532.4609375,-7
+candidate_w4_06_delta1_5300_selective_overlay,W4-06,wave4_5300_finalists,champion base plus tiny selective 5300,VEV_4000,0.0,0
+candidate_w4_06_delta1_5300_selective_overlay,W4-06,wave4_5300_finalists,champion base plus tiny selective 5300,VEV_4500,0.0,0
+candidate_w4_06_delta1_5300_selective_overlay,W4-06,wave4_5300_finalists,champion base plus tiny selective 5300,VEV_5000,0.0,0
+candidate_w4_06_delta1_5300_selective_overlay,W4-06,wave4_5300_finalists,champion base plus tiny selective 5300,VEV_5100,0.0,0
+candidate_w4_06_delta1_5300_selective_overlay,W4-06,wave4_5300_finalists,champion base plus tiny selective 5300,VEV_5200,0.0,0
+candidate_w4_06_delta1_5300_selective_overlay,W4-06,wave4_5300_finalists,champion base plus tiny selective 5300,VEV_5300,-16.0,0
+candidate_w4_06_delta1_5300_selective_overlay,W4-06,wave4_5300_finalists,champion base plus tiny selective 5300,VEV_5400,0.0,0
+candidate_w4_06_delta1_5300_selective_overlay,W4-06,wave4_5300_finalists,champion base plus tiny selective 5300,VEV_5500,0.0,0
+candidate_w4_06_delta1_5300_selective_overlay,W4-06,wave4_5300_finalists,champion base plus tiny selective 5300,VEV_6000,0.0,0
+candidate_w4_06_delta1_5300_selective_overlay,W4-06,wave4_5300_finalists,champion base plus tiny selective 5300,VEV_6500,0.0,0
+candidate_w4_07_delta1_itm_5300_final_stack,W4-07,wave4_5300_finalists,champion plus itm plus tiny 5300 final stack,HYDROGEL_PACK,994.84375,-19
+candidate_w4_07_delta1_itm_5300_final_stack,W4-07,wave4_5300_finalists,champion plus itm plus tiny 5300 final stack,VELVETFRUIT_EXTRACT,532.4609375,-7
+candidate_w4_07_delta1_itm_5300_final_stack,W4-07,wave4_5300_finalists,champion plus itm plus tiny 5300 final stack,VEV_4000,41.0,0
+candidate_w4_07_delta1_itm_5300_final_stack,W4-07,wave4_5300_finalists,champion plus itm plus tiny 5300 final stack,VEV_4500,36.0,0
+candidate_w4_07_delta1_itm_5300_final_stack,W4-07,wave4_5300_finalists,champion plus itm plus tiny 5300 final stack,VEV_5000,0.0,0
+candidate_w4_07_delta1_itm_5300_final_stack,W4-07,wave4_5300_finalists,champion plus itm plus tiny 5300 final stack,VEV_5100,0.0,0
+candidate_w4_07_delta1_itm_5300_final_stack,W4-07,wave4_5300_finalists,champion plus itm plus tiny 5300 final stack,VEV_5200,0.0,0
+candidate_w4_07_delta1_itm_5300_final_stack,W4-07,wave4_5300_finalists,champion plus itm plus tiny 5300 final stack,VEV_5300,-8.0,0
+candidate_w4_07_delta1_itm_5300_final_stack,W4-07,wave4_5300_finalists,champion plus itm plus tiny 5300 final stack,VEV_5400,0.0,0
+candidate_w4_07_delta1_itm_5300_final_stack,W4-07,wave4_5300_finalists,champion plus itm plus tiny 5300 final stack,VEV_5500,0.0,0
+candidate_w4_07_delta1_itm_5300_final_stack,W4-07,wave4_5300_finalists,champion plus itm plus tiny 5300 final stack,VEV_6000,0.0,0
+candidate_w4_07_delta1_itm_5300_final_stack,W4-07,wave4_5300_finalists,champion plus itm plus tiny 5300 final stack,VEV_6500,0.0,0
+candidate_w4_08_5300_peak_salvage,W4-08,wave4_peak_salvage,standalone 5300 peak salvage,HYDROGEL_PACK,0.0,0
+candidate_w4_08_5300_peak_salvage,W4-08,wave4_peak_salvage,standalone 5300 peak salvage,VELVETFRUIT_EXTRACT,0.0,0
+candidate_w4_08_5300_peak_salvage,W4-08,wave4_peak_salvage,standalone 5300 peak salvage,VEV_4000,0.0,0
+candidate_w4_08_5300_peak_salvage,W4-08,wave4_peak_salvage,standalone 5300 peak salvage,VEV_4500,0.0,0
+candidate_w4_08_5300_peak_salvage,W4-08,wave4_peak_salvage,standalone 5300 peak salvage,VEV_5000,0.0,0
+candidate_w4_08_5300_peak_salvage,W4-08,wave4_peak_salvage,standalone 5300 peak salvage,VEV_5100,0.0,0
+candidate_w4_08_5300_peak_salvage,W4-08,wave4_peak_salvage,standalone 5300 peak salvage,VEV_5200,0.0,0
+candidate_w4_08_5300_peak_salvage,W4-08,wave4_peak_salvage,standalone 5300 peak salvage,VEV_5300,-12.0,0
+candidate_w4_08_5300_peak_salvage,W4-08,wave4_peak_salvage,standalone 5300 peak salvage,VEV_5400,0.0,0
+candidate_w4_08_5300_peak_salvage,W4-08,wave4_peak_salvage,standalone 5300 peak salvage,VEV_5500,0.0,0
+candidate_w4_08_5300_peak_salvage,W4-08,wave4_peak_salvage,standalone 5300 peak salvage,VEV_6000,0.0,0
+candidate_w4_08_5300_peak_salvage,W4-08,wave4_peak_salvage,standalone 5300 peak salvage,VEV_6500,0.0,0
+candidate_w4_09_delta1_5300_peak_overlay,W4-09,wave4_peak_salvage,champion base plus tiny 5300 peak salvage,HYDROGEL_PACK,994.84375,-19
+candidate_w4_09_delta1_5300_peak_overlay,W4-09,wave4_peak_salvage,champion base plus tiny 5300 peak salvage,VELVETFRUIT_EXTRACT,532.4609375,-7
+candidate_w4_09_delta1_5300_peak_overlay,W4-09,wave4_peak_salvage,champion base plus tiny 5300 peak salvage,VEV_4000,0.0,0
+candidate_w4_09_delta1_5300_peak_overlay,W4-09,wave4_peak_salvage,champion base plus tiny 5300 peak salvage,VEV_4500,0.0,0
+candidate_w4_09_delta1_5300_peak_overlay,W4-09,wave4_peak_salvage,champion base plus tiny 5300 peak salvage,VEV_5000,0.0,0
+candidate_w4_09_delta1_5300_peak_overlay,W4-09,wave4_peak_salvage,champion base plus tiny 5300 peak salvage,VEV_5100,0.0,0
+candidate_w4_09_delta1_5300_peak_overlay,W4-09,wave4_peak_salvage,champion base plus tiny 5300 peak salvage,VEV_5200,0.0,0
+candidate_w4_09_delta1_5300_peak_overlay,W4-09,wave4_peak_salvage,champion base plus tiny 5300 peak salvage,VEV_5300,-6.0,0
+candidate_w4_09_delta1_5300_peak_overlay,W4-09,wave4_peak_salvage,champion base plus tiny 5300 peak salvage,VEV_5400,0.0,0
+candidate_w4_09_delta1_5300_peak_overlay,W4-09,wave4_peak_salvage,champion base plus tiny 5300 peak salvage,VEV_5500,0.0,0
+candidate_w4_09_delta1_5300_peak_overlay,W4-09,wave4_peak_salvage,champion base plus tiny 5300 peak salvage,VEV_6000,0.0,0
+candidate_w4_09_delta1_5300_peak_overlay,W4-09,wave4_peak_salvage,champion base plus tiny 5300 peak salvage,VEV_6500,0.0,0
+candidate_w4_10_5100_inverse_forced,W4-10,wave4_inverse_closure,forced tradability 5100 inverse closure,HYDROGEL_PACK,0.0,0
+candidate_w4_10_5100_inverse_forced,W4-10,wave4_inverse_closure,forced tradability 5100 inverse closure,VELVETFRUIT_EXTRACT,0.0,0
+candidate_w4_10_5100_inverse_forced,W4-10,wave4_inverse_closure,forced tradability 5100 inverse closure,VEV_4000,0.0,0
+candidate_w4_10_5100_inverse_forced,W4-10,wave4_inverse_closure,forced tradability 5100 inverse closure,VEV_4500,0.0,0
+candidate_w4_10_5100_inverse_forced,W4-10,wave4_inverse_closure,forced tradability 5100 inverse closure,VEV_5000,0.0,0
+candidate_w4_10_5100_inverse_forced,W4-10,wave4_inverse_closure,forced tradability 5100 inverse closure,VEV_5100,0.0,0
+candidate_w4_10_5100_inverse_forced,W4-10,wave4_inverse_closure,forced tradability 5100 inverse closure,VEV_5200,0.0,0
+candidate_w4_10_5100_inverse_forced,W4-10,wave4_inverse_closure,forced tradability 5100 inverse closure,VEV_5300,0.0,0
+candidate_w4_10_5100_inverse_forced,W4-10,wave4_inverse_closure,forced tradability 5100 inverse closure,VEV_5400,0.0,0
+candidate_w4_10_5100_inverse_forced,W4-10,wave4_inverse_closure,forced tradability 5100 inverse closure,VEV_5500,0.0,0
+candidate_w4_10_5100_inverse_forced,W4-10,wave4_inverse_closure,forced tradability 5100 inverse closure,VEV_6000,0.0,0
+candidate_w4_10_5100_inverse_forced,W4-10,wave4_inverse_closure,forced tradability 5100 inverse closure,VEV_6500,0.0,0
+candidate_w4_11_delta1_kalman_stress_control,W4-11,wave4_delta1_finalists,champion stress-control variant,HYDROGEL_PACK,994.84375,-19
+candidate_w4_11_delta1_kalman_stress_control,W4-11,wave4_delta1_finalists,champion stress-control variant,VELVETFRUIT_EXTRACT,460.9228515625,-1
+candidate_w4_11_delta1_kalman_stress_control,W4-11,wave4_delta1_finalists,champion stress-control variant,VEV_4000,0.0,0
+candidate_w4_11_delta1_kalman_stress_control,W4-11,wave4_delta1_finalists,champion stress-control variant,VEV_4500,0.0,0
+candidate_w4_11_delta1_kalman_stress_control,W4-11,wave4_delta1_finalists,champion stress-control variant,VEV_5000,0.0,0
+candidate_w4_11_delta1_kalman_stress_control,W4-11,wave4_delta1_finalists,champion stress-control variant,VEV_5100,0.0,0
+candidate_w4_11_delta1_kalman_stress_control,W4-11,wave4_delta1_finalists,champion stress-control variant,VEV_5200,0.0,0
+candidate_w4_11_delta1_kalman_stress_control,W4-11,wave4_delta1_finalists,champion stress-control variant,VEV_5300,0.0,0
+candidate_w4_11_delta1_kalman_stress_control,W4-11,wave4_delta1_finalists,champion stress-control variant,VEV_5400,0.0,0
+candidate_w4_11_delta1_kalman_stress_control,W4-11,wave4_delta1_finalists,champion stress-control variant,VEV_5500,0.0,0
+candidate_w4_11_delta1_kalman_stress_control,W4-11,wave4_delta1_finalists,champion stress-control variant,VEV_6000,0.0,0
+candidate_w4_11_delta1_kalman_stress_control,W4-11,wave4_delta1_finalists,champion stress-control variant,VEV_6500,0.0,0
+candidate_w4_12_5300_trend_comparator,W4-12,wave4_5300_finalists,trend-led 5300 final comparator,HYDROGEL_PACK,0.0,0
+candidate_w4_12_5300_trend_comparator,W4-12,wave4_5300_finalists,trend-led 5300 final comparator,VELVETFRUIT_EXTRACT,0.0,0
+candidate_w4_12_5300_trend_comparator,W4-12,wave4_5300_finalists,trend-led 5300 final comparator,VEV_4000,0.0,0
+candidate_w4_12_5300_trend_comparator,W4-12,wave4_5300_finalists,trend-led 5300 final comparator,VEV_4500,0.0,0
+candidate_w4_12_5300_trend_comparator,W4-12,wave4_5300_finalists,trend-led 5300 final comparator,VEV_5000,0.0,0
+candidate_w4_12_5300_trend_comparator,W4-12,wave4_5300_finalists,trend-led 5300 final comparator,VEV_5100,0.0,0
+candidate_w4_12_5300_trend_comparator,W4-12,wave4_5300_finalists,trend-led 5300 final comparator,VEV_5200,0.0,0
+candidate_w4_12_5300_trend_comparator,W4-12,wave4_5300_finalists,trend-led 5300 final comparator,VEV_5300,-107.0,0
+candidate_w4_12_5300_trend_comparator,W4-12,wave4_5300_finalists,trend-led 5300 final comparator,VEV_5400,0.0,0
+candidate_w4_12_5300_trend_comparator,W4-12,wave4_5300_finalists,trend-led 5300 final comparator,VEV_5500,0.0,0
+candidate_w4_12_5300_trend_comparator,W4-12,wave4_5300_finalists,trend-led 5300 final comparator,VEV_6000,0.0,0
+candidate_w4_12_5300_trend_comparator,W4-12,wave4_5300_finalists,trend-led 5300 final comparator,VEV_6500,0.0,0
 probe_l01_hydro_reversion,L01,wave1_delta1,delta1 reversion,HYDROGEL_PACK,556.03125,-15
 probe_l01_hydro_reversion,L01,wave1_delta1,delta1 reversion,VELVETFRUIT_EXTRACT,0.0,0
 probe_l01_hydro_reversion,L01,wave1_delta1,delta1 reversion,VEV_4000,0.0,0

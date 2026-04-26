@@ -9,11 +9,10 @@
 
 ## Current Next Priority Action
 
-The full 19-bot Wave 2 batch is now implemented under
-`../bots/amin/canonical/`. Next:
-run the new canonical bots in Prosperity, ideally `W2-01` to `W2-14` first and
-`W2-15` to `W2-19` immediately after, then feed the new artifacts back into
-Phase 06.
+Wave 5 is now specified and implemented in `canonical`. Next:
+run the 12-bot Wave 5 final exploitation / upside-distillation batch on the
+platform, then compare clean winner protection versus distilled `>10k`
+upside descendants.
 
 ## Phase Status
 
@@ -23,11 +22,11 @@ Phase 06.
 | 01 EDA | READY_FOR_REVIEW | Unassigned | Unassigned | [`01_eda/eda_option_surface_and_microstructure.md`](01_eda/eda_option_surface_and_microstructure.md) / [`phase_01_eda_context.md`](phase_01_eda_context.md) | Review pending |
 | 02 Understanding | READY_FOR_REVIEW | Unassigned | Unassigned | [`02_understanding.md`](02_understanding.md) / [`phase_02_understanding_context.md`](phase_02_understanding_context.md) | Review pending |
 | 02b External Paper Research | COMPLETED | Unassigned | Unassigned | [`02b_external_paper_research.md`](02b_external_paper_research.md) / [`phase_02b_external_paper_research_context.md`](phase_02b_external_paper_research_context.md) | None |
-| 03 Strategy | READY_FOR_REVIEW | Unassigned | Unassigned | [`03_strategy_candidates.md`](03_strategy_candidates.md), [`03_signal_strategy_learning_matrix.md`](03_signal_strategy_learning_matrix.md), [`03_next_wave_bot_planning.md`](03_next_wave_bot_planning.md) / [`phase_03_strategy_context.md`](phase_03_strategy_context.md) | Review pending; next-wave planning artifact added after the 39-run synthesis |
-| 04 Spec | COMPLETED | amin | Unassigned | [`04_strategy_specs/spec_c06_composite_base.md`](04_strategy_specs/spec_c06_composite_base.md), [`04_strategy_specs/spec_c06_composite_inv.md`](04_strategy_specs/spec_c06_composite_inv.md), [`04_strategy_specs/spec_learning_batch_wave1.md`](04_strategy_specs/spec_learning_batch_wave1.md), [`04_strategy_specs/spec_learning_batch_wave2.md`](04_strategy_specs/spec_learning_batch_wave2.md) / [`phase_04_spec_context.md`](phase_04_spec_context.md) | None |
-| 05 Implementation | READY_FOR_REVIEW | amin | Unassigned | [`05_implementation/learning_batch_wave1_manifest.md`](05_implementation/learning_batch_wave1_manifest.md), [`05_implementation/learning_batch_wave2_manifest.md`](05_implementation/learning_batch_wave2_manifest.md) / [`phase_05_implementation_context.md`](phase_05_implementation_context.md) | Review pending; Wave 2 manifest and 19 canonical bots compile and now await first platform runs |
-| 06 Testing/performance | IN_PROGRESS | amin | Unassigned | [`06_testing/round_3_canonical_run_analysis.md`](06_testing/round_3_canonical_run_analysis.md), [`06_testing/round_3_historical_performance_analysis.md`](06_testing/round_3_historical_performance_analysis.md), [`06_testing/round_3_full_performance_synthesis.md`](06_testing/round_3_full_performance_synthesis.md) / [`phase_06_testing_context.md`](phase_06_testing_context.md) | Full synthesis is done and Wave 2 is built; the next bottleneck is first-run validation |
-| 07 Debugging/iteration | IN_PROGRESS | amin | Unassigned | [`06_debugging/issue_2026-04-25_active_voucher_strike_misallocation.md`](06_debugging/issue_2026-04-25_active_voucher_strike_misallocation.md) / [`phase_07_debugging_context.md`](phase_07_debugging_context.md) | Waiting for Wave 2 run evidence before opening the next debug loop |
+| 03 Strategy | READY_FOR_REVIEW | Unassigned | Unassigned | [`03_strategy_candidates.md`](03_strategy_candidates.md), [`03_signal_strategy_learning_matrix.md`](03_signal_strategy_learning_matrix.md), [`03_next_wave_bot_planning.md`](03_next_wave_bot_planning.md) / [`phase_03_strategy_context.md`](phase_03_strategy_context.md) | Review pending; Wave 5 exploitation planning has now been consumed by spec and implementation |
+| 04 Spec | COMPLETED | amin | Unassigned | [`04_strategy_specs/spec_c06_composite_base.md`](04_strategy_specs/spec_c06_composite_base.md), [`04_strategy_specs/spec_c06_composite_inv.md`](04_strategy_specs/spec_c06_composite_inv.md), [`04_strategy_specs/spec_learning_batch_wave1.md`](04_strategy_specs/spec_learning_batch_wave1.md), [`04_strategy_specs/spec_learning_batch_wave2.md`](04_strategy_specs/spec_learning_batch_wave2.md), [`04_strategy_specs/spec_learning_batch_wave3.md`](04_strategy_specs/spec_learning_batch_wave3.md), [`04_strategy_specs/spec_learning_batch_wave4.md`](04_strategy_specs/spec_learning_batch_wave4.md), [`04_strategy_specs/spec_learning_batch_wave5.md`](04_strategy_specs/spec_learning_batch_wave5.md) / [`phase_04_spec_context.md`](phase_04_spec_context.md) | None |
+| 05 Implementation | READY_FOR_REVIEW | amin | Unassigned | [`05_implementation/learning_batch_wave1_manifest.md`](05_implementation/learning_batch_wave1_manifest.md), [`05_implementation/learning_batch_wave2_manifest.md`](05_implementation/learning_batch_wave2_manifest.md), [`05_implementation/learning_batch_wave3_manifest.md`](05_implementation/learning_batch_wave3_manifest.md), [`05_implementation/learning_batch_wave4_manifest.md`](05_implementation/learning_batch_wave4_manifest.md), [`05_implementation/learning_batch_wave5_manifest.md`](05_implementation/learning_batch_wave5_manifest.md) / [`phase_05_implementation_context.md`](phase_05_implementation_context.md) | Review pending; Wave 5 is implemented and waiting on platform runs |
+| 06 Testing/performance | IN_PROGRESS | amin | Unassigned | [`06_testing/round_3_canonical_run_analysis.md`](06_testing/round_3_canonical_run_analysis.md), [`06_testing/round_3_historical_performance_analysis.md`](06_testing/round_3_historical_performance_analysis.md), [`06_testing/round_3_full_performance_synthesis.md`](06_testing/round_3_full_performance_synthesis.md) / [`phase_06_testing_context.md`](phase_06_testing_context.md) | Full 94-run synthesis is done; next bottleneck is platform execution of Wave 5 |
+| 07 Debugging/iteration | IN_PROGRESS | amin | Unassigned | [`06_debugging/issue_2026-04-25_active_voucher_strike_misallocation.md`](06_debugging/issue_2026-04-25_active_voucher_strike_misallocation.md) / [`phase_07_debugging_context.md`](phase_07_debugging_context.md) | Wave 5 is now coded; next step is live validation and post-run pruning |
 
 ## Product Scope
 
@@ -76,32 +75,40 @@ with roles, priority tiers, and implementation waves.
 
 | Candidate ID | Role | Priority Tier | Implementation Wave | Evidence Strength | Short Reason | Spec Status | Owner | Decision Needed |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `L-delta1` | primary | implement-first | wave 1 | high | Wave 1 isolated delta-1 family is the strongest live branch | captured in `spec_learning_batch_wave1.md` | amin | Decide whether delta-1 becomes the new base family |
-| `L-itm` | primary | implement-first | wave 1 | medium | ITM is near-flat alone and positive mainly when paired with VEX | captured in `spec_learning_batch_wave1.md` | amin | Decide whether ITM remains addon-only |
-| `L-active-subsets` | primary | implement-first | wave 1 | medium | Active vouchers are heavily pruned by Wave 1 evidence | captured in `spec_learning_batch_wave1.md` | amin | Decide whether only `5000 + 5300` survives and whether `5100/5200` are formal rejects |
-| `L-upper` | secondary | implement-first | wave 1 | low/medium | Upper strikes are tradable enough to test, but not profitable yet | captured in `spec_learning_batch_wave1.md` | amin | Decide whether the upper branch is paused or redesigned |
-| `L-surface` | secondary | implement-first | wave 1 | low | Current surface-pair implementation is negative | captured in `spec_learning_batch_wave1.md` | amin | Decide whether the surface branch is paused or rewritten |
+| `L-delta1` | primary | implemented | wave 5 | high | Wave 5 keeps the Kalman delta-1 base alive as both benchmark and winner scaffold | captured in `spec_learning_batch_wave5.md` | amin | Decide after live runs whether fallback delta-1 still matters once the full batch is compared |
+| `L-itm` | primary | implemented | wave 5 | high | `W4-03/W4-04` made active ITM on the Kalman base the current winner family and Wave 5 now protects that axis directly | captured in `spec_learning_batch_wave5.md` | amin | Decide after live runs whether the final submission should simply be the protected winner family |
+| `L-active-upside-distilled` | primary | implemented | wave 5 | medium/high | Wave 5 now contains the pruned `>10k` descendants with hard retention discipline and VEX anchoring | captured in `spec_learning_batch_wave5.md` | amin | Decide which, if any, distilled branch is finalist-grade |
+| `L-toxic-strike-signals` | secondary | implemented | wave 5 | medium | Wave 5 implements toxic-strike veto / transformed-threshold use instead of forcing direct inverse inventory | captured in `spec_learning_batch_wave5.md` | amin | Decide whether toxic strikes survive only as signal inputs |
+| `L-heavy-regime` | deferred | defer | post-wave 5 | low/untested | HMM/Markov-style regime logic remains intentionally deferred behind simpler online gates, trend, transformed thresholds, and Kalman | intentionally excluded from the current Wave 5 plan | amin | Decide later only if the final simple salvage wave fails cleanly |
 
 ## Active Implementations
 
 Implementation count is driven by reviewed specs, validation capacity,
 deadline risk, and distinct test axes.
 
-- `../bots/amin/canonical/` now contains the active Wave 2 learning batch:
-  19 bots generated from `05_implementation/learning_batch_wave2_manifest.md`.
-- Wave 2 is split into `14` core decision bots and `5` controlled coverage
-  bots; it is not another blind 25-bot sweep.
-- Current family status after the full 39-run synthesis:
-  - `L-delta1`: validated as the strongest live family and the leading base
-    candidate for the next wave.
-  - `L-itm`: kept as an add-on / overlay family, not as a standalone base.
-  - `L-active-subsets`: heavily pruned; `VEV_5100/5200` now default rejects.
-  - `L-upper`: remains exploratory only.
-  - `L-surface`: remains exploratory and currently failing.
-- Wave 2 implementation focus:
-  - `W2-01` to `W2-04`: base-family and overlay controls
-  - `W2-05` to `W2-13`: selective active-voucher clean retests and rescue logic
-  - `W2-14` to `W2-19`: upper, toxic-strike, and floor coverage slots
+- The full 24-bot Wave 3 batch has now been run and archived from `../bots/amin/canonical/` to `../bots/amin/historical/`.
+- The full 12-bot Wave 4 finalist batch has now also been run and archived to
+  `../bots/amin/historical/`.
+- Current family status after the updated 94-run synthesis:
+  - `L-delta1`: confirmed benchmark / fallback family.
+  - `L-itm`: promoted to the current clean winner family through `W4-03/W4-04`.
+  - `L-active-subsets`: no longer a normal finalist family; it now survives only as upside-distillation research.
+  - `L-upper`: paused out of Wave 3.
+  - `L-surface`: paused out of Wave 3.
+- Wave 3 implementation focus:
+  - `W3-01` to `W3-02`: delta-1 champion and simple regime gating
+  - `W3-03`: `VEX + ITM` active refresh
+  - `W3-04` to `W3-11`: `5300` rescue, no-trade, transformed-threshold, and trend-gate designs
+  - `W3-12` to `W3-14`: tiny inverse toxic-strike diagnostics
+  - `W3-15` to `W3-16`: compact Kalman tests
+  - `W3-17` to `W3-19`: selective active filters and capped salvage
+  - `W3-20` to `W3-22`: inverse toxic-strike sidecar tests
+  - `W3-23` to `W3-24`: near-final stacked architecture challengers
+- Wave 5 implementation is now written and materialized in
+  `../bots/amin/canonical/`:
+  - `4` clean finalist / benchmark bots,
+  - `6` `>10k` upside-distillation descendants,
+  - `2` toxic-strike-as-signal variants.
 
 ## Baseline / Reference Bot
 
@@ -126,26 +133,33 @@ deadline risk, and distinct test axes.
 - Best historical tested artifact: `../performances/amin/historical/r3_b02_itm_residual.json` with real platform PnL `1409.371`.
 - Historical runner-up: `../performances/amin/historical/r3_b02_itm_anchor.json` with real platform PnL `726.893`.
 - Best Wave 1 learner: `../performances/amin/historical/probe_l06_delta1_dual_independent.json` with real platform PnL `886.102`.
+- Best Wave 2 run: `../performances/amin/historical/candidate_w2_01_delta1_dual_control.json` at `872.653`; `candidate_w2_04_delta1_itm_overlay.json` matched it exactly with no incremental ITM contribution.
+- Best Wave 3 run and prior clean champion: `../performances/amin/historical/candidate_w3_15_delta1_kalman_control.json` at `1527.305`.
+- Best Wave 4 run and current overall leader: `../performances/amin/historical/candidate_w4_03_delta1_itm_kalman_stack.json` at `1606.305`.
+- Wave 4 runner-up and family confirmer: `../performances/amin/historical/candidate_w4_04_delta1_itm_kalman_strict.json` at `1604.305`.
+- Best pure fallback champion remains `../performances/amin/historical/candidate_w4_01_delta1_kalman_control.json` at `1527.305`.
 - Best isolated product learners: `probe_l01_hydro_reversion = +556.031`,
   `probe_l02_hydro_imbalance = +537.656`, `probe_l05_vex_imbalance = +446.387`,
   `probe_l04_vex_reversion = +309.613`.
-- Latest corrected challenger results remain negative:
-  `candidate_c06_v01_centered_base = -3008.203`,
-  `candidate_c06_composite_inv = -5245.475`.
-- There is no live-validated Wave 2 candidate yet, but there is now an active
-  canonical implementation queue under `../bots/amin/canonical/`.
+- Wave 3 interpretation highlights:
+  `W3-23` proves active `ITM` can add value on top of delta-1, `W3-17` is the
+  first credible standalone selective `5300` winner, and the old `>10k` /
+  `~18k` peaks now read as retention failures rather than ready-made winners.
+- There is still no promoted final Round 3 submission yet, but the winner axis
+  is now much narrower: `W4-03/W4-04` versus one last upside-distillation wave.
 - Interpretation limit: results are non-authoritative evidence, not rules.
 
 ## Post-Run Research Memory
 
 - [`post_run_research_memory.md`](post_run_research_memory.md)
 - Key current takeaways: `activitiesLog` final-sum remains the best PnL proxy
-  when `profit` is unavailable; isolated delta-1 is now the strongest live
-  family; ITM is near-flat alone and best treated as an add-on; `VEV_5100` /
-  `VEV_5200` are now the clearest toxic active strikes; `VEV_5300` is the
-  least-bad active strike but not a standalone winner; many active losers now
-  look like `edge then reversal` rather than pure `no edge`; upper and surface
-  branches remain exploratory.
+  when `profit` is unavailable; `W3-15` is now the clean architectural
+  champion; `W3-23` is the best additive `ITM` overlay path; `VEV_5300` is
+  still the only active strike with positive `10k` markout and `W3-17` is the
+  first credible standalone selective `5300` winner; `VEV_5000/5100/5200`
+  remain final-bot closure candidates unless explicitly rerun; giant legacy
+  `>10k` peaks look more like retention failures than promotable architecture;
+  upper remains research-only and floor looks closeable.
 
 ## Blockers And Decisions Needed
 
@@ -154,33 +168,24 @@ deadline risk, and distinct test axes.
 - Phase 02 review is pending.
 - Historical artifact analysis now exists under `06_testing/`.
 - Voucher expiry framing is now confirmed by the live challenge brief: the current upload regime is `TTE=5d`, so historical `6d-8d` evidence should be treated as nearby-but-not-identical.
-- Need to choose whether the next architecture is `delta-1 first` or
-  `delta-1 + selective voucher overlay`.
-- Need to decide whether ITM remains an optional overlay only or gets a second
-  targeted live test.
-- Need to formalize `VEV_5100` and `VEV_5200` as rejected active strikes unless
-  a new hypothesis justifies reopening them.
-- Need to decide whether surviving selective active-voucher ideas should be
-  redesigned around faster profit capture / unwind.
-- Need to decide whether upper and surface branches are paused or redesigned
-  for one narrower experiment each.
-- Need the first Wave 2 runs before making further pruning or promotion decisions.
-- Need to compare the 14 core Wave 2 bots first, then classify whether the 5
-  coverage bots are worth keeping alive.
+- Need the Wave 5 live runs to decide:
+  - whether the round should simply promote `W4-03/W4-04`,
+  - whether any distilled high-upside descendant can clearly beat that family,
+  - and whether toxic strikes survive only as veto / anti-signal inputs.
 - Exact round-end timestamp is still unknown.
 
 ## Final Submission Status
 
-- Candidate: none.
+- Candidate: none yet, but `W4-03/W4-04` now define the current clean winner axis.
 - File: none.
 - Decision reason: none.
 - Linked spec: none.
 - Linked validation run: none.
 - Comparability status: `unclear`
-- Contract readiness status: `py_compile passed; no run validation yet`
-- Active file verified: `no`
-- Last validation: none.
-- Active-file verification: not started.
+- Contract readiness status: `Wave 5 specified and implemented; waiting live validation`
+- Active file verified: `yes, at compile level`
+- Last validation: `py_compile` on Wave 5 generator and all 12 bots.
+- Active-file verification: `platform run pending`.
 
 ## Recently Changed Artifacts
 
@@ -251,6 +256,22 @@ deadline risk, and distinct test axes.
 - Added Wave 2 implementation manifest: `05_implementation/learning_batch_wave2_manifest.md` on `2026-04-25`
 - Added 19 Wave 2 canonical bots under `../bots/amin/canonical/` on `2026-04-25`
 - Updated Phase 03, 04, 05, and 06 contexts for the implemented Wave 2 batch on `2026-04-25`
-- Updated Round 3 state contexts and memory to reflect the 39-run synthesis on `2026-04-25`
+- Archived the full 19-bot Wave 2 batch from `../bots/amin/canonical/` to `../bots/amin/historical/` after paired platform artifacts were uploaded on `2026-04-26`
+- Updated Round 3 full synthesis to `58` runs with Wave 2, `>5k` peak analysis, no-trade candidates, and markout diagnostics on `2026-04-26`
+- Added new full-synthesis CSV artifacts for Wave 2, `>5k` peaks, no-trade candidates, and markouts under `06_testing/artifacts/full_synthesis/` on `2026-04-26`
+- Added Wave 3 spec: `04_strategy_specs/spec_learning_batch_wave3.md` on `2026-04-26`
+- Added Wave 3 implementation generator: `05_implementation/generate_learning_batch_wave3.py` on `2026-04-26`
+- Added Wave 3 implementation manifest: `05_implementation/learning_batch_wave3_manifest.md` on `2026-04-26`
+- Added 24 Wave 3 canonical bots under `../bots/amin/canonical/` on `2026-04-26`
+- Archived the full 24-bot Wave 3 batch from `../bots/amin/canonical/` to `../bots/amin/historical/` after paired platform artifacts were uploaded on `2026-04-26`
+- Updated Round 3 full synthesis to `82` runs with Wave 3, `>10k` peak analysis, simple exit counterfactuals, and a Wave 3 decision board on `2026-04-26`
+- Refreshed `03_next_wave_bot_planning.md` into a winner-focused `10`-core / `12`-with-closure planning cut on `2026-04-26`
+- Updated Round 3 state contexts and memory to reflect the full post-Wave-2 synthesis on `2026-04-26`
+- Added Wave 4 spec: `04_strategy_specs/spec_learning_batch_wave4.md` on `2026-04-26`
+- Added Wave 4 implementation generator: `05_implementation/generate_learning_batch_wave4.py` on `2026-04-26`
+- Added Wave 4 implementation manifest: `05_implementation/learning_batch_wave4_manifest.md` on `2026-04-26`
+- Added 12 Wave 4 canonical finalist bots under `../bots/amin/canonical/` on `2026-04-26`
+- Updated planning plus Phase 03, 04, 05, 06, and 07 contexts for the active
+  Wave 4 finalist batch on `2026-04-26`
 - Cleaned stale `canonical` archival references in Round 3 workspace docs and removed local cache artifacts on `2026-04-25`
 - Pre-created from template: `2026-04-14`

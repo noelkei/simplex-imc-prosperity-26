@@ -2,440 +2,373 @@
 
 ## Executive Verdict
 
-This report consolidates **all current Round 3 evidence**: EDA, understanding,
-legacy historical runs, corrected challenger runs, and the full 25-bot Wave 1
-learning batch.
+This report now consolidates the **full current Round 3 evidence base**:
+legacy runs, corrected challengers, the full 25-bot Wave 1 learner batch, the
+full 19-bot Wave 2 batch, the full 24-bot Wave 3 batch, and the full 12-bot
+Wave 4 finalist batch.
 
-- Total platform JSON artifacts analyzed: `39`.
+- Total platform JSON artifacts analyzed: `94`.
 - Wave 1 learner JSON artifacts analyzed: `25`.
-- Runs with usable `tradeHistory` execution detail from `.log`: `26`.
-- Best overall tested run remains `B02-resid` / `r3_b02_itm_residual.json` at real platform PnL `1409.371`.
-- Best Wave 1 learner is `L06` / `probe_l06_delta1_dual_independent.json` at `886.102`.
-- No pure voucher-only Wave 1 learner finished positive.
+- Wave 2 learner / control JSON artifacts analyzed: `19`.
+- Wave 3 learner / winner-shaping JSON artifacts analyzed: `24`.
+- Wave 4 finalist JSON artifacts analyzed: `12`.
+- Runs with usable `tradeHistory` execution detail from `.log`: `75`.
+- Best overall tested run is now `W4-03` / `candidate_w4_03_delta1_itm_kalman_stack.json` at real platform PnL `1606.305`.
+- Best Wave 2 run is `W2-04` / `candidate_w2_04_delta1_itm_overlay.json` at real platform PnL `872.653`.
+- Best Wave 3 run is `W3-15` / `candidate_w3_15_delta1_kalman_control.json` at real platform PnL `1527.305`.
+- Best Wave 4 run is `W4-03` / `candidate_w4_03_delta1_itm_kalman_stack.json` at real platform PnL `1606.305`.
+- Runs with intra-run peak above `+5k`: `7`.
+- Runs with intra-run peak above `+10k`: `5`.
 
 ### Bottom Line
 
-1. **The strongest live family is now clean delta-1 microstructure**, not broad
-   voucher composites.
-2. **Pure voucher-only Wave 1 learners did not produce a winner**. The best
-   active standalone strike (`VEV_5300`) was only near-flat, not positive.
-3. **`VEV_5100` and `VEV_5200` are now the clearest toxic strikes** in live
-   standalone testing.
-4. **Inventory control is not dead**, but it only helped on a cleaner subset
-   (`VEV_5000 + VEV_5300`), not on the broad active basket.
-5. **The old “HYDRO is weak” conclusion was too pessimistic**. HYDRO failed in
-   earlier composite implementations, but isolated HYDRO learners turned
-   clearly positive.
+1. **Wave 4 did not produce a new giant winner**, but it did sharpen the endgame: the final race is now between the clean `delta-1` champion family and the `delta-1 + ITM` finalist stack.
+2. **The strongest reliable architecture is still delta-1 first**, and the Wave 4 question became “which overlay survives on top of it cleanly?” rather than “which family wins?”
+3. **The old `>10k` and `~18k` paths still matter**, but now specifically as a source of retention logic and strike-pruning lessons, not as a reason to reopen the raw broad active basket.
+4. **If we want a final upside push above the current `~1.5k` champion ceiling, it has to come from a distilled salvage architecture**, not from simply rerunning the old wide active cluster.
 
-## Coverage Audit
+## Updated Ranking Snapshot
 
-- Historical / corrected / learner evidence now spans legacy delta-1, legacy
-  ITM/VEX, legacy active vouchers, corrected centered composites, Wave 1
-  delta-1 probes, Wave 1 ITM probes, Wave 1 active-subset probes, Wave 1
-  upper probes, and Wave 1 surface probes.
-- `activitiesLog` final product sums remain the best practical PnL
-  reconstruction when JSON `profit` is unavailable.
-- For path analysis, this report now uses **timestamp-level PnL reconstructed
-  from `activitiesLog`**, not just final-run outcomes or the coarser
-  `graphLog`.
-- `.log` files for the Wave 1 learners are not empty; they contain a full
-  single-line JSON blob with `tradeHistory`, which is useful for fill and
-  inventory diagnostics.
+| short_id | stem | analysis_bucket | profit | path_peak | path_end_from_peak | delta1_total | itm_total | active_total | learning_verdict |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| W4-03 | candidate_w4_03_delta1_itm_kalman_stack | wave4_itm_finalists | 1606.305 | 2404.709 | -798.404 | 1527.305 | 79.000 | 0.000 | strong positive |
+| W4-04 | candidate_w4_04_delta1_itm_kalman_strict | wave4_itm_finalists | 1604.305 | 2418.062 | -813.758 | 1527.305 | 77.000 | 0.000 | strong positive |
+| W4-07 | candidate_w4_07_delta1_itm_5300_final_stack | wave4_5300_finalists | 1596.305 | 2410.062 | -813.758 | 1527.305 | 77.000 | -8.000 | strong positive |
+| W4-02 | candidate_w4_02_delta1_kalman_retention | wave4_delta1_finalists | 1527.305 | 2341.062 | -813.758 | 1527.305 | 0.000 | 0.000 | strong positive |
+| W4-01 | candidate_w4_01_delta1_kalman_control | wave4_delta1_finalists | 1527.305 | 2341.062 | -813.758 | 1527.305 | 0.000 | 0.000 | strong positive |
+| W3-15 | candidate_w3_15_delta1_kalman_control | wave3_delta1_controls | 1527.305 | 2341.062 | -813.758 | 1527.305 | 0.000 | 0.000 | strong positive |
+| W4-09 | candidate_w4_09_delta1_5300_peak_overlay | wave4_peak_salvage | 1521.305 | 2335.062 | -813.758 | 1527.305 | 0.000 | -6.000 | strong positive |
+| W4-06 | candidate_w4_06_delta1_5300_selective_overlay | wave4_5300_finalists | 1511.305 | 2325.062 | -813.758 | 1527.305 | 0.000 | -16.000 | strong positive |
+| W4-11 | candidate_w4_11_delta1_kalman_stress_control | wave4_delta1_finalists | 1455.767 | 2276.125 | -820.358 | 1455.767 | 0.000 | 0.000 | strong positive |
+| B02-resid | r3_b02_itm_residual | legacy_itm_vex | 1409.371 | 2203.384 | -794.014 | 1211.906 | 197.464 | 0.000 | strong positive |
+| W3-23 | candidate_w3_23_delta1_itm_active_combo | wave3_itm_and_stacks | 998.230 | 1286.763 | -288.533 | 919.230 | 79.000 | 0.000 | strong positive |
+| W3-24 | candidate_w3_24_delta1_itm_5300_stack | wave3_itm_and_stacks | 960.925 | 1275.455 | -314.530 | 919.230 | 98.000 | -56.306 | strong positive |
+| W3-01 | candidate_w3_01_delta1_dual_control | wave3_delta1_controls | 919.230 | 1223.117 | -303.887 | 919.230 | 0.000 | 0.000 | strong positive |
+| W3-02 | candidate_w3_02_delta1_regime_gate | wave3_delta1_controls | 905.637 | 1299.117 | -393.480 | 905.637 | 0.000 | 0.000 | strong positive |
+| L06 | probe_l06_delta1_dual_independent | wave1_delta1 | 886.102 | 1649.773 | -763.672 | 886.102 | 0.000 | 0.000 | strong positive |
+
+### Ranking Reading
+
+- `W3-15` at `1527.305` remains the best clean architectural result in the whole round unless Wave 4 overtook it.
+- `W4-01` at `1527.305` tells us whether the pure champion survived translation into finalist form.
+- `W4-03` at `1606.305` and `W4-04` at `1604.305` decide whether active ITM deserves final-bot promotion on top of the stronger Kalman base.
+- `W4-05/W4-06/W4-07/W4-08/W4-09/W4-12` decide whether any `5300` branch still merits a final slot or whether it stays only as a salvage research branch.
+
+## What Wave 4 Changed
+
+| short_id | stem | analysis_bucket | profit | path_peak | path_end_from_peak | delta1_total | itm_total | active_total | cf_gain_vs_final_retain_75 | learning_verdict |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| W4-03 | candidate_w4_03_delta1_itm_kalman_stack | wave4_itm_finalists | 1606.305 | 2404.709 | -798.404 | 1527.305 | 79.000 | 0.000 | 185.133 | strong positive |
+| W4-04 | candidate_w4_04_delta1_itm_kalman_strict | wave4_itm_finalists | 1604.305 | 2418.062 | -813.758 | 1527.305 | 77.000 | 0.000 | 185.133 | strong positive |
+| W4-07 | candidate_w4_07_delta1_itm_5300_final_stack | wave4_5300_finalists | 1596.305 | 2410.062 | -813.758 | 1527.305 | 77.000 | -8.000 | 185.133 | strong positive |
+| W4-02 | candidate_w4_02_delta1_kalman_retention | wave4_delta1_finalists | 1527.305 | 2341.062 | -813.758 | 1527.305 | 0.000 | 0.000 | 227.629 | strong positive |
+| W4-01 | candidate_w4_01_delta1_kalman_control | wave4_delta1_finalists | 1527.305 | 2341.062 | -813.758 | 1527.305 | 0.000 | 0.000 | 227.629 | strong positive |
+| W4-09 | candidate_w4_09_delta1_5300_peak_overlay | wave4_peak_salvage | 1521.305 | 2335.062 | -813.758 | 1527.305 | 0.000 | -6.000 | 227.629 | strong positive |
+| W4-06 | candidate_w4_06_delta1_5300_selective_overlay | wave4_5300_finalists | 1511.305 | 2325.062 | -813.758 | 1527.305 | 0.000 | -16.000 | 227.629 | strong positive |
+| W4-11 | candidate_w4_11_delta1_kalman_stress_control | wave4_delta1_finalists | 1455.767 | 2276.125 | -820.358 | 1455.767 | 0.000 | 0.000 | 235.444 | strong positive |
+| W4-10 | candidate_w4_10_5100_inverse_forced | wave4_inverse_closure | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | near flat |
+| W4-08 | candidate_w4_08_5300_peak_salvage | wave4_peak_salvage | -12.000 | 0.000 | -12.000 | 0.000 | 0.000 | -12.000 | 0.000 | near flat |
+| W4-05 | candidate_w4_05_5300_selective_control | wave4_5300_finalists | -91.000 | 0.000 | -91.000 | 0.000 | 0.000 | -91.000 | 0.000 | mild negative |
+| W4-12 | candidate_w4_12_5300_trend_comparator | wave4_5300_finalists | -107.000 | 43.039 | -150.039 | 0.000 | 0.000 | -107.000 | 136.613 | mild negative |
+
+### Wave 4 Reading
+
+- Pure champion control:
+  - `W3-15 = 1527.305`
+  - `W4-01 = 1527.305`
+  - `W4-02 = 1527.305`
+  This tells us whether the best clean architecture is stable under one more implementation pass and whether a light retention gate helps or hurts.
+- Champion plus ITM:
+  - `W3-23 = 998.230`
+  - `W4-03 = 1606.305`
+  - `W4-04 = 1604.305`
+  This is the cleanest test of whether ITM still adds on top of the stronger Kalman champion, not just on top of the older Wave 3 control.
+- Selective `5300` finalists:
+  - `W3-17 = 353.150`
+  - `W4-05 = -91.000`
+  - `W4-06 = 1511.305`
+  - `W4-07 = 1596.305`
+  - `W4-12 = -107.000`
+  These decide whether `5300` survives only as a standalone selective micro-branch, as a true overlay, or not at all.
+- Distilled peak-salvage attempts:
+  - `W4-08 = -12.000`
+  - `W4-09 = 1521.305`
+  These are the first serious attempts to harvest old `>10k` logic in a pruned, shutdown-driven form.
+- Inverse closure:
+  - `W4-10 = 0.000`
+  This is only useful if it truly traded `VEV_5100`; otherwise it should be treated as closure evidence, not as a living final branch.
 
 ## Path Quality Summary
 
 - Runs with a positive intra-run peak above `100` that still finished negative:
-  `20` / `39`.
+  `30` / `94`.
 - Runs with a strong intra-run peak above `500` that still finished negative:
-  `17` / `39`.
-- Of those reversal runs, `13` peaked in the **second
-  half** of the session before giving the gains back.
+  `17` / `94`.
+- Runs that still look like strong no-trade / shutdown candidates because they peaked early and kept trading afterwards:
+  `8`.
 
-| analysis_bucket | runs | mean_final_profit | mean_path_peak | median_path_peak | mean_end_from_peak | mean_path_max_drawdown | mean_positive_time_ratio | positive_peak_negative_finish_rate | big_peak_negative_finish_rate | late_peak_rate |
+| analysis_bucket | runs | mean_final_profit | mean_path_peak | median_path_peak | mean_peak_time_frac | mean_end_from_peak | mean_path_max_drawdown | mean_positive_time_ratio | positive_peak_negative_finish_rate | big_peak_negative_finish_rate | early_peak_post_trade_rate |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| legacy_active_vouchers | 6 | -5614.712 | 11099.881 | 12132.826 | 0.498 | -16714.593 | -24780.181 | 0.349 | 0.833 | 0.833 | 0.000 |
+| corrected_and_legacy_composites | 3 | -3295.201 | 6047.251 | 793.538 | 0.398 | -9342.452 | -12891.895 | 0.290 | 0.667 | 0.667 | 0.000 |
+| legacy_delta1 | 2 | -13408.434 | 2503.750 | 2503.750 | 0.171 | -15912.184 | -19597.688 | 0.151 | 0.500 | 0.500 | 0.000 |
+| wave4_itm_finalists | 2 | 1605.305 | 2411.386 | 2411.386 | 0.912 | -806.081 | -1135.359 | 0.953 | 0.000 | 0.000 | 0.000 |
+| wave4_delta1_finalists | 3 | 1503.459 | 2319.417 | 2341.062 | 0.912 | -815.958 | -1055.757 | 0.899 | 0.000 | 0.000 | 0.000 |
+| wave1_active | 10 | -4089.567 | 1691.109 | 1786.306 | 0.415 | -5780.676 | -6578.888 | 0.356 | 0.700 | 0.700 | 0.100 |
+| wave3_delta1_controls | 3 | 1117.391 | 1621.099 | 1299.117 | 0.912 | -503.708 | -817.656 | 0.897 | 0.000 | 0.000 | 0.000 |
+| legacy_itm_vex | 2 | 1068.132 | 1465.138 | 1465.138 | 0.671 | -397.007 | -2886.430 | 0.837 | 0.000 | 0.000 | 0.000 |
+| wave4_5300_finalists | 4 | 727.402 | 1194.541 | 1184.051 | 0.461 | -467.139 | -611.382 | 0.657 | 0.000 | 0.000 | 0.000 |
+| wave4_peak_salvage | 2 | 754.652 | 1167.531 | 1167.531 | 0.456 | -412.879 | -535.020 | 0.446 | 0.000 | 0.000 | 0.000 |
+| wave2_delta1_controls | 3 | 698.436 | 1092.419 | 1364.539 | 0.789 | -393.984 | -817.188 | 0.848 | 0.000 | 0.000 | 0.000 |
+| wave1_delta1 | 5 | 547.158 | 1055.223 | 1254.016 | 0.940 | -508.066 | -659.674 | 0.809 | 0.000 | 0.000 | 0.000 |
+| wave3_itm_and_stacks | 3 | 786.256 | 995.687 | 1275.455 | 0.778 | -209.431 | -722.945 | 0.908 | 0.000 | 0.000 | 0.000 |
+| wave1_upper | 4 | -383.811 | 490.214 | 496.305 | 0.195 | -874.025 | -1353.143 | 0.233 | 0.500 | 0.500 | 0.000 |
+| wave2_active_clean_retests | 2 | -866.087 | 402.996 | 402.996 | 0.216 | -1269.083 | -1533.740 | 0.490 | 1.000 | 0.000 | 1.000 |
+| wave3_active_rescue_and_filters | 12 | -439.465 | 362.463 | 306.980 | 0.350 | -801.927 | -1015.493 | 0.598 | 0.500 | 0.000 | 0.250 |
+| wave3_inverse_sidecars | 3 | 334.613 | 349.996 | 349.996 | 0.979 | -15.383 | -312.695 | 0.673 | 0.000 | 0.000 | 0.000 |
+| wave1_itm | 4 | 78.383 | 259.178 | 253.771 | 0.560 | -180.794 | -278.867 | 0.477 | 0.750 | 0.000 | 0.000 |
+| wave2_upper_refinement | 2 | 177.414 | 181.875 | 181.875 | 0.792 | -4.461 | -241.972 | 0.597 | 0.000 | 0.000 | 0.000 |
+| wave2_active_rescue | 7 | -3216.415 | 109.485 | 0.000 | 0.067 | -3325.900 | -3411.559 | 0.171 | 0.286 | 0.000 | 0.286 |
+| wave1_surface | 2 | -5864.667 | 25.359 | 25.359 | 0.013 | -5890.026 | -6311.951 | 0.009 | 0.000 | 0.000 | 0.000 |
+| wave2_toxic_rescue | 2 | -492.769 | 22.738 | 22.738 | 0.056 | -515.507 | -753.636 | 0.019 | 0.000 | 0.000 | 0.000 |
+| wave2_itm_passive | 1 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+| wave3_inverse_tiny | 3 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+| diagnostic | 1 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+| wave4_inverse_closure | 1 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+| wave2_active_upper_bridge | 1 | -3763.202 | 0.000 | 0.000 | 0.000 | -3763.202 | -3826.162 | 0.000 | 0.000 | 0.000 | 0.000 |
+| wave2_floor_probe | 1 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+
+### Path Reading
+
+- `wave3_delta1_controls` are now the healthiest family in the entire round on both final PnL and path quality.
+- `wave3_itm_and_stacks` are also healthy, but their edge is clearly **base-driven plus small additive overlays**, not voucher-led.
+- `wave3_active_rescue_and_filters` improved massively on the old active families, but as a group they are still negative because they continue to **give back too much** or fail to scale cleanly.
+- `wave4_delta1_finalists` and `wave4_itm_finalists` are the new decision buckets: they tell us whether the endgame is pure champion or champion-plus-ITM.
+- `wave4_peak_salvage` should be read as an exploitation experiment, not as broad strategy evidence: the real question is whether any of the old high-upside logic survives when heavily pruned and blindfolded against continuation mistakes.
+- The old `legacy_active_vouchers` bucket still owns the giant peaks, but also the giant collapses. That is exactly why the next step should be **winner-focused exploitation plus selective salvage**, not reopening the broad basket.
+
+## All Round 3 Runs With Peak Above `+10k`
+
+This section applies to **all of Round 3**, not only Wave 3.
+
+| short_id | stem | analysis_bucket | profit | path_peak | path_end_from_peak | cf_exit_dd_2000 | cf_exit_retain_75 | cf_gain_vs_final_dd_2000 | cf_gain_vs_final_retain_75 | delta1_total | active_total | path_shape |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| B08-regime | r3_b08_regime_composite | legacy_active_vouchers | -1501.925 | 17478.214 | -18980.139 | 15203.195 | 12315.540 | 16705.120 | 13817.464 | 599.500 | -2101.425 | edge_then_major_reversal |
+| C06-legacy | candidate_c06_composite_base | corrected_and_legacy_composites | -1631.925 | 17348.214 | -18980.139 | 15073.195 | 12185.540 | 16705.120 | 13817.464 | 599.500 | -2231.425 | edge_then_major_reversal |
+| B04-surf | r3_b04_full_surface | legacy_active_vouchers | -2561.846 | 15838.493 | -18400.339 | 13731.161 | 11852.825 | 16293.007 | 14414.671 | 599.500 | -3281.120 | edge_then_major_reversal |
+| B03-pure | r3_b03_voucher_pure | legacy_active_vouchers | -2261.849 | 12539.876 | -14801.725 | 9876.368 | 9248.416 | 12138.217 | 11510.265 | 0.000 | -2261.849 | edge_then_major_reversal |
+| B06-tte | r3_b06_tte_cautious | legacy_active_vouchers | -752.886 | 11725.777 | -12478.663 | 9474.472 | 8368.391 | 10227.358 | 9121.277 | 599.500 | -1352.386 | edge_then_major_reversal |
+
+### `>10k` Reading
+
+- All current `>10k` peak runs belong to the old legacy / broad active-voucher world. **No Wave 3 or Wave 4 bot got there**.
+- Wave 4 also failed to approach those peaks, which is exactly why the next wave should explicitly target **distilled upside retention**, not only clean champion confirmation.
+- That does **not** mean the upside was fake. It means the upside was being harvested in a branch that had terrible retention and product selection.
+- The simple counterfactuals are huge:
+  - `B08-regime`: `+16.7k` versus final under a `2k` giveback stop proxy.
+  - `C06-legacy`: `+16.7k` versus final under the same proxy.
+  - `B04-surf`: `+16.3k`.
+  - `B03-pure`: `+12.1k`.
+  - `B06-tte`: `+10.2k`.
+- So the correct read is **not** “those big-peak branches are ready to promote”. The correct read is “they contained real upside, but packaged in the wrong basket, the wrong strikes, and the wrong continuation logic”.
+
+## Which Products Created And Destroyed Those `>10k` Peaks
+
+| product | runs | total_peak_pnl | total_final_pnl | total_giveback | mean_giveback |
+| --- | --- | --- | --- | --- | --- |
+| VEV_5100 | 5 | 24109.652 | -3424.477 | -27534.129 | -5506.826 |
+| VEV_5000 | 5 | 17700.449 | -4888.875 | -22589.324 | -4517.865 |
+| VEV_5200 | 5 | 18126.867 | -3324.369 | -21451.236 | -4290.247 |
+| VEV_5300 | 5 | 13120.196 | 409.517 | -12710.680 | -2542.136 |
+| VEV_5400 | 5 | 1184.014 | -54.231 | -1238.245 | -247.649 |
+| VEV_5500 | 5 | 364.036 | -144.792 | -508.828 | -101.766 |
+| VEV_6000 | 5 | 0.000 | 0.000 | 0.000 | 0.000 |
+| VEV_6500 | 5 | 0.000 | 0.000 | 0.000 | 0.000 |
+
+### Product Reading
+
+- The `>10k` runs were overwhelmingly created and destroyed by the active voucher cluster.
+- `VEV_5100`, `VEV_5200`, and `VEV_5000` are still the biggest giveback drivers in the giant-peak set.
+- `VEV_5300` also gives back heavily, but it remains materially less toxic than the other active strikes.
+- `VELVETFRUIT_EXTRACT` continues to look more like a stabilizer / anchor than the main destroyer.
+- The practical implication is that any last upside push should be **VEX-anchored and strike-pruned**, with continuation limits, rather than voucher-led and basket-wide.
+
+## No-Trade / Shutdown Candidates
+
+| short_id | stem | analysis_bucket | profit | path_peak | path_peak_time_frac | path_end_from_peak | own_trades | post_peak_trades | post_peak_ratio | mean_markout_10000_unit |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| legacy_active_vouchers | 6 | -5614.712 | 11099.881 | 12132.826 | -16714.593 | -24780.181 | 0.349 | 0.833 | 0.833 | 0.833 |
-| corrected_and_legacy_composites | 3 | -3295.201 | 6047.251 | 793.538 | -9342.452 | -12891.895 | 0.290 | 0.667 | 0.667 | 0.667 |
-| legacy_delta1 | 2 | -13408.434 | 2503.750 | 2503.750 | -15912.184 | -19597.688 | 0.151 | 0.500 | 0.500 | 0.000 |
-| wave1_active | 10 | -4089.567 | 1691.109 | 1786.306 | -5780.676 | -6578.888 | 0.356 | 0.700 | 0.700 | 0.700 |
-| legacy_itm_vex | 2 | 1068.132 | 1465.138 | 1465.138 | -397.007 | -2886.430 | 0.837 | 0.000 | 0.000 | 0.500 |
-| wave1_delta1 | 5 | 547.158 | 1055.223 | 1254.016 | -508.066 | -659.674 | 0.809 | 0.000 | 0.000 | 1.000 |
-| wave1_upper | 4 | -383.811 | 490.214 | 496.305 | -874.025 | -1353.143 | 0.233 | 0.500 | 0.500 | 0.000 |
-| wave1_itm | 4 | 78.383 | 259.178 | 253.771 | -180.794 | -278.867 | 0.477 | 0.750 | 0.000 | 0.250 |
-| wave1_surface | 2 | -5864.667 | 25.359 | 25.359 | -5890.026 | -6311.951 | 0.009 | 0.000 | 0.000 | 0.000 |
-| diagnostic | 1 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+| L16 | probe_l16_active_5000_5300_residual | wave1_active | -1837.049 | 2042.844 | 0.236 | -3879.893 | 676 | 406 | 0.601 | 0.767 |
+| W2-09 | candidate_w2_09_5300_late_flatten | wave2_active_rescue | -291.222 | 472.030 | 0.234 | -763.252 | 234 | 151 | 0.645 | 0.732 |
+| W2-05 | candidate_w2_05_5300_bachelier_selective | wave2_active_clean_retests | -395.875 | 450.030 | 0.234 | -845.905 | 232 | 152 | 0.655 | 0.699 |
+| W3-04 | candidate_w3_04_5300_early_window | wave3_active_rescue_and_filters | -215.243 | 408.151 | 0.234 | -623.394 | 233 | 146 | 0.627 | 0.727 |
+| W2-06 | candidate_w2_06_5000_5300_bachelier_selective | wave2_active_clean_retests | -1336.299 | 355.961 | 0.198 | -1692.261 | 308 | 214 | 0.695 | 0.313 |
+| W2-10 | candidate_w2_10_5000_5300_late_flatten | wave2_active_rescue | -976.913 | 294.367 | 0.234 | -1271.281 | 282 | 184 | 0.652 | 0.311 |
+| W3-07 | candidate_w3_07_5300_slow_hold | wave3_active_rescue_and_filters | -2468.000 | 118.083 | 0.025 | -2586.083 | 344 | 328 | 0.953 | -0.351 |
+| W3-16 | candidate_w3_16_5300_kalman_anchor | wave3_active_rescue_and_filters | -2116.539 | 101.313 | 0.025 | -2217.852 | 352 | 338 | 0.960 | -0.183 |
 
-### Reading The Path Table
+### No-Trade Reading
 
-- `wave1_delta1` is not just positive at the close; it also has strong
-  intraday quality: mean peak `1055.223` and mean
-  positive-time ratio `0.809`.
-- `wave1_active` is more nuanced than “always dead”: mean peak
-  `1691.109`, but mean giveback from peak
-  `-5780.676`. That is a **real reversal /
-  unwind problem**, not just zero edge.
-- `wave1_surface` is different: mean peak only `25.359`
-  and almost no time spent positive. That branch looks structurally wrong in
-  the current implementation, not merely badly closed out.
+- The selective active-voucher runs still peak much earlier than they stop trading.
+- The strongest current implication is that **new-entry shutdown, time-window control, and giveback discipline** remain the most valuable rescue axes for any remaining `5300` work.
 
-## Biggest Mid-Run Reversals
+## Execution Markout Evidence By Product
 
-These runs matter because they may still contain signal even though they
-finished badly.
+| product | trades | mean_entry_edge_unit | mean_markout_1000_unit | mean_markout_5000_unit | mean_markout_10000_unit |
+| --- | --- | --- | --- | --- | --- |
+| HYDROGEL_PACK | 277 | 6.758 | 6.671 | 6.810 | 9.954 |
+| VELVETFRUIT_EXTRACT | 1023 | 1.504 | 1.579 | 1.591 | 3.311 |
+| VEV_4000 | 207 | -4.007 | 0.814 | 1.763 | 1.251 |
+| VEV_4500 | 207 | -3.130 | 0.684 | 1.649 | 1.090 |
+| VEV_5000 | 598 | -2.509 | -1.881 | -2.286 | -2.284 |
+| VEV_5100 | 498 | -2.414 | -2.489 | -3.175 | -3.502 |
+| VEV_5200 | 1224 | -1.573 | -1.590 | -2.632 | -3.665 |
+| VEV_5300 | 11852 | -1.148 | -1.077 | -0.456 | 0.388 |
+| VEV_5400 | 949 | -0.692 | -0.497 | -0.294 | -0.015 |
+| VEV_5500 | 628 | -0.551 | -0.400 | -0.400 | 0.161 |
 
-| short_id | stem | analysis_bucket | profit | path_peak | path_peak_ts | path_end_from_peak | path_positive_time_ratio | path_shape |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| B08-regime | r3_b08_regime_composite | legacy_active_vouchers | -1501.925 | 17478.214 | 59700 | -18980.139 | 0.423 | edge_then_major_reversal |
-| C06-legacy | candidate_c06_composite_base | corrected_and_legacy_composites | -1631.925 | 17348.214 | 59700 | -18980.139 | 0.424 | edge_then_major_reversal |
-| B04-surf | r3_b04_full_surface | legacy_active_vouchers | -2561.846 | 15838.493 | 59700 | -18400.339 | 0.405 | edge_then_major_reversal |
-| B03-pure | r3_b03_voucher_pure | legacy_active_vouchers | -2261.849 | 12539.876 | 59700 | -14801.725 | 0.405 | edge_then_major_reversal |
-| L19 | probe_l19_active_5000_5100_5300_residual | wave1_active | -9241.385 | 3583.584 | 59600 | -12824.969 | 0.198 | edge_then_major_reversal |
-| B06-tte | r3_b06_tte_cautious | legacy_active_vouchers | -752.886 | 11725.777 | 59700 | -12478.663 | 0.426 | edge_then_major_reversal |
-| B01-base | r3_b01_delta1_baseline | legacy_delta1 | -6414.711 | 5007.500 | 34100 | -11422.211 | 0.303 | edge_then_major_reversal |
-| B07-hedge | r3_b07_delta_hedge | legacy_active_vouchers | -1275.997 | 9016.926 | 59600 | -10292.923 | 0.437 | edge_then_major_reversal |
-| L17 | probe_l17_active_5100_5300_residual | wave1_active | -7620.939 | 1850.436 | 59600 | -9471.375 | 0.187 | edge_then_major_reversal |
-| L13 | probe_l13_active_5100_residual | wave1_active | -6956.580 | 1722.176 | 59600 | -8678.756 | 0.037 | edge_then_major_reversal |
-| L16 | probe_l16_active_5000_5300_residual | wave1_active | -1837.049 | 2042.844 | 23600 | -3879.893 | 0.719 | edge_then_major_reversal |
-| C06-base-v01 | candidate_c06_v01_centered_base | corrected_and_legacy_composites | -3008.203 | 793.538 | 59600 | -3801.741 | 0.445 | edge_then_major_reversal |
+### Markout Reading
 
-### Reversal Reading
+- `HYDROGEL_PACK` and `VELVETFRUIT_EXTRACT` remain clean at every horizon.
+- `VEV_4000/4500` are slightly awkward on entry but fine by `10k`, which matches the new “ITM as small overlay” thesis.
+- `VEV_5300` is still the only active strike with a **positive `10k` mean markout** (`0.388`).
+- `VEV_5000`, `VEV_5100`, and `VEV_5200` remain negative at `10k`, with `5200` worst on aggregate.
+- `VEV_5400` is almost flat by `10k`, and `VEV_5500` slightly positive, but those branches are still low-ROI relative to the main decision axes.
 
-- Several legacy voucher/composite bots and several Wave 1 active learners made
-  meaningful money mid-run before collapsing.
-- `probe_l12_active_5000_residual` and `probe_l15_active_5300_residual` are
-  examples of the “edge then reversal” pattern; they are not in the same
-  category as `probe_l26_surface_5200_5300_relval`, which showed almost no
-  positive path at all.
-- This means the next design step should distinguish:
-  - branches with **monetizable entry signal but broken hold / exit / sizing**
-  - branches with **no evidence of usable signal**
+## Focus Comparison: Champion Base, ITM Overlay, `5300`, And Inverse Branches
 
-## Overall Ranking
+| short_id | stem | product | trades | mean_entry_edge_unit | mean_markout_1000_unit | mean_markout_5000_unit | mean_markout_10000_unit |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| W3-15 | candidate_w3_15_delta1_kalman_control | HYDROGEL_PACK | 14 | 7.000 | 6.857 | 6.038 | 9.417 |
+| W3-15 | candidate_w3_15_delta1_kalman_control | VELVETFRUIT_EXTRACT | 28 | 1.607 | 1.714 | 2.038 | 4.560 |
+| W3-23 | candidate_w3_23_delta1_itm_active_combo | HYDROGEL_PACK | 14 | 7.000 | 7.143 | 7.577 | 10.500 |
+| W3-23 | candidate_w3_23_delta1_itm_active_combo | VELVETFRUIT_EXTRACT | 31 | 1.500 | 1.694 | 1.603 | 2.815 |
+| W3-23 | candidate_w3_23_delta1_itm_active_combo | VEV_4000 | 25 | -2.920 | 1.460 | 2.167 | 1.521 |
+| W3-23 | candidate_w3_23_delta1_itm_active_combo | VEV_4500 | 25 | -2.320 | 1.140 | 1.938 | 1.271 |
+| W4-01 | candidate_w4_01_delta1_kalman_control | HYDROGEL_PACK | 14 | 7.000 | 6.857 | 6.038 | 9.417 |
+| W4-01 | candidate_w4_01_delta1_kalman_control | VELVETFRUIT_EXTRACT | 28 | 1.607 | 1.714 | 2.038 | 4.560 |
+| W4-02 | candidate_w4_02_delta1_kalman_retention | HYDROGEL_PACK | 14 | 7.000 | 6.857 | 6.038 | 9.417 |
+| W4-02 | candidate_w4_02_delta1_kalman_retention | VELVETFRUIT_EXTRACT | 28 | 1.607 | 1.714 | 2.038 | 4.560 |
+| W4-03 | candidate_w4_03_delta1_itm_kalman_stack | HYDROGEL_PACK | 14 | 7.000 | 6.857 | 6.038 | 9.417 |
+| W4-03 | candidate_w4_03_delta1_itm_kalman_stack | VELVETFRUIT_EXTRACT | 28 | 1.607 | 1.714 | 2.038 | 4.560 |
+| W4-03 | candidate_w4_03_delta1_itm_kalman_stack | VEV_4000 | 25 | -2.920 | 1.460 | 2.167 | 1.521 |
+| W4-03 | candidate_w4_03_delta1_itm_kalman_stack | VEV_4500 | 25 | -2.320 | 1.140 | 1.938 | 1.271 |
+| W4-04 | candidate_w4_04_delta1_itm_kalman_strict | HYDROGEL_PACK | 14 | 7.000 | 6.857 | 6.038 | 9.417 |
+| W4-04 | candidate_w4_04_delta1_itm_kalman_strict | VELVETFRUIT_EXTRACT | 28 | 1.607 | 1.714 | 2.038 | 4.560 |
+| W4-04 | candidate_w4_04_delta1_itm_kalman_strict | VEV_4000 | 23 | -4.000 | 0.848 | 1.935 | 1.391 |
+| W4-04 | candidate_w4_04_delta1_itm_kalman_strict | VEV_4500 | 23 | -3.130 | 0.717 | 1.804 | 1.196 |
+| W4-05 | candidate_w4_05_5300_selective_control | VEV_5300 | 15 | -1.067 | -0.167 | -1.133 | -0.600 |
+| W4-06 | candidate_w4_06_delta1_5300_selective_overlay | HYDROGEL_PACK | 14 | 7.000 | 6.857 | 6.038 | 9.417 |
+| W4-06 | candidate_w4_06_delta1_5300_selective_overlay | VELVETFRUIT_EXTRACT | 28 | 1.607 | 1.714 | 2.038 | 4.560 |
+| W4-06 | candidate_w4_06_delta1_5300_selective_overlay | VEV_5300 | 5 | -1.100 | -1.100 | -1.800 | -1.900 |
+| W4-07 | candidate_w4_07_delta1_itm_5300_final_stack | HYDROGEL_PACK | 14 | 7.000 | 6.857 | 6.038 | 9.417 |
+| W4-07 | candidate_w4_07_delta1_itm_5300_final_stack | VELVETFRUIT_EXTRACT | 28 | 1.607 | 1.714 | 2.038 | 4.560 |
+| W4-07 | candidate_w4_07_delta1_itm_5300_final_stack | VEV_4000 | 23 | -4.000 | 0.848 | 1.935 | 1.391 |
+| W4-07 | candidate_w4_07_delta1_itm_5300_final_stack | VEV_4500 | 23 | -3.130 | 0.717 | 1.804 | 1.196 |
+| W4-07 | candidate_w4_07_delta1_itm_5300_final_stack | VEV_5300 | 5 | -1.100 | -1.100 | -1.800 | -1.900 |
+| W4-08 | candidate_w4_08_5300_peak_salvage | VEV_5300 | 3 | -1.000 | -2.000 | 1.000 | -1.667 |
+| W4-09 | candidate_w4_09_delta1_5300_peak_overlay | HYDROGEL_PACK | 14 | 7.000 | 6.857 | 6.038 | 9.417 |
+| W4-09 | candidate_w4_09_delta1_5300_peak_overlay | VELVETFRUIT_EXTRACT | 28 | 1.607 | 1.714 | 2.038 | 4.560 |
+| W4-09 | candidate_w4_09_delta1_5300_peak_overlay | VEV_5300 | 3 | -1.000 | -2.000 | 1.000 | -1.667 |
+| W4-12 | candidate_w4_12_5300_trend_comparator | VEV_5300 | 21 | -1.119 | -0.310 | -0.167 | -1.048 |
 
-### Top 12 Runs By Real Platform PnL
+### Focus Reading
 
-| short_id | stem | analysis_bucket | profit | delta1_total | itm_total | active_total | upper_total | learning_verdict |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| B02-resid | r3_b02_itm_residual | legacy_itm_vex | 1409.371 | 1211.906 | 197.464 | 0.000 | 0.000 | strong positive |
-| L06 | probe_l06_delta1_dual_independent | wave1_delta1 | 886.102 | 886.102 | 0.000 | 0.000 | 0.000 | strong positive |
-| B02-anchor | r3_b02_itm_anchor | legacy_itm_vex | 726.893 | 599.500 | 127.393 | 0.000 | 0.000 | strong positive |
-| L01 | probe_l01_hydro_reversion | wave1_delta1 | 556.031 | 556.031 | 0.000 | 0.000 | 0.000 | strong positive |
-| L02 | probe_l02_hydro_imbalance | wave1_delta1 | 537.656 | 537.656 | 0.000 | 0.000 | 0.000 | strong positive |
-| L05 | probe_l05_vex_imbalance | wave1_delta1 | 446.387 | 446.387 | 0.000 | 0.000 | 0.000 | positive |
-| L10 | probe_l10_itm_pair_plus_vex | wave1_itm | 326.151 | 332.461 | -6.310 | 0.000 | 0.000 | positive |
-| L04 | probe_l04_vex_reversion | wave1_delta1 | 309.613 | 309.613 | 0.000 | 0.000 | 0.000 | positive |
-| L25 | probe_l25_vex_plus_5300 | wave1_active | 115.857 | 332.461 | 0.000 | -216.604 | 0.000 | positive |
-| D01-logger | baseline_state_logger | diagnostic | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | near flat |
-| L24 | probe_l24_upper_5400_5500_passive | wave1_upper | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | near flat |
-| L07 | probe_l07_itm_4000_residual | wave1_itm | -3.155 | 0.000 | -3.155 | 0.000 | 0.000 | near flat |
+- `W4-01` and `W4-02` show whether the champion remains strong without leaning on any voucher branch.
+- `W4-03` and `W4-04` show whether ITM still adds cleanly on the stronger Kalman base or whether the old uplift was tied to the older stack shape.
+- `W4-05`, `W4-06`, `W4-07`, and `W4-12` tell us whether `5300` belongs as a standalone filtered branch, a micro-overlay, or nowhere in the final architecture.
+- `W4-08` and `W4-09` should be read as the first direct answer to the user's core question: can we preserve any of the old huge upside without reopening the old self-destructive continuation pattern?
+- `W4-10` is closure quality only; if it still did not trade `VEV_5100`, that branch should be considered exhausted for final-wave purposes.
 
-### Worst 10 Runs By Real Platform PnL
+## Wave 4 Decision Board
 
-| short_id | stem | analysis_bucket | profit | delta1_total | itm_total | active_total | upper_total | learning_verdict |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| C06-inv-v01 | candidate_c06_composite_inv | corrected_and_legacy_composites | -5245.475 | 599.500 | 0.000 | -5844.975 | 0.000 | strong negative |
-| L14 | probe_l14_active_5200_residual | wave1_active | -5900.712 | 0.000 | 0.000 | -5900.712 | 0.000 | strong negative |
-| L18 | probe_l18_active_5200_5300_residual | wave1_active | -6078.315 | 0.000 | 0.000 | -6078.315 | 0.000 | strong negative |
-| B01-base | r3_b01_delta1_baseline | legacy_delta1 | -6414.711 | -6414.711 | 0.000 | 0.000 | 0.000 | strong negative |
-| L13 | probe_l13_active_5100_residual | wave1_active | -6956.580 | 0.000 | 0.000 | -6956.580 | 0.000 | strong negative |
-| L17 | probe_l17_active_5100_5300_residual | wave1_active | -7620.939 | 0.000 | 0.000 | -7620.939 | 0.000 | strong negative |
-| L19 | probe_l19_active_5000_5100_5300_residual | wave1_active | -9241.385 | 0.000 | 0.000 | -9241.385 | 0.000 | strong negative |
-| L26 | probe_l26_surface_5200_5300_relval | wave1_surface | -10739.712 | 0.000 | 0.000 | -10739.712 | 0.000 | strong negative |
-| B01-opt | r3_b01_delta1_optiver | legacy_delta1 | -20402.156 | -20402.156 | 0.000 | 0.000 | 0.000 | strong negative |
-| B05-adv | r3_b05_composite_advanced | legacy_active_vouchers | -25333.769 | -22856.344 | 0.000 | -2477.425 | 0.000 | strong negative |
+Promote count: `5`. Rescue count: `3`. Close count: `3`. Not-cleanly-tested count: `1`.
 
-## Strategy / Bot / Performance Linkage
+| short_id | stem | analysis_bucket | profit | path_peak | path_end_from_peak | overlay_vs_delta1 | mean_markout_10000_unit | cf_gain_vs_final_retain_75 | own_trades | exec_symbols | next_action |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| W4-03 | candidate_w4_03_delta1_itm_kalman_stack | wave4_itm_finalists | 1606.305 | 2404.709 | -798.404 | 79.000 | 3.459 | 185.133 | 92 | HYDROGEL_PACK,VELVETFRUIT_EXTRACT,VEV_4000,VEV_4500 | promote |
+| W4-04 | candidate_w4_04_delta1_itm_kalman_strict | wave4_itm_finalists | 1604.305 | 2418.062 | -813.758 | 77.000 | 3.452 | 185.133 | 88 | HYDROGEL_PACK,VELVETFRUIT_EXTRACT,VEV_4000,VEV_4500 | promote |
+| W4-02 | candidate_w4_02_delta1_kalman_retention | wave4_delta1_finalists | 1527.305 | 2341.062 | -813.758 | 0.000 | 6.135 | 227.629 | 42 | HYDROGEL_PACK,VELVETFRUIT_EXTRACT | promote |
+| W4-01 | candidate_w4_01_delta1_kalman_control | wave4_delta1_finalists | 1527.305 | 2341.062 | -813.758 | 0.000 | 6.135 | 227.629 | 42 | HYDROGEL_PACK,VELVETFRUIT_EXTRACT | promote |
+| W4-11 | candidate_w4_11_delta1_kalman_stress_control | wave4_delta1_finalists | 1455.767 | 2276.125 | -820.358 | 0.000 | 6.676 | 235.444 | 39 | HYDROGEL_PACK,VELVETFRUIT_EXTRACT | promote |
+| W4-07 | candidate_w4_07_delta1_itm_5300_final_stack | wave4_5300_finalists | 1596.305 | 2410.062 | -813.758 | 69.000 | 3.148 | 185.133 | 93 | HYDROGEL_PACK,VELVETFRUIT_EXTRACT,VEV_4000,VEV_4500,VEV_5300 | rescue |
+| W4-09 | candidate_w4_09_delta1_5300_peak_overlay | wave4_peak_salvage | 1521.305 | 2335.062 | -813.758 | -6.000 | 5.550 | 227.629 | 45 | HYDROGEL_PACK,VELVETFRUIT_EXTRACT,VEV_5300 | rescue |
+| W4-06 | candidate_w4_06_delta1_5300_selective_overlay | wave4_5300_finalists | 1511.305 | 2325.062 | -813.758 | -16.000 | 5.179 | 227.629 | 47 | HYDROGEL_PACK,VELVETFRUIT_EXTRACT,VEV_5300 | rescue |
+| W4-10 | candidate_w4_10_5100_inverse_forced | wave4_inverse_closure | 0.000 | 0.000 | 0.000 |  |  | 0.000 | 0 |  | not_cleanly_tested |
+| W4-08 | candidate_w4_08_5300_peak_salvage | wave4_peak_salvage | -12.000 | 0.000 | -12.000 |  | -1.667 | 0.000 | 3 | VEV_5300 | close |
+| W4-05 | candidate_w4_05_5300_selective_control | wave4_5300_finalists | -91.000 | 0.000 | -91.000 |  | -0.600 | 0.000 | 15 | VEV_5300 | close |
+| W4-12 | candidate_w4_12_5300_trend_comparator | wave4_5300_finalists | -107.000 | 43.039 | -150.039 |  | -1.048 | 136.613 | 21 | VEV_5300 | close |
 
-This table links each saved performance artifact back to the bot family and the
-main hypothesis it was testing.
+### Decision Reading
 
-| short_id | stem | era | candidate_family | product_scope | profit | learning_verdict |
-| --- | --- | --- | --- | --- | --- | --- |
-| C06-base-v01 | candidate_c06_v01_centered_base | corrected | corrected centered composite | HYDRO + VEX + VEV_5000-5300 | -3008.203 | strong negative |
-| C06-inv-v01 | candidate_c06_composite_inv | corrected | corrected centered composite inventory | HYDRO + VEX + VEV_5000-5300 | -5245.475 | strong negative |
-| D01-logger | baseline_state_logger | diagnostic | diagnostic logger | all round_3 products | 0.000 | near flat |
-| B02-resid | r3_b02_itm_residual | legacy | legacy itm residual composite | HYDRO + VEX + VEV_4000-4500 | 1409.371 | strong positive |
-| B02-anchor | r3_b02_itm_anchor | legacy | legacy itm anchor composite | VEX + VEV_4000-4500 | 726.893 | strong positive |
-| B06-tte | r3_b06_tte_cautious | legacy | legacy tte cautious | VEX + VEV_5000-5300 | -752.886 | negative |
-| B07-hedge | r3_b07_delta_hedge | legacy | legacy delta hedge | VEX + VEV_5000-5300 | -1275.997 | negative |
-| B08-regime | r3_b08_regime_composite | legacy | legacy regime composite | VEX + VEV_5000-5300 | -1501.925 | negative |
-| C06-legacy | candidate_c06_composite_base | legacy | legacy composite raw residual | HYDRO + VEX + VEV_5000-5300 | -1631.925 | negative |
-| B03-pure | r3_b03_voucher_pure | legacy | legacy active voucher pure | VEV_5000-5300 | -2261.849 | strong negative |
-| B04-surf | r3_b04_full_surface | legacy | legacy full surface composite | VEX + VEV_4000-5500 | -2561.846 | strong negative |
-| B01-base | r3_b01_delta1_baseline | legacy | legacy delta1 baseline | HYDRO + VEX | -6414.711 | strong negative |
-| B01-opt | r3_b01_delta1_optiver | legacy | legacy delta1 optiver | HYDRO + VEX | -20402.156 | strong negative |
-| B05-adv | r3_b05_composite_advanced | legacy | legacy advanced composite | HYDRO + VEX + VEV_5000-5300 | -25333.769 | strong negative |
-| L06 | probe_l06_delta1_dual_independent | wave1_probe | delta1 dual combo | HYDRO + VEX | 886.102 | strong positive |
-| L01 | probe_l01_hydro_reversion | wave1_probe | delta1 reversion | HYDRO | 556.031 | strong positive |
-| L02 | probe_l02_hydro_imbalance | wave1_probe | delta1 imbalance | HYDRO | 537.656 | strong positive |
-| L05 | probe_l05_vex_imbalance | wave1_probe | delta1 imbalance | VEX | 446.387 | positive |
-| L10 | probe_l10_itm_pair_plus_vex | wave1_probe | itm residual plus vex | VEX + VEV_4000 + VEV_4500 | 326.151 | positive |
-| L04 | probe_l04_vex_reversion | wave1_probe | delta1 reversion | VEX | 309.613 | positive |
-| L25 | probe_l25_vex_plus_5300 | wave1_probe | vex plus active best strike | VEX + VEV_5300 | 115.857 | positive |
-| L24 | probe_l24_upper_5400_5500_passive | wave1_probe | upper passive maker | VEV_5400 + VEV_5500 | 0.000 | near flat |
-| L07 | probe_l07_itm_4000_residual | wave1_probe | itm residual | VEV_4000 | -3.155 | near flat |
-| L08 | probe_l08_itm_4500_residual | wave1_probe | itm residual | VEV_4500 | -3.155 | near flat |
-| L09 | probe_l09_itm_pair_residual | wave1_probe | itm residual pair | VEV_4000 + VEV_4500 | -6.310 | near flat |
-| L15 | probe_l15_active_5300_residual | wave1_probe | active residual | VEV_5300 | -216.604 | mild negative |
-| L22 | probe_l22_upper_5500_residual | wave1_probe | upper residual | VEV_5500 | -320.792 | mild negative |
-| L21 | probe_l21_upper_5400_residual | wave1_probe | upper residual | VEV_5400 | -446.830 | mild negative |
-| L23 | probe_l23_upper_5400_5500_residual | wave1_probe | upper residual pair | VEV_5400 + VEV_5500 | -767.622 | negative |
-| L27 | probe_l27_surface_5300_5400_relval | wave1_probe | surface relative value | VEV_5300 + VEV_5400 | -989.622 | negative |
-| L20 | probe_l20_active_5000_5300_inventory | wave1_probe | active residual inventory subset | VEV_5000 + VEV_5300 | -1443.986 | negative |
-| L12 | probe_l12_active_5000_residual | wave1_probe | active residual | VEV_5000 | -1715.952 | negative |
-| L16 | probe_l16_active_5000_5300_residual | wave1_probe | active residual subset | VEV_5000 + VEV_5300 | -1837.049 | negative |
-| L14 | probe_l14_active_5200_residual | wave1_probe | active residual | VEV_5200 | -5900.712 | strong negative |
-| L18 | probe_l18_active_5200_5300_residual | wave1_probe | active residual subset | VEV_5200 + VEV_5300 | -6078.315 | strong negative |
-| L13 | probe_l13_active_5100_residual | wave1_probe | active residual | VEV_5100 | -6956.580 | strong negative |
-| L17 | probe_l17_active_5100_5300_residual | wave1_probe | active residual subset | VEV_5100 + VEV_5300 | -7620.939 | strong negative |
-| L19 | probe_l19_active_5000_5100_5300_residual | wave1_probe | active residual subset | VEV_5000 + VEV_5100 + VEV_5300 | -9241.385 | strong negative |
-| L26 | probe_l26_surface_5200_5300_relval | wave1_probe | surface relative value | VEV_5200 + VEV_5300 | -10739.712 | strong negative |
-
-## Family Summary
-
-| analysis_bucket | runs | mean_profit | median_profit | best_profit | worst_profit | mean_delta1 | mean_itm | mean_active | mean_upper | mean_own_trades |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| legacy_itm_vex | 2 | 1068.132 | 1068.132 | 1409.371 | 726.893 | 905.703 | 162.428 | 0.000 | 0.000 | 0.000 |
-| wave1_delta1 | 5 | 547.158 | 537.656 | 886.102 | 309.613 | 547.158 | 0.000 | 0.000 | 0.000 | 30.600 |
-| wave1_itm | 4 | 78.383 | -3.155 | 326.151 | -6.310 | 83.115 | -4.732 | 0.000 | 0.000 | 39.500 |
-| diagnostic | 1 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
-| wave1_upper | 4 | -383.811 | -383.811 | 0.000 | -767.622 | 0.000 | 0.000 | 0.000 | -383.811 | 360.500 |
-| corrected_and_legacy_composites | 3 | -3295.201 | -3008.203 | -1631.925 | -5245.475 | 599.500 | 0.000 | -3894.701 | 0.000 | 243.667 |
-| wave1_active | 10 | -4089.567 | -3868.880 | 115.857 | -9241.385 | 33.246 | 0.000 | -4122.813 | 0.000 | 533.500 |
-| legacy_active_vouchers | 6 | -5614.712 | -1881.887 | -752.886 | -25333.769 | -3680.046 | 53.133 | -1954.628 | -33.171 | 0.000 |
-| wave1_surface | 2 | -5864.667 | -5864.667 | -989.622 | -10739.712 | 0.000 | 0.000 | -4943.721 | -920.946 | 464.000 |
-| legacy_delta1 | 2 | -13408.434 | -13408.434 | -6414.711 | -20402.156 | -13408.434 | 0.000 | 0.000 | 0.000 | 0.000 |
-
-### Reading The Family Table
-
-- `wave1_delta1` is decisively positive: mean PnL `547.158`.
-- `wave1_itm` is basically flat to slightly negative on its own: mean PnL `78.383`.
-- `wave1_active` is still clearly negative even after strike isolation: mean PnL `-4089.567`.
-- `wave1_upper` is negative in directional residual form: mean PnL `-383.811`.
-- `wave1_surface` is the weakest new experimental family after the toxic active strikes: mean PnL `-5864.667`.
-
-## EDA / Understanding Scorecard
-
-| Original EDA / Understanding Claim | Current Verdict From Runs | Evidence |
-| --- | --- | --- |
-| `HYDROGEL_PACK` should be treated as a separate branch. | validated strongly | `L01 = +556.031`, `L02 = +537.656`, `L06` also positive; hydro weakness was not a product-level death sentence. |
-| `VELVETFRUIT_EXTRACT` is the natural anchor and a tradable standalone delta-1 product. | validated strongly | `L04 = +309.613`, `L05 = +446.387`, `L06 = +886.102`; VEX is also positive inside the corrected challengers and `L25`. |
-| `VEV_5000-5300` is the best first-wave active option scope. | weakened / contradicted | No pure active Wave 1 learner finished positive; `L15` (`VEV_5300`) was the least bad at `-216.604`, while `VEV_5100` and `VEV_5200` were disastrous. |
-| `VEV_4000/4500` should be useful but were not first-wave execution leaders. | partially validated | Pure ITM probes were near-flat (`L07`, `L08`, `L09`), not winners; the positive live result is `L10`, but that comes mostly from the VEX leg. |
-| `VEV_5400/5500` are execution-sensitive and should only be reopened carefully. | validated with caution | Directional residual upper bots lost money (`L21`, `L22`, `L23`); passive upper (`L24`) produced zero trades and zero PnL. |
-| `VEV_6000/6500` should stay excluded. | validated strongly | Logger still shows the floor regime, and no profitable evidence has emerged there. |
-| Surface-relative features may help when absolute residual is noisy. | not validated in current implementation | `L26 = -10739.712`, `L27 = -989.622`; local surface spreads are not rescuing the voucher branch in their current form. |
-
-## Branch-by-Branch Analysis
-
-### 1. Delta-1 Branch: Best Live Learning Outcome
-
-Wave 1 changed the picture materially:
-
-- `L01` (`HYDRO` reversion) finished at `+556.031`.
-- `L02` (`HYDRO` imbalance) finished at `+537.656`.
-- `L04` (`VEX` reversion) finished at `+309.613`.
-- `L05` (`VEX` imbalance) finished at `+446.387`.
-- `L06` (`HYDRO + VEX`) finished at `+886.102`.
-
-Interpretation:
-
-- The clean isolated delta-1 logic works much better than the old legacy pair
-  makers.
-- HYDRO is not rejected; the earlier negative evidence was mostly about
-  implementation style and composite interactions.
-- VEX remains useful both as a standalone edge and as the best anchor leg for
-  any later voucher strategy.
-
-### 2. ITM Branch: Low-Risk Add-On, Not Yet A Standalone Winner
-
-Wave 1 ITM results:
-
-- `L07` (`VEV_4000`) = `-3.155`
-- `L08` (`VEV_4500`) = `-3.155`
-- `L09` (`VEV_4000 + VEV_4500`) = `-6.310`
-- `L10` (`VEX + VEV_4000 + VEV_4500`) = `+326.151`
-
-Interpretation:
-
-- Pure ITM residual trading is basically flat on the live `TTE=5d` day.
-- The historical ITM/VEX winners were already mostly delta-1 driven:
-  `B02-resid` had `delta1 = +1211.906` versus `itm = +197.464`;
-  `B02-anchor` had `delta1 = +599.500` versus `itm = +127.393`.
-- This means ITM is still useful, but more as a **low-damage optional add-on**
-  than as the main alpha engine.
-
-### 3. Active Voucher Branch: Still The Main Problem Area
-
-Wave 1 active-only results:
-
-- `L12` (`VEV_5000`) = `-1715.952`
-- `L13` (`VEV_5100`) = `-6956.580`
-- `L14` (`VEV_5200`) = `-5900.712`
-- `L15` (`VEV_5300`) = `-216.604`
-- `L16` (`VEV_5000 + VEV_5300`) = `-1837.049`
-- `L17` (`VEV_5100 + VEV_5300`) = `-7620.939`
-- `L18` (`VEV_5200 + VEV_5300`) = `-6078.315`
-- `L19` (`VEV_5000 + VEV_5100 + VEV_5300`) = `-9241.385`
-- `L20` (`VEV_5000 + VEV_5300` + inventory) = `-1443.986`
-- `L25` (`VEX + VEV_5300`) = `+115.857`, with the VEX leg contributing `+332.461` and the `VEV_5300` leg `-216.604`.
-
-Interpretation:
-
-- `VEV_5100` and `VEV_5200` should now be treated as default rejects until
-  very strong contradictory evidence appears.
-- `VEV_5300` is still the **least-bad** active strike and looks useful in
-  relative terms, but it is not a standalone positive alpha yet.
-- `VEV_5000` is not good, but it is materially less toxic than `VEV_5100` /
-  `VEV_5200`.
-- Inventory helped once the basket was cleaned:
-  `L20` beat `L16` by about `393.063`, even though the broad C06 inventory
-  overlay had previously failed.
-
-### 4. Upper Strikes: Reopened, But Not Yet Monetized
-
-Wave 1 upper results:
-
-- `L21` (`VEV_5400`) = `-446.830`
-- `L22` (`VEV_5500`) = `-320.792`
-- `L23` (`VEV_5400 + VEV_5500`) = `-767.622`
-- `L24` (passive `VEV_5400 + VEV_5500`) = `0.000` with `0` own trades
-
-Interpretation:
-
-- The logger was right that these strikes move and have tight spreads.
-- But that did **not** translate into profitable directional residual trading.
-- Passive-only execution avoided loss, but also got no fills.
-- The upper branch is therefore still open as a research branch, but it is
-  not close to promotion.
-
-### 5. Surface Relative Value: Useful Diagnostic, Bad Current Trader
-
-Wave 1 surface results:
-
-- `L26` (`VEV_5200 vs VEV_5300`) = `-10739.712`
-- `L27` (`VEV_5300 vs VEV_5400`) = `-989.622`
-
-Interpretation:
-
-- `L26` is especially informative: final positions were small, but the PnL was
-  catastrophically negative, which points to **realized adverse selection /
-  signal error**, not just terminal inventory mark.
-- `L27` is less bad, and the `VEV_5300` side was actually positive, but the
-  `VEV_5400` side dominated the loss.
-- So the current surface-pair implementation should be treated as a diagnostic
-  failure mode, not as a candidate family to scale immediately.
+- **Promote now** means “candidate for the next near-final winner batch”.
+- **Rescue** means “keep only if it is specifically an upside-distillation / retention experiment”.
+- **Close** means “do not spend another normal finalist slot on it”.
+- The purpose of this board is not to crown the winner yet. It is to decide which branches deserve the final exploitation wave.
 
 ## Product-Level Realized Summary
 
-| product | nonzero_runs | positive_runs | negative_runs | mean_pnl | best_pnl | worst_pnl | wave1_nonzero_runs | wave1_positive_runs | wave1_negative_runs | wave1_mean_pnl |
+| product | nonzero_runs | positive_runs | negative_runs | mean_pnl | best_pnl | worst_pnl | wave3_nonzero_runs | wave3_mean_pnl | wave4_nonzero_runs | wave4_mean_pnl |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| HYDROGEL_PACK | 14 | 3 | 11 | -2443.376 | 556.031 | -14249.344 | 3 | 3 | 0 | 549.109 |
-| VELVETFRUIT_EXTRACT | 17 | 14 | 3 | -451.722 | 1240.906 | -8913.188 | 5 | 5 | 0 | 350.677 |
-| VEV_4000 | 6 | 3 | 3 | 54.477 | 159.398 | -3.155 | 3 | 0 | 3 | -3.155 |
-| VEV_4500 | 6 | 3 | 3 | 49.644 | 159.398 | -3.155 | 3 | 0 | 3 | -3.155 |
-| VEV_5000 | 13 | 2 | 11 | -1026.880 | 48.814 | -1935.734 | 4 | 0 | 4 | -1645.949 |
-| VEV_5100 | 12 | 1 | 11 | -2176.873 | 121.293 | -7404.336 | 3 | 0 | 3 | -7255.084 |
-| VEV_5200 | 12 | 1 | 11 | -3059.117 | 383.738 | -11205.903 | 3 | 0 | 3 | -7656.109 |
-| VEV_5300 | 18 | 12 | 6 | 91.882 | 852.269 | -216.604 | 9 | 3 | 6 | 22.423 |
-| VEV_5400 | 4 | 0 | 4 | -697.446 | -54.231 | -1841.891 | 3 | 0 | 3 | -911.850 |
-| VEV_5500 | 3 | 0 | 3 | -262.125 | -144.792 | -320.792 | 2 | 0 | 2 | -320.792 |
-| VEV_6000 | 0 | 0 | 0 |  |  |  | 0 | 0 | 0 |  |
-| VEV_6500 | 0 | 0 | 0 |  |  |  | 0 | 0 | 0 |  |
-
-### Product-Level Reading
-
-- `HYDROGEL_PACK` and `VELVETFRUIT_EXTRACT` now have real positive standalone
-  evidence in Wave 1.
-- `VEV_4000` / `VEV_4500` are low-damage, low-fill, near-flat live products.
-- `VEV_5000` is weak but not hopeless.
-- `VEV_5100` and `VEV_5200` are the strongest current negative evidence in the
-  voucher family.
-- `VEV_5300` is viable only as a relative or combo leg for now, not as a
-  standalone winner.
-- `VEV_5400/5500` are tradable enough to test, but not yet good enough to
-  promote.
-
-## Execution Diagnostics From `tradeHistory`
-
-| short_id | stem | profit | own_trades | buy_qty | sell_qty | max_abs_exec_position | active_limit_hits | upper_limit_hits | final_active_position_abs | final_upper_position_abs | exec_symbols |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| L06 | probe_l06_delta1_dual_independent | 886.102 | 49 | 112 | 137 | 24.000 | 0 | 0 | 0 | 0 | HYDROGEL_PACK,VELVETFRUIT_EXTRACT |
-| L10 | probe_l10_itm_pair_plus_vex | 326.151 | 74 | 162 | 173 | 24.000 | 0 | 0 | 0 | 0 | VELVETFRUIT_EXTRACT,VEV_4000,VEV_4500 |
-| L24 | probe_l24_upper_5400_5500_passive | 0.000 | 0 | 0 | 0 | 0.000 | 0 | 0 | 0 | 0 |  |
-| L15 | probe_l15_active_5300_residual | -216.604 | 631 | 2716 | 2431 | 300.000 | 0 | 0 | 285 | 0 | VEV_5300 |
-| L20 | probe_l20_active_5000_5300_inventory | -1443.986 | 614 | 2631 | 2460 | 300.000 | 0 | 0 | 259 | 0 | VEV_5000,VEV_5300 |
-| L26 | probe_l26_surface_5200_5300_relval | -10739.712 | 670 | 3159 | 3154 | 300.000 | 0 | 0 | 17 | 0 | VEV_5200,VEV_5300 |
-
-### Execution Reading
-
-- Delta-1 winners (`L01`, `L02`, `L04`, `L05`, `L06`) achieved positive PnL
-  with relatively low trade counts. That is a good sign for signal cleanliness.
-- The active learners often traded **a lot** and still lost badly. This pushes
-  the diagnosis toward signal quality / selection problems, not simple lack of
-  fills.
-- `L15` (`VEV_5300`) traded heavily and still only lost `-216.604`, which is
-  why it remains the best active-strike survivor.
-- `L24` confirms that the upper passive branch, in its current form, is too
-  timid to get matched.
+| HYDROGEL_PACK | 31 | 20 | 11 | -675.849 | 994.844 | -14249.344 | 6 | 650.723 | 8 | 994.844 |
+| VELVETFRUIT_EXTRACT | 44 | 41 | 3 | 76.408 | 1240.906 | -8913.188 | 13 | 365.051 | 8 | 523.519 |
+| VEV_4000 | 12 | 9 | 3 | 50.239 | 159.398 | -3.155 | 3 | 48.667 | 3 | 43.333 |
+| VEV_4500 | 12 | 9 | 3 | 41.405 | 159.398 | -3.155 | 3 | 32.000 | 3 | 34.333 |
+| VEV_5000 | 20 | 2 | 18 | -899.455 | 48.814 | -1935.734 | 2 | -295.610 | 0 |  |
+| VEV_5100 | 13 | 1 | 12 | -2052.036 | 121.293 | -7404.336 | 0 |  | 0 |  |
+| VEV_5200 | 13 | 1 | 12 | -2911.031 | 383.738 | -11205.903 | 0 |  | 0 |  |
+| VEV_5300 | 47 | 15 | 32 | -633.204 | 852.269 | -5019.000 | 13 | -527.660 | 6 | -40.000 |
+| VEV_5400 | 7 | 3 | 4 | -397.770 | 1.798 | -1841.891 | 0 |  | 0 |  |
+| VEV_5500 | 3 | 0 | 3 | -262.125 | -144.792 | -320.792 | 0 |  | 0 |  |
+| VEV_6000 | 0 | 0 | 0 |  |  |  | 0 |  | 0 |  |
+| VEV_6500 | 0 | 0 | 0 |  |  |  | 0 |  | 0 |  |
 
 ## What Worked
 
-- Clean delta-1 microstructure on both `HYDROGEL_PACK` and `VELVETFRUIT_EXTRACT`.
-- VEX as a sidecar / anchor leg in mixed bots.
-- Using inventory as a secondary cleaner on a reduced active subset.
-- Excluding `VEV_6000/6500`; nothing in the new evidence argues for reopening them.
-- Identifying that some active-voucher bots do have **mid-run edge**, even if
-  they currently fail to retain it.
+- Clean delta-1 on `HYDROGEL_PACK` and `VELVETFRUIT_EXTRACT`.
+- Kalman-style smoothing on top of the clean delta-1 base.
+- Active ITM as a small additive overlay when attached to the base.
+- Selective `5300` filtering when aggressively narrowed and tied to better state selection.
+- Using the old `>10k` runs as **retention design evidence** rather than as a ready-made architecture.
 
 ## What Did Not Work
 
-- Broad active voucher baskets, even after centered-residual correction.
-- `VEV_5100` and `VEV_5200` as default active strikes.
-- Treating `VEV_5300` as a standalone promoted winner just because it was the
-  least-bad strike inside earlier composites.
-- Directional upper-strike residual trading.
-- Current surface-pair implementations.
-- Interpreting every negative final run as “no signal”; the path analysis now
-  shows that this was too crude for several active-voucher experiments.
+- Broad active-voucher baskets as promotable architecture.
+- Treating `5000/5100/5200` as normal active-reversion strikes.
+- Assuming raw huge peaks were enough evidence by themselves.
+- Using inverse diagnostics as evidence when the target inverse leg did not even trade.
+- Expecting Wave 4 finalist hygiene alone to recreate the old giant peaks. Cleanliness helped quality, but it also compressed upside.
 
-## What We Still Do Not Know
+## Analytical Consequence
 
-- Whether the best next bot should be **delta-1 only** or **delta-1 plus a very
-  selective voucher add-on**.
-- Whether ITM is worth keeping as a low-risk add-on once execution is tuned, or
-  whether VEX alone captures most of that upside more simply.
-- Whether `VEV_5000 + VEV_5300` can become viable with better anchoring,
-  tighter execution, or stronger inventory discipline.
-- Whether the upper branch can ever do better than zero-fill passive quoting
-  without becoming structurally lossy.
-- Whether the best way to rescue selective active vouchers is with **shorter
-  holding periods / faster profit capture** rather than better long-horizon
-  fair value estimates.
+The next step should now be a **winner-focused exploitation pass**, not another broad exploratory wave.
 
-## Recommended Questions Before Wave 2 Strategy Design
+The next spec should answer:
 
-These are **analysis-driven next questions**, not yet implementation orders.
-
-1. Should the next champion family be delta-1 first, with vouchers demoted to optional add-ons?
-2. Is the right voucher follow-up a `VEX + 5000/5300` style combo rather than any pure voucher basket?
-3. Should `VEV_5100` and `VEV_5200` now be formally moved from “active scope” to “excluded unless rescued”?
-4. Is ITM best framed as an execution-light addon rather than a main branch?
-5. Does the next surface work need a different execution style entirely, or should that branch be paused?
+1. Is the near-final base `W3-15`, `W4-01`, `W4-02`, `W4-03`, or `W4-04`?
+2. Does any `5300` branch still deserve a final overlay slot after Wave 4?
+3. Which pruned, VEX-anchored descendants of the old `>10k` paths deserve the last upside-distillation slots?
+4. Which simple online retention rules from the `>10k` counterfactual study are worth converting into real logic without overfitting?
 
 ## Artifacts
 
 - [`artifacts/full_synthesis/full_run_metrics.csv`](artifacts/full_synthesis/full_run_metrics.csv)
+- [`artifacts/full_synthesis/full_family_summary.csv`](artifacts/full_synthesis/full_family_summary.csv)
 - [`artifacts/full_synthesis/full_path_family_summary.csv`](artifacts/full_synthesis/full_path_family_summary.csv)
 - [`artifacts/full_synthesis/full_path_reversal_candidates.csv`](artifacts/full_synthesis/full_path_reversal_candidates.csv)
 - [`artifacts/full_synthesis/full_product_attribution.csv`](artifacts/full_synthesis/full_product_attribution.csv)
-- [`artifacts/full_synthesis/full_family_summary.csv`](artifacts/full_synthesis/full_family_summary.csv)
 - [`artifacts/full_synthesis/full_execution_metrics.csv`](artifacts/full_synthesis/full_execution_metrics.csv)
 - [`artifacts/full_synthesis/full_strategy_run_mapping.csv`](artifacts/full_synthesis/full_strategy_run_mapping.csv)
 - [`artifacts/full_synthesis/full_wave1_probe_summary.csv`](artifacts/full_synthesis/full_wave1_probe_summary.csv)
-
-## Handoff
-
-- This synthesis supersedes the earlier “waiting for Wave 1 runs” state.
-- The next useful step is **not another blind run batch**. It is to redesign
-  the next strategy wave using this evidence, especially the delta-1 recovery
-  and the voucher-family split between survivable and toxic strikes.
+- [`artifacts/full_synthesis/full_wave2_probe_summary.csv`](artifacts/full_synthesis/full_wave2_probe_summary.csv)
+- [`artifacts/full_synthesis/full_wave3_probe_summary.csv`](artifacts/full_synthesis/full_wave3_probe_summary.csv)
+- [`artifacts/full_synthesis/full_wave4_probe_summary.csv`](artifacts/full_synthesis/full_wave4_probe_summary.csv)
+- [`artifacts/full_synthesis/full_high_peak_gt5k_runs.csv`](artifacts/full_synthesis/full_high_peak_gt5k_runs.csv)
+- [`artifacts/full_synthesis/full_high_peak_gt10k_runs.csv`](artifacts/full_synthesis/full_high_peak_gt10k_runs.csv)
+- [`artifacts/full_synthesis/full_high_peak_gt5k_product_giveback.csv`](artifacts/full_synthesis/full_high_peak_gt5k_product_giveback.csv)
+- [`artifacts/full_synthesis/full_high_peak_gt10k_product_giveback.csv`](artifacts/full_synthesis/full_high_peak_gt10k_product_giveback.csv)
+- [`artifacts/full_synthesis/full_no_trade_candidates.csv`](artifacts/full_synthesis/full_no_trade_candidates.csv)
+- [`artifacts/full_synthesis/full_trade_markout_by_product.csv`](artifacts/full_synthesis/full_trade_markout_by_product.csv)
+- [`artifacts/full_synthesis/full_trade_markout_by_run_product.csv`](artifacts/full_synthesis/full_trade_markout_by_run_product.csv)
+- [`artifacts/full_synthesis/full_wave3_decision_board.csv`](artifacts/full_synthesis/full_wave3_decision_board.csv)
+- [`artifacts/full_synthesis/full_wave4_decision_board.csv`](artifacts/full_synthesis/full_wave4_decision_board.csv)
+- [`artifacts/full_synthesis/full_peak_profiles.csv`](artifacts/full_synthesis/full_peak_profiles.csv)

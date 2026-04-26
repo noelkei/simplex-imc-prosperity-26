@@ -1,0 +1,8 @@
+short_id,stem,analysis_bucket,profit,path_peak,path_peak_ts,path_peak_time_frac,path_end_from_peak,delta1_total,active_total,post_peak_ratio,path_shape
+B08-regime,r3_b08_regime_composite,legacy_active_vouchers,-1501.9248046875,17478.21435546875,59700,0.5975975975975976,-18980.13916015625,599.5,-2101.4248046875,,edge_then_major_reversal
+C06-legacy,candidate_c06_composite_base,corrected_and_legacy_composites,-1631.9248046875,17348.21435546875,59700,0.5975975975975976,-18980.13916015625,599.5,-2231.4248046875,,edge_then_major_reversal
+B04-surf,r3_b04_full_surface,legacy_active_vouchers,-2561.846435546875,15838.492919921875,59700,0.5975975975975976,-18400.33935546875,599.5,-3281.1201171875,,edge_then_major_reversal
+B03-pure,r3_b03_voucher_pure,legacy_active_vouchers,-2261.8486328125,12539.8759765625,59700,0.5975975975975976,-14801.724609375,0.0,-2261.8486328125,,edge_then_major_reversal
+B06-tte,r3_b06_tte_cautious,legacy_active_vouchers,-752.8857421875,11725.77685546875,59700,0.5975975975975976,-12478.66259765625,599.5,-1352.3857421875,,edge_then_major_reversal
+B07-hedge,r3_b07_delta_hedge,legacy_active_vouchers,-1275.9970703125,9016.92578125,59600,0.5965965965965966,-10292.9228515625,-1022.43359375,-253.5634765625,,edge_then_major_reversal
+B01-base,r3_b01_delta1_baseline,legacy_delta1,-6414.7109375,5007.5,34100,0.34134134134134136,-11422.2109375,-6414.7109375,0.0,,edge_then_major_reversal

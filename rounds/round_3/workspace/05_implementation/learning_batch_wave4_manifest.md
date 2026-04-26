@@ -1,0 +1,23 @@
+# Finalist Batch Wave 4 Manifest
+
+Generated from `generate_learning_batch_wave4.py`.
+
+- Spec: [`../04_strategy_specs/spec_learning_batch_wave4.md`](../04_strategy_specs/spec_learning_batch_wave4.md)
+- Owner: `amin`
+- Batch size: `12`
+- Intent: `winner-focused / final architecture narrowing / closure-quality diagnostics`
+
+| Bot ID | File | Family | Products | Key Axes | Hypothesis |
+| --- | --- | --- | --- | --- | --- |
+| `W4-01` | `../bots/amin/canonical/candidate_w4_01_delta1_kalman_control.py` | champion delta1 kalman control | HYDROGEL_PACK, VELVETFRUIT_EXTRACT | kalman fair, clean champion control | Freeze the current clean champion architecture in final-wave form so every other Wave 4 slot is measured against the real best base we currently have. |
+| `W4-02` | `../bots/amin/canonical/candidate_w4_02_delta1_kalman_retention.py` | champion delta1 with light retention gate | HYDROGEL_PACK, VELVETFRUIT_EXTRACT | kalman fair, light regime retention | A looser state gate than W3-02 may let the champion keep most of its edge while trimming some late low-quality trading and giveback. |
+| `W4-03` | `../bots/amin/canonical/candidate_w4_03_delta1_itm_kalman_stack.py` | champion base plus active itm overlay | HYDROGEL_PACK, VELVETFRUIT_EXTRACT, VEV_4000, VEV_4500 | champion base, active itm overlay | The highest-ROI untested finalist is the W3-23 ITM thesis lifted onto the stronger W3-15 champion base instead of the older delta-1 control stack. |
+| `W4-04` | `../bots/amin/canonical/candidate_w4_04_delta1_itm_kalman_strict.py` | champion base plus strict itm overlay | HYDROGEL_PACK, VELVETFRUIT_EXTRACT, VEV_4000, VEV_4500 | champion base, strict itm gate | If ITM is truly additive, a stricter calmer-state version should stay positive while reducing overlay noise and limiting slippage-sensitive entries. |
+| `W4-05` | `../bots/amin/canonical/candidate_w4_05_5300_selective_control.py` | refined standalone 5300 control | VEV_5300 | imbalance-led 5300, giveback discipline | The best standalone 5300 branch should improve if we keep the W3-17 imbalance idea but pair it with tighter giveback and reentry discipline. |
+| `W4-06` | `../bots/amin/canonical/candidate_w4_06_delta1_5300_selective_overlay.py` | champion base plus tiny selective 5300 | HYDROGEL_PACK, VELVETFRUIT_EXTRACT, VEV_5300 | champion base, micro 5300 overlay | 5300 only deserves final-bot scope if a much smaller W3-17-style overlay can help the champion without meaningfully contaminating base quality. |
+| `W4-07` | `../bots/amin/canonical/candidate_w4_07_delta1_itm_5300_final_stack.py` | champion plus itm plus tiny 5300 final stack | HYDROGEL_PACK, VELVETFRUIT_EXTRACT, VEV_4000, VEV_4500, VEV_5300 | champion base, strict itm overlay, micro 5300 overlay | If 5300 belongs anywhere in final architecture, it should survive as a tiny add-on to the best champion-plus-ITM stack, not as an independent co-base. |
+| `W4-08` | `../bots/amin/canonical/candidate_w4_08_5300_peak_salvage.py` | standalone 5300 peak salvage | VEV_5300 | early window, hard shutdown, peak salvage | The cleanest sustainable descendant of the old >10k paths is a one-strike 5300 salvage bot that stops opening risk early and exits hard once the useful window ends. |
+| `W4-09` | `../bots/amin/canonical/candidate_w4_09_delta1_5300_peak_overlay.py` | champion base plus tiny 5300 peak salvage | HYDROGEL_PACK, VELVETFRUIT_EXTRACT, VEV_5300 | champion base, peak salvage overlay | If any old voucher-led upside is still worth borrowing, the safest place to borrow it is as a tiny early-shutdown 5300 overlay on top of the champion base. |
+| `W4-10` | `../bots/amin/canonical/candidate_w4_10_5100_inverse_forced.py` | forced tradability 5100 inverse closure | VEV_5100 | inverse closure, forced tradability | 5100 should either prove itself as a tiny anti-signal when thresholds are low enough to actually trade, or be closed decisively for final-bot purposes. |
+| `W4-11` | `../bots/amin/canonical/candidate_w4_11_delta1_kalman_stress_control.py` | champion stress-control variant | HYDROGEL_PACK, VELVETFRUIT_EXTRACT | kalman fair, smaller size, stress control | A slightly calmer, smaller, more defensive version of the champion is worth one slot so we do not over-commit to a single lucky sizing/execution shape. |
+| `W4-12` | `../bots/amin/canonical/candidate_w4_12_5300_trend_comparator.py` | trend-led 5300 final comparator | VEV_5300 | trend-led 5300, final comparator | The last meaningful 5300 comparison is whether a cleaner trend-led gate beats the imbalance-led branch once both are given similarly disciplined timing and giveback control. |
