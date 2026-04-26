@@ -40,6 +40,7 @@ PRODUCT_ROLE_MAP = {
 }
 
 ACTIVE_ZONE = ["VEV_5000", "VEV_5100", "VEV_5200", "VEV_5300", "VEV_5400", "VEV_5500"]
+FUTURE_HORIZONS = [1, 5, 10]
 LEAD_LAG_PAIRS = [
     ("HYDROGEL_PACK", "VELVETFRUIT_EXTRACT"),
     ("VELVETFRUIT_EXTRACT", "VEV_4000"),
@@ -106,14 +107,15 @@ def load_prices() -> pd.DataFrame:
     prices["product_role"] = prices["product"].map(PRODUCT_ROLE_MAP).fillna("other")
     prices = prices.sort_values(["product", "day", "timestamp"]).reset_index(drop=True)
     prices["mid_delta_1"] = prices.groupby(["product", "day"])["mid_price"].diff()
-    prices["future_mid_delta_5"] = (
-        prices.groupby(["product", "day"])["mid_price"].shift(-5) - prices["mid_price"]
-    )
-    prices["future_mid_return_bps_5"] = np.where(
-        prices["mid_price"] != 0,
-        prices["future_mid_delta_5"] / prices["mid_price"] * 10_000,
-        np.nan,
-    )
+    for horizon in FUTURE_HORIZONS:
+        prices[f"future_mid_delta_{horizon}"] = (
+            prices.groupby(["product", "day"])["mid_price"].shift(-horizon) - prices["mid_price"]
+        )
+        prices[f"future_mid_return_bps_{horizon}"] = np.where(
+            prices["mid_price"] != 0,
+            prices[f"future_mid_delta_{horizon}"] / prices["mid_price"] * 10_000,
+            np.nan,
+        )
     return prices
 
 
@@ -225,15 +227,26 @@ def compute_trade_alignment(prices: pd.DataFrame, trades: pd.DataFrame) -> tuple
             "rel_spread_bps",
             "depth_1",
             "imbalance_1",
-            "future_mid_delta_5",
-            "future_mid_return_bps_5",
             "time_bucket",
+            *[f"future_mid_delta_{h}" for h in FUTURE_HORIZONS],
+            *[f"future_mid_return_bps_{h}" for h in FUTURE_HORIZONS],
         ]
     ].rename(columns={"product": "symbol"})
     aligned = trades.merge(book, on=["day", "timestamp", "symbol", "time_bucket"], how="left")
     aligned["trade_minus_mid"] = aligned["price"] - aligned["mid_price"]
     aligned["at_or_below_bid"] = (aligned["price"] <= aligned["bid_price_1"]).astype(int)
     aligned["at_or_above_ask"] = (aligned["price"] >= aligned["ask_price_1"]).astype(int)
+    aligned["trade_location_bucket"] = np.select(
+        [
+            aligned["price"] <= aligned["bid_price_1"],
+            aligned["price"] >= aligned["ask_price_1"],
+        ],
+        ["at_or_below_bid", "at_or_above_ask"],
+        default="inside_spread",
+    )
+    for horizon in FUTURE_HORIZONS:
+        aligned[f"buyer_alpha_bps_{horizon}"] = aligned[f"future_mid_return_bps_{horizon}"]
+        aligned[f"seller_alpha_bps_{horizon}"] = -aligned[f"future_mid_return_bps_{horizon}"]
 
     summary = (
         aligned.groupby("symbol")
@@ -243,13 +256,107 @@ def compute_trade_alignment(prices: pd.DataFrame, trades: pd.DataFrame) -> tuple
             abs_trade_minus_mid=("trade_minus_mid", lambda s: float(s.abs().mean())),
             share_at_or_below_bid=("at_or_below_bid", "mean"),
             share_at_or_above_ask=("at_or_above_ask", "mean"),
+            avg_future_mid_return_bps_1=("future_mid_return_bps_1", "mean"),
             avg_future_mid_return_bps_5=("future_mid_return_bps_5", "mean"),
+            avg_future_mid_return_bps_10=("future_mid_return_bps_10", "mean"),
         )
         .reset_index()
     )
 
+    side_markout_frames = []
+    by_symbol_frames = []
+    for side_name, counterparty_col, alpha_prefix in [
+        ("buyer", "buyer", "buyer_alpha_bps"),
+        ("seller", "seller", "seller_alpha_bps"),
+    ]:
+        side_summary = (
+            aligned.groupby(counterparty_col)
+            .agg(
+                trade_count=("symbol", "size"),
+                quantity=("quantity", "sum"),
+                notional=("notional", "sum"),
+                distinct_symbols=("symbol", "nunique"),
+                avg_rel_spread_bps=("rel_spread_bps", "mean"),
+                avg_depth_1=("depth_1", "mean"),
+                avg_imbalance_1=("imbalance_1", "mean"),
+                avg_trade_minus_mid=("trade_minus_mid", "mean"),
+                share_at_or_below_bid=("at_or_below_bid", "mean"),
+                share_at_or_above_ask=("at_or_above_ask", "mean"),
+                inside_spread_share=("trade_location_bucket", lambda s: float((s == "inside_spread").mean())),
+                avg_future_mid_return_bps_1=("future_mid_return_bps_1", "mean"),
+                avg_future_mid_return_bps_5=("future_mid_return_bps_5", "mean"),
+                avg_future_mid_return_bps_10=("future_mid_return_bps_10", "mean"),
+                avg_side_alpha_bps_1=(f"{alpha_prefix}_1", "mean"),
+                avg_side_alpha_bps_5=(f"{alpha_prefix}_5", "mean"),
+                avg_side_alpha_bps_10=(f"{alpha_prefix}_10", "mean"),
+            )
+            .reset_index()
+            .rename(columns={counterparty_col: "counterparty"})
+        )
+        side_summary["side"] = side_name
+        side_markout_frames.append(side_summary)
+
+        by_symbol = (
+            aligned.groupby([counterparty_col, "symbol"])
+            .agg(
+                trade_count=("symbol", "size"),
+                quantity=("quantity", "sum"),
+                avg_rel_spread_bps=("rel_spread_bps", "mean"),
+                avg_depth_1=("depth_1", "mean"),
+                avg_imbalance_1=("imbalance_1", "mean"),
+                avg_trade_minus_mid=("trade_minus_mid", "mean"),
+                share_at_or_below_bid=("at_or_below_bid", "mean"),
+                share_at_or_above_ask=("at_or_above_ask", "mean"),
+                avg_side_alpha_bps_1=(f"{alpha_prefix}_1", "mean"),
+                avg_side_alpha_bps_5=(f"{alpha_prefix}_5", "mean"),
+                avg_side_alpha_bps_10=(f"{alpha_prefix}_10", "mean"),
+            )
+            .reset_index()
+            .rename(columns={counterparty_col: "counterparty"})
+        )
+        by_symbol["side"] = side_name
+        by_symbol_frames.append(by_symbol)
+
+    counterparty_markout = pd.concat(side_markout_frames, ignore_index=True).sort_values(
+        ["trade_count", "counterparty"], ascending=[False, True]
+    )
+    counterparty_markout_by_symbol_side = pd.concat(
+        by_symbol_frames, ignore_index=True
+    ).sort_values(["trade_count", "counterparty", "symbol"], ascending=[False, True, True])
+
+    pair_summary = (
+        aligned.groupby(["buyer", "seller"])
+        .agg(
+            trade_count=("symbol", "size"),
+            quantity=("quantity", "sum"),
+            notional=("notional", "sum"),
+            distinct_symbols=("symbol", "nunique"),
+            dominant_symbol=("symbol", lambda s: s.value_counts().index[0]),
+            avg_rel_spread_bps=("rel_spread_bps", "mean"),
+            avg_future_mid_return_bps_1=("future_mid_return_bps_1", "mean"),
+            avg_future_mid_return_bps_5=("future_mid_return_bps_5", "mean"),
+            avg_future_mid_return_bps_10=("future_mid_return_bps_10", "mean"),
+        )
+        .reset_index()
+        .sort_values(["trade_count", "notional"], ascending=[False, False])
+    )
+
     paths = {
-        "trade_alignment": save_csv(summary, "derived_round_4_trade_alignment_summary.csv")
+        "trade_alignment": save_csv(summary, "derived_round_4_trade_alignment_summary.csv"),
+        "counterparty_markout": save_csv(
+            counterparty_markout, "derived_round_4_counterparty_markout_by_side.csv"
+        ),
+        "counterparty_markout_by_symbol_side": save_csv(
+            counterparty_markout_by_symbol_side,
+            "derived_round_4_counterparty_markout_by_symbol_side.csv",
+        ),
+        "counterparty_pair_summary": save_csv(
+            pair_summary, "derived_round_4_counterparty_pair_summary.csv"
+        ),
+        "counterparty_book_context": save_csv(
+            counterparty_markout_by_symbol_side,
+            "derived_round_4_counterparty_book_context.csv",
+        ),
     }
     return aligned, paths
 
@@ -365,13 +472,7 @@ def counterparty_metrics(trades: pd.DataFrame) -> dict[str, Path]:
     concentration = pd.DataFrame(concentration_rows).sort_values(["symbol", "side"])
 
     stability_rows = []
-    top_names = (
-        side_asymmetry.assign(total_trade_count=side_asymmetry["buy_trade_count"] + side_asymmetry["sell_trade_count"])
-        .sort_values("total_trade_count", ascending=False)["counterparty"]
-        .head(8)
-        .tolist()
-    )
-    for name in top_names:
+    for name in all_names:
         for day in sorted(trades["day"].unique()):
             buy = trades.loc[(trades["buyer"] == name) & (trades["day"] == day)]
             sell = trades.loc[(trades["seller"] == name) & (trades["day"] == day)]
@@ -392,6 +493,79 @@ def counterparty_metrics(trades: pd.DataFrame) -> dict[str, Path]:
             )
     stability = pd.DataFrame(stability_rows)
 
+    stability_score_rows = []
+    for name in all_names:
+        side_row = side_asymmetry.loc[side_asymmetry["counterparty"] == name].iloc[0]
+        day_rows = stability.loc[stability["counterparty"] == name]
+        active_day_rows = day_rows.loc[day_rows["total_trades"] > 0]
+        buy = trades.loc[trades["buyer"] == name]
+        sell = trades.loc[trades["seller"] == name]
+        all_trades = pd.concat([buy.assign(side="buyer"), sell.assign(side="seller")], ignore_index=True)
+        product_counts = all_trades["symbol"].value_counts()
+        product_shares = product_counts / product_counts.sum() if not product_counts.empty else pd.Series(dtype=float)
+        total_trade_count = int(side_row["buy_trade_count"] + side_row["sell_trade_count"])
+        days_present = int(active_day_rows["day"].nunique())
+        dominant_product = product_counts.index[0] if not product_counts.empty else None
+        dominant_product_share = float(product_shares.iloc[0]) if not product_shares.empty else np.nan
+        product_hhi = float((product_shares**2).sum()) if not product_shares.empty else np.nan
+        global_dominant_side = (
+            "buyer" if side_row["buy_trade_count"] >= side_row["sell_trade_count"] else "seller"
+        )
+        dominant_product_consistency = (
+            float((active_day_rows["dominant_product"] == dominant_product).mean())
+            if dominant_product is not None and not active_day_rows.empty
+            else np.nan
+        )
+        dominant_side_consistency = (
+            float((active_day_rows["dominant_side"] == global_dominant_side).mean())
+            if not active_day_rows.empty
+            else np.nan
+        )
+        buy_trade_share_std = (
+            float(
+                active_day_rows.apply(
+                    lambda row: row["buy_trades"] / row["total_trades"] if row["total_trades"] else np.nan,
+                    axis=1,
+                ).std(ddof=0)
+            )
+            if not active_day_rows.empty
+            else np.nan
+        )
+
+        if total_trade_count < 25 or days_present < 2:
+            stability_class = "small sample"
+        elif dominant_product_share >= 0.75 and all_trades["symbol"].nunique() <= 2:
+            stability_class = "stable specialist"
+        elif (
+            dominant_product_consistency >= 2 / 3
+            and dominant_side_consistency >= 2 / 3
+            and all_trades["symbol"].nunique() >= 3
+        ):
+            stability_class = "stable broad"
+        else:
+            stability_class = "mixed / rotating"
+
+        stability_score_rows.append(
+            {
+                "counterparty": name,
+                "total_trade_count": total_trade_count,
+                "days_present": days_present,
+                "global_dominant_product": dominant_product,
+                "global_dominant_side": global_dominant_side,
+                "dominant_product_share": dominant_product_share,
+                "dominant_product_consistency": dominant_product_consistency,
+                "dominant_side_consistency": dominant_side_consistency,
+                "distinct_products_total": int(all_trades["symbol"].nunique()) if not all_trades.empty else 0,
+                "buy_trade_share_mean": float(side_row["buy_trade_share"]) if pd.notna(side_row["buy_trade_share"]) else np.nan,
+                "buy_trade_share_std": buy_trade_share_std,
+                "product_concentration_hhi": product_hhi,
+                "stability_class": stability_class,
+            }
+        )
+    stability_scores = pd.DataFrame(stability_score_rows).sort_values(
+        ["total_trade_count", "counterparty"], ascending=[False, True]
+    )
+
     return {
         "counterparty_summary": save_csv(
             counterparty_summary, "derived_round_4_counterparty_summary.csv"
@@ -410,6 +584,9 @@ def counterparty_metrics(trades: pd.DataFrame) -> dict[str, Path]:
         ),
         "counterparty_stability": save_csv(
             stability, "derived_round_4_counterparty_stability.csv"
+        ),
+        "counterparty_stability_scores": save_csv(
+            stability_scores, "derived_round_4_counterparty_stability_scores.csv"
         ),
     }
 
@@ -540,13 +717,65 @@ def cross_product_metrics(prices: pd.DataFrame) -> dict[str, Path]:
     }
 
 
-def feature_and_regime_metrics(prices: pd.DataFrame, trade_aligned: pd.DataFrame) -> dict[str, Path]:
-    feature_cols = ["rel_spread_bps", "imbalance_1", "depth_1", "quantity", "future_mid_return_bps_5"]
-    feature_frame = (
-        trade_aligned[feature_cols]
-        .replace([np.inf, -np.inf], np.nan)
-        .dropna()
+def feature_and_regime_metrics(
+    prices: pd.DataFrame,
+    trade_aligned: pd.DataFrame,
+    counterparty_concentration_path: Path,
+    counterparty_stability_scores_path: Path,
+) -> dict[str, Path]:
+    concentration = pd.read_csv(counterparty_concentration_path)
+    stability_scores = pd.read_csv(counterparty_stability_scores_path)
+
+    dominant_map = concentration.set_index(["symbol", "side"])["dominant_counterparty"].to_dict()
+    top1_share_map = concentration.set_index(["symbol", "side"])["top1_share"].to_dict()
+    stability_class_map = stability_scores.set_index("counterparty")["stability_class"].to_dict()
+    product_share_map = stability_scores.set_index("counterparty")["dominant_product_share"].to_dict()
+
+    feature_ready = trade_aligned.copy()
+    feature_ready["buyer_stability_class"] = feature_ready["buyer"].map(stability_class_map).fillna("small sample")
+    feature_ready["seller_stability_class"] = feature_ready["seller"].map(stability_class_map).fillna("small sample")
+    feature_ready["buyer_dominant_product_share"] = feature_ready["buyer"].map(product_share_map)
+    feature_ready["seller_dominant_product_share"] = feature_ready["seller"].map(product_share_map)
+    feature_ready["buyer_is_symbol_dominant"] = (
+        feature_ready.apply(
+            lambda row: int(dominant_map.get((row["symbol"], "buyer")) == row["buyer"]),
+            axis=1,
+        )
     )
+    feature_ready["seller_is_symbol_dominant"] = (
+        feature_ready.apply(
+            lambda row: int(dominant_map.get((row["symbol"], "seller")) == row["seller"]),
+            axis=1,
+        )
+    )
+    feature_ready["symbol_buyer_top1_share"] = feature_ready["symbol"].map(
+        lambda symbol: top1_share_map.get((symbol, "buyer"))
+    )
+    feature_ready["symbol_seller_top1_share"] = feature_ready["symbol"].map(
+        lambda symbol: top1_share_map.get((symbol, "seller"))
+    )
+    pair_counts = feature_ready.groupby(["buyer", "seller"]).size().rename("pair_trade_count_total").reset_index()
+    feature_ready = feature_ready.merge(pair_counts, on=["buyer", "seller"], how="left")
+    feature_ready["pair_is_recurrent"] = (feature_ready["pair_trade_count_total"] >= 25).astype(int)
+
+    feature_cols = [
+        "rel_spread_bps",
+        "imbalance_1",
+        "depth_1",
+        "quantity",
+        "future_mid_return_bps_1",
+        "future_mid_return_bps_5",
+        "future_mid_return_bps_10",
+        "buyer_is_symbol_dominant",
+        "seller_is_symbol_dominant",
+        "buyer_dominant_product_share",
+        "seller_dominant_product_share",
+        "symbol_buyer_top1_share",
+        "symbol_seller_top1_share",
+        "pair_trade_count_total",
+        "pair_is_recurrent",
+    ]
+    feature_frame = feature_ready[feature_cols].replace([np.inf, -np.inf], np.nan).dropna()
     corr_path = save_csv(
         feature_frame.corr().reset_index(),
         "derived_round_4_trade_feature_corr.csv",
@@ -556,16 +785,25 @@ def feature_and_regime_metrics(prices: pd.DataFrame, trade_aligned: pd.DataFrame
         "derived_round_4_trade_feature_covariance.csv",
     )
 
-    model_df = trade_aligned[
+    model_df = feature_ready[
         [
             "symbol",
             "time_bucket",
             "buyer",
             "seller",
+            "buyer_stability_class",
+            "seller_stability_class",
+            "trade_location_bucket",
             "rel_spread_bps",
             "imbalance_1",
             "depth_1",
             "quantity",
+            "buyer_is_symbol_dominant",
+            "seller_is_symbol_dominant",
+            "pair_trade_count_total",
+            "pair_is_recurrent",
+            "symbol_buyer_top1_share",
+            "symbol_seller_top1_share",
             "future_mid_return_bps_5",
         ]
     ].replace([np.inf, -np.inf], np.nan)
@@ -576,7 +814,22 @@ def feature_and_regime_metrics(prices: pd.DataFrame, trade_aligned: pd.DataFrame
     model_df["buyer_bucket"] = np.where(model_df["buyer"].isin(top_buyers), model_df["buyer"], "OTHER_BUYER")
     model_df["seller_bucket"] = np.where(model_df["seller"].isin(top_sellers), model_df["seller"], "OTHER_SELLER")
 
-    X = pd.get_dummies(
+    y = model_df["future_mid_return_bps_5"]
+    baseline_X = pd.get_dummies(
+        model_df[
+            [
+                "symbol",
+                "time_bucket",
+                "rel_spread_bps",
+                "imbalance_1",
+                "depth_1",
+                "quantity",
+            ]
+        ],
+        columns=["symbol", "time_bucket"],
+        drop_first=False,
+    )
+    counterparty_X = pd.get_dummies(
         model_df[
             [
                 "symbol",
@@ -592,16 +845,73 @@ def feature_and_regime_metrics(prices: pd.DataFrame, trade_aligned: pd.DataFrame
         columns=["symbol", "time_bucket", "buyer_bucket", "seller_bucket"],
         drop_first=False,
     )
-    y = model_df["future_mid_return_bps_5"]
-    model = LinearRegression()
-    model.fit(X, y)
-    r2 = model.score(X, y)
-    coeffs = pd.DataFrame({"feature": X.columns, "coefficient": model.coef_})
+    engineered_X = pd.get_dummies(
+        model_df[
+            [
+                "symbol",
+                "time_bucket",
+                "buyer_stability_class",
+                "seller_stability_class",
+                "trade_location_bucket",
+                "rel_spread_bps",
+                "imbalance_1",
+                "depth_1",
+                "quantity",
+                "buyer_is_symbol_dominant",
+                "seller_is_symbol_dominant",
+                "pair_trade_count_total",
+                "pair_is_recurrent",
+                "symbol_buyer_top1_share",
+                "symbol_seller_top1_share",
+            ]
+        ],
+        columns=[
+            "symbol",
+            "time_bucket",
+            "buyer_stability_class",
+            "seller_stability_class",
+            "trade_location_bucket",
+        ],
+        drop_first=False,
+    )
+    baseline_model = LinearRegression().fit(baseline_X, y)
+    counterparty_model = LinearRegression().fit(counterparty_X, y)
+    engineered_model = LinearRegression().fit(engineered_X, y)
+    baseline_r2 = baseline_model.score(baseline_X, y)
+    counterparty_r2 = counterparty_model.score(counterparty_X, y)
+    engineered_r2 = engineered_model.score(engineered_X, y)
+
+    coeffs = pd.DataFrame({"feature": engineered_X.columns, "coefficient": engineered_model.coef_})
     coeffs["abs_coefficient"] = coeffs["coefficient"].abs()
     coeffs = coeffs.sort_values("abs_coefficient", ascending=False)
-    coeffs["r2"] = r2
+    coeffs["r2"] = engineered_r2
     regression_path = save_csv(
         coeffs, "derived_round_4_counterparty_controlled_regression.csv"
+    )
+    model_comparison = pd.DataFrame(
+        [
+            {
+                "model_name": "baseline_microstructure",
+                "target": "future_mid_return_bps_5",
+                "r2": baseline_r2,
+                "incremental_vs_baseline": 0.0,
+                "notes": "symbol + time bucket + spread + imbalance + depth + quantity",
+            },
+            {
+                "model_name": "counterparty_bucket_context",
+                "target": "future_mid_return_bps_5",
+                "r2": counterparty_r2,
+                "incremental_vs_baseline": counterparty_r2 - baseline_r2,
+                "notes": "adds top buyer/seller identity buckets",
+            },
+            {
+                "model_name": "engineered_context_features",
+                "target": "future_mid_return_bps_5",
+                "r2": engineered_r2,
+                "incremental_vs_baseline": engineered_r2 - baseline_r2,
+                "notes": "adds stability class, symbol dominance, pair recurrence, and trade location",
+            },
+        ]
     )
 
     product_regime = (
@@ -617,12 +927,12 @@ def feature_and_regime_metrics(prices: pd.DataFrame, trade_aligned: pd.DataFrame
     product_regime["product_role"] = product_regime["product"].map(PRODUCT_ROLE_MAP)
 
     counterparty_conditioned = (
-        trade_aligned.assign(
+        feature_ready.assign(
             buyer_bucket=np.where(
-                trade_aligned["buyer"].isin(top_buyers), trade_aligned["buyer"], "OTHER_BUYER"
+                feature_ready["buyer"].isin(top_buyers), feature_ready["buyer"], "OTHER_BUYER"
             ),
             seller_bucket=np.where(
-                trade_aligned["seller"].isin(top_sellers), trade_aligned["seller"], "OTHER_SELLER"
+                feature_ready["seller"].isin(top_sellers), feature_ready["seller"], "OTHER_SELLER"
             ),
         )
         .groupby(["symbol", "buyer_bucket", "seller_bucket"])
@@ -630,9 +940,110 @@ def feature_and_regime_metrics(prices: pd.DataFrame, trade_aligned: pd.DataFrame
             trade_count=("symbol", "size"),
             avg_rel_spread_bps=("rel_spread_bps", "mean"),
             avg_imbalance_1=("imbalance_1", "mean"),
+            avg_future_mid_return_bps_1=("future_mid_return_bps_1", "mean"),
             avg_future_mid_return_bps_5=("future_mid_return_bps_5", "mean"),
+            avg_future_mid_return_bps_10=("future_mid_return_bps_10", "mean"),
         )
         .reset_index()
+    )
+
+    engineered_feature_summary = []
+    for feature_name, column_name, role, online_usable in [
+        ("buyer_stability_class", "buyer_stability_class", "counterparty role", "yes"),
+        ("seller_stability_class", "seller_stability_class", "counterparty role", "yes"),
+        ("buyer_is_symbol_dominant", "buyer_is_symbol_dominant", "counterparty-symbol dominance", "yes"),
+        ("seller_is_symbol_dominant", "seller_is_symbol_dominant", "counterparty-symbol dominance", "yes"),
+        ("pair_is_recurrent", "pair_is_recurrent", "pair recurrence", "yes with historical memory"),
+        ("trade_location_bucket", "trade_location_bucket", "trade-to-book context", "yes"),
+    ]:
+        grouped = (
+            feature_ready.groupby(column_name)
+            .agg(
+                sample_size=("symbol", "size"),
+                avg_future_mid_return_bps_1=("future_mid_return_bps_1", "mean"),
+                avg_future_mid_return_bps_5=("future_mid_return_bps_5", "mean"),
+                avg_future_mid_return_bps_10=("future_mid_return_bps_10", "mean"),
+                avg_rel_spread_bps=("rel_spread_bps", "mean"),
+                avg_depth_1=("depth_1", "mean"),
+            )
+            .reset_index()
+            .rename(columns={column_name: "feature_level"})
+        )
+        grouped["feature_name"] = feature_name
+        grouped["feature_role"] = role
+        grouped["online_usable"] = online_usable
+        engineered_feature_summary.append(grouped)
+    engineered_feature_summary_df = pd.concat(engineered_feature_summary, ignore_index=True)
+
+    online_feature_table = pd.DataFrame(
+        [
+            {
+                "feature_name": "buyer_stability_class",
+                "origin": "counterparty stability scores",
+                "online_usability": "yes",
+                "role": "context / regime",
+                "signal_strength": "medium",
+                "stability": "medium-high",
+                "actionability": "filter candidate",
+                "lifecycle_decision": "promote to understanding",
+                "notes": "captures specialist vs broad vs rotating buyer ecology",
+            },
+            {
+                "feature_name": "seller_stability_class",
+                "origin": "counterparty stability scores",
+                "online_usability": "yes",
+                "role": "context / regime",
+                "signal_strength": "medium",
+                "stability": "medium-high",
+                "actionability": "filter candidate",
+                "lifecycle_decision": "promote to understanding",
+                "notes": "especially relevant in concentrated voucher strikes",
+            },
+            {
+                "feature_name": "buyer_is_symbol_dominant",
+                "origin": "symbol-side concentration map",
+                "online_usability": "yes",
+                "role": "dominance flag",
+                "signal_strength": "medium",
+                "stability": "high in upper/floor",
+                "actionability": "feature-engineering candidate",
+                "lifecycle_decision": "promote cautiously",
+                "notes": "useful when one buyer structurally dominates a strike",
+            },
+            {
+                "feature_name": "seller_is_symbol_dominant",
+                "origin": "symbol-side concentration map",
+                "online_usability": "yes",
+                "role": "dominance flag",
+                "signal_strength": "medium",
+                "stability": "high in upper/floor",
+                "actionability": "feature-engineering candidate",
+                "lifecycle_decision": "promote cautiously",
+                "notes": "especially relevant for `Mark 22`-dominated seller flows",
+            },
+            {
+                "feature_name": "pair_is_recurrent",
+                "origin": "buyer-seller pair recurrence",
+                "online_usability": "yes with historical memory",
+                "role": "interaction context",
+                "signal_strength": "weak-to-medium",
+                "stability": "unclear",
+                "actionability": "exploratory",
+                "lifecycle_decision": "keep exploratory",
+                "notes": "interesting for pair ecology, but sample is still only three days",
+            },
+            {
+                "feature_name": "trade_location_bucket",
+                "origin": "trade-to-book alignment",
+                "online_usability": "yes",
+                "role": "microstructure context",
+                "signal_strength": "medium",
+                "stability": "high",
+                "actionability": "feature-engineering candidate",
+                "lifecycle_decision": "promote",
+                "notes": "connects counterparty events to whether prints hit bid/ask or occur inside spread",
+            },
+        ]
     )
 
     family_conditioned = (
@@ -651,12 +1062,23 @@ def feature_and_regime_metrics(prices: pd.DataFrame, trade_aligned: pd.DataFrame
         "trade_feature_corr": corr_path,
         "trade_feature_covariance": cov_path,
         "counterparty_regression": regression_path,
+        "feature_model_comparison": save_csv(
+            model_comparison, "derived_round_4_feature_model_comparison.csv"
+        ),
         "product_regime": save_csv(
             product_regime, "derived_round_4_product_regime_summary.csv"
         ),
         "counterparty_conditioned": save_csv(
             counterparty_conditioned,
             "derived_round_4_counterparty_conditioned_summary.csv",
+        ),
+        "engineered_feature_summary": save_csv(
+            engineered_feature_summary_df,
+            "derived_round_4_engineered_feature_summary.csv",
+        ),
+        "candidate_online_features": save_csv(
+            online_feature_table,
+            "derived_round_4_candidate_online_features.csv",
         ),
         "family_conditioned": save_csv(
             family_conditioned, "derived_round_4_family_conditioned_regime_summary.csv"
@@ -669,6 +1091,7 @@ def build_plots(
     trades: pd.DataFrame,
     counterparty_product_mix: Path,
     corr_matrix_path: Path,
+    counterparty_markout_path: Path,
 ) -> dict[str, Path]:
     plot_paths: dict[str, Path] = {}
 
@@ -724,6 +1147,19 @@ def build_plots(
     ax.tick_params(axis="x", rotation=25)
     plot_paths["top_buyer_timing"] = save_plot(fig, "round_4_top_buyer_timing.png")
 
+    markout = pd.read_csv(counterparty_markout_path)
+    markout = markout.loc[markout["trade_count"] >= 40].copy()
+    markout["label"] = markout["counterparty"] + " (" + markout["side"] + ")"
+    markout = markout.sort_values("avg_side_alpha_bps_5", ascending=False).head(12)
+    fig, ax = plt.subplots(figsize=(10, 5))
+    sns.barplot(data=markout, x="avg_side_alpha_bps_5", y="label", hue="side", dodge=False, ax=ax)
+    ax.set_title("Top counterparty-side 5-step markouts")
+    ax.set_xlabel("Average 5-step side-aligned alpha (bps)")
+    ax.set_ylabel("")
+    plot_paths["counterparty_markout_bar"] = save_plot(
+        fig, "round_4_counterparty_markout_bar.png"
+    )
+
     return plot_paths
 
 
@@ -745,10 +1181,16 @@ def build_summary_metrics(
     counterparty_concentration_path: Path,
     option_book_summary_path: Path,
     regression_path: Path,
+    counterparty_markout_path: Path,
+    counterparty_stability_scores_path: Path,
+    feature_model_comparison_path: Path,
 ) -> dict:
     concentration = pd.read_csv(counterparty_concentration_path)
     option_book = pd.read_csv(option_book_summary_path)
     regression = pd.read_csv(regression_path)
+    markout = pd.read_csv(counterparty_markout_path)
+    stability_scores = pd.read_csv(counterparty_stability_scores_path)
+    model_comparison = pd.read_csv(feature_model_comparison_path)
 
     top_buyers = trades["buyer"].value_counts().head(6).to_dict()
     top_sellers = trades["seller"].value_counts().head(6).to_dict()
@@ -771,6 +1213,13 @@ def build_summary_metrics(
             "mean_rel_spread_bps"
         ].round(4).to_dict(),
         "controlled_regression_r2": float(regression["r2"].iloc[0]) if not regression.empty else None,
+        "feature_model_comparison": model_comparison.to_dict(orient="records"),
+        "top_counterparty_side_markouts_5": markout.sort_values(
+            "avg_side_alpha_bps_5", ascending=False
+        )
+        .head(10)[["counterparty", "side", "trade_count", "avg_side_alpha_bps_5"]]
+        .to_dict(orient="records"),
+        "stability_class_counts": stability_scores["stability_class"].value_counts().to_dict(),
         "top_regression_coefficients": regression.head(12)[["feature", "coefficient"]].to_dict(
             orient="records"
         ),
@@ -793,13 +1242,19 @@ def main() -> None:
     output_paths.update(option_paths)
     cross_paths = cross_product_metrics(prices)
     output_paths.update(cross_paths)
-    feature_paths = feature_and_regime_metrics(prices, trade_aligned)
+    feature_paths = feature_and_regime_metrics(
+        prices,
+        trade_aligned,
+        counterparty_paths["counterparty_concentration"],
+        counterparty_paths["counterparty_stability_scores"],
+    )
     output_paths.update(feature_paths)
     plot_paths = build_plots(
         prices,
         trades,
         counterparty_paths["counterparty_product_mix"],
         cross_paths["corr_matrix"],
+        trade_alignment_paths["counterparty_markout"],
     )
     output_paths.update(plot_paths)
 
@@ -809,6 +1264,9 @@ def main() -> None:
         counterparty_paths["counterparty_concentration"],
         option_paths["option_book_summary"],
         feature_paths["counterparty_regression"],
+        trade_alignment_paths["counterparty_markout"],
+        counterparty_paths["counterparty_stability_scores"],
+        feature_paths["feature_model_comparison"],
     )
     write_manifest(output_paths, summary)
     print(json.dumps(summary, indent=2, sort_keys=True))

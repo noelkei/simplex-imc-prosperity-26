@@ -9,9 +9,10 @@
 
 ## Current Next Priority Action
 
-Review the completed `Phase 01` EDA package, then start `Phase 02`
+Review the extended `Phase 01` EDA package, then start `Phase 02`
 understanding using the canonical EDA plus the counterparty, option-book, and
-Round 3 revalidation annexes.
+Round 3 revalidation annexes, with explicit pickup of engineered feature
+candidates and counterparty-conditioned danger-state findings.
 
 ## Phase Status
 
@@ -131,7 +132,8 @@ Example when active:
 - Ingestion context updated: `phase_00_ingestion_context.md` on `2026-04-26`
 - Canonical EDA added: `01_eda/eda_round_4_counterparty_and_option_book.md` on `2026-04-26`
 - EDA annexes added: `01_eda/eda_round_4_counterparty_profiles.md`, `01_eda/eda_round_4_option_book_structure.md`, and `01_eda/eda_round_4_round3_revalidation.md` on `2026-04-26`
-- EDA script added: `01_eda/analyze_round_4_eda.py` on `2026-04-26`
+- EDA script extended with counterparty markouts, pair ecology, stability scoring, and engineered-feature checks: `01_eda/analyze_round_4_eda.py` on `2026-04-26`
 - EDA context updated: `phase_01_eda_context.md` on `2026-04-26`
+- EDA outputs extended: `../data/processed/derived_round_4_counterparty_markout_by_side.csv`, `../data/processed/derived_round_4_counterparty_pair_summary.csv`, `../data/processed/derived_round_4_counterparty_stability_scores.csv`, `../data/processed/derived_round_4_engineered_feature_summary.csv`, and `../data/processed/derived_round_4_candidate_online_features.csv` on `2026-04-26`
 - Data README updated: `../data/README.md` on `2026-04-26`
 - Round README updated: `../README.md` on `2026-04-26`

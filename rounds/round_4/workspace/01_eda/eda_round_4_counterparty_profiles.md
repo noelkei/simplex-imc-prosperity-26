@@ -21,7 +21,13 @@ Primary sources:
 - `../../data/processed/derived_round_4_counterparty_side_asymmetry.csv`
 - `../../data/processed/derived_round_4_counterparty_concentration.csv`
 - `../../data/processed/derived_round_4_counterparty_stability.csv`
+- `../../data/processed/derived_round_4_counterparty_stability_scores.csv`
 - `../../data/processed/derived_round_4_counterparty_conditioned_summary.csv`
+- `../../data/processed/derived_round_4_counterparty_markout_by_side.csv`
+- `../../data/processed/derived_round_4_counterparty_markout_by_symbol_side.csv`
+- `../../data/processed/derived_round_4_counterparty_pair_summary.csv`
+- `../../data/processed/derived_round_4_counterparty_book_context.csv`
+- `../../data/processed/derived_round_4_candidate_online_features.csv`
 
 ## Headline Findings
 
@@ -31,8 +37,17 @@ Primary sources:
 - `Mark 01` and `Mark 22` dominate the upper/floor voucher complex in opposite directions.
 - `Mark 14` and `Mark 38` repeatedly dominate `HYDROGEL_PACK` and `VEV_4000`.
 - `Mark 55`, `Mark 67`, `Mark 49`, and `Mark 01` matter most inside `VELVETFRUIT_EXTRACT`.
+- Side-aware markouts matter more than raw trade counts.
+- Engineered counterparty-role features are more useful than raw name buckets alone.
 
 ## Stable Counterparty Roles
+
+The new stability score compresses the visible names into reusable classes:
+
+- `stable broad`: `Mark 14`, `Mark 01`, `Mark 22`, `Mark 38`
+- `stable specialist`: `Mark 55`, `Mark 67`, `Mark 49`
+- `mixed / rotating`: none among the names that matter in the current sample
+- `small sample`: none among the names that matter in the current sample
 
 ### `Mark 01`
 
@@ -55,6 +70,8 @@ Primary sources:
   seller-dominant every day, very broad product reach, but strongest in upper/floor
 - Raw interpretation:
   strongest `danger-state / opposing-liquidity` contextual candidate in the voucher family
+- Markout note:
+  seller-side aligned `5`-step markout is `+20.48` bps overall, which is the strongest large-sample side-aware effect in the file set
 
 ### `Mark 14`
 
@@ -99,6 +116,8 @@ Primary sources:
   one-product participant in all three days
 - Raw interpretation:
   strongest raw candidate for a simple `VEX`-buyer context feature
+- Markout note:
+  buyer-side aligned markouts stay positive at `1`, `5`, and `10` steps
 
 ### `Mark 49`
 
@@ -131,6 +150,31 @@ Primary sources:
 - This weakens any universal “late-only” claim.
 - It does not remove the possibility that late trading is still toxic for specific products or later run behavior.
 
+## Markouts By Counterparty And Side
+
+- `Mark 22` as seller is the clearest side-aware contextual signal:
+  `+16.70` bps at `1` step and `+20.48` bps at `5` steps, with most activity concentrated in `5200+`.
+- `Mark 01` as buyer is much weaker than raw frequency might suggest:
+  buyer-aligned markouts are negative at `1` and `5` steps overall because so much of that flow lives in the upper/floor voucher complex.
+- `Mark 67` buyer flow in `VEX` is one of the cleanest positive specialist signals:
+  `+3.75`, `+3.71`, `+4.27` bps at `1`, `5`, `10` steps.
+- `Mark 55` is structurally important in `VEX`, but its side-aware markouts are close to flat; this makes it more useful as state context than as directional flow.
+- `Mark 49` is a persistent `VEX` seller, but the sample is smaller and the seller-aligned markouts are negative, so it should stay below first-wave strategy priority.
+
+## Buyer-Seller Pair Ecology
+
+- The largest recurring pair by far is `Mark 01` buyer vs `Mark 22` seller with `1339` trades, mostly in `VEV_6000/6500`, `5400`, and `5500`.
+- `Mark 14` buyer vs `Mark 22` seller in `VEV_5200` is much smaller (`83` trades) but much more violent, with very negative raw future returns after prints.
+- `Mark 67` buyer vs `Mark 49` seller in `VEX` is a cleaner specialist pair with positive short-horizon follow-through and low spreads.
+- Pair structure is real, but pair recurrence should still stay exploratory as a direct feature because the sample is only `3` days and concentration/product role already explains a lot.
+
+## Trade-To-Book Context
+
+- The strong names differ not just by product and side, but by how they print against the book.
+- `Mark 22` seller flow is overwhelmingly at or below bid, in wide-spread products, and with poor raw follow-through for buyers.
+- `Mark 67` and `Mark 49` in `VEX` print almost entirely at or above ask, but in a very tight-spread environment; that is a different ecology from the upper voucher loop.
+- The `trade_location_bucket` feature turns out to be one of the highest-ROI engineered features because it connects counterparty events with microstructure instead of treating names in isolation.
+
 ## Counterparty-Conditioned Follow-Through
 
 The simple aligned-trade summaries show some pockets of future move asymmetry,
@@ -154,6 +198,7 @@ Keep exploratory only:
 - direct counterparty alpha
 - pure timing-specialist logic
 - small-name (`Mark 49`) specific logic
+- buyer-seller pair recurrence as a direct online trigger
 
 ## Downstream Use
 

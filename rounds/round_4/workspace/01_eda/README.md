@@ -18,6 +18,10 @@ Supporting reproducible analysis:
 
 - [`analyze_round_4_eda.py`](analyze_round_4_eda.py)
 - [`artifacts/`](artifacts/)
+- `../../data/processed/derived_round_4_candidate_online_features.csv`
+- `../../data/processed/derived_round_4_counterparty_markout_by_side.csv`
+- `../../data/processed/derived_round_4_counterparty_pair_summary.csv`
+- `../../data/processed/derived_round_4_feature_model_comparison.csv`
 
 Required closure summary sections:
 

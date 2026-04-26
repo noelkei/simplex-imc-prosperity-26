@@ -25,6 +25,9 @@ READY_FOR_REVIEW
 - Generated processed evidence tables under `../../data/processed/`.
 - Generated Phase 01 plots and manifests under `01_eda/artifacts/`.
 - Wrote the canonical EDA and the three supporting annexes.
+- Extended Phase 01 with side-aware counterparty markouts, buyer-seller pair
+  ecology, trade-to-book context, formal counterparty stability scoring, and
+  a mini EDA on newly engineered usable features.
 
 ## Current Findings
 
@@ -34,10 +37,15 @@ READY_FOR_REVIEW
 - EDA should begin from the raw trade data, not from strategy speculation.
 - Counterparty specialization is real and stable enough to promote as
   contextual state, but not as standalone alpha.
+- Engineered context features add more explanatory value than raw buyer/seller
+  names alone: the simple model ladder moves from `R^2 = 0.0076` to `0.0101`
+  with raw name buckets and to `0.0183` with engineered context.
 - `VEX` remains the strongest same-time anchor for the voucher family and
   delayed-follow stays weak.
 - The voucher family is linked structurally but execution-fragmented by strike,
   especially from `5200` upward.
+- `Mark 22` seller flow in `5200+` is the clearest counterparty-conditioned
+  danger-state pattern in the raw data.
 
 ## Decisions Made
 
@@ -75,8 +83,8 @@ READY_FOR_REVIEW
 
 Review Phase 01, then use the canonical EDA and annexes to write
 `02_understanding.md` with explicit separation between supported
-carry-forward principles, contextual counterparty findings, and still-untested
-Round 4 hypotheses.
+carry-forward principles, contextual counterparty findings, engineered feature
+candidates, and still-untested Round 4 hypotheses.
 
 ## Deadline Risk
 

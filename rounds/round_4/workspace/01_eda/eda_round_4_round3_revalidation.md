@@ -22,7 +22,7 @@ Primary sources:
 | `delta-1 first` as default clean base | `still plausible but not yet validated as a final strategy claim` | `HYDRO` and `VEX` remain the cleanest liquid products, but raw data alone cannot prove champion status |
 | `VEX` as likely anchor/context | `supported by round_4 raw data` | strongest same-time linkage to the voucher family, lowest major spread, no delayed-follow evidence |
 | `5000/5100/5200/5300` are not homogeneous | `supported by round_4 raw data` | spreads, trade counts, concentration, and trade alignment differ sharply across the cluster |
-| `5100/5200` may be better as danger-state inputs than default inventory | `still plausible but not yet validated` | `5100` tape is too sparse; `5200` is concentrated and looks weak short-horizon, but raw data alone cannot fully decide inventory vs signal-only |
+| `5100/5200` may be better as danger-state inputs than default inventory | `still plausible but not yet validated` | `5100` tape is too sparse; `5200` is concentrated and now also shows strong `Mark 22` seller-side follow-through, but raw data alone still cannot fully decide inventory vs signal-only |
 | `5300` deserves special handling | `supported by round_4 raw data` | meaningful trade count, distinct concentration structure, much higher spread than `5200`, and special-case alignment behavior |
 | late-session deterioration and no-trade logic matter | `still plausible but not yet validated` | top names trade all day, so there is no universal timing collapse, but upper-strike friction worsens later |
 | family-level framing matters more than symbol-only framing | `supported by round_4 raw data` | role-conditioned spread, concentration, and linkage structure are more informative than isolated symbol views |
@@ -57,6 +57,7 @@ These are not dead, but they need validation rather than blind reuse:
 - do not reopen the broad `5000/5100/5200/5300` basket by default
 - do not treat vouchers as independent delta-1 symbols
 - do not promote `round_3` winners directly into `round_4` without counterparty-aware revalidation
+- prefer compact engineered context features over naked counterparty names when translating the new information layer into strategy
 
 ## Downstream Use
 

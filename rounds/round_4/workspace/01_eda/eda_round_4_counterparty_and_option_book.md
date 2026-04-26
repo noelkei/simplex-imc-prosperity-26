@@ -66,6 +66,11 @@ Separate findings usable inside `Trader.run()` from manual-challenge findings.
   - `../../data/processed/derived_round_4_counterparty_side_asymmetry.csv`
   - `../../data/processed/derived_round_4_counterparty_concentration.csv`
   - `../../data/processed/derived_round_4_counterparty_stability.csv`
+  - `../../data/processed/derived_round_4_counterparty_stability_scores.csv`
+  - `../../data/processed/derived_round_4_counterparty_markout_by_side.csv`
+  - `../../data/processed/derived_round_4_counterparty_markout_by_symbol_side.csv`
+  - `../../data/processed/derived_round_4_counterparty_pair_summary.csv`
+  - `../../data/processed/derived_round_4_counterparty_book_context.csv`
   - `../../data/processed/derived_round_4_option_book_summary.csv`
   - `../../data/processed/derived_round_4_local_cross_strike_context.csv`
   - `../../data/processed/derived_round_4_same_time_return_corr.csv`
@@ -74,6 +79,9 @@ Separate findings usable inside `Trader.run()` from manual-challenge findings.
   - `../../data/processed/derived_round_4_trade_feature_corr.csv`
   - `../../data/processed/derived_round_4_trade_feature_covariance.csv`
   - `../../data/processed/derived_round_4_counterparty_controlled_regression.csv`
+  - `../../data/processed/derived_round_4_feature_model_comparison.csv`
+  - `../../data/processed/derived_round_4_engineered_feature_summary.csv`
+  - `../../data/processed/derived_round_4_candidate_online_features.csv`
   - `../../data/processed/derived_round_4_product_regime_summary.csv`
   - `../../data/processed/derived_round_4_counterparty_conditioned_summary.csv`
   - `../../data/processed/derived_round_4_family_conditioned_regime_summary.csv`
@@ -117,11 +125,19 @@ Separate findings usable inside `Trader.run()` from manual-challenge findings.
 | [`../../data/processed/derived_round_4_trade_alignment_summary.csv`](../../data/processed/derived_round_4_trade_alignment_summary.csv) | processed file | `prices_*` + `trades_*` | short-horizon trade follow-through and execution texture | yes |
 | [`../../data/processed/derived_round_4_counterparty_concentration.csv`](../../data/processed/derived_round_4_counterparty_concentration.csv) | processed file | `trades_*` | product-level concentration and dominance | yes |
 | [`../../data/processed/derived_round_4_counterparty_stability.csv`](../../data/processed/derived_round_4_counterparty_stability.csv) | processed file | `trades_*` | cross-day stability of names | yes |
+| [`../../data/processed/derived_round_4_counterparty_stability_scores.csv`](../../data/processed/derived_round_4_counterparty_stability_scores.csv) | processed file | `trades_*` | formal stability classes and role persistence | yes |
+| [`../../data/processed/derived_round_4_counterparty_markout_by_side.csv`](../../data/processed/derived_round_4_counterparty_markout_by_side.csv) | processed file | `prices_*` + `trades_*` | side-aware markouts by counterparty | yes |
+| [`../../data/processed/derived_round_4_counterparty_pair_summary.csv`](../../data/processed/derived_round_4_counterparty_pair_summary.csv) | processed file | `prices_*` + `trades_*` | recurring buyer-seller ecology | yes |
+| [`../../data/processed/derived_round_4_counterparty_book_context.csv`](../../data/processed/derived_round_4_counterparty_book_context.csv) | processed file | `prices_*` + `trades_*` | trade-to-book context by counterparty and symbol | yes |
 | [`../../data/processed/derived_round_4_option_book_summary.csv`](../../data/processed/derived_round_4_option_book_summary.csv) | processed file | `prices_*` + `trades_*` | strike activity, spread, depth, role review | yes |
 | [`../../data/processed/derived_round_4_local_cross_strike_context.csv`](../../data/processed/derived_round_4_local_cross_strike_context.csv) | processed file | `prices_*` + `trades_*` | neighbor-strike context | yes |
 | [`../../data/processed/derived_round_4_lead_lag_summary.csv`](../../data/processed/derived_round_4_lead_lag_summary.csv) | processed file | `prices_*` | anchor-voucher same-time vs lagged linkage | yes |
 | [`../../data/processed/derived_round_4_counterparty_controlled_regression.csv`](../../data/processed/derived_round_4_counterparty_controlled_regression.csv) | processed file | trade-aligned sample | whether counterparty identity adds simple linear explanatory power | yes |
+| [`../../data/processed/derived_round_4_feature_model_comparison.csv`](../../data/processed/derived_round_4_feature_model_comparison.csv) | processed file | trade-aligned sample | incremental value of engineered context features | yes |
+| [`../../data/processed/derived_round_4_engineered_feature_summary.csv`](../../data/processed/derived_round_4_engineered_feature_summary.csv) | processed file | trade-aligned sample | mini-EDA on newly engineered usable features | yes |
+| [`../../data/processed/derived_round_4_candidate_online_features.csv`](../../data/processed/derived_round_4_candidate_online_features.csv) | processed file | processed trade + concentration context | downstream feature shortlist | yes |
 | [`artifacts/round_4_counterparty_product_mix_heatmap.png`](artifacts/round_4_counterparty_product_mix_heatmap.png) | plot | `trades_*` | quick counterparty specialization review | yes |
+| [`artifacts/round_4_counterparty_markout_bar.png`](artifacts/round_4_counterparty_markout_bar.png) | plot | aligned trade sample | quick view of side-aware top-name markouts | yes |
 | [`artifacts/round_4_return_corr_heatmap.png`](artifacts/round_4_return_corr_heatmap.png) | plot | `prices_*` | cross-product relationship review | yes |
 | [`artifacts/round_4_relative_spread_boxplot.png`](artifacts/round_4_relative_spread_boxplot.png) | plot | `prices_*` | spread hierarchy by product | yes |
 | [`artifacts/round_4_top_buyer_timing.png`](artifacts/round_4_top_buyer_timing.png) | plot | `trades_*` | timing balance by top buyer | yes |
@@ -164,6 +180,10 @@ Separate findings usable inside `Trader.run()` from manual-challenge findings.
 | top-of-book spread / relative spread | csv | usable online | execution quality and friction proxy | execution filter / risk control | strong | stable by role and strike | changes strategy and execution | promote | spreads explode in upper/floor strikes |
 | top-of-book imbalance | csv | usable online | local book skew | direct signal / execution filter | weak-to-medium | product-dependent | exploratory | keep exploratory | strongest use may be conditional or counterparty-aware |
 | product role | combined | usable online | strike / family structural class | direct signal / risk control | strong | stable by construction plus raw evidence | changes strategy framing | promote | should be a first-class EDA output |
+| buyer / seller stability class | combined | usable online | distinguishes broad structural names from specialists | contextual filter / regime feature | medium | medium-high across 3 days | helps compress counterparties into reusable roles | promote cautiously | use role buckets before raw names |
+| symbol-dominance flags | combined | usable online | whether the active buyer or seller is the dominant participant for that symbol-side | contextual filter / danger-state feature | medium | high in upper/floor and `5300` | useful for strike-specific state detection | promote cautiously | stronger as context than as standalone alpha |
+| trade location bucket | combined | usable online | whether the print hits bid, ask, or lands inside spread | microstructure context | medium | high | useful feature-engineering primitive | promote | also materially improves the controlled model |
+| buyer-seller pair recurrence | combined | usable online with historical memory | flags repeated counterparty loops | interaction context | weak-to-medium | unclear from only 3 days | plausible but not ready | exploratory | pair ecology is interesting but still sample-limited |
 | trade-aligned future 5-step move | combined | EDA-only | short-horizon post-trade follow-through proxy | diagnostic | medium | product-dependent | changes validation and strategy framing | EDA-only calibration | do not turn into bot logic without careful proxy design |
 
 ## Product / Role Classification
@@ -194,8 +214,10 @@ Serious engineered features used in Phase 01:
 Important engineering choices:
 
 - kept top-of-book features as default because deeper-book levels are too sparse for reliable general use
-- used trade-aligned future `5`-step return only as EDA diagnostic, not as bot-ready signal
-- used buyer/seller buckets in one controlled model to test whether identity adds simple explanatory information beyond spread, imbalance, time bucket, and symbol
+- extended trade-aligned diagnostics to `1`, `5`, and `10` steps so counterparty-conditioned follow-through is not horizon-blind
+- turned raw name information into reusable role features: stability class, symbol-dominance flags, trade-location bucket, and recurrent-pair flags
+- ran a mini EDA on those new features rather than only listing them as ideas; this is captured in `derived_round_4_engineered_feature_summary.csv` and `derived_round_4_feature_model_comparison.csv`
+- kept buyer/seller identity buckets as a baseline comparison so we can measure whether engineered context adds more than just raw names
 
 ## Feature Promotion Decisions
 
@@ -206,7 +228,8 @@ Important engineering choices:
 | same-time `VEX` anchor linkage | promote to understanding | Signal Ledger | stable and strong across active vouchers | do not reinterpret as delayed-follow |
 | raw imbalance as universal direct alpha | keep exploratory | none | weaker and more product-dependent than role, spread, and concentration | reopen only with better conditional evidence |
 | direct dynamic alpha in `VEV_6000/6500` | reject | Negative Evidence | constant mids and zero notional invalidate it | reopen only if live data breaks the floor |
-| pure counterparty identity as standalone linear predictor | negative evidence / exploratory | Negative Evidence | controlled regression `R^2 = 0.0101` is too weak for standalone use | may still matter in interaction with product and side |
+| pure counterparty identity as standalone linear predictor | negative evidence / exploratory | Negative Evidence | controlled regression with raw buyer/seller buckets only reaches `R^2 = 0.0101`; names alone are too weak | may still matter in interaction with product, side, and trade location |
+| engineered counterparty/book context | promote to understanding | Signal Ledger | engineered context features lift the controlled model to `R^2 = 0.0183`, well above the raw-name model | still explanatory only and still sample-limited to 3 days |
 
 ## Multivariate Feature Map
 
@@ -214,7 +237,8 @@ Important engineering choices:
 | --- | --- | --- | --- | --- | --- |
 | same-time product returns | cross-product relation | correlation | `HYDRO` vs `VEX` is effectively zero (`0.0013`), while `VEX` vs `VEV_5000/5100/5200` remains strong (`0.7542`, `0.7600`, `0.7315`) | keep `HYDRO` separate, keep `VEX` as main voucher anchor | same-time linkage is not delayed predictiveness |
 | active-zone neighbor returns | cross-strike relation | correlation | local cross-strike correlation decays from `0.8985` (`5000-5100`) to `0.1688` (`5400-5500`) | active zone is linked but not homogeneous | spread and trade quality diverge sharply even where returns correlate |
-| trade-aligned feature set | future 5-step return | linear regression with counterparty buckets + spread + imbalance + time bucket + symbol | `R^2 = 0.0101`; counterparty coefficients are nonzero but weak as a simple linear signal | use counterparties as contextual features only | in-sample explanatory model only |
+| trade-aligned feature set | future 5-step return | linear regression with counterparty buckets + spread + imbalance + time bucket + symbol | `R^2 = 0.0101`; counterparty coefficients are nonzero but weak as a simple linear signal | use raw names as contextual features only | in-sample explanatory model only |
+| engineered context feature set | future 5-step return | linear regression with stability class, symbol-dominance flags, trade location, pair recurrence, plus base controls | `R^2 = 0.0183`; engineered context adds more than raw names alone | prefer compact engineered context over naked name logic | still explanatory only, not causal proof |
 | trade-aligned numeric features | redundancy / overlap | correlation + covariance | spread, depth, imbalance, and trade quantity are not interchangeable | keep spread and role context distinct from raw imbalance | numeric-only view misses symbolic counterparty structure |
 
 ## Redundancy / Dimensionality Check
@@ -224,6 +248,7 @@ Important engineering choices:
 | delta-1 anchor family | `VEX` linkage across active strikes | same-time correlations strongest in `5000-5200` and weaker as strikes move upper/floor | keep one anchor family | strategy should anchor vouchers to `VEX`, not to delayed-follow logic |
 | execution-friction family | relative spread dominates many upper/floor distinctions | option-book summary and family regime summary | keep spread as first-class execution filter | upper/floor branches need stricter passivity or exclusion |
 | counterparty structure family | concentration dominates identity details for many voucher strikes | concentration table shows top1 share `0.70+` in `5200`, `0.80+` in `5300`, and near `1.0` in upper/floor strikes | keep concentration and dominant-side features | raw name buckets alone are less important than role concentration |
+| trade-to-book context family | trade location adds information beyond spread and time bucket | engineered feature model and grouped summaries separate at-bid from at-ask prints materially | keep trade-location as a reusable primitive | strongest as a contextual or defensive feature |
 | sparse tape family | `VEV_4500/5000/5100` trade prints are too thin to support rich trade features | trade counts `3`, `3`, `3` | downgrade trade-tape conclusions for these strikes | use quote-led reasoning only unless more data appears |
 
 ## Cross-Product Relationships
@@ -260,7 +285,7 @@ Important engineering choices:
 
 | Model / Check | Response | Predictors / Controls | Data Slice | Result | Leakage / Overfit Check | Actionability |
 | --- | --- | --- | --- | --- | --- | --- |
-| linear regression | future 5-step return in bps after a trade | symbol, time bucket, top buyer bucket, top seller bucket, spread, imbalance, depth, quantity | aligned trade rows with complete price context | `R^2 = 0.0101`; counterparty identity adds weak simple linear explanatory power | explanatory only, in-sample only | use only as evidence that names are context, not standalone linear alpha |
+| linear regression ladder | future 5-step return in bps after a trade | baseline microstructure controls, then raw buyer/seller buckets, then engineered context features | aligned trade rows with complete price context | baseline `R^2 = 0.0076`, raw names `0.0101`, engineered context `0.0183` | explanatory only, in-sample only | use this as evidence to prefer engineered context over naked names |
 
 ## Analyses Run
 
@@ -285,12 +310,17 @@ Important engineering choices:
 | trade activity summary | run | required for symbol importance and scope | `derived_round_4_trade_summary_by_symbol.csv` |
 | counterparty concentration | run | main new Round 4 edge surface | `derived_round_4_counterparty_concentration.csv` |
 | counterparty stability | run | needed to judge signal vs noise | `derived_round_4_counterparty_stability.csv` |
+| counterparty stability scoring | run | compress names into reusable role classes | `derived_round_4_counterparty_stability_scores.csv` |
 | product mix by counterparty | run | specialization analysis | `derived_round_4_counterparty_product_mix.csv` |
+| side-aware counterparty markouts | run | check whether names matter more as buyer/seller contexts than as raw frequency | `derived_round_4_counterparty_markout_by_side.csv` |
+| buyer-seller pair ecology | run | detect recurring loops and pair-conditioned follow-through | `derived_round_4_counterparty_pair_summary.csv` |
+| trade-to-book context by counterparty | run | connect counterparties to spreads, depth, and trade location | `derived_round_4_counterparty_book_context.csv` |
 | option-book summary | run | strike-role and friction mapping | `derived_round_4_option_book_summary.csv` |
 | same-time cross-product relationships | run | anchor / separation decision | `derived_round_4_same_time_return_corr.csv` |
 | lead-lag checks | run | delayed-follow rejection or support | `derived_round_4_lead_lag_summary.csv` |
 | trade-aligned short-horizon diagnostics | run | contextual markout-like framing | `derived_round_4_trade_alignment_summary.csv` |
 | controlled model | run | does counterparty identity add simple information? | `derived_round_4_counterparty_controlled_regression.csv` |
+| engineered-feature mini EDA | run | test whether new usable features add signal or only description | `derived_round_4_engineered_feature_summary.csv`, `derived_round_4_feature_model_comparison.csv`, `derived_round_4_candidate_online_features.csv` |
 | optional clustering / PCA / MI | skipped | low ROI relative to already-strong direct findings | none |
 
 ## Facts
@@ -307,6 +337,7 @@ Important engineering choices:
 | active-zone middle regime | `VEX` linkage, local cross-strike correlation, concentration | structurally linked but execution texture diverges sharply by strike | do not treat as homogeneous basket | strong | `5000/5100` tape is sparse |
 | time bucket regime in upper strikes | relative spread by bucket | upper spreads worsen from early to mid/late | supports timing-aware passivity or no-trade | medium | trade counts themselves are not late-skewed overall |
 | overall counterparty timing | top buyer / seller counts by bucket | major names are active across the whole day, not only in one late window | weakens universal late-only story | medium | does not rule out product-specific late toxicity |
+| seller-dominant voucher regime | seller dominance, side-aware markouts, pair ecology | `Mark 22` seller flow in `5200+` aligns with favorable seller-side markouts and recurring pair loops | supports danger-state / veto framing | medium-high | still not a license for direct name-based aggression |
 
 ## Linked-Product / Book Framing Notes
 
@@ -335,6 +366,8 @@ Important engineering choices:
 | Signal | Feature Dependencies | What It Means | Why It Matters | Strategy Use | Stability | Confidence | Limitations / Caveats |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | counterparty specialization context | counterparty concentration, side asymmetry, product mix, stability | a small set of `Mark` names repeatedly occupy distinct product/side roles | new Round 4 information may be strategy-relevant | contextual filter / regime feature | stable across 3 days for top names | strong as context, weak as standalone alpha | do not use as a naked name-based trigger |
+| side-aware voucher seller pressure | seller-side markouts, dominance flags, pair ecology, strike concentration | repeated `Mark 22` seller flow in `5200+` aligns with favorable seller-side follow-through | strongest new counterparty-conditioned danger-state story | contextual veto / defensive regime feature | stable at raw-data level in `5200+` | medium-high | still not enough to justify direct name-only trading logic |
+| trade-to-book location context | trade location bucket, spread, depth | at-bid / at-ask / inside-spread prints separate trade follow-through better than raw names alone | helps bridge counterparties with microstructure | feature-engineering primitive | stable by construction | medium | use as a reusable building block, not as standalone trigger |
 | `VEX` same-time anchor still dominates voucher linkage | same-time corr + lead-lag rejection | vouchers still move with `VEX` mainly at lag `0`, not with delayed follow | preserves the core anchor framing from `round_3` | anchor / valuation context | stable | strong | not a claim about final trading style |
 | active voucher family is structurally linked but execution-fragmented | local cross-strike corr, spreads, trade counts, concentration | `5000-5300` is one family structurally, but not one clean trading basket | supports strike-specific logic and danger-state use | role-aware option-book logic | stable at raw-data level | strong | sparse `5000/5100` tape limits direct claims |
 
@@ -355,6 +388,7 @@ Important engineering choices:
 | `HYDRO` as option-family proxy | both are major algorithmic products | same-time return corr vs `VEX` is only `0.0013` | only if later strategy evidence shows cross-product utility |
 | upper/floor vouchers as normal direct inventory | all vouchers have full quote coverage | spreads explode and flow is nearly deterministic by counterparty | only if later validation proves a passive edge |
 | pure name-based linear alpha | named counterparties are the new feature | controlled model `R^2 = 0.0101` is too weak alone | only if interaction features with side/product materially strengthen it |
+| buyer-seller pair recurrence as ready-made alpha | repeated pairs can look very structured | recurrent pairs are interesting, but the strongest ones are mostly explained by strike concentration and only 3 days of sample | only if later runs or more data show stable incremental value over concentration and product-role context |
 | universal late-session deterioration from raw trade timing | Round 3 made this plausible | top counterparties are active across all three session buckets | reopen only at product-specific or run-specific level |
 
 ## Assumptions
@@ -402,10 +436,18 @@ Important engineering choices:
 
 - total price rows: `360000`
 - total trade rows: `4281`
+- controlled model ladder:
+  baseline `R^2 = 0.0076`
+  raw-name model `R^2 = 0.0101`
+  engineered-context model `R^2 = 0.0183`
 - top buyer counts:
   `Mark 01 = 1599`, `Mark 14 = 1127`, `Mark 38 = 733`, `Mark 55 = 598`
 - top seller counts:
   `Mark 22 = 1542`, `Mark 14 = 1045`, `Mark 38 = 745`, `Mark 55 = 600`
+- top side-aware markouts:
+  `Mark 22` seller `+20.48` bps at `5` steps
+  `Mark 67` buyer `+3.71` bps at `5` steps
+  `Mark 49` seller `-3.47` bps seller-aligned
 - same-time `VEX` correlations:
   `VEV_4000 = 0.5806`, `VEV_5000 = 0.7542`, `VEV_5100 = 0.7600`, `VEV_5200 = 0.7315`, `VEV_5300 = 0.6169`, `VEV_5400 = 0.4671`, `VEV_5500 = 0.2492`
 - upper/floor concentration:
