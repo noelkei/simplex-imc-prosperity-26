@@ -1,0 +1,7 @@
+feature_name,origin,online_usability,role,signal_strength,stability,actionability,lifecycle_decision,notes
+buyer_stability_class,counterparty stability scores,yes,context / regime,medium,medium-high,filter candidate,promote to understanding,captures specialist vs broad vs rotating buyer ecology
+seller_stability_class,counterparty stability scores,yes,context / regime,medium,medium-high,filter candidate,promote to understanding,especially relevant in concentrated voucher strikes
+buyer_is_symbol_dominant,symbol-side concentration map,yes,dominance flag,medium,high in upper/floor,feature-engineering candidate,promote cautiously,useful when one buyer structurally dominates a strike
+seller_is_symbol_dominant,symbol-side concentration map,yes,dominance flag,medium,high in upper/floor,feature-engineering candidate,promote cautiously,especially relevant for `Mark 22`-dominated seller flows
+pair_is_recurrent,buyer-seller pair recurrence,yes with historical memory,interaction context,weak-to-medium,unclear,exploratory,keep exploratory,"interesting for pair ecology, but sample is still only three days"
+trade_location_bucket,trade-to-book alignment,yes,microstructure context,medium,high,feature-engineering candidate,promote,connects counterparty events to whether prints hit bid/ask or occur inside spread

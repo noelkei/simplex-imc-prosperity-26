@@ -55,6 +55,24 @@ Proxy PnL is only for upload priority, early filtering, or debugging. It must
 not be presented as real PnL, and it must not drive final promotion unless an
 explicit deadline deferral is recorded.
 
+Platform-first ranking does not mean terminal PnL is the only decision input.
+When artifacts allow, also ask:
+
+- Did the run ever show meaningful positive edge before losing it?
+- Did the branch lose because of bad entries, bad exits, or oversized hold time?
+- Was the result concentrated in one product or strike?
+- Did final inventory dominate the terminal mark?
+- Was the hypothesis cleanly tested, or was the run contaminated by stronger sidecars?
+
+When products are structurally linked, do not stop at separate product totals.
+Also ask whether:
+
+- a derivative branch only worked when read relative to its underlying,
+- a toxic product is better interpreted as veto or anti-signal information than
+  as default inventory,
+- or the branch won in one leg and lost in the linked leg because the combined
+  thesis was mistimed rather than absent.
+
 ## Lightweight proxy calibration
 
 Before using a proxy to rank candidates, check whether comparable platform
@@ -88,6 +106,33 @@ decision-useful:
 Keep diagnostics practical. They should explain product PnL, fills, inventory,
 adverse selection, or a counterfactual. They should not replace platform-first
 ranking or promote weak proxies to real PnL.
+
+Useful path-quality diagnostics include, when artifacts allow:
+
+- peak intra-run PnL
+- end-from-peak or giveback
+- time to peak
+- max drawdown
+- positive-time ratio
+- late-session erosion
+- concentration of loss by product or strike
+- trade share taken after the intra-run peak
+- whether simple no-new-entry, giveback stop, cooldown, or hard-flat
+  counterfactuals would have preserved most of the edge
+
+Use these to separate `no edge` from `edge then reversal` or
+`execution-limited` branches. Do not force every metric on every run if the
+artifact quality is poor or the result would not change a decision.
+
+When a branch is neither a clean candidate nor a pure reject, validation
+should also ask whether it is best interpreted as a `signal-only candidate`:
+harmful or low-ROI as default inventory, but still useful as veto,
+anti-signal, timing context, or cross-product input.
+
+When a run reached unusually high peak PnL, validation should prefer asking
+"what built the peak and what destroyed it?" before declaring the branch dead.
+High-peak failures often belong in `rescue via retention`, `subset pruning`, or
+`use as overlay only`, not immediate rejection.
 
 ## Champion and challenger decisions
 
@@ -230,6 +275,24 @@ Every aggregate memory insight must link back to a per-run summary or raw
 artifact. Treat the memory as evidence input for later phases, not as official
 Prosperity rules.
 
+When a batch of runs materially changes direction, validation should also leave
+the next-wave design more informed than before. That usually means adding some
+combination of:
+
+- a hypothesis coverage note,
+- a branch status note (`promote`, `pause`, `prune`, `rescue via exits`,
+  `needs clean test`),
+- a branch posture note (`protect winner`, `rescue via retention`,
+  `execution-limited`, `inventory-limited`, `signal-only candidate`,
+  `no edge`),
+- a compact counterfactual backlog,
+- a carry-forward principles note when the batch resolved framing rather than
+  only ranking,
+- an anti-pattern or `do not repeat by default` note when evidence is strong
+  enough,
+- and any path-quality distinction that changes what kind of bot should be
+  built next.
+
 Post-run-discovered features, contradicted process hypotheses, and weakened
 multivariate relationships should enter the pipeline as post-run insight,
 targeted EDA question, strategy branch/counterfactual backlog item, or
@@ -256,6 +319,13 @@ Separate issues into:
 - Heuristic weakness: the approach is allowed but likely fragile, overfit, slow, or hard to debug.
 - Execution tuning issue: behavior is valid but likely needs parameter, sizing, or quoting adjustment.
 - Evidence gap: more data, logging, or reproduction is needed.
+
+When linked products exist, a failure should also ask whether the issue is:
+
+- bad inventory choice,
+- bad timing on a linked thesis,
+- or a branch that should survive only as signal/context rather than as a
+  normal trading leg.
 
 ## Reroute rules
 

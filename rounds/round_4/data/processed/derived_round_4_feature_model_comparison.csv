@@ -1,0 +1,4 @@
+model_name,target,r2,incremental_vs_baseline,notes
+baseline_microstructure,future_mid_return_bps_5,0.0076037702228506365,0.0,symbol + time bucket + spread + imbalance + depth + quantity
+counterparty_bucket_context,future_mid_return_bps_5,0.010083137015115096,0.002479366792264459,adds top buyer/seller identity buckets
+engineered_context_features,future_mid_return_bps_5,0.018305669039964778,0.010701898817114142,"adds stability class, symbol dominance, pair recurrence, and trade location"

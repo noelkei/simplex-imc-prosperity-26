@@ -2,7 +2,7 @@
 C06 Composite Inventory-Variant Trader — Round 3
 Spec: spec_c06_composite_inv.md (inherits from spec_c06_composite_base.md)
 Components: C01 (HYDROGEL MM) + C02 (VEX MM) + C04 (Bachelier Residual + Inventory Skew + Imbalance Confirm)
-Changed axis vs base: inventory skew, imbalance confirmation, TTE-cautious thresholds
+Changed axis vs base: inventory skew and imbalance confirmation
 Owner: amin
 """
 
@@ -70,14 +70,17 @@ MM_EDGE = 1
 IMBALANCE_LEAN = 1
 MAX_DELTA1_SPREAD = 8
 
-# Voucher residual reversion — TTE-cautious thresholds (wider entry vs base)
-ENTRY_THRESHOLD = 4.0        # wider than base (3.0) — TTE-5d caution
-EXIT_THRESHOLD = 0.8         # slightly wider exit
-VOUCHER_MM_OFFSET = 3        # wider passive offset
+# Voucher residual reversion — same core thresholds as base
+ENTRY_THRESHOLD = 3.0
+EXIT_THRESHOLD = 0.5
+VOUCHER_MM_OFFSET = 2
 MAX_VOUCHER_SPREAD = 20
 SIGMA_ABS_DEFAULT = 95.0
 TTE_DAYS = 5
 TTE_YEARS = TTE_DAYS / 365.0
+RESIDUAL_ANCHOR_ALPHA = 0.01
+SURFACE_MONO_TOL = 1.0
+SURFACE_CONVEX_TOL = 1.0
 
 # Inventory skew — STRONGER than base (C04 feature)
 INV_SKEW_FACTOR = 1.5           # delta-1 skew
@@ -145,6 +148,33 @@ def clamp_order_qty(qty: int, position: int, limit: int) -> int:
     return 0
 
 
+def get_observed_voucher_mids(order_depths) -> dict[str, float]:
+    mids = {}
+    for symbol in ALL_VOUCHER_STRIKES:
+        order_depth = order_depths.get(symbol)
+        if order_depth is None:
+            continue
+        mid = get_mid(order_depth)
+        if mid is not None:
+            mids[symbol] = mid
+    return mids
+
+
+def surface_guardrail_ok(observed_mids: dict[str, float]) -> bool:
+    ordered = sorted(observed_mids.items(), key=lambda item: VOUCHER_PRODUCTS[item[0]][0])
+    if len(ordered) >= 2:
+        for (_, left_mid), (_, right_mid) in zip(ordered, ordered[1:]):
+            if left_mid + SURFACE_MONO_TOL < right_mid:
+                return False
+    if len(ordered) >= 3:
+        mids = [mid for _, mid in ordered]
+        for idx in range(len(mids) - 2):
+            second_diff = mids[idx] - 2.0 * mids[idx + 1] + mids[idx + 2]
+            if second_diff < -SURFACE_CONVEX_TOL:
+                return False
+    return True
+
+
 # ---------------------------------------------------------------------------
 # Trader
 # ---------------------------------------------------------------------------
@@ -164,6 +194,9 @@ class Trader:
                 data = {}
 
         sigma_abs = data.get("sigma_abs", SIGMA_ABS_DEFAULT)
+        residual_anchor = data.get("voucher_residual_anchor", {})
+        if not isinstance(residual_anchor, dict):
+            residual_anchor = {}
 
         # ---- Get VEX mid for voucher pricing ----
         vex_mid = None
@@ -234,6 +267,7 @@ class Trader:
         # ---- Voucher products (Bachelier residual + inventory skew + imbalance confirm) ----
         if vex_mid is not None:
             # Compute Bachelier fairs
+            observed_voucher_mids = get_observed_voucher_mids(state.order_depths)
             fairs = {}
             for symbol in ALL_VOUCHER_STRIKES:
                 strike, _ = VOUCHER_PRODUCTS[symbol]
@@ -242,21 +276,7 @@ class Trader:
                     fair_val = max(vex_mid - strike, 0.0)
                 fairs[symbol] = fair_val
 
-            # Surface monotonicity guardrail
-            sorted_symbols = sorted(fairs.keys(), key=lambda s: VOUCHER_PRODUCTS[s][0])
-            surface_ok = True
-            for i in range(len(sorted_symbols) - 1):
-                if fairs[sorted_symbols[i]] < fairs[sorted_symbols[i + 1]] - 0.5:
-                    surface_ok = False
-                    break
-
-            # Compute aggregate family exposure for cross-symbol awareness
-            family_exposure = 0.0
-            for symbol in ALL_VOUCHER_STRIKES:
-                _, lim = VOUCHER_PRODUCTS[symbol]
-                pos = state.position.get(symbol, 0)
-                family_exposure += pos / lim
-            family_exposure /= max(len(ALL_VOUCHER_STRIKES), 1)
+            surface_ok = surface_guardrail_ok(observed_voucher_mids)
 
             for symbol in ALL_VOUCHER_STRIKES:
                 if symbol not in state.order_depths:
@@ -274,37 +294,36 @@ class Trader:
                 fair = fairs[symbol]
                 imbalance = get_imbalance(od)
 
-                # Residual
-                residual = voucher_mid - fair
+                raw_residual = voucher_mid - fair
+                anchor = residual_anchor.get(symbol, raw_residual)
+                reference_fair = fair + anchor
+                centered_residual = voucher_mid - reference_fair
 
                 # ---- C04 FEATURE: Strong per-symbol inventory skew ----
                 inv_adj = -VOUCHER_INV_SKEW * (position / limit)
-
-                # Add mild family-exposure nudge
-                family_nudge = -0.5 * family_exposure
-                adjusted_fair = fair + inv_adj + family_nudge
+                adjusted_fair = reference_fair + inv_adj
 
                 # ---- C04 FEATURE: Imbalance confirmation filter ----
                 # Adjust effective entry threshold based on imbalance agreement
                 eff_entry = ENTRY_THRESHOLD
                 if abs(imbalance) > IMBALANCE_CONFIRM_THRESHOLD:
-                    if residual < 0 and imbalance > IMBALANCE_CONFIRM_THRESHOLD:
+                    if centered_residual < 0 and imbalance > IMBALANCE_CONFIRM_THRESHOLD:
                         # Want to buy & imbalance suggests bid pressure (agrees)
                         eff_entry *= IMBALANCE_AGREE_DISCOUNT
-                    elif residual < 0 and imbalance < -IMBALANCE_CONFIRM_THRESHOLD:
+                    elif centered_residual < 0 and imbalance < -IMBALANCE_CONFIRM_THRESHOLD:
                         # Want to buy but ask pressure (disagrees)
                         eff_entry *= IMBALANCE_DISAGREE_PENALTY
-                    elif residual > 0 and imbalance < -IMBALANCE_CONFIRM_THRESHOLD:
+                    elif centered_residual > 0 and imbalance < -IMBALANCE_CONFIRM_THRESHOLD:
                         # Want to sell & ask pressure (agrees)
                         eff_entry *= IMBALANCE_AGREE_DISCOUNT
-                    elif residual > 0 and imbalance > IMBALANCE_CONFIRM_THRESHOLD:
+                    elif centered_residual > 0 and imbalance > IMBALANCE_CONFIRM_THRESHOLD:
                         # Want to sell but bid pressure (disagrees)
                         eff_entry *= IMBALANCE_DISAGREE_PENALTY
 
                 orders = []
 
-                if abs(residual) > eff_entry and surface_ok:
-                    if residual < -eff_entry:
+                if abs(centered_residual) > eff_entry and surface_ok:
+                    if centered_residual < -eff_entry:
                         # Underpriced: buy
                         for ask_price in sorted(od.sell_orders.keys()):
                             if ask_price < adjusted_fair - EXIT_THRESHOLD:
@@ -314,7 +333,7 @@ class Trader:
                                     orders.append(Order(symbol, ask_price, buy_qty))
                                     position += buy_qty
 
-                    elif residual > eff_entry:
+                    elif centered_residual > eff_entry:
                         # Overpriced: sell
                         for bid_price in sorted(od.buy_orders.keys(), reverse=True):
                             if bid_price > adjusted_fair + EXIT_THRESHOLD:
@@ -324,23 +343,32 @@ class Trader:
                                     orders.append(Order(symbol, bid_price, sell_qty))
                                     position += sell_qty
 
-                # Passive quotes around adjusted fair (wider offset than base)
+                # Passive quotes around adjusted fair
                 passive_size = max(1, limit // 15)
                 buy_price = int(round(adjusted_fair - VOUCHER_MM_OFFSET))
                 sell_price = int(round(adjusted_fair + VOUCHER_MM_OFFSET))
 
-                buy_qty = clamp_order_qty(passive_size, position, limit)
-                sell_qty = clamp_order_qty(-passive_size, position, limit)
+                if surface_ok:
+                    buy_qty = clamp_order_qty(passive_size, position, limit)
+                    sell_qty = clamp_order_qty(-passive_size, position, limit)
+                else:
+                    buy_qty = 0
+                    sell_qty = 0
 
                 if buy_qty > 0 and buy_price > 0:
                     orders.append(Order(symbol, buy_price, buy_qty))
                 if sell_qty < 0 and sell_price > 0:
                     orders.append(Order(symbol, sell_price, sell_qty))
 
+                residual_anchor[symbol] = (
+                    (1.0 - RESIDUAL_ANCHOR_ALPHA) * anchor
+                    + RESIDUAL_ANCHOR_ALPHA * raw_residual
+                )
                 result[symbol] = orders
 
         # ---- Persist state ----
         data["sigma_abs"] = sigma_abs
+        data["voucher_residual_anchor"] = residual_anchor
         if vex_mid is not None:
             data["prev_vex"] = vex_mid
 

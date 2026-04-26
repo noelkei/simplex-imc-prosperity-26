@@ -1,0 +1,8 @@
+idea_id,type,idea,why,priority
+R3-NEXT-01,diagnostic,Run baseline_state_logger first if we need richer per-iteration state/trade logs.,"Historical JSONs give book/PnL, but not enough detail about trade events, own fills, or exact state transitions.",high
+R3-NEXT-02,validation,Run candidate_c06_v01_centered_base against the historical legacy base.,Historical active-voucher runs weaken raw residual implementations but strengthen the case for the corrected centered-residual challenger.,high
+R3-NEXT-03,validation,Run candidate_c06_composite_inv after the centered base.,Historical active-voucher runs repeatedly hit short saturation; the clean inventory variant directly tests that risk control.,high
+R3-NEXT-04,learning variant,Create a hydro-only learner and a vex-only learner.,We still do not have isolated online evidence for C01 or C02; current data only tests them in pairs or composites.,high
+R3-NEXT-05,learning variant,Reopen ITM residual as a near-term learner/follow-up.,"The only positive tested family is ITM/VEX, led by r3_b02_itm_residual (+1409.371) and r3_b02_itm_anchor (+726.893).",high
+R3-NEXT-06,learning variant,Test an active-voucher subset without VEV_5000 (for example VEV_5100-5300 or VEV_5200-5300).,VEV_5000 was negative in 7/7 tested runs; VEV_5300 was positive in 7/7.,medium/high
+R3-NEXT-07,targeted EDA + variant,Recheck VEV_5400/5500 with platform-style evidence before discarding them.,"Historical activitiesLog spreads look tight there, which contradicts the raw-day EDA; however the one full-surface run still lost money.",medium

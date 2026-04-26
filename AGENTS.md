@@ -51,6 +51,18 @@
 - Avoid arbitrary limits on strategy exploration or implementation when ROI justifies additional candidates. Control complexity through evidence strength, non-duplication, feature budget, reviewed specs, distinct test axes, deadline risk, and validation capacity rather than fixed candidate or bot counts.
 - When `rounds/round_X/workspace/post_run_research_memory.md` exists for the active round, read it before EDA, understanding, strategy generation, spec writing, or trader variant work. Treat it as evidence input, not passive documentation; cite relevant insight IDs or descriptions when they influence decisions. Missing memory does not block work; record the absence only when it affects confidence or direction.
 - When validating new run artifacts, classify the run and apply the ROI-gated memory action: `update`, `update lightly`, or `no update`.
+- When validating new run artifacts, do not judge a branch by terminal PnL alone when richer artifacts exist. Use final PnL for ranking, but also inspect path quality, product or strike attribution, inventory shape, and whether the branch looks like `no edge`, `edge then reversal`, `execution-limited`, or `not cleanly tested`.
+- When products are structurally linked, validate and plan at the thesis level
+  as well as the product level. In particular, ask whether a derivative branch
+  only makes sense relative to its underlying, whether a toxic product is more
+  useful as veto information than as inventory, and whether attribution is
+  clean or contaminated by stronger sidecars.
+- Before proposing a new bot wave after a meaningful run batch, do a compact coverage audit: what hypotheses were tested cleanly, what was only tested inside contaminated composites, what paper-derived ideas remain partially tested, and what new hypotheses appeared from the runs themselves.
+- Before proposing a new bot wave after a meaningful run batch, also label each
+  surviving branch posture explicitly: `protect winner`, `rescue via
+  retention`, `execution-limited`, `inventory-limited`, `no edge`, or `not
+  cleanly tested`. Use that posture to decide whether the next wave should be
+  exploitative, retention-focused, a clean isolation pass, or a prune.
 - Specs must define a Feature Contract for each implemented feature and a Round-Specific Mechanics Contract for each relevant round mechanic, Trader method, or changed online field; implementation and validation must follow those contracts.
 - Consume current phase artifacts before rethinking earlier phases. Reopen an earlier phase only when material new evidence, a blocker, implementation behavior, validation, or debugging changes the decision.
 - Write phase artifacts for downstream agents. EDA and understanding should make clear what to use, what not to trust yet, and what to validate next.

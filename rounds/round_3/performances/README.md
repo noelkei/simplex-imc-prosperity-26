@@ -1,6 +1,8 @@
 # Round 3 Performances
 
-No performance artifacts have been added yet.
+Historical platform-style JSON artifacts are present under
+`amin/historical/`. Canonical run summaries for the current corrected
+challengers are still pending.
 
 Performance results are non-authoritative evidence. Preserve durable run evidence as `.md` and/or `.json` summaries using `docs/templates/run_summary_template.md`.
 

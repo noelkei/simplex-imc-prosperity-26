@@ -7,6 +7,9 @@ Strategy research converts facts and evidence into testable trading ideas. It sh
 - Wiki facts for products, limits, API behavior, matching, and runtime constraints.
 - EDA findings when available.
 - Understanding synthesis when available, especially strategy-relevant insights, what should be tried, what should not be trusted yet, and open risks.
+- Prior-round closeout or carry-forward artifacts only after a
+  `Prior-Round Compatibility Gate` says the previous round is compatible
+  enough to matter.
 - External paper research outputs when available, especially processed paper summaries and the explicit action classifications attached to them.
 - Post-run research memory when present, especially failure patterns, edge decomposition, counterfactual backlog, and negative evidence.
 - Playbook heuristics for fair value, inventory management, risk, execution, and iteration.
@@ -24,6 +27,29 @@ Strategy research converts facts and evidence into testable trading ideas. It sh
 - Execution behavior: when it buys, sells, rests orders, or stays idle.
 - Required state, if any, and whether it fits within `traderData` constraints.
 - Test plan and known failure modes.
+- A clear separation between:
+  - `validated carry-forward principles`
+  - `untested hypotheses`
+  - `default anti-patterns / do not repeat by default`
+
+When strategy work follows a meaningful validation batch, do not branch from
+terminal PnL alone. Treat strategy as a synthesis step over platform ranking,
+path-quality diagnostics, product or strike attribution, clean-vs-contaminated
+test coverage, and newly revealed failure or opportunity patterns.
+
+Make the branch posture explicit. A useful post-run strategy pass should say
+whether a family is:
+
+- `protect winner`
+- `edge then reversal`
+- `execution-limited`
+- `inventory-limited`
+- `no edge`
+- or `not cleanly tested`
+
+That label should drive what kind of next candidate is worth a slot. For
+example, `edge then reversal` usually justifies retention, subset-pruning, or
+exit redesign work before broad re-exploration.
 
 For active round workspaces, strategy work has two steps:
 
@@ -39,10 +65,16 @@ Implementation must not start from the candidate list alone.
 Good candidates are specific enough to compare and reject. Each candidate should include:
 
 - product scope
+- product or strike role when role changes risk, execution, or interpretation
 - strategy family or source of edge
 - evidence or heuristic basis, including linked EDA signals and understanding insight when available
 - feature evidence, multivariate relationships, process hypotheses, redundancy decisions, and regime assumptions
 - primary feature or fair-value model, plus any supporting features
+- signal class, such as valuation, microstructure, surface, or regime
+- whether the product is being used as alpha, anchor, overlay, veto, or monitor
+- whether the setup calls for aggression, passivity, or explicit no-trade behavior
+- natural trade horizon
+- the rule that is supposed to stop `edge -> giveback`
 - key assumptions
 - main risk
 - expected failure case
@@ -139,6 +171,59 @@ traceable:
 - Reject feature stacks that combine duplicate signals unless the decision trace explains the incremental behavior.
 - Route missing high-impact multivariate or process evidence back to targeted EDA instead of adding speculative features.
 
+## Post-Run Coverage Audit
+
+When a round already has meaningful run evidence, strategy should perform a
+compact coverage audit before proposing the next wave:
+
+- Which hypotheses were tested cleanly and are now sufficiently answered?
+- Which hypotheses were only tested inside contaminated composites and still
+  need an isolated or cleaner test?
+- Which paper-derived ideas changed validation posture only, versus genuinely
+  earning another live test?
+- Which branches showed `no edge`, versus `edge then reversal`, versus
+  `execution-limited` behavior?
+- Which branches reached meaningful intra-run edge or high peak PnL, but failed
+  to retain it?
+- Which products or strikes built the upside, and which gave it back?
+- Which products or subsets remain untested but still matter for current-round
+  ROI?
+
+When the next round or next wave may inherit from a prior one, this audit
+should also separate four outputs explicitly:
+
+- `retrospective work completed`
+- `validated carry-forward principles`
+- `untested hypotheses worth revisiting`
+- `default anti-patterns / rejected habits`
+
+This audit should stay decision-oriented. It exists to reduce duplicate waves
+and improve learning value, not to create unnecessary process overhead.
+
+When linked products or derivatives exist, the audit should also ask whether a
+signal was tested as:
+
+- standalone product logic,
+- underlying-anchored overlay logic,
+- or only inside a contaminated composite where attribution stayed unclear.
+
+## Derivative / Linked-Product Framing Check
+
+Before prioritizing a serious candidate in a linked-product or derivative-heavy
+round, answer these questions explicitly:
+
+- Is this product behaving like `delta-1`, ITM structural, active risk leg,
+  upper passive leg, floor/monitor, or another named role?
+- Is the main signal valuation, microstructure, surface, or regime?
+- Is the underlying being used as alpha, anchor, or both?
+- Does the setup ask for aggressive quoting, passive quoting, or no-trade?
+- What is the natural hold horizon?
+- What rule is supposed to prevent large giveback if the edge appears early?
+
+If these answers are not clear enough to influence candidate ranking, route the
+gap back to targeted EDA or understanding instead of hiding it inside a broad
+composite candidate.
+
 ## Branch Before Commit
 
 Strategy research may explore 5-10 conceptual branches when evidence supports
@@ -165,6 +250,10 @@ unlikely to change the candidate queue, or when implementation/validation has
 become the bottleneck. Also stop broad branching when a strong incumbent exists
 or deadline pressure makes more exploration low ROI.
 
+When run evidence is already rich, also stop broad branching when the remaining
+open questions are mostly hold/unwind design, subset pruning, execution
+refinement, or clean coverage of still-important but untested hypotheses.
+
 ## Dynamic or regime logic
 
 Before prioritizing dynamic thresholds, regime filters, CUSUM, HMM-style logic,
@@ -175,6 +264,14 @@ Use dynamic logic only when it can be observed online and it targets a concrete
 weakness in the current champion. If the evidence is weak, keep the idea as
 optional guidance or route it back to EDA instead of adding implementation
 complexity.
+
+Prefer an explicit complexity ladder:
+
+- simple no-trade, no-new-entry, or retention gates first
+- transformed thresholds, vetoes, or linked-product filters second
+- lightweight trend or slope logic third
+- hidden-state or HMM-style logic only after simpler online-usable controls
+  fail cleanly
 
 ## Historical bots
 
@@ -230,6 +327,9 @@ Strategy generation is done when:
 - each serious candidate respects the feature budget or records why it does not
 - each prioritized candidate has role, priority tier, evidence strength, and a short rationale
 - each prioritized candidate has a decision trace naming signals used, alternatives rejected or deferred, and why it has its queue position
+- when run evidence is already rich, each prioritized candidate also has a
+  branch posture such as `protect winner`, `rescue via retention`,
+  `clean isolation test`, `coverage gap`, or `prune`
 - weak or redundant ideas are rejected or deferred with a reason
 - exploration stop-rule reason is recorded before moving to specs
 - all high-ROI candidates are retained in a prioritized queue, while weak,

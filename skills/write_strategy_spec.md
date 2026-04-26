@@ -27,6 +27,12 @@ deadline-deferred implementation-ready strategy spec.
 - If a paper-derived idea survives into the spec, cite the processed paper file
   directly in the evidence traceability.
 - Copy or summarize the candidate decision trace so the spec shows signals used, alternatives considered, why this strategy was selected, and known caveats.
+- Preserve whether the candidate is entering spec as a validated carry-forward principle, an intentionally tested untested hypothesis, or a constrained reopen with explicit caveats.
+- When the spec follows a non-trivial run batch, preserve the key post-run framing that justified the candidate: whether it is a clean carry-forward, a path-rescue design, a coverage test, a paper-gap test, or a reopen-after-pruning hypothesis.
+- When the spec follows a rich run batch, preserve the branch posture
+  explicitly: `protect winner`, `rescue via retention`,
+  `execution-limited`, `inventory-limited`, `clean isolation test`,
+  `coverage gap`, or `prune/reopen with new thesis`.
 - Define a Feature Contract for every feature that changes trading behavior, including source fields, online availability, role, parameters, multivariate relationship, process assumption, redundancy decision, missing-signal behavior, `traderData` state requirements, and validation/invalidation checks.
 - When a processed paper contributes a method or simplification, pull its
   `Minimal Usable Adaptation` into the relevant `Feature Contract`, `Feature
@@ -39,6 +45,11 @@ deadline-deferred implementation-ready strategy spec.
   exclusions, validation caveats, or implementation boundaries when they matter
   to the selected candidate.
 - Define signal or fair value, execution, missing-signal behavior, position/risk handling, state/runtime, expected failures, validation checks, and allowed variant axes when useful.
+- When relevant, make the validation plan explicit about what kind of failure the run should distinguish: `no edge`, `edge then reversal`, `inventory-limited`, `execution-limited`, or `subset contamination`.
+- When derivatives or linked products matter, make the validation plan explicit
+  about whether the branch is being tested as standalone logic, underlying
+  anchor plus overlay, or a multi-leg bundle whose attribution must be checked.
+- When derivatives or linked products matter, fill a linked-product framing contract: product role, signal class, underlying role, trading posture, natural hold horizon, and the rule meant to prevent giveback.
 - Treat validation-only or utility papers as validation or implementation-quality
   inputs, not as core signal logic.
 - Explicitly exclude research-only dependencies from uploadable bot imports unless the wiki runtime docs allow them and the reviewed spec names that import.

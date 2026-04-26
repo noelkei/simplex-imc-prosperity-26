@@ -8,6 +8,8 @@ Use [`11_dataset_eda_framework.md`](11_dataset_eda_framework.md) to classify col
 
 - A concrete question, such as price stability, spread behavior, volume distribution, fill behavior, or PnL breakdown.
 - Data files, logs, or run artifacts available in the repo or from the platform.
+- Prior-round closeout artifacts only after a `Prior-Round Compatibility Gate`
+  says the prior round is `compatible` or `partially compatible`.
 - Wiki facts for interpreting fields, signs, products, and runtime context.
 - Playbook heuristics only as research prompts, not as proof.
 
@@ -18,6 +20,8 @@ Use [`11_dataset_eda_framework.md`](11_dataset_eda_framework.md) to classify col
 - Clear source references for the data used.
 - Data quality and filter notes: row counts, missingness, incomplete books, zero/blank mid prices, timestamp coverage, and which rows were used for each major result.
 - A distinction between observed evidence and strategy interpretation.
+- A decision on whether the work is fully covered by `raw-data EDA` or needs a
+  `retrospective run-informed EDA addendum`.
 - A recommendation for the next workstream: more EDA, strategy research, implementation, or validation.
 - A knowledge-transfer artifact another agent can use without rerunning EDA.
 
@@ -51,6 +55,14 @@ For active round workspaces, close EDA with the sections required by the round t
 - Reusable metrics
 - Downstream use / agent notes
 
+When multiple structurally linked products exist, also make the following
+explicit before closing EDA:
+
+- product or strike `role` classification
+- whether the product is more useful as inventory, anchor, overlay, veto, or monitor
+- whether the analysis is symbol-local or book-level
+- whether cross-product or cross-strike context changes decisions
+
 ## How to do EDA well
 
 Use a checklist, but keep it targeted. Start with the decision the analysis may affect: strategy choice, parameterization, risk handling, validation, or debugging. Skip checklist items that cannot change a decision under the current deadline.
@@ -62,6 +74,7 @@ Before analyzing, state:
 - exact question
 - decision the result may affect
 - time budget
+- whether prior-round evidence is being reused and, if so, the compatibility verdict
 
 Before deeper analysis, fill a Round Adaptation Check. It should identify current-round mechanics, products/limits, schema changes, new fields, and prior-round assumptions at risk. Only items that can change a downstream decision need detail.
 
@@ -71,6 +84,8 @@ Track product scope explicitly:
 - products with enough usable evidence
 - products likely needed in the trader
 - products deferred or excluded, with rationale
+- role classification when it could change strategy or risk, such as base,
+  anchor, ITM structural, active risk leg, upper passive leg, or floor/monitor
 
 Useful analysis dimensions include:
 
@@ -247,6 +262,42 @@ Close the check with one verdict:
 - `not worth implementing`
 
 This is a decision checklist, not a mandate to build a regime model.
+
+## Retrospective Run-Informed EDA
+
+When meaningful run evidence already exists for the round, decide explicitly
+whether the canonical EDA artifact should absorb it or whether a
+`retrospective run-informed EDA addendum` is lower-friction and clearer.
+
+Create or extend a retrospective EDA layer when run history changes the
+downstream decision in ways raw sample data alone cannot show. Typical cases:
+
+- product or strike roles only become clear after many real runs
+- cross-strike context matters more than isolated symbol quality
+- family-level exposure explains giveback better than per-symbol analysis
+- path-quality or post-peak churn changes whether the right response is prune,
+  no-trade, rescue-via-retention, or signal-only reuse
+- hold horizon is part of the signal definition
+
+When used, the retrospective EDA layer should keep the same discipline as raw
+EDA:
+
+- observed evidence separated from strategy interpretation
+- explicit source artifacts
+- negative evidence preserved
+- downstream use made explicit
+
+Good retrospective EDA questions include:
+
+- What product roles are now strong enough to treat as first-class features?
+- Which toxic products or strikes are better as veto / anti-signal inputs than
+  as default inventory?
+- Which family-level exposures or cross-product contexts matter more than
+  symbol-level views?
+- Which branches had real edge but failed on timing, hold horizon, or late
+  churn?
+- Which run-derived findings should be promoted into future EDA framing versus
+  left as strategy-only hypotheses?
 
 ## Product branching
 

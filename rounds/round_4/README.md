@@ -2,18 +2,20 @@
 
 Official round facts expected path: `../../docs/prosperity_wiki/rounds/round_4.md`
 
-The official Round 4 facts file is not present in this repository yet. Do not start round work until that curated wiki file exists.
+The official Round 4 facts file is now available at
+[`../../docs/prosperity_wiki/rounds/round_4.md`](../../docs/prosperity_wiki/rounds/round_4.md).
 
 Do NOT duplicate or modify official round facts here. This folder contains derived artifacts only.
 
-This round workspace is pre-created; no round work has begun yet.
+Round 4 ingestion has started. Use the workspace artifacts below for derived
+facts, caveats, and phase state.
 
 ## How To Start
 
-1. Confirm `../../docs/prosperity_wiki/rounds/round_4.md` exists.
+1. Open [`../../docs/prosperity_wiki/rounds/round_4.md`](../../docs/prosperity_wiki/rounds/round_4.md).
 2. Open [`workspace/_index.md`](workspace/_index.md).
-3. Keep all phases `NOT_STARTED` until official facts are available.
-4. Start phase 00 ingestion in [`workspace/00_ingestion.md`](workspace/00_ingestion.md).
+3. Continue or review phase 00 ingestion in [`workspace/00_ingestion.md`](workspace/00_ingestion.md).
+4. Use the uploaded raw CSVs in [`data/raw/`](data/raw/) to begin targeted EDA on counterparties and Round 3 carry-forward revalidation.
 5. Update the relevant phase context whenever status, decisions, blockers, or next actions change.
 
 ## How To Continue

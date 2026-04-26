@@ -27,6 +27,15 @@ What is assumed but not official.
 ## Evidence
 Commands, files, charts, logs, or observations.
 
+## Carry-forward principles
+Validated rules, framing, or reusable lessons that downstream work should keep using.
+
+## Untested hypotheses
+Ideas worth exploring later, clearly marked as not yet validated.
+
+## Do not repeat by default
+Rejected or de-prioritized habits, branches, or assumptions that should stay closed unless new evidence appears.
+
 ## Risks or caveats
 Known gaps, ambiguity, or fragility.
 
@@ -40,6 +49,16 @@ When handing off a platform or proxy run: strategy family, changed axis, tested 
 The next useful step and who can pick it up.
 ```
 
+If the handoff crosses rounds or explicitly reuses prior-round learning, add:
+
+```md
+## Prior-round compatibility
+- Source round:
+- Compatibility verdict: compatible | partially compatible | not compatible
+- What can be reused:
+- What must be revalidated:
+```
+
 ## Common handoff paths
 
 - EDA to strategy: provide observed patterns, feature/signal hypotheses, reproduction steps, evidence limits, and which signals are usable, exploratory, or not ready.
@@ -48,9 +67,10 @@ The next useful step and who can pick it up.
 - Strategy spec to implementation: provide reviewed spec, Feature Contract, Round-Specific Mechanics Contract, parameters, risk behavior, and tests.
 - Strategy/spec to variant generation: provide parent spec, insight being tested, allowed changed axes, feature toggle if applicable, expected effect, and validation check.
 - Implementation to validation: provide changed behavior, expected outputs, and known risk areas.
-- Validation to strategy: provide failures, logs, and whether the issue is factual, implementation-level, or heuristic.
+- Validation to strategy: provide failures, logs, whether the issue is factual, implementation-level, heuristic, or better reinterpreted as `signal-only candidate`, plus any carry-forward principles, untested hypotheses, and anti-patterns opened by the batch.
 - Platform run to post-run memory: provide run classification, knowledge delta, ROI-gated memory action, reusable failure patterns, edge decomposition, feature feedback, counterfactuals, negative evidence, and links back to per-run artifacts.
-- Round preparation to all workstreams: provide products, limits, manual/algorithmic separation, caveats, and data availability.
+- Round preparation to all workstreams: provide products, limits, manual/algorithmic separation, caveats, data availability, and the Prior-Round Compatibility Gate verdict when prior-round learning is being considered.
+- Round closeout to next round: provide the closeout artifact, validated carry-forward principles, untested hypotheses, anti-patterns, canonical/historical cleanup state, and compatibility guidance for the next round.
 
 ## Platform run handoff fields
 
@@ -71,6 +91,8 @@ When a handoff includes a platform or platform-style run, include these fields i
 - Keep docs operational: what to do, what to check, and what to hand off.
 - Prefer concise notes over long narratives.
 - Do not hide uncertainty; make it easy to find and resolve.
+- Do not mix validated evidence, transferable principles, untested hypotheses, and anti-patterns in one unlabeled summary.
+- If prior-round learning is reused, state the compatibility verdict explicitly instead of assuming continuity.
 
 ## Platform run provenance
 

@@ -1,0 +1,408 @@
+{
+  "processed_outputs": {
+    "candidate_online_features": "rounds/round_4/data/processed/derived_round_4_candidate_online_features.csv",
+    "corr_matrix": "rounds/round_4/data/processed/derived_round_4_same_time_return_corr.csv",
+    "counterparty_book_context": "rounds/round_4/data/processed/derived_round_4_counterparty_book_context.csv",
+    "counterparty_concentration": "rounds/round_4/data/processed/derived_round_4_counterparty_concentration.csv",
+    "counterparty_conditioned": "rounds/round_4/data/processed/derived_round_4_counterparty_conditioned_summary.csv",
+    "counterparty_markout": "rounds/round_4/data/processed/derived_round_4_counterparty_markout_by_side.csv",
+    "counterparty_markout_bar": "rounds/round_4/workspace/01_eda/artifacts/round_4_counterparty_markout_bar.png",
+    "counterparty_markout_by_symbol_side": "rounds/round_4/data/processed/derived_round_4_counterparty_markout_by_symbol_side.csv",
+    "counterparty_pair_summary": "rounds/round_4/data/processed/derived_round_4_counterparty_pair_summary.csv",
+    "counterparty_product_mix": "rounds/round_4/data/processed/derived_round_4_counterparty_product_mix.csv",
+    "counterparty_product_mix_heatmap": "rounds/round_4/workspace/01_eda/artifacts/round_4_counterparty_product_mix_heatmap.png",
+    "counterparty_regression": "rounds/round_4/data/processed/derived_round_4_counterparty_controlled_regression.csv",
+    "counterparty_side_asymmetry": "rounds/round_4/data/processed/derived_round_4_counterparty_side_asymmetry.csv",
+    "counterparty_stability": "rounds/round_4/data/processed/derived_round_4_counterparty_stability.csv",
+    "counterparty_stability_scores": "rounds/round_4/data/processed/derived_round_4_counterparty_stability_scores.csv",
+    "counterparty_summary": "rounds/round_4/data/processed/derived_round_4_counterparty_summary.csv",
+    "counterparty_time_bucket": "rounds/round_4/data/processed/derived_round_4_counterparty_time_bucket.csv",
+    "cov_matrix": "rounds/round_4/data/processed/derived_round_4_same_time_return_covariance.csv",
+    "engineered_feature_summary": "rounds/round_4/data/processed/derived_round_4_engineered_feature_summary.csv",
+    "family_conditioned": "rounds/round_4/data/processed/derived_round_4_family_conditioned_regime_summary.csv",
+    "family_liquidity": "rounds/round_4/data/processed/derived_round_4_family_liquidity_by_time_bucket.csv",
+    "feature_model_comparison": "rounds/round_4/data/processed/derived_round_4_feature_model_comparison.csv",
+    "lead_lag": "rounds/round_4/data/processed/derived_round_4_lead_lag_summary.csv",
+    "local_cross_strike": "rounds/round_4/data/processed/derived_round_4_local_cross_strike_context.csv",
+    "option_book_summary": "rounds/round_4/data/processed/derived_round_4_option_book_summary.csv",
+    "product_regime": "rounds/round_4/data/processed/derived_round_4_product_regime_summary.csv",
+    "quality_by_file": "rounds/round_4/data/processed/derived_round_4_data_quality_by_file.csv",
+    "quality_by_product": "rounds/round_4/data/processed/derived_round_4_data_quality_by_product.csv",
+    "relative_spread_boxplot": "rounds/round_4/workspace/01_eda/artifacts/round_4_relative_spread_boxplot.png",
+    "return_corr_heatmap": "rounds/round_4/workspace/01_eda/artifacts/round_4_return_corr_heatmap.png",
+    "top_buyer_timing": "rounds/round_4/workspace/01_eda/artifacts/round_4_top_buyer_timing.png",
+    "trade_alignment": "rounds/round_4/data/processed/derived_round_4_trade_alignment_summary.csv",
+    "trade_feature_corr": "rounds/round_4/data/processed/derived_round_4_trade_feature_corr.csv",
+    "trade_feature_covariance": "rounds/round_4/data/processed/derived_round_4_trade_feature_covariance.csv",
+    "trade_summary_by_symbol": "rounds/round_4/data/processed/derived_round_4_trade_summary_by_symbol.csv",
+    "trade_summary_by_symbol_day": "rounds/round_4/data/processed/derived_round_4_trade_summary_by_symbol_day.csv"
+  },
+  "summary_metrics": {
+    "concentration_top1_share_by_symbol_side": [
+      {
+        "dominant_counterparty": "Mark 38",
+        "side": "buyer",
+        "symbol": "HYDROGEL_PACK",
+        "top1_share": 0.5039138943248532
+      },
+      {
+        "dominant_counterparty": "Mark 14",
+        "side": "seller",
+        "symbol": "HYDROGEL_PACK",
+        "top1_share": 0.4960861056751467
+      },
+      {
+        "dominant_counterparty": "Mark 55",
+        "side": "buyer",
+        "symbol": "VELVETFRUIT_EXTRACT",
+        "top1_share": 0.4330195510499638
+      },
+      {
+        "dominant_counterparty": "Mark 55",
+        "side": "seller",
+        "symbol": "VELVETFRUIT_EXTRACT",
+        "top1_share": 0.4344677769732078
+      },
+      {
+        "dominant_counterparty": "Mark 14",
+        "side": "buyer",
+        "symbol": "VEV_4000",
+        "top1_share": 0.5248868778280543
+      },
+      {
+        "dominant_counterparty": "Mark 38",
+        "side": "seller",
+        "symbol": "VEV_4000",
+        "top1_share": 0.5271493212669683
+      },
+      {
+        "dominant_counterparty": "Mark 38",
+        "side": "buyer",
+        "symbol": "VEV_4500",
+        "top1_share": 0.6666666666666666
+      },
+      {
+        "dominant_counterparty": "Mark 22",
+        "side": "seller",
+        "symbol": "VEV_4500",
+        "top1_share": 0.6666666666666666
+      },
+      {
+        "dominant_counterparty": "Mark 38",
+        "side": "buyer",
+        "symbol": "VEV_5000",
+        "top1_share": 0.6666666666666666
+      },
+      {
+        "dominant_counterparty": "Mark 22",
+        "side": "seller",
+        "symbol": "VEV_5000",
+        "top1_share": 0.6666666666666666
+      },
+      {
+        "dominant_counterparty": "Mark 38",
+        "side": "buyer",
+        "symbol": "VEV_5100",
+        "top1_share": 0.6666666666666666
+      },
+      {
+        "dominant_counterparty": "Mark 22",
+        "side": "seller",
+        "symbol": "VEV_5100",
+        "top1_share": 0.6666666666666666
+      },
+      {
+        "dominant_counterparty": "Mark 14",
+        "side": "buyer",
+        "symbol": "VEV_5200",
+        "top1_share": 0.7021276595744681
+      },
+      {
+        "dominant_counterparty": "Mark 22",
+        "side": "seller",
+        "symbol": "VEV_5200",
+        "top1_share": 0.9787234042553192
+      },
+      {
+        "dominant_counterparty": "Mark 01",
+        "side": "buyer",
+        "symbol": "VEV_5300",
+        "top1_share": 0.8048780487804879
+      },
+      {
+        "dominant_counterparty": "Mark 22",
+        "side": "seller",
+        "symbol": "VEV_5300",
+        "top1_share": 0.9939024390243902
+      },
+      {
+        "dominant_counterparty": "Mark 01",
+        "side": "buyer",
+        "symbol": "VEV_5400",
+        "top1_share": 0.9528985507246376
+      },
+      {
+        "dominant_counterparty": "Mark 22",
+        "side": "seller",
+        "symbol": "VEV_5400",
+        "top1_share": 1.0
+      },
+      {
+        "dominant_counterparty": "Mark 01",
+        "side": "buyer",
+        "symbol": "VEV_5500",
+        "top1_share": 0.977124183006536
+      },
+      {
+        "dominant_counterparty": "Mark 22",
+        "side": "seller",
+        "symbol": "VEV_5500",
+        "top1_share": 1.0
+      },
+      {
+        "dominant_counterparty": "Mark 01",
+        "side": "buyer",
+        "symbol": "VEV_6000",
+        "top1_share": 1.0
+      },
+      {
+        "dominant_counterparty": "Mark 22",
+        "side": "seller",
+        "symbol": "VEV_6000",
+        "top1_share": 1.0
+      },
+      {
+        "dominant_counterparty": "Mark 01",
+        "side": "buyer",
+        "symbol": "VEV_6500",
+        "top1_share": 1.0
+      },
+      {
+        "dominant_counterparty": "Mark 22",
+        "side": "seller",
+        "symbol": "VEV_6500",
+        "top1_share": 1.0
+      }
+    ],
+    "controlled_regression_r2": 0.0183056690399647,
+    "dominant_symbol_by_trade_count": {
+      "HYDROGEL_PACK": 1022,
+      "VELVETFRUIT_EXTRACT": 1381,
+      "VEV_4000": 442,
+      "VEV_5300": 164,
+      "VEV_5400": 276,
+      "VEV_5500": 306,
+      "VEV_6000": 317,
+      "VEV_6500": 317
+    },
+    "feature_model_comparison": [
+      {
+        "incremental_vs_baseline": 0.0,
+        "model_name": "baseline_microstructure",
+        "notes": "symbol + time bucket + spread + imbalance + depth + quantity",
+        "r2": 0.0076037702228506,
+        "target": "future_mid_return_bps_5"
+      },
+      {
+        "incremental_vs_baseline": 0.0024793667922644,
+        "model_name": "counterparty_bucket_context",
+        "notes": "adds top buyer/seller identity buckets",
+        "r2": 0.010083137015115,
+        "target": "future_mid_return_bps_5"
+      },
+      {
+        "incremental_vs_baseline": 0.0107018988171141,
+        "model_name": "engineered_context_features",
+        "notes": "adds stability class, symbol dominance, pair recurrence, and trade location",
+        "r2": 0.0183056690399647,
+        "target": "future_mid_return_bps_5"
+      }
+    ],
+    "option_book_rel_spread_bps": {
+      "VEV_4000": 166.3389,
+      "VEV_4500": 211.2479,
+      "VEV_5000": 237.6412,
+      "VEV_5100": 260.1363,
+      "VEV_5200": 312.6965,
+      "VEV_5300": 493.5511,
+      "VEV_5400": 1147.0759,
+      "VEV_5500": 3227.4352,
+      "VEV_6000": 20000.0,
+      "VEV_6500": 20000.0
+    },
+    "option_book_trade_counts": {
+      "VEV_4000": 442,
+      "VEV_4500": 3,
+      "VEV_5000": 3,
+      "VEV_5100": 3,
+      "VEV_5200": 47,
+      "VEV_5300": 164,
+      "VEV_5400": 276,
+      "VEV_5500": 306,
+      "VEV_6000": 317,
+      "VEV_6500": 317
+    },
+    "price_rows_total": 360000,
+    "products_present": [
+      "HYDROGEL_PACK",
+      "VELVETFRUIT_EXTRACT",
+      "VEV_4000",
+      "VEV_4500",
+      "VEV_5000",
+      "VEV_5100",
+      "VEV_5200",
+      "VEV_5300",
+      "VEV_5400",
+      "VEV_5500",
+      "VEV_6000",
+      "VEV_6500"
+    ],
+    "stability_class_counts": {
+      "stable broad": 4,
+      "stable specialist": 3
+    },
+    "top_buyers": {
+      "Mark 01": 1599,
+      "Mark 14": 1127,
+      "Mark 22": 42,
+      "Mark 38": 733,
+      "Mark 55": 598,
+      "Mark 67": 165
+    },
+    "top_counterparty_side_markouts_5": [
+      {
+        "avg_side_alpha_bps_5": 20.4770863534105,
+        "counterparty": "Mark 22",
+        "side": "seller",
+        "trade_count": 1542
+      },
+      {
+        "avg_side_alpha_bps_5": 16.359065711220225,
+        "counterparty": "Mark 22",
+        "side": "buyer",
+        "trade_count": 42
+      },
+      {
+        "avg_side_alpha_bps_5": 3.7074207641028343,
+        "counterparty": "Mark 67",
+        "side": "buyer",
+        "trade_count": 165
+      },
+      {
+        "avg_side_alpha_bps_5": 0.8142813576627344,
+        "counterparty": "Mark 38",
+        "side": "buyer",
+        "trade_count": 733
+      },
+      {
+        "avg_side_alpha_bps_5": 0.3791938290730762,
+        "counterparty": "Mark 55",
+        "side": "buyer",
+        "trade_count": 598
+      },
+      {
+        "avg_side_alpha_bps_5": 0.004117136828921,
+        "counterparty": "Mark 01",
+        "side": "seller",
+        "trade_count": 244
+      },
+      {
+        "avg_side_alpha_bps_5": -0.0990648057487618,
+        "counterparty": "Mark 55",
+        "side": "seller",
+        "trade_count": 600
+      },
+      {
+        "avg_side_alpha_bps_5": -0.2817046366167495,
+        "counterparty": "Mark 14",
+        "side": "seller",
+        "trade_count": 1045
+      },
+      {
+        "avg_side_alpha_bps_5": -0.5967166968131397,
+        "counterparty": "Mark 38",
+        "side": "seller",
+        "trade_count": 745
+      },
+      {
+        "avg_side_alpha_bps_5": -3.465819507896738,
+        "counterparty": "Mark 49",
+        "side": "seller",
+        "trade_count": 105
+      }
+    ],
+    "top_regression_coefficients": [
+      {
+        "coefficient": 174.93296489073728,
+        "feature": "trade_location_bucket_inside_spread"
+      },
+      {
+        "coefficient": -97.75613906410156,
+        "feature": "symbol_VEV_5500"
+      },
+      {
+        "coefficient": 97.64792813707894,
+        "feature": "symbol_VEV_5100"
+      },
+      {
+        "coefficient": -88.45870972679889,
+        "feature": "trade_location_bucket_at_or_below_bid"
+      },
+      {
+        "coefficient": 87.47569501919058,
+        "feature": "symbol_VEV_5000"
+      },
+      {
+        "coefficient": -86.47425516393827,
+        "feature": "trade_location_bucket_at_or_above_ask"
+      },
+      {
+        "coefficient": -76.99496907382303,
+        "feature": "symbol_VEV_5300"
+      },
+      {
+        "coefficient": -76.3583534162478,
+        "feature": "symbol_VEV_5400"
+      },
+      {
+        "coefficient": -71.26480840567093,
+        "feature": "pair_is_recurrent"
+      },
+      {
+        "coefficient": -61.70615823834979,
+        "feature": "symbol_seller_top1_share"
+      },
+      {
+        "coefficient": 58.559133000285776,
+        "feature": "symbol_VEV_5200"
+      },
+      {
+        "coefficient": 57.74724057999551,
+        "feature": "symbol_VEV_4500"
+      }
+    ],
+    "top_sellers": {
+      "Mark 01": 244,
+      "Mark 14": 1045,
+      "Mark 22": 1542,
+      "Mark 38": 745,
+      "Mark 49": 105,
+      "Mark 55": 600
+    },
+    "trade_rows_total": 4281,
+    "trade_symbols_present": [
+      "HYDROGEL_PACK",
+      "VELVETFRUIT_EXTRACT",
+      "VEV_4000",
+      "VEV_4500",
+      "VEV_5000",
+      "VEV_5100",
+      "VEV_5200",
+      "VEV_5300",
+      "VEV_5400",
+      "VEV_5500",
+      "VEV_6000",
+      "VEV_6500"
+    ]
+  }
+}

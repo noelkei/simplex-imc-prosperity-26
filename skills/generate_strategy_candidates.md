@@ -29,6 +29,14 @@ from existing ingestion, EDA, and understanding evidence.
 - Classify each materially relevant processed paper by actual usage:
   `used`, `hybrid`, `validation`, `rejected`, or `inspiration-only`.
 - When post-run memory includes a Run Knowledge Index, check tested strategy families, changed axes, tested features/signals, knowledge deltas, and memory actions before adding a new branch.
+- When post-run memory or recent run synthesis exists, do a compact hypothesis-coverage pass before adding a new branch: identify which ideas were tested cleanly, which were only tested inside composites, which remain genuinely untested, and which were already rejected strongly enough that they need a new thesis before reopening.
+- Separate the strategy input ledger explicitly into `validated carry-forward principles`, `untested hypotheses`, and `default anti-patterns` before writing new candidates.
+- When post-run memory or recent run synthesis exists, also identify branch
+  posture explicitly: `protect winner`, `rescue via retention`,
+  `execution-limited`, `inventory-limited`, `no edge`, or `not cleanly tested`.
+  Use that posture to decide whether the next candidate should be a carry
+  forward, an exit/hold redesign, a cleaner isolation test, a coverage fill,
+  or a prune.
 - Read the Understanding Assumptions Carried Forward and EDA Round Adaptation Check before branching. Fill Round Coverage Check for current-round mechanics, fields, or product behaviors that could affect candidate selection.
 - Consume existing understanding, EDA summaries, and candidates before adding new ideas.
 - Generate only non-duplicative candidates tied to linked EDA signals, feature evidence, regime assumptions, understanding insights, playbook heuristics, or explicit strategy assumptions.
@@ -38,6 +46,21 @@ from existing ingestion, EDA, and understanding evidence.
 - Generate conceptual branches by product or source of edge before prioritizing.
 - Evaluate multi-product combinations conceptually when relevant, including compatibility, risk interaction, execution alignment, and cross-product dependency.
 - Use post-run failure patterns, edge decomposition, counterfactual backlog, and negative evidence when present to prune weak branches and prioritize high-ROI candidates.
+- Distinguish branch outcomes when run evidence exists:
+  - `edge clean`
+  - `edge then reversal`
+  - `execution-limited`
+  - `inventory-limited`
+  - `no edge`
+  - `not cleanly tested`
+  Use that classification to choose whether the next candidate should be a promotion, an exit/redesign variant, a cleaner isolation test, or a prune decision.
+- For linked products, also ask whether the branch was tested as standalone
+  logic, linked-overlay logic, or only inside a contaminated composite. Do not
+  treat those as equivalent coverage.
+- For linked products or derivative-like books, fill the derivative / linked-product framing check before prioritizing a serious candidate: product role, signal class, underlying role, trading posture, natural hold horizon, and giveback prevention rule.
+- When a branch reached meaningful peak PnL or path quality before failing,
+  prefer one or two retention-focused or subset-pruned candidates over broad
+  family reopening.
 - Enforce the feature budget for each serious candidate: at most one primary edge feature or fair-value model, up to two supporting execution/risk filters, plus diagnostics that do not change decisions.
 - Treat outputs from `arch`, `ruptures`, `sklearn`, `pingouin`, `statsmodels`, PCA/loadings, clustering, mutual information, or notebooks as evidence for simpler trading decisions, not as a reason to add offline model complexity. If a candidate relies on a research-only feature, latent state, PCA component, or cluster label, require an online proxy or route it back to EDA/spec before implementation.
 - Require each serious candidate to link `feature -> signal -> decision -> expected edge -> validation check`.
@@ -55,10 +78,12 @@ from existing ingestion, EDA, and understanding evidence.
 - Record rejected or deferred alternatives and why they were pruned.
 - Prune candidates whose family/axis/feature combination was already tested and marked `duplicate`, `tested-reject`, `discard`, or `superseded`, unless new evidence makes the retest decision-relevant.
 - Reject or defer candidates that rely on prior-round product behavior, fair values, limits, or mechanics without current-round evidence.
+- Do not reopen a prior anti-pattern or rejected habit unless new evidence, a changed current-round mechanic, or a compatibility-qualified context justifies it.
 - Prefer high-ROI Counterfactual Backlog items with `untested` or worth-retesting status when they have a clear falsification check and match the current champion weakness.
+- When a new bot wave is being planned, prefer candidates that maximize decision value per run slot: champion tests, high-ROI carry-forwards, clean paper-gap tests, and targeted coverage of still-important products or subsets. Do not refill a large wave with low-information duplicates just because run capacity exists.
 - Record a decision trace for serious and prioritized candidates: signals used,
-  alternatives rejected or deferred, reason selected, role, priority tier, and
-  caveat.
+  alternatives rejected or deferred, reason selected, role, priority tier,
+  carry-forward principle vs untested hypothesis status, and caveat.
 - Record whether processed paper input was absent, used directly, blended with
   data-driven evidence, used only for validation, rejected, or kept as
   inspiration-only.

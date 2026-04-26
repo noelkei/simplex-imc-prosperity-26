@@ -24,6 +24,7 @@ Use this skill to keep phase state synchronized without duplicating phase workfl
 - Update only the minimum state fields needed: status, owner/reviewer, review outcome, blockers, linked artifact, next priority action, deadline risk, and recently changed artifacts.
 - Before closure, confirm the required artifact exists and review rules are satisfied. Exception: for Phase `02b External Paper Research`, allow operational `COMPLETED` once the prompt exists and at least one processed paper exists, or when the user explicitly skips it with reason.
 - For Phase `02b External Paper Research`, also keep the paper-pipeline state synchronized enough for resumption: wait state, current raw-set coverage, and whether the phase is only operationally complete or fully processed for the local raw set.
+- When a phase closure is part of round closeout, also check whether `_index.md`, the phase context, and the closeout artifact agree on whether the round is still active, paused, or retrospective-only.
 - If status cannot be safely reconciled, preserve or set `BLOCKED` and record the mismatch as the blocker.
 
 ## Boundaries

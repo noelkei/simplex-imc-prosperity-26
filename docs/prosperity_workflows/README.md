@@ -18,6 +18,12 @@ When a fact is missing, ambiguous, or inconsistent, record a caveat. Do not inve
 
 For active round work, start from `rounds/round_X/workspace/_index.md`, then read the relevant phase context and the task-specific workflow below.
 
+When a round may inherit useful structure from a prior round, do not carry
+strategy conclusions forward by default. First run a `Prior-Round
+Compatibility Gate`: products, mechanics, fields, and market structure must be
+checked and labeled `compatible`, `partially compatible`, or `not compatible`
+before prior-round evidence changes current-round direction.
+
 When starting a phase, confirm required inputs and update the phase context. When continuing, update the existing artifact instead of creating duplicates. When closing, check the exit criteria, update `_index.md`, update the phase context, and leave a concrete next action.
 
 When `rounds/round_X/workspace/post_run_research_memory.md` exists, treat it as
@@ -28,11 +34,24 @@ the memory as official Prosperity rules.
 Keep the lightweight gates aligned across phases:
 
 - EDA owns the feature lifecycle, Round Adaptation Check, compact multivariate/redundancy layer, and process/distribution hypotheses.
+- EDA also decides whether meaningful run history requires a
+  `retrospective run-informed EDA addendum`, instead of leaving path-quality,
+  product-role, or cross-product lessons buried in validation only.
 - Understanding compresses promoted signals, multivariate/process evidence, redundancy decisions, and assumptions carried forward.
 - External paper research converts understanding outputs into a grounded external research prompt, may use controlled online shortlist-building or metadata verification when needed, leaves strategy free to proceed after prompt generation, and distills local paper inputs into strategy-useful summaries without treating papers as truth.
-- Strategy enforces the feature budget and Round Coverage Check.
+- Strategy enforces the feature budget and Round Coverage Check, and should
+  separate `validated carry-forward principles`, `untested hypotheses`, and
+  `default anti-patterns` once meaningful run evidence exists.
 - Specs define the Feature Contract, including online proxies and invalidation checks for process or multivariate assumptions, and Round-Specific Mechanics Contract.
 - Validation owns the ROI-gated run update decision: `update`, `update lightly`, or `no update`, including process/multivariate feedback when it changes future decisions.
+- When runs are already rich, strategy and validation should also classify
+  branch posture explicitly: clean winner, rescue-via-retention,
+  execution-limited, inventory-limited, no-edge, or not-cleanly-tested. Use
+  that classification to shape the next wave instead of reacting to terminal
+  PnL alone.
+- Handoffs and closeouts should leave a reusable package, not just scattered
+  files: evidence, carry-forward principles, untested hypotheses, and
+  anti-patterns should be easy to find and explicitly separated.
 
 ## Research Environment Use
 

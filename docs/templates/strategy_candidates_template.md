@@ -20,6 +20,28 @@ focus instead of imposing a hard cap.
 
 When processed papers exist, record a paper intake pass before broad branching.
 
+## Carry-Forward Ledger
+
+Separate what is already learned from what still needs proof.
+
+### Validated carry-forward principles
+
+| Principle | Source Artifact | Why It Still Matters | Current-Round Revalidation Need |
+| --- | --- | --- | --- |
+| PRINCIPLE | ARTIFACT | REASON | none / light / full |
+
+### Untested hypotheses
+
+| Hypothesis | Origin | Why It Is Still Interesting | Clean Test Needed |
+| --- | --- | --- | --- |
+| HYPOTHESIS | post-run memory / closeout / EDA / paper / other | REASON | TEST |
+
+### Default anti-patterns
+
+| Anti-Pattern | Evidence Source | Why To Avoid | Reopen Only If |
+| --- | --- | --- | --- |
+| ANTI_PATTERN | ARTIFACT | REASON | CONDITION |
+
 ## Paper Intake Pass
 
 | Paper ID | Current-Round Mapping | Strategy Use | Candidate Impact | Note |
@@ -98,6 +120,14 @@ Use this for multi-product rounds before writing specs. Mark `not applicable` wh
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | CANDIDATE_ID | primary / secondary / exploratory / mechanics-only / manual-only / deferred / rejected | data-driven / paper-inspired / hybrid / paper-rejected | PRODUCT | EDGE | FEATURE_OR_FV | FEATURES_OR_NONE | direct signal / execution filter / risk control / diagnostic | SIGNALS | FEATURES | PROCESSED_PAPER_FILE_OR_NONE | used / hybrid / validation / rejected / inspiration-only / none | corr / covariance / regression / lead-lag / redundancy / none | PROCESS_OR_NONE | keep / merge / downgrade / not checked / not applicable | yes / no / unknown | REGIMES | INSIGHT | ASSUMPTIONS | RISK | FEATURE_BUDGET_RATIONALE | WHY_KEEP_OR_PRUNE | strong / medium / weak / contradictory | high / medium / low | high / medium / low | high / medium / low | high / medium / low | spec-first / implement-first / validate-next / backlog / defer | WAVE_OR_NONE | draft |
 
+## Derivative / Linked-Product Framing
+
+Use this when products are linked or behave like a small book rather than isolated symbols.
+
+| Candidate ID | Product Role | Signal Class | Underlying Role | Trading Posture | Natural Hold Horizon | Giveback Prevention Rule | Cross-Product Dependency | Notes |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| CANDIDATE_ID | delta-1 / ITM / active / upper / floor / other | valuation / microstructure / surface / regime / mixed | alpha / anchor / both / not applicable | aggressive / passive / no-trade / conditional | scalp / short hold / medium hold / session state / unknown | RULE | none / low / medium / high | NOTE |
+
 ## Rejected Or Deferred Ideas
 
 | Idea | Source Classification | Paper Idea Handling | Reason | Evidence Gap Or Risk |
@@ -121,6 +151,11 @@ alternatives.
 | Candidate | Signals Used | Alternatives Rejected Or Deferred | Reason For Priority | Caveat |
 | --- | --- | --- | --- | --- |
 | CANDIDATE_ID | SIGNALS | ALTERNATIVES | REASON | CAVEAT |
+
+Decision-trace reminder:
+
+- Do not present an untested hypothesis as a validated carry-forward principle.
+- Do not reopen an anti-pattern without recording the new evidence or changed context.
 
 ## Exploration Stop Rule
 
