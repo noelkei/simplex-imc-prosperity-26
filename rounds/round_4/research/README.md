@@ -16,6 +16,18 @@ research/
 - `papers_md/`: Markdown conversions of raw papers.
 - `papers_processed/`: concise strategy-useful summaries.
 
+Round-local organization may use subfolders inside `papers_processed/` when it
+improves clarity, for example:
+
+- `carry_forward/` for prior-round processed references still useful in the
+  current round
+- `manual_reference/` for papers relevant only to the manual challenge
+- `knowledge_draft/` for non-canonical draft notes that have not come from the
+  current local `papers_raw -> papers_md` pipeline
+
+When subfolders are used, `round4_raw_derived` papers should still be treated as
+the highest-authority processed inputs for current-round strategy generation.
+
 ## Incremental Rules
 
 - If a file exists in `papers_raw/` but not in `papers_md/`, convert only that file.

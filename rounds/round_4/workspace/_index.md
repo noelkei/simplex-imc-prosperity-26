@@ -9,10 +9,11 @@
 
 ## Current Next Priority Action
 
-Open `03 Strategy` using the completed understanding package and the
-non-blocking `02b` research prompt. Treat external paper research as optional
-incremental input while Batch 1 papers move from `papers_md/` to
-`papers_processed/`.
+Open `Phase 06` and validate the implemented Wave 2 bots in grouped order.
+Default start:
+`r4_w2_01`, `r4_w2_08`, `r4_w2_13`, then one winner-style adapted probe from
+`r4_w2_07` or `r4_w2_15`. Keep Pack `C/E/F` canonical validation as the next
+evidence expansion after the first Wave 2 validation slice.
 
 ## Phase Status
 
@@ -21,11 +22,11 @@ incremental input while Batch 1 papers move from `papers_md/` to
 | 00 Ingestion | READY_FOR_REVIEW | Codex | Unassigned | [`00_ingestion.md`](00_ingestion.md) / [`phase_00_ingestion_context.md`](phase_00_ingestion_context.md) | Review pending |
 | 01 EDA | READY_FOR_REVIEW | Codex | Unassigned | [`01_eda/eda_round_4_counterparty_and_option_book.md`](01_eda/eda_round_4_counterparty_and_option_book.md) / [`phase_01_eda_context.md`](phase_01_eda_context.md) | Review pending |
 | 02 Understanding | READY_FOR_REVIEW | Codex | Unassigned | [`02_understanding.md`](02_understanding.md) / [`phase_02_understanding_context.md`](phase_02_understanding_context.md) | Review pending |
-| 02b External Paper Research | IN_PROGRESS | Codex | Unassigned | [`02b_external_paper_research.md`](02b_external_paper_research.md) / [`phase_02b_external_paper_research_context.md`](phase_02b_external_paper_research_context.md) | No material blocker; Batch 1 processed summaries pending |
-| 03 Strategy | NOT_STARTED | Unassigned | Unassigned | [`03_strategy_candidates.md`](03_strategy_candidates.md) / [`phase_03_strategy_context.md`](phase_03_strategy_context.md) | None recorded |
-| 04 Spec | NOT_STARTED | Unassigned | Unassigned | [`04_strategy_specs/`](04_strategy_specs/) / [`phase_04_spec_context.md`](phase_04_spec_context.md) | None recorded |
-| 05 Implementation | NOT_STARTED | Unassigned | Unassigned | [`phase_05_implementation_context.md`](phase_05_implementation_context.md) | Reviewed strategy spec required |
-| 06 Testing/performance | NOT_STARTED | Unassigned | Unassigned | [`phase_06_testing_context.md`](phase_06_testing_context.md) | Bot candidate required |
+| 02b External Paper Research | COMPLETED | Codex | Unassigned | [`02b_external_paper_research.md`](02b_external_paper_research.md) / [`phase_02b_external_paper_research_context.md`](phase_02b_external_paper_research_context.md) | Operationally complete; no blocker |
+| 03 Strategy | READY_FOR_REVIEW | Codex | Unassigned | [`03_strategy_candidates.md`](03_strategy_candidates.md) / [`phase_03_strategy_context.md`](phase_03_strategy_context.md) | Review pending |
+| 04 Spec | COMPLETED | Codex | Human | [`04_strategy_specs/`](04_strategy_specs/) / [`phase_04_spec_context.md`](phase_04_spec_context.md) | Operationally approved by explicit user request to implement Wave 2 |
+| 05 Implementation | READY_FOR_REVIEW | Codex | Unassigned | [`phase_05_implementation_context.md`](phase_05_implementation_context.md) | Wave 2 bots implemented; validation pending |
+| 06 Testing/performance | IN_PROGRESS | Codex | Unassigned | [`phase_06_testing_context.md`](phase_06_testing_context.md) | Canonical Pack `C`, `E`, and `F` run summaries still missing |
 | 07 Debugging/iteration | NOT_STARTED | Unassigned | Unassigned | [`06_debugging/`](06_debugging/) / [`phase_07_debugging_context.md`](phase_07_debugging_context.md) | Issue/run required |
 
 ## Product Scope
@@ -41,32 +42,53 @@ incremental input while Batch 1 papers move from `papers_md/` to
 
 ## External Paper Research Status
 
-- Status: `prompt generated; shortlist refined; raw set normalized`
+- Status: `operationally complete; local raw set fully processed`
 - Expected folder: `../research/papers_raw/`
 - Raw papers detected: `9`
 - Markdown conversions: `9 usable`
-- Processed paper summaries: none
-- Strategy dependency: none currently; proceed now and consume processed papers incrementally when present
+- Processed paper summaries: `9 canonical raw-derived` at top level, plus
+  secondary `carry_forward`, `manual_reference`, and `knowledge_draft` buckets
+- Strategy dependency: none; `03 Strategy` has consumed the nine-paper core and
+  the short handoff and is ready for `04 Spec`
 
 ## Active Strategies
 
-Candidate count is ROI-driven, not fixed. Track all high-ROI active candidates
-with roles, priority tiers, and implementation waves.
+Candidate count remains ROI-driven. After the Pack `A/B/D` synthesis, the
+active strategy queue is now a Wave 2 exploratory set of `15` bots designed to
+maximize learning before the winner-oriented wave.
 
-- None.
-
-Example when active:
-
-| Candidate ID | Role | Priority Tier | Implementation Wave | Evidence Strength | Short Reason | Spec Status | Owner | Decision Needed |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `candidate_01` | primary | spec-first | wave 1 | medium | concise rationale from understanding/EDA | not reviewed | Unassigned | Review spec |
+| Candidate ID | Role | Learning Pack | Evidence Strength | Short Reason | Spec Status | Owner | Decision Needed |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `r4_w2_01_vex_late_no_new_entry` | primary | `G` | strong | cheapest direct retention rescue on live `VEX` base | approved + implemented: `spec_pack_g_vex_retention_rescue.md` | Codex | Validate first |
+| `r4_w2_08_5300_with_5200_veto` | primary | `H` | medium-high | best likely combination of live context signal and active family | approved + implemented: `spec_pack_h_5300_winner_style_and_veto.md` | Codex | Validate first |
+| `r4_w2_13_4000_forced_activation` | primary | `J` | medium-high | closes the biggest attribution gap from Wave 1 | approved + implemented: `spec_pack_j_4000_activation_and_execution.md` | Codex | Validate first |
+| `r4_w2_05_5300_clean_value_retest` | primary | `H` | medium | clean current-round `5300` baseline | approved + implemented: `spec_pack_h_5300_winner_style_and_veto.md` | Codex | Validate after first slice |
+| `r4_w2_09_vex_plus_5200_veto` | primary | `I` | medium-high | simplest portability test for best contextual feature | approved + implemented: `spec_pack_i_light_context_overlays.md` | Codex | Validate after first slice |
+| `r4_w2_02_vex_peak_giveback_stop` | primary | `G` | medium-high | second clean retention diagnosis on `VEX` | approved + implemented: `spec_pack_g_vex_retention_rescue.md` | Codex | Validate after first slice |
+| `r4_w2_15_4000_quote_ladder_probe` | secondary | `J` | medium | tests whether `4000` is execution-limited | approved + implemented: `spec_pack_j_4000_activation_and_execution.md` | Codex | Winner-style adapted probe |
+| `r4_w2_06_5300_horizon_hold_v2` | secondary | `H` | medium | targets `5300` edge-then-reversal thesis | approved + implemented: `spec_pack_h_5300_winner_style_and_veto.md` | Codex | Validate after first slice |
+| `r4_w2_07_5300_queue_takeover_probe` | secondary | `H` | medium | execution-style probe for active family | approved + implemented: `spec_pack_h_5300_winner_style_and_veto.md` | Codex | Winner-style adapted probe |
+| `r4_w2_10_vex_trade_to_book_light` | secondary | `I` | medium | light execution overlay revival | approved + implemented: `spec_pack_i_light_context_overlays.md` | Codex | Lower priority in validation |
+| `r4_w2_14_4000_benign_tape_only` | secondary | `J` | medium | only useful after direct `4000` activation exists | approved + implemented: `spec_pack_j_4000_activation_and_execution.md` | Codex | Gate interpretation behind `r4_w2_13` |
+| `r4_w2_12_5300_spread_conditioned_parent_gate` | secondary | `I` | medium | parent-book quality overlay inspired by winners | approved + implemented: `spec_pack_i_light_context_overlays.md` | Codex | Lower priority in validation |
+| `r4_w2_03_vex_toxic_window_cooldown` | secondary | `G` | medium | narrow cooldown around `5200` warnings | approved + implemented: `spec_pack_g_vex_retention_rescue.md` | Codex | Validate after first slice |
+| `r4_w2_04_vex_smaller_second_clip` | exploratory | `G` | medium-low | sizing diagnosis for late giveback | approved + implemented: `spec_pack_g_vex_retention_rescue.md` | Codex | Validate later |
+| `r4_w2_11_vex_family_pressure_light` | exploratory | `I` | medium-low | compact family-state incremental test | approved + implemented: `spec_pack_i_light_context_overlays.md` | Codex | Validate later |
 
 ## Active Implementations
 
 Implementation count is driven by reviewed specs, validation capacity,
 deadline risk, and distinct test axes.
 
-- None.
+- Wave 1 and Wave 2 implementations exist under
+  [`../bots/noel/canonical/`](../bots/noel/canonical/).
+- Shared engines:
+  - [`../bots/noel/canonical/wave1_shared_engine.py`](../bots/noel/canonical/wave1_shared_engine.py)
+  - [`../bots/noel/canonical/wave2_shared_engine.py`](../bots/noel/canonical/wave2_shared_engine.py)
+- Canonical Wave 2 bot files:
+  `r4_w2_01`, `r4_w2_02`, `r4_w2_03`, `r4_w2_04`, `r4_w2_05`, `r4_w2_06`,
+  `r4_w2_07`, `r4_w2_08`, `r4_w2_09`, `r4_w2_10`, `r4_w2_11`, `r4_w2_12`,
+  `r4_w2_13`, `r4_w2_14`, `r4_w2_15`
 
 Example when active:
 
@@ -78,10 +100,26 @@ Example when active:
 
 - None selected.
 
+## Post-Run Research Memory
+
+- [`post_run_research_memory.md`](post_run_research_memory.md)
+
 ## Latest Results And Best Current Candidate
 
-- No results.
-- No best candidate.
+- Canonical Pack `A/B/D` run summaries now exist under
+  `../performances/noel/canonical/`.
+- Partial comparative synthesis exists in
+  `06_testing/round_4_wave1_pack_abd_partial_synthesis.md`.
+- A/B/D partial view:
+  - best live base: `r4_s01_vex_base_control`
+  - strongest reusable contextual feature: `r4_s10_5200_signal_only_veto`
+  - biggest unresolved gap: honest `VEV_4000` activation
+  - weakest confirmed branch: `r4_s02_hydro_base_control`
+- Best current strategy posture:
+  - `protect / rescue`: `VEX` retention variants
+  - `exploit / isolate`: `5300`
+  - `reuse as overlay`: `5200` veto
+  - `coverage fill`: one clean `4000` test
 
 Example when active:
 
@@ -89,7 +127,7 @@ Example when active:
 | --- | --- | --- | --- | --- |
 | `candidate_01` | `../performances/<member>/canonical/run_YYYYMMDD_HHMM_candidate_01.md` | unclear | continue | non-authoritative evidence; caveats recorded in run summary |
 
-- Best current candidate: `candidate_01`, pending final validation
+- Best current candidate: unresolved after the A/B/D partial only
 - Interpretation limit: results are non-authoritative evidence, not rules
 
 ## Blockers And Decisions Needed
@@ -97,8 +135,10 @@ Example when active:
 - Need exact manual contract details from the platform or accepted source before
   manual-order analysis can start.
 - Need deadline confirmation to assess fast-mode risk accurately.
-- Human review is still pending for Phases `01` and `02`, but no material gap
-  currently blocks `03 Strategy`.
+- Human review is still pending for Phases `01`, `02`, `03`, `04`, and `05`.
+- No material gap currently blocks the `03/04` reroute, but canonical Pack `C`,
+  `E`, and `F` summaries are still missing for full round closeout and keep
+  `5300` confidence below the `VEX` / `5200` conclusions.
 
 ## Final Submission Status
 
@@ -106,11 +146,11 @@ Example when active:
 - File: none.
 - Decision reason: none.
 - Linked spec: none.
-- Linked validation run: none.
+- Linked validation run: `06_testing/round_4_wave1_pack_abd_partial_synthesis.md`
 - Comparability status: `unclear`
 - Contract readiness status: `not checked`
 - Active file verified: `no`
-- Last validation: none.
+- Last validation: Pack `A/B/D` partial synthesis recorded on `2026-04-27`.
 - Active-file verification: not started.
 
 Example when active:
@@ -140,9 +180,44 @@ Example when active:
 - Advanced option/counterparty outputs added: `../data/processed/derived_round_4_option_iv_surface_summary.csv`, `../data/processed/derived_round_4_option_bs_vs_heston_fit.csv`, `../data/processed/derived_round_4_counterparty_directional_profile.csv`, and `../data/processed/derived_round_4_counterparty_credit_metric_availability.csv` on `2026-04-27`
 - Understanding summary added: `02_understanding.md` on `2026-04-27`
 - Understanding context updated: `phase_02_understanding_context.md` on `2026-04-27`
-- External paper research prompt added: `02b_external_paper_research.md` on `2026-04-27`
+- External paper research artifact rewritten around the final local-paper state:
+  `02b_external_paper_research.md` on `2026-04-27`
 - External paper research context updated: `phase_02b_external_paper_research_context.md` on `2026-04-27`
 - External paper raw set normalized and ROI-filtered against `round_3` processed papers on `2026-04-27`
 - All `papers_md` conversions for the current 9-paper raw set added under `../research/papers_md/` on `2026-04-27`
+- Nine canonical raw-derived processed summaries added under
+  `../research/papers_processed/` on `2026-04-27`
+- Processed-set audit added: `02b_processed_set_audit.md` on `2026-04-27`
+- Strategy handoff added: `02b_strategy_handoff.md` on `2026-04-27`
+- Strategy candidates added: `03_strategy_candidates.md` on `2026-04-27`
+- Strategy context updated: `phase_03_strategy_context.md` on `2026-04-27`
+- Wave 1 learning matrix and grouped-spec recommendation added to
+  `03_strategy_candidates.md` on `2026-04-27`
+- Grouped Wave 1 strategy specs added under `04_strategy_specs/` on
+  `2026-04-27`
+- Phase 04 context updated: `phase_04_spec_context.md` on `2026-04-27`
+- Wave 1 canonical bots added under `../bots/noel/canonical/` on `2026-04-27`
+- Wave 1 canonical bots rewritten as standalone uploadable files on
+  `2026-04-27`
+- Phase 05 context updated: `phase_05_implementation_context.md` on `2026-04-27`
+- Noel Wave 1 raw performance artifacts added under
+  `../performances/noel/historical/` on `2026-04-27`
+- Canonical Pack `A/B/D` run summaries added under
+  `../performances/noel/canonical/` on `2026-04-27`
+- Wave 1 Pack `A/B/D` partial synthesis added:
+  `06_testing/round_4_wave1_pack_abd_partial_synthesis.md` on `2026-04-27`
+- Round 4 post-run memory added: `post_run_research_memory.md` on `2026-04-27`
+- Retrospective EDA addendum added:
+  `01_eda/eda_round_4_wave1_abd_retrospective_addendum.md` on `2026-04-27`
+- Phase 01 context updated: `phase_01_eda_context.md` on `2026-04-27`
+- Phase 03 context updated: `phase_03_strategy_context.md` on `2026-04-27`
+- Strategy candidates rewritten around the Wave 2 exploratory queue on
+  `2026-04-27`
+- Wave 2 grouped specs added under `04_strategy_specs/` on `2026-04-27`
+- Phase 04 context updated for Wave 2 spec review on `2026-04-27`
+- Wave 2 shared engine and `15` standalone uploadable bots added under
+  `../bots/noel/canonical/` on `2026-04-27`
+- Phase 05 context updated for Wave 2 implementation on `2026-04-27`
+- Phase 06 context updated: `phase_06_testing_context.md` on `2026-04-27`
 - Data README updated: `../data/README.md` on `2026-04-26`
 - Round README updated: `../README.md` on `2026-04-26`
