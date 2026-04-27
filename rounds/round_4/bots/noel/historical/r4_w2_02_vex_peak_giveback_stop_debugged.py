@@ -501,7 +501,7 @@ class SharedWave2Trader:
         depth = state.order_depths.get(VEX)
         mid = mid_price(depth)
         spread_value = spread(depth)
-        if depth is None or mid is None or spread_value is None or spread_value > 5:
+        if depth is None or mid is None or spread_value is None or spread_value > 6:
             return []
         bid, ask = best_bid_ask(depth)
         if bid is None or ask is None:
@@ -515,14 +515,16 @@ class SharedWave2Trader:
             return []
 
         last_mid = store.get("last_mid", {}).get(VEX)
-        move_term = 0.0 if last_mid is None else 0.12 * (mid - last_mid)
-        fair = mid + 1.25 * imbalance(depth) + move_term
+        move_term = 0.0 if last_mid is None else 0.15 * (mid - last_mid)
+        fair = mid + 1.2 * imbalance(depth) + move_term
 
-        clip = 16 if not (self.cfg.trade_4000 or self.cfg.trade_5300) else 10
+        clip = 12 if not (self.cfg.trade_4000 or self.cfg.trade_5300) else 10
         if abs(position) >= 120:
-            clip = min(clip, 6)
+            clip = min(clip, 4)
         elif abs(position) >= 80:
             clip = min(clip, 8)
+        if spread_value >= 5:
+            clip = min(clip, 6)
 
         block_new_entries = False
         cooldowns = store.setdefault("cooldowns", {})
@@ -557,9 +559,6 @@ class SharedWave2Trader:
         if self.cfg.vex_mode == "smaller_second_clip" and abs(position) > 0:
             clip = min(clip, 8)
 
-        buy_signal = fair >= ask + 0.5 or fair > mid + 0.35
-        sell_signal = fair <= bid - 0.5 or fair < mid - 0.35
-
         block_buy = block_new_entries and position >= 0
         block_sell = block_new_entries and position <= 0
         orders: List[Order] = []
@@ -576,12 +575,12 @@ class SharedWave2Trader:
                 sell_cap -= take_qty
 
         if spread_value <= 4:
-            if buy_cap > 0 and not block_buy and buy_signal:
+            if buy_cap > 0 and not block_buy:
                 post_qty = min(clip, buy_cap)
                 bid_px = min(bid + 1, clamp_floor(fair - 1.0))
                 if post_qty > 0:
                     orders.append(Order(VEX, bid_px, post_qty))
-            if sell_cap > 0 and not block_sell and sell_signal:
+            if sell_cap > 0 and not block_sell:
                 post_qty = min(clip, sell_cap)
                 ask_px = max(ask - 1, clamp_ceil(fair + 1.0))
                 if post_qty > 0:
@@ -814,4 +813,4 @@ class SharedWave2Trader:
 
 class Trader(SharedWave2Trader):
     def __init__(self):
-        super().__init__("r4_w2_04_vex_smaller_second_clip")
+        super().__init__('r4_w2_02_vex_peak_giveback_stop')

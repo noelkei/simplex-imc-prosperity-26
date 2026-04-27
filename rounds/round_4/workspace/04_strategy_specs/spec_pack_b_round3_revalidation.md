@@ -19,9 +19,9 @@
 
 | Candidate | Product Scope | Role In Pack | Target Bot Path |
 | --- | --- | --- | --- |
-| `r4_s03_vex_4000_overlay` | `VEX + VEV_4000` | plain ITM overlay baseline | `rounds/round_4/bots/noel/canonical/r4_s03_vex_4000_overlay.py` |
-| `r4_s13_4000_benign_flow_overlay` | `VEX + VEV_4000` | ITM overlay with benign-flow conditioning | `rounds/round_4/bots/noel/canonical/r4_s13_4000_benign_flow_overlay.py` |
-| `r4_s15_round3_winner_revalidation` | `VEX + VEV_4000` | old winner family with round-4 danger filters | `rounds/round_4/bots/noel/canonical/r4_s15_round3_winner_revalidation.py` |
+| `r4_s03_vex_4000_overlay` | `VEX + VEV_4000` | plain ITM overlay baseline | `rounds/round_4/bots/noel/historical/r4_s03_vex_4000_overlay.py` |
+| `r4_s13_4000_benign_flow_overlay` | `VEX + VEV_4000` | ITM overlay with benign-flow conditioning | `rounds/round_4/bots/noel/historical/r4_s13_4000_benign_flow_overlay.py` |
+| `r4_s15_round3_winner_revalidation` | `VEX + VEV_4000` | old winner family with round-4 danger filters | `rounds/round_4/bots/noel/historical/r4_s15_round3_winner_revalidation.py` |
 
 ## Review Decision
 
@@ -213,9 +213,9 @@
 ## Implementation Handoff
 
 - Target bot paths:
-  - `rounds/round_4/bots/noel/canonical/r4_s03_vex_4000_overlay.py`
-  - `rounds/round_4/bots/noel/canonical/r4_s13_4000_benign_flow_overlay.py`
-  - `rounds/round_4/bots/noel/canonical/r4_s15_round3_winner_revalidation.py`
+  - `rounds/round_4/bots/noel/historical/r4_s03_vex_4000_overlay.py`
+  - `rounds/round_4/bots/noel/historical/r4_s13_4000_benign_flow_overlay.py`
+  - `rounds/round_4/bots/noel/historical/r4_s15_round3_winner_revalidation.py`
 - Parameters to implement:
   - `VEX` cross edge `2`, clip `10`, soft band `70`
   - `4000` overlay edge `2`, spread cap `8`, clip `15`, soft band `90`

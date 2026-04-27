@@ -865,3 +865,8 @@ class SharedWave2Trader:
             if quantity != 0:
                 deduped.append(Order(symbol, price, quantity))
         return deduped
+
+
+class Trader(SharedWave2Trader):
+    def __init__(self):
+        super().__init__('r4_w2_13_4000_forced_activation')

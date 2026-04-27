@@ -9,11 +9,11 @@
 
 ## Current Next Priority Action
 
-Open `Phase 06` and validate the implemented Wave 2 bots in grouped order.
-Default start:
-`r4_w2_01`, `r4_w2_08`, `r4_w2_13`, then one winner-style adapted probe from
-`r4_w2_07` or `r4_w2_15`. Keep Pack `C/E/F` canonical validation as the next
-evidence expansion after the first Wave 2 validation slice.
+Upload the refined active `_debugged.py` Wave 2 queue and rerun the
+recalibrated option branches first:
+`r4_w2_05`, `r4_w2_07`, `r4_w2_08`, `r4_w2_13`, `r4_w2_15`, then
+`r4_w2_01`, `r4_w2_02`, `r4_w2_06`, and `r4_w2_14`. Old pre-fix or superseded
+Wave 2 runs should not be treated as live strategy evidence.
 
 ## Phase Status
 
@@ -27,7 +27,7 @@ evidence expansion after the first Wave 2 validation slice.
 | 04 Spec | COMPLETED | Codex | Human | [`04_strategy_specs/`](04_strategy_specs/) / [`phase_04_spec_context.md`](phase_04_spec_context.md) | Operationally approved by explicit user request to implement Wave 2 |
 | 05 Implementation | READY_FOR_REVIEW | Codex | Unassigned | [`phase_05_implementation_context.md`](phase_05_implementation_context.md) | Wave 2 bots implemented; validation pending |
 | 06 Testing/performance | IN_PROGRESS | Codex | Unassigned | [`phase_06_testing_context.md`](phase_06_testing_context.md) | Canonical Pack `C`, `E`, and `F` run summaries still missing |
-| 07 Debugging/iteration | NOT_STARTED | Unassigned | Unassigned | [`06_debugging/`](06_debugging/) / [`phase_07_debugging_context.md`](phase_07_debugging_context.md) | Issue/run required |
+| 07 Debugging/iteration | IN_PROGRESS | Codex | Unassigned | [`06_debugging/`](06_debugging/) / [`phase_07_debugging_context.md`](phase_07_debugging_context.md) | Need re-run evidence on patched Wave 2 uploadables |
 
 ## Product Scope
 
@@ -53,42 +53,59 @@ evidence expansion after the first Wave 2 validation slice.
 
 ## Active Strategies
 
-Candidate count remains ROI-driven. After the Pack `A/B/D` synthesis, the
-active strategy queue is now a Wave 2 exploratory set of `15` bots designed to
-maximize learning before the winner-oriented wave.
+The active strategy queue remains a `15`-bot Wave 2 set, but it is now a
+refined queue: six structural keepers plus nine replacement probes that test
+entry quality and direct option attribution more honestly.
 
 | Candidate ID | Role | Learning Pack | Evidence Strength | Short Reason | Spec Status | Owner | Decision Needed |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| `r4_w2_01_vex_late_no_new_entry` | primary | `G` | strong | cheapest direct retention rescue on live `VEX` base | approved + implemented: `spec_pack_g_vex_retention_rescue.md` | Codex | Validate first |
-| `r4_w2_08_5300_with_5200_veto` | primary | `H` | medium-high | best likely combination of live context signal and active family | approved + implemented: `spec_pack_h_5300_winner_style_and_veto.md` | Codex | Validate first |
-| `r4_w2_13_4000_forced_activation` | primary | `J` | medium-high | closes the biggest attribution gap from Wave 1 | approved + implemented: `spec_pack_j_4000_activation_and_execution.md` | Codex | Validate first |
-| `r4_w2_05_5300_clean_value_retest` | primary | `H` | medium | clean current-round `5300` baseline | approved + implemented: `spec_pack_h_5300_winner_style_and_veto.md` | Codex | Validate after first slice |
-| `r4_w2_09_vex_plus_5200_veto` | primary | `I` | medium-high | simplest portability test for best contextual feature | approved + implemented: `spec_pack_i_light_context_overlays.md` | Codex | Validate after first slice |
-| `r4_w2_02_vex_peak_giveback_stop` | primary | `G` | medium-high | second clean retention diagnosis on `VEX` | approved + implemented: `spec_pack_g_vex_retention_rescue.md` | Codex | Validate after first slice |
-| `r4_w2_15_4000_quote_ladder_probe` | secondary | `J` | medium | tests whether `4000` is execution-limited | approved + implemented: `spec_pack_j_4000_activation_and_execution.md` | Codex | Winner-style adapted probe |
-| `r4_w2_06_5300_horizon_hold_v2` | secondary | `H` | medium | targets `5300` edge-then-reversal thesis | approved + implemented: `spec_pack_h_5300_winner_style_and_veto.md` | Codex | Validate after first slice |
-| `r4_w2_07_5300_queue_takeover_probe` | secondary | `H` | medium | execution-style probe for active family | approved + implemented: `spec_pack_h_5300_winner_style_and_veto.md` | Codex | Winner-style adapted probe |
-| `r4_w2_10_vex_trade_to_book_light` | secondary | `I` | medium | light execution overlay revival | approved + implemented: `spec_pack_i_light_context_overlays.md` | Codex | Lower priority in validation |
-| `r4_w2_14_4000_benign_tape_only` | secondary | `J` | medium | only useful after direct `4000` activation exists | approved + implemented: `spec_pack_j_4000_activation_and_execution.md` | Codex | Gate interpretation behind `r4_w2_13` |
-| `r4_w2_12_5300_spread_conditioned_parent_gate` | secondary | `I` | medium | parent-book quality overlay inspired by winners | approved + implemented: `spec_pack_i_light_context_overlays.md` | Codex | Lower priority in validation |
-| `r4_w2_03_vex_toxic_window_cooldown` | secondary | `G` | medium | narrow cooldown around `5200` warnings | approved + implemented: `spec_pack_g_vex_retention_rescue.md` | Codex | Validate after first slice |
-| `r4_w2_04_vex_smaller_second_clip` | exploratory | `G` | medium-low | sizing diagnosis for late giveback | approved + implemented: `spec_pack_g_vex_retention_rescue.md` | Codex | Validate later |
-| `r4_w2_11_vex_family_pressure_light` | exploratory | `I` | medium-low | compact family-state incremental test | approved + implemented: `spec_pack_i_light_context_overlays.md` | Codex | Validate later |
+| `r4_w2_01_vex_late_no_new_entry` | keep | `G` | strong | cheapest retained `VEX` rescue control | approved + implemented: `spec_pack_g_vex_retention_rescue.md` | Codex | Validate first |
+| `r4_w2_05_5300_clean_value_retest` | keep | `H` | medium-high | clean `5300` baseline | approved + implemented: `spec_pack_h_5300_winner_style_and_veto.md` | Codex | Validate first |
+| `r4_w2_07_5300_queue_takeover_probe` | keep | `H` | medium-high | best winner-style `5300` execution probe | approved + implemented: `spec_pack_h_5300_winner_style_and_veto.md` | Codex | Validate first |
+| `r4_w2_08_5300_with_5200_veto` | keep | `H` | medium-high | strongest live-family plus useful veto combo | approved + implemented: `spec_pack_h_5300_winner_style_and_veto.md` | Codex | Validate first |
+| `r4_w2_13_4000_forced_activation` | keep | `J` | medium-high | closes the biggest `4000` evidence gap | approved + implemented: `spec_pack_j_4000_activation_and_execution.md` | Codex | Validate first |
+| `r4_w2_15_4000_quote_ladder_probe` | keep | `J` | medium-high | best direct `4000` execution-style test | approved + implemented: `spec_pack_j_4000_activation_and_execution.md` | Codex | Validate first |
+| `r4_w2_02_vex_inside_book_only` | replacement | `G` | medium-high | tests whether clean-tape `VEX` entry matters more than more retention tweaks | approved + implemented: `spec_pack_g_vex_retention_rescue.md` | Codex | Validate after first slice |
+| `r4_w2_06_5300_direct_dislocation_only` | replacement | `H` | medium-high | direct `5300` without parent contamination | approved + implemented: `spec_pack_h_5300_winner_style_and_veto.md` | Codex | Validate after first slice |
+| `r4_w2_14_4000_option_only_band_entry` | replacement | `J` | medium-high | direct `4000` without parent contamination | approved + implemented: `spec_pack_j_4000_activation_and_execution.md` | Codex | Validate after first slice |
+| `r4_w2_03_vex_micro_reversal_entry` | replacement | `G` | medium | aggression-reversal `VEX` entry | approved + implemented: `spec_pack_g_vex_retention_rescue.md` | Codex | Validate after first slice |
+| `r4_w2_09_vex_tape_clean_entry` | replacement | `I` | medium | context as clean-entry filter rather than simple veto | approved + implemented: `spec_pack_i_light_context_overlays.md` | Codex | Validate after first slice |
+| `r4_w2_12_5300_option_only_veto` | replacement | `I` | medium | direct `5300` attribution plus the useful veto | approved + implemented: `spec_pack_i_light_context_overlays.md` | Codex | Validate after first slice |
+| `r4_w2_04_vex_depth_supported_entry` | replacement | `G` | medium | depth-supported `VEX` entry probe | approved + implemented: `spec_pack_g_vex_retention_rescue.md` | Codex | Lower priority |
+| `r4_w2_10_vex_imbalance_surge_entry` | replacement | `I` | medium | event-driven `VEX` entry | approved + implemented: `spec_pack_i_light_context_overlays.md` | Codex | Lower priority |
+| `r4_w2_11_vex_low_concentration_entry` | replacement | `I` | medium-low | family-ecology regime test | approved + implemented: `spec_pack_i_light_context_overlays.md` | Codex | Lower priority |
 
 ## Active Implementations
 
 Implementation count is driven by reviewed specs, validation capacity,
 deadline risk, and distinct test axes.
 
-- Wave 1 and Wave 2 implementations exist under
+- Active Wave 2 implementations exist under
   [`../bots/noel/canonical/`](../bots/noel/canonical/).
+- Historical Wave 1 implementations and their retired support code live under
+  [`../bots/noel/historical/`](../bots/noel/historical/).
+- Historical superseded Wave 2 drafts also live under
+  [`../bots/noel/historical/`](../bots/noel/historical/).
 - Shared engines:
-  - [`../bots/noel/canonical/wave1_shared_engine.py`](../bots/noel/canonical/wave1_shared_engine.py)
   - [`../bots/noel/canonical/wave2_shared_engine.py`](../bots/noel/canonical/wave2_shared_engine.py)
+- Historical shared engines:
+  - [`../bots/noel/historical/wave1_shared_engine.py`](../bots/noel/historical/wave1_shared_engine.py)
 - Canonical Wave 2 bot files:
-  `r4_w2_01`, `r4_w2_02`, `r4_w2_03`, `r4_w2_04`, `r4_w2_05`, `r4_w2_06`,
-  `r4_w2_07`, `r4_w2_08`, `r4_w2_09`, `r4_w2_10`, `r4_w2_11`, `r4_w2_12`,
-  `r4_w2_13`, `r4_w2_14`, `r4_w2_15`
+  `r4_w2_01_vex_late_no_new_entry_debugged`,
+  `r4_w2_02_vex_inside_book_only_debugged`,
+  `r4_w2_03_vex_micro_reversal_entry_debugged`,
+  `r4_w2_04_vex_depth_supported_entry_debugged`,
+  `r4_w2_05_5300_clean_value_retest_debugged`,
+  `r4_w2_06_5300_direct_dislocation_only_debugged`,
+  `r4_w2_07_5300_queue_takeover_probe_debugged`,
+  `r4_w2_08_5300_with_5200_veto_debugged`,
+  `r4_w2_09_vex_tape_clean_entry_debugged`,
+  `r4_w2_10_vex_imbalance_surge_entry_debugged`,
+  `r4_w2_11_vex_low_concentration_entry_debugged`,
+  `r4_w2_12_5300_option_only_veto_debugged`,
+  `r4_w2_13_4000_forced_activation_debugged`,
+  `r4_w2_14_4000_option_only_band_entry_debugged`,
+  `r4_w2_15_4000_quote_ladder_probe_debugged`
 
 Example when active:
 
@@ -211,13 +228,16 @@ Example when active:
   `01_eda/eda_round_4_wave1_abd_retrospective_addendum.md` on `2026-04-27`
 - Phase 01 context updated: `phase_01_eda_context.md` on `2026-04-27`
 - Phase 03 context updated: `phase_03_strategy_context.md` on `2026-04-27`
-- Strategy candidates rewritten around the Wave 2 exploratory queue on
-  `2026-04-27`
+- Strategy candidates rewritten around the refined Wave 2 queue on
+  `2026-04-28`
 - Wave 2 grouped specs added under `04_strategy_specs/` on `2026-04-27`
 - Phase 04 context updated for Wave 2 spec review on `2026-04-27`
 - Wave 2 shared engine and `15` standalone uploadable bots added under
   `../bots/noel/canonical/` on `2026-04-27`
-- Phase 05 context updated for Wave 2 implementation on `2026-04-27`
-- Phase 06 context updated: `phase_06_testing_context.md` on `2026-04-27`
+- Wave 2 `_debugged.py` upload set refined and superseded drafts moved to
+  `../bots/noel/historical/` on `2026-04-28`
+- Phase 05 context updated for the refined Wave 2 implementation on
+  `2026-04-28`
+- Phase 06 context updated for the refined Wave 2 rerun slice on `2026-04-28`
 - Data README updated: `../data/README.md` on `2026-04-26`
 - Round README updated: `../README.md` on `2026-04-26`

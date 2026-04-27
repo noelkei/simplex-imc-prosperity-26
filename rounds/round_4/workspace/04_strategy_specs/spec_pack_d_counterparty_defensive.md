@@ -19,9 +19,9 @@
 
 | Candidate | Product Scope | Role In Pack | Target Bot Path |
 | --- | --- | --- | --- |
-| `r4_s05_mark22_veto_gate` | `VEX` plus `5200+` context | explicit `Mark 22` danger veto | `rounds/round_4/bots/noel/canonical/r4_s05_mark22_veto_gate.py` |
-| `r4_s06_counterparty_concentration_gate` | selective voucher family context | concentration-state filter | `rounds/round_4/bots/noel/canonical/r4_s06_counterparty_concentration_gate.py` |
-| `r4_s10_5200_signal_only_veto` | family context only | `5200` as signal-only monitor | `rounds/round_4/bots/noel/canonical/r4_s10_5200_signal_only_veto.py` |
+| `r4_s05_mark22_veto_gate` | `VEX` plus `5200+` context | explicit `Mark 22` danger veto | `rounds/round_4/bots/noel/historical/r4_s05_mark22_veto_gate.py` |
+| `r4_s06_counterparty_concentration_gate` | selective voucher family context | concentration-state filter | `rounds/round_4/bots/noel/historical/r4_s06_counterparty_concentration_gate.py` |
+| `r4_s10_5200_signal_only_veto` | family context only | `5200` as signal-only monitor | `rounds/round_4/bots/noel/historical/r4_s10_5200_signal_only_veto.py` |
 
 ## Review Decision
 
@@ -203,9 +203,9 @@
 ## Implementation Handoff
 
 - Target bot paths:
-  - `rounds/round_4/bots/noel/canonical/r4_s05_mark22_veto_gate.py`
-  - `rounds/round_4/bots/noel/canonical/r4_s06_counterparty_concentration_gate.py`
-  - `rounds/round_4/bots/noel/canonical/r4_s10_5200_signal_only_veto.py`
+  - `rounds/round_4/bots/noel/historical/r4_s05_mark22_veto_gate.py`
+  - `rounds/round_4/bots/noel/historical/r4_s06_counterparty_concentration_gate.py`
+  - `rounds/round_4/bots/noel/historical/r4_s10_5200_signal_only_veto.py`
 - Parameters to implement:
   - danger-state timer `3`
   - concentration high threshold `50%`

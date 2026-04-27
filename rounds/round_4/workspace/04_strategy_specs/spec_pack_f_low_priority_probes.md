@@ -19,8 +19,8 @@
 
 | Candidate | Product Scope | Role In Pack | Target Bot Path |
 | --- | --- | --- | --- |
-| `r4_s12_upper_passive_probe` | `VEV_5400/5500` | passive-only upper-loop closure test | `rounds/round_4/bots/noel/canonical/r4_s12_upper_passive_probe.py` |
-| `r4_s14_surface_sanity_filter` | selective voucher overlays | tiny surface-sanity support test | `rounds/round_4/bots/noel/canonical/r4_s14_surface_sanity_filter.py` |
+| `r4_s12_upper_passive_probe` | `VEV_5400/5500` | passive-only upper-loop closure test | `rounds/round_4/bots/noel/historical/r4_s12_upper_passive_probe.py` |
+| `r4_s14_surface_sanity_filter` | selective voucher overlays | tiny surface-sanity support test | `rounds/round_4/bots/noel/historical/r4_s14_surface_sanity_filter.py` |
 
 ## Review Decision
 
@@ -192,8 +192,8 @@
 ## Implementation Handoff
 
 - Target bot paths:
-  - `rounds/round_4/bots/noel/canonical/r4_s12_upper_passive_probe.py`
-  - `rounds/round_4/bots/noel/canonical/r4_s14_surface_sanity_filter.py`
+  - `rounds/round_4/bots/noel/historical/r4_s12_upper_passive_probe.py`
+  - `rounds/round_4/bots/noel/historical/r4_s14_surface_sanity_filter.py`
 - Parameters to implement:
   - upper spread window `6-12`
   - passive clip `4`

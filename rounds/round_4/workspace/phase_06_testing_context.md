@@ -11,60 +11,46 @@ IN_PROGRESS
 
 ## Last Updated
 
-2026-04-27
+2026-04-28
 
 ## What Has Been Done
 
-- Uploaded raw performance `.json` artifacts for the `15` Wave 1 Noel bots
-  under [`../performances/noel/historical/`](../performances/noel/historical/).
-- Wrote canonical run summaries for the eight Pack `A`, `B`, and `D` Noel
-  bots under [`../performances/noel/canonical/`](../performances/noel/canonical/).
-- Produced the partial Wave 1 synthesis in
-  [`06_testing/round_4_wave1_pack_abd_partial_synthesis.md`](06_testing/round_4_wave1_pack_abd_partial_synthesis.md).
-- Created the first Round 4 post-run memory in
-  [`post_run_research_memory.md`](post_run_research_memory.md).
+- Preserved the canonical Wave 1 A/B/D summaries and partial synthesis.
+- Used that evidence plus the Wave 2 debug incident to refine the active Wave 2
+  queue before new reruns.
 
 ## Current Findings
 
-- Packs `A`, `B`, and `D` now have readable decision-supporting summaries.
-- `VEX` remains the only live delta-1 base in this subset; `HYDRO` did not
-  engage.
-- Pack `B` did not actually test direct `VEV_4000` inventory online; the
-  advertised overlay leg never activated.
-- The strongest reusable novelty signal so far is `VEV_5200` as a signal-only
-  veto, not a standalone defensive bot.
-- The next high-ROI move is to reopen `Phase 03` and `Phase 04` with a small
-  retention-focused mini-wave, while leaving Pack `C` as the next validation
-  expansion priority.
+- Old pre-fix Wave 2 evidence for the affected bots is not strategy evidence.
+- The current highest-ROI testing question is no longer “which tiny overlay is
+  best?” but “which entry or direct attribution branch is genuinely alive?”
+- Pack `C/E/F` Wave 1 canonical summaries still remain outstanding, but they no
+  longer block the refined Wave 2 rerun slice.
 
 ## Decisions Made
 
-- Final submission requires a readable validation or performance summary.
-- Logs should be converted into `.md` and/or `.json` summaries for durable tracking.
+- Final submission still requires readable validation artifacts.
+- The next rerun slice should favor structural and direct-signal bots first.
 
 ## Open Questions / Blockers
 
-- No blocker to analysis.
-- Canonical Pack `C`, `E`, and `F` run summaries are still missing.
-- Deadline is still unknown, which affects how aggressive the next mini-wave
-  should be.
+- Need fresh platform reruns on the refined active upload set.
+- Canonical Pack `C`, `E`, and `F` summaries are still missing for full Wave 1
+  round closeout.
 
 ## Linked Artifacts
 
 - [`_index.md`](_index.md)
-- [`docs/templates/run_summary_template.md`](../../../docs/templates/run_summary_template.md)
 - [`06_testing/round_4_wave1_pack_abd_partial_synthesis.md`](06_testing/round_4_wave1_pack_abd_partial_synthesis.md)
 - [`post_run_research_memory.md`](post_run_research_memory.md)
+- [`phase_07_debugging_context.md`](phase_07_debugging_context.md)
 
 ## Next Priority Action
 
-Use the Pack `A/B/D` synthesis and post-run memory to reopen `Phase 03` and
-`Phase 04` for a small Wave 2 challenger set centered on retention and
-`5200` veto reuse; after that, validate Pack `C` canonically before any broad
-new exploration.
+Run the refined Wave 2 slice in this order:
+`r4_w2_01`, `r4_w2_05`, `r4_w2_07`, `r4_w2_08`, `r4_w2_13`, `r4_w2_15`,
+then `r4_w2_02`, `r4_w2_06`, and `r4_w2_14`.
 
 ## Deadline Risk
 
-Medium: decision quality is now better for Packs `A/B/D`, but the round still
-needs a disciplined mini-wave and at least one more canonical pass on the raw
-Pack `C` leaders.
+Medium: we have a cleaner queue, but only a few iteration windows remain.

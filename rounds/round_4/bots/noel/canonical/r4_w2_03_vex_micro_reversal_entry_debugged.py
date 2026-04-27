@@ -202,20 +202,20 @@ CONFIGS: Dict[str, StrategyConfig] = {
         trade_vex=True,
         vex_mode="late_no_new_entry",
     ),
-    "r4_w2_02_vex_peak_giveback_stop": StrategyConfig(
-        "r4_w2_02_vex_peak_giveback_stop",
+    "r4_w2_02_vex_inside_book_only": StrategyConfig(
+        "r4_w2_02_vex_inside_book_only",
         trade_vex=True,
-        vex_mode="peak_giveback_stop",
+        vex_mode="inside_book_only",
     ),
-    "r4_w2_03_vex_toxic_window_cooldown": StrategyConfig(
-        "r4_w2_03_vex_toxic_window_cooldown",
+    "r4_w2_03_vex_micro_reversal_entry": StrategyConfig(
+        "r4_w2_03_vex_micro_reversal_entry",
         trade_vex=True,
-        vex_mode="toxic_window_cooldown",
+        vex_mode="micro_reversal_entry",
     ),
-    "r4_w2_04_vex_smaller_second_clip": StrategyConfig(
-        "r4_w2_04_vex_smaller_second_clip",
+    "r4_w2_04_vex_depth_supported_entry": StrategyConfig(
+        "r4_w2_04_vex_depth_supported_entry",
         trade_vex=True,
-        vex_mode="smaller_second_clip",
+        vex_mode="depth_supported_entry",
     ),
     "r4_w2_05_5300_clean_value_retest": StrategyConfig(
         "r4_w2_05_5300_clean_value_retest",
@@ -223,11 +223,11 @@ CONFIGS: Dict[str, StrategyConfig] = {
         trade_5300=True,
         option_mode="5300_clean_value",
     ),
-    "r4_w2_06_5300_horizon_hold_v2": StrategyConfig(
-        "r4_w2_06_5300_horizon_hold_v2",
-        trade_vex=True,
+    "r4_w2_06_5300_direct_dislocation_only": StrategyConfig(
+        "r4_w2_06_5300_direct_dislocation_only",
+        trade_vex=False,
         trade_5300=True,
-        option_mode="5300_horizon_hold",
+        option_mode="5300_direct_dislocation",
     ),
     "r4_w2_07_5300_queue_takeover_probe": StrategyConfig(
         "r4_w2_07_5300_queue_takeover_probe",
@@ -241,26 +241,26 @@ CONFIGS: Dict[str, StrategyConfig] = {
         trade_5300=True,
         option_mode="5300_with_5200_veto",
     ),
-    "r4_w2_09_vex_plus_5200_veto": StrategyConfig(
-        "r4_w2_09_vex_plus_5200_veto",
+    "r4_w2_09_vex_tape_clean_entry": StrategyConfig(
+        "r4_w2_09_vex_tape_clean_entry",
         trade_vex=True,
-        vex_mode="vex_plus_5200_veto",
+        vex_mode="tape_clean_entry",
     ),
-    "r4_w2_10_vex_trade_to_book_light": StrategyConfig(
-        "r4_w2_10_vex_trade_to_book_light",
+    "r4_w2_10_vex_imbalance_surge_entry": StrategyConfig(
+        "r4_w2_10_vex_imbalance_surge_entry",
         trade_vex=True,
-        vex_mode="trade_to_book_light",
+        vex_mode="imbalance_surge_entry",
     ),
-    "r4_w2_11_vex_family_pressure_light": StrategyConfig(
-        "r4_w2_11_vex_family_pressure_light",
+    "r4_w2_11_vex_low_concentration_entry": StrategyConfig(
+        "r4_w2_11_vex_low_concentration_entry",
         trade_vex=True,
-        vex_mode="family_pressure_light",
+        vex_mode="low_concentration_entry",
     ),
-    "r4_w2_12_5300_spread_conditioned_parent_gate": StrategyConfig(
-        "r4_w2_12_5300_spread_conditioned_parent_gate",
-        trade_vex=True,
+    "r4_w2_12_5300_option_only_veto": StrategyConfig(
+        "r4_w2_12_5300_option_only_veto",
+        trade_vex=False,
         trade_5300=True,
-        option_mode="5300_parent_gate",
+        option_mode="5300_option_only_veto",
     ),
     "r4_w2_13_4000_forced_activation": StrategyConfig(
         "r4_w2_13_4000_forced_activation",
@@ -268,11 +268,11 @@ CONFIGS: Dict[str, StrategyConfig] = {
         trade_4000=True,
         option_mode="4000_forced_activation",
     ),
-    "r4_w2_14_4000_benign_tape_only": StrategyConfig(
-        "r4_w2_14_4000_benign_tape_only",
-        trade_vex=True,
+    "r4_w2_14_4000_option_only_band_entry": StrategyConfig(
+        "r4_w2_14_4000_option_only_band_entry",
+        trade_vex=False,
         trade_4000=True,
-        option_mode="4000_benign_tape",
+        option_mode="4000_option_only_band",
     ),
     "r4_w2_15_4000_quote_ladder_probe": StrategyConfig(
         "r4_w2_15_4000_quote_ladder_probe",
@@ -501,11 +501,13 @@ class SharedWave2Trader:
         depth = state.order_depths.get(VEX)
         mid = mid_price(depth)
         spread_value = spread(depth)
-        if depth is None or mid is None or spread_value is None or spread_value > 5:
+        if depth is None or mid is None or spread_value is None or spread_value > 6:
             return []
         bid, ask = best_bid_ask(depth)
         if bid is None or ask is None:
             return []
+        bid_depth, ask_depth = top_depth(depth)
+        depth_imbalance = imbalance(depth)
 
         position = int(state.position.get(VEX, 0))
         limit = LIMITS[VEX]
@@ -515,14 +517,16 @@ class SharedWave2Trader:
             return []
 
         last_mid = store.get("last_mid", {}).get(VEX)
-        move_term = 0.0 if last_mid is None else 0.12 * (mid - last_mid)
-        fair = mid + 1.25 * imbalance(depth) + move_term
+        move_term = 0.0 if last_mid is None else 0.15 * (mid - last_mid)
+        fair = mid + 1.2 * depth_imbalance + move_term
 
-        clip = 16 if not (self.cfg.trade_4000 or self.cfg.trade_5300) else 10
+        clip = 12 if not (self.cfg.trade_4000 or self.cfg.trade_5300) else 10
         if abs(position) >= 120:
-            clip = min(clip, 6)
+            clip = min(clip, 4)
         elif abs(position) >= 80:
             clip = min(clip, 8)
+        if spread_value >= 5:
+            clip = min(clip, 6)
 
         block_new_entries = False
         cooldowns = store.setdefault("cooldowns", {})
@@ -557,11 +561,34 @@ class SharedWave2Trader:
         if self.cfg.vex_mode == "smaller_second_clip" and abs(position) > 0:
             clip = min(clip, 8)
 
-        buy_signal = fair >= ask + 0.5 or fair > mid + 0.35
-        sell_signal = fair <= bid - 0.5 or fair < mid - 0.35
+        buy_signal = True
+        sell_signal = True
+        clean_tape = context["last_vex_bucket"] in {"inside", "unknown"}
+        if self.cfg.vex_mode == "inside_book_only":
+            buy_signal = spread_value <= 1 and clean_tape and fair >= mid
+            sell_signal = spread_value <= 1 and clean_tape and fair <= mid
+        elif self.cfg.vex_mode == "micro_reversal_entry":
+            buy_signal = context["last_vex_bucket"] == "aggressive_sell" and depth_imbalance >= 0.20 and fair >= mid
+            sell_signal = context["last_vex_bucket"] == "aggressive_buy" and depth_imbalance <= -0.20 and fair <= mid
+        elif self.cfg.vex_mode == "depth_supported_entry":
+            buy_signal = spread_value <= 2 and bid_depth >= 12 and fair >= mid
+            sell_signal = spread_value <= 2 and ask_depth >= 12 and fair <= mid
+        elif self.cfg.vex_mode == "tape_clean_entry":
+            buy_signal = spread_value <= 1 and clean_tape and not context["bad_5200_recent"] and context["family_pressure"] == "low" and fair >= mid
+            sell_signal = spread_value <= 1 and clean_tape and not context["bad_5200_recent"] and context["family_pressure"] == "low" and fair <= mid
+        elif self.cfg.vex_mode == "imbalance_surge_entry":
+            buy_signal = spread_value <= 2 and depth_imbalance >= 0.35
+            sell_signal = spread_value <= 2 and depth_imbalance <= -0.35
+        elif self.cfg.vex_mode == "low_concentration_entry":
+            buy_signal = context["concentration_share"] < 0.42 and context["family_pressure"] != "high" and fair >= mid
+            sell_signal = context["concentration_share"] < 0.42 and context["family_pressure"] != "high" and fair <= mid
 
         block_buy = block_new_entries and position >= 0
         block_sell = block_new_entries and position <= 0
+        if not buy_signal:
+            block_buy = True
+        if not sell_signal:
+            block_sell = True
         orders: List[Order] = []
 
         if buy_cap > 0 and not block_buy and ask <= fair - 2.0:
@@ -576,12 +603,12 @@ class SharedWave2Trader:
                 sell_cap -= take_qty
 
         if spread_value <= 4:
-            if buy_cap > 0 and not block_buy and buy_signal:
+            if buy_cap > 0 and not block_buy:
                 post_qty = min(clip, buy_cap)
                 bid_px = min(bid + 1, clamp_floor(fair - 1.0))
                 if post_qty > 0:
                     orders.append(Order(VEX, bid_px, post_qty))
-            if sell_cap > 0 and not block_sell and sell_signal:
+            if sell_cap > 0 and not block_sell:
                 post_qty = min(clip, sell_cap)
                 ask_px = max(ask - 1, clamp_ceil(fair + 1.0))
                 if post_qty > 0:
@@ -600,7 +627,7 @@ class SharedWave2Trader:
         if bid is None or ask is None:
             return []
 
-        metrics = self._option_metrics(state, store, symbol, vex_mid, option_mid)
+        metrics = self._option_metrics(state, store, symbol, vex_mid, option_mid, depth)
         fair = metrics.get("fair")
         if fair is None:
             return []
@@ -615,12 +642,12 @@ class SharedWave2Trader:
         block_new_entries = False
         mode = self.cfg.option_mode
         if symbol == "VEV_4000":
-            edge = 1.0
+            edge = 0.5
             max_spread = 10
             clip = 15
             band = 90
         else:
-            edge = 2.0
+            edge = 1.0
             max_spread = 10
             clip = 12
             band = 72
@@ -646,10 +673,14 @@ class SharedWave2Trader:
                 return self._flatten_product(state, symbol, max_clip=clip)
         if mode == "5300_with_5200_veto" and context["bad_5200_recent"]:
             block_new_entries = True
+        if mode == "5300_option_only_veto" and context["bad_5200_recent"]:
+            block_new_entries = True
         if mode == "5300_parent_gate" and not context["parent_good"]:
             block_new_entries = True
         if mode == "4000_benign_tape" and not context["benign_4000_tape"]:
             block_new_entries = True
+        if mode == "4000_option_only_band" and abs(fair - option_mid) < 1.5:
+            return []
 
         winner_style = mode in {"5300_queue_takeover", "4000_quote_ladder"}
         if winner_style:
@@ -666,11 +697,12 @@ class SharedWave2Trader:
             symbol=symbol,
             depth=depth,
             fair=fair,
-            edge=edge,
+            edge=0.5 if mode == "5300_direct_dislocation" else edge,
             clip=clip,
             max_spread=max_spread,
             block_new_entries=block_new_entries,
             always_quote=(mode == "4000_forced_activation"),
+            take_only=(mode == "5300_direct_dislocation"),
         )
 
     def _simple_option_orders(
@@ -684,6 +716,7 @@ class SharedWave2Trader:
         max_spread: int,
         block_new_entries: bool,
         always_quote: bool = False,
+        take_only: bool = False,
     ) -> List[Order]:
         bid, ask = best_bid_ask(depth)
         spread_value = spread(depth)
@@ -707,15 +740,15 @@ class SharedWave2Trader:
                 orders.append(Order(symbol, bid, -take_qty))
                 sell_cap -= take_qty
 
-        should_quote = spread_value <= max_spread - 2
+        should_quote = (spread_value <= max_spread - 2) and not take_only
         if should_quote or always_quote:
             if buy_cap > 0 and not block_buy:
-                bid_px = min(bid + 1, clamp_floor(fair - 1.0))
+                bid_px = min(bid + 1, clamp_floor(fair))
                 bid_px = max(1, bid_px)
                 post_qty = min(max(1, clip // 2), buy_cap)
                 orders.append(Order(symbol, bid_px, post_qty))
             if sell_cap > 0 and not block_sell:
-                ask_px = max(ask - 1, clamp_ceil(fair + 1.0))
+                ask_px = max(ask - 1, clamp_ceil(fair))
                 post_qty = min(max(1, clip // 2), sell_cap)
                 orders.append(Order(symbol, ask_px, -post_qty))
         return self._dedupe_orders(orders)
@@ -744,13 +777,13 @@ class SharedWave2Trader:
         sent_buys = 0
         sent_sells = 0
 
-        if buy_cap > 0 and not block_buy and fair_bid >= ask + 1:
+        if buy_cap > 0 and not block_buy and fair_bid >= ask:
             take_qty = min(clip, buy_cap, max(0, -depth.sell_orders.get(ask, 0)))
             if take_qty > 0:
                 orders.append(Order(symbol, ask, take_qty))
                 buy_cap -= take_qty
                 sent_buys += take_qty
-        if sell_cap > 0 and not block_sell and fair_ask <= bid - 1:
+        if sell_cap > 0 and not block_sell and fair_ask <= bid:
             take_qty = min(clip, sell_cap, max(0, depth.buy_orders.get(bid, 0)))
             if take_qty > 0:
                 orders.append(Order(symbol, bid, -take_qty))
@@ -768,11 +801,22 @@ class SharedWave2Trader:
             orders.append(Order(symbol, post_px, -post_qty))
         return self._dedupe_orders(orders)
 
-    def _option_metrics(self, state: TradingState, store: dict, symbol: str, vex_mid: float, option_mid: float) -> dict:
+    def _option_metrics(self, state: TradingState, store: dict, symbol: str, vex_mid: float, option_mid: float, depth) -> dict:
         strike = STRIKES[symbol]
         tte = tte_years(state.timestamp)
         intrinsic = intrinsic_value(vex_mid, strike)
         clean_mid = max(option_mid, intrinsic)
+        depth_imb = imbalance(depth)
+        last_vex_mid = store.get("last_mid", {}).get(VEX)
+        vex_move = 0.0 if last_vex_mid is None else vex_mid - last_vex_mid
+
+        if symbol == "VEV_4000":
+            heuristic_fair = intrinsic + 3.0 + 0.55 * vex_move + 0.4 * depth_imb
+            heuristic_cap = 4.0
+        else:
+            heuristic_fair = intrinsic + 6.0 + 0.70 * vex_move + 0.5 * depth_imb
+            heuristic_cap = 10.0
+        heuristic_fair = max(heuristic_fair, intrinsic)
 
         current_iv = implied_volatility(clean_mid, vex_mid, strike, tte)
         histories = store.setdefault("iv_history", {})
@@ -785,12 +829,23 @@ class SharedWave2Trader:
         if iv_mean is None:
             iv_mean = current_iv
         if iv_mean is None:
-            return {"fair": clean_mid, "delta": None, "iv_mean": None}
+            return {"fair": heuristic_fair, "delta": None, "iv_mean": None, "heuristic_fair": heuristic_fair}
 
-        fair = bs_call(vex_mid, strike, tte, iv_mean)
+        bs_fair = bs_call(vex_mid, strike, tte, iv_mean)
+        bs_fair = max(bs_fair, intrinsic)
+        if symbol == "VEV_4000":
+            fair = 0.60 * heuristic_fair + 0.40 * bs_fair
+        else:
+            fair = min(bs_fair, heuristic_fair + heuristic_cap)
         fair = max(fair, intrinsic)
         delta = bs_delta(vex_mid, strike, tte, iv_mean)
-        return {"fair": fair, "delta": delta, "iv_mean": iv_mean}
+        return {
+            "fair": fair,
+            "delta": delta,
+            "iv_mean": iv_mean,
+            "heuristic_fair": heuristic_fair,
+            "bs_fair": bs_fair,
+        }
 
     def _update_mid_cache(self, state: TradingState, store: dict) -> None:
         last_mid = dict(store.get("last_mid", {}))
@@ -814,4 +869,4 @@ class SharedWave2Trader:
 
 class Trader(SharedWave2Trader):
     def __init__(self):
-        super().__init__("r4_w2_05_5300_clean_value_retest")
+        super().__init__('r4_w2_03_vex_micro_reversal_entry')

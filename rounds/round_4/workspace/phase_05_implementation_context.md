@@ -11,86 +11,66 @@ READY_FOR_REVIEW
 
 ## Last Updated
 
-2026-04-27
+2026-04-28
 
 ## What Has Been Done
 
-- Implemented a shared Wave 2 engine in
+- Kept the six highest-ROI Wave 2 bots active:
+  `r4_w2_01`, `r4_w2_05`, `r4_w2_07`, `r4_w2_08`, `r4_w2_13`, `r4_w2_15`.
+- Replaced the other nine active slots with new entry-quality and option-only
+  attribution probes.
+- Updated the shared Wave 2 engine in
   [`../bots/noel/canonical/wave2_shared_engine.py`](../bots/noel/canonical/wave2_shared_engine.py)
-  covering the full Wave 2 candidate queue.
-- Implemented all `15` Wave 2 canonical bots under
-  [`../bots/noel/canonical/`](../bots/noel/canonical/), covering Packs `G`
-  through `J`.
-- Generated the Wave 2 bots as standalone uploadable files so they do not
-  depend on local sibling imports forbidden by Prosperity upload checks.
-- Implemented the winner-style adapted execution architecture in Wave 2 where
-  it actually fits:
-  - `r4_w2_07_5300_queue_takeover_probe`
-  - `r4_w2_15_4000_quote_ladder_probe`
-- Ran syntax compilation across the shared engine and all `15` Wave 2 bot
-  files.
-- Ran import smoke and minimal `run()` contract smoke for all `15` Wave 2 bots
-  using a stub `datamodel` and mock `TradingState`.
+  to support the refined queue.
+- Applied a fill-seeking recalibration pass to the active option branches after
+  debugging showed they were materially more passive than the useful Wave 1
+  bots.
+- Regenerated the full active upload set in `canonical/` as standalone
+  `*_debugged.py` files.
+- Moved superseded Wave 1 bots and superseded Wave 2 draft files into
+  [`../bots/noel/historical/`](../bots/noel/historical/).
+- Re-ran local compilation and `Trader.run()` smoke checks on the active
+  upload set.
 
 ## Current Findings
 
-- The implementation is intentionally pack-driven: one shared Wave 2 engine plus
-  strategy-specific configs keeps the new wave comparable and easier to debug
-  locally, while the uploadable bot files themselves remain standalone.
-- The most important validation start is now:
-  - `r4_w2_01_vex_late_no_new_entry`
-  - `r4_w2_08_5300_with_5200_veto`
-  - `r4_w2_13_4000_forced_activation`
-  - then one winner-style adapted probe from `r4_w2_07` or `r4_w2_15`
-- The implementation now optimizes for uploadability and comparability, but not
-  yet for final submission readiness.
+- `canonical/` now represents only the live queue we actually want to upload.
+- `historical/` now holds:
+  - Wave 1 bots with existing performance history
+  - retired pre-fix or superseded Wave 2 variants
+- The refined queue is materially more signal-seeking than the prior version:
+  less overlap in retention overlays, more direct entry and option-only tests.
+- Local replay now shows materially more option crossing activity in the active
+  `5300` and `4000` branches after the recalibration.
 
 ## Decisions Made
 
-- Implementation count was expanded to the full `15`-bot Wave 2 queue by
-  explicit user direction.
-- Implementation used approved grouped specs after the user's explicit request
-  to implement all Wave 2 bots.
-- Shared local helper code is acceptable in this phase, but each uploadable bot
-  file was emitted as standalone code.
-- The main architecture split is now:
-  - retention rescue on `VEX`
-  - `5300` isolation and winner-style adaptation
-  - light context overlays
-  - honest `4000` activation and execution closure
+- The active upload set is the debugged series only.
+- The old Wave 2 filenames without `_debugged.py` are no longer part of the
+  live queue.
+- Strategy IDs were refined in-place where needed so the implementation can
+  preserve the 15-slot wave while changing the actual questions being tested.
 
 ## Open Questions / Blockers
 
-- No material blocker prevents testing.
-- Validation is now the main gate: no bot should be treated as submission-ready
-  until `Phase 06` and `Phase 07` produce readable evidence.
+- No implementation blocker remains.
+- Fresh platform reruns are still required before pruning further.
 
 ## Linked Artifacts
 
 - [`_index.md`](_index.md)
-- [`04_strategy_specs/README.md`](04_strategy_specs/README.md)
+- [`03_strategy_candidates.md`](03_strategy_candidates.md)
+- [`04_strategy_specs/`](04_strategy_specs/)
 - [`../bots/noel/canonical/`](../bots/noel/canonical/)
-- [`../bots/noel/canonical/wave2_shared_engine.py`](../bots/noel/canonical/wave2_shared_engine.py)
-- Linked Wave 2 spec packs:
-  - [`04_strategy_specs/spec_pack_g_vex_retention_rescue.md`](04_strategy_specs/spec_pack_g_vex_retention_rescue.md)
-  - [`04_strategy_specs/spec_pack_h_5300_winner_style_and_veto.md`](04_strategy_specs/spec_pack_h_5300_winner_style_and_veto.md)
-  - [`04_strategy_specs/spec_pack_i_light_context_overlays.md`](04_strategy_specs/spec_pack_i_light_context_overlays.md)
-  - [`04_strategy_specs/spec_pack_j_4000_activation_and_execution.md`](04_strategy_specs/spec_pack_j_4000_activation_and_execution.md)
-- Uploadable candidate files:
-  `r4_w2_01` through `r4_w2_15` in `../bots/noel/canonical/`
+- [`../bots/noel/historical/`](../bots/noel/historical/)
 
 ## Next Priority Action
 
-Open `06 Testing/performance` and validate the first Wave 2 batch, starting
-with:
-- `r4_w2_01_vex_late_no_new_entry`
-- `r4_w2_08_5300_with_5200_veto`
-- `r4_w2_13_4000_forced_activation`
-- then `r4_w2_07_5300_queue_takeover_probe` or
-  `r4_w2_15_4000_quote_ladder_probe`
+Hand the refined upload set into `Phase 06` in this order:
+`r4_w2_01`, `r4_w2_05`, `r4_w2_07`, `r4_w2_08`, `r4_w2_13`, `r4_w2_15`,
+then `r4_w2_02`, `r4_w2_06`, and `r4_w2_14`.
 
 ## Deadline Risk
 
-Medium: the full `15`-bot implementation breadth was intentional by user
-request, but ROI now depends on disciplined grouped validation instead of
-scattered runs.
+Medium: the implementation layer is cleaner now, but the remaining ROI depends
+on fast reruns and disciplined pruning.

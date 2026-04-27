@@ -19,8 +19,8 @@
 
 | Candidate | Product Scope | Role In Pack | Target Bot Path |
 | --- | --- | --- | --- |
-| `r4_s07_trade_to_book_execution_overlay` | `VEX` plus selective vouchers | book-state execution overlay | `rounds/round_4/bots/noel/canonical/r4_s07_trade_to_book_execution_overlay.py` |
-| `r4_s08_family_pressure_overlay` | voucher family plus `VEX` | family-state context overlay | `rounds/round_4/bots/noel/canonical/r4_s08_family_pressure_overlay.py` |
+| `r4_s07_trade_to_book_execution_overlay` | `VEX` plus selective vouchers | book-state execution overlay | `rounds/round_4/bots/noel/historical/r4_s07_trade_to_book_execution_overlay.py` |
+| `r4_s08_family_pressure_overlay` | voucher family plus `VEX` | family-state context overlay | `rounds/round_4/bots/noel/historical/r4_s08_family_pressure_overlay.py` |
 
 ## Review Decision
 
@@ -196,8 +196,8 @@
 ## Implementation Handoff
 
 - Target bot paths:
-  - `rounds/round_4/bots/noel/canonical/r4_s07_trade_to_book_execution_overlay.py`
-  - `rounds/round_4/bots/noel/canonical/r4_s08_family_pressure_overlay.py`
+  - `rounds/round_4/bots/noel/historical/r4_s07_trade_to_book_execution_overlay.py`
+  - `rounds/round_4/bots/noel/historical/r4_s08_family_pressure_overlay.py`
 - Parameters to implement:
   - adverse trade-location cooldown `1`
   - book-state disable spread `> 6`

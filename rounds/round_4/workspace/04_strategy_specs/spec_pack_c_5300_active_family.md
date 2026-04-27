@@ -19,9 +19,9 @@
 
 | Candidate | Product Scope | Role In Pack | Target Bot Path |
 | --- | --- | --- | --- |
-| `r4_s04_vex_5300_overlay` | `VEX + VEV_5300` | plain isolated `5300` branch | `rounds/round_4/bots/noel/canonical/r4_s04_vex_5300_overlay.py` |
-| `r4_s09_5300_toxic_strike_gate` | `VEX + VEV_5300` plus `5100/5200` context | anti-signal gated `5300` | `rounds/round_4/bots/noel/canonical/r4_s09_5300_toxic_strike_gate.py` |
-| `r4_s11_5300_horizon_hold` | `VEX + VEV_5300` | horizon-aware `5300` redesign | `rounds/round_4/bots/noel/canonical/r4_s11_5300_horizon_hold.py` |
+| `r4_s04_vex_5300_overlay` | `VEX + VEV_5300` | plain isolated `5300` branch | `rounds/round_4/bots/noel/historical/r4_s04_vex_5300_overlay.py` |
+| `r4_s09_5300_toxic_strike_gate` | `VEX + VEV_5300` plus `5100/5200` context | anti-signal gated `5300` | `rounds/round_4/bots/noel/historical/r4_s09_5300_toxic_strike_gate.py` |
+| `r4_s11_5300_horizon_hold` | `VEX + VEV_5300` | horizon-aware `5300` redesign | `rounds/round_4/bots/noel/historical/r4_s11_5300_horizon_hold.py` |
 
 ## Review Decision
 
@@ -206,9 +206,9 @@
 ## Implementation Handoff
 
 - Target bot paths:
-  - `rounds/round_4/bots/noel/canonical/r4_s04_vex_5300_overlay.py`
-  - `rounds/round_4/bots/noel/canonical/r4_s09_5300_toxic_strike_gate.py`
-  - `rounds/round_4/bots/noel/canonical/r4_s11_5300_horizon_hold.py`
+  - `rounds/round_4/bots/noel/historical/r4_s04_vex_5300_overlay.py`
+  - `rounds/round_4/bots/noel/historical/r4_s09_5300_toxic_strike_gate.py`
+  - `rounds/round_4/bots/noel/historical/r4_s11_5300_horizon_hold.py`
 - Parameters to implement:
   - `5300` spread cap `10`
   - `5300` edge `2`

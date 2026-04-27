@@ -19,8 +19,8 @@
 
 | Candidate | Product | Role In Pack | Target Bot Path |
 | --- | --- | --- | --- |
-| `r4_s01_vex_base_control` | `VELVETFRUIT_EXTRACT` | anchor control | `rounds/round_4/bots/noel/canonical/r4_s01_vex_base_control.py` |
-| `r4_s02_hydro_base_control` | `HYDROGEL_PACK` | independent delta-1 control | `rounds/round_4/bots/noel/canonical/r4_s02_hydro_base_control.py` |
+| `r4_s01_vex_base_control` | `VELVETFRUIT_EXTRACT` | anchor control | `rounds/round_4/bots/noel/historical/r4_s01_vex_base_control.py` |
+| `r4_s02_hydro_base_control` | `HYDROGEL_PACK` | independent delta-1 control | `rounds/round_4/bots/noel/historical/r4_s02_hydro_base_control.py` |
 
 ## Review Decision
 
@@ -185,8 +185,8 @@
 ## Implementation Handoff
 
 - Target bot paths:
-  - `rounds/round_4/bots/noel/canonical/r4_s01_vex_base_control.py`
-  - `rounds/round_4/bots/noel/canonical/r4_s02_hydro_base_control.py`
+  - `rounds/round_4/bots/noel/historical/r4_s01_vex_base_control.py`
+  - `rounds/round_4/bots/noel/historical/r4_s02_hydro_base_control.py`
 - Parameters to implement:
   - passive quote width `1`
   - cross edge `2`
