@@ -1,0 +1,37 @@
+counterparty,symbol,product_role,trade_count,buy_trade_count,sell_trade_count,buy_share,net_qty,net_notional,directional_leaning
+Mark 55,VELVETFRUIT_EXTRACT,anchor,1198,598,600,0.4991652754590985,-43.0,-208908.0,balanced
+Mark 38,HYDROGEL_PACK,delta-1 base,1022,515,507,0.5039138943248532,34.0,365144.0,balanced
+Mark 14,HYDROGEL_PACK,delta-1 base,1003,496,507,0.4945164506480558,-44.0,-465215.0,balanced
+Mark 14,VELVETFRUIT_EXTRACT,anchor,647,316,331,0.4884080370942813,-2.0,-18848.0,balanced
+Mark 01,VELVETFRUIT_EXTRACT,anchor,504,260,244,0.5158730158730159,42.0,212845.0,balanced
+Mark 38,VEV_4000,ITM structural,442,209,233,0.47285067873303166,-46.0,-49175.0,balanced
+Mark 14,VEV_4000,ITM structural,439,232,207,0.5284738041002278,46.0,49208.0,balanced
+Mark 01,VEV_6000,floor/monitor,317,317,0,1.0,1105.0,0.0,directional buyer
+Mark 01,VEV_6500,floor/monitor,317,317,0,1.0,1105.0,0.0,directional buyer
+Mark 22,VEV_6000,floor/monitor,317,0,317,0.0,-1105.0,0.0,directional seller
+Mark 22,VEV_6500,floor/monitor,317,0,317,0.0,-1105.0,0.0,directional seller
+Mark 22,VEV_5500,upper/passive,306,0,306,0.0,-1069.0,-4202.0,directional seller
+Mark 01,VEV_5500,upper/passive,299,299,0,1.0,1042.0,4058.0,directional buyer
+Mark 22,VEV_5400,upper/passive,276,0,276,0.0,-959.0,-10869.0,directional seller
+Mark 01,VEV_5400,upper/passive,263,263,0,1.0,911.0,10201.0,directional buyer
+Mark 67,VELVETFRUIT_EXTRACT,anchor,165,165,0,1.0,1510.0,7926450.0,directional buyer
+Mark 22,VEV_5300,active zone,164,1,163,0.006097560975609756,-542.0,-20142.0,directional seller
+Mark 01,VEV_5300,active zone,132,132,0,1.0,439.0,15943.0,directional buyer
+Mark 22,VELVETFRUIT_EXTRACT,anchor,126,25,101,0.1984126984126984,-551.0,-2892049.0,directional seller
+Mark 49,VELVETFRUIT_EXTRACT,anchor,122,17,105,0.13934426229508196,-956.0,-5019490.0,directional seller
+Mark 22,VEV_5200,active zone,47,1,46,0.02127659574468085,-156.0,-11786.0,directional seller
+Mark 14,VEV_5200,active zone,33,33,0,1.0,122.0,9523.0,directional buyer
+Mark 14,VEV_5300,active zone,30,30,0,1.0,105.0,4242.0,directional buyer
+Mark 22,HYDROGEL_PACK,delta-1 base,19,11,8,0.5789473684210527,10.0,100071.0,balanced
+Mark 14,VEV_5400,upper/passive,13,13,0,1.0,48.0,668.0,directional buyer
+Mark 01,VEV_5200,active zone,11,11,0,1.0,34.0,2225.0,directional buyer
+Mark 14,VEV_5500,upper/passive,7,7,0,1.0,27.0,144.0,directional buyer
+Mark 22,VEV_4000,ITM structural,3,1,2,0.3333333333333333,0.0,-33.0,balanced
+Mark 22,VEV_4500,ITM structural,3,1,2,0.3333333333333333,0.0,-33.0,balanced
+Mark 22,VEV_5000,active zone,3,1,2,0.3333333333333333,0.0,-35.0,balanced
+Mark 22,VEV_5100,active zone,3,1,2,0.3333333333333333,0.0,-37.0,balanced
+Mark 38,VEV_4500,ITM structural,3,2,1,0.6666666666666666,0.0,33.0,balanced
+Mark 38,VEV_5000,active zone,3,2,1,0.6666666666666666,0.0,35.0,balanced
+Mark 38,VEV_5100,active zone,3,2,1,0.6666666666666666,0.0,37.0,balanced
+Mark 38,VEV_5200,active zone,3,2,1,0.6666666666666666,0.0,38.0,balanced
+Mark 38,VEV_5300,active zone,2,1,1,0.5,-2.0,-43.0,balanced

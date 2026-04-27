@@ -1,0 +1,7 @@
+metric,status,scope,reason_or_method
+implied_volatility_surface,implemented,algorithmic VEV family,BS implied vol per day/time_bucket/strike panel using call-like voucher assumption
+heston_vs_black_scholes,implemented,algorithmic VEV family,constant-vol BS fit compared to Heston COS calibration on aggregated panels
+cos_pricing_under_heston,implemented,algorithmic VEV family,Fourier-cosine pricing engine used for panel calibration and residual comparison
+greeks,implemented,algorithmic VEV family,BS Greeks computed from panel implied vols
+put_call_parity,not available,algorithmic challenge,no paired put series exists in the uploaded algorithmic data
+volume_open_interest_relation,partially available,algorithmic challenge,"trade volume exists, official open interest does not; no honest OI metric can be derived from current files"

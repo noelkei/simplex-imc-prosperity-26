@@ -12,6 +12,7 @@ Current annexes:
 
 - [`eda_round_4_counterparty_profiles.md`](eda_round_4_counterparty_profiles.md)
 - [`eda_round_4_option_book_structure.md`](eda_round_4_option_book_structure.md)
+- [`eda_round_4_option_volatility_and_pricing.md`](eda_round_4_option_volatility_and_pricing.md)
 - [`eda_round_4_round3_revalidation.md`](eda_round_4_round3_revalidation.md)
 
 Supporting reproducible analysis:
@@ -22,6 +23,8 @@ Supporting reproducible analysis:
 - `../../data/processed/derived_round_4_counterparty_markout_by_side.csv`
 - `../../data/processed/derived_round_4_counterparty_pair_summary.csv`
 - `../../data/processed/derived_round_4_feature_model_comparison.csv`
+- `../../data/processed/derived_round_4_option_iv_surface_summary.csv`
+- `../../data/processed/derived_round_4_option_bs_vs_heston_fit.csv`
 
 Required closure summary sections:
 

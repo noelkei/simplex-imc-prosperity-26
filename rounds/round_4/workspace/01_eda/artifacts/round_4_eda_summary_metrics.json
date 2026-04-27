@@ -146,6 +146,28 @@
     }
   ],
   "controlled_regression_r2": 0.0183056690399647,
+  "counterparty_credit_metric_availability": [
+    {
+      "metric": "historical_default_probability",
+      "reason": "no defaults, balance-sheet data, or survival outcomes exist in current files",
+      "status": "not available"
+    },
+    {
+      "metric": "implied_default_probability",
+      "reason": "no credit spreads, CDS, or financing curves exist in current files",
+      "status": "not available"
+    },
+    {
+      "metric": "true_cva",
+      "reason": "no OTC exposure profile, recovery assumption, or credit term structure exists in current files",
+      "status": "not available"
+    },
+    {
+      "metric": "credit_style_proxy",
+      "reason": "stress proxy is based on market-structure concentration and adverse flow, not on real credit risk",
+      "status": "implemented_as_proxy_only"
+    }
+  ],
   "dominant_symbol_by_trade_count": {
     "HYDROGEL_PACK": 1022,
     "VELVETFRUIT_EXTRACT": 1381,
@@ -203,6 +225,118 @@
     "VEV_6000": 317,
     "VEV_6500": 317
   },
+  "option_metric_availability": [
+    {
+      "metric": "implied_volatility_surface",
+      "reason_or_method": "BS implied vol per day/time_bucket/strike panel using call-like voucher assumption",
+      "scope": "algorithmic VEV family",
+      "status": "implemented"
+    },
+    {
+      "metric": "heston_vs_black_scholes",
+      "reason_or_method": "constant-vol BS fit compared to Heston COS calibration on aggregated panels",
+      "scope": "algorithmic VEV family",
+      "status": "implemented"
+    },
+    {
+      "metric": "cos_pricing_under_heston",
+      "reason_or_method": "Fourier-cosine pricing engine used for panel calibration and residual comparison",
+      "scope": "algorithmic VEV family",
+      "status": "implemented"
+    },
+    {
+      "metric": "greeks",
+      "reason_or_method": "BS Greeks computed from panel implied vols",
+      "scope": "algorithmic VEV family",
+      "status": "implemented"
+    },
+    {
+      "metric": "put_call_parity",
+      "reason_or_method": "no paired put series exists in the uploaded algorithmic data",
+      "scope": "algorithmic challenge",
+      "status": "not available"
+    },
+    {
+      "metric": "volume_open_interest_relation",
+      "reason_or_method": "trade volume exists, official open interest does not; no honest OI metric can be derived from current files",
+      "scope": "algorithmic challenge",
+      "status": "partially available"
+    }
+  ],
+  "option_model_fit_summary": [
+    {
+      "bs_rmse": 0.942685897965758,
+      "day": 1,
+      "heston_rmse": 0.9385666739842976,
+      "heston_success": 1,
+      "rmse_improvement_heston_vs_bs": 0.0041192239814605,
+      "time_bucket": "early"
+    },
+    {
+      "bs_rmse": 1.3085161985748015,
+      "day": 1,
+      "heston_rmse": 1.306134623196179,
+      "heston_success": 1,
+      "rmse_improvement_heston_vs_bs": 0.0023815753786227,
+      "time_bucket": "late"
+    },
+    {
+      "bs_rmse": 1.0561764677531509,
+      "day": 1,
+      "heston_rmse": 1.0563127178153071,
+      "heston_success": 1,
+      "rmse_improvement_heston_vs_bs": -0.0001362500621564,
+      "time_bucket": "mid"
+    },
+    {
+      "bs_rmse": 1.1784968849310171,
+      "day": 2,
+      "heston_rmse": 1.1493417095564045,
+      "heston_success": 1,
+      "rmse_improvement_heston_vs_bs": 0.0291551753746126,
+      "time_bucket": "early"
+    },
+    {
+      "bs_rmse": 0.97204272073273,
+      "day": 2,
+      "heston_rmse": 0.9721567920144132,
+      "heston_success": 1,
+      "rmse_improvement_heston_vs_bs": -0.0001140712816832,
+      "time_bucket": "late"
+    },
+    {
+      "bs_rmse": 1.0319740711556389,
+      "day": 2,
+      "heston_rmse": 1.0213494888277794,
+      "heston_success": 1,
+      "rmse_improvement_heston_vs_bs": 0.0106245823278592,
+      "time_bucket": "mid"
+    },
+    {
+      "bs_rmse": 0.5702853120820439,
+      "day": 3,
+      "heston_rmse": 0.5674742610686234,
+      "heston_success": 1,
+      "rmse_improvement_heston_vs_bs": 0.0028110510134204,
+      "time_bucket": "early"
+    },
+    {
+      "bs_rmse": 0.6414329288746804,
+      "day": 3,
+      "heston_rmse": 0.5967413594446586,
+      "heston_success": 1,
+      "rmse_improvement_heston_vs_bs": 0.0446915694300218,
+      "time_bucket": "late"
+    },
+    {
+      "bs_rmse": 0.5612698018602824,
+      "day": 3,
+      "heston_rmse": 0.5014927625861022,
+      "heston_success": 1,
+      "rmse_improvement_heston_vs_bs": 0.0597770392741802,
+      "time_bucket": "mid"
+    }
+  ],
   "price_rows_total": 360000,
   "products_present": [
     "HYDROGEL_PACK",

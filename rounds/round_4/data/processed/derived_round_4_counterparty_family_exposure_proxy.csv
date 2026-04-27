@@ -1,0 +1,22 @@
+counterparty,product_role,trade_count,buy_trade_count,sell_trade_count,net_qty,net_notional
+Mark 01,active zone,143,143,0,473.0,18168.0
+Mark 01,anchor,504,260,244,42.0,212845.0
+Mark 01,floor/monitor,634,634,0,2210.0,0.0
+Mark 01,upper/passive,562,562,0,1953.0,14259.0
+Mark 14,ITM structural,439,232,207,46.0,49208.0
+Mark 14,active zone,63,63,0,227.0,13765.0
+Mark 14,anchor,647,316,331,-2.0,-18848.0
+Mark 14,delta-1 base,1003,496,507,-44.0,-465215.0
+Mark 14,upper/passive,20,20,0,75.0,812.0
+Mark 22,ITM structural,6,2,4,0.0,-66.0
+Mark 22,active zone,217,4,213,-698.0,-32000.0
+Mark 22,anchor,126,25,101,-551.0,-2892049.0
+Mark 22,delta-1 base,19,11,8,10.0,100071.0
+Mark 22,floor/monitor,634,0,634,-2210.0,0.0
+Mark 22,upper/passive,582,0,582,-2028.0,-15071.0
+Mark 38,ITM structural,445,211,234,-46.0,-49142.0
+Mark 38,active zone,11,7,4,-2.0,67.0
+Mark 38,delta-1 base,1022,515,507,34.0,365144.0
+Mark 49,anchor,122,17,105,-956.0,-5019490.0
+Mark 55,anchor,1198,598,600,-43.0,-208908.0
+Mark 67,anchor,165,165,0,1510.0,7926450.0
