@@ -30,6 +30,9 @@ LIMITS = {
     **{symbol: 300 for symbol in FAMILY_SYMBOLS},
 }
 
+# Product-specific spread gates: HYDRO spreads are always >= 7 in real R4 data
+DELTA1_SPREAD_GATE = {HYDRO: 20, VEX: 6}
+
 
 def best_bid_ask(depth) -> Tuple[Optional[int], Optional[int]]:
     if depth is None:
@@ -273,7 +276,7 @@ class SharedWave1Trader:
         depth = state.order_depths.get(symbol)
         mid = mid_price(depth)
         spread_value = spread(depth)
-        if depth is None or mid is None or spread_value is None or spread_value > 6:
+        if depth is None or mid is None or spread_value is None or spread_value > DELTA1_SPREAD_GATE.get(symbol, 6):
             return []
         bid, ask = best_bid_ask(depth)
         if bid is None or ask is None:
@@ -286,7 +289,7 @@ class SharedWave1Trader:
         move_term = 0.0 if last_mid is None else 0.15 * (mid - last_mid)
         fair = mid + (1.2 if symbol == VEX else 0.9) * imb + move_term
 
-        if self.cfg.use_mark22_veto and context["mark22_active"]:
+        if self.cfg.use_mark22_veto and context["mark22_active"] and symbol != VEX:
             return []
         if self.cfg.use_5200_monitor and context["bad_5200"]:
             return []
@@ -295,7 +298,7 @@ class SharedWave1Trader:
         if self.cfg.use_trade_to_book_gate and context["last_bucket"] != "inside":
             conservative = True
         if self.cfg.use_family_pressure_gate and context["family_pressure"] == "high":
-            return []
+            conservative = True
 
         clip = 12 if not conservative else 7
         buy_cap = max(0, limit - pos)
@@ -322,12 +325,12 @@ class SharedWave1Trader:
                 orders.append(Order(symbol, bid, -take_qty))
                 sell_cap -= take_qty
 
-        if buy_cap > 0 and spread_value <= 4:
+        if buy_cap > 0 and spread_value <= 5:
             bid_px = min(bid + 1, clamp_int(fair - quote_width))
             post_qty = min(clip, buy_cap)
             if post_qty > 0:
                 orders.append(Order(symbol, bid_px, post_qty))
-        if sell_cap > 0 and spread_value <= 4:
+        if sell_cap > 0 and spread_value <= 5:
             ask_px = max(ask - 1, clamp_int(fair + quote_width))
             post_qty = min(clip, sell_cap)
             if post_qty > 0:
@@ -354,7 +357,7 @@ class SharedWave1Trader:
 
         if symbol == "VEV_4000":
             fair = max(vex_mid - strike, 0.0) + 3.0 + 0.55 * vex_move + 0.4 * depth_imb
-            max_spread = 8
+            max_spread = 25
             clip = 15
         else:
             fair = max(vex_mid - strike, 0.0) + 6.0 + 0.70 * vex_move + 0.5 * depth_imb
