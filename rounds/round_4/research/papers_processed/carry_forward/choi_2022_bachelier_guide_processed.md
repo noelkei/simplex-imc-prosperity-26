@@ -4,6 +4,13 @@
 
 `draft`
 
+## Round 4 Role
+
+- Reference class: `carry-forward reference`
+- Priority for Strategy: below the top-level `round4_raw_derived` processed core
+- Allowed use: pricing/framing support, validation cross-checks, and Greek intuition
+- Caution: if current-round EDA or raw-derived `round_4` papers conflict with this note, prefer current-round evidence
+
 ## Paper Metadata
 
 - Paper ID: `choi_2022_bachelier_guide`

@@ -4,6 +4,13 @@
 
 `draft`
 
+## Round 4 Role
+
+- Reference class: `carry-forward reference`
+- Priority for Strategy: below the top-level `round4_raw_derived` processed core
+- Allowed use: order-flow framing, validation cross-checks, and counterparty-context interpretation
+- Caution: parts of this note were written before the full `round_4` raw-derived paper core existed, so treat it as supporting context rather than as the primary driver
+
 ## Paper Metadata
 
 - Paper ID: `muravyev_2015_option_order_flow`

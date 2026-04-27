@@ -4,6 +4,13 @@
 
 `draft`
 
+## Round 4 Role
+
+- Reference class: `knowledge draft`
+- Priority for Strategy: below both the top-level `round4_raw_derived` core and the strongest `carry_forward` references
+- Allowed use: inspiration, guardrail vocabulary, and offline framing only unless supported by current-round evidence
+- Caution: this note did not come from the local `round_4` raw-paper pipeline; do not promote it directly to live logic without stronger support
+
 ## Paper Metadata
 
 - Paper ID: `avellaneda_stoikov_2008_hft_mm`

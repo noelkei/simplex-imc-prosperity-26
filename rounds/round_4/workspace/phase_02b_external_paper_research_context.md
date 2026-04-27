@@ -2,7 +2,7 @@
 
 ## Status
 
-IN_PROGRESS
+COMPLETED
 
 ## Owner / Reviewer
 
@@ -28,6 +28,20 @@ IN_PROGRESS
   `../research/papers_md/`.
 - Converted the remaining Batch 2 and Batch 3 papers into usable Markdown files
   under `../research/papers_md/`.
+- Normalized the existing `papers_processed/` set into explicit structural
+  buckets: `carry_forward`, `manual_reference`, and `knowledge_draft`.
+- Removed the duplicate `glosten_milgrom ... (1)` processed file.
+- Added a processed-set audit artifact:
+  [`02b_processed_set_audit.md`](02b_processed_set_audit.md).
+- Created the first six canonical `round4_raw_derived` processed summaries from
+  the uploaded raw-paper core.
+- Completed the remaining three canonical `round4_raw_derived` processed
+  summaries and rewrote [`02b_external_paper_research.md`](02b_external_paper_research.md)
+  around the final local-paper state.
+- Added a short paper-to-strategy bridge in
+  [`02b_strategy_handoff.md`](02b_strategy_handoff.md).
+- Extended that bridge to include the most useful `round_3` carry-forward paper
+  references as clearly secondary inputs to the new `round_4` raw-derived core.
 
 ## Current Findings
 
@@ -42,20 +56,32 @@ IN_PROGRESS
   `linnainmaa_saar_2012_lack_of_anonymity_and_the_inference_from_order_flow`.
 - All 9 local raw papers now have usable Markdown conversions and the phase is
   ready for ROI-ordered processed summaries.
+- The current `papers_processed/` layer is no longer a flat mixed set; it is
+  structurally partitioned and now includes a complete nine-paper canonical
+  `round4_raw_derived` processed core.
+- The uploaded raw-paper set is fully represented in `papers_processed/`.
+- The auxiliary processed notes now carry explicit in-file role labels so they
+  should no longer compete silently with the canonical raw-derived core.
 
 ## Decisions Made
 
 - Keep Phase `02b` non-blocking and leave it in `ready-to-process` after full
   raw -> md conversion.
+- Keep the existing `papers_processed/` notes available as references, but do
+  not treat them as more important than the canonical `round4_raw_derived`
+  strategy core.
+- Treat the full nine-paper canonical core as the primary paper layer for
+  Strategy.
 - Let `03 Strategy` proceed immediately using the completed understanding
   artifact.
 - Keep paper work incremental once uploads arrive; do not re-open broad
   research setup.
+- Close Phase `02b` as `COMPLETED` operationally under the workflow exception:
+  prompt exists, local raw set is fully processed, and the strategy handoff is
+  ready.
 
 ## Open Questions / Blockers
 
-- Whether to upload the remaining preferred paper before or after Batch 1
-  conversion.
 - Exact deadline remains unknown.
 
 ## Linked Artifacts
@@ -64,12 +90,14 @@ IN_PROGRESS
 - [`02_understanding.md`](02_understanding.md)
 - [`phase_02_understanding_context.md`](phase_02_understanding_context.md)
 - [`02b_external_paper_research.md`](02b_external_paper_research.md)
+- [`02b_processed_set_audit.md`](02b_processed_set_audit.md)
+- [`02b_strategy_handoff.md`](02b_strategy_handoff.md)
 
 ## Next Priority Action
 
-Process the converted Markdown files into `../research/papers_processed/`,
-starting with the highest-ROI trio from Batch 1, while keeping `03 Strategy`
-unblocked.
+Open `03 Strategy` using `02_understanding.md`,
+`02b_strategy_handoff.md`, and the nine-paper canonical `round4_raw_derived`
+paper core.
 
 ## Deadline Risk
 

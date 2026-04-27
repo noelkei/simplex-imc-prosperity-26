@@ -4,6 +4,13 @@
 
 `draft`
 
+## Round 4 Role
+
+- Reference class: `knowledge draft`
+- Priority for Strategy: below both the top-level `round4_raw_derived` core and the strongest `carry_forward` references
+- Allowed use: inspiration, EDA framing, and offline pricing context only
+- Caution: this note did not come from the local `round_4` raw-paper pipeline; do not promote it directly to live logic without stronger support
+
 ## Paper Metadata
 
 - Paper ID: `heston_1993_stochastic_vol`

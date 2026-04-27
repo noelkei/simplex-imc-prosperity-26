@@ -4,6 +4,13 @@
 
 `draft`
 
+## Round 4 Role
+
+- Reference class: `manual challenge reference`
+- Priority for Strategy: not part of the canonical algorithmic `VEX` / `VEV_*` strategy core
+- Allowed use: manual challenge pricing only unless the user explicitly reopens manual scope
+- Caution: do not treat this note as input to `03 Strategy` for the algorithmic round
+
 ## Paper Metadata
 
 - Paper ID: `reiner_rubinstein_1991_barrier_options`

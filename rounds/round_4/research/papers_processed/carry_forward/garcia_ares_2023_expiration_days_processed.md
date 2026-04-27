@@ -4,6 +4,13 @@
 
 `draft`
 
+## Round 4 Role
+
+- Reference class: `carry-forward reference`
+- Priority for Strategy: below the top-level `round4_raw_derived` processed core
+- Allowed use: near-expiry framing, validation cross-checks, and horizon caution
+- Caution: if current-round EDA or raw-derived `round_4` papers conflict with this note, prefer current-round evidence
+
 ## Paper Metadata
 
 - Paper ID: `garcia_ares_2023_expiration_days`

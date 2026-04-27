@@ -4,6 +4,13 @@
 
 `draft`
 
+## Round 4 Role
+
+- Reference class: `knowledge draft`
+- Priority for Strategy: below both the top-level `round4_raw_derived` core and the strongest `carry_forward` references
+- Allowed use: adverse-selection framing, validation vocabulary, and offline interpretation support
+- Caution: this note did not come from the local `round_4` raw-paper pipeline; do not promote it directly to live logic without stronger support
+
 ## Paper Metadata
 
 - Paper ID: `easley_ohara_1987_price_trade_size`

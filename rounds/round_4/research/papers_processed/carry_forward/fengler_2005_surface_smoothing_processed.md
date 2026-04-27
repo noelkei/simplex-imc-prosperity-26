@@ -4,6 +4,13 @@
 
 `draft`
 
+## Round 4 Role
+
+- Reference class: `carry-forward reference`
+- Priority for Strategy: below the top-level `round4_raw_derived` processed core
+- Allowed use: surface-sanity framing, validation cross-checks, and residual caution
+- Caution: if current-round EDA or raw-derived `round_4` papers conflict with this note, prefer current-round evidence
+
 ## Paper Metadata
 
 - Paper ID: `fengler_2005_surface_smoothing`

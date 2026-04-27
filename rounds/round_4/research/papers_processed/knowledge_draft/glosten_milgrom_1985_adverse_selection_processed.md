@@ -4,6 +4,13 @@
 
 `draft`
 
+## Round 4 Role
+
+- Reference class: `knowledge draft`
+- Priority for Strategy: below both the top-level `round4_raw_derived` core and the strongest `carry_forward` references
+- Allowed use: adverse-selection framing, guardrail intuition, and validation vocabulary
+- Caution: this note did not come from the local `round_4` raw-paper pipeline; do not promote it directly to live logic without stronger support
+
 ## Paper Metadata
 
 - Paper ID: `glosten_milgrom_1985_adverse_selection`
