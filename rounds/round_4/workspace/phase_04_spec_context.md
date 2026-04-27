@@ -15,67 +15,76 @@ COMPLETED
 
 ## What Has Been Done
 
-- Consumed the completed `03 Strategy` artifact and the grouped-spec plan from
-  `03_strategy_candidates.md`.
-- Wrote six grouped Wave 1 specs covering all `15` exploration bots:
-  - `pack_a_delta1_controls`
-  - `pack_b_round3_revalidation`
-  - `pack_c_5300_active_family`
-  - `pack_d_counterparty_defensive`
-  - `pack_e_execution_and_family_context`
-  - `pack_f_low_priority_probes`
-- Updated `04_strategy_specs/README.md` so the grouped-pack structure is
-  explicit and easy to resume.
+- Reopened `Phase 04` after Wave 2 strategy work replaced the old Wave 1 queue
+  as the active direction.
+- Wrote four grouped Wave 2 specs:
+  - `pack_g_vex_retention_rescue`
+  - `pack_h_5300_winner_style_and_veto`
+  - `pack_i_light_context_overlays`
+  - `pack_j_4000_activation_and_execution`
+- Carried run-informed evidence from Pack `A/B/D` into the specs so the Wave 2
+  implementation set is explicitly path-rescue, isolation, and coverage-gap
+  driven.
+- Added explicit winner-style adaptation in the new `5300` and `4000` packs:
+  simple rolling-IV fair value, strike-specific quote ladder, and queue
+  takeover, but without porting incompatible old-round calibration or hedge
+  machinery.
+- Updated `04_strategy_specs/README.md` so Wave 2 and historical Wave 1 specs
+  are clearly separated.
 
 ## Current Findings
 
-- `04` should stay grouped by learning family, not split into `15` isolated
-  one-off specs.
-- The highest-ROI implementation start was:
-  - Pack A controls
-  - Pack B round-3 revalidation
-  - Pack D counterparty-defensive logic
-- The spec layer is deliberately exploration-oriented: several branches are
-  designed to prove or disprove hypotheses cleanly, not to predeclare winners.
+- `04` should still stay grouped by learning family, not split into `15`
+  isolated one-off specs.
+- The highest-ROI Wave 2 implementation start is now:
+  - Pack `G` retention rescue
+  - Pack `H` `5300` isolation and winner-style adaptation
+  - Pack `J` honest `4000` attribution closure
+- Pack `I` should stay behind those unless Wave 2 capacity is larger than the
+  preferred mini-batch.
+- The best direct port of the uploaded winner style is no longer a literal
+  carry-forward bot; it is a controlled execution architecture inside Pack `H`
+  and Pack `J`.
 
 ## Decisions Made
 
-- Reviewed spec is mandatory before implementation.
-- Grouped pack specs are acceptable as long as each pack preserves candidate
+- Reviewed spec remains mandatory before implementation unless deadline
+  deferral is explicit.
+- Grouped pack specs remain acceptable as long as they preserve candidate
   differences, feature contracts, and validation checks cleanly.
-- All six Wave 1 packs are now written and waiting for review; implementation
-  should start from approved packs, not from the raw candidate note.
-- User requested entering `Phase 05`, so the grouped packs were approved
-  operationally with exploratory caveats and handed off to implementation.
+- User explicitly requested implementing all `15` Wave 2 bots, so the grouped
+  specs were treated as operationally approved for exploratory implementation.
+- The winner-style adaptation is explicitly limited to portable structure:
+  rolling-IV fair value, intrinsic floor, quote ladder, and queue takeover.
 
 ## Open Questions / Blockers
 
-- No material blocker remains.
-- Grouped pack review was treated as operationally approved based on the user
-  request to enter `Phase 05`; remaining risk is now in implementation quality
-  and validation, not spec readiness.
-- Exact deadline remains unknown, so the size of the `15`-bot wave still needs
-  discipline in Phase `05`.
+- No material blocker remains in `Phase 04`.
+- Canonical Pack `C/E/F` summaries are still missing, which slightly weakens
+  confidence on the full `5300` family but does not block spec writing.
+- Exact deadline remains unknown, so validation discipline is now more
+  important than further spec expansion.
 
 ## Linked Artifacts
 
 - [`_index.md`](_index.md)
 - [`04_strategy_specs/README.md`](04_strategy_specs/README.md)
-- [`04_strategy_specs/spec_pack_a_delta1_controls.md`](04_strategy_specs/spec_pack_a_delta1_controls.md)
-- [`04_strategy_specs/spec_pack_b_round3_revalidation.md`](04_strategy_specs/spec_pack_b_round3_revalidation.md)
-- [`04_strategy_specs/spec_pack_c_5300_active_family.md`](04_strategy_specs/spec_pack_c_5300_active_family.md)
-- [`04_strategy_specs/spec_pack_d_counterparty_defensive.md`](04_strategy_specs/spec_pack_d_counterparty_defensive.md)
-- [`04_strategy_specs/spec_pack_e_execution_and_family_context.md`](04_strategy_specs/spec_pack_e_execution_and_family_context.md)
-- [`04_strategy_specs/spec_pack_f_low_priority_probes.md`](04_strategy_specs/spec_pack_f_low_priority_probes.md)
+- [`04_strategy_specs/spec_pack_g_vex_retention_rescue.md`](04_strategy_specs/spec_pack_g_vex_retention_rescue.md)
+- [`04_strategy_specs/spec_pack_h_5300_winner_style_and_veto.md`](04_strategy_specs/spec_pack_h_5300_winner_style_and_veto.md)
+- [`04_strategy_specs/spec_pack_i_light_context_overlays.md`](04_strategy_specs/spec_pack_i_light_context_overlays.md)
+- [`04_strategy_specs/spec_pack_j_4000_activation_and_execution.md`](04_strategy_specs/spec_pack_j_4000_activation_and_execution.md)
 - [`03_strategy_candidates.md`](03_strategy_candidates.md)
+- [`post_run_research_memory.md`](post_run_research_memory.md)
+- [`06_testing/round_4_wave1_pack_abd_partial_synthesis.md`](06_testing/round_4_wave1_pack_abd_partial_synthesis.md)
 
 ## Next Priority Action
 
-Monitor implementation consistency during `Phase 05` and hand the Wave 1 bots
-to `Phase 06 Testing/performance`, starting with Packs `A`, `B`, and `D`.
+Monitor Wave 2 implementation consistency during `Phase 05` and hand the new
+bots into `Phase 06 Testing/performance`, starting with the highest-ROI
+validation order:
+`r4_w2_01`, `r4_w2_08`, `r4_w2_13`, then `r4_w2_07` or `r4_w2_15`.
 
 ## Deadline Risk
 
-Medium: the spec layer is complete, but the `15`-bot exploration wave only
-stays high-ROI if implementation follows the grouped-pack plan instead of
-fragmenting into ad hoc one-off bots.
+Medium: the spec layer is complete, but ROI now depends on grouped validation
+instead of scattered run ordering.
