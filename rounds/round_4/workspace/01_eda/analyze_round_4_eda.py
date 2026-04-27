@@ -16,6 +16,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sns
+from scipy.optimize import brentq, minimize, minimize_scalar
+from scipy.stats import norm
 from sklearn.linear_model import LinearRegression
 
 
@@ -41,6 +43,9 @@ PRODUCT_ROLE_MAP = {
 
 ACTIVE_ZONE = ["VEV_5000", "VEV_5100", "VEV_5200", "VEV_5300", "VEV_5400", "VEV_5500"]
 FUTURE_HORIZONS = [1, 5, 10]
+TTE_DAYS_BY_DAY = {1: 4, 2: 3, 3: 2}
+TRADING_DAYS_PER_YEAR = 252.0
+OPTION_PANEL_EXCLUDED_STRIKES = {6000, 6500}
 LEAD_LAG_PAIRS = [
     ("HYDROGEL_PACK", "VELVETFRUIT_EXTRACT"),
     ("VELVETFRUIT_EXTRACT", "VEV_4000"),
@@ -83,6 +88,196 @@ def save_plot(fig: plt.Figure, name: str) -> Path:
     fig.savefig(path, dpi=180, bbox_inches="tight")
     plt.close(fig)
     return path
+
+
+def bs_call_price(spot: float, strike: float, tau: float, sigma: float, rate: float = 0.0) -> float:
+    if tau <= 0:
+        return max(spot - strike, 0.0)
+    sigma = max(float(sigma), 1e-12)
+    spot = max(float(spot), 1e-12)
+    strike = max(float(strike), 1e-12)
+    sqrt_tau = np.sqrt(tau)
+    d1 = (np.log(spot / strike) + (rate + 0.5 * sigma * sigma) * tau) / (sigma * sqrt_tau)
+    d2 = d1 - sigma * sqrt_tau
+    return float(spot * norm.cdf(d1) - strike * np.exp(-rate * tau) * norm.cdf(d2))
+
+
+def bs_implied_vol(spot: float, strike: float, tau: float, price: float, rate: float = 0.0) -> float:
+    intrinsic = max(spot - strike * np.exp(-rate * tau), 0.0)
+    if tau <= 0 or price <= intrinsic + 1e-9 or price >= spot:
+        return np.nan
+
+    def objective(sigma: float) -> float:
+        return bs_call_price(spot, strike, tau, sigma, rate) - price
+
+    try:
+        return float(brentq(objective, 1e-6, 5.0, maxiter=200))
+    except Exception:
+        return np.nan
+
+
+def bs_greeks(spot: float, strike: float, tau: float, sigma: float, rate: float = 0.0) -> dict[str, float]:
+    if tau <= 0 or not np.isfinite(sigma) or sigma <= 0:
+        intrinsic_delta = 1.0 if spot > strike else 0.0
+        return {"delta": intrinsic_delta, "gamma": np.nan, "vega": np.nan, "theta": np.nan}
+    sqrt_tau = np.sqrt(tau)
+    d1 = (np.log(spot / strike) + (rate + 0.5 * sigma * sigma) * tau) / (sigma * sqrt_tau)
+    d2 = d1 - sigma * sqrt_tau
+    pdf_d1 = norm.pdf(d1)
+    return {
+        "delta": float(norm.cdf(d1)),
+        "gamma": float(pdf_d1 / (spot * sigma * sqrt_tau)),
+        "vega": float(spot * pdf_d1 * sqrt_tau),
+        "theta": float(
+            -(spot * pdf_d1 * sigma) / (2 * sqrt_tau) - rate * strike * np.exp(-rate * tau) * norm.cdf(d2)
+        ),
+    }
+
+
+def heston_characteristic_function(
+    u: np.ndarray,
+    spot: float,
+    tau: float,
+    rate: float,
+    kappa: float,
+    theta: float,
+    volvol: float,
+    rho: float,
+    v0: float,
+) -> np.ndarray:
+    x0 = np.log(max(spot, 1e-12))
+    iu = 1j * u
+    d = np.sqrt((rho * volvol * iu - kappa) ** 2 + volvol * volvol * (iu + u * u))
+    g = (kappa - rho * volvol * iu - d) / (kappa - rho * volvol * iu + d + 1e-18)
+    exp_dt = np.exp(-d * tau)
+    c_term = (
+        rate * iu * tau
+        + (kappa * theta / (volvol * volvol))
+        * ((kappa - rho * volvol * iu - d) * tau - 2.0 * np.log((1.0 - g * exp_dt) / (1.0 - g + 1e-18)))
+    )
+    d_term = ((kappa - rho * volvol * iu - d) / (volvol * volvol)) * ((1.0 - exp_dt) / (1.0 - g * exp_dt + 1e-18))
+    return np.exp(c_term + d_term * v0 + iu * x0)
+
+
+def cos_call_payoff_coefficients(a: float, b: float, n_terms: int) -> tuple[np.ndarray, np.ndarray]:
+    k = np.arange(n_terms, dtype=float)
+    u = k * np.pi / (b - a)
+    c = 0.0
+    d = max(b, 0.0)
+    exp_c = np.exp(c)
+    exp_d = np.exp(d)
+    chi = (
+        exp_d * (np.cos(u * (d - a)) + u * np.sin(u * (d - a)))
+        - exp_c * (np.cos(u * (c - a)) + u * np.sin(u * (c - a)))
+    ) / (1.0 + u * u)
+    psi = np.zeros_like(u)
+    psi[0] = d - c
+    if len(u) > 1:
+        psi[1:] = (np.sin(u[1:] * (d - a)) - np.sin(u[1:] * (c - a))) / u[1:]
+    vk = 2.0 / (b - a) * (chi - psi)
+    return u, vk
+
+
+def heston_cos_call_price(
+    spot: float,
+    strike: float,
+    tau: float,
+    rate: float,
+    kappa: float,
+    theta: float,
+    volvol: float,
+    rho: float,
+    v0: float,
+    n_terms: int = 128,
+    truncation_l: float = 10.0,
+) -> float:
+    if tau <= 0:
+        return max(spot - strike, 0.0)
+    var_proxy = max(theta, v0, 1e-8) * tau
+    c1 = np.log(max(spot / strike, 1e-12)) + (rate - 0.5 * theta) * tau
+    c2 = max(var_proxy, 1e-8)
+    a = c1 - truncation_l * np.sqrt(c2)
+    b = c1 + truncation_l * np.sqrt(c2)
+    if b <= 0:
+        return max(spot - strike, 0.0)
+    u, vk = cos_call_payoff_coefficients(a, b, n_terms)
+    cf_y = np.exp(-1j * u * np.log(max(strike, 1e-12))) * heston_characteristic_function(
+        u, spot, tau, rate, kappa, theta, volvol, rho, v0
+    )
+    coeff = np.real(cf_y * np.exp(-1j * u * a))
+    coeff[0] *= 0.5
+    price = np.exp(-rate * tau) * strike * np.sum(coeff * vk)
+    return float(max(price, 0.0))
+
+
+def fit_bs_constant_vol(panel: pd.DataFrame, rate: float = 0.0) -> tuple[float, float]:
+    if panel.empty:
+        return np.nan, np.nan
+    spot = float(panel["panel_spot"].iloc[0])
+    tau = float(panel["tau_years"].iloc[0])
+    strikes = panel["strike"].to_numpy(dtype=float)
+    market = panel["panel_mid"].to_numpy(dtype=float)
+
+    def objective(sigma: float) -> float:
+        model = np.array([bs_call_price(spot, k, tau, sigma, rate) for k in strikes])
+        return float(np.mean((model - market) ** 2))
+
+    result = minimize_scalar(objective, bounds=(1e-4, 5.0), method="bounded")
+    sigma = float(result.x) if result.success else np.nan
+    rmse = float(np.sqrt(result.fun)) if result.success else np.nan
+    return sigma, rmse
+
+
+def fit_heston_panel(panel: pd.DataFrame, rate: float = 0.0) -> dict[str, float]:
+    if len(panel) < 4:
+        return {
+            "success": 0,
+            "v0": np.nan,
+            "kappa": np.nan,
+            "theta": np.nan,
+            "volvol": np.nan,
+            "rho": np.nan,
+            "rmse": np.nan,
+        }
+    spot = float(panel["panel_spot"].iloc[0])
+    tau = float(panel["tau_years"].iloc[0])
+    strikes = panel["strike"].to_numpy(dtype=float)
+    market = panel["panel_mid"].to_numpy(dtype=float)
+    bs_seed = panel["bs_iv"].dropna().median()
+    base_var = max(float(bs_seed) ** 2 if pd.notna(bs_seed) else 0.04, 1e-4)
+
+    def objective(params: np.ndarray) -> float:
+        v0, kappa, theta, volvol, rho = params
+        try:
+            model = np.array(
+                [
+                    heston_cos_call_price(spot, k, tau, rate, kappa, theta, volvol, rho, v0)
+                    for k in strikes
+                ]
+            )
+            if not np.all(np.isfinite(model)):
+                return 1e9
+            return float(np.mean((model - market) ** 2))
+        except Exception:
+            return 1e9
+
+    result = minimize(
+        objective,
+        x0=np.array([base_var, 2.0, base_var, max(np.sqrt(base_var), 0.2), -0.5]),
+        bounds=[(1e-6, 4.0), (0.1, 20.0), (1e-6, 4.0), (0.05, 5.0), (-0.99, 0.99)],
+        method="L-BFGS-B",
+        options={"maxiter": 120},
+    )
+    params = result.x if result.success else [np.nan] * 5
+    return {
+        "success": int(bool(result.success)),
+        "v0": float(params[0]),
+        "kappa": float(params[1]),
+        "theta": float(params[2]),
+        "volvol": float(params[3]),
+        "rho": float(params[4]),
+        "rmse": float(np.sqrt(result.fun)) if result.success else np.nan,
+    }
 
 
 def load_prices() -> pd.DataFrame:
@@ -680,6 +875,358 @@ def option_book_metrics(prices: pd.DataFrame, trades: pd.DataFrame) -> dict[str,
     }
 
 
+def advanced_option_metrics(prices: pd.DataFrame, trades: pd.DataFrame) -> dict[str, Path]:
+    vex = prices.loc[prices["product"] == "VELVETFRUIT_EXTRACT", ["day", "timestamp", "mid_price"]].rename(
+        columns={"mid_price": "underlying_mid"}
+    )
+    option_quotes = prices.loc[prices["product"].str.startswith("VEV_")].copy()
+    option_quotes["strike"] = option_quotes["product"].str.split("_").str[1].astype(int)
+    option_quotes = option_quotes.merge(vex, on=["day", "timestamp"], how="left")
+    option_quotes["tte_days"] = option_quotes["day"].map(TTE_DAYS_BY_DAY)
+    option_quotes["tau_years"] = option_quotes["tte_days"] / TRADING_DAYS_PER_YEAR
+    option_quotes["intrinsic_value"] = (option_quotes["underlying_mid"] - option_quotes["strike"]).clip(lower=0.0)
+    option_quotes["extrinsic_value"] = option_quotes["mid_price"] - option_quotes["intrinsic_value"]
+    option_quotes["moneyness"] = option_quotes["underlying_mid"] / option_quotes["strike"]
+
+    trade_activity = (
+        trades.loc[trades["symbol"].str.startswith("VEV_")]
+        .groupby(["day", "time_bucket", "symbol"])
+        .agg(trade_count=("symbol", "size"), trade_notional=("notional", "sum"))
+        .reset_index()
+        .rename(columns={"symbol": "product"})
+    )
+
+    option_panel = (
+        option_quotes.groupby(["day", "time_bucket", "product", "strike"])
+        .agg(
+            panel_mid=("mid_price", "median"),
+            panel_spot=("underlying_mid", "median"),
+            mean_spread=("spread", "mean"),
+            mean_rel_spread_bps=("rel_spread_bps", "mean"),
+            mean_depth_1=("depth_1", "mean"),
+            mean_imbalance_1=("imbalance_1", "mean"),
+            intrinsic_value=("intrinsic_value", "median"),
+            extrinsic_value=("extrinsic_value", "median"),
+            moneyness=("moneyness", "median"),
+            tau_years=("tau_years", "median"),
+            tte_days=("tte_days", "median"),
+        )
+        .reset_index()
+        .merge(trade_activity, on=["day", "time_bucket", "product"], how="left")
+        .fillna({"trade_count": 0, "trade_notional": 0.0})
+    )
+
+    option_panel["bs_iv"] = option_panel.apply(
+        lambda row: bs_implied_vol(
+            row["panel_spot"], row["strike"], row["tau_years"], row["panel_mid"], 0.0
+        ),
+        axis=1,
+    )
+    option_panel["bs_iv_valid"] = option_panel["bs_iv"].notna().astype(int)
+    greek_rows = option_panel.apply(
+        lambda row: bs_greeks(row["panel_spot"], row["strike"], row["tau_years"], row["bs_iv"], 0.0),
+        axis=1,
+    )
+    greek_df = pd.DataFrame(list(greek_rows))
+    option_panel = pd.concat([option_panel, greek_df], axis=1)
+
+    iv_surface_summary = (
+        option_panel.groupby(["day", "product", "strike"])
+        .agg(
+            median_bs_iv=("bs_iv", "median"),
+            mean_bs_iv=("bs_iv", "mean"),
+            bs_iv_valid_share=("bs_iv_valid", "mean"),
+            median_delta=("delta", "median"),
+            median_gamma=("gamma", "median"),
+            median_vega=("vega", "median"),
+            median_theta=("theta", "median"),
+            median_extrinsic_value=("extrinsic_value", "median"),
+            total_trade_count=("trade_count", "sum"),
+        )
+        .reset_index()
+    )
+
+    smile_rows = []
+    fit_rows = []
+    residual_rows = []
+    fit_input = option_panel.loc[~option_panel["strike"].isin(OPTION_PANEL_EXCLUDED_STRIKES)].copy()
+    for (day, time_bucket), panel in fit_input.groupby(["day", "time_bucket"]):
+        panel = panel.loc[(panel["panel_mid"] > 0) & panel["panel_spot"].notna()].copy()
+        if panel.empty:
+            continue
+        panel = panel.sort_values("strike")
+        valid_iv = panel.loc[panel["bs_iv"].notna()].copy()
+        if len(valid_iv) >= 3:
+            x = np.log(valid_iv["strike"] / valid_iv["panel_spot"])
+            y = valid_iv["bs_iv"]
+            coeff = np.polyfit(x, y, deg=2)
+            smile_rows.append(
+                {
+                    "day": day,
+                    "time_bucket": time_bucket,
+                    "tte_days": float(panel["tte_days"].iloc[0]),
+                    "smile_quad_a": float(coeff[0]),
+                    "smile_linear_b": float(coeff[1]),
+                    "smile_level_c": float(coeff[2]),
+                    "valid_strikes": int(len(valid_iv)),
+                }
+            )
+
+        bs_sigma, bs_rmse = fit_bs_constant_vol(panel)
+        heston_fit = fit_heston_panel(panel)
+        fit_rows.append(
+            {
+                "day": day,
+                "time_bucket": time_bucket,
+                "tte_days": float(panel["tte_days"].iloc[0]),
+                "panel_spot": float(panel["panel_spot"].iloc[0]),
+                "strike_count": int(len(panel)),
+                "bs_constant_sigma": bs_sigma,
+                "bs_rmse": bs_rmse,
+                "heston_success": heston_fit["success"],
+                "heston_v0": heston_fit["v0"],
+                "heston_kappa": heston_fit["kappa"],
+                "heston_theta": heston_fit["theta"],
+                "heston_volvol": heston_fit["volvol"],
+                "heston_rho": heston_fit["rho"],
+                "heston_rmse": heston_fit["rmse"],
+                "rmse_improvement_heston_vs_bs": bs_rmse - heston_fit["rmse"]
+                if pd.notna(bs_rmse) and pd.notna(heston_fit["rmse"])
+                else np.nan,
+            }
+        )
+
+        for _, row in panel.iterrows():
+            bs_price = bs_call_price(row["panel_spot"], row["strike"], row["tau_years"], bs_sigma, 0.0) if pd.notna(bs_sigma) else np.nan
+            heston_price = (
+                heston_cos_call_price(
+                    row["panel_spot"],
+                    row["strike"],
+                    row["tau_years"],
+                    0.0,
+                    heston_fit["kappa"],
+                    heston_fit["theta"],
+                    heston_fit["volvol"],
+                    heston_fit["rho"],
+                    heston_fit["v0"],
+                )
+                if heston_fit["success"]
+                else np.nan
+            )
+            residual_rows.append(
+                {
+                    "day": day,
+                    "time_bucket": time_bucket,
+                    "product": row["product"],
+                    "strike": row["strike"],
+                    "panel_mid": row["panel_mid"],
+                    "panel_spot": row["panel_spot"],
+                    "tau_years": row["tau_years"],
+                    "bs_price": bs_price,
+                    "heston_price": heston_price,
+                    "bs_residual": row["panel_mid"] - bs_price if pd.notna(bs_price) else np.nan,
+                    "heston_residual": row["panel_mid"] - heston_price if pd.notna(heston_price) else np.nan,
+                }
+            )
+
+    smile_summary = pd.DataFrame(smile_rows)
+    model_fit = pd.DataFrame(fit_rows)
+    model_residuals = pd.DataFrame(residual_rows)
+
+    availability = pd.DataFrame(
+        [
+            {
+                "metric": "implied_volatility_surface",
+                "status": "implemented",
+                "scope": "algorithmic VEV family",
+                "reason_or_method": "BS implied vol per day/time_bucket/strike panel using call-like voucher assumption",
+            },
+            {
+                "metric": "heston_vs_black_scholes",
+                "status": "implemented",
+                "scope": "algorithmic VEV family",
+                "reason_or_method": "constant-vol BS fit compared to Heston COS calibration on aggregated panels",
+            },
+            {
+                "metric": "cos_pricing_under_heston",
+                "status": "implemented",
+                "scope": "algorithmic VEV family",
+                "reason_or_method": "Fourier-cosine pricing engine used for panel calibration and residual comparison",
+            },
+            {
+                "metric": "greeks",
+                "status": "implemented",
+                "scope": "algorithmic VEV family",
+                "reason_or_method": "BS Greeks computed from panel implied vols",
+            },
+            {
+                "metric": "put_call_parity",
+                "status": "not available",
+                "scope": "algorithmic challenge",
+                "reason_or_method": "no paired put series exists in the uploaded algorithmic data",
+            },
+            {
+                "metric": "volume_open_interest_relation",
+                "status": "partially available",
+                "scope": "algorithmic challenge",
+                "reason_or_method": "trade volume exists, official open interest does not; no honest OI metric can be derived from current files",
+            },
+        ]
+    )
+
+    volume_by_strike = (
+        option_panel.groupby(["day", "product", "strike"])
+        .agg(
+            total_trade_count=("trade_count", "sum"),
+            total_trade_notional=("trade_notional", "sum"),
+            median_panel_mid=("panel_mid", "median"),
+            median_bs_iv=("bs_iv", "median"),
+        )
+        .reset_index()
+    )
+
+    return {
+        "option_panel": save_csv(option_panel, "derived_round_4_option_panel_metrics.csv"),
+        "iv_surface_summary": save_csv(
+            iv_surface_summary, "derived_round_4_option_iv_surface_summary.csv"
+        ),
+        "smile_summary": save_csv(
+            smile_summary, "derived_round_4_option_smile_summary.csv"
+        ),
+        "model_fit": save_csv(
+            model_fit, "derived_round_4_option_bs_vs_heston_fit.csv"
+        ),
+        "model_residuals": save_csv(
+            model_residuals, "derived_round_4_option_model_residuals.csv"
+        ),
+        "volume_by_strike": save_csv(
+            volume_by_strike, "derived_round_4_option_volume_by_strike.csv"
+        ),
+        "availability": save_csv(
+            availability, "derived_round_4_option_metric_availability.csv"
+        ),
+    }
+
+
+def advanced_counterparty_metrics(
+    trades: pd.DataFrame,
+    counterparty_stability_scores_path: Path,
+    counterparty_markout_path: Path,
+) -> dict[str, Path]:
+    stability_scores = pd.read_csv(counterparty_stability_scores_path)
+    markout = pd.read_csv(counterparty_markout_path)
+
+    directional_rows = []
+    all_names = sorted(set(trades["buyer"]).union(trades["seller"]))
+    for name in all_names:
+        for symbol in sorted(trades["symbol"].unique()):
+            buy = trades.loc[(trades["buyer"] == name) & (trades["symbol"] == symbol)]
+            sell = trades.loc[(trades["seller"] == name) & (trades["symbol"] == symbol)]
+            trade_count = len(buy) + len(sell)
+            if trade_count == 0:
+                continue
+            net_qty = float(buy["quantity"].sum() - sell["quantity"].sum())
+            net_notional = float(buy["notional"].sum() - sell["notional"].sum())
+            buy_share = float(len(buy) / trade_count)
+            if buy_share >= 0.7:
+                leaning = "directional buyer"
+            elif buy_share <= 0.3:
+                leaning = "directional seller"
+            else:
+                leaning = "balanced"
+            directional_rows.append(
+                {
+                    "counterparty": name,
+                    "symbol": symbol,
+                    "product_role": PRODUCT_ROLE_MAP.get(symbol, "other"),
+                    "trade_count": trade_count,
+                    "buy_trade_count": int(len(buy)),
+                    "sell_trade_count": int(len(sell)),
+                    "buy_share": buy_share,
+                    "net_qty": net_qty,
+                    "net_notional": net_notional,
+                    "directional_leaning": leaning,
+                }
+            )
+    directional_profile = pd.DataFrame(directional_rows).sort_values(
+        ["trade_count", "counterparty", "symbol"], ascending=[False, True, True]
+    )
+
+    family_exposure = (
+        directional_profile.groupby(["counterparty", "product_role"])
+        .agg(
+            trade_count=("trade_count", "sum"),
+            buy_trade_count=("buy_trade_count", "sum"),
+            sell_trade_count=("sell_trade_count", "sum"),
+            net_qty=("net_qty", "sum"),
+            net_notional=("net_notional", "sum"),
+        )
+        .reset_index()
+    )
+
+    side_alpha = (
+        markout[["counterparty", "side", "avg_side_alpha_bps_5", "trade_count"]]
+        .rename(columns={"trade_count": "markout_trade_count"})
+    )
+    stress_proxy = stability_scores.merge(
+        side_alpha.groupby("counterparty")
+        .agg(
+            avg_abs_side_alpha_bps_5=("avg_side_alpha_bps_5", lambda s: float(s.abs().mean())),
+            max_side_alpha_bps_5=("avg_side_alpha_bps_5", "max"),
+            min_side_alpha_bps_5=("avg_side_alpha_bps_5", "min"),
+        )
+        .reset_index(),
+        on="counterparty",
+        how="left",
+    )
+    stress_proxy["one_sidedness_score"] = (stress_proxy["buy_trade_share_mean"] - 0.5).abs() * 2.0
+    stress_proxy["proxy_concentration_stress"] = (
+        stress_proxy["product_concentration_hhi"].fillna(0.0) * 0.4
+        + stress_proxy["one_sidedness_score"].fillna(0.0) * 0.3
+        + (stress_proxy["avg_abs_side_alpha_bps_5"].fillna(0.0).clip(upper=50.0) / 50.0) * 0.3
+    )
+
+    credit_availability = pd.DataFrame(
+        [
+            {
+                "metric": "historical_default_probability",
+                "status": "not available",
+                "reason": "no defaults, balance-sheet data, or survival outcomes exist in current files",
+            },
+            {
+                "metric": "implied_default_probability",
+                "status": "not available",
+                "reason": "no credit spreads, CDS, or financing curves exist in current files",
+            },
+            {
+                "metric": "true_cva",
+                "status": "not available",
+                "reason": "no OTC exposure profile, recovery assumption, or credit term structure exists in current files",
+            },
+            {
+                "metric": "credit_style_proxy",
+                "status": "implemented_as_proxy_only",
+                "reason": "stress proxy is based on market-structure concentration and adverse flow, not on real credit risk",
+            },
+        ]
+    )
+
+    return {
+        "directional_profile": save_csv(
+            directional_profile, "derived_round_4_counterparty_directional_profile.csv"
+        ),
+        "family_exposure": save_csv(
+            family_exposure, "derived_round_4_counterparty_family_exposure_proxy.csv"
+        ),
+        "stress_proxy": save_csv(
+            stress_proxy, "derived_round_4_counterparty_credit_proxy.csv"
+        ),
+        "credit_availability": save_csv(
+            credit_availability, "derived_round_4_counterparty_credit_metric_availability.csv"
+        ),
+    }
+
+
 def cross_product_metrics(prices: pd.DataFrame) -> dict[str, Path]:
     pivot = prices.pivot_table(index=["day", "timestamp"], columns="product", values="mid_price")
     returns = pivot.groupby(level=0).pct_change().replace([np.inf, -np.inf], np.nan)
@@ -1092,6 +1639,9 @@ def build_plots(
     counterparty_product_mix: Path,
     corr_matrix_path: Path,
     counterparty_markout_path: Path,
+    option_iv_surface_path: Path,
+    option_model_fit_path: Path,
+    option_model_residuals_path: Path,
 ) -> dict[str, Path]:
     plot_paths: dict[str, Path] = {}
 
@@ -1160,6 +1710,46 @@ def build_plots(
         fig, "round_4_counterparty_markout_bar.png"
     )
 
+    iv_surface = pd.read_csv(option_iv_surface_path)
+    iv_surface = iv_surface.loc[iv_surface["median_bs_iv"].notna()].copy()
+    if not iv_surface.empty:
+        fig, ax = plt.subplots(figsize=(10, 5))
+        sns.lineplot(
+            data=iv_surface,
+            x="strike",
+            y="median_bs_iv",
+            hue="day",
+            style="day",
+            markers=True,
+            dashes=False,
+            ax=ax,
+        )
+        ax.set_title("Round 4 implied volatility smile by day")
+        ax.set_ylabel("Median BS implied vol")
+        plot_paths["iv_smile_by_day"] = save_plot(fig, "round_4_iv_smile_by_day.png")
+
+    fit = pd.read_csv(option_model_fit_path)
+    residuals = pd.read_csv(option_model_residuals_path)
+    if not fit.empty and not residuals.empty:
+        best_panel = fit.sort_values("rmse_improvement_heston_vs_bs", ascending=False).head(1)
+        if not best_panel.empty:
+            day = int(best_panel["day"].iloc[0])
+            time_bucket = best_panel["time_bucket"].iloc[0]
+            panel_resid = residuals.loc[
+                (residuals["day"] == day) & (residuals["time_bucket"] == time_bucket)
+            ].copy()
+            panel_resid = panel_resid.sort_values("strike")
+            fig, ax = plt.subplots(figsize=(10, 5))
+            ax.plot(panel_resid["strike"], panel_resid["panel_mid"], marker="o", label="market")
+            ax.plot(panel_resid["strike"], panel_resid["bs_price"], marker="o", label="BS constant vol")
+            ax.plot(panel_resid["strike"], panel_resid["heston_price"], marker="o", label="Heston COS")
+            ax.set_title(f"Round 4 model fit comparison: day {day}, {time_bucket}")
+            ax.set_ylabel("Option mid price")
+            ax.legend()
+            plot_paths["option_model_fit_comparison"] = save_plot(
+                fig, "round_4_option_model_fit_comparison.png"
+            )
+
     return plot_paths
 
 
@@ -1184,6 +1774,9 @@ def build_summary_metrics(
     counterparty_markout_path: Path,
     counterparty_stability_scores_path: Path,
     feature_model_comparison_path: Path,
+    option_model_fit_path: Path,
+    option_metric_availability_path: Path,
+    counterparty_credit_availability_path: Path,
 ) -> dict:
     concentration = pd.read_csv(counterparty_concentration_path)
     option_book = pd.read_csv(option_book_summary_path)
@@ -1191,6 +1784,9 @@ def build_summary_metrics(
     markout = pd.read_csv(counterparty_markout_path)
     stability_scores = pd.read_csv(counterparty_stability_scores_path)
     model_comparison = pd.read_csv(feature_model_comparison_path)
+    option_model_fit = pd.read_csv(option_model_fit_path)
+    option_metric_availability = pd.read_csv(option_metric_availability_path)
+    counterparty_credit_availability = pd.read_csv(counterparty_credit_availability_path)
 
     top_buyers = trades["buyer"].value_counts().head(6).to_dict()
     top_sellers = trades["seller"].value_counts().head(6).to_dict()
@@ -1214,6 +1810,20 @@ def build_summary_metrics(
         ].round(4).to_dict(),
         "controlled_regression_r2": float(regression["r2"].iloc[0]) if not regression.empty else None,
         "feature_model_comparison": model_comparison.to_dict(orient="records"),
+        "option_model_fit_summary": option_model_fit[
+            [
+                "day",
+                "time_bucket",
+                "bs_rmse",
+                "heston_rmse",
+                "rmse_improvement_heston_vs_bs",
+                "heston_success",
+            ]
+        ].to_dict(orient="records"),
+        "option_metric_availability": option_metric_availability.to_dict(orient="records"),
+        "counterparty_credit_metric_availability": counterparty_credit_availability.to_dict(
+            orient="records"
+        ),
         "top_counterparty_side_markouts_5": markout.sort_values(
             "avg_side_alpha_bps_5", ascending=False
         )
@@ -1240,6 +1850,14 @@ def main() -> None:
     output_paths.update(counterparty_paths)
     option_paths = option_book_metrics(prices, trades)
     output_paths.update(option_paths)
+    advanced_option_paths = advanced_option_metrics(prices, trades)
+    output_paths.update(advanced_option_paths)
+    advanced_counterparty_paths = advanced_counterparty_metrics(
+        trades,
+        counterparty_paths["counterparty_stability_scores"],
+        trade_alignment_paths["counterparty_markout"],
+    )
+    output_paths.update(advanced_counterparty_paths)
     cross_paths = cross_product_metrics(prices)
     output_paths.update(cross_paths)
     feature_paths = feature_and_regime_metrics(
@@ -1255,6 +1873,9 @@ def main() -> None:
         counterparty_paths["counterparty_product_mix"],
         cross_paths["corr_matrix"],
         trade_alignment_paths["counterparty_markout"],
+        advanced_option_paths["iv_surface_summary"],
+        advanced_option_paths["model_fit"],
+        advanced_option_paths["model_residuals"],
     )
     output_paths.update(plot_paths)
 
@@ -1267,6 +1888,9 @@ def main() -> None:
         trade_alignment_paths["counterparty_markout"],
         counterparty_paths["counterparty_stability_scores"],
         feature_paths["feature_model_comparison"],
+        advanced_option_paths["model_fit"],
+        advanced_option_paths["availability"],
+        advanced_counterparty_paths["credit_availability"],
     )
     write_manifest(output_paths, summary)
     print(json.dumps(summary, indent=2, sort_keys=True))

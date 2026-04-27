@@ -175,6 +175,43 @@ The new stability score compresses the visible names into reusable classes:
 - `Mark 67` and `Mark 49` in `VEX` print almost entirely at or above ask, but in a very tight-spread environment; that is a different ecology from the upper voucher loop.
 - The `trade_location_bucket` feature turns out to be one of the highest-ROI engineered features because it connects counterparty events with microstructure instead of treating names in isolation.
 
+## Family Exposure Proxies
+
+- `Mark 01` is structurally long:
+  `upper/passive`, `floor/monitor`, and a smaller `active zone` slice.
+- `Mark 22` is structurally short:
+  `upper/passive`, `floor/monitor`, and a material `active zone` slice.
+- `Mark 14` is a broad mixed participant:
+  mostly `HYDRO`, `VEX`, and `4000`, with a small long bias in the active zone.
+- `Mark 55`, `Mark 67`, and `Mark 49` are clean anchor specialists inside
+  `VEX`, not broad voucher-family participants.
+
+This matters because the most important names are not just “active” or
+“inactive”; they occupy different parts of the family with very different
+execution and directional texture.
+
+## Credit-Risk Availability And Proxy
+
+- True historical PD is not available.
+- True implied PD is not available.
+- True CVA is not available.
+
+That is not a gap in implementation; it is a data limitation:
+
+- no default outcomes,
+- no balance-sheet or capital data,
+- no credit spread term structure,
+- no OTC exposure profile or recovery assumptions.
+
+What is implemented instead is a clearly labeled `credit-style proxy`:
+
+- concentration stress,
+- one-sidedness,
+- and adverse side-aware markout intensity.
+
+This is useful as a structural warning score, especially for names like
+`Mark 22`, but it must not be confused with real credit risk measurement.
+
 ## Counterparty-Conditioned Follow-Through
 
 The simple aligned-trade summaries show some pockets of future move asymmetry,
@@ -192,6 +229,8 @@ Promote into `Phase 02 Understanding`:
 - top counterparty role map
 - symbol-level concentration map
 - warning that upper/floor and `5300` are counterparty-structured markets
+- family-level exposure cards for the top names
+- explicit distinction between real credit metrics and structural stress proxies
 
 Keep exploratory only:
 

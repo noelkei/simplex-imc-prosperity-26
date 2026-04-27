@@ -41,7 +41,19 @@
 - Before EDA, understanding, strategy, spec, implementation, or validation depends on current-round mechanics or changed fields, route them through the Round Adaptation Check, Assumptions Carried Forward, Round Coverage Check, or Round-Specific Mechanics Contract as appropriate.
 - Treat EDA as targeted signal discovery: state the decision it may affect, use hypothesis-driven feature engineering, classify signals as usable, exploratory, or not ready, and stop when more analysis will not change the next decision.
 - EDA should consider compact multivariate, redundancy, cross-product, and process/distribution layers when decision-relevant. Do not force PCA, clustering, latent-state models, or heavy regressions into every EDA, and do not turn offline research outputs into bot logic without an online-usable Feature Contract.
+- When a user requests advanced quantitative metrics or models, classify each
+  requested item explicitly as `implemented`, `implemented_as_proxy_only`,
+  `partially_available`, or `not_available`, and record why. Do not silently
+  invent unavailable market metrics or present proxies as direct observations.
 - Use the shared research environment libraries when they improve decision quality, research speed, or evidence clarity; document the method when it matters. Do not force libraries into simple checks, overfit sample data, or treat research-only packages as allowed imports for uploadable bots.
+- Before promoting an engineered feature as serious, online-usable, or strategy
+  relevant, run a compact evidence check appropriate to the phase: signal
+  value, redundancy, stability, incremental explanatory value, or a similarly
+  scoped test. Do not promote features on intuition alone when a quick check
+  could change the decision.
+- Before promoting a materially richer quantitative model, compare it against a
+  simpler baseline and record the incremental value. Additional complexity
+  needs a measured reason, not just theoretical appeal.
 - Ground strategy candidates, specs, and variants in linked EDA signals, feature evidence, regime assumptions, and understanding insights when those artifacts exist; otherwise label the missing evidence as an assumption or route it to targeted EDA.
 - Treat processed paper summaries under `rounds/round_X/research/papers_processed/` as idea sources and method references, not as official facts or replacements for current-round evidence.
 - During Phase 02b, controlled online paper search or metadata verification is allowed for shortlist-building and gap checks, but canonical paper inputs remain the local files under `rounds/round_X/research/papers_raw/`.
@@ -128,3 +140,23 @@ Ask for human review when closure changes strategy direction, priority, risk, or
 ## Working philosophy
 
 There is no single correct strategy. Make small, reviewable changes, label assumptions, validate against the wiki, and hand off evidence clearly.
+
+## Quant posture
+
+- Prefer explicit assumptions over silent financial inference.
+- Treat data availability, market structure, execution, and online observability
+  as first-class constraints, not afterthoughts.
+- Distinguish:
+  - `EDA-only`
+  - `research-only`
+  - `understanding carry-forward`
+  - `online-usable`
+  - `implementation candidate`
+- Distinguish advanced quantitative outputs from observable market facts. A
+  model-implied quantity, proxy, or reconstructed surface is not the same thing
+  as an exchange-provided field.
+- When the data cannot support a standard quant metric exactly, implement the
+  strongest honest version the data allows and label it clearly as a proxy,
+  partial result, or unavailable metric.
+- Use richer models, numerical methods, or advanced libraries only when they
+  can change a real downstream decision or materially improve evidence quality.

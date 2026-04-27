@@ -22,6 +22,8 @@ Strategy research converts facts and evidence into testable trading ideas. It sh
   `paper-inspired`, `hybrid`, or `paper-rejected`.
 - Links to EDA signal hypotheses, feature evidence, regime assumptions, and understanding insight.
 - Links to any processed paper summary that materially shaped the candidate, plus the current-round evidence it maps back to.
+- For any advanced quant metric or model used in reasoning, its availability
+  class and lifecycle label.
 - The fair value or signal definition, if applicable.
 - Inventory and risk rules, including how the idea avoids limit rejection.
 - Execution behavior: when it buys, sells, rests orders, or stays idle.
@@ -31,6 +33,9 @@ Strategy research converts facts and evidence into testable trading ideas. It sh
   - `validated carry-forward principles`
   - `untested hypotheses`
   - `default anti-patterns / do not repeat by default`
+- A clear distinction between research-grade evidence and bot-grade logic:
+  `EDA-only`, `research-only`, `understanding carry-forward`,
+  `online-usable`, or `implementation candidate`.
 
 When strategy work follows a meaningful validation batch, do not branch from
 terminal PnL alone. Treat strategy as a synthesis step over platform ranking,
@@ -131,6 +136,13 @@ Every serious candidate should be traceable as:
 feature -> signal -> decision -> expected edge -> validation check
 ```
 
+If a candidate depends on a richer model than the current baseline, keep a
+short ladder in the trace:
+
+```text
+baseline -> richer model -> incremental value -> keep or downgrade
+```
+
 Prune feature-dump strategies, candidates whose features are not online-usable
 without a defined proxy, weak features that do not target a known failure mode,
 and feature combinations that do not change candidate queue/spec decisions.
@@ -142,6 +154,12 @@ parameters, or validation checks. Do not prioritize for specs a candidate that r
 offline-only research packages, PCA components, latent states, or cluster labels
 in `Trader.run()` unless the spec defines an online proxy and the wiki runtime
 supports the needed imports.
+
+Advanced quantitative reasoning should not skip the availability question. If a
+candidate leans on a metric or model that was only `implemented_as_proxy_only`,
+`partially_available`, or `not_available`, keep that caveat visible in the
+candidate rationale and do not let the candidate outrank cleaner evidence by
+default.
 
 Paper-research output is inspiration, not truth. Use processed paper summaries
 to suggest strategy families, validation checks, or failure-mode mitigations,
@@ -166,6 +184,8 @@ Use EDA multivariate and process evidence to keep candidates simple and
 traceable:
 
 - Prefer one primary edge feature that survives redundancy and controlled checks.
+- Prefer features that already passed a compact mini-EDA or incremental-value
+  check when such evidence exists.
 - Treat cross-product relationships as candidates only when EDA or understanding marks them useful or worth validating.
 - Let process hypotheses guide strategy family selection, such as mean reversion, trend, defensive regime logic, or flow-driven execution.
 - Reject feature stacks that combine duplicate signals unless the decision trace explains the incremental behavior.

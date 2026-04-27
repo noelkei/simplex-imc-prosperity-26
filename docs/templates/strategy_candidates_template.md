@@ -71,6 +71,9 @@ Use EDA multivariate and process evidence to keep candidates feature-light:
 - Cross-product relationships should be used only when EDA or understanding marks them useful or worth validating.
 - Paper-inspired methods must still map back to current-round signals, risks, failure modes, or open questions.
 - Always check `research/papers_processed/` when it exists. If no processed papers are available yet, proceed data-driven instead of blocking.
+- If a candidate depends on an advanced metric or richer model, keep its
+  availability class and `baseline -> richer model -> incremental value`
+  verdict visible.
 
 ## Candidate Count And Roles
 
@@ -116,9 +119,9 @@ Use this for multi-product rounds before writing specs. Mark `not applicable` wh
 
 ## Candidate Table
 
-| Candidate ID | Role | Source Classification | Product Scope | Source Of Edge | Primary Feature / Signal | Supporting Features | Feature Role | Linked EDA Signals | Feature Evidence | External Research Input | Paper Idea Handling | Multivariate Evidence | Supporting Process Hypothesis | Redundancy Note | Online Proxy Needed? | Regime Assumptions | Understanding Insight | Key Assumptions | Main Risk | Why Not Feature Dumping | ROI / Pruning Rationale | Evidence Strength | Implementation Cost | Validation Speed | Risk Level | Expected Upside | Priority Tier | Implementation Wave | Status |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| CANDIDATE_ID | primary / secondary / exploratory / mechanics-only / manual-only / deferred / rejected | data-driven / paper-inspired / hybrid / paper-rejected | PRODUCT | EDGE | FEATURE_OR_FV | FEATURES_OR_NONE | direct signal / execution filter / risk control / diagnostic | SIGNALS | FEATURES | PROCESSED_PAPER_FILE_OR_NONE | used / hybrid / validation / rejected / inspiration-only / none | corr / covariance / regression / lead-lag / redundancy / none | PROCESS_OR_NONE | keep / merge / downgrade / not checked / not applicable | yes / no / unknown | REGIMES | INSIGHT | ASSUMPTIONS | RISK | FEATURE_BUDGET_RATIONALE | WHY_KEEP_OR_PRUNE | strong / medium / weak / contradictory | high / medium / low | high / medium / low | high / medium / low | high / medium / low | spec-first / implement-first / validate-next / backlog / defer | WAVE_OR_NONE | draft |
+| Candidate ID | Role | Source Classification | Product Scope | Source Of Edge | Primary Feature / Signal | Supporting Features | Feature Role | Lifecycle Label | Metric Availability | Baseline / Richer Verdict | Linked EDA Signals | Feature Evidence | External Research Input | Paper Idea Handling | Multivariate Evidence | Supporting Process Hypothesis | Redundancy Note | Online Proxy Needed? | Regime Assumptions | Understanding Insight | Key Assumptions | Main Risk | Why Not Feature Dumping | ROI / Pruning Rationale | Evidence Strength | Implementation Cost | Validation Speed | Risk Level | Expected Upside | Priority Tier | Implementation Wave | Status |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| CANDIDATE_ID | primary / secondary / exploratory / mechanics-only / manual-only / deferred / rejected | data-driven / paper-inspired / hybrid / paper-rejected | PRODUCT | EDGE | FEATURE_OR_FV | FEATURES_OR_NONE | direct signal / execution filter / risk control / diagnostic | EDA-only / research-only / understanding carry-forward / online-usable / implementation candidate | implemented / implemented_as_proxy_only / partially_available / not_available / not_applicable | baseline only / richer adds value / richer low ROI / not checked | SIGNALS | FEATURES | PROCESSED_PAPER_FILE_OR_NONE | used / hybrid / validation / rejected / inspiration-only / none | corr / covariance / regression / lead-lag / redundancy / none | PROCESS_OR_NONE | keep / merge / downgrade / not checked / not applicable | yes / no / unknown | REGIMES | INSIGHT | ASSUMPTIONS | RISK | FEATURE_BUDGET_RATIONALE | WHY_KEEP_OR_PRUNE | strong / medium / weak / contradictory | high / medium / low | high / medium / low | high / medium / low | high / medium / low | spec-first / implement-first / validate-next / backlog / defer | WAVE_OR_NONE | draft |
 
 ## Derivative / Linked-Product Framing
 

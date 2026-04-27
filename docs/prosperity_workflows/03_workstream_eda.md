@@ -19,6 +19,9 @@ Use [`11_dataset_eda_framework.md`](11_dataset_eda_framework.md) to classify col
 - Reproducible artifacts: notebook, script, table, plot, or command notes.
 - Clear source references for the data used.
 - Data quality and filter notes: row counts, missingness, incomplete books, zero/blank mid prices, timestamp coverage, and which rows were used for each major result.
+- A `Metric Availability Audit` for advanced or user-requested quant metrics:
+  `implemented`, `implemented_as_proxy_only`, `partially_available`, or
+  `not_available`, with a short reason.
 - A distinction between observed evidence and strategy interpretation.
 - A decision on whether the work is fully covered by `raw-data EDA` or needs a
   `retrospective run-informed EDA addendum`.
@@ -32,6 +35,8 @@ Every important feature, pattern, or signal should state:
 - how it could be used in a strategy
 - limitations or caveats
 - confidence level
+- lifecycle label: `EDA-only`, `research-only`, `understanding carry-forward`,
+  `online-usable`, or `implementation candidate`
 
 Fewer clear, reusable signals are better than many unclear findings.
 
@@ -78,6 +83,11 @@ Before analyzing, state:
 
 Before deeper analysis, fill a Round Adaptation Check. It should identify current-round mechanics, products/limits, schema changes, new fields, and prior-round assumptions at risk. Only items that can change a downstream decision need detail.
 
+Before deeper quantitative analysis, also decide whether any requested metric
+or model is fully observable, proxy-only, partially supported, or unavailable.
+This avoids wasted work and prevents decorative quant sections from being
+mistaken for hard evidence.
+
 Track product scope explicitly:
 
 - products present in the data
@@ -120,6 +130,20 @@ Prefer simple, hypothesis-driven transformations before complex ones:
 
 Do not brute-force feature combinations or produce feature catalogs that no downstream phase can use. Document only features that are useful, potentially useful, or meaningfully rejected because the result changes a decision.
 
+Before a serious engineered feature is promoted beyond exploratory status, run a
+compact mini-EDA or incremental-value check appropriate to the phase. Good
+checks include:
+
+- signal strength against a named target
+- redundancy against already-promoted features
+- slice stability across day, time bucket, product, or regime
+- simple controlled comparisons
+- online observability or proxy feasibility
+
+Features may stay interesting without passing every check, but they should not
+be labeled `online-usable` or used to drive strategy priority without some
+evidence beyond intuition.
+
 ## Default multivariate layer
 
 Every serious EDA should include a compact multivariate layer over the serious
@@ -143,6 +167,22 @@ Use these defaults:
 Close this layer with a `Multivariate Feature Map`: which features overlap,
 which survive controls, whether cross-product behavior matters, and what a
 downstream phase should use, avoid, or validate.
+
+### Baseline vs richer model ladder
+
+When EDA introduces materially richer quant logic such as stochastic-volatility
+pricing, numerical methods, clustering, or more complex counterparty models,
+compare it against a simple baseline first. The richer method should record:
+
+- baseline method
+- richer method
+- incremental value gained
+- caveats, cost, and online usability
+- downstream verdict
+
+If the richer method does not change a downstream decision, label it
+`research-only` or `EDA-only` and stop rather than promoting complexity by
+default.
 
 ### Multivariate ROI gate
 
@@ -214,6 +254,8 @@ Classify serious features with:
 - Online usability: `usable online`, `EDA-only`, `log-only`, or `unknown`.
 - Role: `direct signal`, `execution filter`, `risk control`, `diagnostic`,
   `manual`, or `avoid`.
+- Lifecycle label: `EDA-only`, `research-only`, `understanding carry-forward`,
+  `online-usable`, or `implementation candidate`.
 
 Evaluate serious features through three gates:
 
@@ -227,9 +269,40 @@ Promotion decisions:
 - Promote only features that change a concrete downstream decision.
 - Keep EDA-only features as calibration or reasoning evidence; do not let them
   enter bot specs unless an online proxy is defined.
+- Keep research-grade outputs that improve interpretation but not bot logic
+  labeled as `research-only` or `understanding carry-forward`.
 - Preserve high-plausibility failed features as negative evidence.
 - Prefer 5-8 serious feature candidates and 1-3 promoted signal hypotheses per
   EDA artifact unless breadth is explicitly requested.
+
+## Metric availability and honest approximation
+
+When the user or the round naturally suggests advanced quant metrics, do not
+force exact implementations if the data does not support them.
+
+Use these availability states:
+
+- `implemented`: directly supported by available fields and assumptions
+- `implemented_as_proxy_only`: computed from an honest approximation or partial
+  reconstruction
+- `partially_available`: some meaningful sub-analysis exists, but the full
+  metric is not supported
+- `not_available`: current data cannot support the metric honestly
+
+For every non-trivial proxy, state:
+
+- what was requested
+- what was actually computed
+- what assumptions were introduced
+- what downstream use is still valid
+
+Examples:
+
+- open interest without exchange OI fields is usually `not_available`
+- CVA without counterparty credit inputs is usually `not_available` or
+  `implemented_as_proxy_only`, depending on the proxy
+- implied-volatility smiles from same-expiry vouchers may be `implemented`,
+  while term structure may be only `partially_available`
 
 ## Conditional patterns and regimes
 

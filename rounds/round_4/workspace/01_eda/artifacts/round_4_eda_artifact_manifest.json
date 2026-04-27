@@ -1,5 +1,6 @@
 {
   "processed_outputs": {
+    "availability": "rounds/round_4/data/processed/derived_round_4_option_metric_availability.csv",
     "candidate_online_features": "rounds/round_4/data/processed/derived_round_4_candidate_online_features.csv",
     "corr_matrix": "rounds/round_4/data/processed/derived_round_4_same_time_return_corr.csv",
     "counterparty_book_context": "rounds/round_4/data/processed/derived_round_4_counterparty_book_context.csv",
@@ -18,24 +19,36 @@
     "counterparty_summary": "rounds/round_4/data/processed/derived_round_4_counterparty_summary.csv",
     "counterparty_time_bucket": "rounds/round_4/data/processed/derived_round_4_counterparty_time_bucket.csv",
     "cov_matrix": "rounds/round_4/data/processed/derived_round_4_same_time_return_covariance.csv",
+    "credit_availability": "rounds/round_4/data/processed/derived_round_4_counterparty_credit_metric_availability.csv",
+    "directional_profile": "rounds/round_4/data/processed/derived_round_4_counterparty_directional_profile.csv",
     "engineered_feature_summary": "rounds/round_4/data/processed/derived_round_4_engineered_feature_summary.csv",
     "family_conditioned": "rounds/round_4/data/processed/derived_round_4_family_conditioned_regime_summary.csv",
+    "family_exposure": "rounds/round_4/data/processed/derived_round_4_counterparty_family_exposure_proxy.csv",
     "family_liquidity": "rounds/round_4/data/processed/derived_round_4_family_liquidity_by_time_bucket.csv",
     "feature_model_comparison": "rounds/round_4/data/processed/derived_round_4_feature_model_comparison.csv",
+    "iv_smile_by_day": "rounds/round_4/workspace/01_eda/artifacts/round_4_iv_smile_by_day.png",
+    "iv_surface_summary": "rounds/round_4/data/processed/derived_round_4_option_iv_surface_summary.csv",
     "lead_lag": "rounds/round_4/data/processed/derived_round_4_lead_lag_summary.csv",
     "local_cross_strike": "rounds/round_4/data/processed/derived_round_4_local_cross_strike_context.csv",
+    "model_fit": "rounds/round_4/data/processed/derived_round_4_option_bs_vs_heston_fit.csv",
+    "model_residuals": "rounds/round_4/data/processed/derived_round_4_option_model_residuals.csv",
     "option_book_summary": "rounds/round_4/data/processed/derived_round_4_option_book_summary.csv",
+    "option_model_fit_comparison": "rounds/round_4/workspace/01_eda/artifacts/round_4_option_model_fit_comparison.png",
+    "option_panel": "rounds/round_4/data/processed/derived_round_4_option_panel_metrics.csv",
     "product_regime": "rounds/round_4/data/processed/derived_round_4_product_regime_summary.csv",
     "quality_by_file": "rounds/round_4/data/processed/derived_round_4_data_quality_by_file.csv",
     "quality_by_product": "rounds/round_4/data/processed/derived_round_4_data_quality_by_product.csv",
     "relative_spread_boxplot": "rounds/round_4/workspace/01_eda/artifacts/round_4_relative_spread_boxplot.png",
     "return_corr_heatmap": "rounds/round_4/workspace/01_eda/artifacts/round_4_return_corr_heatmap.png",
+    "smile_summary": "rounds/round_4/data/processed/derived_round_4_option_smile_summary.csv",
+    "stress_proxy": "rounds/round_4/data/processed/derived_round_4_counterparty_credit_proxy.csv",
     "top_buyer_timing": "rounds/round_4/workspace/01_eda/artifacts/round_4_top_buyer_timing.png",
     "trade_alignment": "rounds/round_4/data/processed/derived_round_4_trade_alignment_summary.csv",
     "trade_feature_corr": "rounds/round_4/data/processed/derived_round_4_trade_feature_corr.csv",
     "trade_feature_covariance": "rounds/round_4/data/processed/derived_round_4_trade_feature_covariance.csv",
     "trade_summary_by_symbol": "rounds/round_4/data/processed/derived_round_4_trade_summary_by_symbol.csv",
-    "trade_summary_by_symbol_day": "rounds/round_4/data/processed/derived_round_4_trade_summary_by_symbol_day.csv"
+    "trade_summary_by_symbol_day": "rounds/round_4/data/processed/derived_round_4_trade_summary_by_symbol_day.csv",
+    "volume_by_strike": "rounds/round_4/data/processed/derived_round_4_option_volume_by_strike.csv"
   },
   "summary_metrics": {
     "concentration_top1_share_by_symbol_side": [
@@ -185,6 +198,28 @@
       }
     ],
     "controlled_regression_r2": 0.0183056690399647,
+    "counterparty_credit_metric_availability": [
+      {
+        "metric": "historical_default_probability",
+        "reason": "no defaults, balance-sheet data, or survival outcomes exist in current files",
+        "status": "not available"
+      },
+      {
+        "metric": "implied_default_probability",
+        "reason": "no credit spreads, CDS, or financing curves exist in current files",
+        "status": "not available"
+      },
+      {
+        "metric": "true_cva",
+        "reason": "no OTC exposure profile, recovery assumption, or credit term structure exists in current files",
+        "status": "not available"
+      },
+      {
+        "metric": "credit_style_proxy",
+        "reason": "stress proxy is based on market-structure concentration and adverse flow, not on real credit risk",
+        "status": "implemented_as_proxy_only"
+      }
+    ],
     "dominant_symbol_by_trade_count": {
       "HYDROGEL_PACK": 1022,
       "VELVETFRUIT_EXTRACT": 1381,
@@ -242,6 +277,118 @@
       "VEV_6000": 317,
       "VEV_6500": 317
     },
+    "option_metric_availability": [
+      {
+        "metric": "implied_volatility_surface",
+        "reason_or_method": "BS implied vol per day/time_bucket/strike panel using call-like voucher assumption",
+        "scope": "algorithmic VEV family",
+        "status": "implemented"
+      },
+      {
+        "metric": "heston_vs_black_scholes",
+        "reason_or_method": "constant-vol BS fit compared to Heston COS calibration on aggregated panels",
+        "scope": "algorithmic VEV family",
+        "status": "implemented"
+      },
+      {
+        "metric": "cos_pricing_under_heston",
+        "reason_or_method": "Fourier-cosine pricing engine used for panel calibration and residual comparison",
+        "scope": "algorithmic VEV family",
+        "status": "implemented"
+      },
+      {
+        "metric": "greeks",
+        "reason_or_method": "BS Greeks computed from panel implied vols",
+        "scope": "algorithmic VEV family",
+        "status": "implemented"
+      },
+      {
+        "metric": "put_call_parity",
+        "reason_or_method": "no paired put series exists in the uploaded algorithmic data",
+        "scope": "algorithmic challenge",
+        "status": "not available"
+      },
+      {
+        "metric": "volume_open_interest_relation",
+        "reason_or_method": "trade volume exists, official open interest does not; no honest OI metric can be derived from current files",
+        "scope": "algorithmic challenge",
+        "status": "partially available"
+      }
+    ],
+    "option_model_fit_summary": [
+      {
+        "bs_rmse": 0.942685897965758,
+        "day": 1,
+        "heston_rmse": 0.9385666739842976,
+        "heston_success": 1,
+        "rmse_improvement_heston_vs_bs": 0.0041192239814605,
+        "time_bucket": "early"
+      },
+      {
+        "bs_rmse": 1.3085161985748015,
+        "day": 1,
+        "heston_rmse": 1.306134623196179,
+        "heston_success": 1,
+        "rmse_improvement_heston_vs_bs": 0.0023815753786227,
+        "time_bucket": "late"
+      },
+      {
+        "bs_rmse": 1.0561764677531509,
+        "day": 1,
+        "heston_rmse": 1.0563127178153071,
+        "heston_success": 1,
+        "rmse_improvement_heston_vs_bs": -0.0001362500621564,
+        "time_bucket": "mid"
+      },
+      {
+        "bs_rmse": 1.1784968849310171,
+        "day": 2,
+        "heston_rmse": 1.1493417095564045,
+        "heston_success": 1,
+        "rmse_improvement_heston_vs_bs": 0.0291551753746126,
+        "time_bucket": "early"
+      },
+      {
+        "bs_rmse": 0.97204272073273,
+        "day": 2,
+        "heston_rmse": 0.9721567920144132,
+        "heston_success": 1,
+        "rmse_improvement_heston_vs_bs": -0.0001140712816832,
+        "time_bucket": "late"
+      },
+      {
+        "bs_rmse": 1.0319740711556389,
+        "day": 2,
+        "heston_rmse": 1.0213494888277794,
+        "heston_success": 1,
+        "rmse_improvement_heston_vs_bs": 0.0106245823278592,
+        "time_bucket": "mid"
+      },
+      {
+        "bs_rmse": 0.5702853120820439,
+        "day": 3,
+        "heston_rmse": 0.5674742610686234,
+        "heston_success": 1,
+        "rmse_improvement_heston_vs_bs": 0.0028110510134204,
+        "time_bucket": "early"
+      },
+      {
+        "bs_rmse": 0.6414329288746804,
+        "day": 3,
+        "heston_rmse": 0.5967413594446586,
+        "heston_success": 1,
+        "rmse_improvement_heston_vs_bs": 0.0446915694300218,
+        "time_bucket": "late"
+      },
+      {
+        "bs_rmse": 0.5612698018602824,
+        "day": 3,
+        "heston_rmse": 0.5014927625861022,
+        "heston_success": 1,
+        "rmse_improvement_heston_vs_bs": 0.0597770392741802,
+        "time_bucket": "mid"
+      }
+    ],
     "price_rows_total": 360000,
     "products_present": [
       "HYDROGEL_PACK",

@@ -11,7 +11,7 @@ READY_FOR_REVIEW
 
 ## Last Updated
 
-2026-04-26
+2026-04-27
 
 ## What Has Been Done
 
@@ -24,10 +24,13 @@ READY_FOR_REVIEW
   [`01_eda/analyze_round_4_eda.py`](01_eda/analyze_round_4_eda.py).
 - Generated processed evidence tables under `../../data/processed/`.
 - Generated Phase 01 plots and manifests under `01_eda/artifacts/`.
-- Wrote the canonical EDA and the three supporting annexes.
+- Wrote the canonical EDA and the four supporting annexes.
 - Extended Phase 01 with side-aware counterparty markouts, buyer-seller pair
   ecology, trade-to-book context, formal counterparty stability scoring, and
   a mini EDA on newly engineered usable features.
+- Added an advanced option-pricing annex covering IV surface, Greeks,
+  Black-Scholes vs Heston fit, and COS pricing, plus counterparty exposure and
+  metric-availability extensions.
 
 ## Current Findings
 
@@ -46,6 +49,8 @@ READY_FOR_REVIEW
   especially from `5200` upward.
 - `Mark 22` seller flow in `5200+` is the clearest counterparty-conditioned
   danger-state pattern in the raw data.
+- The short-dated voucher surface is not flat: Heston improves the aggregated
+  cross-strike fit in `7/9` panels, but only moderately.
 
 ## Decisions Made
 
@@ -58,12 +63,19 @@ READY_FOR_REVIEW
 - Use one canonical EDA plus annexes rather than many peer artifacts.
 - Treat `round_4` as raw-data EDA only for now; no Round 4 retrospective
   run-informed addendum is needed yet.
+- Internal sufficiency review says `Phase 01` is adequate to open
+  `Phase 02 Understanding` without more mandatory EDA work.
+- Remaining Phase 01 additions are `nice to have`, not blockers:
+  future run-informed EDA after testing exists, manual contract analysis once
+  raw contract details are available, and any extra niche quant diagnostics
+  only if a later strategy candidate specifically depends on them.
 
 ## Open Questions / Blockers
 
 - Exact deadline remains unknown.
 - Manual contract-level raw data is still missing.
-- Phase 01 review is still pending.
+- Human Phase 01 review is still pending, but no material EDA gap currently
+  blocks `Phase 02`.
 
 ## Linked Artifacts
 
@@ -74,6 +86,7 @@ READY_FOR_REVIEW
 - [`01_eda/eda_round_4_counterparty_and_option_book.md`](01_eda/eda_round_4_counterparty_and_option_book.md)
 - [`01_eda/eda_round_4_counterparty_profiles.md`](01_eda/eda_round_4_counterparty_profiles.md)
 - [`01_eda/eda_round_4_option_book_structure.md`](01_eda/eda_round_4_option_book_structure.md)
+- [`01_eda/eda_round_4_option_volatility_and_pricing.md`](01_eda/eda_round_4_option_volatility_and_pricing.md)
 - [`01_eda/eda_round_4_round3_revalidation.md`](01_eda/eda_round_4_round3_revalidation.md)
 - [`01_eda/analyze_round_4_eda.py`](01_eda/analyze_round_4_eda.py)
 - [`../../round_3/workspace/06_testing/round_3_closeout_retrospective.md`](../../round_3/workspace/06_testing/round_3_closeout_retrospective.md)
@@ -81,10 +94,11 @@ READY_FOR_REVIEW
 
 ## Next Priority Action
 
-Review Phase 01, then use the canonical EDA and annexes to write
-`02_understanding.md` with explicit separation between supported
-carry-forward principles, contextual counterparty findings, engineered feature
-candidates, and still-untested Round 4 hypotheses.
+Use the canonical EDA and annexes to write `02_understanding.md` with explicit
+separation between supported carry-forward principles, contextual counterparty
+findings, engineered feature candidates, option-surface caveats, and still
+untested Round 4 hypotheses. Keep any further EDA work explicitly optional
+unless `Phase 02` surfaces a concrete missing decision input.
 
 ## Deadline Risk
 

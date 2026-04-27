@@ -37,6 +37,11 @@ Keep the lightweight gates aligned across phases:
 - EDA also decides whether meaningful run history requires a
   `retrospective run-informed EDA addendum`, instead of leaving path-quality,
   product-role, or cross-product lessons buried in validation only.
+- EDA should also classify advanced requested metrics as `implemented`,
+  `implemented_as_proxy_only`, `partially_available`, or `not_available`, and
+  should label serious features or models as `EDA-only`, `research-only`,
+  `understanding carry-forward`, `online-usable`, or `implementation
+  candidate`.
 - Understanding compresses promoted signals, multivariate/process evidence, redundancy decisions, and assumptions carried forward.
 - External paper research converts understanding outputs into a grounded external research prompt, may use controlled online shortlist-building or metadata verification when needed, leaves strategy free to proceed after prompt generation, and distills local paper inputs into strategy-useful summaries without treating papers as truth.
 - Strategy enforces the feature budget and Round Coverage Check, and should
@@ -52,6 +57,15 @@ Keep the lightweight gates aligned across phases:
 - Handoffs and closeouts should leave a reusable package, not just scattered
   files: evidence, carry-forward principles, untested hypotheses, and
   anti-patterns should be easy to find and explicitly separated.
+
+When advanced quant work appears, keep the ladder explicit:
+
+- availability first: can the metric or model be supported honestly by the
+  data?
+- baseline first: what does the simple model explain?
+- richer model second: what incremental value was actually gained?
+- lifecycle label last: is this output EDA-only, research-only,
+  understanding-usable, online-usable, or implementation-worthy?
 
 ## Research Environment Use
 
@@ -101,6 +115,7 @@ Use research tools only when they answer a decision-relevant question faster or 
 - [`11_dataset_eda_framework.md`](11_dataset_eda_framework.md): column classification, adaptive EDA, and EDA-as-knowledge-transfer guidance.
 - [`12_top_level_artifact_audit.md`](12_top_level_artifact_audit.md): historical cleanup audit for removed top-level `bots/` and `performances/`.
 - [`13_external_paper_research.md`](13_external_paper_research.md): external paper prompt generation, wait-state handling, and raw -> md -> processed paper pipeline.
+- [`14_quant_posture_and_metric_availability_proposal.md`](14_quant_posture_and_metric_availability_proposal.md): proposal for explicit quant-posture guards, metric availability audits, and feature-promotion checks.
 - [`../templates/`](../templates/): reusable Markdown templates for EDA, understanding, strategy candidates, strategy specs, run summaries, post-run research memory, and debugging issues.
 
 ## Operating rule

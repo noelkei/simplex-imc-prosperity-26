@@ -9,10 +9,10 @@
 
 ## Current Next Priority Action
 
-Review the extended `Phase 01` EDA package, then start `Phase 02`
-understanding using the canonical EDA plus the counterparty, option-book, and
-Round 3 revalidation annexes, with explicit pickup of engineered feature
-candidates and counterparty-conditioned danger-state findings.
+Open `03 Strategy` using the completed understanding package and the
+non-blocking `02b` research prompt. Treat external paper research as optional
+incremental input while Batch 1 papers move from `papers_md/` to
+`papers_processed/`.
 
 ## Phase Status
 
@@ -20,9 +20,9 @@ candidates and counterparty-conditioned danger-state findings.
 | --- | --- | --- | --- | --- | --- |
 | 00 Ingestion | READY_FOR_REVIEW | Codex | Unassigned | [`00_ingestion.md`](00_ingestion.md) / [`phase_00_ingestion_context.md`](phase_00_ingestion_context.md) | Review pending |
 | 01 EDA | READY_FOR_REVIEW | Codex | Unassigned | [`01_eda/eda_round_4_counterparty_and_option_book.md`](01_eda/eda_round_4_counterparty_and_option_book.md) / [`phase_01_eda_context.md`](phase_01_eda_context.md) | Review pending |
-| 02 Understanding | NOT_STARTED | Unassigned | Unassigned | [`02_understanding.md`](02_understanding.md) / [`phase_02_understanding_context.md`](phase_02_understanding_context.md) | None recorded |
-| 02b External Paper Research | NOT_STARTED | Unassigned | Unassigned | [`02b_external_paper_research.md`](02b_external_paper_research.md) / [`phase_02b_external_paper_research_context.md`](phase_02b_external_paper_research_context.md) | Understanding summary required |
-| 03 Strategy | NOT_STARTED | Unassigned | Unassigned | [`03_strategy_candidates.md`](03_strategy_candidates.md) / [`phase_03_strategy_context.md`](phase_03_strategy_context.md) | Understanding summary and default 02b prompt generation required, unless the user explicitly skips 02b |
+| 02 Understanding | READY_FOR_REVIEW | Codex | Unassigned | [`02_understanding.md`](02_understanding.md) / [`phase_02_understanding_context.md`](phase_02_understanding_context.md) | Review pending |
+| 02b External Paper Research | IN_PROGRESS | Codex | Unassigned | [`02b_external_paper_research.md`](02b_external_paper_research.md) / [`phase_02b_external_paper_research_context.md`](phase_02b_external_paper_research_context.md) | No material blocker; Batch 1 processed summaries pending |
+| 03 Strategy | NOT_STARTED | Unassigned | Unassigned | [`03_strategy_candidates.md`](03_strategy_candidates.md) / [`phase_03_strategy_context.md`](phase_03_strategy_context.md) | None recorded |
 | 04 Spec | NOT_STARTED | Unassigned | Unassigned | [`04_strategy_specs/`](04_strategy_specs/) / [`phase_04_spec_context.md`](phase_04_spec_context.md) | None recorded |
 | 05 Implementation | NOT_STARTED | Unassigned | Unassigned | [`phase_05_implementation_context.md`](phase_05_implementation_context.md) | Reviewed strategy spec required |
 | 06 Testing/performance | NOT_STARTED | Unassigned | Unassigned | [`phase_06_testing_context.md`](phase_06_testing_context.md) | Bot candidate required |
@@ -41,10 +41,12 @@ candidates and counterparty-conditioned danger-state findings.
 
 ## External Paper Research Status
 
-- Status: `not started`
+- Status: `prompt generated; shortlist refined; raw set normalized`
 - Expected folder: `../research/papers_raw/`
+- Raw papers detected: `9`
+- Markdown conversions: `9 usable`
 - Processed paper summaries: none
-- Strategy dependency: generate the 02b prompt by default, then proceed and consume processed papers incrementally when present; explicit user skip is also valid
+- Strategy dependency: none currently; proceed now and consume processed papers incrementally when present
 
 ## Active Strategies
 
@@ -95,8 +97,8 @@ Example when active:
 - Need exact manual contract details from the platform or accepted source before
   manual-order analysis can start.
 - Need deadline confirmation to assess fast-mode risk accurately.
-- Need Phase 01 review to lock which counterparty findings are trusted inputs
-  for understanding and strategy.
+- Human review is still pending for Phases `01` and `02`, but no material gap
+  currently blocks `03 Strategy`.
 
 ## Final Submission Status
 
@@ -131,9 +133,16 @@ Example when active:
 - Prior-round intake added: `00_prior_round_intake.md` on `2026-04-26`
 - Ingestion context updated: `phase_00_ingestion_context.md` on `2026-04-26`
 - Canonical EDA added: `01_eda/eda_round_4_counterparty_and_option_book.md` on `2026-04-26`
-- EDA annexes added: `01_eda/eda_round_4_counterparty_profiles.md`, `01_eda/eda_round_4_option_book_structure.md`, and `01_eda/eda_round_4_round3_revalidation.md` on `2026-04-26`
+- EDA annexes added: `01_eda/eda_round_4_counterparty_profiles.md`, `01_eda/eda_round_4_option_book_structure.md`, `01_eda/eda_round_4_option_volatility_and_pricing.md`, and `01_eda/eda_round_4_round3_revalidation.md` on `2026-04-26`
 - EDA script extended with counterparty markouts, pair ecology, stability scoring, and engineered-feature checks: `01_eda/analyze_round_4_eda.py` on `2026-04-26`
 - EDA context updated: `phase_01_eda_context.md` on `2026-04-26`
 - EDA outputs extended: `../data/processed/derived_round_4_counterparty_markout_by_side.csv`, `../data/processed/derived_round_4_counterparty_pair_summary.csv`, `../data/processed/derived_round_4_counterparty_stability_scores.csv`, `../data/processed/derived_round_4_engineered_feature_summary.csv`, and `../data/processed/derived_round_4_candidate_online_features.csv` on `2026-04-26`
+- Advanced option/counterparty outputs added: `../data/processed/derived_round_4_option_iv_surface_summary.csv`, `../data/processed/derived_round_4_option_bs_vs_heston_fit.csv`, `../data/processed/derived_round_4_counterparty_directional_profile.csv`, and `../data/processed/derived_round_4_counterparty_credit_metric_availability.csv` on `2026-04-27`
+- Understanding summary added: `02_understanding.md` on `2026-04-27`
+- Understanding context updated: `phase_02_understanding_context.md` on `2026-04-27`
+- External paper research prompt added: `02b_external_paper_research.md` on `2026-04-27`
+- External paper research context updated: `phase_02b_external_paper_research_context.md` on `2026-04-27`
+- External paper raw set normalized and ROI-filtered against `round_3` processed papers on `2026-04-27`
+- All `papers_md` conversions for the current 9-paper raw set added under `../research/papers_md/` on `2026-04-27`
 - Data README updated: `../data/README.md` on `2026-04-26`
 - Round README updated: `../README.md` on `2026-04-26`

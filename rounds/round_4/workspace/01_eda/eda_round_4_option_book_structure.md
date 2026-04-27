@@ -155,6 +155,19 @@ This is strong enough for a `defensive-only` regime conclusion:
 time bucket should matter to execution and no-trade policy, especially in upper
 strikes.
 
+## Volatility And Pricing Layer
+
+The deeper pricing layer now lives in
+[`eda_round_4_option_volatility_and_pricing.md`](eda_round_4_option_volatility_and_pricing.md),
+but the headline conclusion belongs here too:
+
+- the family is not only linked in price space, but also mildly non-flat in
+  volatility space;
+- a flat-sigma Black-Scholes fit is decent, but Heston improves the cross-strike
+  fit in most aggregated panels;
+- that supports `surface-aware framing`, not `full live quant stack` by
+  default.
+
 ## Promotion Decision
 
 Promote:

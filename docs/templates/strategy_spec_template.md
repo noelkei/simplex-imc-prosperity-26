@@ -72,6 +72,8 @@ Implementation must not start until this spec is reviewed. In fast mode, keep it
 
 - Linked EDA Signals:
 - Feature Evidence:
+- Metric Availability:
+- Baseline vs richer model verdict:
 - Multivariate Evidence:
 - Process / Distribution Assumptions:
 - Redundancy Decisions:
@@ -104,9 +106,9 @@ Fill this when products are linked, derivative-like, or clearly book-dependent.
 
 Define every feature that changes trading behavior. EDA-only features must not be implemented unless this spec names an online proxy.
 
-| Feature | Source Fields | Online Availability | Role | Parameters | Multivariate Relationship | Process Assumption | Redundancy Decision | Missing-Signal Behavior | State / `traderData` Required | Validation / Invalidation Check |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| FEATURE | FIELDS | usable online / EDA-only with proxy / log-only diagnostic / unknown | direct signal / execution filter / risk control / diagnostic | PARAMS | corr / covariance / regression / lead-lag / none / unknown | PROCESS_OR_NONE | keep / merged / downgraded / not applicable / unknown | FALLBACK_OR_DISABLE | STATE | CHECK |
+| Feature | Source Fields | Online Availability | Lifecycle Label | Role | Parameters | Multivariate Relationship | Process Assumption | Redundancy Decision | Missing-Signal Behavior | State / `traderData` Required | Validation / Invalidation Check |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| FEATURE | FIELDS | usable online / EDA-only with proxy / log-only diagnostic / unknown | online-usable / implementation candidate / EDA-only with proxy / research-only / understanding carry-forward | direct signal / execution filter / risk control / diagnostic | PARAMS | corr / covariance / regression / lead-lag / none / unknown | PROCESS_OR_NONE | keep / merged / downgraded / not applicable / unknown | FALLBACK_OR_DISABLE | STATE | CHECK |
 
 ## Feature Exclusions
 

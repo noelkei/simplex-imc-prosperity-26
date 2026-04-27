@@ -71,8 +71,19 @@ Separate findings usable inside `Trader.run()` from manual-challenge findings.
   - `../../data/processed/derived_round_4_counterparty_markout_by_symbol_side.csv`
   - `../../data/processed/derived_round_4_counterparty_pair_summary.csv`
   - `../../data/processed/derived_round_4_counterparty_book_context.csv`
+  - `../../data/processed/derived_round_4_counterparty_directional_profile.csv`
+  - `../../data/processed/derived_round_4_counterparty_family_exposure_proxy.csv`
+  - `../../data/processed/derived_round_4_counterparty_credit_proxy.csv`
+  - `../../data/processed/derived_round_4_counterparty_credit_metric_availability.csv`
   - `../../data/processed/derived_round_4_option_book_summary.csv`
   - `../../data/processed/derived_round_4_local_cross_strike_context.csv`
+  - `../../data/processed/derived_round_4_option_panel_metrics.csv`
+  - `../../data/processed/derived_round_4_option_iv_surface_summary.csv`
+  - `../../data/processed/derived_round_4_option_smile_summary.csv`
+  - `../../data/processed/derived_round_4_option_bs_vs_heston_fit.csv`
+  - `../../data/processed/derived_round_4_option_model_residuals.csv`
+  - `../../data/processed/derived_round_4_option_volume_by_strike.csv`
+  - `../../data/processed/derived_round_4_option_metric_availability.csv`
   - `../../data/processed/derived_round_4_same_time_return_corr.csv`
   - `../../data/processed/derived_round_4_same_time_return_covariance.csv`
   - `../../data/processed/derived_round_4_lead_lag_summary.csv`
@@ -129,8 +140,14 @@ Separate findings usable inside `Trader.run()` from manual-challenge findings.
 | [`../../data/processed/derived_round_4_counterparty_markout_by_side.csv`](../../data/processed/derived_round_4_counterparty_markout_by_side.csv) | processed file | `prices_*` + `trades_*` | side-aware markouts by counterparty | yes |
 | [`../../data/processed/derived_round_4_counterparty_pair_summary.csv`](../../data/processed/derived_round_4_counterparty_pair_summary.csv) | processed file | `prices_*` + `trades_*` | recurring buyer-seller ecology | yes |
 | [`../../data/processed/derived_round_4_counterparty_book_context.csv`](../../data/processed/derived_round_4_counterparty_book_context.csv) | processed file | `prices_*` + `trades_*` | trade-to-book context by counterparty and symbol | yes |
+| [`../../data/processed/derived_round_4_counterparty_directional_profile.csv`](../../data/processed/derived_round_4_counterparty_directional_profile.csv) | processed file | `trades_*` | directional leaning by counterparty and strike | yes |
+| [`../../data/processed/derived_round_4_counterparty_family_exposure_proxy.csv`](../../data/processed/derived_round_4_counterparty_family_exposure_proxy.csv) | processed file | `trades_*` | family-level exposure proxy by counterparty | yes |
+| [`../../data/processed/derived_round_4_counterparty_credit_proxy.csv`](../../data/processed/derived_round_4_counterparty_credit_proxy.csv) | processed file | processed trade structure | stress-style counterparty proxy, not true credit risk | yes |
 | [`../../data/processed/derived_round_4_option_book_summary.csv`](../../data/processed/derived_round_4_option_book_summary.csv) | processed file | `prices_*` + `trades_*` | strike activity, spread, depth, role review | yes |
 | [`../../data/processed/derived_round_4_local_cross_strike_context.csv`](../../data/processed/derived_round_4_local_cross_strike_context.csv) | processed file | `prices_*` + `trades_*` | neighbor-strike context | yes |
+| [`../../data/processed/derived_round_4_option_iv_surface_summary.csv`](../../data/processed/derived_round_4_option_iv_surface_summary.csv) | processed file | `prices_*` + `VEX` anchor | IV surface by strike and short maturity | yes |
+| [`../../data/processed/derived_round_4_option_bs_vs_heston_fit.csv`](../../data/processed/derived_round_4_option_bs_vs_heston_fit.csv) | processed file | aggregated option panels | BS vs Heston pricing fit comparison | yes |
+| [`../../data/processed/derived_round_4_option_metric_availability.csv`](../../data/processed/derived_round_4_option_metric_availability.csv) | processed file | advanced option layer | honest availability map for parity / OI / Greeks / IV | yes |
 | [`../../data/processed/derived_round_4_lead_lag_summary.csv`](../../data/processed/derived_round_4_lead_lag_summary.csv) | processed file | `prices_*` | anchor-voucher same-time vs lagged linkage | yes |
 | [`../../data/processed/derived_round_4_counterparty_controlled_regression.csv`](../../data/processed/derived_round_4_counterparty_controlled_regression.csv) | processed file | trade-aligned sample | whether counterparty identity adds simple linear explanatory power | yes |
 | [`../../data/processed/derived_round_4_feature_model_comparison.csv`](../../data/processed/derived_round_4_feature_model_comparison.csv) | processed file | trade-aligned sample | incremental value of engineered context features | yes |
@@ -138,12 +155,15 @@ Separate findings usable inside `Trader.run()` from manual-challenge findings.
 | [`../../data/processed/derived_round_4_candidate_online_features.csv`](../../data/processed/derived_round_4_candidate_online_features.csv) | processed file | processed trade + concentration context | downstream feature shortlist | yes |
 | [`artifacts/round_4_counterparty_product_mix_heatmap.png`](artifacts/round_4_counterparty_product_mix_heatmap.png) | plot | `trades_*` | quick counterparty specialization review | yes |
 | [`artifacts/round_4_counterparty_markout_bar.png`](artifacts/round_4_counterparty_markout_bar.png) | plot | aligned trade sample | quick view of side-aware top-name markouts | yes |
+| [`artifacts/round_4_iv_smile_by_day.png`](artifacts/round_4_iv_smile_by_day.png) | plot | option panel surface | quick view of IV smile evolution | yes |
+| [`artifacts/round_4_option_model_fit_comparison.png`](artifacts/round_4_option_model_fit_comparison.png) | plot | option panel surface | representative BS vs Heston fit comparison | yes |
 | [`artifacts/round_4_return_corr_heatmap.png`](artifacts/round_4_return_corr_heatmap.png) | plot | `prices_*` | cross-product relationship review | yes |
 | [`artifacts/round_4_relative_spread_boxplot.png`](artifacts/round_4_relative_spread_boxplot.png) | plot | `prices_*` | spread hierarchy by product | yes |
 | [`artifacts/round_4_top_buyer_timing.png`](artifacts/round_4_top_buyer_timing.png) | plot | `trades_*` | timing balance by top buyer | yes |
 | [`artifacts/round_4_eda_summary_metrics.json`](artifacts/round_4_eda_summary_metrics.json) | processed file | generated outputs | fast downstream lookup | yes |
 | [`eda_round_4_counterparty_profiles.md`](eda_round_4_counterparty_profiles.md) | annex | `trades_*` + processed tables | deeper participant profiles | yes |
 | [`eda_round_4_option_book_structure.md`](eda_round_4_option_book_structure.md) | annex | `prices_*` + `trades_*` + processed tables | deeper strike/book structure | yes |
+| [`eda_round_4_option_volatility_and_pricing.md`](eda_round_4_option_volatility_and_pricing.md) | annex | option panels + model outputs | IV surface, Greeks, BS vs Heston, COS pricing | yes |
 | [`eda_round_4_round3_revalidation.md`](eda_round_4_round3_revalidation.md) | annex | Round 4 raw data + Round 3 carry-forward artifacts | compatibility-qualified revalidation | yes |
 
 ## Data Quality And Filters
@@ -316,11 +336,16 @@ Important engineering choices:
 | buyer-seller pair ecology | run | detect recurring loops and pair-conditioned follow-through | `derived_round_4_counterparty_pair_summary.csv` |
 | trade-to-book context by counterparty | run | connect counterparties to spreads, depth, and trade location | `derived_round_4_counterparty_book_context.csv` |
 | option-book summary | run | strike-role and friction mapping | `derived_round_4_option_book_summary.csv` |
+| implied-volatility surface and Greeks | run | test whether the voucher family has usable cross-strike pricing structure beyond raw mids | `derived_round_4_option_iv_surface_summary.csv`, `derived_round_4_option_panel_metrics.csv` |
+| BS vs Heston panel fit | run | check whether stochastic volatility materially improves the short-dated cross-strike fit | `derived_round_4_option_bs_vs_heston_fit.csv`, `derived_round_4_option_model_residuals.csv` |
+| option metric availability audit | run | separate feasible first-class metrics from unavailable classical diagnostics like put-call parity and OI | `derived_round_4_option_metric_availability.csv` |
 | same-time cross-product relationships | run | anchor / separation decision | `derived_round_4_same_time_return_corr.csv` |
 | lead-lag checks | run | delayed-follow rejection or support | `derived_round_4_lead_lag_summary.csv` |
 | trade-aligned short-horizon diagnostics | run | contextual markout-like framing | `derived_round_4_trade_alignment_summary.csv` |
 | controlled model | run | does counterparty identity add simple information? | `derived_round_4_counterparty_controlled_regression.csv` |
 | engineered-feature mini EDA | run | test whether new usable features add signal or only description | `derived_round_4_engineered_feature_summary.csv`, `derived_round_4_feature_model_comparison.csv`, `derived_round_4_candidate_online_features.csv` |
+| exhaustive counterparty exposure / directional map | run | summarize who is structurally long/short which family slice | `derived_round_4_counterparty_directional_profile.csv`, `derived_round_4_counterparty_family_exposure_proxy.csv` |
+| credit-style metric availability and proxy | run | document what true credit metrics are impossible and what stress-style proxy remains useful | `derived_round_4_counterparty_credit_metric_availability.csv`, `derived_round_4_counterparty_credit_proxy.csv` |
 | optional clustering / PCA / MI | skipped | low ROI relative to already-strong direct findings | none |
 
 ## Facts
@@ -352,6 +377,37 @@ Important engineering choices:
 - Natural hold horizon differences across products or setups:
   raw data does not prove final hold horizons, but short-horizon trade alignment is already materially worse in `5200+` than in `VEX` or `4000`.
 
+## Advanced Option-Pricing Layer
+
+- Advanced option work is now implemented in
+  [eda_round_4_option_volatility_and_pricing.md](eda_round_4_option_volatility_and_pricing.md).
+- The `VEV_*` family supports a usable short-dated implied-volatility surface
+  when treated as call-like options on `VEX`.
+- Black-Scholes is a decent first fit, but Heston with COS pricing improves fit
+  in `7/9` aggregated `(day, time_bucket)` panels, with average RMSE
+  improvement about `0.0170`.
+- The improvement is moderate rather than dramatic, which supports a
+  `surface-aware framing` more than a `full Heston live-engine` conclusion.
+- Greeks reinforce the role split already visible in the microstructure layer:
+  `5200/5300` carry the richest short-dated sensitivity, while `4000` is closer
+  to intrinsic and `6000/6500` remain floor-like.
+- Put-call parity and open interest are now explicitly classified as
+  unavailable or only partially available instead of being left implicit.
+
+## Exhaustive Counterparty Layer
+
+- Counterparty analysis now goes beyond concentration and stability into:
+  directional leaning by strike, family-exposure proxies, and a documented
+  credit-metric availability check.
+- `Mark 01` is structurally long the upper/floor voucher complex.
+- `Mark 22` is structurally short the same upper/floor and active upper-middle
+  region, with the strongest large-sample seller-side markout.
+- `Mark 55`, `Mark 67`, and `Mark 49` are much cleaner `VEX` specialists than
+  broad voucher participants.
+- True PD / implied default / CVA are not computable from the current files,
+  but a `credit-style proxy` has been implemented explicitly as a market
+  structure stress heuristic rather than mislabeled as real credit risk.
+
 ## Threshold / Execution Findings
 
 | Finding | Feature Basis | Threshold Or Zone | Execution / Risk Use | Readiness | Caveat |
@@ -369,6 +425,7 @@ Important engineering choices:
 | side-aware voucher seller pressure | seller-side markouts, dominance flags, pair ecology, strike concentration | repeated `Mark 22` seller flow in `5200+` aligns with favorable seller-side follow-through | strongest new counterparty-conditioned danger-state story | contextual veto / defensive regime feature | stable at raw-data level in `5200+` | medium-high | still not enough to justify direct name-only trading logic |
 | trade-to-book location context | trade location bucket, spread, depth | at-bid / at-ask / inside-spread prints separate trade follow-through better than raw names alone | helps bridge counterparties with microstructure | feature-engineering primitive | stable by construction | medium | use as a reusable building block, not as standalone trigger |
 | `VEX` same-time anchor still dominates voucher linkage | same-time corr + lead-lag rejection | vouchers still move with `VEX` mainly at lag `0`, not with delayed follow | preserves the core anchor framing from `round_3` | anchor / valuation context | stable | strong | not a claim about final trading style |
+| short-dated voucher surface is not flat | BS IV surface, Greeks, BS vs Heston fit | volatility curvature and strike sensitivity matter, especially as TTE compresses | validates surface-aware option framing beyond intrinsic-only logic | pricing / residual context | stable enough across aggregated panels | medium | Heston fit improvement is moderate, not enough to justify a heavy live stack |
 | active voucher family is structurally linked but execution-fragmented | local cross-strike corr, spreads, trade counts, concentration | `5000-5300` is one family structurally, but not one clean trading basket | supports strike-specific logic and danger-state use | role-aware option-book logic | stable at raw-data level | strong | sparse `5000/5100` tape limits direct claims |
 
 ## Downstream Feature Contract Implications
@@ -377,6 +434,7 @@ Important engineering choices:
 | --- | --- | --- | --- | --- |
 | counterparty concentration / identity | if used, must be framed as contextual state, not naked primary alpha | no | check stability and product specificity in validation | until understanding compresses which names and roles matter |
 | `VEX` anchor relationship | later specs may anchor voucher logic to `VEX` same-time state | no | invalidate if later runs show no benefit over standalone voucher logic | until strategy chooses the exact residual logic |
+| IV / Greeks / BS-Heston comparison | later specs may use them as pricing or residual context, not as mandatory live machinery | yes, if brought online | invalidate if simple residual frames dominate equally well without the extra complexity | until strategy chooses whether pricing context is worth the runtime and state budget |
 | upper/floor exclusion | later specs should default these to monitor/passive/avoid states | no | reopen only if validation or richer data contradicts raw EDA | until contradictory evidence appears |
 | sparse-tape strikes `4500/5000/5100` | avoid tape-based claims and use quote-led framing only | no | invalidate if later data adds meaningful trade coverage | until more evidence exists |
 
@@ -388,6 +446,7 @@ Important engineering choices:
 | `HYDRO` as option-family proxy | both are major algorithmic products | same-time return corr vs `VEX` is only `0.0013` | only if later strategy evidence shows cross-product utility |
 | upper/floor vouchers as normal direct inventory | all vouchers have full quote coverage | spreads explode and flow is nearly deterministic by counterparty | only if later validation proves a passive edge |
 | pure name-based linear alpha | named counterparties are the new feature | controlled model `R^2 = 0.0101` is too weak alone | only if interaction features with side/product materially strengthen it |
+| flat-vol option treatment is fully sufficient everywhere | the active voucher family often looks orderly by strike | Heston improves fit in `7/9` panels and Greeks concentrate sensitivity in the active center | only if downstream validation shows no strategy benefit from any surface-aware context |
 | buyer-seller pair recurrence as ready-made alpha | repeated pairs can look very structured | recurrent pairs are interesting, but the strongest ones are mostly explained by strike concentration and only 3 days of sample | only if later runs or more data show stable incremental value over concentration and product-role context |
 | universal late-session deterioration from raw trade timing | Round 3 made this plausible | top counterparties are active across all three session buckets | reopen only at product-specific or run-specific level |
 

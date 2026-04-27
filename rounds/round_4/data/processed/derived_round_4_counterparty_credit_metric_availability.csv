@@ -1,0 +1,5 @@
+metric,status,reason
+historical_default_probability,not available,"no defaults, balance-sheet data, or survival outcomes exist in current files"
+implied_default_probability,not available,"no credit spreads, CDS, or financing curves exist in current files"
+true_cva,not available,"no OTC exposure profile, recovery assumption, or credit term structure exists in current files"
+credit_style_proxy,implemented_as_proxy_only,"stress proxy is based on market-structure concentration and adverse flow, not on real credit risk"
