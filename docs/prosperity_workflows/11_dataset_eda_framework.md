@@ -26,6 +26,10 @@ Use it as a guided checklist, not a rigid schema. Classify the columns you actua
 - Derived features are analysis tools, not official mechanics.
 - Strategy implications are hypotheses until tested.
 - If column meaning is unclear, record it as an open question or blocker before strategy depends on it.
+- If a standard market metric requires missing fields, contract data, or
+  counterparty inputs, classify it explicitly as `implemented`,
+  `implemented_as_proxy_only`, `partially_available`, or `not_available`
+  instead of silently skipping or fabricating it.
 
 ## Adaptive EDA Flow
 
@@ -35,9 +39,10 @@ Use it as a guided checklist, not a rigid schema. Classify the columns you actua
 4. Choose analyses that match those categories and can affect a downstream decision.
 5. Create reusable metrics or derived features only when they support understanding, strategy, specification, validation, or debugging.
 6. Build a serious engineered feature set for decision-relevant checks.
-7. Run the default multivariate and process-hypothesis layers when applicable.
-8. Decide whether the evidence is raw-data only or needs a retrospective run-informed addendum.
-9. Write a structured EDA artifact that another agent can use without rerunning the analysis.
+7. For advanced quant metrics or models, run a feasibility / availability pass before implementation effort grows.
+8. Run the default multivariate and process-hypothesis layers when applicable.
+9. Decide whether the evidence is raw-data only or needs a retrospective run-informed addendum.
+10. Write a structured EDA artifact that another agent can use without rerunning the analysis.
 
 ## Role Classification For Linked Products
 
@@ -84,6 +89,10 @@ the deferral and why.
 The output should be a compact `Multivariate Feature Map` that says which
 features overlap, which survive controls, whether cross-product signals matter,
 and what downstream phases should do.
+
+When richer quantitative models are introduced, also keep a compact
+`Baseline -> Richer Model -> Incremental Value -> Lifecycle Label` trace so
+downstream phases know whether the extra complexity earned any decision weight.
 
 ## Process / Distribution Hypothesis Layer
 

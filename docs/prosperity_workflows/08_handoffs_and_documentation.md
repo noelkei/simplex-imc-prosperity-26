@@ -27,6 +27,12 @@ What is assumed but not official.
 ## Evidence
 Commands, files, charts, logs, or observations.
 
+## Metric availability
+Advanced metrics or models used: implemented / proxy-only / partially available / not available.
+
+## Lifecycle labels
+Which findings are EDA-only, research-only, understanding carry-forward, online-usable, or implementation candidates.
+
 ## Carry-forward principles
 Validated rules, framing, or reusable lessons that downstream work should keep using.
 
@@ -62,6 +68,9 @@ If the handoff crosses rounds or explicitly reuses prior-round learning, add:
 ## Common handoff paths
 
 - EDA to strategy: provide observed patterns, feature/signal hypotheses, reproduction steps, evidence limits, and which signals are usable, exploratory, or not ready.
+- EDA to strategy: also provide any metric-availability caveats, proxy notes,
+  baseline-vs-richer-model verdicts, and lifecycle labels for serious features
+  or models.
 - EDA to understanding: provide product scope, feature inventory, feature origin, online usability, role, lifecycle decision, conditional patterns, signal confidence, caveats, and validation needs.
 - Understanding to strategy: provide prioritized strategy-relevant insights, what should be tried, what should not be trusted yet, and open risks.
 - Strategy spec to implementation: provide reviewed spec, Feature Contract, Round-Specific Mechanics Contract, parameters, risk behavior, and tests.
@@ -93,6 +102,9 @@ When a handoff includes a platform or platform-style run, include these fields i
 - Do not hide uncertainty; make it easy to find and resolve.
 - Do not mix validated evidence, transferable principles, untested hypotheses, and anti-patterns in one unlabeled summary.
 - If prior-round learning is reused, state the compatibility verdict explicitly instead of assuming continuity.
+- If a requested quant metric was not fully supported, record whether it was
+  omitted, proxied, or only partially implemented instead of leaving the reader
+  to guess.
 
 ## Platform run provenance
 

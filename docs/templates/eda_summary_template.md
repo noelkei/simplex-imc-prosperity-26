@@ -77,6 +77,14 @@ Persist reusable artifacts under existing round-local paths and link them here.
 - Findings based on: `raw rows | filtered rows | mixed, explain`
 - Data quality caveats:
 
+## Metric Availability Audit
+
+Fill this when advanced or user-requested quant metrics/models appear.
+
+| Metric Or Model | Availability | What Was Computed | Key Assumptions | Downstream Use | Caveat |
+| --- | --- | --- | --- | --- | --- |
+| ITEM | implemented / implemented_as_proxy_only / partially_available / not_available | RESULT_OR_NONE | ASSUMPTIONS | USE | CAVEAT |
+
 ## Feature Inventory
 
 Use [`docs/prosperity_workflows/11_dataset_eda_framework.md`](../prosperity_workflows/11_dataset_eda_framework.md) as the checklist.
@@ -96,10 +104,11 @@ Feature lifecycle states:
 Origins: `csv | online | log/post-run | combined | manual-only`.
 Online usability: `usable online | EDA-only | log-only | unknown`.
 Roles: `direct signal | execution filter | risk control | diagnostic | manual | avoid`.
+Lifecycle labels: `EDA-only | research-only | understanding carry-forward | online-usable | implementation candidate`.
 
-| Feature | Origin | Online Usability | Meaning | Role | Signal Strength | Stability | Actionability | Lifecycle Decision | Notes / Caveats |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| FEATURE | csv / online / log/post-run / combined / manual-only | usable online / EDA-only / log-only / unknown | MEANING | direct signal / execution filter / risk control / diagnostic / manual / avoid | strong / medium / weak / contradictory | stable / day-sensitive / timestamp-sensitive / regime-dependent / unknown | changes strategy / changes parameters / changes validation / no decision impact | promote / exploratory / negative evidence / EDA-only calibration / needs logs / reject | NOTES |
+| Feature | Origin | Online Usability | Lifecycle Label | Meaning | Role | Signal Strength | Stability | Actionability | Lifecycle Decision | Notes / Caveats |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| FEATURE | csv / online / log/post-run / combined / manual-only | usable online / EDA-only / log-only / unknown | EDA-only / research-only / understanding carry-forward / online-usable / implementation candidate | MEANING | direct signal / execution filter / risk control / diagnostic / manual / avoid | strong / medium / weak / contradictory | stable / day-sensitive / timestamp-sensitive / regime-dependent / unknown | changes strategy / changes parameters / changes validation / no decision impact | promote / exploratory / negative evidence / EDA-only calibration / needs logs / reject | NOTES |
 
 ## Product / Role Classification
 
@@ -188,6 +197,14 @@ recommend offline-only model logic for `Trader.run()`.
 | Model / Check | Response | Predictors / Controls | Data Slice | Result | Leakage / Overfit Check | Actionability |
 | --- | --- | --- | --- | --- | --- | --- |
 | OLS / logit / ridge / MI / clustering / PCA / change-point / other | TARGET | FEATURES | SLICE | RESULT | CHECK | use / calibrate / exploratory / reject / defer |
+
+## Baseline Vs Richer Model Ladder
+
+Fill this when a richer quantitative model is introduced over a simpler baseline.
+
+| Scope | Baseline | Richer Model | Incremental Value | Cost / Complexity | Lifecycle Label | Verdict |
+| --- | --- | --- | --- | --- | --- | --- |
+| SCOPE | MODEL | MODEL | RESULT | LOW / MEDIUM / HIGH | EDA-only / research-only / understanding carry-forward / online-usable / implementation candidate | keep / downgrade / reject / defer |
 
 ## Analyses Run
 
