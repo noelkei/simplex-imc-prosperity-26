@@ -2,24 +2,29 @@
 
 ## Status
 
-NOT_STARTED
+IN_PROGRESS
 
 ## Owner / Reviewer
 
-- Owner: Unassigned
+- Owner: Codex
 - Reviewer: Unassigned
 
 ## Last Updated
 
-TBD
+2026-04-27
 
 ## What Has Been Done
 
-- Nothing yet.
+- Uploaded raw performance `.json` artifacts for the `15` Wave 1 Noel bots
+  under [`../performances/noel/historical/`](../performances/noel/historical/).
+- Phase `06` has started in the sense that run artifacts now exist, but no
+  canonical run summaries or comparative analysis have been written yet.
 
 ## Current Findings
 
-- None yet.
+- Raw run artifacts now exist for the first Wave 1 batch, but they still need
+  conversion into readable performance summaries before decisions can be made.
+- The next meaningful work is comparative analysis, not more implementation.
 
 ## Decisions Made
 
@@ -28,7 +33,8 @@ TBD
 
 ## Open Questions / Blockers
 
-- Bot candidate required.
+- No blocker to analysis.
+- Canonical `.md` run summaries are still missing.
 
 ## Linked Artifacts
 
@@ -37,8 +43,10 @@ TBD
 
 ## Next Priority Action
 
-After implementation, run the fastest meaningful validation and create a run summary.
+Convert the uploaded Wave 1 run artifacts into canonical performance summaries
+and compare Packs `A`, `B`, and `D` first.
 
 ## Deadline Risk
 
-Unknown.
+Medium: artifacts exist, but decision quality is still low until the raw runs
+are converted into readable summaries and compared cleanly.

@@ -1,6 +1,8 @@
 # Round 4 Performances
 
-No performance artifacts have been added yet.
+Raw performance artifacts now exist under `noel/historical/` for the first
+Wave 1 exploration batch, but canonical decision-supporting summaries have not
+been written yet.
 
 Performance results are non-authoritative evidence. Preserve durable run evidence as `.md` and/or `.json` summaries using `docs/templates/run_summary_template.md`.
 
