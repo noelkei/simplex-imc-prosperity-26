@@ -34,18 +34,22 @@ from datamodel import Order, TradingState
 VEX = "VELVETFRUIT_EXTRACT"
 
 # (strike, fair_offset, base_clip, edge)
-# fair_offset: added to intrinsic to get fair value
-#   negative for ITM (force model to see as overpriced)
-#   positive small for OTM (matches the market premium minus a bit)
+# Calibrated from actual bid distance to intrinsic on day 3:
+#   VEV_4000: mean bid 1254, intrinsic 1265 -> bid is 11 BELOW intrinsic
+#   VEV_4500: mean bid  757, intrinsic  765 -> bid is 8  BELOW intrinsic
+#   VEV_5000: mean bid  264, intrinsic  265 -> bid is 1  BELOW intrinsic
+# Setting fair = intrinsic + offset where offset must be < (bid - intrinsic - edge)
+# ensures sell crosses fire at the bid. Aggressive negative offsets for ITM
+# guarantee triggers across the whole session.
 STRIKE_CONFIG = {
-    "VEV_4000": (4000, -2.0, 35, 2.0),
-    "VEV_4500": (4500, -2.0, 35, 2.0),
-    "VEV_5000": (5000, -1.0, 30, 2.0),
-    "VEV_5100": (5100,  3.0, 30, 2.0),
-    "VEV_5200": (5200,  8.0, 30, 2.0),
-    "VEV_5300": (5300,  6.0, 30, 2.0),
-    "VEV_5400": (5400,  4.0, 25, 2.0),
-    "VEV_5500": (5500,  2.5, 20, 2.0),
+    "VEV_4000": (4000, -15.0, 35, 2.0),
+    "VEV_4500": (4500, -12.0, 35, 2.0),
+    "VEV_5000": (5000,  -5.0, 30, 2.0),
+    "VEV_5100": (5100,   3.0, 30, 2.0),
+    "VEV_5200": (5200,   8.0, 30, 2.0),
+    "VEV_5300": (5300,   6.0, 30, 2.0),
+    "VEV_5400": (5400,   4.0, 25, 2.0),
+    "VEV_5500": (5500,   2.5, 20, 2.0),
 }
 OPT_LIMIT = 300
 VEX_LIMIT = 200
