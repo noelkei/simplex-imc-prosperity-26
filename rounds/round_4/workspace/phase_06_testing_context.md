@@ -15,42 +15,47 @@ IN_PROGRESS
 
 ## What Has Been Done
 
-- Preserved the canonical Wave 1 A/B/D summaries and partial synthesis.
-- Used that evidence plus the Wave 2 debug incident to refine the active Wave 2
-  queue before new reruns.
+- Absorbed the full current `round_4` performance base into
+  [`06_testing/round_4_full_performance_synthesis.md`](06_testing/round_4_full_performance_synthesis.md).
+- Crossed that evidence with the closed `round_3` peak and carry-forward
+  package.
+- Archived all prior current-round canonical performance artifacts into
+  `historical/` before opening the new final upload wave.
 
 ## Current Findings
 
-- Old pre-fix Wave 2 evidence for the affected bots is not strategy evidence.
-- The current highest-ROI testing question is no longer “which tiny overlay is
-  best?” but “which entry or direct attribution branch is genuinely alive?”
-- Pack `C/E/F` Wave 1 canonical summaries still remain outstanding, but they no
-  longer block the refined Wave 2 rerun slice.
+- The current live champion is `r4_final_05_full_otm_basket`.
+- The best fallback families are still `5300`-centered, not `4000` or
+  delta-1-first.
+- The only remaining high-ROI unknowns are whether the three new retention and
+  veto derivatives can protect more of the champion path.
 
 ## Decisions Made
 
-- Final submission still requires readable validation artifacts.
-- The next rerun slice should favor structural and direct-signal bots first.
+- Final testing should be champion-first, not broad exploration.
+- All old canonical performance artifacts are now evidence only, not live queue
+  state.
+- Missing performance for the archived dead-end bots is treated as non-ROI for
+  this last pass.
 
 ## Open Questions / Blockers
 
-- Need fresh platform reruns on the refined active upload set.
-- Canonical Pack `C`, `E`, and `F` summaries are still missing for full Wave 1
-  round closeout.
+- Need fresh platform reruns on the final `10`-bot pack.
+- Need real platform evidence before selecting the final submission file.
 
 ## Linked Artifacts
 
 - [`_index.md`](_index.md)
-- [`06_testing/round_4_wave1_pack_abd_partial_synthesis.md`](06_testing/round_4_wave1_pack_abd_partial_synthesis.md)
+- [`06_testing/round_4_full_performance_synthesis.md`](06_testing/round_4_full_performance_synthesis.md)
 - [`post_run_research_memory.md`](post_run_research_memory.md)
-- [`phase_07_debugging_context.md`](phase_07_debugging_context.md)
+- [`phase_05_implementation_context.md`](phase_05_implementation_context.md)
 
 ## Next Priority Action
 
-Run the refined Wave 2 slice in this order:
-`r4_w2_01`, `r4_w2_05`, `r4_w2_07`, `r4_w2_08`, `r4_w2_13`, `r4_w2_15`,
-then `r4_w2_02`, `r4_w2_06`, and `r4_w2_14`.
+Upload and rerun the final pack in this order:
+`01`, `02`, `08`, `09`, `10`, then `03`, `04`, `05`, `06`, `07`.
 
 ## Deadline Risk
 
-Medium: we have a cleaner queue, but only a few iteration windows remain.
+Medium: the evidence base is clean now, but submission selection still depends
+on one final live ranking pass.

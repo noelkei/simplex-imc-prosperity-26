@@ -15,54 +15,47 @@ COMPLETED
 
 ## What Has Been Done
 
-- Revised the grouped Wave 2 specs after the Wave 2 debugging incident and the
-  queue refinement.
-- Preserved the grouped pack structure:
-  - `pack_g_vex_retention_rescue`
-  - `pack_h_5300_winner_style_and_veto`
-  - `pack_i_light_context_overlays`
-  - `pack_j_4000_activation_and_execution`
-- Rewrote pack membership so the active queue keeps six structural bots and
-  replaces nine low-ROI overlays with direct entry probes and option-only
-  attribution tests.
+- Added the final implementation-ready pack:
+  [`04_strategy_specs/spec_pack_k_final_otm_winner_distillation.md`](04_strategy_specs/spec_pack_k_final_otm_winner_distillation.md).
+- Recorded the final queue as `7` proven bots plus `3` one-axis derivatives.
+- Bound the new work to retention and veto logic only.
 
 ## Current Findings
 
-- Pack `G` is no longer mostly small retention variants; it is now one retained
-  rescue plus three distinct `VEX` entry probes.
-- Pack `H` and Pack `J` now include cleaner option-only tests, not just
-  parented hybrids.
-- The winner-style adapted architecture remains concentrated in `r4_w2_07` and
-  `r4_w2_15`.
+- The spec layer no longer needs grouped Wave 2 exploration packs as the live
+  abstraction.
+- The final abstraction is a winner-distillation pack centered on the OTM
+  family.
+- `Mark 22 / 5200` only survives as a veto feature, not as a direct
+  inventory thesis.
 
 ## Decisions Made
 
-- Grouped pack specs remain the correct abstraction.
-- User direction is still treated as operational approval for implementation.
-- The spec layer now reflects the shorter remaining runway by favoring
-  distinct decision questions over incremental overlay tweaks.
+- Explicit user direction is treated as operational approval for this final
+  pack.
+- The raw `round_3` high-peak voucher basket is excluded from direct
+  implementation.
+- `4000` remains excluded from the last wave.
 
 ## Open Questions / Blockers
 
 - No spec blocker remains.
-- Fresh reruns are required before any further queue pruning.
+- Validation must now decide whether any of the three new derivatives can beat
+  or protect the champion.
 
 ## Linked Artifacts
 
 - [`_index.md`](_index.md)
 - [`03_strategy_candidates.md`](03_strategy_candidates.md)
-- [`04_strategy_specs/spec_pack_g_vex_retention_rescue.md`](04_strategy_specs/spec_pack_g_vex_retention_rescue.md)
-- [`04_strategy_specs/spec_pack_h_5300_winner_style_and_veto.md`](04_strategy_specs/spec_pack_h_5300_winner_style_and_veto.md)
-- [`04_strategy_specs/spec_pack_i_light_context_overlays.md`](04_strategy_specs/spec_pack_i_light_context_overlays.md)
-- [`04_strategy_specs/spec_pack_j_4000_activation_and_execution.md`](04_strategy_specs/spec_pack_j_4000_activation_and_execution.md)
+- [`04_strategy_specs/spec_pack_k_final_otm_winner_distillation.md`](04_strategy_specs/spec_pack_k_final_otm_winner_distillation.md)
+- [`06_testing/round_4_full_performance_synthesis.md`](06_testing/round_4_full_performance_synthesis.md)
 
 ## Next Priority Action
 
-Keep `Phase 05` aligned with the refined queue and treat the active upload set
-as the debugged series only. Start validation with:
-`r4_w2_01`, `r4_w2_05`, `r4_w2_07`, `r4_w2_08`, `r4_w2_13`, `r4_w2_15`.
+Keep `Phase 05` and `Phase 06` aligned with the final `10`-bot pack and rank
+everything against `r4_finalbatch_01_full_otm_basket_champion.py`.
 
 ## Deadline Risk
 
-Medium: the spec layer is now better targeted, but the next learning depends on
-clean reruns rather than more design branching.
+Medium: the spec is stable, but the final promotion decision still depends on
+live reruns.

@@ -15,62 +15,49 @@ READY_FOR_REVIEW
 
 ## What Has Been Done
 
-- Kept the six highest-ROI Wave 2 bots active:
-  `r4_w2_01`, `r4_w2_05`, `r4_w2_07`, `r4_w2_08`, `r4_w2_13`, `r4_w2_15`.
-- Replaced the other nine active slots with new entry-quality and option-only
-  attribution probes.
-- Updated the shared Wave 2 engine in
-  [`../bots/noel/canonical/wave2_shared_engine.py`](../bots/noel/canonical/wave2_shared_engine.py)
-  to support the refined queue.
-- Applied a fill-seeking recalibration pass to the active option branches after
-  debugging showed they were materially more passive than the useful Wave 1
-  bots.
-- Regenerated the full active upload set in `canonical/` as standalone
-  `*_debugged.py` files.
-- Moved superseded Wave 1 bots and superseded Wave 2 draft files into
-  [`../bots/noel/historical/`](../bots/noel/historical/).
-- Re-ran local compilation and `Trader.run()` smoke checks on the active
-  upload set.
+- Archived every prior live `round_4` canonical bot into the corresponding
+  member `historical/` folder.
+- Created a new final `10`-bot upload pack under
+  [`../bots/noel/canonical/`](../bots/noel/canonical/).
+- Reused `7` proven positive bots and added `3` one-axis derivatives:
+  `late_freeze`, `Mark22_veto`, and `giveback_stop`.
+- Ran `python3 -m py_compile` on the full final pack.
+- Ran a local `Trader.run()` smoke check on all `10` bots with a minimal
+  synthetic `TradingState`.
 
 ## Current Findings
 
-- `canonical/` now represents only the live queue we actually want to upload.
-- `historical/` now holds:
-  - Wave 1 bots with existing performance history
-  - retired pre-fix or superseded Wave 2 variants
-- The refined queue is materially more signal-seeking than the prior version:
-  less overlap in retention overlays, more direct entry and option-only tests.
-- Local replay now shows materially more option crossing activity in the active
-  `5300` and `4000` branches after the recalibration.
+- The implementation layer now reflects the actual final upload plan rather
+  than the old Wave 2 queue.
+- The three new derivatives are narrow and self-contained.
+- No contract or syntax issue was found in local validation.
 
 ## Decisions Made
 
-- The active upload set is the debugged series only.
-- The old Wave 2 filenames without `_debugged.py` are no longer part of the
-  live queue.
-- Strategy IDs were refined in-place where needed so the implementation can
-  preserve the 15-slot wave while changing the actual questions being tested.
+- Final bots are owned under `noel` for the last upload wave.
+- Old cross-member canonical bots are no longer live implementation state.
+- The base champion for comparison is
+  `r4_finalbatch_01_full_otm_basket_champion.py`.
 
 ## Open Questions / Blockers
 
 - No implementation blocker remains.
-- Fresh platform reruns are still required before pruning further.
+- Live reruns are still required before final submission selection.
 
 ## Linked Artifacts
 
 - [`_index.md`](_index.md)
 - [`03_strategy_candidates.md`](03_strategy_candidates.md)
-- [`04_strategy_specs/`](04_strategy_specs/)
+- [`04_strategy_specs/spec_pack_k_final_otm_winner_distillation.md`](04_strategy_specs/spec_pack_k_final_otm_winner_distillation.md)
 - [`../bots/noel/canonical/`](../bots/noel/canonical/)
 - [`../bots/noel/historical/`](../bots/noel/historical/)
 
 ## Next Priority Action
 
-Hand the refined upload set into `Phase 06` in this order:
-`r4_w2_01`, `r4_w2_05`, `r4_w2_07`, `r4_w2_08`, `r4_w2_13`, `r4_w2_15`,
-then `r4_w2_02`, `r4_w2_06`, and `r4_w2_14`.
+Hand the final `10`-bot pack into `Phase 06` in this order:
+`01`, `02`, `08`, `09`, `10`, `03`, `04`, `05`, `06`, `07`.
 
 ## Deadline Risk
 
-Medium: the implementation layer is cleaner now, but the remaining ROI depends
-on fast reruns and disciplined pruning.
+Medium: implementation is clean, but the final ranking still needs live
+evidence.

@@ -1,136 +1,110 @@
 # Strategy Candidates
 
-Use [`docs/templates/strategy_candidates_template.md`](../../../docs/templates/strategy_candidates_template.md) as the structure for this file.
-
 ## Status
 
 READY_FOR_REVIEW
 
 ## Reopen Reason
 
-Wave 2 was refined after the first debugged upload cycle because the remaining
-runway is short: this wave plus only two more rounds before final selection.
-That changes the correct optimization target.
+This is now a round-closeout and last-upload-wave strategy pass, not another
+broad exploration cycle.
 
-- keep only the bots that answer structural thesis questions cleanly
-- replace low-information overlays with entry-logic probes
-- preserve comparability, but stop spending many slots on tiny retention
-  variations over the same parent
+- All prior `round_4` canonical bots now either have performance evidence and
+  were archived to `historical/`, or had no useful run evidence and were
+  archived as dead ends.
+- The final queue should maximize expected real platform PnL from what already
+  worked in `round_4`, while importing only the highest-ROI retention and veto
+  lessons from `round_3`.
 
 ## Sources
 
 - Wiki facts:
   - [`../../../docs/prosperity_wiki/rounds/round_4.md`](../../../docs/prosperity_wiki/rounds/round_4.md)
-- Understanding summary:
-  - [`02_understanding.md`](02_understanding.md)
-- EDA evidence:
-  - [`01_eda/eda_round_4_counterparty_and_option_book.md`](01_eda/eda_round_4_counterparty_and_option_book.md)
-  - [`01_eda/eda_round_4_wave1_abd_retrospective_addendum.md`](01_eda/eda_round_4_wave1_abd_retrospective_addendum.md)
-- Run evidence:
-  - [`06_testing/round_4_wave1_pack_abd_partial_synthesis.md`](06_testing/round_4_wave1_pack_abd_partial_synthesis.md)
+- Round 4 run evidence:
+  - [`06_testing/round_4_full_performance_synthesis.md`](06_testing/round_4_full_performance_synthesis.md)
   - [`post_run_research_memory.md`](post_run_research_memory.md)
-- Uploaded winner references:
-  - [`../research/algo run for round 4.py`](../research/algo%20run%20for%20round%204.py)
-  - [`../research/big_volcano_man_fixed.py`](../research/big_volcano_man_fixed.py)
-  - [`../research/big_volcano_man_IV_window.py`](../research/big_volcano_man_IV_window.py)
+- Round 3 carry-forward evidence:
+  - [`../../round_3/workspace/06_testing/round_3_full_performance_synthesis.md`](../../round_3/workspace/06_testing/round_3_full_performance_synthesis.md)
+  - [`../../round_3/workspace/06_testing/round_3_closeout_retrospective.md`](../../round_3/workspace/06_testing/round_3_closeout_retrospective.md)
+  - [`../../round_3/workspace/post_run_research_memory.md`](../../round_3/workspace/post_run_research_memory.md)
 
 ## Strategy Objective
 
-This refined Wave 2 should answer four things before the winner wave:
+Build a final upload batch of at most `10` bots that:
 
-1. Is `VEX` still mainly a retention problem, or do better entry conditions
-   matter more now?
-2. Does `VEV_5300` have direct current-round life, and does it need cleaner
-   execution or cleaner activation?
-3. Can `VEV_5200` and family-state context act as entry-quality filters rather
-   than only post-hoc vetoes?
-4. Is `VEV_4000` weak, execution-limited, or simply parent-contaminated?
+1. keeps the best proven `round_4` money-making family intact,
+2. preserves a few proven fallbacks for diversity,
+3. spends only three slots on one-axis derivatives that directly target the
+   main retained failure mode: `peak -> giveback -> late extension`,
+4. avoids reopening the broad toxic active basket that produced `>10k` and
+   `~18k` peaks in `round_3` but repeatedly failed to retain them.
 
-## Keep / Replace Decision
+## Cross-Round Evidence Summary
 
-### Kept from the previous Wave 2 draft
+### What is clearly alive in `round_4`
 
-| Candidate | Why It Stays |
-| --- | --- |
-| `r4_w2_01_vex_late_no_new_entry` | cheapest direct retention rescue on the live `VEX` base |
-| `r4_w2_05_5300_clean_value_retest` | cleanest `5300` baseline |
-| `r4_w2_07_5300_queue_takeover_probe` | best winner-style execution probe on the strongest active family |
-| `r4_w2_08_5300_with_5200_veto` | highest-ROI `5300 + 5200` combination |
-| `r4_w2_13_4000_forced_activation` | closes the biggest unresolved `4000` evidence gap |
-| `r4_w2_15_4000_quote_ladder_probe` | best direct `4000` execution-style test |
+- The strongest real platform family is the simple OTM option basket centered
+  on `VEV_5300`, extended to `VEV_5400`, and best of all to
+  `VEV_5500`.
+- The top `round_4` run is
+  `r4_final_05_full_otm_basket = 8729.104`, with a still-positive retained
+  peak structure instead of the catastrophic reversal seen in the old toxic
+  baskets.
+- The clean `5300` floor is real and repeatable:
+  `r4_final_01`, `r4_final_02`, `r4_s04`, `r4_s11`, and the four observed
+  Wave 2 reruns all cluster around `5.2k-5.4k`.
 
-### Replaced
+### What should only survive as control logic, not as a reopened architecture
 
-The replaced slots were too concentrated in tiny retention or overlay changes.
-They are now used for entry-logic probes and cleaner option isolation.
+- `round_3` confirmed that raw wide active baskets can print huge peaks, but
+  the same family also produced the worst givebacks in the repo:
+  `r3_b08_regime_composite` peaked near `17.47k` and finished negative,
+  `candidate_c06_composite_base` peaked near `17.34k` and finished negative,
+  and multiple other broad voucher composites crossed `10k` before collapsing.
+- The transferable part from that family is not the raw basket itself. It is:
+  - late-session no-new-entry discipline,
+  - giveback-aware flattening,
+  - treating `5100/5200` toxicity as veto or danger-state information rather
+    than default inventory.
 
-## Wave 2 Pack Structure
+### What should be de-prioritized for the last wave
 
-| Pack | Learning Goal | Candidate IDs |
-| --- | --- | --- |
-| `G` | test whether `VEX` needs cleaner entry, not only cleaner retention | `r4_w2_01` to `r4_w2_04` |
-| `H` | isolate `5300` signal quality versus execution style | `r4_w2_05` to `r4_w2_08` |
-| `I` | test lightweight context as entry-quality gating rather than pure veto | `r4_w2_09` to `r4_w2_12` |
-| `J` | separate `4000` activation quality from parent contamination | `r4_w2_13` to `r4_w2_15` |
+- Direct `VEV_4000` work remains unproven in `round_4`.
+- `VEX`-only and broad counterparty-architecture bots did not beat the OTM
+  basket family.
+- Unrun or flat-PnL Wave 2 branches are not good final-wave slots.
 
-## Candidate Table
+## Final Last-Wave Queue
 
-| Candidate ID | Role | Product Scope | Changed Axis | Source Classification | Expected Learning | Validation Check | Priority |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| `r4_w2_01_vex_late_no_new_entry` | keep | `VEX` | retention cutoff | data-driven | whether late giveback is still mostly timing | path improves without killing early activity | highest |
-| `r4_w2_02_vex_inside_book_only` | replacement | `VEX` | enter only when recent `VEX` tape is clean/inside and spread is very tight | data-driven | whether `VEX` edge is mostly a clean-tape problem | fewer but cleaner `VEX` fills | high |
-| `r4_w2_03_vex_micro_reversal_entry` | replacement | `VEX` | enter only on micro reversal after aggressive tape | data-driven | whether fading short aggressive bursts is better than continuous quoting | directional fills appear after aggression flips | high |
-| `r4_w2_04_vex_depth_supported_entry` | replacement | `VEX` | enter only when top-of-book depth supports the side | data-driven | whether depth support matters more than late retention | fills cluster in deeper books | medium-high |
-| `r4_w2_05_5300_clean_value_retest` | keep | `VEX + VEV_5300` | clean `5300` baseline | hybrid | whether `5300` has standalone current-round life | direct `5300` inventory appears cleanly | highest |
-| `r4_w2_06_5300_direct_dislocation_only` | replacement | `VEV_5300` only | take only strong direct dislocations, no parent `VEX` trading | hybrid | whether `5300` has signal without parent noise | direct `5300` fills from obvious dislocations | high |
-| `r4_w2_07_5300_queue_takeover_probe` | keep | `VEX + VEV_5300` | winner-style queue takeover | inspiration-only from winners | whether `5300` is execution-limited | healthier fill quality than plain baseline | highest |
-| `r4_w2_08_5300_with_5200_veto` | keep | `VEX + VEV_5300 + 5200 context` | `5200` veto on active family | hybrid | whether best contextual feature improves strongest family | same `5300` intent, fewer toxic entries | highest |
-| `r4_w2_09_vex_tape_clean_entry` | replacement | `VEX + family context` | clean-tape entry requiring low family pressure and no bad `5200` | hybrid | whether context should improve entry, not only exit | trades concentrate in visibly cleaner windows | medium-high |
-| `r4_w2_10_vex_imbalance_surge_entry` | replacement | `VEX` | enter only on strong imbalance surge | data-driven | whether `VEX` should be event-driven rather than always-on | fewer but more directional fills | medium-high |
-| `r4_w2_11_vex_low_concentration_entry` | replacement | `VEX + family ecology` | enter only when participant concentration is low | hybrid | whether fragmented family flow is a better regime for `VEX` | trade windows differ from pure `5200` veto | medium |
-| `r4_w2_12_5300_option_only_veto` | replacement | `VEV_5300 + 5200 context` | trade `5300` without parent `VEX`, but keep the useful veto | hybrid | whether `5300 + 5200` works without parent contamination | direct `5300` attribution survives | medium-high |
-| `r4_w2_13_4000_forced_activation` | keep | `VEX + VEV_4000` | force visible `4000` intent | data-driven | whether `4000` is alive at all | direct `4000` inventory or quotes appear | highest |
-| `r4_w2_14_4000_option_only_band_entry` | replacement | `VEV_4000` only | trade only when direct `4000` band mispricing is large enough | hybrid | whether `4000` can work without parent `VEX` noise | direct `4000` engagement with cleaner attribution | high |
-| `r4_w2_15_4000_quote_ladder_probe` | keep | `VEX + VEV_4000` | winner-style quote ladder | inspiration-only from winners | whether `4000` is execution-limited | better `4000` engagement than plain activation | highest |
-
-## Prioritized Candidate Queue
-
-| Order | Candidate ID | Why This Early |
-| --- | --- | --- |
-| 1 | `r4_w2_01_vex_late_no_new_entry` | fast sanity check that the live base still behaves |
-| 2 | `r4_w2_05_5300_clean_value_retest` | clean active-family baseline |
-| 3 | `r4_w2_07_5300_queue_takeover_probe` | best direct test of winner-style execution value |
-| 4 | `r4_w2_08_5300_with_5200_veto` | best likely exploitative combo if `5300` is real |
-| 5 | `r4_w2_13_4000_forced_activation` | necessary before any honest `4000` conclusion |
-| 6 | `r4_w2_15_4000_quote_ladder_probe` | tests execution-limited versus no-edge |
-| 7 | `r4_w2_02_vex_inside_book_only` | first clean `VEX` entry-quality probe |
-| 8 | `r4_w2_06_5300_direct_dislocation_only` | direct `5300` without parent contamination |
-| 9 | `r4_w2_14_4000_option_only_band_entry` | direct `4000` without parent contamination |
-| 10 | `r4_w2_03_vex_micro_reversal_entry` | tests mean-reversion style entry |
-| 11 | `r4_w2_09_vex_tape_clean_entry` | context as entry gate, not only veto |
-| 12 | `r4_w2_12_5300_option_only_veto` | context plus direct `5300` attribution |
-| 13 | `r4_w2_04_vex_depth_supported_entry` | depth-supported entry probe |
-| 14 | `r4_w2_10_vex_imbalance_surge_entry` | event-driven `VEX` entry |
-| 15 | `r4_w2_11_vex_low_concentration_entry` | lower-confidence family-ecology entry probe |
+| Order | Candidate ID | Bot Path | Role | Origin | Why It Is In The Last 10 |
+| --- | --- | --- | --- | --- | --- |
+| 1 | `r4_finalbatch_01_full_otm_basket_champion` | `../bots/noel/canonical/r4_finalbatch_01_full_otm_basket_champion.py` | primary champion | proven `round_4` winner | best real PnL in the round |
+| 2 | `r4_finalbatch_02_5300_5400_basket` | `../bots/noel/canonical/r4_finalbatch_02_5300_5400_basket.py` | backup basket | proven `round_4` winner | strongest two-strike fallback |
+| 3 | `r4_finalbatch_03_5300_vex_combo` | `../bots/noel/canonical/r4_finalbatch_03_5300_vex_combo.py` | mixed-family backup | proven `round_4` winner | only positive `VEX` sidecar among top bots |
+| 4 | `r4_finalbatch_04_5300_giveback_stop` | `../bots/noel/canonical/r4_finalbatch_04_5300_giveback_stop.py` | retention fallback | proven `round_4` winner | keeps the best observed simple retention control |
+| 5 | `r4_finalbatch_05_5300_pure_max` | `../bots/noel/canonical/r4_finalbatch_05_5300_pure_max.py` | simple baseline | proven `round_4` winner | clean single-strike benchmark |
+| 6 | `r4_finalbatch_06_vex_5300_overlay_fallback` | `../bots/noel/canonical/r4_finalbatch_06_vex_5300_overlay_fallback.py` | cross-team fallback | proven `round_4` fallback | best earlier Noel `VEX + 5300` positive branch |
+| 7 | `r4_finalbatch_07_5300_horizon_hold_fallback` | `../bots/noel/canonical/r4_finalbatch_07_5300_horizon_hold_fallback.py` | horizon fallback | proven `round_4` fallback | positive slower-hold `5300` control |
+| 8 | `r4_finalbatch_08_full_otm_late_freeze` | `../bots/noel/canonical/r4_finalbatch_08_full_otm_late_freeze.py` | new one-axis derivative | `round_4` champion + `round_3/4` retention lesson | imports the cleanest no-new-entry lesson without reopening toxic strikes |
+| 9 | `r4_finalbatch_09_full_otm_mark22_veto` | `../bots/noel/canonical/r4_finalbatch_09_full_otm_mark22_veto.py` | new one-axis derivative | `round_4` champion + `round_4` counterparty lesson | imports the best `5200` / `Mark 22` veto idea as a family filter |
+| 10 | `r4_finalbatch_10_full_otm_giveback_stop` | `../bots/noel/canonical/r4_finalbatch_10_full_otm_giveback_stop.py` | new one-axis derivative | `round_4` champion + `round_3/4` giveback lesson | tests basket-level retention instead of raw upside reopening |
 
 ## Rejected Or Deferred Ideas
 
 | Idea | Reason | Reopen Only If |
 | --- | --- | --- |
-| further tiny `VEX` retention variants | too much slot cost for too little new information | one retained branch still gives ambiguous path quality |
-| more broad context overlays on top of the same parent | attribution contamination | a direct-entry probe proves strong |
-| full old winner IV or hedge stack | complexity still too high for current evidence | a tiny execution-style port shows clear incremental value |
-| new standalone `HYDRO` branches | Wave 1 evidence still too weak | a linked-product role emerges |
+| Raw `4000` reopening | current `round_4` evidence is still too weak for a last-wave slot | all OTM finalists fail live |
+| Re-uploading flat or unrun Wave 2 probes | user rule for this pass is to treat missing useful performance as dead weight | a human explicitly wants one more diagnostic wave |
+| Reopening the broad toxic `5000/5100/5200/5300` basket | `round_3` peak study says the raw upside is real but non-retainable | the final OTM family itself collapses and only a danger-state redesign remains |
+| Fresh standalone `HYDRO` or `VEX` architecture | far below the current OTM family in real `round_4` PnL | OTM finalists fail and delta-1 becomes the only live fallback |
 
 ## Handoff To Phase 04
 
-The grouped specs remain the right unit, but they must now reflect the refined
-queue:
+The spec layer should treat this as a final distillation pack:
 
-1. Pack `G`: one retained rescue plus three new `VEX` entry probes
-2. Pack `H`: one clean baseline, one direct isolated `5300` probe, and two
-   execution/context probes
-3. Pack `I`: three `VEX` entry-quality/context gates plus one direct `5300`
-   context-isolation probe
-4. Pack `J`: one parented activation baseline, one direct isolated `4000`
-   probe, and one winner-style execution probe
+- `01-05`: proven champion and close proven backups
+- `06-07`: proven fallback diversity
+- `08-10`: new one-axis retention and veto derivatives only
+
+Do not treat the new derivatives as permission to reopen the old broad active
+voucher thesis.

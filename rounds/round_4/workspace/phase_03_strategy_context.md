@@ -15,56 +15,47 @@ READY_FOR_REVIEW
 
 ## What Has Been Done
 
-- Reopened Wave 2 strategy after the Wave 2 debugging incident and the user
-  decision to optimize for this wave plus only two more rounds before final
-  selection.
-- Kept the six highest-ROI structural bots:
-  `r4_w2_01`, `r4_w2_05`, `r4_w2_07`, `r4_w2_08`, `r4_w2_13`, `r4_w2_15`.
-- Replaced the other nine slots with entry-quality probes and cleaner
-  option-only attribution tests.
-- Updated [`03_strategy_candidates.md`](03_strategy_candidates.md) so the live
-  Wave 2 queue is now more signal-seeking and less overlay-heavy.
+- Closed the old Wave 2 queue as the live strategy surface.
+- Crossed all `round_4` performance artifacts with `round_3` carry-forward
+  evidence before selecting the last upload wave.
+- Rewrote [`03_strategy_candidates.md`](03_strategy_candidates.md) around a
+  distilled `10`-bot queue.
 
 ## Current Findings
 
-- The main remaining question is no longer just retention. It is whether we
-  can find cleaner entry logic in `VEX`, `5300`, and `4000`.
-- `5300` and `4000` both deserve at least one direct isolated test without the
-  parent `VEX` branch contaminating attribution.
-- Counterparty and family context should now be tested as entry-quality gates
-  as well as vetoes.
+- The strongest `round_4` real-PnL family is the focused OTM basket:
+  `5300 + 5400 + 5500`.
+- `5300` alone remains the strongest positive fallback family.
+- The only `round_3` lessons worth importing now are retention and toxic-veto
+  controls, not the raw broad voucher basket.
 
 ## Decisions Made
 
-- The active Wave 2 queue stays at `15`, but the composition is now sharper:
-  fewer near-duplicate overlays, more direct signal probes.
-- Pack grouping remains useful, so `Phase 04` stays grouped rather than split
-  into `15` separate specs.
-- The next run slice should emphasize the kept structural bots first, then the
-  best new entry probes.
+- All prior live `canonical/` bots were archived before creating the new final
+  queue.
+- The final queue uses `7` proven performers and `3` one-axis derivatives.
+- `4000`, flat Wave 2 probes, and raw delta-1 reopens are out of the final
+  upload wave.
 
 ## Open Questions / Blockers
 
 - No strategy blocker remains.
-- The refined queue now depends on implementation consistency and fresh reruns;
-  old pre-fix Wave 2 evidence remains invalid.
+- Final strategy ranking now depends only on fresh live reruns of the new
+  `10`-bot pack.
 
 ## Linked Artifacts
 
 - [`_index.md`](_index.md)
 - [`03_strategy_candidates.md`](03_strategy_candidates.md)
-- [`04_strategy_specs/`](04_strategy_specs/)
-- [`06_testing/round_4_wave1_pack_abd_partial_synthesis.md`](06_testing/round_4_wave1_pack_abd_partial_synthesis.md)
+- [`06_testing/round_4_full_performance_synthesis.md`](06_testing/round_4_full_performance_synthesis.md)
 - [`post_run_research_memory.md`](post_run_research_memory.md)
 
 ## Next Priority Action
 
-Use the refined specs and implementations in `Phase 05/06`. Default rerun
-order:
-`r4_w2_01`, `r4_w2_05`, `r4_w2_07`, `r4_w2_08`, `r4_w2_13`, `r4_w2_15`,
-then the best new entry probes `r4_w2_02`, `r4_w2_06`, and `r4_w2_14`.
+Use the final distilled queue in `Phase 04/05/06`, starting with:
+`01`, `02`, `08`, `09`, `10`, then the remaining proven backups.
 
 ## Deadline Risk
 
-Medium: the queue is now better aligned with limited remaining rounds, but its
-value depends on disciplined rerun ordering and fast pruning.
+Medium: strategy selection is now narrow and evidence-based, but final ranking
+still requires live reruns.
