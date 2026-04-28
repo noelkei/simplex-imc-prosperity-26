@@ -9,10 +9,14 @@
 
 ## Current Next Priority Action
 
+<<<<<<< Updated upstream
 Consume the closed `round_3` package as input to `round_4`:
 read the `101`-run synthesis, the closeout retrospective, and the updated
 research memory before reopening EDA, understanding, or strategy work in the
 next round. `round_3` no longer expects new platform runs.
+=======
+C06 tested: peaked 17K, closed -1.6K (sigma=95, 12x too low). C07 tested: straight down to -4.2K (Bachelier model still toxic — residuals too small for edge, passive quotes mispriced). New bot C08 (`candidate_c08_model_free_mm.py`) under `bots/amin/canonical/`: **drops Bachelier entirely**, uses Kalman-filtered microprice + Avellaneda-Stoikov reservation price + aggressive inventory control on all products. Tight position caps (40 delta-1, 50 vouchers). **Next: upload C08 to the platform.**
+>>>>>>> Stashed changes
 
 ## Phase Status
 
